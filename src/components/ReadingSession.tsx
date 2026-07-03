@@ -21,6 +21,12 @@ export function ReadingSession({ topic, onFinish }: { topic: Topic; onFinish: ()
 
   const { visible, play, reset } = useSlidingReveal();
   const gapTimer = useRef<number | null>(null);
+  const endRef = useRef<HTMLDivElement>(null);
+
+  // 새 말풍선이 등장하거나 종료될 때 화면 하단으로 자동 스크롤
+  useEffect(() => {
+    endRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
+  }, [index, runId, finished]);
 
   useEffect(() => {
     if (finished) return;
@@ -70,6 +76,7 @@ export function ReadingSession({ topic, onFinish }: { topic: Topic; onFinish: ()
             visible={i === index && !finished ? visible : new Set<number>()}
           />
         ))}
+        <div ref={endRef} />
       </div>
       {finished && (
         <div className="session-actions">

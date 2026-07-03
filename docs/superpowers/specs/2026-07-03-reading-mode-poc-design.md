@@ -84,11 +84,12 @@ Vite + React + TypeScript SPA. `conversation-agent/web`와 동일 스택. 서버
 
 문장 전체를 자연스러운 흐름의 청크 `span`으로 배치한다(실제 줄바꿈·길이 그대로).
 
-- 보이는 창의 청크: `visibility: visible`
-- 나머지(미래·과거) 청크: `visibility: hidden` → 자리(공백)는 유지되고 글자만 사라짐
+- 보이는 창의 청크: `opacity: 1`
+- 나머지(미래·과거) 청크: `opacity: 0` + `transition: opacity 450ms` → 서서히 나타나고 사라짐
 
-`visibility: hidden`은 레이아웃 박스를 유지하므로 "빈 공백 + 길이 노출 + 위치 맥락"이 정확히 구현된다.
+`opacity: 0`은 레이아웃 박스를 유지하므로 "빈 공백 + 길이 노출 + 위치 맥락"이 그대로이면서, 하드 컷이 아니라 페이드로 자연스럽게 소멸한다.
 화자 A/B는 좌우 정렬·색으로 구분한다.
+말풍선이 쌓여 화면을 넘으면 세션이 하단 sentinel을 `scrollIntoView`로 자동 스크롤한다.
 
 ### 5. 세션 플레이어 — `src/components/ReadingSession.tsx`
 
@@ -102,6 +103,7 @@ Vite + React + TypeScript SPA. `conversation-agent/web`와 동일 스택. 서버
 ### 6. 설정 패널 — `src/components/Settings.tsx`
 
 노출 단위(단어/청크)·창 크기 N·기본 속도를 **실시간 조절**한다. 조절 즉시 다음 노출부터 반영.
+설정은 `localStorage`(`reading-poc:settings`)에 저장되어 재접속 시 복원된다.
 
 ### 7. 퀴즈 — `src/components/Quiz.tsx`
 

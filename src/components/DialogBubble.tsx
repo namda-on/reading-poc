@@ -10,7 +10,7 @@ export function DialogBubble({ speaker, chunks, visible }: {
     <div className={`bubble-row ${speaker === 'A' ? 'right' : 'left'}`}>
       <div className="bubble">
         {chunks.map((c, i) => (
-          <span key={i} className="chunk" style={{ visibility: visible.has(i) ? 'visible' : 'hidden' }}>
+          <span key={i} className="chunk" style={{ opacity: visible.has(i) ? 1 : 0 }}>
             {c.text}{' '}
           </span>
         ))}
