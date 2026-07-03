@@ -235,45 +235,6 @@
                   "end": 35
                 }
               ]
-            },
-            {
-              "seq": 2501205,
-              "speaker": "A",
-              "english": "I think people would buy this.",
-              "translated": "사람들이 이거 살 것 같아.",
-              "hint": "'~을 살 것 같아'에서 추측을 나타낼 때 would buy를 사용해 보세요.",
-              "words": [
-                {
-                  "text": "I",
-                  "start": 0,
-                  "end": 1
-                },
-                {
-                  "text": "think",
-                  "start": 2,
-                  "end": 7
-                },
-                {
-                  "text": "people",
-                  "start": 8,
-                  "end": 14
-                },
-                {
-                  "text": "would",
-                  "start": 15,
-                  "end": 20
-                },
-                {
-                  "text": "buy",
-                  "start": 21,
-                  "end": 24
-                },
-                {
-                  "text": "this",
-                  "start": 25,
-                  "end": 29
-                }
-              ]
             }
           ]
         },
@@ -516,55 +477,6 @@
                   "end": 23
                 }
               ]
-            },
-            {
-              "seq": 2502205,
-              "speaker": "B",
-              "english": "But only if they're fully assembled.",
-              "translated": "하지만 완제품이어야 해요.",
-              "hint": null,
-              "words": [
-                {
-                  "text": "But",
-                  "start": 0,
-                  "end": 3
-                },
-                {
-                  "text": "only",
-                  "start": 4,
-                  "end": 8
-                },
-                {
-                  "text": "if",
-                  "start": 9,
-                  "end": 11
-                },
-                {
-                  "text": "they're",
-                  "start": 12,
-                  "end": 19
-                },
-                {
-                  "text": "they",
-                  "start": 12,
-                  "end": 16
-                },
-                {
-                  "text": "'re",
-                  "start": 16,
-                  "end": 19
-                },
-                {
-                  "text": "fully",
-                  "start": 20,
-                  "end": 25
-                },
-                {
-                  "text": "assembled",
-                  "start": 26,
-                  "end": 35
-                }
-              ]
             }
           ]
         },
@@ -797,60 +709,6 @@
                   "end": 32
                 }
               ]
-            },
-            {
-              "seq": 2503205,
-              "speaker": "A",
-              "english": "Look at this. It's from Byte Shop.",
-              "translated": "이거 보세요. Byte Shop에서 온 거예요.",
-              "hint": "'~에서 온 거예요'는 It's from으로 간단하게 표현하세요.",
-              "words": [
-                {
-                  "text": "Look",
-                  "start": 0,
-                  "end": 4
-                },
-                {
-                  "text": "at",
-                  "start": 5,
-                  "end": 7
-                },
-                {
-                  "text": "this",
-                  "start": 8,
-                  "end": 12
-                },
-                {
-                  "text": "It's",
-                  "start": 14,
-                  "end": 18
-                },
-                {
-                  "text": "It",
-                  "start": 14,
-                  "end": 16
-                },
-                {
-                  "text": "'s",
-                  "start": 16,
-                  "end": 18
-                },
-                {
-                  "text": "from",
-                  "start": 19,
-                  "end": 23
-                },
-                {
-                  "text": "Byte",
-                  "start": 24,
-                  "end": 28
-                },
-                {
-                  "text": "Shop",
-                  "start": 29,
-                  "end": 33
-                }
-              ]
             }
           ]
         },
@@ -1078,40 +936,6 @@
                   "end": 34
                 }
               ]
-            },
-            {
-              "seq": 2504205,
-              "speaker": "B",
-              "english": "What makes your computer special?",
-              "translated": "그 컴퓨터가 뭐가 특별한 건가요?",
-              "hint": null,
-              "words": [
-                {
-                  "text": "What",
-                  "start": 0,
-                  "end": 4
-                },
-                {
-                  "text": "makes",
-                  "start": 5,
-                  "end": 10
-                },
-                {
-                  "text": "your",
-                  "start": 11,
-                  "end": 15
-                },
-                {
-                  "text": "computer",
-                  "start": 16,
-                  "end": 24
-                },
-                {
-                  "text": "special",
-                  "start": 25,
-                  "end": 32
-                }
-              ]
             }
           ]
         },
@@ -1312,55 +1136,6 @@
                   "text": "innovative",
                   "start": 24,
                   "end": 34
-                }
-              ]
-            },
-            {
-              "seq": 2505205,
-              "speaker": "B",
-              "english": "But it doesn't sound like technology.",
-              "translated": "근데 기술 회사 같지 않은데.",
-              "hint": null,
-              "words": [
-                {
-                  "text": "But",
-                  "start": 0,
-                  "end": 3
-                },
-                {
-                  "text": "it",
-                  "start": 4,
-                  "end": 6
-                },
-                {
-                  "text": "doesn't",
-                  "start": 7,
-                  "end": 14
-                },
-                {
-                  "text": "does",
-                  "start": 7,
-                  "end": 11
-                },
-                {
-                  "text": "n't",
-                  "start": 11,
-                  "end": 14
-                },
-                {
-                  "text": "sound",
-                  "start": 15,
-                  "end": 20
-                },
-                {
-                  "text": "like",
-                  "start": 21,
-                  "end": 25
-                },
-                {
-                  "text": "technology",
-                  "start": 26,
-                  "end": 36
                 }
               ]
             }
@@ -1615,60 +1390,6 @@
                   "end": 42
                 }
               ]
-            },
-            {
-              "seq": 2506205,
-              "speaker": "A",
-              "english": "Yes. Simple but memorable. That's the goal.",
-              "translated": "네. 단순하면서도 기억에 남게. 그게 목표예요.",
-              "hint": "'기억에 남게'는 memorable로 표현하세요.",
-              "words": [
-                {
-                  "text": "Yes",
-                  "start": 0,
-                  "end": 3
-                },
-                {
-                  "text": "Simple",
-                  "start": 5,
-                  "end": 11
-                },
-                {
-                  "text": "but",
-                  "start": 12,
-                  "end": 15
-                },
-                {
-                  "text": "memorable",
-                  "start": 16,
-                  "end": 25
-                },
-                {
-                  "text": "That's",
-                  "start": 27,
-                  "end": 33
-                },
-                {
-                  "text": "That",
-                  "start": 27,
-                  "end": 31
-                },
-                {
-                  "text": "'s",
-                  "start": 31,
-                  "end": 33
-                },
-                {
-                  "text": "the",
-                  "start": 34,
-                  "end": 37
-                },
-                {
-                  "text": "goal",
-                  "start": 38,
-                  "end": 42
-                }
-              ]
             }
           ]
         },
@@ -1854,40 +1575,6 @@
                   "text": "case",
                   "start": 18,
                   "end": 22
-                }
-              ]
-            },
-            {
-              "seq": 2507205,
-              "speaker": "B",
-              "english": "How do I use it?",
-              "translated": "어떻게 사용하나요?",
-              "hint": null,
-              "words": [
-                {
-                  "text": "How",
-                  "start": 0,
-                  "end": 3
-                },
-                {
-                  "text": "do",
-                  "start": 4,
-                  "end": 6
-                },
-                {
-                  "text": "I",
-                  "start": 7,
-                  "end": 8
-                },
-                {
-                  "text": "use",
-                  "start": 9,
-                  "end": 12
-                },
-                {
-                  "text": "it",
-                  "start": 13,
-                  "end": 15
                 }
               ]
             }
@@ -2135,55 +1822,6 @@
                   "text": "company",
                   "start": 23,
                   "end": 30
-                }
-              ]
-            },
-            {
-              "seq": 2508205,
-              "speaker": "A",
-              "english": "My friend and I started in a garage.",
-              "translated": "친구랑 차고에서 시작했어요.",
-              "hint": "'친구랑'을 주어로 표현할 때 My friend and I를 사용하세요.",
-              "words": [
-                {
-                  "text": "My",
-                  "start": 0,
-                  "end": 2
-                },
-                {
-                  "text": "friend",
-                  "start": 3,
-                  "end": 9
-                },
-                {
-                  "text": "and",
-                  "start": 10,
-                  "end": 13
-                },
-                {
-                  "text": "I",
-                  "start": 14,
-                  "end": 15
-                },
-                {
-                  "text": "started",
-                  "start": 16,
-                  "end": 23
-                },
-                {
-                  "text": "in",
-                  "start": 24,
-                  "end": 26
-                },
-                {
-                  "text": "a",
-                  "start": 27,
-                  "end": 28
-                },
-                {
-                  "text": "garage",
-                  "start": 29,
-                  "end": 35
                 }
               ]
             }
@@ -2453,45 +2091,6 @@
                   "end": 38
                 }
               ]
-            },
-            {
-              "seq": 2509205,
-              "speaker": "A",
-              "english": "You click on those small pictures?",
-              "translated": "저 작은 그림들을 클릭하는 건가요?",
-              "hint": "'~을 클릭하다'는 click on으로 표현하세요.",
-              "words": [
-                {
-                  "text": "You",
-                  "start": 0,
-                  "end": 3
-                },
-                {
-                  "text": "click",
-                  "start": 4,
-                  "end": 9
-                },
-                {
-                  "text": "on",
-                  "start": 10,
-                  "end": 12
-                },
-                {
-                  "text": "those",
-                  "start": 13,
-                  "end": 18
-                },
-                {
-                  "text": "small",
-                  "start": 19,
-                  "end": 24
-                },
-                {
-                  "text": "pictures",
-                  "start": 25,
-                  "end": 33
-                }
-              ]
             }
           ]
         },
@@ -2702,50 +2301,6 @@
                   "text": "low",
                   "start": 31,
                   "end": 34
-                }
-              ]
-            },
-            {
-              "seq": 2510205,
-              "speaker": "A",
-              "english": "The Macintosh will sell. Give it time.",
-              "translated": "매킨토시는 팔릴 거예요. 시간을 주세요.",
-              "hint": "'시간을 주세요'는 Give it time이라는 표현을 사용하세요.",
-              "words": [
-                {
-                  "text": "The",
-                  "start": 0,
-                  "end": 3
-                },
-                {
-                  "text": "Macintosh",
-                  "start": 4,
-                  "end": 13
-                },
-                {
-                  "text": "will",
-                  "start": 14,
-                  "end": 18
-                },
-                {
-                  "text": "sell",
-                  "start": 19,
-                  "end": 23
-                },
-                {
-                  "text": "Give",
-                  "start": 25,
-                  "end": 29
-                },
-                {
-                  "text": "it",
-                  "start": 30,
-                  "end": 32
-                },
-                {
-                  "text": "time",
-                  "start": 33,
-                  "end": 37
                 }
               ]
             }
@@ -2965,35 +2520,6 @@
                   "end": 36
                 }
               ]
-            },
-            {
-              "seq": 2511205,
-              "speaker": "B",
-              "english": "What will NeXT do?",
-              "translated": "NeXT는 뭘 할 건가요?",
-              "hint": null,
-              "words": [
-                {
-                  "text": "What",
-                  "start": 0,
-                  "end": 4
-                },
-                {
-                  "text": "will",
-                  "start": 5,
-                  "end": 9
-                },
-                {
-                  "text": "NeXT",
-                  "start": 10,
-                  "end": 14
-                },
-                {
-                  "text": "do",
-                  "start": 15,
-                  "end": 17
-                }
-              ]
             }
           ]
         },
@@ -3204,55 +2730,6 @@
                   "text": "money",
                   "start": 33,
                   "end": 38
-                }
-              ]
-            },
-            {
-              "seq": 2512205,
-              "speaker": "B",
-              "english": "It is. But this technology is very valuable.",
-              "translated": "그렇죠. 하지만 이 기술은 정말 가치가 있습니다.",
-              "hint": null,
-              "words": [
-                {
-                  "text": "It",
-                  "start": 0,
-                  "end": 2
-                },
-                {
-                  "text": "is",
-                  "start": 3,
-                  "end": 5
-                },
-                {
-                  "text": "But",
-                  "start": 7,
-                  "end": 10
-                },
-                {
-                  "text": "this",
-                  "start": 11,
-                  "end": 15
-                },
-                {
-                  "text": "technology",
-                  "start": 16,
-                  "end": 26
-                },
-                {
-                  "text": "is",
-                  "start": 27,
-                  "end": 29
-                },
-                {
-                  "text": "very",
-                  "start": 30,
-                  "end": 34
-                },
-                {
-                  "text": "valuable",
-                  "start": 35,
-                  "end": 43
                 }
               ]
             }
@@ -3482,50 +2959,6 @@
                   "end": 28
                 }
               ]
-            },
-            {
-              "seq": 2513205,
-              "speaker": "B",
-              "english": "Honestly, not good. We are losing money.",
-              "translated": "솔직히, 좋지 않습니다. 적자가 나고 있습니다.",
-              "hint": null,
-              "words": [
-                {
-                  "text": "Honestly",
-                  "start": 0,
-                  "end": 8
-                },
-                {
-                  "text": "not",
-                  "start": 10,
-                  "end": 13
-                },
-                {
-                  "text": "good",
-                  "start": 14,
-                  "end": 18
-                },
-                {
-                  "text": "We",
-                  "start": 20,
-                  "end": 22
-                },
-                {
-                  "text": "are",
-                  "start": 23,
-                  "end": 26
-                },
-                {
-                  "text": "losing",
-                  "start": 27,
-                  "end": 33
-                },
-                {
-                  "text": "money",
-                  "start": 34,
-                  "end": 39
-                }
-              ]
             }
           ]
         },
@@ -3731,40 +3164,6 @@
                   "text": "innovators",
                   "start": 25,
                   "end": 35
-                }
-              ]
-            },
-            {
-              "seq": 2514205,
-              "speaker": "A",
-              "english": "Which people will you show?",
-              "translated": "어떤 사람들을 보여줄 건가요?",
-              "hint": "'어떤 사람들'을 물을 때 Which people로 문장을 시작하세요.",
-              "words": [
-                {
-                  "text": "Which",
-                  "start": 0,
-                  "end": 5
-                },
-                {
-                  "text": "people",
-                  "start": 6,
-                  "end": 12
-                },
-                {
-                  "text": "will",
-                  "start": 13,
-                  "end": 17
-                },
-                {
-                  "text": "you",
-                  "start": 18,
-                  "end": 21
-                },
-                {
-                  "text": "show",
-                  "start": 22,
-                  "end": 26
                 }
               ]
             }
@@ -4004,55 +3403,6 @@
                   "end": 33
                 }
               ]
-            },
-            {
-              "seq": 2515205,
-              "speaker": "A",
-              "english": "People don't need floppy disks anymore.",
-              "translated": "사람들 이제 플로피 디스크 필요 없어요.",
-              "hint": "'이제 ~없어요'라는 의미를 표현할 때 문장 끝에 anymore를 사용하세요.",
-              "words": [
-                {
-                  "text": "People",
-                  "start": 0,
-                  "end": 6
-                },
-                {
-                  "text": "don't",
-                  "start": 7,
-                  "end": 12
-                },
-                {
-                  "text": "do",
-                  "start": 7,
-                  "end": 9
-                },
-                {
-                  "text": "n't",
-                  "start": 9,
-                  "end": 12
-                },
-                {
-                  "text": "need",
-                  "start": 13,
-                  "end": 17
-                },
-                {
-                  "text": "floppy",
-                  "start": 18,
-                  "end": 24
-                },
-                {
-                  "text": "disks",
-                  "start": 25,
-                  "end": 30
-                },
-                {
-                  "text": "anymore",
-                  "start": 31,
-                  "end": 38
-                }
-              ]
             }
           ]
         },
@@ -4250,45 +3600,6 @@
                   "end": 24
                 }
               ]
-            },
-            {
-              "seq": 2516205,
-              "speaker": "A",
-              "english": "One thousand songs in your pocket!",
-              "translated": "주머니에 1000곡이라!",
-              "hint": "'1000곡'은 one thousand songs로 표현해 보세요.",
-              "words": [
-                {
-                  "text": "One",
-                  "start": 0,
-                  "end": 3
-                },
-                {
-                  "text": "thousand",
-                  "start": 4,
-                  "end": 12
-                },
-                {
-                  "text": "songs",
-                  "start": 13,
-                  "end": 18
-                },
-                {
-                  "text": "in",
-                  "start": 19,
-                  "end": 21
-                },
-                {
-                  "text": "your",
-                  "start": 22,
-                  "end": 26
-                },
-                {
-                  "text": "pocket",
-                  "start": 27,
-                  "end": 33
-                }
-              ]
             }
           ]
         },
@@ -4479,50 +3790,6 @@
                   "text": "device",
                   "start": 30,
                   "end": 36
-                }
-              ]
-            },
-            {
-              "seq": 2518205,
-              "speaker": "B",
-              "english": "Yes. And they are one device now.",
-              "translated": "네. 그리고 이제 그게 하나의 기기죠.",
-              "hint": null,
-              "words": [
-                {
-                  "text": "Yes",
-                  "start": 0,
-                  "end": 3
-                },
-                {
-                  "text": "And",
-                  "start": 5,
-                  "end": 8
-                },
-                {
-                  "text": "they",
-                  "start": 9,
-                  "end": 13
-                },
-                {
-                  "text": "are",
-                  "start": 14,
-                  "end": 17
-                },
-                {
-                  "text": "one",
-                  "start": 18,
-                  "end": 21
-                },
-                {
-                  "text": "device",
-                  "start": 22,
-                  "end": 28
-                },
-                {
-                  "text": "now",
-                  "start": 29,
-                  "end": 32
                 }
               ]
             }
@@ -4742,40 +4009,6 @@
                   "end": 39
                 }
               ]
-            },
-            {
-              "seq": 2519205,
-              "speaker": "A",
-              "english": "How much does it weigh?",
-              "translated": "무게는 얼마나 돼?",
-              "hint": "'무게가 나가다'는 동사 weigh를 사용해서 질문을 만들어 보세요.",
-              "words": [
-                {
-                  "text": "How",
-                  "start": 0,
-                  "end": 3
-                },
-                {
-                  "text": "much",
-                  "start": 4,
-                  "end": 8
-                },
-                {
-                  "text": "does",
-                  "start": 9,
-                  "end": 13
-                },
-                {
-                  "text": "it",
-                  "start": 14,
-                  "end": 16
-                },
-                {
-                  "text": "weigh",
-                  "start": 17,
-                  "end": 22
-                }
-              ]
             }
           ]
         },
@@ -4951,60 +4184,6 @@
                   "text": "worse",
                   "start": 21,
                   "end": 26
-                }
-              ]
-            },
-            {
-              "seq": 2520205,
-              "speaker": "B",
-              "english": "I'm so sorry. What can I do?",
-              "translated": "정말 안타깝습니다. 제가 뭘 해드릴까요?",
-              "hint": null,
-              "words": [
-                {
-                  "text": "I'm",
-                  "start": 0,
-                  "end": 3
-                },
-                {
-                  "text": "I",
-                  "start": 0,
-                  "end": 1
-                },
-                {
-                  "text": "'m",
-                  "start": 1,
-                  "end": 3
-                },
-                {
-                  "text": "so",
-                  "start": 4,
-                  "end": 6
-                },
-                {
-                  "text": "sorry",
-                  "start": 7,
-                  "end": 12
-                },
-                {
-                  "text": "What",
-                  "start": 14,
-                  "end": 18
-                },
-                {
-                  "text": "can",
-                  "start": 19,
-                  "end": 22
-                },
-                {
-                  "text": "I",
-                  "start": 23,
-                  "end": 24
-                },
-                {
-                  "text": "do",
-                  "start": 25,
-                  "end": 27
                 }
               ]
             }
@@ -5244,55 +4423,6 @@
                   "end": 35
                 }
               ]
-            },
-            {
-              "seq": 2521205,
-              "speaker": "B",
-              "english": "I understand. It's a big change.",
-              "translated": "알겠습니다. 큰 변화죠.",
-              "hint": null,
-              "words": [
-                {
-                  "text": "I",
-                  "start": 0,
-                  "end": 1
-                },
-                {
-                  "text": "understand",
-                  "start": 2,
-                  "end": 12
-                },
-                {
-                  "text": "It's",
-                  "start": 14,
-                  "end": 18
-                },
-                {
-                  "text": "It",
-                  "start": 14,
-                  "end": 16
-                },
-                {
-                  "text": "'s",
-                  "start": 16,
-                  "end": 18
-                },
-                {
-                  "text": "a",
-                  "start": 19,
-                  "end": 20
-                },
-                {
-                  "text": "big",
-                  "start": 21,
-                  "end": 24
-                },
-                {
-                  "text": "change",
-                  "start": 25,
-                  "end": 31
-                }
-              ]
             }
           ]
         },
@@ -5520,45 +4650,6 @@
                   "end": 34
                 }
               ]
-            },
-            {
-              "seq": 2522205,
-              "speaker": "B",
-              "english": "It will. You built something amazing.",
-              "translated": "그럴 거예요. 당신은 대단한 걸 만들었잖아요.",
-              "hint": null,
-              "words": [
-                {
-                  "text": "It",
-                  "start": 0,
-                  "end": 2
-                },
-                {
-                  "text": "will",
-                  "start": 3,
-                  "end": 7
-                },
-                {
-                  "text": "You",
-                  "start": 9,
-                  "end": 12
-                },
-                {
-                  "text": "built",
-                  "start": 13,
-                  "end": 18
-                },
-                {
-                  "text": "something",
-                  "start": 19,
-                  "end": 28
-                },
-                {
-                  "text": "amazing",
-                  "start": 29,
-                  "end": 36
-                }
-              ]
             }
           ]
         }
@@ -5761,50 +4852,6 @@
                   "text": "low",
                   "start": 26,
                   "end": 29
-                }
-              ]
-            },
-            {
-              "seq": 1701205,
-              "speaker": "A",
-              "english": "Yes, it's only one percent.",
-              "translated": "네, 1%밖에 안 돼요.",
-              "hint": "'~밖에 안 돼요'라는 표현은 only로 나타내 보세요.",
-              "words": [
-                {
-                  "text": "Yes",
-                  "start": 0,
-                  "end": 3
-                },
-                {
-                  "text": "it's",
-                  "start": 5,
-                  "end": 9
-                },
-                {
-                  "text": "it",
-                  "start": 5,
-                  "end": 7
-                },
-                {
-                  "text": "'s",
-                  "start": 7,
-                  "end": 9
-                },
-                {
-                  "text": "only",
-                  "start": 10,
-                  "end": 14
-                },
-                {
-                  "text": "one",
-                  "start": 15,
-                  "end": 18
-                },
-                {
-                  "text": "percent",
-                  "start": 19,
-                  "end": 26
                 }
               ]
             }
@@ -6022,50 +5069,6 @@
                   "text": "money",
                   "start": 21,
                   "end": 26
-                }
-              ]
-            },
-            {
-              "seq": 1702205,
-              "speaker": "B",
-              "english": "I started with just five hundred dollars.",
-              "translated": "오백 달러로 시작했는데.",
-              "hint": null,
-              "words": [
-                {
-                  "text": "I",
-                  "start": 0,
-                  "end": 1
-                },
-                {
-                  "text": "started",
-                  "start": 2,
-                  "end": 9
-                },
-                {
-                  "text": "with",
-                  "start": 10,
-                  "end": 14
-                },
-                {
-                  "text": "just",
-                  "start": 15,
-                  "end": 19
-                },
-                {
-                  "text": "five",
-                  "start": 20,
-                  "end": 24
-                },
-                {
-                  "text": "hundred",
-                  "start": 25,
-                  "end": 32
-                },
-                {
-                  "text": "dollars",
-                  "start": 33,
-                  "end": 40
                 }
               ]
             }
@@ -6330,55 +5333,6 @@
                   "end": 35
                 }
               ]
-            },
-            {
-              "seq": 1703205,
-              "speaker": "B",
-              "english": "Good. And we can watch YouTube videos too.",
-              "translated": "좋아. 유튜브 영상도 보고.",
-              "hint": null,
-              "words": [
-                {
-                  "text": "Good",
-                  "start": 0,
-                  "end": 4
-                },
-                {
-                  "text": "And",
-                  "start": 6,
-                  "end": 9
-                },
-                {
-                  "text": "we",
-                  "start": 10,
-                  "end": 12
-                },
-                {
-                  "text": "can",
-                  "start": 13,
-                  "end": 16
-                },
-                {
-                  "text": "watch",
-                  "start": 17,
-                  "end": 22
-                },
-                {
-                  "text": "YouTube",
-                  "start": 23,
-                  "end": 30
-                },
-                {
-                  "text": "videos",
-                  "start": 31,
-                  "end": 37
-                },
-                {
-                  "text": "too",
-                  "start": 38,
-                  "end": 41
-                }
-              ]
             }
           ]
         },
@@ -6626,50 +5580,6 @@
                   "end": 28
                 }
               ]
-            },
-            {
-              "seq": 1704205,
-              "speaker": "B",
-              "english": "Some are safe. Big companies are better.",
-              "translated": "어떤 건 안전해. 대기업이 더 나아.",
-              "hint": null,
-              "words": [
-                {
-                  "text": "Some",
-                  "start": 0,
-                  "end": 4
-                },
-                {
-                  "text": "are",
-                  "start": 5,
-                  "end": 8
-                },
-                {
-                  "text": "safe",
-                  "start": 9,
-                  "end": 13
-                },
-                {
-                  "text": "Big",
-                  "start": 15,
-                  "end": 18
-                },
-                {
-                  "text": "companies",
-                  "start": 19,
-                  "end": 28
-                },
-                {
-                  "text": "are",
-                  "start": 29,
-                  "end": 32
-                },
-                {
-                  "text": "better",
-                  "start": 33,
-                  "end": 39
-                }
-              ]
             }
           ]
         },
@@ -6897,40 +5807,6 @@
                   "end": 31
                 }
               ]
-            },
-            {
-              "seq": 1705205,
-              "speaker": "A",
-              "english": "What documents do I need?",
-              "translated": "필요한 서류가 뭐예요?",
-              "hint": "'서류'는 documents로 표현하세요.",
-              "words": [
-                {
-                  "text": "What",
-                  "start": 0,
-                  "end": 4
-                },
-                {
-                  "text": "documents",
-                  "start": 5,
-                  "end": 14
-                },
-                {
-                  "text": "do",
-                  "start": 15,
-                  "end": 17
-                },
-                {
-                  "text": "I",
-                  "start": 18,
-                  "end": 19
-                },
-                {
-                  "text": "need",
-                  "start": 20,
-                  "end": 24
-                }
-              ]
             }
           ]
         },
@@ -7128,45 +6004,6 @@
                   "end": 34
                 }
               ]
-            },
-            {
-              "seq": 1706205,
-              "speaker": "B",
-              "english": "I did the same at first.",
-              "translated": "나도 처음엔 그랬어.",
-              "hint": null,
-              "words": [
-                {
-                  "text": "I",
-                  "start": 0,
-                  "end": 1
-                },
-                {
-                  "text": "did",
-                  "start": 2,
-                  "end": 5
-                },
-                {
-                  "text": "the",
-                  "start": 6,
-                  "end": 9
-                },
-                {
-                  "text": "same",
-                  "start": 10,
-                  "end": 14
-                },
-                {
-                  "text": "at",
-                  "start": 15,
-                  "end": 17
-                },
-                {
-                  "text": "first",
-                  "start": 18,
-                  "end": 23
-                }
-              ]
             }
           ]
         },
@@ -7362,45 +6199,6 @@
                   "text": "stocks",
                   "start": 25,
                   "end": 31
-                }
-              ]
-            },
-            {
-              "seq": 1707205,
-              "speaker": "B",
-              "english": "The whole market is down now.",
-              "translated": "지금 시장 전체가 다 빠지고 있어요.",
-              "hint": null,
-              "words": [
-                {
-                  "text": "The",
-                  "start": 0,
-                  "end": 3
-                },
-                {
-                  "text": "whole",
-                  "start": 4,
-                  "end": 9
-                },
-                {
-                  "text": "market",
-                  "start": 10,
-                  "end": 16
-                },
-                {
-                  "text": "is",
-                  "start": 17,
-                  "end": 19
-                },
-                {
-                  "text": "down",
-                  "start": 20,
-                  "end": 24
-                },
-                {
-                  "text": "now",
-                  "start": 25,
-                  "end": 28
                 }
               ]
             }
@@ -7615,45 +6413,6 @@
                   "end": 23
                 }
               ]
-            },
-            {
-              "seq": 1708205,
-              "speaker": "B",
-              "english": "What should we do with it?",
-              "translated": "이걸로 뭐 할까?",
-              "hint": null,
-              "words": [
-                {
-                  "text": "What",
-                  "start": 0,
-                  "end": 4
-                },
-                {
-                  "text": "should",
-                  "start": 5,
-                  "end": 11
-                },
-                {
-                  "text": "we",
-                  "start": 12,
-                  "end": 14
-                },
-                {
-                  "text": "do",
-                  "start": 15,
-                  "end": 17
-                },
-                {
-                  "text": "with",
-                  "start": 18,
-                  "end": 22
-                },
-                {
-                  "text": "it",
-                  "start": 23,
-                  "end": 25
-                }
-              ]
             }
           ]
         },
@@ -7859,40 +6618,6 @@
                   "text": "good",
                   "start": 22,
                   "end": 26
-                }
-              ]
-            },
-            {
-              "seq": 1709205,
-              "speaker": "B",
-              "english": "How much did we lose?",
-              "translated": "얼마나 잃은 거야?",
-              "hint": null,
-              "words": [
-                {
-                  "text": "How",
-                  "start": 0,
-                  "end": 3
-                },
-                {
-                  "text": "much",
-                  "start": 4,
-                  "end": 8
-                },
-                {
-                  "text": "did",
-                  "start": 9,
-                  "end": 12
-                },
-                {
-                  "text": "we",
-                  "start": 13,
-                  "end": 15
-                },
-                {
-                  "text": "lose",
-                  "start": 16,
-                  "end": 20
                 }
               ]
             }
@@ -8117,45 +6842,6 @@
                   "end": 28
                 }
               ]
-            },
-            {
-              "seq": 1710205,
-              "speaker": "A",
-              "english": "Everyone was buying. I was afraid.",
-              "translated": "다들 사고 있었어요. 불안했어요.",
-              "hint": "'불안했어요'는 afraid를 사용하여 표현해 보세요.",
-              "words": [
-                {
-                  "text": "Everyone",
-                  "start": 0,
-                  "end": 8
-                },
-                {
-                  "text": "was",
-                  "start": 9,
-                  "end": 12
-                },
-                {
-                  "text": "buying",
-                  "start": 13,
-                  "end": 19
-                },
-                {
-                  "text": "I",
-                  "start": 21,
-                  "end": 22
-                },
-                {
-                  "text": "was",
-                  "start": 23,
-                  "end": 26
-                },
-                {
-                  "text": "afraid",
-                  "start": 27,
-                  "end": 33
-                }
-              ]
             }
           ]
         },
@@ -8373,45 +7059,6 @@
                   "end": 32
                 }
               ]
-            },
-            {
-              "seq": 1711205,
-              "speaker": "A",
-              "english": "I want safe and stable returns.",
-              "translated": "안전하고 안정적인 수익을 원해요.",
-              "hint": "'안정적인 수익'은 stable returns로 표현하세요.",
-              "words": [
-                {
-                  "text": "I",
-                  "start": 0,
-                  "end": 1
-                },
-                {
-                  "text": "want",
-                  "start": 2,
-                  "end": 6
-                },
-                {
-                  "text": "safe",
-                  "start": 7,
-                  "end": 11
-                },
-                {
-                  "text": "and",
-                  "start": 12,
-                  "end": 15
-                },
-                {
-                  "text": "stable",
-                  "start": 16,
-                  "end": 22
-                },
-                {
-                  "text": "returns",
-                  "start": 23,
-                  "end": 30
-                }
-              ]
             }
           ]
         },
@@ -8619,55 +7266,6 @@
                   "end": 31
                 }
               ]
-            },
-            {
-              "seq": 1712205,
-              "speaker": "B",
-              "english": "Yes, it's like magic for money!",
-              "translated": "응, 돈의 마법 같은 거야!",
-              "hint": null,
-              "words": [
-                {
-                  "text": "Yes",
-                  "start": 0,
-                  "end": 3
-                },
-                {
-                  "text": "it's",
-                  "start": 5,
-                  "end": 9
-                },
-                {
-                  "text": "it",
-                  "start": 5,
-                  "end": 7
-                },
-                {
-                  "text": "'s",
-                  "start": 7,
-                  "end": 9
-                },
-                {
-                  "text": "like",
-                  "start": 10,
-                  "end": 14
-                },
-                {
-                  "text": "magic",
-                  "start": 15,
-                  "end": 20
-                },
-                {
-                  "text": "for",
-                  "start": 21,
-                  "end": 24
-                },
-                {
-                  "text": "money",
-                  "start": 25,
-                  "end": 30
-                }
-              ]
             }
           ]
         },
@@ -8833,45 +7431,6 @@
                   "text": "stocks",
                   "start": 18,
                   "end": 24
-                }
-              ]
-            },
-            {
-              "seq": 1713205,
-              "speaker": "B",
-              "english": "A stop-loss line is important.",
-              "translated": "손절 라인이 중요하지.",
-              "hint": null,
-              "words": [
-                {
-                  "text": "A",
-                  "start": 0,
-                  "end": 1
-                },
-                {
-                  "text": "stop",
-                  "start": 2,
-                  "end": 6
-                },
-                {
-                  "text": "loss",
-                  "start": 7,
-                  "end": 11
-                },
-                {
-                  "text": "line",
-                  "start": 12,
-                  "end": 16
-                },
-                {
-                  "text": "is",
-                  "start": 17,
-                  "end": 19
-                },
-                {
-                  "text": "important",
-                  "start": 20,
-                  "end": 29
                 }
               ]
             }
@@ -9121,45 +7680,6 @@
                   "end": 34
                 }
               ]
-            },
-            {
-              "seq": 1714205,
-              "speaker": "B",
-              "english": "Which news site should we use?",
-              "translated": "어느 뉴스 사이트 볼까?",
-              "hint": null,
-              "words": [
-                {
-                  "text": "Which",
-                  "start": 0,
-                  "end": 5
-                },
-                {
-                  "text": "news",
-                  "start": 6,
-                  "end": 10
-                },
-                {
-                  "text": "site",
-                  "start": 11,
-                  "end": 15
-                },
-                {
-                  "text": "should",
-                  "start": 16,
-                  "end": 22
-                },
-                {
-                  "text": "we",
-                  "start": 23,
-                  "end": 25
-                },
-                {
-                  "text": "use",
-                  "start": 26,
-                  "end": 29
-                }
-              ]
             }
           ]
         },
@@ -9382,55 +7902,6 @@
                   "end": 33
                 }
               ]
-            },
-            {
-              "seq": 1715205,
-              "speaker": "B",
-              "english": "Wow! I'm so proud of you!",
-              "translated": "와! 정말 자랑스러워!",
-              "hint": null,
-              "words": [
-                {
-                  "text": "Wow",
-                  "start": 0,
-                  "end": 3
-                },
-                {
-                  "text": "I'm",
-                  "start": 5,
-                  "end": 8
-                },
-                {
-                  "text": "I",
-                  "start": 5,
-                  "end": 6
-                },
-                {
-                  "text": "'m",
-                  "start": 6,
-                  "end": 8
-                },
-                {
-                  "text": "so",
-                  "start": 9,
-                  "end": 11
-                },
-                {
-                  "text": "proud",
-                  "start": 12,
-                  "end": 17
-                },
-                {
-                  "text": "of",
-                  "start": 18,
-                  "end": 20
-                },
-                {
-                  "text": "you",
-                  "start": 21,
-                  "end": 24
-                }
-              ]
             }
           ]
         },
@@ -9631,40 +8102,6 @@
                   "text": "here",
                   "start": 27,
                   "end": 31
-                }
-              ]
-            },
-            {
-              "seq": 1716205,
-              "speaker": "A",
-              "english": "What about public transport nearby?",
-              "translated": "근처 대중교통은 어때요?",
-              "hint": "'~은 어때요?'라는 의미로 What about으로 문장을 시작하세요.",
-              "words": [
-                {
-                  "text": "What",
-                  "start": 0,
-                  "end": 4
-                },
-                {
-                  "text": "about",
-                  "start": 5,
-                  "end": 10
-                },
-                {
-                  "text": "public",
-                  "start": 11,
-                  "end": 17
-                },
-                {
-                  "text": "transport",
-                  "start": 18,
-                  "end": 27
-                },
-                {
-                  "text": "nearby",
-                  "start": 28,
-                  "end": 34
                 }
               ]
             }
@@ -9889,50 +8326,6 @@
                   "end": 38
                 }
               ]
-            },
-            {
-              "seq": 1717205,
-              "speaker": "B",
-              "english": "Yes! My hands are shaking a little.",
-              "translated": "응! 손이 좀 떨려.",
-              "hint": null,
-              "words": [
-                {
-                  "text": "Yes",
-                  "start": 0,
-                  "end": 3
-                },
-                {
-                  "text": "My",
-                  "start": 5,
-                  "end": 7
-                },
-                {
-                  "text": "hands",
-                  "start": 8,
-                  "end": 13
-                },
-                {
-                  "text": "are",
-                  "start": 14,
-                  "end": 17
-                },
-                {
-                  "text": "shaking",
-                  "start": 18,
-                  "end": 25
-                },
-                {
-                  "text": "a",
-                  "start": 26,
-                  "end": 27
-                },
-                {
-                  "text": "little",
-                  "start": 28,
-                  "end": 34
-                }
-              ]
             }
           ]
         },
@@ -10148,40 +8541,6 @@
                   "text": "years",
                   "start": 25,
                   "end": 30
-                }
-              ]
-            },
-            {
-              "seq": 1718205,
-              "speaker": "B",
-              "english": "You must feel so happy.",
-              "translated": "진짜 행복하겠다.",
-              "hint": null,
-              "words": [
-                {
-                  "text": "You",
-                  "start": 0,
-                  "end": 3
-                },
-                {
-                  "text": "must",
-                  "start": 4,
-                  "end": 8
-                },
-                {
-                  "text": "feel",
-                  "start": 9,
-                  "end": 13
-                },
-                {
-                  "text": "so",
-                  "start": 14,
-                  "end": 16
-                },
-                {
-                  "text": "happy",
-                  "start": 17,
-                  "end": 22
                 }
               ]
             }
@@ -10416,50 +8775,6 @@
                   "end": 40
                 }
               ]
-            },
-            {
-              "seq": 1719205,
-              "speaker": "A",
-              "english": "Good start! First, build an emergency fund.",
-              "translated": "좋은 시작이야! 먼저 비상금부터 마련해.",
-              "hint": "'비상금'은 emergency fund로, '~을 마련하다'는 build로 표현하세요.",
-              "words": [
-                {
-                  "text": "Good",
-                  "start": 0,
-                  "end": 4
-                },
-                {
-                  "text": "start",
-                  "start": 5,
-                  "end": 10
-                },
-                {
-                  "text": "First",
-                  "start": 12,
-                  "end": 17
-                },
-                {
-                  "text": "build",
-                  "start": 19,
-                  "end": 24
-                },
-                {
-                  "text": "an",
-                  "start": 25,
-                  "end": 27
-                },
-                {
-                  "text": "emergency",
-                  "start": 28,
-                  "end": 37
-                },
-                {
-                  "text": "fund",
-                  "start": 38,
-                  "end": 42
-                }
-              ]
             }
           ]
         },
@@ -10677,45 +8992,6 @@
                   "end": 38
                 }
               ]
-            },
-            {
-              "seq": 1720205,
-              "speaker": "A",
-              "english": "Perfect. I like helping children learn.",
-              "translated": "딱이네요. 아이들이 배우는 걸 돕는 게 좋아요.",
-              "hint": "'아이들이 배우는 걸 돕는 것'은 helping children learn으로 표현하세요.",
-              "words": [
-                {
-                  "text": "Perfect",
-                  "start": 0,
-                  "end": 7
-                },
-                {
-                  "text": "I",
-                  "start": 9,
-                  "end": 10
-                },
-                {
-                  "text": "like",
-                  "start": 11,
-                  "end": 15
-                },
-                {
-                  "text": "helping",
-                  "start": 16,
-                  "end": 23
-                },
-                {
-                  "text": "children",
-                  "start": 24,
-                  "end": 32
-                },
-                {
-                  "text": "learn",
-                  "start": 33,
-                  "end": 38
-                }
-              ]
             }
           ]
         },
@@ -10911,40 +9187,6 @@
                   "text": "money",
                   "start": 21,
                   "end": 26
-                }
-              ]
-            },
-            {
-              "seq": 1721205,
-              "speaker": "B",
-              "english": "How much do we need?",
-              "translated": "얼마나 필요한데?",
-              "hint": null,
-              "words": [
-                {
-                  "text": "How",
-                  "start": 0,
-                  "end": 3
-                },
-                {
-                  "text": "much",
-                  "start": 4,
-                  "end": 8
-                },
-                {
-                  "text": "do",
-                  "start": 9,
-                  "end": 11
-                },
-                {
-                  "text": "we",
-                  "start": 12,
-                  "end": 14
-                },
-                {
-                  "text": "need",
-                  "start": 15,
-                  "end": 19
                 }
               ]
             }
@@ -11162,45 +9404,6 @@
                   "text": "failures",
                   "start": 21,
                   "end": 29
-                }
-              ]
-            },
-            {
-              "seq": 1722205,
-              "speaker": "A",
-              "english": "Yes, I lost money in 2008.",
-              "translated": "네, 2008년에 돈을 잃었어요.",
-              "hint": "'잃다'는 lose이고, 과거형은 lost입니다.",
-              "words": [
-                {
-                  "text": "Yes",
-                  "start": 0,
-                  "end": 3
-                },
-                {
-                  "text": "I",
-                  "start": 5,
-                  "end": 6
-                },
-                {
-                  "text": "lost",
-                  "start": 7,
-                  "end": 11
-                },
-                {
-                  "text": "money",
-                  "start": 12,
-                  "end": 17
-                },
-                {
-                  "text": "in",
-                  "start": 18,
-                  "end": 20
-                },
-                {
-                  "text": "2008",
-                  "start": 21,
-                  "end": 25
                 }
               ]
             }
@@ -11462,45 +9665,6 @@
                   "end": 42
                 }
               ]
-            },
-            {
-              "seq": 201205,
-              "speaker": "A",
-              "english": "Are there any direct flights available?",
-              "translated": "직항편도 있나요?",
-              "hint": "'직항편'은 direct flights로 표현하세요.",
-              "words": [
-                {
-                  "text": "Are",
-                  "start": 0,
-                  "end": 3
-                },
-                {
-                  "text": "there",
-                  "start": 4,
-                  "end": 9
-                },
-                {
-                  "text": "any",
-                  "start": 10,
-                  "end": 13
-                },
-                {
-                  "text": "direct",
-                  "start": 14,
-                  "end": 20
-                },
-                {
-                  "text": "flights",
-                  "start": 21,
-                  "end": 28
-                },
-                {
-                  "text": "available",
-                  "start": 29,
-                  "end": 38
-                }
-              ]
             }
           ]
         },
@@ -11728,50 +9892,6 @@
                   "end": 39
                 }
               ]
-            },
-            {
-              "seq": 202205,
-              "speaker": "A",
-              "english": "What's important for New York?",
-              "translated": "뉴욕은 뭐가 중요해요?",
-              "hint": "'뉴욕은'을 표현할 때 전치사 for를 사용해 보세요.",
-              "words": [
-                {
-                  "text": "What's",
-                  "start": 0,
-                  "end": 6
-                },
-                {
-                  "text": "What",
-                  "start": 0,
-                  "end": 4
-                },
-                {
-                  "text": "'s",
-                  "start": 4,
-                  "end": 6
-                },
-                {
-                  "text": "important",
-                  "start": 7,
-                  "end": 16
-                },
-                {
-                  "text": "for",
-                  "start": 17,
-                  "end": 20
-                },
-                {
-                  "text": "New",
-                  "start": 21,
-                  "end": 24
-                },
-                {
-                  "text": "York",
-                  "start": 25,
-                  "end": 29
-                }
-              ]
             }
           ]
         },
@@ -11957,55 +10077,6 @@
                   "text": "number",
                   "start": 23,
                   "end": 29
-                }
-              ]
-            },
-            {
-              "seq": 203205,
-              "speaker": "A",
-              "english": "Sure. It's here on my phone.",
-              "translated": "네, 여기 폰에 있어요.",
-              "hint": "'폰에'는 on my phone으로 표현하세요.",
-              "words": [
-                {
-                  "text": "Sure",
-                  "start": 0,
-                  "end": 4
-                },
-                {
-                  "text": "It's",
-                  "start": 6,
-                  "end": 10
-                },
-                {
-                  "text": "It",
-                  "start": 6,
-                  "end": 8
-                },
-                {
-                  "text": "'s",
-                  "start": 8,
-                  "end": 10
-                },
-                {
-                  "text": "here",
-                  "start": 11,
-                  "end": 15
-                },
-                {
-                  "text": "on",
-                  "start": 16,
-                  "end": 18
-                },
-                {
-                  "text": "my",
-                  "start": 19,
-                  "end": 21
-                },
-                {
-                  "text": "phone",
-                  "start": 22,
-                  "end": 27
                 }
               ]
             }
@@ -12230,40 +10301,6 @@
                   "end": 23
                 }
               ]
-            },
-            {
-              "seq": 204205,
-              "speaker": "B",
-              "english": "Broadway shows and Central Park.",
-              "translated": "브로드웨이 쇼랑 센트럴 파크요.",
-              "hint": null,
-              "words": [
-                {
-                  "text": "Broadway",
-                  "start": 0,
-                  "end": 8
-                },
-                {
-                  "text": "shows",
-                  "start": 9,
-                  "end": 14
-                },
-                {
-                  "text": "and",
-                  "start": 15,
-                  "end": 18
-                },
-                {
-                  "text": "Central",
-                  "start": 19,
-                  "end": 26
-                },
-                {
-                  "text": "Park",
-                  "start": 27,
-                  "end": 31
-                }
-              ]
             }
           ]
         },
@@ -12439,50 +10476,6 @@
                   "text": "do",
                   "start": 8,
                   "end": 10
-                }
-              ]
-            },
-            {
-              "seq": 205205,
-              "speaker": "A",
-              "english": "I'll have ginger ale, please.",
-              "translated": "진저에일로 주세요.",
-              "hint": "'~로 주세요'라고 주문할 때는 I'll have로 시작해 보세요.",
-              "words": [
-                {
-                  "text": "I'll",
-                  "start": 0,
-                  "end": 4
-                },
-                {
-                  "text": "I",
-                  "start": 0,
-                  "end": 1
-                },
-                {
-                  "text": "'ll",
-                  "start": 1,
-                  "end": 4
-                },
-                {
-                  "text": "have",
-                  "start": 5,
-                  "end": 9
-                },
-                {
-                  "text": "ginger",
-                  "start": 10,
-                  "end": 16
-                },
-                {
-                  "text": "ale",
-                  "start": 17,
-                  "end": 20
-                },
-                {
-                  "text": "please",
-                  "start": 22,
-                  "end": 28
                 }
               ]
             }
@@ -12690,45 +10683,6 @@
                   "text": "available",
                   "start": 29,
                   "end": 38
-                }
-              ]
-            },
-            {
-              "seq": 206205,
-              "speaker": "A",
-              "english": "How much data do you have?",
-              "translated": "데이터 용량은 어떻게 되나요?",
-              "hint": "'데이터 용량'을 물을 때는 how much data라는 표현을 사용하세요.",
-              "words": [
-                {
-                  "text": "How",
-                  "start": 0,
-                  "end": 3
-                },
-                {
-                  "text": "much",
-                  "start": 4,
-                  "end": 8
-                },
-                {
-                  "text": "data",
-                  "start": 9,
-                  "end": 13
-                },
-                {
-                  "text": "do",
-                  "start": 14,
-                  "end": 16
-                },
-                {
-                  "text": "you",
-                  "start": 17,
-                  "end": 20
-                },
-                {
-                  "text": "have",
-                  "start": 21,
-                  "end": 25
                 }
               ]
             }
@@ -12958,50 +10912,6 @@
                   "end": 31
                 }
               ]
-            },
-            {
-              "seq": 207205,
-              "speaker": "A",
-              "english": "Yes, in my pocket. Is that bad?",
-              "translated": "네, 주머니에요. 그러면 안 되나요?",
-              "hint": "'그러면 안 되나요?'는 Is that bad?로 간단하게 표현할 수 있어요.",
-              "words": [
-                {
-                  "text": "Yes",
-                  "start": 0,
-                  "end": 3
-                },
-                {
-                  "text": "in",
-                  "start": 5,
-                  "end": 7
-                },
-                {
-                  "text": "my",
-                  "start": 8,
-                  "end": 10
-                },
-                {
-                  "text": "pocket",
-                  "start": 11,
-                  "end": 17
-                },
-                {
-                  "text": "Is",
-                  "start": 19,
-                  "end": 21
-                },
-                {
-                  "text": "that",
-                  "start": 22,
-                  "end": 26
-                },
-                {
-                  "text": "bad",
-                  "start": 27,
-                  "end": 30
-                }
-              ]
             }
           ]
         },
@@ -13219,40 +11129,6 @@
                   "end": 41
                 }
               ]
-            },
-            {
-              "seq": 208205,
-              "speaker": "A",
-              "english": "How much does it cost?",
-              "translated": "얼마예요?",
-              "hint": "'비용이 들다'라는 의미의 cost를 동사로 사용하여 질문을 만들어 보세요.",
-              "words": [
-                {
-                  "text": "How",
-                  "start": 0,
-                  "end": 3
-                },
-                {
-                  "text": "much",
-                  "start": 4,
-                  "end": 8
-                },
-                {
-                  "text": "does",
-                  "start": 9,
-                  "end": 13
-                },
-                {
-                  "text": "it",
-                  "start": 14,
-                  "end": 16
-                },
-                {
-                  "text": "cost",
-                  "start": 17,
-                  "end": 21
-                }
-              ]
             }
           ]
         },
@@ -13455,55 +11331,6 @@
                   "end": 35
                 }
               ]
-            },
-            {
-              "seq": 209205,
-              "speaker": "B",
-              "english": "Okay. I'll include all the signs.",
-              "translated": "네. 간판들 다 나오게 찍을게요.",
-              "hint": null,
-              "words": [
-                {
-                  "text": "Okay",
-                  "start": 0,
-                  "end": 4
-                },
-                {
-                  "text": "I'll",
-                  "start": 6,
-                  "end": 10
-                },
-                {
-                  "text": "I",
-                  "start": 6,
-                  "end": 7
-                },
-                {
-                  "text": "'ll",
-                  "start": 7,
-                  "end": 10
-                },
-                {
-                  "text": "include",
-                  "start": 11,
-                  "end": 18
-                },
-                {
-                  "text": "all",
-                  "start": 19,
-                  "end": 22
-                },
-                {
-                  "text": "the",
-                  "start": 23,
-                  "end": 26
-                },
-                {
-                  "text": "signs",
-                  "start": 27,
-                  "end": 32
-                }
-              ]
             }
           ]
         },
@@ -13699,50 +11526,6 @@
                   "text": "attractions",
                   "start": 26,
                   "end": 37
-                }
-              ]
-            },
-            {
-              "seq": 210205,
-              "speaker": "A",
-              "english": "Is it safe to walk alone here?",
-              "translated": "혼자 다녀도 안전한가요?",
-              "hint": "'~해도 안전한가요?'라고 물을 때 Is it safe로 질문을 시작하세요.",
-              "words": [
-                {
-                  "text": "Is",
-                  "start": 0,
-                  "end": 2
-                },
-                {
-                  "text": "it",
-                  "start": 3,
-                  "end": 5
-                },
-                {
-                  "text": "safe",
-                  "start": 6,
-                  "end": 10
-                },
-                {
-                  "text": "to",
-                  "start": 11,
-                  "end": 13
-                },
-                {
-                  "text": "walk",
-                  "start": 14,
-                  "end": 18
-                },
-                {
-                  "text": "alone",
-                  "start": 19,
-                  "end": 24
-                },
-                {
-                  "text": "here",
-                  "start": 25,
-                  "end": 29
                 }
               ]
             }
@@ -13944,40 +11727,6 @@
                 {
                   "text": "free",
                   "start": 25,
-                  "end": 29
-                }
-              ]
-            },
-            {
-              "seq": 211205,
-              "speaker": "A",
-              "english": "Do you have student discounts?",
-              "translated": "학생 할인도 있나요?",
-              "hint": "'학생 할인'은 student discounts로 표현하세요.",
-              "words": [
-                {
-                  "text": "Do",
-                  "start": 0,
-                  "end": 2
-                },
-                {
-                  "text": "you",
-                  "start": 3,
-                  "end": 6
-                },
-                {
-                  "text": "have",
-                  "start": 7,
-                  "end": 11
-                },
-                {
-                  "text": "student",
-                  "start": 12,
-                  "end": 19
-                },
-                {
-                  "text": "discounts",
-                  "start": 20,
                   "end": 29
                 }
               ]
@@ -14198,60 +11947,6 @@
                   "end": 35
                 }
               ]
-            },
-            {
-              "seq": 212205,
-              "speaker": "A",
-              "english": "It's room 312, on the third floor.",
-              "translated": "312호실이요, 3층이에요.",
-              "hint": "'~층에'는 on the third floor로 표현하세요.",
-              "words": [
-                {
-                  "text": "It's",
-                  "start": 0,
-                  "end": 4
-                },
-                {
-                  "text": "It",
-                  "start": 0,
-                  "end": 2
-                },
-                {
-                  "text": "'s",
-                  "start": 2,
-                  "end": 4
-                },
-                {
-                  "text": "room",
-                  "start": 5,
-                  "end": 9
-                },
-                {
-                  "text": "312",
-                  "start": 10,
-                  "end": 13
-                },
-                {
-                  "text": "on",
-                  "start": 15,
-                  "end": 17
-                },
-                {
-                  "text": "the",
-                  "start": 18,
-                  "end": 21
-                },
-                {
-                  "text": "third",
-                  "start": 22,
-                  "end": 27
-                },
-                {
-                  "text": "floor",
-                  "start": 28,
-                  "end": 33
-                }
-              ]
             }
           ]
         },
@@ -14422,45 +12117,6 @@
                   "text": "now",
                   "start": 27,
                   "end": 30
-                }
-              ]
-            },
-            {
-              "seq": 213205,
-              "speaker": "A",
-              "english": "Can we make it on time?",
-              "translated": "제시간에 도착할 수 있을까요?",
-              "hint": "'도착하다'는 make it이라는 표현으로 나타내 보세요.",
-              "words": [
-                {
-                  "text": "Can",
-                  "start": 0,
-                  "end": 3
-                },
-                {
-                  "text": "we",
-                  "start": 4,
-                  "end": 6
-                },
-                {
-                  "text": "make",
-                  "start": 7,
-                  "end": 11
-                },
-                {
-                  "text": "it",
-                  "start": 12,
-                  "end": 14
-                },
-                {
-                  "text": "on",
-                  "start": 15,
-                  "end": 17
-                },
-                {
-                  "text": "time",
-                  "start": 18,
-                  "end": 22
                 }
               ]
             }
@@ -14680,35 +12336,6 @@
                   "end": 33
                 }
               ]
-            },
-            {
-              "seq": 214205,
-              "speaker": "A",
-              "english": "Both regular size, please.",
-              "translated": "둘 다 레귤러 사이즈로요.",
-              "hint": "'둘 다'는 Both로 표현하세요.",
-              "words": [
-                {
-                  "text": "Both",
-                  "start": 0,
-                  "end": 4
-                },
-                {
-                  "text": "regular",
-                  "start": 5,
-                  "end": 12
-                },
-                {
-                  "text": "size",
-                  "start": 13,
-                  "end": 17
-                },
-                {
-                  "text": "please",
-                  "start": 19,
-                  "end": 25
-                }
-              ]
             }
           ]
         },
@@ -14914,40 +12541,6 @@
                   "text": "under",
                   "start": 25,
                   "end": 30
-                }
-              ]
-            },
-            {
-              "seq": 215205,
-              "speaker": "A",
-              "english": "It's under Abigail.",
-              "translated": "아비게일이요.",
-              "hint": "'~의 이름으로 되어 있어요'라는 의미로 under를 사용해 보세요.",
-              "words": [
-                {
-                  "text": "It's",
-                  "start": 0,
-                  "end": 4
-                },
-                {
-                  "text": "It",
-                  "start": 0,
-                  "end": 2
-                },
-                {
-                  "text": "'s",
-                  "start": 2,
-                  "end": 4
-                },
-                {
-                  "text": "under",
-                  "start": 5,
-                  "end": 10
-                },
-                {
-                  "text": "Abigail",
-                  "start": 11,
-                  "end": 18
                 }
               ]
             }
@@ -15187,45 +12780,6 @@
                   "end": 36
                 }
               ]
-            },
-            {
-              "seq": 216205,
-              "speaker": "A",
-              "english": "I'll take that, please.",
-              "translated": "그걸로 할게요.",
-              "hint": "'~로 할게요'라는 선택 표현은 I'll take로 시작해 보세요.",
-              "words": [
-                {
-                  "text": "I'll",
-                  "start": 0,
-                  "end": 4
-                },
-                {
-                  "text": "I",
-                  "start": 0,
-                  "end": 1
-                },
-                {
-                  "text": "'ll",
-                  "start": 1,
-                  "end": 4
-                },
-                {
-                  "text": "take",
-                  "start": 5,
-                  "end": 9
-                },
-                {
-                  "text": "that",
-                  "start": 10,
-                  "end": 14
-                },
-                {
-                  "text": "please",
-                  "start": 16,
-                  "end": 22
-                }
-              ]
             }
           ]
         },
@@ -15463,35 +13017,6 @@
                   "end": 31
                 }
               ]
-            },
-            {
-              "seq": 217205,
-              "speaker": "A",
-              "english": "Coffee one two three?",
-              "translated": "coffee 일이삼이요?",
-              "hint": "'일이삼'을 one, two처럼 영어 숫자로 차례대로 읽어보세요.",
-              "words": [
-                {
-                  "text": "Coffee",
-                  "start": 0,
-                  "end": 6
-                },
-                {
-                  "text": "one",
-                  "start": 7,
-                  "end": 10
-                },
-                {
-                  "text": "two",
-                  "start": 11,
-                  "end": 14
-                },
-                {
-                  "text": "three",
-                  "start": 15,
-                  "end": 20
-                }
-              ]
             }
           ]
         },
@@ -15677,40 +13202,6 @@
                   "text": "DUMBO",
                   "start": 16,
                   "end": 21
-                }
-              ]
-            },
-            {
-              "seq": 218205,
-              "speaker": "B",
-              "english": "Take the downtown F train.",
-              "translated": "다운타운 방향 F선 타세요.",
-              "hint": null,
-              "words": [
-                {
-                  "text": "Take",
-                  "start": 0,
-                  "end": 4
-                },
-                {
-                  "text": "the",
-                  "start": 5,
-                  "end": 8
-                },
-                {
-                  "text": "downtown",
-                  "start": 9,
-                  "end": 17
-                },
-                {
-                  "text": "F",
-                  "start": 18,
-                  "end": 19
-                },
-                {
-                  "text": "train",
-                  "start": 20,
-                  "end": 25
                 }
               ]
             }
@@ -15903,45 +13394,6 @@
                   "text": "sick",
                   "start": 23,
                   "end": 27
-                }
-              ]
-            },
-            {
-              "seq": 219205,
-              "speaker": "A",
-              "english": "Since yesterday. I traveled too much.",
-              "translated": "어제부터요. 여행 중에 무리했어요.",
-              "hint": "'~부터'는 Since로 표현하세요.",
-              "words": [
-                {
-                  "text": "Since",
-                  "start": 0,
-                  "end": 5
-                },
-                {
-                  "text": "yesterday",
-                  "start": 6,
-                  "end": 15
-                },
-                {
-                  "text": "I",
-                  "start": 17,
-                  "end": 18
-                },
-                {
-                  "text": "traveled",
-                  "start": 19,
-                  "end": 27
-                },
-                {
-                  "text": "too",
-                  "start": 28,
-                  "end": 31
-                },
-                {
-                  "text": "much",
-                  "start": 32,
-                  "end": 36
                 }
               ]
             }
@@ -16146,40 +13598,6 @@
                   "end": 31
                 }
               ]
-            },
-            {
-              "seq": 220205,
-              "speaker": "A",
-              "english": "How much does it cost?",
-              "translated": "얼마예요?",
-              "hint": "'비용이 들다'라는 의미의 동사 cost를 활용해 보세요.",
-              "words": [
-                {
-                  "text": "How",
-                  "start": 0,
-                  "end": 3
-                },
-                {
-                  "text": "much",
-                  "start": 4,
-                  "end": 8
-                },
-                {
-                  "text": "does",
-                  "start": 9,
-                  "end": 13
-                },
-                {
-                  "text": "it",
-                  "start": 14,
-                  "end": 16
-                },
-                {
-                  "text": "cost",
-                  "start": 17,
-                  "end": 21
-                }
-              ]
             }
           ]
         },
@@ -16367,50 +13785,6 @@
                   "end": 16
                 }
               ]
-            },
-            {
-              "seq": 221205,
-              "speaker": "A",
-              "english": "Thanks. It's really late now.",
-              "translated": "감사해요. 시간이 진짜 늦었네요.",
-              "hint": "'진짜 늦었네요'는 really late로 표현해 보세요.",
-              "words": [
-                {
-                  "text": "Thanks",
-                  "start": 0,
-                  "end": 6
-                },
-                {
-                  "text": "It's",
-                  "start": 8,
-                  "end": 12
-                },
-                {
-                  "text": "It",
-                  "start": 8,
-                  "end": 10
-                },
-                {
-                  "text": "'s",
-                  "start": 10,
-                  "end": 12
-                },
-                {
-                  "text": "really",
-                  "start": 13,
-                  "end": 19
-                },
-                {
-                  "text": "late",
-                  "start": 20,
-                  "end": 24
-                },
-                {
-                  "text": "now",
-                  "start": 25,
-                  "end": 28
-                }
-              ]
             }
           ]
         },
@@ -16591,25 +13965,6 @@
                   "text": "MoMA",
                   "start": 25,
                   "end": 29
-                }
-              ]
-            },
-            {
-              "seq": 222205,
-              "speaker": "B",
-              "english": "Any problems?",
-              "translated": "문제는 없었어?",
-              "hint": null,
-              "words": [
-                {
-                  "text": "Any",
-                  "start": 0,
-                  "end": 3
-                },
-                {
-                  "text": "problems",
-                  "start": 4,
-                  "end": 12
                 }
               ]
             }
