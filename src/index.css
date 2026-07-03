@@ -1,9 +1,9 @@
 :root {
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  color: #1a1a1a;
-  background: #fff;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Apple SD Gothic Neo", sans-serif;
+  color: #1f2937;
 }
 
 * { box-sizing: border-box; }
-body { margin: 0; }
+html, body { margin: 0; }
+body { background: #a9ccf2; }
 button { font-family: inherit; }

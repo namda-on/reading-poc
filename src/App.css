@@ -1,23 +1,49 @@
-.app { max-width: 720px; margin: 0 auto; padding: 20px; }
-.app-header { display: flex; flex-direction: column; gap: 12px; margin-bottom: 16px; }
-.app-header > button {
-  align-self: flex-start;
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: #2b7cff;
-  font-size: 15px;
+.app {
+  max-width: 480px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: #a9ccf2;
 }
-.topic-list ul { list-style: none; padding: 0; }
+
+.topbar-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 토픽 목록 */
+.topic-list { padding: 20px 16px 32px; }
+.topic-list h1 {
+  font-size: 22px;
+  color: #294a75;
+  margin: 8px 4px 20px;
+}
+.topic-list h1 small { font-size: 14px; color: #4b6a94; font-weight: 500; }
+.topic-list ul { list-style: none; padding: 0; margin: 0; }
 .topic-list li button {
   width: 100%;
   text-align: left;
-  padding: 14px 16px;
-  margin: 6px 0;
-  border: 1px solid #e3e3e3;
-  border-radius: 12px;
+  padding: 16px 18px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 16px;
   background: #fff;
   cursor: pointer;
   font-size: 16px;
+  font-weight: 600;
+  color: #2f3e52;
+  box-shadow: 0 2px 8px rgba(30, 60, 110, 0.12);
 }
-.topic-list li span { color: #888; font-size: 13px; }
+.topic-list li button span { display: block; margin-top: 4px; color: #8496ab; font-size: 13px; font-weight: 500; }
+
+/* 퀴즈 화면 */
+.quiz-screen { min-height: 100vh; }
+.quiz-screen .topbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 12px;
+}

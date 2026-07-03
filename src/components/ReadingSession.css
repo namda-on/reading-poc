@@ -1,12 +1,98 @@
-.session { display: flex; flex-direction: column; gap: 16px; }
-.chat { min-height: 320px; display: flex; flex-direction: column; }
-.session-actions { display: flex; gap: 12px; justify-content: center; }
+.session { display: flex; flex-direction: column; min-height: 100vh; }
+
+/* 상단바 */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 12px;
+  background: #a9ccf2;
+}
+.icon-btn {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: transparent;
+  color: #fff;
+  font-size: 26px;
+  line-height: 1;
+  cursor: pointer;
+  border-radius: 50%;
+}
+.icon-btn:hover { background: rgba(255, 255, 255, 0.2); }
+
+.progress { display: flex; align-items: center; gap: 8px; flex: 1; min-width: 0; }
+.trophy {
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+}
+.bar { position: relative; flex: 1; min-width: 0; }
+.bar-count {
+  position: absolute;
+  top: -14px;
+  left: 2px;
+  font-size: 11px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.85);
+}
+.bar-track {
+  height: 12px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.35);
+  overflow: hidden;
+}
+.bar-fill {
+  height: 100%;
+  border-radius: 6px;
+  background: #6f9bd6;
+  transition: width 400ms ease;
+}
+
+/* 설정 드롭다운 */
+.settings-drop {
+  margin: 0 12px 8px;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(30, 60, 110, 0.18);
+}
+
+/* 대화 영역 */
+.chat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 12px 16px 24px;
+}
+
+.session-actions {
+  position: sticky;
+  bottom: 0;
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  padding: 16px;
+  background: linear-gradient(to top, #a9ccf2 70%, transparent);
+}
 .session-actions button {
-  padding: 10px 20px;
-  border-radius: 10px;
-  border: 1px solid #ccc;
+  padding: 12px 24px;
+  border-radius: 24px;
+  border: none;
   cursor: pointer;
   font-size: 15px;
+  font-weight: 600;
   background: #fff;
+  color: #45566b;
+  box-shadow: 0 2px 8px rgba(30, 60, 110, 0.15);
 }
-.session-actions button.primary { background: #2b7cff; color: #fff; border-color: #2b7cff; }
+.session-actions button.primary { background: #4b83d6; color: #fff; }

@@ -4,7 +4,6 @@ import type { DialogsData } from './data/types';
 import { TopicList } from './components/TopicList';
 import { ReadingSession } from './components/ReadingSession';
 import { Quiz } from './components/Quiz';
-import { SettingsPanel } from './components/SettingsPanel';
 import './App.css';
 
 const DATA = dialogs as unknown as DialogsData;
@@ -17,26 +16,31 @@ export default function App() {
 
   return (
     <div className="app">
-      {screen !== 'topics' && (
-        <header className="app-header">
-          <button onClick={() => setScreen('topics')}>← 목록</button>
-          <SettingsPanel />
-        </header>
+      {screen === 'topics' && (
+        <TopicList
+          onPick={(s) => {
+            setTopicSeq(s);
+            setScreen('session');
+          }}
+        />
       )}
-      <main className="app-main">
-        {screen === 'topics' && (
-          <TopicList
-            onPick={(s) => {
-              setTopicSeq(s);
-              setScreen('session');
-            }}
-          />
-        )}
-        {screen === 'session' && topic && (
-          <ReadingSession key={topic.topicSeq} topic={topic} onFinish={() => setScreen('quiz')} />
-        )}
-        {screen === 'quiz' && topic && <Quiz topicSeq={topic.topicSeq} onDone={() => setScreen('topics')} />}
-      </main>
+      {screen === 'session' && topic && (
+        <ReadingSession
+          key={topic.topicSeq}
+          topic={topic}
+          onFinish={() => setScreen('quiz')}
+          onBack={() => setScreen('topics')}
+        />
+      )}
+      {screen === 'quiz' && topic && (
+        <div className="quiz-screen">
+          <header className="topbar">
+            <button className="icon-btn" onClick={() => setScreen('session')} aria-label="뒤로">‹</button>
+            <span className="topbar-title">{topic.title}</span>
+          </header>
+          <Quiz topicSeq={topic.topicSeq} onDone={() => setScreen('topics')} />
+        </div>
+      )}
     </div>
   );
 }
