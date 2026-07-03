@@ -25,7 +25,7 @@ export function ReadingSession({ topic, onFinish, onBack }: { topic: Topic; onFi
   const [started, setStarted] = useState(false);
   const [index, setIndex] = useState(0);
   const [currentChunks, setCurrentChunks] = useState<Chunk[]>([]);
-  const [settingsOpen, setSettingsOpen] = useState(false);
+  const [settingsOpen, setSettingsOpen] = useState(true); // 학습 시작 전에는 설정창을 열어둠
 
   const { visible, play } = useSlidingReveal();
   const gapTimer = useRef<number | null>(null);
@@ -91,7 +91,15 @@ export function ReadingSession({ topic, onFinish, onBack }: { topic: Topic; onFi
       {!started ? (
         <div className="start-prompt">
           <p>준비되면 시작하세요.<br />설정(⚙)을 먼저 조절할 수 있어요.</p>
-          <button className="start-btn" onClick={() => setStarted(true)}>▶ 시작</button>
+          <button
+            className="start-btn"
+            onClick={() => {
+              setSettingsOpen(false);
+              setStarted(true);
+            }}
+          >
+            ▶ 시작
+          </button>
         </div>
       ) : (
         <div className="chat">
