@@ -7,13 +7,22 @@ export function SettingsPanel() {
     <div className="settings-panel">
       <label>
         노출 단위
-        <select
-          value={settings.unit}
-          onChange={(e) => setSettings({ ...settings, unit: e.target.value as 'word' | 'chunk' })}
-        >
-          <option value="word">단어</option>
-          <option value="chunk">청크</option>
-        </select>
+        <div className="seg-toggle" role="group">
+          <button
+            type="button"
+            className={settings.unit === 'word' ? 'on' : ''}
+            onClick={() => setSettings({ ...settings, unit: 'word' })}
+          >
+            단어
+          </button>
+          <button
+            type="button"
+            className={settings.unit === 'chunk' ? 'on' : ''}
+            onClick={() => setSettings({ ...settings, unit: 'chunk' })}
+          >
+            청크
+          </button>
+        </div>
       </label>
       <label>
         창 크기 N: {settings.windowSize}

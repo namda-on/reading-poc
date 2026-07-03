@@ -5,54 +5,30 @@
       "options": ["모니터에 연결되는 컴퓨터", "새 자동차", "게임기", "라디오"],
       "answerIndex": 0,
       "explanation": "B는 모니터에 연결되어 화면에 글자가 나오는 컴퓨터를 몇 달간 만들었다."
-    },
-    {
-      "question": "A(잡스)가 마지막에 제안한 것은?",
-      "options": ["컴퓨터를 팔지 말자", "회사를 차리자", "취미로만 하자", "가격을 올리자"],
-      "answerIndex": 1,
-      "explanation": "A는 시장이 있다며 회사를 차리자고 제안했고 B가 같이 해보자고 했다."
     }
   ],
   "2502": [
     {
-      "question": "폴 테렐(B)이 주문한 컴퓨터 수량은?",
+      "question": "B(폴 테렐)가 주문한 컴퓨터 수량은?",
       "options": ["10개", "30개", "50개", "100개"],
       "answerIndex": 2,
-      "explanation": "B는 50개를 주문하겠다고 했다."
-    },
-    {
-      "question": "B가 내건 조건은 무엇인가?",
-      "options": ["완제품으로 조립되어야 한다", "무료 배송", "색상 선택", "1년 보증"],
-      "answerIndex": 0,
-      "explanation": "B는 완제품(fully assembled) 상태여야 한다고 했고, 30일 안에 필요하다고 했다."
+      "explanation": "B는 마음에 든다며 50개를 주문하겠다고 했다."
     }
   ],
   "2503": [
     {
-      "question": "A가 부품 가게에서 겪은 문제는?",
-      "options": ["부품이 품절이었다", "현금이 없었다", "가게가 문을 닫았다", "목록을 잃어버렸다"],
+      "question": "A에게 지금 없는 것은 무엇인가?",
+      "options": ["부품 목록", "현금", "시간", "신분증"],
       "answerIndex": 1,
-      "explanation": "A는 프로젝트용 전자부품이 필요했지만 현금이 없었다."
-    },
-    {
-      "question": "점원(B)이 결국 A를 도와준 이유는?",
-      "options": ["A가 친구였다", "가격을 깎아줘서", "Byte Shop의 컴퓨터 50대 주문서를 보여줘서", "사장이 시켜서"],
-      "answerIndex": 2,
-      "explanation": "A가 Byte Shop의 진짜 주문서(컴퓨터 50대)를 보여주며 30일 안에 갚겠다고 해 외상을 얻었다."
+      "explanation": "A는 목록은 있지만 현금이 없다(no cash)고 했다."
     }
   ],
   "2504": [
     {
-      "question": "A가 마쿨라에게 요청한 투자 금액은?",
-      "options": ["2만 5천 달러", "25만 달러", "250만 달러", "500만 달러"],
-      "answerIndex": 1,
-      "explanation": "A는 25만 달러($250,000)가 필요하다고 했다."
-    },
-    {
-      "question": "마쿨라(B)의 최종 답변은?",
-      "options": ["투자를 거절했다", "더 생각해보겠다고 했다", "투자하고 경영도 돕겠다고 했다", "절반만 투자하겠다고 했다"],
-      "answerIndex": 2,
-      "explanation": "B는 25만 달러를 투자하고 경영도 돕겠다며 내일 연락하라고 했다."
+      "question": "A가 밝힌 목표는 무엇인가?",
+      "options": ["모든 가정에 컴퓨터를 두는 것", "게임 회사를 만드는 것", "학교에만 컴퓨터를 파는 것", "해외로 진출하는 것"],
+      "answerIndex": 0,
+      "explanation": "A는 모든 가정(every home)에 컴퓨터를 보급하고 싶다고 했다."
     }
   ],
   "2505": [
@@ -61,12 +37,6 @@
       "options": ["Atari", "Apple Computer", "NeXT", "Macintosh"],
       "answerIndex": 1,
       "explanation": "A는 'Apple Computer'를 제안했다."
-    },
-    {
-      "question": "A가 든 Apple이라는 이름의 실용적 이유는?",
-      "options": ["사과를 좋아해서", "전화번호부에서 Atari보다 앞에 나와서", "발음이 쉬워서", "로고를 이미 만들어서"],
-      "answerIndex": 1,
-      "explanation": "전화번호부에서 Atari보다 앞에 나온다는 점을 들었고 B는 기발하다고 했다."
     }
   ],
   "2506": [
@@ -74,111 +44,63 @@
       "question": "A가 원한 로고 디자인은?",
       "options": ["한 입 베어문 사과", "온전한 사과", "나무", "무지개"],
       "answerIndex": 0,
-      "explanation": "A는 한 입 베어문(bite taken out) 사과를 원했다."
-    },
-    {
-      "question": "A가 원한 색상 방향은?",
-      "options": ["흑백(모노크롬)", "컬러", "금색만", "투명"],
-      "answerIndex": 1,
-      "explanation": "A는 컬러로, 친근하고 혁신적인 느낌을 원했다."
+      "explanation": "A는 한 입 베어문(a bite taken out) 사과를 원했다."
     }
   ],
   "2507": [
     {
-      "question": "부스에서 소개된 제품은?",
+      "question": "부스에서 소개된 제품의 이름은?",
       "options": ["Apple I", "Apple II", "Macintosh", "iMac"],
       "answerIndex": 1,
       "explanation": "A는 플라스틱 케이스에 든 Apple II를 소개했다."
-    },
-    {
-      "question": "이 컴퓨터를 쓰려면 무엇을 하면 되는가?",
-      "options": ["프린터를 연결", "모니터를 연결", "배터리를 넣음", "소프트웨어를 구매"],
-      "answerIndex": 1,
-      "explanation": "모니터만 연결하면 되고, 컬러 그래픽과 게임·프로그래밍도 가능하다고 했다."
     }
   ],
   "2508": [
     {
-      "question": "인터뷰 당시 잡스(A)의 나이는?",
+      "question": "A(잡스)가 밝힌 나이는?",
       "options": ["18살", "20살", "22살", "25살"],
       "answerIndex": 2,
-      "explanation": "A는 스물두 살이라고 밝혔다."
-    },
-    {
-      "question": "A는 회사를 어디서 시작했다고 했는가?",
-      "options": ["대학교", "차고", "사무실 빌딩", "공장"],
-      "answerIndex": 1,
-      "explanation": "A는 친구와 차고(garage)에서 시작했다고 했다."
+      "explanation": "A는 자신이 스물두 살(twenty-two)이라고 했다."
     }
   ],
   "2509": [
     {
-      "question": "B가 소개한 작은 상자 장치의 이름은?",
+      "question": "B가 소개한 작은 장치의 이름은?",
       "options": ["키보드", "마우스", "모뎀", "스피커"],
       "answerIndex": 1,
-      "explanation": "B는 클릭에 쓰는 마우스(mouse)를 소개했다."
-    },
-    {
-      "question": "화면의 작은 그림들을 무엇이라 부르는가?",
-      "options": ["아이콘", "픽셀", "폴더", "버튼"],
-      "answerIndex": 0,
-      "explanation": "그것들은 아이콘이며 각각 윈도우를 연다고 했다."
+      "explanation": "B는 클릭에 쓰는 마우스(mouse)라고 했다."
     }
   ],
   "2510": [
     {
-      "question": "이사회가 스티브(A)에 대해 내린 결정은?",
+      "question": "이사회가 내린 결정은?",
       "options": ["급여 인상", "경영에서 배제", "새 프로젝트 배정", "해외 발령"],
       "answerIndex": 1,
       "explanation": "이사회는 A를 경영에서 배제(remove from management)하기로 했다."
-    },
-    {
-      "question": "B가 든 이유는 무엇인가?",
-      "options": ["매출이 너무 저조해서", "A가 자주 결근해서", "제품이 없어서", "투자자가 반대해서"],
-      "answerIndex": 0,
-      "explanation": "B는 매출이 매우 저조하고 이사회가 더 기다리지 않으려 한다고 했다."
     }
   ],
   "2511": [
     {
-      "question": "A가 세운 새 회사의 이름은?",
-      "options": ["Pixar", "NeXT", "Apple", "Byte"],
-      "answerIndex": 1,
-      "explanation": "A는 새 회사 NeXT를 시작했다."
-    },
-    {
-      "question": "NeXT가 겨냥한 시장은?",
-      "options": ["게임 시장", "교육 시장", "군사 시장", "의료 시장"],
-      "answerIndex": 1,
-      "explanation": "A는 교육 시장(education market)을 위한 컴퓨터를 만들겠다고 했다."
+      "question": "애플이 A에게 한 것은?",
+      "options": ["소송을 걸었다", "투자를 했다", "복귀를 요청했다", "상을 줬다"],
+      "answerIndex": 0,
+      "explanation": "B가 애플이 소송을 걸었다(filed a lawsuit)고 말했다."
     }
   ],
   "2512": [
     {
-      "question": "B의 팀이 만들고 싶어한 것은?",
+      "question": "B의 팀이 만들고 싶어하는 것은?",
       "options": ["3D 애니메이션 영화", "비디오 게임", "광고", "다큐멘터리"],
       "answerIndex": 0,
       "explanation": "B는 컴퓨터로 3D 애니메이션 영화를 만들고 싶다고 했다."
-    },
-    {
-      "question": "언급된 금액은 얼마인가?",
-      "options": ["50만 달러", "500만 달러", "5천만 달러", "5억 달러"],
-      "answerIndex": 1,
-      "explanation": "500만 달러(five million dollars)가 언급되었고 A가 투자하기로 했다."
     }
   ],
   "2513": [
     {
-      "question": "애플(B)이 원한 것은?",
-      "options": ["NeXT 인수", "잡스 해고", "새 로고", "공장 매각"],
+      "question": "애플이 원하는 것은 무엇인가?",
+      "options": ["NeXT 인수", "A의 해고", "새 로고", "공장 매각"],
       "answerIndex": 0,
-      "explanation": "B는 애플이 NeXT를 인수하고 싶으며 A의 복귀도 요청했다."
-    },
-    {
-      "question": "현재 애플의 상황은?",
-      "options": ["큰 흑자", "적자(돈을 잃고 있음)", "시장 1위", "합병 직전"],
-      "answerIndex": 1,
-      "explanation": "B는 솔직히 상황이 좋지 않고 적자가 나고 있다고 했다."
+      "explanation": "B는 애플이 NeXT를 인수하고 싶으며 A의 도움도 필요하다고 했다."
     }
   ],
   "2514": [
@@ -187,68 +109,38 @@
       "options": ["Think Big", "Think Different", "Just Do It", "Stay Hungry"],
       "answerIndex": 1,
       "explanation": "B는 'Think Different' 캠페인을 제안했다."
-    },
-    {
-      "question": "캠페인에 등장하는 인물이 아닌 것은?",
-      "options": ["아인슈타인", "피카소", "간디", "나폴레옹"],
-      "answerIndex": 3,
-      "explanation": "언급된 인물은 아인슈타인, 피카소, 간디 등 혁신가들이었다."
     }
   ],
   "2515": [
     {
-      "question": "iMac 케이스로 제안된 것은?",
+      "question": "B가 제안한 케이스는?",
       "options": ["금속 케이스", "반투명 플라스틱 케이스", "나무 케이스", "가죽 케이스"],
       "answerIndex": 1,
       "explanation": "B는 반투명(translucent) 플라스틱 케이스를 제안했다."
-    },
-    {
-      "question": "A가 없애기로 한 것은?",
-      "options": ["플로피 드라이브", "전원 버튼", "모니터", "키보드"],
-      "answerIndex": 0,
-      "explanation": "A는 사람들이 더 이상 플로피 디스크가 필요 없다며 플로피 드라이브를 빼고 USB만 쓰자고 했다."
     }
   ],
   "2516": [
     {
-      "question": "B가 제안한 뮤직 플레이어의 저장 용량은?",
+      "question": "이 뮤직 플레이어가 저장할 수 있는 곡 수는?",
       "options": ["약 100곡", "약 500곡", "약 1000곡", "약 5000곡"],
       "answerIndex": 2,
-      "explanation": "소형 하드 드라이브로 약 1000곡을 저장할 수 있다고 했다."
-    },
-    {
-      "question": "A가 강조한 핵심 요소는?",
-      "options": ["가장 낮은 가격", "완벽한 사용자 경험", "가장 큰 화면", "방수 기능"],
-      "answerIndex": 1,
-      "explanation": "A는 사용자 경험이 완벽해야 한다며 스크롤 휠과 iTunes 동기화를 원했다."
+      "explanation": "B는 약 1000곡(one thousand songs)을 저장할 수 있다고 했다."
     }
   ],
   "2518": [
     {
-      "question": "A가 무대에서 소개할 세 가지로 묶인 기기는?",
+      "question": "A가 하나로 합치려는 세 가지 기기는?",
       "options": ["아이팟·폰·인터넷 기기", "노트북·태블릿·시계", "카메라·TV·라디오", "마우스·키보드·모니터"],
       "answerIndex": 0,
       "explanation": "A는 아이팟, 폰, 인터넷 기기를 하나로 합친 기기라고 소개했다."
-    },
-    {
-      "question": "그 하나의 기기를 뭐라고 부르는가?",
-      "options": ["아이패드", "아이폰", "아이팟", "맥북"],
-      "answerIndex": 1,
-      "explanation": "세 기기를 하나로 합친 것을 아이폰(iPhone)이라 부른다고 했다."
     }
   ],
   "2519": [
     {
-      "question": "완성된 제품 iPad는 무엇으로 설명되는가?",
+      "question": "iPad는 어떻게 설명되는가?",
       "options": ["더 큰 폰", "PC도 폰도 아닌 새 카테고리", "게임기", "전자책 전용 기기"],
       "answerIndex": 1,
-      "explanation": "A는 PC도 폰도 아닌, 그 사이의 새로운 카테고리라고 했다."
-    },
-    {
-      "question": "iPad의 무게는?",
-      "options": ["0.5파운드", "1.5파운드", "3파운드", "5파운드"],
-      "answerIndex": 1,
-      "explanation": "B는 1.5파운드밖에 안 되며 책을 든 느낌이어야 한다고 했다."
+      "explanation": "A와 B는 PC도 폰도 아닌, 그 사이의 새로운 카테고리라고 했다."
     }
   ],
   "2520": [
@@ -256,27 +148,15 @@
       "question": "A가 B에게 털어놓은 것은?",
       "options": ["회사를 매각한다", "건강이 악화되고 있다", "해외로 이주한다", "새 제품 아이디어"],
       "answerIndex": 1,
-      "explanation": "A는 자신의 건강이 악화되고 있다고 말했다."
-    },
-    {
-      "question": "A가 B에게 부탁한 것은?",
-      "options": ["CEO를 맡아달라", "투자를 해달라", "비밀을 지켜달라", "사직서를 내달라"],
-      "answerIndex": 0,
-      "explanation": "A는 B에게 CEO가 되어 애플을 맡아달라고 부탁했다."
+      "explanation": "A는 자신의 건강이 악화되고 있다(getting worse)고 말했다."
     }
   ],
   "2521": [
     {
-      "question": "A가 다음 날 발표에서 강조하라고 한 것은?",
-      "options": ["가격", "Siri(음성 AI)", "카메라", "배터리"],
+      "question": "A가 발표에서 강조하라고 한 것은?",
+      "options": ["가격", "Siri", "카메라", "배터리"],
       "answerIndex": 1,
-      "explanation": "A는 Siri를 꼭 강조하라고 했고 B는 메인 시연으로 하겠다고 했다."
-    },
-    {
-      "question": "A는 음성 AI를 무엇이라고 표현했는가?",
-      "options": ["일시적 유행", "컴퓨터의 미래", "위험한 기술", "비싼 장난감"],
-      "answerIndex": 1,
-      "explanation": "A는 음성 AI가 컴퓨터의 미래라고 했다."
+      "explanation": "A는 Siri를 꼭 강조하라고 했고, 음성 AI가 컴퓨터의 미래라고 했다."
     }
   ],
   "2522": [
@@ -284,13 +164,7 @@
       "question": "A가 자신의 '최고의 작품'이라고 말한 것은?",
       "options": ["애플 제품", "아내와 아이들", "아이폰", "픽사 영화"],
       "answerIndex": 1,
-      "explanation": "A는 당신(아내)과 아이들이 내 최고의 작품이었다고 말했다."
-    },
-    {
-      "question": "A가 애플에 대해 남긴 바람은?",
-      "options": ["회사를 팔기를", "계속 혁신하기를", "이름을 바꾸기를", "규모를 줄이기를"],
-      "answerIndex": 1,
-      "explanation": "A는 애플이 계속 혁신하기를 바란다고 했다."
+      "explanation": "A는 당신(아내)과 아이들이 내 최고의 작품(best work)이라고 말했다."
     }
   ]
 }

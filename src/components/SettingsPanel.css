@@ -13,9 +13,26 @@
   gap: 6px;
   font-weight: 600;
 }
-.settings-panel select {
-  padding: 4px 6px;
-  border-radius: 8px;
-  border: 1px solid #d3dae4;
-}
 .settings-panel input[type='range'] { width: 100%; accent-color: #4b83d6; }
+
+.seg-toggle {
+  display: inline-flex;
+  padding: 3px;
+  background: #eef2f7;
+  border-radius: 999px;
+}
+.seg-toggle button {
+  border: none;
+  background: transparent;
+  padding: 6px 18px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #8496ab;
+  cursor: pointer;
+}
+.seg-toggle button.on {
+  background: #4b83d6;
+  color: #fff;
+  box-shadow: 0 1px 3px rgba(30, 60, 110, 0.25);
+}

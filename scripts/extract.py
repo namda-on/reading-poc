@@ -5,6 +5,8 @@ import sqlite3, json, os
 SQLITE = "/Users/namda/sayvoca/conversation-agent/server.sqlite"
 COURSE_SEQ = 25
 LEVEL = 2
+# 리딩 모드엔 10~11턴 원본이 너무 길다. 자연스러운 도입부 6턴만 사용(대화당 1문항).
+MAX_SCRIPTS = 6
 OUT = os.path.join(os.path.dirname(__file__), "..", "src", "data", "dialogs.json")
 
 
@@ -45,7 +47,7 @@ def main():
                 "words": words_from_taglist(d["en"], d.get("tagList")),
             })
         if scripts:
-            topics.append({"topicSeq": topic_seq, "title": t["t"], "partner": t["c"], "scripts": scripts})
+            topics.append({"topicSeq": topic_seq, "title": t["t"], "partner": t["c"], "scripts": scripts[:MAX_SCRIPTS]})
 
     out = {"courseSeq": COURSE_SEQ, "courseTitle": course["t"], "level": LEVEL, "topics": topics}
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
