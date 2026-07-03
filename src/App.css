@@ -14,14 +14,51 @@
   text-overflow: ellipsis;
 }
 
-/* 토픽 목록 */
-.topic-list { padding: 20px 16px 32px; }
-.topic-list h1 {
-  font-size: 22px;
+/* 스토리 선택 */
+.story-list { padding: 24px 16px 32px; }
+.story-list h1 {
+  font-size: 24px;
   color: #294a75;
-  margin: 8px 4px 20px;
+  margin: 8px 4px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
-.topic-list h1 small { font-size: 14px; color: #4b6a94; font-weight: 500; }
+.story-list h1 small { font-size: 14px; color: #4b6a94; font-weight: 500; }
+.story-list ul { list-style: none; padding: 0; margin: 0; }
+.story-list li button {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  text-align: left;
+  padding: 18px;
+  margin: 12px 0;
+  border: none;
+  border-radius: 18px;
+  background: #fff;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(30, 60, 110, 0.12);
+}
+.story-emoji {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: #eaf2fc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+}
+.story-text { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.story-title { font-size: 17px; font-weight: 700; color: #2f3e52; }
+.story-sub { font-size: 13px; color: #8496ab; }
+
+/* 토픽 목록 */
+.topic-screen { min-height: 100vh; }
+.topic-screen .topbar { display: flex; align-items: center; gap: 8px; padding: 14px 12px; }
+.topic-list { padding: 8px 16px 32px; }
 .topic-list ul { list-style: none; padding: 0; margin: 0; }
 .topic-list li button {
   width: 100%;

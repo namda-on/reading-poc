@@ -21,9 +21,14 @@ export interface Topic {
   scripts: Script[];
 }
 
-export interface DialogsData {
+export interface Story {
   courseSeq: number;
-  courseTitle: string;
-  level: number;
+  title: string;
+  subtitle: string;
   topics: Topic[];
+}
+
+export interface DialogsData {
+  level: number;
+  stories: Story[];
 }
