@@ -1,8 +1,12 @@
 """server.sqlite 에서 여러 스토리(코스)의 A2(level 2) 대화를 추출해
 src/data/dialogs.json 으로 굽는다. 각 토픽은 도입부 6턴만 사용(대화당 1문항)."""
-import sqlite3, json, os
+import sqlite3, json, os, sys
 
-SQLITE = "/Users/namda/sayvoca/conversation-agent/server.sqlite"
+# sqlite 경로: 환경변수 > CLI 인자 > 상대경로 기본값(모노레포 형제 디렉토리).
+# 이 레포 밖(conversation-agent)에 의존하므로 절대경로를 하드코딩하지 않는다.
+DEFAULT_SQLITE = os.path.normpath(
+    os.path.join(os.path.dirname(__file__), "..", "..", "conversation-agent", "server.sqlite"))
+SQLITE = os.environ.get("READING_POC_SQLITE") or (sys.argv[1] if len(sys.argv) > 1 else DEFAULT_SQLITE)
 LEVEL = 2
 MAX_SCRIPTS = 4  # 리딩 모드 분량: 자연스러운 도입부 4턴만
 # 포함할 스토리(코스). 표시 순서대로.
@@ -42,6 +46,11 @@ def build_topic(c, t):
 
 
 def main():
+    if not os.path.exists(SQLITE):
+        sys.exit(
+            f"sqlite 를 찾을 수 없습니다: {SQLITE}\n"
+            "READING_POC_SQLITE 환경변수나 인자로 conversation-agent/server.sqlite 경로를 지정하세요.\n"
+            "예) python3 scripts/extract.py /path/to/server.sqlite")
     c = sqlite3.connect(SQLITE)
     raw = json.loads(c.execute(
         "SELECT content FROM ResourceFileKR WHERE name='ConversationCourses'").fetchone()[0])

@@ -33,9 +33,9 @@ python3 scripts/extract.py   # 대화 데이터(dialogs.json) 재생성
 
 ## 데이터 파이프라인
 
-`dialogs.json`은 **손으로 편집하지 말 것**. `scripts/extract.py`가 생성한다.
+`dialogs.json`은 커밋된 생성물이자 런타임의 유일한 소스다(sqlite 없이도 앱은 동작). 재생성할 때만 `scripts/extract.py`를 쓰고, **손으로 편집하지 말 것**.
 
-- 출처: `/Users/namda/sayvoca/conversation-agent/server.sqlite` (절대경로 하드코딩). 이 레포 밖의 다른 프로젝트에 의존한다.
+- 출처: `conversation-agent/server.sqlite` (이 레포 밖). 경로는 `READING_POC_SQLITE` 환경변수 또는 CLI 인자로 지정. 기본값은 형제 디렉토리 `../conversation-agent/server.sqlite`. 없으면 명확한 에러로 종료한다.
 - 포함 코스: `INCLUDE = [25(잡스), 17(투자), 2(뉴욕여행)]`, 레벨 A2(=2) 고정.
 - 각 에피소드는 **도입부 4턴(`MAX_SCRIPTS`)만** 사용 — 리딩 분량을 짧게.
 - 단어 경계는 tagList가 아니라 문장 문자열을 직접 파싱(문장부호 보존).
