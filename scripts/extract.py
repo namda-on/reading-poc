@@ -4,7 +4,7 @@ import sqlite3, json, os
 
 SQLITE = "/Users/namda/sayvoca/conversation-agent/server.sqlite"
 LEVEL = 2
-MAX_SCRIPTS = 5  # 리딩 모드 분량: 자연스러운 도입부 5턴만
+MAX_SCRIPTS = 4  # 리딩 모드 분량: 자연스러운 도입부 4턴만
 # 포함할 스토리(코스). 표시 순서대로.
 INCLUDE = [25, 17, 2]
 OUT = os.path.join(os.path.dirname(__file__), "..", "src", "data", "dialogs.json")
