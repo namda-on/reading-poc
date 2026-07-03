@@ -15,17 +15,22 @@ function speakerInfo(speaker: 'A' | 'B') {
   return speaker === 'A' ? { name: 'A', avatar: '🐻' } : { name: 'B', avatar: '🐰' };
 }
 
-export function ReadingSession({ topic, onFinish, onBack }: { topic: Topic; onFinish: () => void; onBack: () => void }) {
+export function ReadingSession({ topic, onFinish, onBack, autoStart = false }: {
+  topic: Topic;
+  onFinish: () => void;
+  onBack: () => void;
+  autoStart?: boolean; // 다시 듣기 등: 시작 버튼 없이 바로 재생
+}) {
   const { settings } = useSettings();
   const settingsRef = useRef(settings);
   settingsRef.current = settings;
   const onFinishRef = useRef(onFinish);
   onFinishRef.current = onFinish;
 
-  const [started, setStarted] = useState(false);
+  const [started, setStarted] = useState(autoStart);
   const [index, setIndex] = useState(0);
   const [currentChunks, setCurrentChunks] = useState<Chunk[]>([]);
-  const [settingsOpen, setSettingsOpen] = useState(true); // 학습 시작 전에는 설정창을 열어둠
+  const [settingsOpen, setSettingsOpen] = useState(!autoStart); // 시작 전에는 설정창을 열어둠(자동시작이면 닫힘)
 
   const { visible, play } = useSlidingReveal();
   const gapTimer = useRef<number | null>(null);

@@ -15,6 +15,7 @@ export default function App() {
   const [storySeq, setStorySeq] = useState<number | null>(null);
   const [topicSeq, setTopicSeq] = useState<number | null>(null);
   const [sessionRun, setSessionRun] = useState(0); // 다시 듣기 시 세션 리마운트용
+  const [autoStart, setAutoStart] = useState(false); // 다시 듣기면 시작 버튼 없이 바로 재생
 
   const story = DATA.stories.find((s) => s.courseSeq === storySeq) ?? null;
   const topic = story?.topics.find((t) => t.topicSeq === topicSeq) ?? null;
@@ -34,6 +35,7 @@ export default function App() {
           story={story}
           onPick={(t) => {
             setTopicSeq(t);
+            setAutoStart(false);
             setScreen('session');
           }}
           onBack={() => setScreen('stories')}
@@ -43,6 +45,7 @@ export default function App() {
         <ReadingSession
           key={`${topic.topicSeq}-${sessionRun}`}
           topic={topic}
+          autoStart={autoStart}
           onFinish={() => setScreen('quiz')}
           onBack={() => setScreen('topics')}
         />
@@ -51,6 +54,7 @@ export default function App() {
         <QuizSheet
           topicSeq={topic.topicSeq}
           onReplay={() => {
+            setAutoStart(true); // 다시 듣기는 바로 재생
             setSessionRun((r) => r + 1); // 세션 리마운트 → 처음부터
             setScreen('session');
           }}
