@@ -7,7 +7,7 @@ export interface Settings {
   maxChunkWords: number;
 }
 
-export const DEFAULT_SETTINGS: Settings = { unit: 'chunk', windowSize: 2, baseMsPerSyllable: 160, maxChunkWords: 3 };
+export const DEFAULT_SETTINGS: Settings = { unit: 'word', windowSize: 4, baseMsPerSyllable: 200, maxChunkWords: 3 };
 
 const STORAGE_KEY = 'reading-poc:settings';
 
