@@ -46,14 +46,14 @@ export function SettingsPanel() {
         />
       </label>
       <label>
-        속도(ms/단어): {settings.baseMsPerWord}
+        속도(ms/음절): {settings.baseMsPerSyllable}
         <input
           type="range"
-          min={80}
-          max={500}
+          min={60}
+          max={400}
           step={20}
-          value={settings.baseMsPerWord}
-          onChange={(e) => setSettings({ ...settings, baseMsPerWord: Number(e.target.value) })}
+          value={settings.baseMsPerSyllable}
+          onChange={(e) => setSettings({ ...settings, baseMsPerSyllable: Number(e.target.value) })}
         />
       </label>
     </div>

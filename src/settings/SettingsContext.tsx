@@ -3,11 +3,11 @@ import { createContext, useContext, useEffect, useState, type ReactNode } from '
 export interface Settings {
   unit: 'word' | 'chunk';
   windowSize: number;
-  baseMsPerWord: number;
+  baseMsPerSyllable: number;
   maxChunkWords: number;
 }
 
-export const DEFAULT_SETTINGS: Settings = { unit: 'chunk', windowSize: 2, baseMsPerWord: 220, maxChunkWords: 3 };
+export const DEFAULT_SETTINGS: Settings = { unit: 'chunk', windowSize: 2, baseMsPerSyllable: 160, maxChunkWords: 3 };
 
 const STORAGE_KEY = 'reading-poc:settings';
 

@@ -5,7 +5,7 @@ import { useSlidingReveal } from './useSlidingReveal';
 import type { Chunk } from '../lib/chunk';
 
 const ch = (t: string): Chunk => ({ text: t, start: 0, end: t.length });
-const S = { windowSize: 1, baseMsPerWord: 100, minDwellMs: 300 };
+const S = { windowSize: 1, baseMsPerSyllable: 100, minDwellMs: 300 };
 
 beforeEach(() => vi.useFakeTimers());
 afterEach(() => vi.useRealTimers());

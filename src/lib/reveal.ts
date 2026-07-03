@@ -1,8 +1,9 @@
+import { syllable } from 'syllable';
 import type { Chunk } from './chunk';
 
 export interface RevealSettings {
   windowSize: number;
-  baseMsPerWord: number;
+  baseMsPerSyllable: number;
   minDwellMs: number;
 }
 
@@ -13,8 +14,9 @@ export interface RevealStep {
 }
 
 export function dwellMs(chunk: Chunk, s: RevealSettings): number {
-  const wordCount = chunk.text.trim().split(/\s+/).filter(Boolean).length;
-  return Math.max(s.minDwellMs, wordCount * s.baseMsPerWord);
+  // 단어 수가 아니라 음절 수에 비례. 최소 1음절 보장.
+  const syllables = Math.max(1, syllable(chunk.text));
+  return Math.max(s.minDwellMs, syllables * s.baseMsPerSyllable);
 }
 
 export function buildRevealSchedule(chunks: Chunk[], s: RevealSettings): { steps: RevealStep[]; totalMs: number } {

@@ -16,15 +16,17 @@
 .settings-panel input[type='range'] { width: 100%; accent-color: #4b83d6; }
 
 .seg-toggle {
-  display: inline-flex;
+  display: flex;
+  width: 100%;
   padding: 3px;
   background: #eef2f7;
   border-radius: 999px;
 }
 .seg-toggle button {
+  flex: 1;
   border: none;
   background: transparent;
-  padding: 6px 18px;
+  padding: 6px 0;
   border-radius: 999px;
   font-size: 13px;
   font-weight: 700;

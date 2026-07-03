@@ -11,12 +11,8 @@ const MIN_DWELL_MS = 300;
 const GAP_MS = 400;
 const FADE_OUT_MS = 500; // 마지막 청크가 페이드아웃(CSS 450ms)된 뒤 문제로 넘어감
 
-// 이 코스에서 A는 항상 잡스, B는 대화 상대. 상대 이름은 괄호를 떼고 성(마지막 단어)만 한 줄로.
-function speakerInfo(speaker: 'A' | 'B', partner: string) {
-  if (speaker === 'A') return { name: '잡스', avatar: '🐻' };
-  const base = partner.split('(')[0].trim();
-  const parts = base.split(/\s+/);
-  return { name: parts[parts.length - 1] || base, avatar: '🐰' };
+function speakerInfo(speaker: 'A' | 'B') {
+  return speaker === 'A' ? { name: 'A', avatar: '🐻' } : { name: 'B', avatar: '🐰' };
 }
 
 export function ReadingSession({ topic, onFinish, onBack }: { topic: Topic; onFinish: () => void; onBack: () => void }) {
@@ -26,6 +22,7 @@ export function ReadingSession({ topic, onFinish, onBack }: { topic: Topic; onFi
   const onFinishRef = useRef(onFinish);
   onFinishRef.current = onFinish;
 
+  const [started, setStarted] = useState(false);
   const [index, setIndex] = useState(0);
   const [currentChunks, setCurrentChunks] = useState<Chunk[]>([]);
   const [settingsOpen, setSettingsOpen] = useState(false);
@@ -40,6 +37,7 @@ export function ReadingSession({ topic, onFinish, onBack }: { topic: Topic; onFi
   }, [index]);
 
   useEffect(() => {
+    if (!started) return; // 시작 버튼을 누르기 전까지 재생하지 않음(옵션 설정 시간 확보)
     const script = topic.scripts[index];
     if (!script) return;
     const s = settingsRef.current;
@@ -47,7 +45,7 @@ export function ReadingSession({ topic, onFinish, onBack }: { topic: Topic; onFi
     setCurrentChunks(chunks);
     play(
       chunks,
-      { windowSize: s.windowSize, baseMsPerWord: s.baseMsPerWord, minDwellMs: MIN_DWELL_MS },
+      { windowSize: s.windowSize, baseMsPerSyllable: s.baseMsPerSyllable, minDwellMs: MIN_DWELL_MS },
       () => {
         // 마지막 스크립트면 페이드아웃을 기다렸다가 문제로, 아니면 다음 말풍선
         if (index + 1 >= topic.scripts.length) {
@@ -63,7 +61,7 @@ export function ReadingSession({ topic, onFinish, onBack }: { topic: Topic; onFi
       gapTimer.current = null;
       finishTimer.current = null;
     };
-  }, [index, topic, play]);
+  }, [started, index, topic, play]);
 
   const total = topic.scripts.length;
   const progressPct = Math.round(((index + 1) / total) * 100);
@@ -90,21 +88,28 @@ export function ReadingSession({ topic, onFinish, onBack }: { topic: Topic; onFi
         </div>
       )}
 
-      <div className="chat">
-        {topic.scripts.slice(0, index + 1).map((s, i) => {
-          const info = speakerInfo(s.speaker, topic.partner);
-          return (
-            <DialogBubble
-              key={s.seq}
-              name={info.name}
-              avatar={info.avatar}
-              chunks={i === index ? currentChunks : chunkSentence(s.english, settings.unit, settings.maxChunkWords)}
-              visible={i === index ? visible : new Set<number>()}
-            />
-          );
-        })}
-        <div ref={endRef} />
-      </div>
+      {!started ? (
+        <div className="start-prompt">
+          <p>준비되면 시작하세요.<br />설정(⚙)을 먼저 조절할 수 있어요.</p>
+          <button className="start-btn" onClick={() => setStarted(true)}>▶ 시작</button>
+        </div>
+      ) : (
+        <div className="chat">
+          {topic.scripts.slice(0, index + 1).map((s, i) => {
+            const info = speakerInfo(s.speaker);
+            return (
+              <DialogBubble
+                key={s.seq}
+                name={info.name}
+                avatar={info.avatar}
+                chunks={i === index ? currentChunks : chunkSentence(s.english, settings.unit, settings.maxChunkWords)}
+                visible={i === index ? visible : new Set<number>()}
+              />
+            );
+          })}
+          <div ref={endRef} />
+        </div>
+      )}
     </div>
   );
 }

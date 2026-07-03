@@ -3,12 +3,12 @@ import { buildRevealSchedule, dwellMs } from './reveal';
 import type { Chunk } from './chunk';
 
 const ch = (text: string): Chunk => ({ text, start: 0, end: text.length });
-const S = { windowSize: 1, baseMsPerWord: 100, minDwellMs: 300 };
+const S = { windowSize: 1, baseMsPerSyllable: 100, minDwellMs: 300 };
 
 describe('dwellMs', () => {
-  it('단어 수 × 기본속도, 최소값 보장', () => {
-    expect(dwellMs(ch('to Rome'), S)).toBe(300); // 2*100=200 < 300 → 300
-    expect(dwellMs(ch('one two three four'), S)).toBe(400); // 4*100=400
+  it('음절 수 × 기본속도, 최소값 보장', () => {
+    expect(dwellMs(ch('to Rome'), S)).toBe(300); // 2음절*100=200 < 300 → 300
+    expect(dwellMs(ch('one two three four'), S)).toBe(400); // 4음절*100=400
   });
 });
 
