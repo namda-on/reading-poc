@@ -54,10 +54,10 @@ Vite + React + TypeScript SPA. `conversation-agent/web`와 동일 스택. 서버
 
 - 코스/토픽 목록 (선택 화면용)
 - 대화별 스크립트 배열: `{ seq, speaker: 'A'|'B', english, translated, hint?, words }`
-  - `words`: tagList의 `{s, e}` 오프셋에서 뽑은 단어 토큰 `{ text, start, end }[]`
-- 대화별 퀴즈: 한국어 내용이해 MCQ 2문항 `{ question, options[], answerIndex }[]`
+  - `words`: tagList 원본 보존용(provenance). 앱 청킹에는 쓰지 않는다.
+- 대화별 퀴즈: 한국어 내용이해 MCQ 2문항 `{ question, options[], answerIndex, explanation }[]` (별도 `quizzes.json`에 topicSeq 키로 저작)
 
-추출 시 tagList 파싱으로 단어 경계가 공짜로 확보된다. 퀴즈는 추출 단계에서 미리 만들어 fixture에 함께 저장한다.
+토큰화는 `chunk.ts`가 **문장 문자열을 직접 파싱**한다(`\S+`, 문장부호를 앞 토큰에 붙여 보존). tagList의 `s/e`는 `!`·`?` 등을 제외하므로 표시용으로 쓰지 않는다.
 
 ### 2. 청커 — `src/lib/chunk.ts` (순수 함수)
 
@@ -77,8 +77,8 @@ Vite + React + TypeScript SPA. `conversation-agent/web`와 동일 스택. 서버
 
 - 청크 `i`는 자기 순서에 켜지고, 청크 `i+N`이 켜질 때 꺼진다
 - `dwell(i) = max(MIN_DWELL, wordCount(i) × baseMsPerWord)`
-- play / pause / replay 제어 제공
-- 타이머 정리(cleanup)로 언마운트·리플레이 시 누수 방지
+- `play(chunks, settings)` / `reset` 제어. chunks·settings는 재생 시작 시점에 인자로 고정(설정 변경은 다음 문장/다시보기부터 반영)
+- **generation guard** + 타이머 정리(cleanup)로 리플레이·언마운트 시 stale timer 방지
 
 ### 4. 말풍선 렌더러 — `src/components/DialogBubble.tsx`
 

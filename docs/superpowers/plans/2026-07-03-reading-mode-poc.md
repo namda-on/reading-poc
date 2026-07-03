@@ -13,9 +13,10 @@
 - 대화 데이터 출처: `/Users/namda/sayvoca/conversation-agent/server.sqlite`, 테이블 `ConversationDialogScriptKR`(스크립트), `ResourceFileKR` name=`ConversationCourses`(코스/토픽).
 - 콘텐츠 고정: courseSeq **25**(스티브 잡스), level **2**(A2). 22개 토픽.
 - seq 매핑: `dialogSeq = floor(scriptSeq/100)`, `topicSeq = floor(dialogSeq/10)`, `level = dialogSeq % 10`. 즉 topic·level 스크립트 seq 범위 = `(topicSeq*10+level)*100 .. +99`.
-- tagList 토큰: `{s: startCharIdx, e: endCharIdx}` (english 문자열 기준 오프셋). 단어 경계로 사용.
+- 토큰화: **문장 문자열을 직접 파싱**한다(공백 구분, 문장부호는 앞 토큰에 붙임). tagList는 `!`/`?` 등을 제외하므로 표시용 청크에는 쓰지 않는다(문장부호 유실 방지). tagList는 fixture에 보존만.
 - 주석·문서 한국어. 실험 축 3개: 노출 단위(word/chunk)·창 크기 N·기본 속도(ms/단어).
-- 안 함: 서버 로깅, 방식2(전광판), 런타임 sqlite/LLM, A2 외 레벨, 로그인.
+- **설정 변경 semantics(확정):** 노출 단위·N·속도 변경은 **현재 재생 중인 문장에는 영향 없음**. 다음 문장(자동 진행) 또는 "다시 보기"부터 반영한다. → hook은 재생 시작 시점의 chunks·settings를 인자로 받아 고정.
+- 안 함: 서버 로깅, 방식2(전광판), 런타임 sqlite/LLM, A2 외 레벨, 로그인, pause(재생/리플레이만).
 
 ---
 
@@ -88,11 +89,11 @@ git commit -m "chore: Vite React-TS + Vitest 스캐폴딩"
   - `src/data/types.ts`:
     ```ts
     export interface Token { text: string; start: number; end: number }
-    export interface Script { seq: number; speaker: 'A' | 'B'; english: string; translated: string; hint?: string; words: Token[] }
+    export interface Script { seq: number; speaker: 'A' | 'B'; english: string; translated: string; hint?: string; words?: Token[] }
     export interface Topic { topicSeq: number; title: string; partner: string; scripts: Script[] }
     export interface DialogsData { courseSeq: number; courseTitle: string; level: number; topics: Topic[] }
     ```
-  - `src/data/dialogs.json`: `DialogsData` 형태. topics[].scripts[].words 는 tagList에서 추출.
+  - `src/data/dialogs.json`: `DialogsData` 형태. `words`는 tagList 원본 보존용(provenance)이며 앱 청킹은 `chunk.ts`가 문장 문자열을 직접 파싱한다.
 
 - [ ] **Step 1: 추출 스크립트 작성**
 
@@ -187,58 +188,54 @@ git commit -m "feat: 스티브 잡스 A2 대화 추출 스크립트 + dialogs.js
 - Test: `src/lib/chunk.test.ts`
 
 **Interfaces:**
-- Consumes: `Token` from `src/data/types.ts`
+- Consumes: 없음 (문장 문자열만)
 - Produces:
   ```ts
   export interface Chunk { text: string; start: number; end: number }
-  export function chunkByWord(sentence: string, tokens: Token[]): Chunk[]
-  export function chunkByRule(sentence: string, tokens: Token[]): Chunk[]
-  export function chunkSentence(sentence: string, tokens: Token[], unit: 'word' | 'chunk'): Chunk[]
+  export interface Token { text: string; start: number; end: number }
+  export function tokenize(sentence: string): Token[]   // 공백 구분, 문장부호는 앞 토큰에 붙음
+  export function chunkByWord(sentence: string): Chunk[]
+  export function chunkByRule(sentence: string): Chunk[]
+  export function chunkSentence(sentence: string, unit: 'word' | 'chunk'): Chunk[]
   ```
+- 문장부호 보존이 핵심: `tokenize`가 `\S+`로 잘라 "this!"·"trip?"처럼 부호를 유지한다. 경계 판정은 부호를 뗀 소문자(`norm`)로 하되 표시 텍스트는 원문 토큰 그대로.
 
 - [ ] **Step 1: 실패 테스트 작성**
 
 Create `src/lib/chunk.test.ts`:
 ```ts
 import { describe, it, expect } from 'vitest';
-import { chunkByWord, chunkByRule, chunkSentence } from './chunk';
-import type { Token } from '../data/types';
+import { tokenize, chunkByWord, chunkByRule, chunkSentence } from './chunk';
 
-const toks = (s: string): Token[] => {
-  const out: Token[] = [];
-  const re = /\S+/g; let m;
-  while ((m = re.exec(s))) out.push({ text: m[0], start: m.index, end: m.index + m[0].length });
-  return out;
-};
+describe('tokenize', () => {
+  it('문장부호를 앞 토큰에 붙여 보존', () => {
+    expect(tokenize('Look at this!').map(t => t.text)).toEqual(['Look', 'at', 'this!']);
+  });
+});
 
 describe('chunkByWord', () => {
-  it('토큰을 그대로 단어 청크로 반환', () => {
-    const s = 'I need a hotel';
-    expect(chunkByWord(s, toks(s)).map(c => c.text)).toEqual(['I', 'need', 'a', 'hotel']);
+  it('단어 청크(문장부호 포함)', () => {
+    expect(chunkByWord('I need a hotel.').map(c => c.text)).toEqual(['I', 'need', 'a', 'hotel.']);
   });
 });
 
 describe('chunkByRule', () => {
   it('전치사·to부정사 앞에서 끊는다', () => {
-    const s = 'I want to go to Rome';
     // want to = 화이트리스트 유지, 'to Rome' 은 전치사 to 앞에서 분리
-    expect(chunkByRule(s, toks(s)).map(c => c.text)).toEqual(['I', 'want to go', 'to Rome']);
+    expect(chunkByRule('I want to go to Rome').map(c => c.text)).toEqual(['I', 'want to go', 'to Rome']);
   });
   it('고정표현 a lot of 는 쪼개지 않는다', () => {
-    const s = 'There are a lot of people';
-    expect(chunkByRule(s, toks(s)).map(c => c.text)).toEqual(['There are', 'a lot of people']);
+    expect(chunkByRule('There are a lot of people').map(c => c.text)).toEqual(['There are', 'a lot of people']);
   });
-  it('접속사 and 앞에서 끊는다', () => {
-    const s = 'Hobbyists and tech fans';
-    expect(chunkByRule(s, toks(s)).map(c => c.text)).toEqual(['Hobbyists', 'and tech fans']);
+  it('접속사 and 앞에서 끊는다 (문장부호 보존)', () => {
+    expect(chunkByRule('Hobbyists and tech fans.').map(c => c.text)).toEqual(['Hobbyists', 'and tech fans.']);
   });
 });
 
 describe('chunkSentence', () => {
   it('unit 스위치', () => {
-    const s = 'I want to go';
-    expect(chunkSentence(s, toks(s), 'word').length).toBe(4);
-    expect(chunkSentence(s, toks(s), 'chunk').length).toBeLessThan(4);
+    expect(chunkSentence('I want to go', 'word').length).toBe(4);
+    expect(chunkSentence('I want to go', 'chunk').length).toBeLessThan(4);
   });
 });
 ```
@@ -252,9 +249,16 @@ Expected: FAIL ("chunk" 모듈 없음)
 
 Create `src/lib/chunk.ts`:
 ```ts
-import type { Token } from '../data/types';
-
 export interface Chunk { text: string; start: number; end: number }
+export interface Token { text: string; start: number; end: number }
+
+export function tokenize(sentence: string): Token[] {
+  const out: Token[] = [];
+  const re = /\S+/g;
+  let m: RegExpExecArray | null;
+  while ((m = re.exec(sentence))) out.push({ text: m[0], start: m.index, end: m.index + m[0].length });
+  return out;
+}
 
 // 청크 경계를 '앞에서 끊는' 트리거 단어. 소문자 비교.
 const BREAK_BEFORE = new Set([
@@ -270,11 +274,12 @@ const FIXED_PHRASES = [
 
 const norm = (w: string) => w.replace(/[^a-zA-Z']/g, '').toLowerCase();
 
-export function chunkByWord(_sentence: string, tokens: Token[]): Chunk[] {
-  return tokens.map(t => ({ text: t.text, start: t.start, end: t.end }));
+export function chunkByWord(sentence: string): Chunk[] {
+  return tokenize(sentence).map(t => ({ text: t.text, start: t.start, end: t.end }));
 }
 
-export function chunkByRule(sentence: string, tokens: Token[]): Chunk[] {
+export function chunkByRule(sentence: string): Chunk[] {
+  const tokens = tokenize(sentence);
   // 1) 고정표현이 시작되는 토큰 인덱스 → 그 구간은 절대 쪼개지 않도록 표시
   const lockedStart = new Set<number>(); // 이 인덱스에서 새 청크 시작 금지(고정표현 중간)
   const words = tokens.map(t => norm(t.text));
@@ -305,8 +310,8 @@ export function chunkByRule(sentence: string, tokens: Token[]): Chunk[] {
   return chunks;
 }
 
-export function chunkSentence(sentence: string, tokens: Token[], unit: 'word' | 'chunk'): Chunk[] {
-  return unit === 'word' ? chunkByWord(sentence, tokens) : chunkByRule(sentence, tokens);
+export function chunkSentence(sentence: string, unit: 'word' | 'chunk'): Chunk[] {
+  return unit === 'word' ? chunkByWord(sentence) : chunkByRule(sentence);
 }
 ```
 
@@ -399,6 +404,7 @@ export function dwellMs(chunk: Chunk, s: RevealSettings): number {
 }
 
 export function buildRevealSchedule(chunks: Chunk[], s: RevealSettings): { steps: RevealStep[]; totalMs: number } {
+  const windowSize = Math.max(1, Math.floor(s.windowSize)); // 방어: 최소 1
   const showAt: number[] = [];
   let acc = 0;
   for (let i = 0; i < chunks.length; i++) {
@@ -407,7 +413,7 @@ export function buildRevealSchedule(chunks: Chunk[], s: RevealSettings): { steps
   }
   const totalMs = acc;
   const steps: RevealStep[] = chunks.map((_, i) => {
-    const hideIdx = i + s.windowSize; // 이 인덱스가 등장하면 i 는 꺼진다
+    const hideIdx = i + windowSize; // 이 인덱스가 등장하면 i 는 꺼진다
     const hideAt = hideIdx < chunks.length ? showAt[hideIdx] : totalMs;
     return { index: i, showAt: showAt[i], hideAt };
   });
@@ -429,22 +435,77 @@ git commit -m "feat: 노출 스케줄 순수 함수 + 테스트"
 
 ---
 
-### Task 5: useSlidingReveal 훅
+### Task 5: useSlidingReveal 훅 (generation guard)
 
 **Files:**
 - Create: `src/hooks/useSlidingReveal.ts`
+- Test: `src/hooks/useSlidingReveal.test.ts`
 
 **Interfaces:**
-- Consumes: `buildRevealSchedule` from `src/lib/reveal.ts`, `Chunk`
+- Consumes: `buildRevealSchedule`, `RevealSettings` from `src/lib/reveal.ts`, `Chunk` from `src/lib/chunk.ts`
 - Produces:
   ```ts
-  export interface RevealState { visible: Set<number>; done: boolean; playing: boolean }
-  export function useSlidingReveal(
-    chunks: Chunk[], settings: RevealSettings, opts?: { autoStart?: boolean; onDone?: () => void }
-  ): RevealState & { play: () => void; reset: () => void }
+  export function useSlidingReveal(): {
+    visible: Set<number>;
+    play: (chunks: Chunk[], settings: RevealSettings, onDone?: () => void) => void;
+    reset: () => void;
+  }
   ```
+- 설계 근거(Codex 리뷰 반영):
+  - `play`는 chunks·settings를 **인자로** 받는다 → 재생 시작 시점에 고정("다음 노출부터 반영" semantics). closure 통한 stale 참조 없음.
+  - **generation guard**(`gen` ref): `play`/`reset` 때마다 세대 증가. 각 setTimeout callback은 자기 세대가 최신일 때만 실행 → reset/replay 직후 큐에 남은 옛 콜백은 no-op.
+  - `play`·`reset`은 `useCallback([clear])`로 **안정 참조** → 소비 컴포넌트 effect 의존성에 안전하게 넣을 수 있음.
 
-- [ ] **Step 1: 훅 구현 (타이머 구동, cleanup 필수)**
+- [ ] **Step 1: 실패 테스트 작성 (fake timer)**
+
+`src/hooks/useSlidingReveal.test.ts` 상단에 jsdom 환경 지정:
+```ts
+// @vitest-environment jsdom
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+import { renderHook, act } from '@testing-library/react';
+import { useSlidingReveal } from './useSlidingReveal';
+import type { Chunk } from '../lib/chunk';
+
+const ch = (t: string): Chunk => ({ text: t, start: 0, end: t.length });
+const S = { windowSize: 1, baseMsPerWord: 100, minDwellMs: 300 };
+
+beforeEach(() => vi.useFakeTimers());
+afterEach(() => vi.useRealTimers());
+
+describe('useSlidingReveal', () => {
+  it('스케줄대로 노출·소멸하고 onDone 호출', () => {
+    const onDone = vi.fn();
+    const { result } = renderHook(() => useSlidingReveal());
+    act(() => result.current.play([ch('a'), ch('b')], S, onDone));
+    act(() => vi.advanceTimersByTime(0));
+    expect([...result.current.visible]).toEqual([0]);   // a 노출
+    act(() => vi.advanceTimersByTime(300));
+    expect([...result.current.visible]).toEqual([1]);   // b 노출, a 소멸(window=1)
+    act(() => vi.advanceTimersByTime(400));
+    expect(onDone).toHaveBeenCalledTimes(1);
+  });
+
+  it('reset 후 옛 타이머는 visible 을 건드리지 않는다 (generation guard)', () => {
+    const { result } = renderHook(() => useSlidingReveal());
+    act(() => result.current.play([ch('a'), ch('b')], S));
+    act(() => result.current.reset());
+    act(() => vi.advanceTimersByTime(1000));
+    expect([...result.current.visible]).toEqual([]);
+  });
+});
+```
+
+- [ ] **Step 2: jsdom·testing-library 설치 후 테스트 실패 확인**
+
+```bash
+npm install -D jsdom @testing-library/react @testing-library/dom
+```
+`vitest.config.ts`의 `include`를 `['src/**/*.test.ts', 'src/**/*.test.tsx']`로 확장(현재 .ts만).
+
+Run: `npx vitest run src/hooks/useSlidingReveal.test.ts`
+Expected: FAIL (모듈 없음)
+
+- [ ] **Step 3: 훅 구현 (generation guard, cleanup 필수)**
 
 Create `src/hooks/useSlidingReveal.ts`:
 ```ts
@@ -452,69 +513,54 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { buildRevealSchedule, type RevealSettings } from '../lib/reveal';
 import type { Chunk } from '../lib/chunk';
 
-export interface RevealState { visible: Set<number>; done: boolean; playing: boolean }
-
-export function useSlidingReveal(
-  chunks: Chunk[],
-  settings: RevealSettings,
-  opts?: { autoStart?: boolean; onDone?: () => void },
-) {
+export function useSlidingReveal() {
   const [visible, setVisible] = useState<Set<number>>(new Set());
-  const [done, setDone] = useState(false);
-  const [playing, setPlaying] = useState(false);
   const timers = useRef<number[]>([]);
-  const onDoneRef = useRef(opts?.onDone);
-  onDoneRef.current = opts?.onDone;
+  const gen = useRef(0);
 
   const clear = useCallback(() => {
     timers.current.forEach((t) => window.clearTimeout(t));
     timers.current = [];
   }, []);
 
-  const play = useCallback(() => {
+  const play = useCallback((chunks: Chunk[], settings: RevealSettings, onDone?: () => void) => {
     clear();
+    const myGen = ++gen.current;
     setVisible(new Set());
-    setDone(false);
-    setPlaying(true);
     const { steps, totalMs } = buildRevealSchedule(chunks, settings);
     for (const step of steps) {
       timers.current.push(window.setTimeout(() => {
+        if (gen.current !== myGen) return;
         setVisible((prev) => new Set(prev).add(step.index));
       }, step.showAt));
       timers.current.push(window.setTimeout(() => {
+        if (gen.current !== myGen) return;
         setVisible((prev) => { const n = new Set(prev); n.delete(step.index); return n; });
       }, step.hideAt));
     }
     timers.current.push(window.setTimeout(() => {
-      setPlaying(false);
-      setDone(true);
-      onDoneRef.current?.();
+      if (gen.current !== myGen) return;
+      onDone?.();
     }, totalMs + 50));
-  }, [chunks, settings, clear]);
+  }, [clear]);
 
-  const reset = useCallback(() => { clear(); setVisible(new Set()); setDone(false); setPlaying(false); }, [clear]);
+  const reset = useCallback(() => { gen.current++; clear(); setVisible(new Set()); }, [clear]);
 
-  useEffect(() => {
-    if (opts?.autoStart) play();
-    return clear;
-    // play 는 chunks/settings 변화 시 재생성. autoStart 대화 전환용.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [chunks]);
-
-  return { visible, done, playing, play, reset };
+  useEffect(() => clear, [clear]); // 언마운트 시 타이머 정리
+  return { visible, play, reset };
 }
 ```
 
-- [ ] **Step 2: 타입 체크**
+- [ ] **Step 4: 테스트 통과 확인**
 
-Run: `npx tsc --noEmit`
-Expected: 에러 없음
+Run: `npx vitest run src/hooks/useSlidingReveal.test.ts`
+Expected: PASS (2 tests)
 
-- [ ] **Step 3: 커밋**
+- [ ] **Step 5: 커밋**
 
 ```bash
-git add src/hooks/useSlidingReveal.ts
-git commit -m "feat: useSlidingReveal 훅"
+git add src/hooks/useSlidingReveal.ts src/hooks/useSlidingReveal.test.ts vitest.config.ts package.json package-lock.json
+git commit -m "feat: useSlidingReveal 훅 (generation guard) + 테스트"
 ```
 
 ---
@@ -688,20 +734,25 @@ git commit -m "feat: 설정 컨텍스트 + 실시간 패널"
 - Create: `src/components/ReadingSession.css`
 
 **Interfaces:**
-- Consumes: `Topic`, `useSettings`, `chunkSentence`, `useSlidingReveal`, `DialogBubble`
+- Consumes: `Topic`, `useSettings`, `chunkSentence`+`Chunk`, `useSlidingReveal`, `DialogBubble`
 - Produces:
   ```tsx
   export function ReadingSession(props: { topic: Topic; onFinish: () => void }): JSX.Element
   ```
-- 동작: 스크립트를 앞에서부터 하나씩 노출. 현재 스크립트만 slidingReveal 로 재생, 완료되면 400ms 뒤 다음으로. 지난 스크립트는 `visible=빈 Set`으로 렌더(빈 껍데기). 마지막까지 끝나면 "문제 풀기" 버튼 + "다시 보기" 버튼 노출. "다시 보기"는 index 0부터 재시작.
+- 동작·설계 근거(Codex 리뷰 반영):
+  - 재생은 **`useEffect([index, runId, finished, play])`**에서 `play(chunks, settings)`를 명시 호출. autoStart 미사용 → 단일 스크립트도 `runId` 증가로 리플레이 재생 보장.
+  - 설정은 `settingsRef`로 읽어 **effect 의존성에서 제외** → 설정 변경이 현재 문장을 재시작시키지 않음(다음 문장/다시보기부터 반영). play에 넘긴 chunks·settings는 시작 시점 스냅샷.
+  - 현재 문장 chunks는 `currentChunks` state에 고정 저장 → 재생 중 unit이 바뀌어도 hook과 DialogBubble이 **같은 chunks**를 봐서 인덱스 desync 없음.
+  - **GAP 진행 타이머는 `gapTimer` ref로 추적**하고 effect cleanup·replay에서 정리 → stale advance 방지.
+  - `visible`을 effect 의존성에 넣지 않기 위해 `play`/`reset`만 구조분해(안정 참조).
 
 - [ ] **Step 1: 컴포넌트 구현**
 
 Create `src/components/ReadingSession.tsx`:
 ```tsx
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { Topic } from '../data/types';
-import { chunkSentence } from '../lib/chunk';
+import { chunkSentence, type Chunk } from '../lib/chunk';
 import { useSlidingReveal } from '../hooks/useSlidingReveal';
 import { useSettings } from '../settings/SettingsContext';
 import { DialogBubble } from './DialogBubble';
@@ -712,50 +763,54 @@ const GAP_MS = 400;
 
 export function ReadingSession({ topic, onFinish }: { topic: Topic; onFinish: () => void }) {
   const { settings } = useSettings();
+  const settingsRef = useRef(settings);
+  settingsRef.current = settings;
+
   const [index, setIndex] = useState(0);
+  const [runId, setRunId] = useState(0);   // 같은 index 재생 강제(리플레이)용
   const [finished, setFinished] = useState(false);
+  const [currentChunks, setCurrentChunks] = useState<Chunk[]>([]);
 
-  // 현재 스크립트의 청크 (단위/스크립트 변경 시 재계산)
-  const script = topic.scripts[index];
-  const chunks = useMemo(
-    () => (script ? chunkSentence(script.english, script.words, settings.unit) : []),
-    [script, settings.unit],
-  );
+  const { visible, play, reset } = useSlidingReveal();
+  const gapTimer = useRef<number | null>(null);
 
-  const reveal = useSlidingReveal(
-    chunks,
-    { windowSize: settings.windowSize, baseMsPerWord: settings.baseMsPerWord, minDwellMs: MIN_DWELL_MS },
-    {
-      autoStart: true,
-      onDone: () => {
-        window.setTimeout(() => {
-          setIndex((i) => {
-            if (i + 1 >= topic.scripts.length) { setFinished(true); return i; }
-            return i + 1;
-          });
-        }, GAP_MS);
+  useEffect(() => {
+    if (finished) return;
+    const script = topic.scripts[index];
+    if (!script) return;
+    const s = settingsRef.current; // 시작 시점 설정 스냅샷
+    const chunks = chunkSentence(script.english, s.unit);
+    setCurrentChunks(chunks);
+    play(
+      chunks,
+      { windowSize: s.windowSize, baseMsPerWord: s.baseMsPerWord, minDwellMs: MIN_DWELL_MS },
+      () => {
+        if (index + 1 >= topic.scripts.length) { setFinished(true); return; }
+        gapTimer.current = window.setTimeout(() => setIndex((i) => i + 1), GAP_MS);
       },
-    },
-  );
+    );
+    return () => { if (gapTimer.current) { window.clearTimeout(gapTimer.current); gapTimer.current = null; } };
+  }, [index, runId, finished, topic, play]);
 
-  // 리플레이: 처음부터
-  const replay = () => { setFinished(false); setIndex(0); };
-  useEffect(() => { /* index 0 리셋 시 autoStart 가 재생 */ }, [index]);
+  const replay = () => {
+    if (gapTimer.current) { window.clearTimeout(gapTimer.current); gapTimer.current = null; }
+    reset();
+    setFinished(false);
+    setIndex(0);
+    setRunId((r) => r + 1); // index 가 이미 0이어도 effect 재실행
+  };
 
   return (
     <div className="session">
       <div className="chat">
-        {topic.scripts.slice(0, index + 1).map((s, i) => {
-          const cks = chunkSentence(s.english, s.words, settings.unit);
-          return (
-            <DialogBubble
-              key={s.seq}
-              speaker={s.speaker}
-              chunks={cks}
-              visible={i === index && !finished ? reveal.visible : new Set<number>()}
-            />
-          );
-        })}
+        {topic.scripts.slice(0, index + 1).map((s, i) => (
+          <DialogBubble
+            key={s.seq}
+            speaker={s.speaker}
+            chunks={i === index ? currentChunks : chunkSentence(s.english, settings.unit)}
+            visible={i === index && !finished ? visible : new Set<number>()}
+          />
+        ))}
       </div>
       {finished && (
         <div className="session-actions">
@@ -1037,14 +1092,15 @@ Run: `npm run dev`
 브라우저에서 확인:
 1. 스티브 잡스 코스 토픽 22개 목록 표시
 2. 토픽 선택 → 말풍선이 문장 크기로 뜨고, 청크가 창(N=2)만큼 슬라이딩하며 노출·소멸
-3. 설정에서 단위(단어↔청크)·N·속도 조절 시 다음 노출부터 반영
-4. 대화 끝 → "다시 보기"/"문제 풀기" 버튼
-5. 문제 풀기 → 2문항 MCQ, 답 선택 시 정답·해설 피드백 → "토픽 목록으로"
+3. 설정에서 단위(단어↔청크)·N·속도 조절 → **현재 문장은 그대로, 다음 문장부터 반영**
+4. 대화 끝 → "다시 보기"/"문제 풀기" 버튼. **다시 보기 시 처음부터 정상 재생**(스크립트 1개짜리 토픽도 재생되는지 확인)
+5. **재생 중 목록으로 나갔다가 다른 토픽 진입 시** 이전 타이머가 새 화면을 건드리지 않는지 확인(stale timer)
+6. 문제 풀기 → 2문항 MCQ, 답 선택 시 정답·해설 피드백 → "토픽 목록으로"
 
 - [ ] **Step 2: 전체 테스트 통과 확인**
 
 Run: `npm test`
-Expected: chunk(4) + reveal(4) 통과
+Expected: chunk(6) + reveal(4) + useSlidingReveal(2) 통과
 
 - [ ] **Step 3: 최종 커밋 (필요 시)**
 
@@ -1058,4 +1114,15 @@ git add -A && git commit -m "chore: 리딩 모드 POC 검증 완료" || echo "no
 
 - **Spec coverage:** 노출 메커니즘(Task 6,4,5,8), 실험 축 3개(Task 7), 청킹 단어/규칙(Task 3), 콘텐츠 22개 추출(Task 2), 한국어 MCQ 2문항(Task 9), 다시 보기(Task 8), 코스/토픽 선택(Task 10) — 모두 태스크 존재.
 - **Placeholder scan:** Task 9의 퀴즈 저작은 dialogs.json 실제 내용 의존이라 형식 예시 + 스키마 제공, 구현 시 22개 저작. 그 외 코드 스텝은 전부 실제 코드.
-- **Type consistency:** `Chunk`(chunk.ts) → reveal/hook/bubble 일관, `Settings`/`RevealSettings` 분리(설정 축 3개 + minDwellMs 상수 주입), `DialogsData`/`Topic`/`Script`/`Token` 일관, `QuizMap` key=topicSeq 일관.
+- **Type consistency:** `Chunk`(chunk.ts) → reveal/hook/bubble 일관, `Settings`/`RevealSettings` 분리(설정 축 3개 + minDwellMs 상수 주입), `DialogsData`/`Topic`/`Script`/`Token`(chunk.ts는 자체 Token 정의) 일관, `QuizMap` key=topicSeq 일관.
+
+## Codex 리뷰 반영 (2026-07-03)
+
+- **타이머 race:** hook에 generation guard 도입, `play(chunks, settings)` 인자형으로 stale closure 제거, `reset` 세대 증가로 옛 콜백 무력화 (Task 5).
+- **GAP 진행 타이머 누수:** `gapTimer` ref 추적 + effect cleanup·replay 정리 (Task 8).
+- **단일 스크립트 리플레이 불발:** autoStart 폐기, `runId` 토큰으로 명시 재생 (Task 8).
+- **설정 변경 semantics 확정:** 현재 문장 미영향, 다음 문장/다시보기부터 반영. `settingsRef` + `currentChunks` 고정 (Global Constraints, Task 8).
+- **문장부호 유실:** tagList 대신 문장 문자열 직접 토큰화(`\S+`), 부호를 앞 토큰에 보존 (Task 3).
+- **방어 코드:** `windowSize` 최소 1 클램프 (Task 4).
+- **테스트 보강:** 가장 위험한 hook에 fake-timer 테스트 추가 (Task 5).
+- **미반영(POC 범위 밖):** `visibility:hidden`의 스크린리더 처리(접근성), 반응형 정밀 검증 — POC 체험 도구 범위에서 제외.
