@@ -4,9 +4,10 @@ export interface Settings {
   unit: 'word' | 'chunk';
   windowSize: number;
   baseMsPerWord: number;
+  maxChunkWords: number;
 }
 
-export const DEFAULT_SETTINGS: Settings = { unit: 'chunk', windowSize: 2, baseMsPerWord: 220 };
+export const DEFAULT_SETTINGS: Settings = { unit: 'chunk', windowSize: 2, baseMsPerWord: 220, maxChunkWords: 3 };
 
 const STORAGE_KEY = 'reading-poc:settings';
 

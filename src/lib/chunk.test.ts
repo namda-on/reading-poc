@@ -23,6 +23,30 @@ describe('chunkByRule', () => {
   it('접속사 and 앞에서 끊는다 (문장부호 보존)', () => {
     expect(chunkByRule('Hobbyists and tech fans.').map((c) => c.text)).toEqual(['Hobbyists', 'and tech fans.']);
   });
+  it('최대 청크 길이 초과 시 단어 경계에서 강제 분할', () => {
+    // 규칙만: ["I need electronic parts","for a project."] → maxWords=2 로 재분할
+    expect(chunkByRule('I need electronic parts for a project.', 2).map((c) => c.text)).toEqual([
+      'I need',
+      'electronic parts',
+      'for a',
+      'project.',
+    ]);
+  });
+  it('문장 끝(.!?) 뒤에서 무조건 끊는다 (청크가 문장을 넘지 않음)', () => {
+    expect(chunkByRule('Yes. I worked on it for months.').map((c) => c.text)).toEqual([
+      'Yes.',
+      'I worked',
+      'on it',
+      'for months.',
+    ]);
+  });
+  it('트리거 없는 문장도 최대 길이로 쪼갠다', () => {
+    expect(chunkByRule('Rome has many good restaurants.', 2).map((c) => c.text)).toEqual([
+      'Rome has',
+      'many good',
+      'restaurants.',
+    ]);
+  });
 });
 
 describe('chunkSentence', () => {

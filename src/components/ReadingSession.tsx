@@ -33,7 +33,7 @@ export function ReadingSession({ topic, onFinish }: { topic: Topic; onFinish: ()
     const script = topic.scripts[index];
     if (!script) return;
     const s = settingsRef.current; // 시작 시점 설정 스냅샷
-    const chunks = chunkSentence(script.english, s.unit);
+    const chunks = chunkSentence(script.english, s.unit, s.maxChunkWords);
     setCurrentChunks(chunks);
     play(
       chunks,
@@ -72,7 +72,7 @@ export function ReadingSession({ topic, onFinish }: { topic: Topic; onFinish: ()
           <DialogBubble
             key={s.seq}
             speaker={s.speaker}
-            chunks={i === index ? currentChunks : chunkSentence(s.english, settings.unit)}
+            chunks={i === index ? currentChunks : chunkSentence(s.english, settings.unit, settings.maxChunkWords)}
             visible={i === index && !finished ? visible : new Set<number>()}
           />
         ))}

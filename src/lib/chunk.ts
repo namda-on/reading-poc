@@ -36,7 +36,7 @@ export function chunkByWord(sentence: string): Chunk[] {
   return tokenize(sentence).map((t) => ({ text: t.text, start: t.start, end: t.end }));
 }
 
-export function chunkByRule(sentence: string): Chunk[] {
+export function chunkByRule(sentence: string, maxWords = Infinity): Chunk[] {
   const tokens = tokenize(sentence);
   const words = tokens.map((t) => norm(t.text));
 
@@ -54,27 +54,44 @@ export function chunkByRule(sentence: string): Chunk[] {
     }
   }
 
-  const chunks: Chunk[] = [];
+  // 1) 기능어 경계로 토큰 그룹핑
+  const groups: Token[][] = [];
   let cur: Token[] = [];
   const flush = () => {
-    if (!cur.length) return;
-    chunks.push({
-      text: cur.map((t) => t.text).join(' '),
-      start: cur[0].start,
-      end: cur[cur.length - 1].end,
-    });
+    if (cur.length) groups.push(cur);
     cur = [];
   };
+  const endsSentence = (tok: string) => /[.!?]['")\]]*$/.test(tok);
   for (let i = 0; i < tokens.length; i++) {
+    const afterSentenceEnd = i > 0 && endsSentence(tokens[i - 1].text); // 문장 끝 뒤는 무조건 끊음
     const startsNewChunk =
-      i > 0 && !lockedStart.has(i) && (BREAK_BEFORE.has(words[i]) || phraseStart.has(i));
+      i > 0 &&
+      (afterSentenceEnd || (!lockedStart.has(i) && (BREAK_BEFORE.has(words[i]) || phraseStart.has(i))));
     if (startsNewChunk) flush();
     cur.push(tokens[i]);
   }
   flush();
+
+  // 2) 최대 길이 초과 그룹은 단어 경계에서 강제 분할
+  const chunks: Chunk[] = [];
+  const step = maxWords >= 1 ? maxWords : Infinity;
+  for (const g of groups) {
+    for (let i = 0; i < g.length; i += step) {
+      const slice = g.slice(i, i + step);
+      chunks.push({
+        text: slice.map((t) => t.text).join(' '),
+        start: slice[0].start,
+        end: slice[slice.length - 1].end,
+      });
+    }
+  }
   return chunks;
 }
 
-export function chunkSentence(sentence: string, unit: 'word' | 'chunk'): Chunk[] {
-  return unit === 'word' ? chunkByWord(sentence) : chunkByRule(sentence);
+export function chunkSentence(
+  sentence: string,
+  unit: 'word' | 'chunk',
+  maxChunkWords = Infinity,
+): Chunk[] {
+  return unit === 'word' ? chunkByWord(sentence) : chunkByRule(sentence, maxChunkWords);
 }

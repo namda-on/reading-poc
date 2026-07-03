@@ -25,6 +25,17 @@ export function SettingsPanel() {
           onChange={(e) => setSettings({ ...settings, windowSize: Number(e.target.value) })}
         />
       </label>
+      <label style={{ opacity: settings.unit === 'chunk' ? 1 : 0.4 }}>
+        최대 청크 길이: {settings.maxChunkWords}단어
+        <input
+          type="range"
+          min={1}
+          max={6}
+          value={settings.maxChunkWords}
+          disabled={settings.unit !== 'chunk'}
+          onChange={(e) => setSettings({ ...settings, maxChunkWords: Number(e.target.value) })}
+        />
+      </label>
       <label>
         속도(ms/단어): {settings.baseMsPerWord}
         <input
