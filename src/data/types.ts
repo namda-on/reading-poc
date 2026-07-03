@@ -10,6 +10,8 @@ export interface Script {
   english: string;
   translated: string;
   hint?: string;
+  // 리스닝 모드 TTS 오디오(speech.epop.ai). 없으면 null.
+  audioUrl: string | null;
   // tagList 원본 보존용(provenance). 앱 청킹에는 쓰지 않는다.
   words?: Token[];
 }
@@ -32,3 +34,6 @@ export interface DialogsData {
   level: number;
   stories: Story[];
 }
+
+// 세션 재생 방식: 리딩(슬라이딩 노출) / 리스닝(TTS 오디오).
+export type Mode = 'reading' | 'listening';

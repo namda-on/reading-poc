@@ -1,0 +1,29 @@
+/* 텍스트를 숨긴 말풍선: 자리는 유지하되 내용은 노출하지 않는다. */
+.hidden-bubble {
+  min-width: 72px;
+  min-height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 재생 중이 아닌(이미 지나간) 말풍선은 조용히 채워진 상태로. */
+.hidden-bubble .wave { display: none; }
+.hidden-bubble:not(.playing) { opacity: 0.5; }
+
+/* 재생 중 말풍선: 음성 재생을 나타내는 웨이브 애니메이션. */
+.hidden-bubble.playing .wave { display: inline-flex; gap: 4px; align-items: center; height: 20px; }
+.hidden-bubble.playing .wave i {
+  width: 4px;
+  height: 8px;
+  border-radius: 2px;
+  background: #4b83d6;
+  animation: wave 900ms ease-in-out infinite;
+}
+.hidden-bubble.playing .wave i:nth-child(2) { animation-delay: 150ms; }
+.hidden-bubble.playing .wave i:nth-child(3) { animation-delay: 300ms; }
+
+@keyframes wave {
+  0%, 100% { height: 8px; }
+  50% { height: 18px; }
+}

@@ -13,6 +13,26 @@ MAX_SCRIPTS = 4  # 리딩 모드 분량: 자연스러운 도입부 4턴만
 INCLUDE = [25, 17, 2]
 OUT = os.path.join(os.path.dirname(__file__), "..", "src", "data", "dialogs.json")
 
+# 리스닝 모드용 TTS 오디오. speech.epop.ai(인증 없는 공개 CDN)에서 문장 단위로 재생한다.
+SPEECH_BASE = "https://speech.epop.ai/conversation/tts"
+# 음성 종류 인덱스 → 폴더명 (bi modules/voice-data/voice-data.ts:kLiveVoiceTypes)
+LIVE_VOICE_TYPES = [
+    "usFemaleNormal", "usFemaleToeic", "usMaleNormal", "usMaleToeic",
+    "gbFemaleNormal", "gbFemaleToeic", "gbMaleNormal", "gbMaleToeic",
+]
+
+
+def audio_url(dseq, dialog_hash, script_seq, voice_infos):
+    """스크립트 하나의 TTS 오디오 URL을 조립한다. 재료가 없으면 None.
+    URL = {base}/{dseq:06d}-{dialogHash}/{voiceType}/{scriptIdx:02d}.{voiceHash}.ogg"""
+    if not dialog_hash:
+        return None
+    idx = next((i for i, v in enumerate(voice_infos or []) if v), None)
+    if idx is None:
+        return None
+    return (f"{SPEECH_BASE}/{dseq:06d}-{dialog_hash}/{LIVE_VOICE_TYPES[idx]}"
+            f"/{script_seq % 100:02d}.{voice_infos[idx]['hash']}.ogg")
+
 
 def words_from_taglist(en, tag_list):
     words = []
@@ -27,6 +47,8 @@ def words_from_taglist(en, tag_list):
 def build_topic(c, t):
     topic_seq = t["sq"]
     dseq = topic_seq * 10 + LEVEL
+    # 이 레벨 대화(dseq)의 오디오 해시. ConversationCourses 의 di[] 에 담겨 있다.
+    dialog_hash = next((x["h"] for x in t.get("di", []) if x["sq"] == dseq), None)
     lo, hi = dseq * 100, dseq * 100 + 99
     rows = c.execute(
         "SELECT seq,data FROM ConversationDialogScriptKR WHERE seq BETWEEN ? AND ? ORDER BY seq",
@@ -40,6 +62,7 @@ def build_topic(c, t):
             "english": d["en"],
             "translated": d.get("tr", ""),
             "hint": d.get("hint"),
+            "audioUrl": audio_url(dseq, dialog_hash, seq, d.get("voiceInfos")),
             "words": words_from_taglist(d["en"], d.get("tagList")),
         })
     return {"topicSeq": topic_seq, "title": t["t"], "partner": t["c"], "scripts": scripts[:MAX_SCRIPTS]}

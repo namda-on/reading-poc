@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import dialogs from './data/dialogs.json';
-import type { DialogsData } from './data/types';
+import type { DialogsData, Mode } from './data/types';
 import { StoryList } from './components/StoryList';
 import { TopicList } from './components/TopicList';
+import { SessionStart } from './components/SessionStart';
 import { ReadingSession } from './components/ReadingSession';
+import { ListeningSession } from './components/ListeningSession';
 import { QuizSheet } from './components/QuizSheet';
 import './App.css';
 
@@ -14,8 +16,9 @@ export default function App() {
   const [screen, setScreen] = useState<Screen>('stories');
   const [storySeq, setStorySeq] = useState<number | null>(null);
   const [topicSeq, setTopicSeq] = useState<number | null>(null);
+  const [mode, setMode] = useState<Mode>('reading');
+  const [playing, setPlaying] = useState(false); // 시작 화면(false) → 재생(true)
   const [sessionRun, setSessionRun] = useState(0); // 다시 듣기 시 세션 리마운트용
-  const [autoStart, setAutoStart] = useState(false); // 다시 듣기면 시작 버튼 없이 바로 재생
 
   const story = DATA.stories.find((s) => s.courseSeq === storySeq) ?? null;
   const topic = story?.topics.find((t) => t.topicSeq === topicSeq) ?? null;
@@ -35,30 +38,57 @@ export default function App() {
           story={story}
           onPick={(t) => {
             setTopicSeq(t);
-            setAutoStart(false);
+            setPlaying(false); // 토픽 진입 시 시작 화면(모드 선택)부터
             setScreen('session');
           }}
           onBack={() => setScreen('stories')}
         />
       )}
-      {(screen === 'session' || screen === 'quiz') && topic && (
-        <ReadingSession
-          key={`${topic.topicSeq}-${sessionRun}`}
+      {screen === 'session' && topic && !playing && (
+        <SessionStart
           topic={topic}
-          autoStart={autoStart}
-          onFinish={() => setScreen('quiz')}
+          onStart={(m) => {
+            setMode(m);
+            setSessionRun((r) => r + 1);
+            setPlaying(true);
+          }}
           onBack={() => setScreen('topics')}
         />
+      )}
+      {(screen === 'session' || screen === 'quiz') && topic && playing && (
+        mode === 'listening' ? (
+          <ListeningSession
+            key={`l-${topic.topicSeq}-${sessionRun}`}
+            topic={topic}
+            onFinish={() => setScreen('quiz')}
+            onBack={() => {
+              setPlaying(false);
+              setScreen('topics');
+            }}
+          />
+        ) : (
+          <ReadingSession
+            key={`r-${topic.topicSeq}-${sessionRun}`}
+            topic={topic}
+            onFinish={() => setScreen('quiz')}
+            onBack={() => {
+              setPlaying(false);
+              setScreen('topics');
+            }}
+          />
+        )
       )}
       {screen === 'quiz' && topic && (
         <QuizSheet
           topicSeq={topic.topicSeq}
           onReplay={() => {
-            setAutoStart(true); // 다시 듣기는 바로 재생
-            setSessionRun((r) => r + 1); // 세션 리마운트 → 처음부터
+            setSessionRun((r) => r + 1); // 세션 리마운트 → 처음부터, 같은 모드로 즉시 재생
             setScreen('session');
           }}
-          onClose={() => setScreen('topics')}
+          onClose={() => {
+            setPlaying(false);
+            setScreen('topics');
+          }}
         />
       )}
     </div>

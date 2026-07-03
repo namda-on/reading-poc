@@ -17,6 +17,7 @@
               "english": "Look at this! It connects to a monitor!",
               "translated": "이거 봐! 모니터에 연결되잖아!",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025012-e0102/usMaleNormal/00.FcheF.ogg",
               "words": [
                 {
                   "text": "Look",
@@ -66,6 +67,7 @@
               "english": "Wow! Did you build this yourself?",
               "translated": "와! 이거 직접 만든 거야?",
               "hint": "'직접'은 yourself로, '만들다'는 build로 표현해 보세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025012-e0102/usMaleNormal/01.pQlZ8.ogg",
               "words": [
                 {
                   "text": "Wow",
@@ -105,6 +107,7 @@
               "english": "Yes. I worked on it for months.",
               "translated": "응. 몇 달 동안 작업했어.",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025012-e0102/usMaleNormal/02.yFAi7.ogg",
               "words": [
                 {
                   "text": "Yes",
@@ -149,6 +152,7 @@
               "english": "This is really cool. Show me more.",
               "translated": "진짜 대단하다. 더 보여줘.",
               "hint": "'진짜 대단하다'는 really cool로 표현해 보세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025012-e0102/usMaleNormal/03.ej4yX.ogg",
               "words": [
                 {
                   "text": "This",
@@ -200,6 +204,7 @@
               "english": "Look at this board. It's a real computer.",
               "translated": "이 보드 보세요. 진짜 컴퓨터예요.",
               "hint": "'~을 좀 보세요'는 Look at으로 시작하여 표현해 보세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025022-68cb2/usMaleNormal/00.PkRQU.ogg",
               "words": [
                 {
                   "text": "Look",
@@ -259,6 +264,7 @@
               "english": "Interesting. What can it do?",
               "translated": "흥미롭네요. 뭘 할 수 있죠?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025022-68cb2/usMaleNormal/01.VN0lN.ogg",
               "words": [
                 {
                   "text": "Interesting",
@@ -293,6 +299,7 @@
               "english": "It runs programs. It's easy to use.",
               "translated": "프로그램을 실행해요. 사용하기 쉬워요.",
               "hint": "'프로그램을 돌리다'는 runs programs로 표현하세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025022-68cb2/usMaleNormal/02.ctnbG.ogg",
               "words": [
                 {
                   "text": "It",
@@ -347,6 +354,7 @@
               "english": "I like it. I'll order fifty units.",
               "translated": "마음에 드네요. 50개 주문할게요.",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025022-68cb2/usMaleNormal/03.-dIZu.ogg",
               "words": [
                 {
                   "text": "I",
@@ -408,6 +416,7 @@
               "english": "Good afternoon. How can I help you?",
               "translated": "안녕하세요. 뭘 도와드릴까요?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025032-7f204/usMaleNormal/00.THQte.ogg",
               "words": [
                 {
                   "text": "Good",
@@ -452,6 +461,7 @@
               "english": "I need electronic parts for a project.",
               "translated": "프로젝트에 쓸 전자부품이 필요해요.",
               "hint": "'전자부품'은 electronic parts로 표현하세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025032-7f204/usMaleNormal/01.JVMPo.ogg",
               "words": [
                 {
                   "text": "I",
@@ -496,6 +506,7 @@
               "english": "Sure. What do you need?",
               "translated": "네. 뭐가 필요하세요?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025032-7f204/usMaleNormal/02.Ci4zv.ogg",
               "words": [
                 {
                   "text": "Sure",
@@ -530,6 +541,7 @@
               "english": "Here is my list. But I have no cash.",
               "translated": "여기 목록이요. 근데 현금이 없어요.",
               "hint": "'~이 없어요'는 have no로 표현해 보세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025032-7f204/usMaleNormal/03.z1vEL.ogg",
               "words": [
                 {
                   "text": "Here",
@@ -591,6 +603,7 @@
               "english": "Thank you for meeting me today.",
               "translated": "오늘 시간 내 주셔서 감사합니다.",
               "hint": "'시간 내 주셔서'는 for meeting me로 표현해 보세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025042-e2f6c/usMaleNormal/00.PPgc8.ogg",
               "words": [
                 {
                   "text": "Thank",
@@ -630,6 +643,7 @@
               "english": "Sure. Tell me about your computer project.",
               "translated": "그럼요. 컴퓨터 프로젝트에 대해 얘기해 보세요.",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025042-e2f6c/usMaleNormal/01.qaPGh.ogg",
               "words": [
                 {
                   "text": "Sure",
@@ -674,6 +688,7 @@
               "english": "We want to put a computer in every home.",
               "translated": "저희는 모든 가정에 컴퓨터를 보급하려고 합니다.",
               "hint": "'~에 보급하다'는 put ~ in으로, '모든 가정'은 every home으로 표현해 보세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025042-e2f6c/usMaleNormal/02.Z4DhA.ogg",
               "words": [
                 {
                   "text": "We",
@@ -728,6 +743,7 @@
               "english": "Every home? How big is the market?",
               "translated": "모든 가정이요? 시장 규모가 어느 정도죠?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025042-e2f6c/usMaleNormal/03.4QXeO.ogg",
               "words": [
                 {
                   "text": "Every",
@@ -779,6 +795,7 @@
               "english": "The investment is done. We need a name.",
               "translated": "투자는 끝났어. 이제 이름을 정해야 해.",
               "hint": "'투자'는 investment로, '~해야 해'는 need로 표현해 보세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025052-ea2ff/usMaleNormal/00.3GHCa.ogg",
               "words": [
                 {
                   "text": "The",
@@ -828,6 +845,7 @@
               "english": "Yes, we do. Any ideas?",
               "translated": "그러게. 뭐 생각해 둔 거 있어?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025052-ea2ff/usMaleNormal/01.fEt7q.ogg",
               "words": [
                 {
                   "text": "Yes",
@@ -862,6 +880,7 @@
               "english": "How about \"Apple Computer\"?",
               "translated": "\"Apple Computer\" 어때?",
               "hint": "'~어때?'라고 제안할 때는 How about으로 시작하세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025052-ea2ff/usMaleNormal/02.qWzdh.ogg",
               "words": [
                 {
                   "text": "How",
@@ -891,6 +910,7 @@
               "english": "Apple? Why an apple? It's strange.",
               "translated": "Apple? 왜 사과야? 이상한데.",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025052-ea2ff/usMaleNormal/03.4XGLa.ogg",
               "words": [
                 {
                   "text": "Apple",
@@ -947,6 +967,7 @@
               "english": "Welcome to my studio. How can I help?",
               "translated": "스튜디오에 오신 걸 환영해요. 뭘 도와드릴까요?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025062-de1d3/usMaleNormal/00.hKab7.ogg",
               "words": [
                 {
                   "text": "Welcome",
@@ -996,6 +1017,7 @@
               "english": "I need a logo for my company.",
               "translated": "회사 로고가 필요해요.",
               "hint": "'회사를 위한'이라는 의미로 for my company를 사용하세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025062-de1d3/usMaleNormal/01.Jy9ft.ogg",
               "words": [
                 {
                   "text": "I",
@@ -1040,6 +1062,7 @@
               "english": "Sure. What kind of design do you want?",
               "translated": "네. 어떤 디자인을 원하세요?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025062-de1d3/usMaleNormal/02.vHVJk.ogg",
               "words": [
                 {
                   "text": "Sure",
@@ -1089,6 +1112,7 @@
               "english": "An apple. But with a bite taken out.",
               "translated": "사과요. 근데 한 입 베어문 느낌으로요.",
               "hint": "'한 입 베어문'은 a bite taken out으로 표현해 보세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025062-de1d3/usMaleNormal/03.wxfpr.ogg",
               "words": [
                 {
                   "text": "An",
@@ -1145,6 +1169,7 @@
               "english": "Welcome to the Apple booth!",
               "translated": "애플 부스에 오신 걸 환영합니다!",
               "hint": "'~에 오신 걸 환영합니다'는 Welcome to로 표현하세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025072-b8d25/usMaleNormal/00.eI3tA.ogg",
               "words": [
                 {
                   "text": "Welcome",
@@ -1179,6 +1204,7 @@
               "english": "Thanks! Is this a personal computer?",
               "translated": "감사합니다! 이거 개인용 컴퓨터인가요?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025072-b8d25/usMaleNormal/01.nFs35.ogg",
               "words": [
                 {
                   "text": "Thanks",
@@ -1218,6 +1244,7 @@
               "english": "Yes, this is the Apple II.",
               "translated": "네, 이게 Apple II예요.",
               "hint": "특정 제품을 가리킬 때는 정관사 the를 붙여 the Apple II로 표현하세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025072-b8d25/usMaleNormal/02.6-jj-.ogg",
               "words": [
                 {
                   "text": "Yes",
@@ -1257,6 +1284,7 @@
               "english": "Is it a finished product?",
               "translated": "완제품으로 나온 건가요?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025072-b8d25/usMaleNormal/03.hGc0X.ogg",
               "words": [
                 {
                   "text": "Is",
@@ -1298,6 +1326,7 @@
               "english": "Hello! Who are you? You look young.",
               "translated": "안녕하세요! 누구시죠? 젊어 보이시는데요.",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025082-20a5c/usFemaleNormal/00.s4Sqe.ogg",
               "words": [
                 {
                   "text": "Hello",
@@ -1342,6 +1371,7 @@
               "english": "I'm Steve Jobs. I'm twenty-two years old.",
               "translated": "스티브 잡스입니다. 스물두 살이에요.",
               "hint": "나이를 말할 때 '~살이에요'는 years old로 표현하세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025082-20a5c/usMaleNormal/01.xPqrq.ogg",
               "words": [
                 {
                   "text": "I'm",
@@ -1411,6 +1441,7 @@
               "english": "Twenty-two? And you have your own booth?",
               "translated": "스물두 살이요? 그런데 직접 부스를 운영하시는 건가요?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025082-20a5c/usFemaleNormal/02.g1fPN.ogg",
               "words": [
                 {
                   "text": "Twenty",
@@ -1460,6 +1491,7 @@
               "english": "Yes. My company is called Apple.",
               "translated": "네. 제 회사 이름은 애플이에요.",
               "hint": "'이름은 ~이에요'라는 표현을 is called로 바꿔서 문장을 만들어 보세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025082-20a5c/usMaleNormal/03.CS9Kv.ogg",
               "words": [
                 {
                   "text": "Yes",
@@ -1506,6 +1538,7 @@
               "english": "Welcome to Xerox PARC. I'll show you our work.",
               "translated": "제록스 파크에 오신 걸 환영합니다. 저희 작업물을 보여드릴게요.",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025092-989cd/usMaleNormal/00.11ns8.ogg",
               "words": [
                 {
                   "text": "Welcome",
@@ -1570,6 +1603,7 @@
               "english": "Thank you. What will you show me?",
               "translated": "감사합니다. 뭘 보여주실 건가요?",
               "hint": "'뭘 ~할 건가요?'라는 질문은 What will you로 시작해 보세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025092-989cd/usMaleNormal/01.AOwca.ogg",
               "words": [
                 {
                   "text": "Thank",
@@ -1614,6 +1648,7 @@
               "english": "This is a new way to use computers.",
               "translated": "컴퓨터를 쓰는 새로운 방식이에요.",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025092-989cd/usMaleNormal/02.whi6T.ogg",
               "words": [
                 {
                   "text": "This",
@@ -1663,6 +1698,7 @@
               "english": "What is that small box there?",
               "translated": "저기 저 작은 상자는 뭔가요?",
               "hint": "'저기 저'는 that과 there를 함께 사용하여 표현하세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025092-989cd/usMaleNormal/03.sjYpQ.ogg",
               "words": [
                 {
                   "text": "What",
@@ -1709,6 +1745,7 @@
               "english": "Steve, the board made a decision today.",
               "translated": "스티브, 오늘 이사회에서 결정이 내려졌어요.",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025102-6bf14/usMaleNormal/00.KStqO.ogg",
               "words": [
                 {
                   "text": "Steve",
@@ -1753,6 +1790,7 @@
               "english": "What decision? Tell me.",
               "translated": "무슨 결정이요? 말해 주세요.",
               "hint": "'결정'은 decision으로 표현하세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025102-6bf14/usMaleNormal/01.JTxJq.ogg",
               "words": [
                 {
                   "text": "What",
@@ -1782,6 +1820,7 @@
               "english": "They decided to remove you from management.",
               "translated": "당신을 경영에서 배제하기로 했습니다.",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025102-6bf14/usMaleNormal/02.qkkr3.ogg",
               "words": [
                 {
                   "text": "They",
@@ -1826,6 +1865,7 @@
               "english": "Remove me? I built this company!",
               "translated": "날 배제한다고요? 내가 만든 회사인데!",
               "hint": "'~을 배제하다'는 remove로 표현하세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025102-6bf14/usMaleNormal/03.PGWxS.ogg",
               "words": [
                 {
                   "text": "Remove",
@@ -1872,6 +1912,7 @@
               "english": "So, here we are. Our new beginning.",
               "translated": "자, 드디어 여기까지 왔군. 우리의 새로운 시작이야.",
               "hint": "'드디어 여기까지 왔군'은 here we are라는 표현으로 나타낼 수 있어요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025112-d444e/usMaleNormal/00.tuMNX.ogg",
               "words": [
                 {
                   "text": "So",
@@ -1916,6 +1957,7 @@
               "english": "Yes, but Apple filed a lawsuit.",
               "translated": "네, 그런데 애플이 소송을 걸었어요.",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025112-d444e/usFemaleNormal/01.M_Rma.ogg",
               "words": [
                 {
                   "text": "Yes",
@@ -1955,6 +1997,7 @@
               "english": "I expected that. They kicked me out.",
               "translated": "예상했어. 날 쫓아낸 게 그 사람들인데.",
               "hint": "'~을 쫓아내다'는 kick out이라는 표현을 사용하세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025112-d444e/usMaleNormal/02.j4Kgw.ogg",
               "words": [
                 {
                   "text": "I",
@@ -1999,6 +2042,7 @@
               "english": "Will we be okay?",
               "translated": "괜찮을까요?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025112-d444e/usFemaleNormal/03.1USPx.ogg",
               "words": [
                 {
                   "text": "Will",
@@ -2035,6 +2079,7 @@
               "english": "What is your dream for this team?",
               "translated": "이 팀의 꿈이 뭔가요?",
               "hint": "'이 팀을 위한'이라는 의미로 for this team을 사용해 보세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025122-7e3d0/usMaleNormal/00.DLSDy.ogg",
               "words": [
                 {
                   "text": "What",
@@ -2079,6 +2124,7 @@
               "english": "We want to make 3D animated movies.",
               "translated": "저희는 3D 애니메이션 영화를 만들고 싶습니다.",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025122-7e3d0/usMaleNormal/01.oxAKn.ogg",
               "words": [
                 {
                   "text": "We",
@@ -2123,6 +2169,7 @@
               "english": "Movies made by computers?",
               "translated": "컴퓨터로 만드는 영화요?",
               "hint": "'~로 만드는'은 made by라는 표현을 사용하세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025122-7e3d0/usMaleNormal/02.HKAqG.ogg",
               "words": [
                 {
                   "text": "Movies",
@@ -2152,6 +2199,7 @@
               "english": "Yes. Computers can create new worlds.",
               "translated": "네. 컴퓨터로 새로운 세계를 창조할 수 있어요.",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025122-7e3d0/usMaleNormal/03.HvmEA.ogg",
               "words": [
                 {
                   "text": "Yes",
@@ -2198,6 +2246,7 @@
               "english": "You wanted to see me. What's this about?",
               "translated": "부르셨다면서요. 무슨 일이십니까?",
               "hint": "'부르셨다면서요'는 wanted to see me로 표현하세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025132-eb81d/usMaleNormal/00.cu8MB.ogg",
               "words": [
                 {
                   "text": "You",
@@ -2257,6 +2306,7 @@
               "english": "Apple wants to buy NeXT.",
               "translated": "애플이 NeXT를 인수하고 싶습니다.",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025132-eb81d/usMaleNormal/01.H8Q30.ogg",
               "words": [
                 {
                   "text": "Apple",
@@ -2291,6 +2341,7 @@
               "english": "Just my company? Or something more?",
               "translated": "제 회사만요? 아니면 다른 것도요?",
               "hint": "'다른 것도요'는 something more로 표현하세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025132-eb81d/usMaleNormal/02.wh-jN.ogg",
               "words": [
                 {
                   "text": "Just",
@@ -2330,6 +2381,7 @@
               "english": "I need your help too. Please come back.",
               "translated": "도움도 필요합니다. 돌아와 주세요.",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025132-eb81d/usMaleNormal/03.rUYhg.ogg",
               "words": [
                 {
                   "text": "I",
@@ -2386,6 +2438,7 @@
               "english": "I have a new idea for Apple.",
               "translated": "애플을 위한 새로운 아이디어가 있어요.",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025142-d275d/usMaleNormal/00.MlHVi.ogg",
               "words": [
                 {
                   "text": "I",
@@ -2430,6 +2483,7 @@
               "english": "Great. What is the idea?",
               "translated": "좋아요. 어떤 아이디어죠?",
               "hint": "'아이디어'는 the idea로 표현하여 질문을 완성해 보세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025142-d275d/usMaleNormal/01.pRwgY.ogg",
               "words": [
                 {
                   "text": "Great",
@@ -2464,6 +2518,7 @@
               "english": "The campaign is called 'Think Different.'",
               "translated": "캠페인 이름은 'Think Different'예요.",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025142-d275d/usMaleNormal/02.CuUY1.ogg",
               "words": [
                 {
                   "text": "The",
@@ -2508,6 +2563,7 @@
               "english": "Think Different? I like that name.",
               "translated": "Think Different? 이름 마음에 드는데요.",
               "hint": "'그 이름'은 that name으로 표현해 보세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025142-d275d/usMaleNormal/03.DgdCC.ogg",
               "words": [
                 {
                   "text": "Think",
@@ -2554,6 +2610,7 @@
               "english": "What about a translucent plastic case?",
               "translated": "반투명 플라스틱 케이스는 어떨까요?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025152-db8d3/usMaleNormal/00.6yrEw.ogg",
               "words": [
                 {
                   "text": "What",
@@ -2593,6 +2650,7 @@
               "english": "That's revolutionary! I love it.",
               "translated": "혁명적이네요! 마음에 들어요.",
               "hint": "'혁명적인'은 revolutionary로 표현해 보세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025152-db8d3/usMaleNormal/01.bi0cL.ogg",
               "words": [
                 {
                   "text": "That's",
@@ -2637,6 +2695,7 @@
               "english": "It will look friendly and modern.",
               "translated": "친근하면서도 현대적으로 보일 거예요.",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025152-db8d3/usMaleNormal/02.r40Ew.ogg",
               "words": [
                 {
                   "text": "It",
@@ -2676,6 +2735,7 @@
               "english": "Make it all-in-one. Use only USB ports.",
               "translated": "올인원으로 하죠. USB 포트만 쓰고요.",
               "hint": "'~으로 하다'는 Make it으로 표현하고, '~만'은 only로 표현해 보세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025152-db8d3/usMaleNormal/03.aN8TK.ogg",
               "words": [
                 {
                   "text": "Make",
@@ -2742,6 +2802,7 @@
               "english": "I have an idea for a music player.",
               "translated": "뮤직 플레이어 아이디어가 있습니다.",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025162-a2eb7/usMaleNormal/00.QItyi.ogg",
               "words": [
                 {
                   "text": "I",
@@ -2791,6 +2852,7 @@
               "english": "Tell me about it.",
               "translated": "말해 봐.",
               "hint": "'~에 대해'라는 의미의 about it을 활용해 보세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025162-a2eb7/usMaleNormal/01.9_6aW.ogg",
               "words": [
                 {
                   "text": "Tell",
@@ -2820,6 +2882,7 @@
               "english": "It uses a small hard drive inside.",
               "translated": "안에 소형 하드 드라이브를 사용합니다.",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025162-a2eb7/usMaleNormal/02.HkCFV.ogg",
               "words": [
                 {
                   "text": "It",
@@ -2864,6 +2927,7 @@
               "english": "How many songs can it store?",
               "translated": "몇 곡이나 저장할 수 있어?",
               "hint": "'저장하다'는 store라는 동사로 표현해 보세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025162-a2eb7/usMaleNormal/03.dZKAq.ogg",
               "words": [
                 {
                   "text": "How",
@@ -2910,6 +2974,7 @@
               "english": "Is the team ready?",
               "translated": "팀 준비 됐어?",
               "hint": "'준비 됐어?'라고 물을 때 Is... ready?라는 구조를 사용하세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025182-11000/usMaleNormal/00.LCCOF.ogg",
               "words": [
                 {
                   "text": "Is",
@@ -2939,6 +3004,7 @@
               "english": "Yes. Everything is ready.",
               "translated": "네. 전부 준비 완료됐습니다.",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025182-11000/usMaleNormal/01.QHEV5.ogg",
               "words": [
                 {
                   "text": "Yes",
@@ -2968,6 +3034,7 @@
               "english": "Good. Let me practice one more time.",
               "translated": "좋아. 한 번만 더 연습해볼게.",
               "hint": "'~해볼게'라는 의미를 Let me로 시작하여 표현해 보세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025182-11000/usMaleNormal/02.un3zv.ogg",
               "words": [
                 {
                   "text": "Good",
@@ -3012,6 +3079,7 @@
               "english": "Of course. I'm listening.",
               "translated": "그럼요. 듣고 있겠습니다.",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025182-11000/usMaleNormal/03.TSIRQ.ogg",
               "words": [
                 {
                   "text": "Of",
@@ -3058,6 +3126,7 @@
               "english": "The iPad design is finally complete.",
               "translated": "iPad 디자인이 드디어 완성됐습니다.",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025192-88bee/usMaleNormal/00.acUl8.ogg",
               "words": [
                 {
                   "text": "The",
@@ -3097,6 +3166,7 @@
               "english": "Let me see it.",
               "translated": "어디 보자.",
               "hint": "'~해 보자'라는 표현은 Let me로 시작해 보세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025192-88bee/usMaleNormal/01.cpVKG.ogg",
               "words": [
                 {
                   "text": "Let",
@@ -3126,6 +3196,7 @@
               "english": "Here it is. Very thin and light.",
               "translated": "여기 있습니다. 아주 얇고 가볍습니다.",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025192-88bee/usMaleNormal/02.g3bA9.ogg",
               "words": [
                 {
                   "text": "Here",
@@ -3170,6 +3241,7 @@
               "english": "Perfect. Not a PC or a phone.",
               "translated": "완벽해. PC도 폰도 아니야.",
               "hint": "'~도 ~도 아니야'는 영어로 Not... or... 구조를 사용해 보세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025192-88bee/usMaleNormal/03.E1VG9.ogg",
               "words": [
                 {
                   "text": "Perfect",
@@ -3221,6 +3293,7 @@
               "english": "Come in. Please sit down.",
               "translated": "들어와요. 앉아요.",
               "hint": "'앉다'는 sit down이라는 표현을 사용하세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025202-493ed/usMaleNormal/00.wJct8.ogg",
               "words": [
                 {
                   "text": "Come",
@@ -3255,6 +3328,7 @@
               "english": "Of course. Is something wrong?",
               "translated": "네. 무슨 일이세요?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025202-493ed/usMaleNormal/01.CwbIn.ogg",
               "words": [
                 {
                   "text": "Of",
@@ -3289,6 +3363,7 @@
               "english": "I have to tell you something.",
               "translated": "할 말이 있어요.",
               "hint": "'할 말이 있다'는 have to tell이라는 표현을 사용해 보세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025202-493ed/usMaleNormal/02.Be9wy.ogg",
               "words": [
                 {
                   "text": "I",
@@ -3328,6 +3403,7 @@
               "english": "I'm listening.",
               "translated": "말씀하세요.",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025202-493ed/usMaleNormal/03.zyzRE.ogg",
               "words": [
                 {
                   "text": "I'm",
@@ -3364,6 +3440,7 @@
               "english": "It's me. Tomorrow is the big day.",
               "translated": "나야. 내일이 중요한 날이야.",
               "hint": "'중요한 날'은 the big day라는 표현으로 나타내 보세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025212-d64c3/usMaleNormal/00.PZQ8m.ogg",
               "words": [
                 {
                   "text": "It's",
@@ -3418,6 +3495,7 @@
               "english": "Yes, we're almost ready here.",
               "translated": "네, 여기 거의 다 준비됐습니다.",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025212-d64c3/usMaleNormal/01.shZCh.ogg",
               "words": [
                 {
                   "text": "Yes",
@@ -3462,6 +3540,7 @@
               "english": "Please emphasize Siri. It's very important.",
               "translated": "Siri 꼭 강조해줘. 아주 중요해.",
               "hint": "'강조하다'는 emphasize라는 동사를 사용해 보세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025212-d64c3/usMaleNormal/02._gcb2.ogg",
               "words": [
                 {
                   "text": "Please",
@@ -3511,6 +3590,7 @@
               "english": "Siri will be the main demo.",
               "translated": "Siri를 메인 시연으로 하겠습니다.",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025212-d64c3/usMaleNormal/03.lGK2-.ogg",
               "words": [
                 {
                   "text": "Siri",
@@ -3557,6 +3637,7 @@
               "english": "It's getting harder to breathe now.",
               "translated": "이제 숨쉬기가 점점 힘들어지네요.",
               "hint": "'점점 힘들어지다'는 getting harder로 표현해 보세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025222-5a63f/usMaleNormal/00.FL5JV.ogg",
               "words": [
                 {
                   "text": "It's",
@@ -3606,6 +3687,7 @@
               "english": "I'm right here. I love you.",
               "translated": "여기 있어요. 사랑해요.",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025222-5a63f/usFemaleNormal/01.Tbyqo.ogg",
               "words": [
                 {
                   "text": "I'm",
@@ -3655,6 +3737,7 @@
               "english": "You and the kids are my best work.",
               "translated": "당신과 아이들이 내 최고의 작품이었어요.",
               "hint": "'최고의 작품'은 my best work로 표현해 보세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025222-5a63f/usMaleNormal/02.7RsH1.ogg",
               "words": [
                 {
                   "text": "You",
@@ -3704,6 +3787,7 @@
               "english": "You changed the whole world.",
               "translated": "당신은 세상을 바꿨어요.",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/025222-5a63f/usFemaleNormal/03.STm4O.ogg",
               "words": [
                 {
                   "text": "You",
@@ -3752,6 +3836,7 @@
               "english": "How can I help you today?",
               "translated": "오늘 뭘 도와드릴까요?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017012-3d572/usMaleNormal/00.2vgA-.ogg",
               "words": [
                 {
                   "text": "How",
@@ -3791,6 +3876,7 @@
               "english": "I want to grow my money.",
               "translated": "돈을 불리고 싶은데요.",
               "hint": "'돈을 불리다'는 grow라는 동사를 사용해 표현해 보세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017012-3d572/usMaleNormal/01.bcT-a.ogg",
               "words": [
                 {
                   "text": "I",
@@ -3830,6 +3916,7 @@
               "english": "What are you doing now?",
               "translated": "지금은 어떻게 하고 계세요?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017012-3d572/usMaleNormal/02.UWFRe.ogg",
               "words": [
                 {
                   "text": "What",
@@ -3864,6 +3951,7 @@
               "english": "I only have a savings account.",
               "translated": "예금 계좌만 있어요.",
               "hint": "'예금 계좌'는 savings account로 표현하세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017012-3d572/usMaleNormal/03.IZCXx.ogg",
               "words": [
                 {
                   "text": "I",
@@ -3910,6 +3998,7 @@
               "english": "Hey, you look really happy today.",
               "translated": "야, 너 오늘 진짜 기분 좋아 보인다.",
               "hint": "'~해 보인다'는 look + 형용사 구조로, look happy라고 표현해 보세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017022-ed686/usMaleNormal/00.lzapj.ogg",
               "words": [
                 {
                   "text": "Hey",
@@ -3949,6 +4038,7 @@
               "english": "I made good money from stocks!",
               "translated": "나 주식으로 돈 좀 벌었어!",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017022-ed686/usMaleNormal/01.eINRU.ogg",
               "words": [
                 {
                   "text": "I",
@@ -3988,6 +4078,7 @@
               "english": "Really? How much did you make?",
               "translated": "진짜? 얼마나 벌었는데?",
               "hint": "'돈을 벌다'는 make로 표현할 수 있어요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017022-ed686/usMaleNormal/02.0A640.ogg",
               "words": [
                 {
                   "text": "Really",
@@ -4027,6 +4118,7 @@
               "english": "I made three thousand dollars last month.",
               "translated": "지난달에 삼천 달러 벌었어.",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017022-ed686/usMaleNormal/03.zlrbk.ogg",
               "words": [
                 {
                   "text": "I",
@@ -4078,6 +4170,7 @@
               "english": "I think we should study investing together.",
               "translated": "우리 같이 투자 공부 해야 할 것 같아.",
               "hint": "'~해야 할 것 같아'는 I think ~ should 구문을 사용해 보세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017032-d9d50/usMaleNormal/00.f0LOE.ogg",
               "words": [
                 {
                   "text": "I",
@@ -4122,6 +4215,7 @@
               "english": "That's a good idea. But investing is risky.",
               "translated": "좋은 생각이야. 근데 투자는 위험하잖아.",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017032-d9d50/usFemaleNormal/01.p5cUv.ogg",
               "words": [
                 {
                   "text": "That's",
@@ -4181,6 +4275,7 @@
               "english": "Yes, I know. We need to learn first.",
               "translated": "응, 알아. 우린 먼저 배워야 해.",
               "hint": "'~해야 해'는 need to로 표현하세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017032-d9d50/usMaleNormal/02.5WIBz.ogg",
               "words": [
                 {
                   "text": "Yes",
@@ -4230,6 +4325,7 @@
               "english": "What should we study? There's so much information.",
               "translated": "뭘 공부해야 할까? 정보가 너무 많아.",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017032-d9d50/usFemaleNormal/03.-JhF0.ogg",
               "words": [
                 {
                   "text": "What",
@@ -4296,6 +4392,7 @@
               "english": "I saved some money to invest.",
               "translated": "투자하려고 돈 좀 모았어.",
               "hint": "'투자하려고'는 to invest로 표현하세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017042-61382/usMaleNormal/00.RRtBq.ogg",
               "words": [
                 {
                   "text": "I",
@@ -4335,6 +4432,7 @@
               "english": "That's great! How much did you save?",
               "translated": "잘됐다! 얼마나 모았어?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017042-61382/usFemaleNormal/01.e-6MO.ogg",
               "words": [
                 {
                   "text": "That's",
@@ -4389,6 +4487,7 @@
               "english": "About three thousand dollars. Where should I invest?",
               "translated": "한 삼천 달러 정도. 어디에 투자하면 좋을까?",
               "hint": "'~하면 좋을까?'는 should I로, '투자하다'는 invest로 표현하세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017042-61382/usMaleNormal/02.nU7Sm.ogg",
               "words": [
                 {
                   "text": "About",
@@ -4438,6 +4537,7 @@
               "english": "I'm putting mine in technology stocks.",
               "translated": "난 기술주에 넣으려고.",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017042-61382/usFemaleNormal/03.qdPaw.ogg",
               "words": [
                 {
                   "text": "I'm",
@@ -4494,6 +4594,7 @@
               "english": "Hello! How can I help you today?",
               "translated": "안녕하세요! 뭘 도와드릴까요?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017052-f2e73/usMaleNormal/00.YgGoz.ogg",
               "words": [
                 {
                   "text": "Hello",
@@ -4538,6 +4639,7 @@
               "english": "I want to open an account here.",
               "translated": "여기서 계좌 개설하고 싶은데요.",
               "hint": "'계좌를 개설하다'는 open an account로 표현하세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017052-f2e73/usMaleNormal/01.FWcTl.ogg",
               "words": [
                 {
                   "text": "I",
@@ -4582,6 +4684,7 @@
               "english": "Sure! What will you use it for?",
               "translated": "네! 어떤 용도로 사용하실 건가요?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017052-f2e73/usMaleNormal/02.jrZPr.ogg",
               "words": [
                 {
                   "text": "Sure",
@@ -4626,6 +4729,7 @@
               "english": "I want to start investing in stocks.",
               "translated": "주식 투자 시작하려고요.",
               "hint": "'~에 투자하다'는 investing in으로 표현하세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017052-f2e73/usMaleNormal/03.XVPk4.ogg",
               "words": [
                 {
                   "text": "I",
@@ -4677,6 +4781,7 @@
               "english": "I bought my first stock today!",
               "translated": "나 오늘 처음으로 주식 샀어!",
               "hint": "'처음으로 주식'은 my first stock으로 표현하세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017062-60b8b/usMaleNormal/00.FM73M.ogg",
               "words": [
                 {
                   "text": "I",
@@ -4716,6 +4821,7 @@
               "english": "That's exciting! Which company?",
               "translated": "오 대박! 어떤 회사?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017062-60b8b/usFemaleNormal/01.8rjh1.ogg",
               "words": [
                 {
                   "text": "That's",
@@ -4755,6 +4861,7 @@
               "english": "Apple. I keep checking the price.",
               "translated": "애플. 자꾸 가격 확인하게 돼.",
               "hint": "'자꾸 ~하게 돼'는 keep checking이라는 표현으로 나타낼 수 있어요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017062-60b8b/usMaleNormal/02.xQfIx.ogg",
               "words": [
                 {
                   "text": "Apple",
@@ -4794,6 +4901,7 @@
               "english": "How often are you checking?",
               "translated": "얼마나 자주 확인해?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017062-60b8b/usFemaleNormal/03.3LpTJ.ogg",
               "words": [
                 {
                   "text": "How",
@@ -4835,6 +4943,7 @@
               "english": "My stocks keep going down badly.",
               "translated": "제 주식이 계속 많이 빠지고 있어요.",
               "hint": "'계속 빠지고 있다'는 keep going down으로 표현해 보세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017072-b8c1a/usMaleNormal/00.kt3MB.ogg",
               "words": [
                 {
                   "text": "My",
@@ -4874,6 +4983,7 @@
               "english": "How long have you had them?",
               "translated": "산 지 얼마나 됐어요?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017072-b8c1a/usMaleNormal/01.aQhmV.ogg",
               "words": [
                 {
                   "text": "How",
@@ -4913,6 +5023,7 @@
               "english": "I bought them two months ago.",
               "translated": "두 달 전에 샀어요.",
               "hint": "'~전에'는 ago를 사용하여 two months ago로 표현하세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017072-b8c1a/usMaleNormal/02.GCtpj.ogg",
               "words": [
                 {
                   "text": "I",
@@ -4952,6 +5063,7 @@
               "english": "Which companies did you buy?",
               "translated": "어떤 회사 주식 사셨어요?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017072-b8c1a/usMaleNormal/03.IGL6Z.ogg",
               "words": [
                 {
                   "text": "Which",
@@ -4993,6 +5105,7 @@
               "english": "Look! I got my first dividend!",
               "translated": "자기야 봐! 나 첫 배당금 받았어!",
               "hint": "'배당금'은 dividend로 표현하세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017082-bb43c/usMaleNormal/00.SWLiE.ogg",
               "words": [
                 {
                   "text": "Look",
@@ -5032,6 +5145,7 @@
               "english": "Really? That's great news!",
               "translated": "진짜? 대박이다!",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017082-bb43c/usFemaleNormal/01.OAu7W.ogg",
               "words": [
                 {
                   "text": "Really",
@@ -5071,6 +5185,7 @@
               "english": "Yes, the company sent it today.",
               "translated": "응, 오늘 회사에서 입금됐어.",
               "hint": "'입금됐어'는 sent it으로 표현해 보세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017082-bb43c/usMaleNormal/02.I87th.ogg",
               "words": [
                 {
                   "text": "Yes",
@@ -5110,6 +5225,7 @@
               "english": "Money without working. That's nice!",
               "translated": "일 안 하고 버는 돈이네. 좋다!",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017082-bb43c/usFemaleNormal/03.Tttm6.ogg",
               "words": [
                 {
                   "text": "Money",
@@ -5161,6 +5277,7 @@
               "english": "I lost all our savings today.",
               "translated": "오늘 우리 저축한 돈 다 잃었어.",
               "hint": "'저축한 돈'은 savings로 표현하세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017092-d2ab9/usMaleNormal/00.EOFig.ogg",
               "words": [
                 {
                   "text": "I",
@@ -5200,6 +5317,7 @@
               "english": "What? How did that happen?",
               "translated": "뭐? 어떻게 된 거야?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017092-d2ab9/usFemaleNormal/01.kB0gK.ogg",
               "words": [
                 {
                   "text": "What",
@@ -5234,6 +5352,7 @@
               "english": "I invested in stocks yesterday.",
               "translated": "어제 주식에 투자했어.",
               "hint": "'~에 투자하다'는 invest in으로 표현하세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017092-d2ab9/usMaleNormal/02.n8X8q.ogg",
               "words": [
                 {
                   "text": "I",
@@ -5268,6 +5387,7 @@
               "english": "Which stocks? Why didn't you tell me?",
               "translated": "무슨 주식? 왜 나한테 말 안 했어?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017092-d2ab9/usFemaleNormal/03.XLSRi.ogg",
               "words": [
                 {
                   "text": "Which",
@@ -5329,6 +5449,7 @@
               "english": "So, tell me about your investment problem.",
               "translated": "그래서, 투자 문제에 대해 말해 보세요.",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017102-7469f/usMaleNormal/00.rvg87.ogg",
               "words": [
                 {
                   "text": "So",
@@ -5373,6 +5494,7 @@
               "english": "I lost a lot of money recently.",
               "translated": "최근에 돈을 많이 잃었어요.",
               "hint": "'잃다'의 과거형은 lost를 사용하세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017102-7469f/usMaleNormal/01.SILX8.ogg",
               "words": [
                 {
                   "text": "I",
@@ -5417,6 +5539,7 @@
               "english": "What happened? Which investment was it?",
               "translated": "무슨 일이 있었어요? 어떤 투자였어요?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017102-7469f/usMaleNormal/02.xyjVE.ogg",
               "words": [
                 {
                   "text": "What",
@@ -5456,6 +5579,7 @@
               "english": "I bought stocks when prices were high.",
               "translated": "주가가 높을 때 주식을 샀어요.",
               "hint": "'~할 때'는 when으로 연결하고, '높았다'는 were high로 표현하세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017102-7469f/usMaleNormal/03.Dgy6V.ogg",
               "words": [
                 {
                   "text": "I",
@@ -5507,6 +5631,7 @@
               "english": "Hello! How can I help you today?",
               "translated": "안녕하세요! 오늘 뭘 도와드릴까요?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017112-6e022/usMaleNormal/00.BBll2.ogg",
               "words": [
                 {
                   "text": "Hello",
@@ -5551,6 +5676,7 @@
               "english": "I want to invest my money.",
               "translated": "제 돈을 투자하고 싶은데요.",
               "hint": "'투자하다'는 invest라는 동사로 표현하세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017112-6e022/usMaleNormal/01.qGc2q.ogg",
               "words": [
                 {
                   "text": "I",
@@ -5590,6 +5716,7 @@
               "english": "Great! How much do you want to invest?",
               "translated": "좋아요! 얼마나 투자하실 생각이세요?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017112-6e022/usMaleNormal/02.3w7g7.ogg",
               "words": [
                 {
                   "text": "Great",
@@ -5639,6 +5766,7 @@
               "english": "About fifty thousand dollars.",
               "translated": "5만 달러 정도요.",
               "hint": "'5만'은 fifty thousand로 표현하세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017112-6e022/usMaleNormal/03.0CORN.ogg",
               "words": [
                 {
                   "text": "About",
@@ -5675,6 +5803,7 @@
               "english": "What do you think about investing?",
               "translated": "투자에 대해 어떻게 생각해?",
               "hint": "'~에 대해 생각하다'는 think about으로, '투자'는 investing으로 표현하세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017122-199e8/usMaleNormal/00.WDE3e.ogg",
               "words": [
                 {
                   "text": "What",
@@ -5714,6 +5843,7 @@
               "english": "I prefer long-term investment strategies.",
               "translated": "난 장기 투자 전략을 선호해.",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017122-199e8/usFemaleNormal/01.GtMnL.ogg",
               "words": [
                 {
                   "text": "I",
@@ -5758,6 +5888,7 @@
               "english": "Why is long-term better?",
               "translated": "장기가 왜 더 좋은데?",
               "hint": "'장기'는 long-term으로 표현하세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017122-199e8/usMaleNormal/02.Q1gME.ogg",
               "words": [
                 {
                   "text": "Why",
@@ -5797,6 +5928,7 @@
               "english": "Short-term trading is too risky.",
               "translated": "단기 매매는 너무 위험하거든.",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017122-199e8/usFemaleNormal/03.Y0xTq.ogg",
               "words": [
                 {
                   "text": "Short-term",
@@ -5848,6 +5980,7 @@
               "english": "I need some investment rules.",
               "translated": "나 투자 원칙이 좀 필요해.",
               "hint": "'투자 원칙'은 investment rules로 표현해 보세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017132-ba302/usMaleNormal/00.TgmvW.ogg",
               "words": [
                 {
                   "text": "I",
@@ -5882,6 +6015,7 @@
               "english": "Good idea! Why now?",
               "translated": "좋은 생각이네! 근데 왜 갑자기?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017132-ba302/usMaleNormal/01.hk83T.ogg",
               "words": [
                 {
                   "text": "Good",
@@ -5911,6 +6045,7 @@
               "english": "I always change my mind.",
               "translated": "나 맨날 마음이 바뀌거든.",
               "hint": "'마음이 바뀌다'는 change와 mind를 활용해 표현해 보세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017132-ba302/usMaleNormal/02.wZZVi.ogg",
               "words": [
                 {
                   "text": "I",
@@ -5945,6 +6080,7 @@
               "english": "What kind of rules?",
               "translated": "어떤 원칙?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017132-ba302/usMaleNormal/03.9qwrp.ogg",
               "words": [
                 {
                   "text": "What",
@@ -5981,6 +6117,7 @@
               "english": "Hey, I want to read economic news daily.",
               "translated": "야, 나 경제 뉴스 매일 챙겨보고 싶은데.",
               "hint": "'경제 뉴스'는 economic news로 표현하세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017142-b7572/usMaleNormal/00.c2vH6.ogg",
               "words": [
                 {
                   "text": "Hey",
@@ -6030,6 +6167,7 @@
               "english": "That's a good idea! When will you read?",
               "translated": "좋은 생각이다! 언제 볼 건데?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017142-b7572/usMaleNormal/01.OIaAv.ogg",
               "words": [
                 {
                   "text": "That's",
@@ -6089,6 +6227,7 @@
               "english": "Maybe during lunch time. We can read together.",
               "translated": "아마 점심시간? 같이 보자.",
               "hint": "'점심시간에'를 표현할 때 during이라는 전치사를 사용해 보세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017142-b7572/usMaleNormal/02.l-hMp.ogg",
               "words": [
                 {
                   "text": "Maybe",
@@ -6138,6 +6277,7 @@
               "english": "Sure! We can discuss the news too.",
               "translated": "좋아! 뉴스 얘기도 나눌 수 있고.",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017142-b7572/usMaleNormal/03.qo_me.ogg",
               "words": [
                 {
                   "text": "Sure",
@@ -6189,6 +6329,7 @@
               "english": "Honey, I have great news!",
               "translated": "자기야, 좋은 소식 있어!",
               "hint": "'소식이 있어'를 표현할 때 I have로 시작해 보세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017152-efc52/usMaleNormal/00.EPAGy.ogg",
               "words": [
                 {
                   "text": "Honey",
@@ -6223,6 +6364,7 @@
               "english": "What is it? You look excited!",
               "translated": "뭔데? 완전 신나 보여!",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017152-efc52/usFemaleNormal/01.ybUpM.ogg",
               "words": [
                 {
                   "text": "What",
@@ -6262,6 +6404,7 @@
               "english": "My investment made more than my salary!",
               "translated": "투자 수익이 월급보다 많았어!",
               "hint": "'~보다 많았어'는 made more than으로 표현해 보세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017152-efc52/usMaleNormal/02.g4zN_.ogg",
               "words": [
                 {
                   "text": "My",
@@ -6306,6 +6449,7 @@
               "english": "Really? That's amazing! How much did you make?",
               "translated": "진짜? 대박이다! 얼마 벌었어?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017152-efc52/usFemaleNormal/03.4rBPl.ogg",
               "words": [
                 {
                   "text": "Really",
@@ -6372,6 +6516,7 @@
               "english": "Hello! Ready to see some properties today?",
               "translated": "안녕하세요! 오늘 매물 보러 갈 준비 되셨어요?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017162-16e7b/usFemaleNormal/00.ml903.ogg",
               "words": [
                 {
                   "text": "Hello",
@@ -6416,6 +6561,7 @@
               "english": "Yes, I want to invest here.",
               "translated": "네, 여기에 투자하고 싶은데요.",
               "hint": "'투자하다'는 invest라는 동사로 표현하세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017162-16e7b/usMaleNormal/01.E2fRs.ogg",
               "words": [
                 {
                   "text": "Yes",
@@ -6455,6 +6601,7 @@
               "english": "Great. This area is growing fast.",
               "translated": "좋아요. 이 지역은 빠르게 성장하고 있어요.",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017162-16e7b/usFemaleNormal/02.s-F84.ogg",
               "words": [
                 {
                   "text": "Great",
@@ -6494,6 +6641,7 @@
               "english": "How fast is it growing?",
               "translated": "얼마나 빠르게요?",
               "hint": "How fast로 시작하여 현재진행형 의문문을 만들어 보세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017162-16e7b/usMaleNormal/03.i5KF5.ogg",
               "words": [
                 {
                   "text": "How",
@@ -6535,6 +6683,7 @@
               "english": "We did it! Our first property!",
               "translated": "우리 해냈어! 첫 부동산이야!",
               "hint": "'부동산'은 property로 표현해 보세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017172-59baf/usMaleNormal/00.V9uWF.ogg",
               "words": [
                 {
                   "text": "We",
@@ -6574,6 +6723,7 @@
               "english": "I can't believe this is happening.",
               "translated": "이게 진짜 일어나고 있다니 믿기지 않아.",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017172-59baf/usFemaleNormal/01.L1C5Q.ogg",
               "words": [
                 {
                   "text": "I",
@@ -6623,6 +6773,7 @@
               "english": "All those months of saving worked.",
               "translated": "그동안 열심히 모은 보람이 있네.",
               "hint": "'~한 보람이 있다'는 worked라는 동사로 표현해 보세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017172-59baf/usMaleNormal/02.Stxun.ogg",
               "words": [
                 {
                   "text": "All",
@@ -6662,6 +6813,7 @@
               "english": "And that smart investment really helped us.",
               "translated": "그리고 그 똑똑한 투자가 정말 도움이 됐지.",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017172-59baf/usFemaleNormal/03.2vbwM.ogg",
               "words": [
                 {
                   "text": "And",
@@ -6713,6 +6865,7 @@
               "english": "Guess what? I'm finally financially free!",
               "translated": "야, 있잖아. 나 드디어 경제적 자유 달성했어!",
               "hint": "'야, 있잖아'는 Guess what?으로 표현할 수 있어요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017182-b1bf5/usMaleNormal/00.alvGY.ogg",
               "words": [
                 {
                   "text": "Guess",
@@ -6762,6 +6915,7 @@
               "english": "Really? That's amazing news!",
               "translated": "진짜? 대박이다!",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017182-b1bf5/usMaleNormal/01.TgDgh.ogg",
               "words": [
                 {
                   "text": "Really",
@@ -6801,6 +6955,7 @@
               "english": "I don't worry about money anymore.",
               "translated": "이제 돈 걱정 안 해도 돼.",
               "hint": "'~을 걱정하다'는 worry about으로 표현하세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017182-b1bf5/usMaleNormal/02.1QEhZ.ogg",
               "words": [
                 {
                   "text": "I",
@@ -6850,6 +7005,7 @@
               "english": "How did you do it?",
               "translated": "어떻게 한 거야?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017182-b1bf5/usMaleNormal/03.yHTQa.ogg",
               "words": [
                 {
                   "text": "How",
@@ -6891,6 +7047,7 @@
               "english": "Do you have time for coffee?",
               "translated": "커피 마실 시간 있으세요?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017192-b862e/usFemaleNormal/00.c9zaq.ogg",
               "words": [
                 {
                   "text": "Do",
@@ -6930,6 +7087,7 @@
               "english": "Sure! What do you want to discuss?",
               "translated": "그럼! 무슨 얘긴데?",
               "hint": "'~하고 싶어?'의 의미로 want to를 사용하고, '얘기하다'는 discuss로 표현해 보세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017192-b862e/usMaleNormal/01.QJJzR.ogg",
               "words": [
                 {
                   "text": "Sure",
@@ -6974,6 +7132,7 @@
               "english": "I want to start investing my money.",
               "translated": "제 돈으로 투자를 시작하고 싶어서요.",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017192-b862e/usFemaleNormal/02.xpxGq.ogg",
               "words": [
                 {
                   "text": "I",
@@ -7018,6 +7177,7 @@
               "english": "That's great! How much can you invest?",
               "translated": "좋은 생각이네! 얼마나 투자할 수 있는데?",
               "hint": "'투자하다'는 invest라는 동사로 표현해 보세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017192-b862e/usMaleNormal/03.BGUmR.ogg",
               "words": [
                 {
                   "text": "That's",
@@ -7079,6 +7239,7 @@
               "english": "Hello! How can I help you today?",
               "translated": "안녕하세요! 뭘 도와드릴까요?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017202-eac9b/usFemaleNormal/00.nl4Ak.ogg",
               "words": [
                 {
                   "text": "Hello",
@@ -7123,6 +7284,7 @@
               "english": "I want to donate money regularly.",
               "translated": "정기적으로 기부하고 싶은데요.",
               "hint": "'기부하다'는 donate라는 동사를 사용하세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017202-eac9b/usMaleNormal/01.StnFy.ogg",
               "words": [
                 {
                   "text": "I",
@@ -7162,6 +7324,7 @@
               "english": "That's wonderful! How much each month?",
               "translated": "정말 좋으시네요! 한 달에 얼마 정도요?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017202-eac9b/usFemaleNormal/02.C4AeD.ogg",
               "words": [
                 {
                   "text": "That's",
@@ -7211,6 +7374,7 @@
               "english": "I can give $500 every month.",
               "translated": "매달 500달러 낼 수 있어요.",
               "hint": "'매달'은 every month로 표현하세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017202-eac9b/usMaleNormal/03.8DpQL.ogg",
               "words": [
                 {
                   "text": "I",
@@ -7257,6 +7421,7 @@
               "english": "I want to retire early.",
               "translated": "조기 은퇴하고 싶어.",
               "hint": "'은퇴하다'는 retire라는 동사로 표현하세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017212-926e1/usMaleNormal/00.HBXPh.ogg",
               "words": [
                 {
                   "text": "I",
@@ -7291,6 +7456,7 @@
               "english": "Really? When do you want to?",
               "translated": "진짜? 언제쯤 하고 싶은데?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017212-926e1/usFemaleNormal/01.2FhVk.ogg",
               "words": [
                 {
                   "text": "Really",
@@ -7330,6 +7496,7 @@
               "english": "Maybe in five years.",
               "translated": "아마 5년 후쯤?",
               "hint": "'~후'라는 시간 표현은 전치사 in을 사용하여 in five years처럼 표현하세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017212-926e1/usMaleNormal/02.M4w1k.ogg",
               "words": [
                 {
                   "text": "Maybe",
@@ -7359,6 +7526,7 @@
               "english": "That's soon. Do we have enough?",
               "translated": "얼마 안 남았네. 우리 돈 충분해?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017212-926e1/usFemaleNormal/03.-FhF9.ogg",
               "words": [
                 {
                   "text": "That's",
@@ -7415,6 +7583,7 @@
               "english": "Thank you for meeting me today.",
               "translated": "오늘 시간 내주셔서 감사합니다.",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017222-1e36d/usMaleNormal/00.S11PH.ogg",
               "words": [
                 {
                   "text": "Thank",
@@ -7454,6 +7623,7 @@
               "english": "It's my pleasure to be here.",
               "translated": "이렇게 초대해 주셔서 영광이죠.",
               "hint": "'영광이다'는 It's my pleasure로 표현해 보세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017222-1e36d/usMaleNormal/01.AY4jC.ogg",
               "words": [
                 {
                   "text": "It's",
@@ -7503,6 +7673,7 @@
               "english": "What is your main investment philosophy?",
               "translated": "주된 투자 철학이 뭔가요?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017222-1e36d/usMaleNormal/02.YMRyU.ogg",
               "words": [
                 {
                   "text": "What",
@@ -7542,6 +7713,7 @@
               "english": "I always think about the long term.",
               "translated": "전 항상 장기적으로 생각해요.",
               "hint": "'장기적으로'는 the long term으로 표현하세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/017222-1e36d/usMaleNormal/03.Bw3Gu.ogg",
               "words": [
                 {
                   "text": "I",
@@ -7600,6 +7772,7 @@
               "english": "Hello, how can I help you today?",
               "translated": "안녕하세요, 뭘 도와드릴까요?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002012-b2181/usFemaleNormal/00.kiyH5.ogg",
               "words": [
                 {
                   "text": "Hello",
@@ -7644,6 +7817,7 @@
               "english": "I want to book flights to New York.",
               "translated": "뉴욕행 항공권 예약하고 싶은데요.",
               "hint": "'항공권을 예약하다'는 book flights로 표현해 보세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002012-b2181/usFemaleNormal/01.IGD7X.ogg",
               "words": [
                 {
                   "text": "I",
@@ -7693,6 +7867,7 @@
               "english": "Sure! What dates are you planning?",
               "translated": "네! 날짜는 언제로 생각하고 계세요?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002012-b2181/usFemaleNormal/02.vMF3S.ogg",
               "words": [
                 {
                   "text": "Sure",
@@ -7732,6 +7907,7 @@
               "english": "June 15th to 22nd. It's my first solo trip.",
               "translated": "6월 15일에서 22일이요. 처음 혼자 가는 여행이에요.",
               "hint": "'혼자 가는 여행'은 solo trip으로 표현하세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002012-b2181/usFemaleNormal/03.YrqJd.ogg",
               "words": [
                 {
                   "text": "June",
@@ -7803,6 +7979,7 @@
               "english": "Hello! Do you need travel insurance today?",
               "translated": "안녕하세요! 오늘 여행자 보험 가입하러 오셨나요?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002022-c45ed/usFemaleNormal/00.EMDhf.ogg",
               "words": [
                 {
                   "text": "Hello",
@@ -7847,6 +8024,7 @@
               "english": "Yes, I'm going to New York.",
               "translated": "네, 뉴욕에 가려고요.",
               "hint": "'~에 가려고요'는 I'm going to로 표현해 보세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002022-c45ed/usFemaleNormal/01.IV1jC.ogg",
               "words": [
                 {
                   "text": "Yes",
@@ -7896,6 +8074,7 @@
               "english": "When will you travel?",
               "translated": "언제 여행하시나요?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002022-c45ed/usFemaleNormal/02.I8bCI.ogg",
               "words": [
                 {
                   "text": "When",
@@ -7925,6 +8104,7 @@
               "english": "Next week. It's my first solo trip.",
               "translated": "다음 주요. 혼자 여행하는 건 처음이에요.",
               "hint": "'혼자 여행'을 solo trip으로 표현해 보세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002022-c45ed/usFemaleNormal/03.4FNvj.ogg",
               "words": [
                 {
                   "text": "Next",
@@ -7986,6 +8166,7 @@
               "english": "Hi! Do you need any help?",
               "translated": "안녕하세요! 도움이 필요하세요?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002032-7e0af/usMaleNormal/00.x2B_1.ogg",
               "words": [
                 {
                   "text": "Hi",
@@ -8025,6 +8206,7 @@
               "english": "Yes, the kiosk shows an error.",
               "translated": "네, 키오스크에 오류가 떴어요.",
               "hint": "'오류가 떴어요'는 shows an error로 표현하세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002032-7e0af/usFemaleNormal/01.w-Ip4.ogg",
               "words": [
                 {
                   "text": "Yes",
@@ -8064,6 +8246,7 @@
               "english": "What happened?",
               "translated": "무슨 일이세요?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002032-7e0af/usMaleNormal/02._yuh7.ogg",
               "words": [
                 {
                   "text": "What",
@@ -8083,6 +8266,7 @@
               "english": "It stopped at the seat selection screen.",
               "translated": "좌석 선택 화면에서 멈췄어요.",
               "hint": "'좌석 선택'은 seat selection으로 표현하세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002032-7e0af/usFemaleNormal/03.OeAfN.ogg",
               "words": [
                 {
                   "text": "It",
@@ -8134,6 +8318,7 @@
               "english": "Are you going to New York alone?",
               "translated": "혹시 뉴욕에 혼자 가세요?",
               "hint": "'혼자'는 alone으로 문장 끝에 배치하세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002042-59245/usFemaleNormal/00.yE7mn.ogg",
               "words": [
                 {
                   "text": "Are",
@@ -8178,6 +8363,7 @@
               "english": "Yes, I am. You too?",
               "translated": "네, 맞아요. 그쪽도요?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002042-59245/usMaleNormal/01.OOzgq.ogg",
               "words": [
                 {
                   "text": "Yes",
@@ -8212,6 +8398,7 @@
               "english": "Yes! It's my first solo trip.",
               "translated": "네! 첫 혼자 여행이에요.",
               "hint": "'혼자 여행'은 solo trip으로 표현해 보세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002042-59245/usFemaleNormal/02.MTRW1.ogg",
               "words": [
                 {
                   "text": "Yes",
@@ -8261,6 +8448,7 @@
               "english": "Me too! I'm a little nervous.",
               "translated": "저도요! 좀 떨리네요.",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002042-59245/usMaleNormal/03.4YZCa.ogg",
               "words": [
                 {
                   "text": "Me",
@@ -8317,6 +8505,7 @@
               "english": "Would you like something to drink?",
               "translated": "음료 드릴까요?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002052-87e51/usFemaleNormal/00.VnsI-.ogg",
               "words": [
                 {
                   "text": "Would",
@@ -8356,6 +8545,7 @@
               "english": "What do you have?",
               "translated": "뭐가 있어요?",
               "hint": "'~가 있어요?'는 have를 사용한 의문문으로 표현해 보세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002052-87e51/usFemaleNormal/01.nu658.ogg",
               "words": [
                 {
                   "text": "What",
@@ -8385,6 +8575,7 @@
               "english": "We have water, juice, coffee, and soda.",
               "translated": "물, 주스, 커피, 탄산음료가 있어요.",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002052-87e51/usFemaleNormal/02.GvK4m.ogg",
               "words": [
                 {
                   "text": "We",
@@ -8429,6 +8620,7 @@
               "english": "Do you have ginger ale?",
               "translated": "진저에일 있어요?",
               "hint": "Do you have로 시작하여 '~있어요?'라는 질문을 완성하세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002052-87e51/usFemaleNormal/03.4A4Lk.ogg",
               "words": [
                 {
                   "text": "Do",
@@ -8470,6 +8662,7 @@
               "english": "Hello! How can I help you today?",
               "translated": "안녕하세요! 뭘 도와드릴까요?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002062-698a7/usFemaleNormal/00.MDVJ2.ogg",
               "words": [
                 {
                   "text": "Hello",
@@ -8514,6 +8707,7 @@
               "english": "I need a SIM card, please.",
               "translated": "유심칩 필요한데요.",
               "hint": "'유심칩'은 a SIM card로 표현하세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002062-698a7/usFemaleNormal/01.k7pZW.ogg",
               "words": [
                 {
                   "text": "I",
@@ -8553,6 +8747,7 @@
               "english": "Sure! How long will you stay?",
               "translated": "네! 얼마나 머무르실 건가요?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002062-698a7/usFemaleNormal/02.Q_eNy.ogg",
               "words": [
                 {
                   "text": "Sure",
@@ -8592,6 +8787,7 @@
               "english": "About one week in New York.",
               "translated": "뉴욕에서 일주일 정도요.",
               "hint": "'~정도'라는 의미를 나타낼 때 About으로 문장을 시작해 보세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002062-698a7/usFemaleNormal/03.ZCfyZ.ogg",
               "words": [
                 {
                   "text": "About",
@@ -8638,6 +8834,7 @@
               "english": "How can I help you today?",
               "translated": "뭘 도와드릴까요?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002072-554ea/usMaleNormal/00.CrIPG.ogg",
               "words": [
                 {
                   "text": "How",
@@ -8677,6 +8874,7 @@
               "english": "My room key isn't working.",
               "translated": "방 키가 안 돼요.",
               "hint": "'안 돼요'는 isn't working으로 표현해 보세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002072-554ea/usFemaleNormal/01.7UH9e.ogg",
               "words": [
                 {
                   "text": "My",
@@ -8721,6 +8919,7 @@
               "english": "Oh, I'm sorry about that. Which room?",
               "translated": "아, 죄송합니다. 몇 호실이세요?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002072-554ea/usMaleNormal/02.mTpDz.ogg",
               "words": [
                 {
                   "text": "Oh",
@@ -8775,6 +8974,7 @@
               "english": "Room 512. The light stays red.",
               "translated": "512호요. 빨간불만 계속 켜져요.",
               "hint": "'계속 ~인 상태다'라는 의미로 stays red라는 표현을 사용해 보세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002072-554ea/usFemaleNormal/03.a5fSb.ogg",
               "words": [
                 {
                   "text": "Room",
@@ -8821,6 +9021,7 @@
               "english": "Hello! Can I help you?",
               "translated": "안녕하세요! 뭘 도와드릴까요?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002082-87491/usFemaleNormal/00.AIkBK.ogg",
               "words": [
                 {
                   "text": "Hello",
@@ -8855,6 +9056,7 @@
               "english": "Yes, please. I need a subway ticket.",
               "translated": "네, 지하철 티켓이 필요한데요.",
               "hint": "'네'를 공손하게 표현하려면 Yes, please로 시작하세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002082-87491/usFemaleNormal/01.Jtsxo.ogg",
               "words": [
                 {
                   "text": "Yes",
@@ -8899,6 +9101,7 @@
               "english": "Sure. How long are you visiting?",
               "translated": "네. 며칠 계시나요?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002082-87491/usFemaleNormal/02.Yz4QL.ogg",
               "words": [
                 {
                   "text": "Sure",
@@ -8938,6 +9141,7 @@
               "english": "I'm here for seven days.",
               "translated": "7일 있을 거예요.",
               "hint": "'~일 동안'처럼 기간을 나타낼 때 for를 사용하세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002082-87491/usFemaleNormal/03.XvxST.ogg",
               "words": [
                 {
                   "text": "I'm",
@@ -8989,6 +9193,7 @@
               "english": "Excuse me. Can you help me?",
               "translated": "저기요. 좀 도와주실 수 있을까요?",
               "hint": "'저기요'는 누군가의 주의를 끌 때 쓰는 Excuse me로 표현하세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002092-d86a0/usFemaleNormal/00.EBgev.ogg",
               "words": [
                 {
                   "text": "Excuse",
@@ -9028,6 +9233,7 @@
               "english": "Sure! What do you need?",
               "translated": "그럼요! 뭐 필요하세요?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002092-d86a0/usFemaleNormal/01.kmqCv.ogg",
               "words": [
                 {
                   "text": "Sure",
@@ -9062,6 +9268,7 @@
               "english": "Can you take my photo, please?",
               "translated": "사진 좀 찍어주실 수 있을까요?",
               "hint": "'사진을 찍다'는 take my photo로 표현하세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002092-d86a0/usFemaleNormal/02.is7Cp.ogg",
               "words": [
                 {
                   "text": "Can",
@@ -9101,6 +9308,7 @@
               "english": "Of course! Where do you want it?",
               "translated": "당연하죠! 어디서 찍어드릴까요?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002092-d86a0/usFemaleNormal/03.z_7zh.ogg",
               "words": [
                 {
                   "text": "Of",
@@ -9152,6 +9360,7 @@
               "english": "Hello! How can I help you today?",
               "translated": "안녕하세요! 뭘 도와드릴까요?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002102-e0da0/usMaleNormal/00.UM9wN.ogg",
               "words": [
                 {
                   "text": "Hello",
@@ -9196,6 +9405,7 @@
               "english": "I need information about tourist passes.",
               "translated": "관광 패스에 대해 알고 싶은데요.",
               "hint": "'~을 알고 싶다'는 need information으로 표현해 보세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002102-e0da0/usFemaleNormal/01.85g16.ogg",
               "words": [
                 {
                   "text": "I",
@@ -9235,6 +9445,7 @@
               "english": "We have CityPass and Explorer Pass.",
               "translated": "저희는 시티패스랑 익스플로러 패스가 있어요.",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002102-e0da0/usMaleNormal/02.wvLlU.ogg",
               "words": [
                 {
                   "text": "We",
@@ -9274,6 +9485,7 @@
               "english": "What benefits do they have?",
               "translated": "어떤 혜택이 있나요?",
               "hint": "'혜택'은 benefits라는 단어로 표현하세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002102-e0da0/usFemaleNormal/03.fB47_.ogg",
               "words": [
                 {
                   "text": "What",
@@ -9315,6 +9527,7 @@
               "english": "Hello! How can I help you today?",
               "translated": "안녕하세요! 뭘 도와드릴까요?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002112-16555/usFemaleNormal/00.84aDD.ogg",
               "words": [
                 {
                   "text": "Hello",
@@ -9359,6 +9572,7 @@
               "english": "I need one adult ticket, please.",
               "translated": "성인 한 장 주세요.",
               "hint": "'주세요'를 I need를 사용해서 요청 문장으로 만들어 보세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002112-16555/usFemaleNormal/01.bQavo.ogg",
               "words": [
                 {
                   "text": "I",
@@ -9398,6 +9612,7 @@
               "english": "Sure. That's twenty-five dollars.",
               "translated": "네. 25달러입니다.",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002112-16555/usFemaleNormal/02.eZtwh.ogg",
               "words": [
                 {
                   "text": "Sure",
@@ -9442,6 +9657,7 @@
               "english": "Are there any free days?",
               "translated": "무료 입장일도 있나요?",
               "hint": "'무료 입장일'은 free days로 간단히 표현하세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002112-16555/usFemaleNormal/03.ImO80.ogg",
               "words": [
                 {
                   "text": "Are",
@@ -9483,6 +9699,7 @@
               "english": "Front desk. How can I help you?",
               "translated": "프런트입니다. 뭘 도와드릴까요?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002122-e556c/usMaleNormal/00.Zj4_W.ogg",
               "words": [
                 {
                   "text": "Front",
@@ -9527,6 +9744,7 @@
               "english": "Hi, I need a wake-up call.",
               "translated": "안녕하세요, 모닝콜 부탁드리려고요.",
               "hint": "'모닝콜'은 영어로 wake-up call이라고 표현해요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002122-e556c/usFemaleNormal/01.qumv8.ogg",
               "words": [
                 {
                   "text": "Hi",
@@ -9576,6 +9794,7 @@
               "english": "Of course. What time would you like?",
               "translated": "네, 몇 시로 해 드릴까요?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002122-e556c/usMaleNormal/02.SKjDv.ogg",
               "words": [
                 {
                   "text": "Of",
@@ -9620,6 +9839,7 @@
               "english": "Tomorrow at 7 AM, please.",
               "translated": "내일 아침 7시로 부탁드려요.",
               "hint": "'아침 7시'는 7 AM으로 표현하세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002122-e556c/usFemaleNormal/03.42Mje.ogg",
               "words": [
                 {
                   "text": "Tomorrow",
@@ -9661,6 +9881,7 @@
               "english": "Where to tonight?",
               "translated": "오늘 밤 어디로요?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002132-46e2b/usMaleNormal/00.i0RTR.ogg",
               "words": [
                 {
                   "text": "Where",
@@ -9685,6 +9906,7 @@
               "english": "The Minskoff Theatre, please. Quickly!",
               "translated": "민스코프 극장으로요, 빨리요!",
               "hint": "'빨리요!'라는 급한 느낌은 Quickly!로 표현하세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002132-46e2b/usFemaleNormal/01.m4t2G.ogg",
               "words": [
                 {
                   "text": "The",
@@ -9719,6 +9941,7 @@
               "english": "Got it. Broadway show?",
               "translated": "알겠습니다. 브로드웨이 공연이요?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002132-46e2b/usMaleNormal/02.6I_Of.ogg",
               "words": [
                 {
                   "text": "Got",
@@ -9748,6 +9971,7 @@
               "english": "Yes, Lion King at eight.",
               "translated": "네, 8시에 라이온 킹이요.",
               "hint": "시간 '~시에'는 at eight처럼 at을 사용하여 표현하세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002132-46e2b/usFemaleNormal/03.L6zOs.ogg",
               "words": [
                 {
                   "text": "Yes",
@@ -9789,6 +10013,7 @@
               "english": "Hi! What can I get for you today?",
               "translated": "안녕하세요! 뭘 드릴까요?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002142-772e7/usFemaleNormal/00.Tmtg_.ogg",
               "words": [
                 {
                   "text": "Hi",
@@ -9838,6 +10063,7 @@
               "english": "I'd like one ShackBurger, please.",
               "translated": "쉑버거 하나 주세요.",
               "hint": "'~주세요'를 정중하게 표현하려면 I'd like로 문장을 시작해 보세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002142-772e7/usFemaleNormal/01.8eHzH.ogg",
               "words": [
                 {
                   "text": "I'd",
@@ -9882,6 +10108,7 @@
               "english": "Sure! Anything else with that?",
               "translated": "네! 더 필요하신 거 있으세요?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002142-772e7/usFemaleNormal/02.BiRbg.ogg",
               "words": [
                 {
                   "text": "Sure",
@@ -9916,6 +10143,7 @@
               "english": "Yes, fries and a vanilla shake.",
               "translated": "네, 감자튀김이랑 바닐라 쉐이크요.",
               "hint": "'감자튀김'은 간단히 fries로 표현하세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002142-772e7/usFemaleNormal/03.pB0LW.ogg",
               "words": [
                 {
                   "text": "Yes",
@@ -9962,6 +10190,7 @@
               "english": "Hello! How can I help you?",
               "translated": "안녕하세요! 뭘 도와드릴까요?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002152-621f7/usMaleNormal/00.YNcKY.ogg",
               "words": [
                 {
                   "text": "Hello",
@@ -10001,6 +10230,7 @@
               "english": "I have a reservation for Lion King.",
               "translated": "라이온 킹 예약했는데요.",
               "hint": "'예약했어요'는 have a reservation이라는 표현을 사용해 보세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002152-621f7/usFemaleNormal/01.zU2Vb.ogg",
               "words": [
                 {
                   "text": "I",
@@ -10045,6 +10275,7 @@
               "english": "Great! Can I see your confirmation?",
               "translated": "네! 예약 확인서 좀 보여주시겠어요?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002152-621f7/usMaleNormal/02.pJblV.ogg",
               "words": [
                 {
                   "text": "Great",
@@ -10084,6 +10315,7 @@
               "english": "Here's my email confirmation.",
               "translated": "여기 이메일 확인서요.",
               "hint": "'확인서'는 confirmation으로 표현하세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002152-621f7/usFemaleNormal/03.ZUMVS.ogg",
               "words": [
                 {
                   "text": "Here's",
@@ -10130,6 +10362,7 @@
               "english": "Hi! What can I get you today?",
               "translated": "안녕하세요! 뭘 드릴까요?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002162-3d955/usFemaleNormal/00.GatDJ.ogg",
               "words": [
                 {
                   "text": "Hi",
@@ -10174,6 +10407,7 @@
               "english": "What's your signature drink here?",
               "translated": "여기 시그니처 음료가 뭐예요?",
               "hint": "가게의 것을 물을 때는 What's your...?라는 표현을 사용해 보세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002162-3d955/usFemaleNormal/01.TEUJz.ogg",
               "words": [
                 {
                   "text": "What's",
@@ -10218,6 +10452,7 @@
               "english": "Our New Orleans iced coffee is popular.",
               "translated": "뉴 올리언스 아이스 커피가 인기 있어요.",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002162-3d955/usFemaleNormal/02.1p2FO.ogg",
               "words": [
                 {
                   "text": "Our",
@@ -10262,6 +10497,7 @@
               "english": "Sounds good. What's in it?",
               "translated": "좋네요. 뭐가 들어가요?",
               "hint": "'좋네요'라는 반응은 Sounds good으로 표현하세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002162-3d955/usFemaleNormal/03.QPq7n.ogg",
               "words": [
                 {
                   "text": "Sounds",
@@ -10313,6 +10549,7 @@
               "english": "Is everything okay with your coffee?",
               "translated": "커피 괜찮으세요?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002172-f14af/usFemaleNormal/00.zIxbt.ogg",
               "words": [
                 {
                   "text": "Is",
@@ -10352,6 +10589,7 @@
               "english": "Yes, it's good. Do you have WiFi here?",
               "translated": "네, 맛있어요. 여기 와이파이 되나요?",
               "hint": "'~이 되나요?'라고 물을 때는 Do you have라는 표현을 사용해 보세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002172-f14af/usFemaleNormal/01.okgCa.ogg",
               "words": [
                 {
                   "text": "Yes",
@@ -10411,6 +10649,7 @@
               "english": "Yes, we do. It's free for customers.",
               "translated": "네, 있어요. 손님들은 무료예요.",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002172-f14af/usFemaleNormal/02.29R5X.ogg",
               "words": [
                 {
                   "text": "Yes",
@@ -10465,6 +10704,7 @@
               "english": "Great! What's the password?",
               "translated": "잘됐다! 비밀번호가 뭐예요?",
               "hint": "'잘됐다!'는 Great!로 표현하세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002172-f14af/usFemaleNormal/03.sNS2r.ogg",
               "words": [
                 {
                   "text": "Great",
@@ -10511,6 +10751,7 @@
               "english": "Excuse me, can you help me?",
               "translated": "저기요, 좀 도와주시겠어요?",
               "hint": "'저기요'는 Excuse me로 표현하세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002182-9fac9/usFemaleNormal/00.ptlva.ogg",
               "words": [
                 {
                   "text": "Excuse",
@@ -10550,6 +10791,7 @@
               "english": "Sure, what's wrong?",
               "translated": "그럼요, 무슨 일이세요?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002182-9fac9/usFemaleNormal/01.rt_dZ.ogg",
               "words": [
                 {
                   "text": "Sure",
@@ -10584,6 +10826,7 @@
               "english": "I took the express by mistake.",
               "translated": "급행을 잘못 탔어요.",
               "hint": "'잘못 ~했어요'는 by mistake로 문장 끝에 표현하세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002182-9fac9/usFemaleNormal/02.XkLCD.ogg",
               "words": [
                 {
                   "text": "I",
@@ -10623,6 +10866,7 @@
               "english": "Where are you going?",
               "translated": "어디 가세요?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002182-9fac9/usFemaleNormal/03.ZNlK6.ogg",
               "words": [
                 {
                   "text": "Where",
@@ -10659,6 +10903,7 @@
               "english": "Hello! Can I help you?",
               "translated": "안녕하세요! 뭘 도와드릴까요?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002192-bff65/usFemaleNormal/00.tzRRM.ogg",
               "words": [
                 {
                   "text": "Hello",
@@ -10693,6 +10938,7 @@
               "english": "Yes, I have a sore throat.",
               "translated": "네, 목이 아파요.",
               "hint": "'목이 아프다'는 sore throat라는 표현을 사용해 보세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002192-bff65/usFemaleNormal/01.jq8Os.ogg",
               "words": [
                 {
                   "text": "Yes",
@@ -10732,6 +10978,7 @@
               "english": "Do you have other symptoms?",
               "translated": "다른 증상도 있으세요?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002192-bff65/usFemaleNormal/02.wmTnu.ogg",
               "words": [
                 {
                   "text": "Do",
@@ -10766,6 +11013,7 @@
               "english": "I have a slight fever too.",
               "translated": "미열도 있어요.",
               "hint": "'미열'은 a slight fever로 표현하세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002192-bff65/usFemaleNormal/03.NFApr.ogg",
               "words": [
                 {
                   "text": "I",
@@ -10812,6 +11060,7 @@
               "english": "Hi! How can I help you?",
               "translated": "안녕하세요! 뭘 도와드릴까요?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002202-61580/usFemaleNormal/00.rTdJL.ogg",
               "words": [
                 {
                   "text": "Hi",
@@ -10851,6 +11100,7 @@
               "english": "I want to send this postcard.",
               "translated": "이 엽서 보내고 싶은데요.",
               "hint": "'엽서'는 postcard로 표현하세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002202-61580/usFemaleNormal/01.-sdzw.ogg",
               "words": [
                 {
                   "text": "I",
@@ -10890,6 +11140,7 @@
               "english": "Where are you sending it to?",
               "translated": "어디로 보내시나요?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002202-61580/usFemaleNormal/02.8d6fi.ogg",
               "words": [
                 {
                   "text": "Where",
@@ -10929,6 +11180,7 @@
               "english": "To my family. They live overseas.",
               "translated": "가족한테요. 해외에 살아요.",
               "hint": "'해외에'는 overseas로 표현하세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002202-61580/usFemaleNormal/03.1q3T9.ogg",
               "words": [
                 {
                   "text": "To",
@@ -10975,6 +11227,7 @@
               "english": "Hi! Are you James?",
               "translated": "안녕하세요! James 님이세요?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002212-d70b2/usMaleNormal/00.fwCDG.ogg",
               "words": [
                 {
                   "text": "Hi",
@@ -11004,6 +11257,7 @@
               "english": "Yes, that's me. Hi!",
               "translated": "네, 맞아요. 안녕하세요!",
               "hint": "'맞아요'는 that's me로 표현해 보세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002212-d70b2/usFemaleNormal/01.R1ptI.ogg",
               "words": [
                 {
                   "text": "Yes",
@@ -11043,6 +11297,7 @@
               "english": "Going to the Hilton Hotel, right?",
               "translated": "힐튼 호텔로 가시는 거죠?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002212-d70b2/usMaleNormal/02.rNi1D.ogg",
               "words": [
                 {
                   "text": "Going",
@@ -11082,6 +11337,7 @@
               "english": "Yes, the one in Manhattan.",
               "translated": "네, 맨해튼에 있는 데요.",
               "hint": "'~에 있는 것'이라는 의미로 the one을 사용하세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002212-d70b2/usFemaleNormal/03.6sMuI.ogg",
               "words": [
                 {
                   "text": "Yes",
@@ -11123,6 +11379,7 @@
               "english": "I'm back from New York!",
               "translated": "나 뉴욕 갔다 왔어!",
               "hint": "'갔다 왔어'는 back from으로 표현해 보세요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002222-7766c/usFemaleNormal/00.Lg4-J.ogg",
               "words": [
                 {
                   "text": "I'm",
@@ -11167,6 +11424,7 @@
               "english": "How was traveling alone?",
               "translated": "혼자 여행하는 거 어땠어?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002222-7766c/usFemaleNormal/01.nZj3h.ogg",
               "words": [
                 {
                   "text": "How",
@@ -11196,6 +11454,7 @@
               "english": "Amazing! Solo travel is great!",
               "translated": "대박! 혼자 여행하는 거 진짜 좋더라!",
               "hint": "'혼자 여행하는 거'는 solo travel이라는 표현으로 간결하게 나타낼 수 있어요.",
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002222-7766c/usFemaleNormal/02.33pMr.ogg",
               "words": [
                 {
                   "text": "Amazing",
@@ -11230,6 +11489,7 @@
               "english": "What did you do there?",
               "translated": "거기서 뭐 했어?",
               "hint": null,
+              "audioUrl": "https://speech.epop.ai/conversation/tts/002222-7766c/usFemaleNormal/03.-IeSk.ogg",
               "words": [
                 {
                   "text": "What",

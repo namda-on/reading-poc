@@ -15,11 +15,10 @@ function speakerInfo(speaker: 'A' | 'B') {
   return speaker === 'A' ? { name: 'A', avatar: '🐻' } : { name: 'B', avatar: '🐰' };
 }
 
-export function ReadingSession({ topic, onFinish, onBack, autoStart = false }: {
+export function ReadingSession({ topic, onFinish, onBack }: {
   topic: Topic;
   onFinish: () => void;
   onBack: () => void;
-  autoStart?: boolean; // 다시 듣기 등: 시작 버튼 없이 바로 재생
 }) {
   const { settings } = useSettings();
   const settingsRef = useRef(settings);
@@ -27,10 +26,9 @@ export function ReadingSession({ topic, onFinish, onBack, autoStart = false }: {
   const onFinishRef = useRef(onFinish);
   onFinishRef.current = onFinish;
 
-  const [started, setStarted] = useState(autoStart);
   const [index, setIndex] = useState(0);
   const [currentChunks, setCurrentChunks] = useState<Chunk[]>([]);
-  const [settingsOpen, setSettingsOpen] = useState(!autoStart); // 시작 전에는 설정창을 열어둠(자동시작이면 닫힘)
+  const [settingsOpen, setSettingsOpen] = useState(false);
 
   const { visible, play } = useSlidingReveal();
   const gapTimer = useRef<number | null>(null);
@@ -42,7 +40,6 @@ export function ReadingSession({ topic, onFinish, onBack, autoStart = false }: {
   }, [index]);
 
   useEffect(() => {
-    if (!started) return; // 시작 버튼을 누르기 전까지 재생하지 않음(옵션 설정 시간 확보)
     const script = topic.scripts[index];
     if (!script) return;
     const s = settingsRef.current;
@@ -66,7 +63,7 @@ export function ReadingSession({ topic, onFinish, onBack, autoStart = false }: {
       gapTimer.current = null;
       finishTimer.current = null;
     };
-  }, [started, index, topic, play]);
+  }, [index, topic, play]);
 
   const total = topic.scripts.length;
   const progressPct = Math.round(((index + 1) / total) * 100);
@@ -93,36 +90,21 @@ export function ReadingSession({ topic, onFinish, onBack, autoStart = false }: {
         </div>
       )}
 
-      {!started ? (
-        <div className="start-prompt">
-          <p>준비되면 시작하세요.<br />설정(⚙)을 먼저 조절할 수 있어요.</p>
-          <button
-            className="start-btn"
-            onClick={() => {
-              setSettingsOpen(false);
-              setStarted(true);
-            }}
-          >
-            ▶ 시작
-          </button>
-        </div>
-      ) : (
-        <div className="chat">
-          {topic.scripts.slice(0, index + 1).map((s, i) => {
-            const info = speakerInfo(s.speaker);
-            return (
-              <DialogBubble
-                key={s.seq}
-                name={info.name}
-                avatar={info.avatar}
-                chunks={i === index ? currentChunks : chunkSentence(s.english, settings.unit, settings.maxChunkWords)}
-                visible={i === index ? visible : new Set<number>()}
-              />
-            );
-          })}
-          <div ref={endRef} />
-        </div>
-      )}
+      <div className="chat">
+        {topic.scripts.slice(0, index + 1).map((s, i) => {
+          const info = speakerInfo(s.speaker);
+          return (
+            <DialogBubble
+              key={s.seq}
+              name={info.name}
+              avatar={info.avatar}
+              chunks={i === index ? currentChunks : chunkSentence(s.english, settings.unit, settings.maxChunkWords)}
+              visible={i === index ? visible : new Set<number>()}
+            />
+          );
+        })}
+        <div ref={endRef} />
+      </div>
     </div>
   );
 }

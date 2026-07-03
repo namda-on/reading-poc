@@ -1,0 +1,37 @@
+.start-title { color: #fff; font-size: 17px; font-weight: 700; }
+
+.mode-cards {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  max-width: 420px;
+}
+.mode-card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 20px 12px;
+  border: 2px solid #cddcf1;
+  border-radius: 16px;
+  background: #fff;
+  cursor: pointer;
+  transition: border-color 150ms, box-shadow 150ms, transform 100ms;
+}
+.mode-card:hover { transform: translateY(-1px); }
+.mode-card.on {
+  border-color: #4b83d6;
+  box-shadow: 0 4px 14px rgba(75, 131, 214, 0.25);
+}
+.mode-icon { font-size: 32px; line-height: 1; }
+.mode-label { font-size: 17px; font-weight: 700; color: #2f4a70; }
+.mode-desc { font-size: 12px; color: #6b7c93; line-height: 1.4; text-align: center; }
+
+.start-settings {
+  width: 100%;
+  max-width: 420px;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(30, 60, 110, 0.12);
+}
