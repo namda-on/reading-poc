@@ -61,20 +61,31 @@
 .topic-list { padding: 8px 16px 32px; }
 .topic-list ul { list-style: none; padding: 0; margin: 0; }
 .topic-list li button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   width: 100%;
-  text-align: left;
   padding: 16px 18px;
   margin: 10px 0;
   border: none;
   border-radius: 16px;
   background: #fff;
   cursor: pointer;
-  font-size: 16px;
-  font-weight: 600;
-  color: #2f3e52;
   box-shadow: 0 2px 8px rgba(30, 60, 110, 0.12);
 }
-.topic-list li button span { display: block; margin-top: 4px; color: #8496ab; font-size: 13px; font-weight: 500; }
+.topic-list .ep { font-size: 16px; font-weight: 700; color: #2f3e52; }
+.topic-list .ep-check {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #34a853;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 /* 퀴즈 화면 */
 .quiz-screen { min-height: 100vh; }

@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import quizzes from '../data/quizzes.json';
 import type { QuizMap } from '../data/quizTypes';
+import { markSolved } from '../lib/progress';
 import './Quiz.css';
 
 const QUIZ = quizzes as unknown as QuizMap;
@@ -9,8 +10,13 @@ export function Quiz({ topicSeq, onDone }: { topicSeq: number; onDone: () => voi
   const questions = QUIZ[topicSeq] ?? [];
   const [picked, setPicked] = useState<(number | null)[]>(() => questions.map(() => null));
 
-  const answeredAll = picked.every((p) => p !== null);
+  const answeredAll = questions.length > 0 && picked.every((p) => p !== null);
   const correct = picked.filter((p, i) => p === questions[i].answerIndex).length;
+
+  // 모든 문항을 풀면 완료로 기록(정답 여부와 무관).
+  useEffect(() => {
+    if (answeredAll) markSolved(topicSeq);
+  }, [answeredAll, topicSeq]);
 
   if (questions.length === 0) {
     return (
