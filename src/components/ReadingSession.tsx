@@ -9,6 +9,7 @@ import './ReadingSession.css';
 
 const MIN_DWELL_MS = 300;
 const GAP_MS = 400;
+const FADE_OUT_MS = 500; // 마지막 청크가 페이드아웃(CSS 450ms)된 뒤 문제로 넘어감
 
 // 이 코스에서 A는 항상 잡스, B는 대화 상대. 상대 이름은 괄호를 떼고 성(마지막 단어)만 한 줄로.
 function speakerInfo(speaker: 'A' | 'B', partner: string) {
@@ -22,23 +23,23 @@ export function ReadingSession({ topic, onFinish, onBack }: { topic: Topic; onFi
   const { settings } = useSettings();
   const settingsRef = useRef(settings);
   settingsRef.current = settings;
+  const onFinishRef = useRef(onFinish);
+  onFinishRef.current = onFinish;
 
   const [index, setIndex] = useState(0);
-  const [runId, setRunId] = useState(0); // 같은 index 재생 강제(리플레이)용
-  const [finished, setFinished] = useState(false);
   const [currentChunks, setCurrentChunks] = useState<Chunk[]>([]);
   const [settingsOpen, setSettingsOpen] = useState(false);
 
-  const { visible, play, reset } = useSlidingReveal();
+  const { visible, play } = useSlidingReveal();
   const gapTimer = useRef<number | null>(null);
+  const finishTimer = useRef<number | null>(null);
   const endRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
-  }, [index, runId, finished]);
+  }, [index]);
 
   useEffect(() => {
-    if (finished) return;
     const script = topic.scripts[index];
     if (!script) return;
     const s = settingsRef.current;
@@ -48,34 +49,24 @@ export function ReadingSession({ topic, onFinish, onBack }: { topic: Topic; onFi
       chunks,
       { windowSize: s.windowSize, baseMsPerWord: s.baseMsPerWord, minDwellMs: MIN_DWELL_MS },
       () => {
+        // 마지막 스크립트면 페이드아웃을 기다렸다가 문제로, 아니면 다음 말풍선
         if (index + 1 >= topic.scripts.length) {
-          setFinished(true);
+          finishTimer.current = window.setTimeout(() => onFinishRef.current(), FADE_OUT_MS);
           return;
         }
         gapTimer.current = window.setTimeout(() => setIndex((i) => i + 1), GAP_MS);
       },
     );
     return () => {
-      if (gapTimer.current) {
-        window.clearTimeout(gapTimer.current);
-        gapTimer.current = null;
-      }
-    };
-  }, [index, runId, finished, topic, play]);
-
-  const replay = () => {
-    if (gapTimer.current) {
-      window.clearTimeout(gapTimer.current);
+      if (gapTimer.current) window.clearTimeout(gapTimer.current);
+      if (finishTimer.current) window.clearTimeout(finishTimer.current);
       gapTimer.current = null;
-    }
-    reset();
-    setFinished(false);
-    setIndex(0);
-    setRunId((r) => r + 1);
-  };
+      finishTimer.current = null;
+    };
+  }, [index, topic, play]);
 
   const total = topic.scripts.length;
-  const progressPct = finished ? 100 : Math.round(((index + 1) / total) * 100);
+  const progressPct = Math.round(((index + 1) / total) * 100);
 
   return (
     <div className="session">
@@ -84,7 +75,7 @@ export function ReadingSession({ topic, onFinish, onBack }: { topic: Topic; onFi
         <div className="progress">
           <div className="trophy">🏆</div>
           <div className="bar">
-            <span className="bar-count">{Math.min(index + 1, total)}/{total}</span>
+            <span className="bar-count">{index + 1}/{total}</span>
             <div className="bar-track">
               <div className="bar-fill" style={{ width: `${progressPct}%` }} />
             </div>
@@ -108,19 +99,12 @@ export function ReadingSession({ topic, onFinish, onBack }: { topic: Topic; onFi
               name={info.name}
               avatar={info.avatar}
               chunks={i === index ? currentChunks : chunkSentence(s.english, settings.unit, settings.maxChunkWords)}
-              visible={i === index && !finished ? visible : new Set<number>()}
+              visible={i === index ? visible : new Set<number>()}
             />
           );
         })}
         <div ref={endRef} />
       </div>
-
-      {finished && (
-        <div className="session-actions">
-          <button onClick={replay}>다시 보기</button>
-          <button className="primary" onClick={onFinish}>문제 풀기</button>
-        </div>
-      )}
     </div>
   );
 }

@@ -47,3 +47,16 @@
   gap: 8px;
   padding: 14px 12px;
 }
+.quiz-screen .topbar-title { flex: 1; }
+.replay-btn {
+  flex-shrink: 0;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 14px;
+  background: #fff;
+  color: #4b83d6;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(30, 60, 110, 0.15);
+}

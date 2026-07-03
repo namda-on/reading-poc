@@ -35,8 +35,9 @@ export default function App() {
       {screen === 'quiz' && topic && (
         <div className="quiz-screen">
           <header className="topbar">
-            <button className="icon-btn" onClick={() => setScreen('session')} aria-label="뒤로">‹</button>
+            <button className="icon-btn" onClick={() => setScreen('topics')} aria-label="목록">‹</button>
             <span className="topbar-title">{topic.title}</span>
+            <button className="replay-btn" onClick={() => setScreen('session')}>🔁 다시 듣기</button>
           </header>
           <Quiz topicSeq={topic.topicSeq} onDone={() => setScreen('topics')} />
         </div>
