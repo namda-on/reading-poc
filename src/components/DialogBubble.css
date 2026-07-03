@@ -10,5 +10,6 @@
   background: #eef1f5;
 }
 .bubble-row.right .bubble { background: #d9ebff; }
-/* opacity 로 서서히 사라짐. 자리(빈 공백)는 유지되어 길이·위치 맥락은 그대로. */
-.chunk { white-space: pre; transition: opacity 450ms ease; }
+/* opacity 로 서서히 사라짐. 자리(빈 공백)는 유지되어 길이·위치 맥락은 그대로.
+   pre-wrap: 공백은 보존하되 청크 사이에서 줄바꿈 허용(모바일 오버플로우 방지). */
+.chunk { white-space: pre-wrap; transition: opacity 450ms ease; }
