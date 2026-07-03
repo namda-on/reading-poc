@@ -1,0 +1,23 @@
+.app { max-width: 720px; margin: 0 auto; padding: 20px; }
+.app-header { display: flex; flex-direction: column; gap: 12px; margin-bottom: 16px; }
+.app-header > button {
+  align-self: flex-start;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #2b7cff;
+  font-size: 15px;
+}
+.topic-list ul { list-style: none; padding: 0; }
+.topic-list li button {
+  width: 100%;
+  text-align: left;
+  padding: 14px 16px;
+  margin: 6px 0;
+  border: 1px solid #e3e3e3;
+  border-radius: 12px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 16px;
+}
+.topic-list li span { color: #888; font-size: 13px; }

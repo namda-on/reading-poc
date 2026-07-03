@@ -280,6 +280,9 @@ export function chunkByWord(sentence: string): Chunk[] {
 
 export function chunkByRule(sentence: string): Chunk[] {
   const tokens = tokenize(sentence);
+  const words = tokens.map((t) => norm(t.text));
+  // 고정표현 시작 인덱스는 경계로(phraseStart), 중간은 경계 금지(lockedStart).
+  // 나머지 로직은 BREAK_BEFORE || phraseStart 에서 flush.
   // 1) 고정표현이 시작되는 토큰 인덱스 → 그 구간은 절대 쪼개지 않도록 표시
   const lockedStart = new Set<number>(); // 이 인덱스에서 새 청크 시작 금지(고정표현 중간)
   const words = tokens.map(t => norm(t.text));

@@ -1,0 +1,12 @@
+.session { display: flex; flex-direction: column; gap: 16px; }
+.chat { min-height: 320px; display: flex; flex-direction: column; }
+.session-actions { display: flex; gap: 12px; justify-content: center; }
+.session-actions button {
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  font-size: 15px;
+  background: #fff;
+}
+.session-actions button.primary { background: #2b7cff; color: #fff; border-color: #2b7cff; }

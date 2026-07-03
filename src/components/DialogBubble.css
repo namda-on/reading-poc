@@ -1,0 +1,13 @@
+.bubble-row { display: flex; margin: 8px 0; }
+.bubble-row.left { justify-content: flex-start; }
+.bubble-row.right { justify-content: flex-end; }
+.bubble {
+  max-width: 78%;
+  padding: 12px 16px;
+  border-radius: 16px;
+  line-height: 1.9;
+  font-size: 20px;
+  background: #eef1f5;
+}
+.bubble-row.right .bubble { background: #d9ebff; }
+.chunk { white-space: pre; }
