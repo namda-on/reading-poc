@@ -5,9 +5,10 @@ export interface Settings {
   windowSize: number;
   baseMsPerSyllable: number;
   maxChunkWords: number;
+  hideOld: boolean; // 오래된 청크 숨기기(창 크기 적용). false 면 문장 끝까지 누적.
 }
 
-export const DEFAULT_SETTINGS: Settings = { unit: 'word', windowSize: 4, baseMsPerSyllable: 200, maxChunkWords: 3 };
+export const DEFAULT_SETTINGS: Settings = { unit: 'word', windowSize: 4, baseMsPerSyllable: 200, maxChunkWords: 3, hideOld: true };
 
 const STORAGE_KEY = 'reading-poc:settings';
 

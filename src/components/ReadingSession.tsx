@@ -47,7 +47,7 @@ export function ReadingSession({ topic, onFinish, onBack }: {
     setCurrentChunks(chunks);
     play(
       chunks,
-      { windowSize: s.windowSize, baseMsPerSyllable: s.baseMsPerSyllable, minDwellMs: MIN_DWELL_MS },
+      { windowSize: s.windowSize, baseMsPerSyllable: s.baseMsPerSyllable, minDwellMs: MIN_DWELL_MS, hideOld: s.hideOld },
       () => {
         // 마지막 스크립트면 페이드아웃을 기다렸다가 문제로, 아니면 다음 말풍선
         if (index + 1 >= topic.scripts.length) {

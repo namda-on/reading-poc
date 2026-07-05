@@ -5,6 +5,8 @@ export interface RevealSettings {
   windowSize: number;
   baseMsPerSyllable: number;
   minDwellMs: number;
+  // 오래된 청크 숨기기. false 면 문장 끝까지 누적(창 크기 무시). 미지정=켜짐.
+  hideOld?: boolean;
 }
 
 export interface RevealStep {
@@ -28,9 +30,11 @@ export function buildRevealSchedule(chunks: Chunk[], s: RevealSettings): { steps
     acc += dwellMs(chunks[i], s);
   }
   const totalMs = acc;
+  const hideOld = s.hideOld !== false; // 미지정=켜짐
   const steps: RevealStep[] = chunks.map((_, i) => {
     const hideIdx = i + windowSize; // 이 인덱스가 등장하면 i 는 꺼진다
-    const hideAt = hideIdx < chunks.length ? showAt[hideIdx] : totalMs;
+    // 숨기기 off: 문장 끝(totalMs)까지 계속 보인다.
+    const hideAt = hideOld && hideIdx < chunks.length ? showAt[hideIdx] : totalMs;
     return { index: i, showAt: showAt[i], hideAt };
   });
   return { steps, totalMs };

@@ -30,4 +30,9 @@ describe('buildRevealSchedule', () => {
     const { steps } = buildRevealSchedule(chunks, { ...S, windowSize: 2 });
     expect(steps[0].hideAt).toBe(600); // c(index2) 등장 시 a off
   });
+  it('hideOld=false 면 창 크기와 무관하게 문장 끝까지 유지', () => {
+    const chunks = [ch('a'), ch('b'), ch('c')];
+    const { steps, totalMs } = buildRevealSchedule(chunks, { ...S, hideOld: false });
+    expect(steps.map((s) => s.hideAt)).toEqual([totalMs, totalMs, totalMs]);
+  });
 });

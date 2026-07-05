@@ -25,12 +25,32 @@ export function SettingsPanel() {
         </div>
       </label>
       <label>
+        오래된 청크 숨기기
+        <div className="seg-toggle" role="group">
+          <button
+            type="button"
+            className={settings.hideOld ? 'on' : ''}
+            onClick={() => setSettings({ ...settings, hideOld: true })}
+          >
+            켜기
+          </button>
+          <button
+            type="button"
+            className={!settings.hideOld ? 'on' : ''}
+            onClick={() => setSettings({ ...settings, hideOld: false })}
+          >
+            끄기
+          </button>
+        </div>
+      </label>
+      <label style={{ opacity: settings.hideOld ? 1 : 0.4 }}>
         창 크기 N: {settings.windowSize}
         <input
           type="range"
           min={1}
           max={5}
           value={settings.windowSize}
+          disabled={!settings.hideOld}
           onChange={(e) => setSettings({ ...settings, windowSize: Number(e.target.value) })}
         />
       </label>
