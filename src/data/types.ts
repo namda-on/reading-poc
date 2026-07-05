@@ -35,5 +35,5 @@ export interface DialogsData {
   stories: Story[];
 }
 
-// 세션 재생 방식: 리딩(슬라이딩 노출) / 리스닝(TTS 오디오).
-export type Mode = 'reading' | 'listening';
+// 세션 재생 방식: 리딩(슬라이딩 노출) / 리스닝(TTS 오디오) / 전광판(가로 흐름).
+export type Mode = 'reading' | 'listening' | 'marquee';

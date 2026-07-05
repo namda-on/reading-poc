@@ -1,0 +1,16 @@
+/* 전광판 모드: 리딩과 같은 말풍선 안에서 텍스트가 오른쪽→왼쪽으로 흘러 지나간다. */
+.marquee-bubble {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;      /* 말풍선 밖으로 나간 텍스트는 잘라낸다(되돌아보기 차단) */
+  white-space: nowrap;
+  /* 한 줄 높이로 고정해 빈 말풍선도 같은 크기를 유지. */
+  height: calc(19px * 1.75);
+  box-sizing: content-box;
+}
+
+.marquee-text {
+  display: inline-block;
+  transform: translateX(100vw); /* 애니메이션 시작 전엔 오른쪽 밖에서 대기 */
+  will-change: transform;
+}

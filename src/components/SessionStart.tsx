@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import type { Mode, Topic } from '../data/types';
+import { useSettings } from '../settings/SettingsContext';
 import { SettingsPanel } from './SettingsPanel';
 import './ReadingSession.css';
 import './SessionStart.css';
 
 const MODES: { value: Mode; label: string; icon: string; desc: string }[] = [
-  { value: 'reading', label: '리딩', icon: '📖', desc: '청크가 창을 따라 슬라이딩하며 노출' },
-  { value: 'listening', label: '리스닝', icon: '🎧', desc: '텍스트 없이 실제 음성만 듣기' },
+  { value: 'reading', label: '리딩', icon: '📖', desc: '청크가 창을 따라 슬라이딩' },
+  { value: 'listening', label: '리스닝', icon: '🎧', desc: '텍스트 없이 실제 음성' },
+  { value: 'marquee', label: '전광판', icon: '🪧', desc: '문구가 오른쪽→왼쪽 흐름' },
 ];
 
 export function SessionStart({ topic, onStart, onBack }: {
@@ -14,6 +16,7 @@ export function SessionStart({ topic, onStart, onBack }: {
   onStart: (mode: Mode) => void;
   onBack: () => void;
 }) {
+  const { settings, setSettings } = useSettings();
   const [mode, setMode] = useState<Mode>('reading');
 
   return (
@@ -46,6 +49,25 @@ export function SessionStart({ topic, onStart, onBack }: {
         {mode === 'reading' && (
           <div className="start-settings">
             <SettingsPanel />
+          </div>
+        )}
+
+        {/* 전광판은 흐름 속도만 조절한다. */}
+        {mode === 'marquee' && (
+          <div className="start-settings">
+            <div className="settings-panel">
+              <label>
+                흐름 속도(px/초): {settings.marqueeSpeed}
+                <input
+                  type="range"
+                  min={40}
+                  max={240}
+                  step={20}
+                  value={settings.marqueeSpeed}
+                  onChange={(e) => setSettings({ ...settings, marqueeSpeed: Number(e.target.value) })}
+                />
+              </label>
+            </div>
           </div>
         )}
 

@@ -6,6 +6,7 @@ import { TopicList } from './components/TopicList';
 import { SessionStart } from './components/SessionStart';
 import { ReadingSession } from './components/ReadingSession';
 import { ListeningSession } from './components/ListeningSession';
+import { MarqueeSession } from './components/MarqueeSession';
 import { QuizSheet } from './components/QuizSheet';
 import './App.css';
 
@@ -55,29 +56,20 @@ export default function App() {
           onBack={() => setScreen('topics')}
         />
       )}
-      {(screen === 'session' || screen === 'quiz') && topic && playing && (
-        mode === 'listening' ? (
-          <ListeningSession
-            key={`l-${topic.topicSeq}-${sessionRun}`}
-            topic={topic}
-            onFinish={() => setScreen('quiz')}
-            onBack={() => {
-              setPlaying(false);
-              setScreen('topics');
-            }}
-          />
-        ) : (
-          <ReadingSession
-            key={`r-${topic.topicSeq}-${sessionRun}`}
-            topic={topic}
-            onFinish={() => setScreen('quiz')}
-            onBack={() => {
-              setPlaying(false);
-              setScreen('topics');
-            }}
-          />
-        )
-      )}
+      {(screen === 'session' || screen === 'quiz') && topic && playing && (() => {
+        const props = {
+          topic,
+          onFinish: () => setScreen('quiz'),
+          onBack: () => {
+            setPlaying(false);
+            setScreen('topics');
+          },
+        };
+        const key = `${mode}-${topic.topicSeq}-${sessionRun}`;
+        if (mode === 'listening') return <ListeningSession key={key} {...props} />;
+        if (mode === 'marquee') return <MarqueeSession key={key} {...props} />;
+        return <ReadingSession key={key} {...props} />;
+      })()}
       {screen === 'quiz' && topic && (
         <QuizSheet
           topicSeq={topic.topicSeq}
