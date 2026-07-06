@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import type { Script, Topic } from '../data/types';
 import { useSettings } from '../settings/SettingsContext';
+import { QuestionBanner } from './QuestionBanner';
 import './ReadingSession.css';
 import './DialogBubble.css';
 import './MarqueeSession.css';
@@ -102,6 +103,8 @@ export function MarqueeSession({ topic, onFinish, onBack }: {
           </div>
         </div>
       </header>
+
+      <QuestionBanner topicSeq={topic.topicSeq} />
 
       <div className="chat">
         {topic.scripts.slice(0, revealed).map((s, i) => (

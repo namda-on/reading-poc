@@ -1,0 +1,27 @@
+.question-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 8px 16px 0;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: #fff6dc;
+  border: 1px solid #f2e2a8;
+}
+.qb-tag {
+  flex-shrink: 0;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #f0b429;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+}
+.qb-list { display: flex; flex-direction: column; gap: 4px; }
+.qb-list p {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #6b5410;
+  line-height: 1.4;
+}

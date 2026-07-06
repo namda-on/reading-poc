@@ -59,4 +59,5 @@
 
 /* opacity 로 서서히 사라짐. 자리(빈 공백)는 유지되어 길이·위치 맥락은 그대로.
    pre-wrap: 공백은 보존하되 청크 사이에서 줄바꿈 허용(모바일 오버플로우 방지). */
-.chunk { white-space: pre-wrap; transition: opacity 450ms ease; }
+/* opacity transition 은 방향(등장/사라짐)별로 DialogBubble 에서 인라인 지정. */
+.chunk { white-space: pre-wrap; }

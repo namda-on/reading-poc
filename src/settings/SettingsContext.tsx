@@ -6,10 +6,12 @@ export interface Settings {
   baseMsPerSyllable: number;
   maxChunkWords: number;
   hideOld: boolean; // 오래된 청크 숨기기(창 크기 적용). false 면 문장 끝까지 누적.
+  fadeIn: boolean; // 청크 등장 페이드. false 면 즉시 나타남.
+  fadeOut: boolean; // 청크 사라짐 페이드. false 면 즉시 사라짐.
   marqueeSpeed: number; // 전광판 흐름 속도(px/초).
 }
 
-export const DEFAULT_SETTINGS: Settings = { unit: 'word', windowSize: 4, baseMsPerSyllable: 200, maxChunkWords: 3, hideOld: true, marqueeSpeed: 120 };
+export const DEFAULT_SETTINGS: Settings = { unit: 'word', windowSize: 4, baseMsPerSyllable: 200, maxChunkWords: 3, hideOld: true, fadeIn: false, fadeOut: true, marqueeSpeed: 120 };
 
 const STORAGE_KEY = 'reading-poc:settings';
 

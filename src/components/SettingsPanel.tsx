@@ -3,14 +3,16 @@ import { useSettings, type Settings } from '../settings/SettingsContext';
 import './SettingsPanel.css';
 
 // 리딩 옵션 프리셋. 처음 쓰는 사람은 여기서 한 번에 고른다.
-const PRESETS: { key: string; name: string; desc: string; settings: Settings }[] = [
-  { key: 'word', name: '단어', desc: '단어 하나씩', settings: { unit: 'word', windowSize: 4, baseMsPerSyllable: 200, maxChunkWords: 3, hideOld: true, marqueeSpeed: 120 } },
-  { key: 'chunk', name: '청크', desc: '여러 단어 묶음', settings: { unit: 'chunk', windowSize: 4, baseMsPerSyllable: 200, maxChunkWords: 3, hideOld: true, marqueeSpeed: 120 } },
-  { key: 'accumulate', name: '누적', desc: '청크가 쌓임', settings: { unit: 'chunk', windowSize: 4, baseMsPerSyllable: 200, maxChunkWords: 3, hideOld: false, marqueeSpeed: 120 } },
+// 페이드·전광판 속도는 프리셋과 독립이므로 노출 관련 필드만 담는다.
+type PresetSettings = Pick<Settings, 'unit' | 'windowSize' | 'baseMsPerSyllable' | 'maxChunkWords' | 'hideOld'>;
+const PRESETS: { key: string; name: string; desc: string; settings: PresetSettings }[] = [
+  { key: 'word', name: '단어', desc: '단어 하나씩', settings: { unit: 'word', windowSize: 4, baseMsPerSyllable: 200, maxChunkWords: 3, hideOld: true } },
+  { key: 'chunk', name: '청크', desc: '여러 단어 묶음', settings: { unit: 'chunk', windowSize: 4, baseMsPerSyllable: 200, maxChunkWords: 3, hideOld: true } },
+  { key: 'accumulate', name: '누적', desc: '청크가 쌓임', settings: { unit: 'chunk', windowSize: 4, baseMsPerSyllable: 200, maxChunkWords: 3, hideOld: false } },
 ];
 
-// 지금 설정이 어떤 프리셋인지 판정(무관한 필드는 무시).
-function matchesPreset(s: Settings, p: Settings): boolean {
+// 지금 설정이 어떤 프리셋인지 판정. 페이드는 프리셋과 독립된 옵션이라 판정에서 제외.
+function matchesPreset(s: Settings, p: (typeof PRESETS)[number]['settings']): boolean {
   if (s.unit !== p.unit || s.baseMsPerSyllable !== p.baseMsPerSyllable || s.hideOld !== p.hideOld) return false;
   if (p.unit === 'chunk' && s.maxChunkWords !== p.maxChunkWords) return false;
   if (p.hideOld && s.windowSize !== p.windowSize) return false;
@@ -20,6 +22,8 @@ function matchesPreset(s: Settings, p: Settings): boolean {
 const OPTION_HELP: { title: string; desc: string }[] = [
   { title: '노출 단위', desc: '한 번에 드러나는 덩어리 — 단어 하나씩 또는 여러 단어 묶음(청크)' },
   { title: '오래된 청크 숨기기', desc: '지나간 덩어리를 지워 되돌아보기 차단 — 끄면 문장 끝까지 쌓임' },
+  { title: '페이드 인', desc: '청크가 등장할 때 서서히 — 끄면 즉시 나타남' },
+  { title: '페이드 아웃', desc: '청크가 사라질 때 서서히 — 끄면 즉시 사라짐' },
   { title: '창 크기 N', desc: '화면에 동시에 남는 덩어리 개수 — 클수록 여유롭게 보임' },
   { title: '최대 청크 길이', desc: '한 청크에 묶을 최대 단어 수 (청크 모드에서만)' },
   { title: '속도(ms/음절)', desc: '음절 하나당 노출 시간 — 클수록 천천히 넘어감' },
@@ -40,7 +44,7 @@ export function SettingsPanel() {
             type="button"
             className={`preset${activeKey === p.key ? ' on' : ''}`}
             aria-pressed={activeKey === p.key}
-            onClick={() => setSettings(p.settings)}
+            onClick={() => setSettings({ ...settings, ...p.settings })}
           >
             <span className="preset-name">{p.name}</span>
             <span className="preset-desc">{p.desc}</span>
@@ -94,6 +98,44 @@ export function SettingsPanel() {
                   type="button"
                   className={!settings.hideOld ? 'on' : ''}
                   onClick={() => setSettings({ ...settings, hideOld: false })}
+                >
+                  끄기
+                </button>
+              </div>
+            </label>
+            <label>
+              페이드 인
+              <div className="seg-toggle" role="group">
+                <button
+                  type="button"
+                  className={settings.fadeIn ? 'on' : ''}
+                  onClick={() => setSettings({ ...settings, fadeIn: true })}
+                >
+                  켜기
+                </button>
+                <button
+                  type="button"
+                  className={!settings.fadeIn ? 'on' : ''}
+                  onClick={() => setSettings({ ...settings, fadeIn: false })}
+                >
+                  끄기
+                </button>
+              </div>
+            </label>
+            <label>
+              페이드 아웃
+              <div className="seg-toggle" role="group">
+                <button
+                  type="button"
+                  className={settings.fadeOut ? 'on' : ''}
+                  onClick={() => setSettings({ ...settings, fadeOut: true })}
+                >
+                  켜기
+                </button>
+                <button
+                  type="button"
+                  className={!settings.fadeOut ? 'on' : ''}
+                  onClick={() => setSettings({ ...settings, fadeOut: false })}
                 >
                   끄기
                 </button>

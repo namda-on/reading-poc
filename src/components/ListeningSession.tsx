@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import type { Topic } from '../data/types';
+import { QuestionBanner } from './QuestionBanner';
 import './ReadingSession.css';
 import './DialogBubble.css';
 import './ListeningSession.css';
@@ -85,6 +86,8 @@ export function ListeningSession({ topic, onFinish, onBack }: {
       </header>
 
       <audio ref={audioRef} preload="auto" />
+
+      <QuestionBanner topicSeq={topic.topicSeq} />
 
       <div className="chat">
         {topic.scripts.slice(0, index + 1).map((s, i) => {

@@ -5,6 +5,7 @@ import { useSlidingReveal } from '../hooks/useSlidingReveal';
 import { useSettings } from '../settings/SettingsContext';
 import { DialogBubble } from './DialogBubble';
 import { SettingsPanel } from './SettingsPanel';
+import { QuestionBanner } from './QuestionBanner';
 import './ReadingSession.css';
 
 const MIN_DWELL_MS = 300;
@@ -99,6 +100,8 @@ export function ReadingSession({ topic, onFinish, onBack }: {
         </div>
       )}
 
+      <QuestionBanner topicSeq={topic.topicSeq} />
+
       <div className="chat">
         {!ready ? (
           <div className="msg">
@@ -120,6 +123,8 @@ export function ReadingSession({ topic, onFinish, onBack }: {
                 avatar={info.avatar}
                 chunks={i === index ? currentChunks : chunkSentence(s.english, settings.unit, settings.maxChunkWords)}
                 visible={i === index ? visible : new Set<number>()}
+                fadeIn={settings.fadeIn}
+                fadeOut={settings.fadeOut}
               />
             );
           })
