@@ -9,7 +9,7 @@ type PresetSettings = Pick<Settings, 'unit' | 'windowSize' | 'baseMsPerSyllable'
 const PRESETS: { key: string; name: string; desc: string; settings: PresetSettings }[] = [
   { key: 'word', name: '단어', desc: '단어 하나씩', settings: { unit: 'word', windowSize: 4, baseMsPerSyllable: 300, maxChunkWords: 3, hideOld: true, fadeIn: false, fadeOut: true } },
   { key: 'chunk', name: '청크', desc: '여러 단어 묶음', settings: { unit: 'chunk', windowSize: 2, baseMsPerSyllable: 300, maxChunkWords: 3, hideOld: true, fadeIn: true, fadeOut: true } },
-  { key: 'accumulate', name: '누적', desc: '청크가 쌓임', settings: { unit: 'chunk', windowSize: 4, baseMsPerSyllable: 300, maxChunkWords: 3, hideOld: false, fadeIn: true, fadeOut: true } },
+  { key: 'accumulate', name: '누적', desc: '청크가 쌓임', settings: { unit: 'chunk', windowSize: 4, baseMsPerSyllable: 220, maxChunkWords: 3, hideOld: false, fadeIn: true, fadeOut: true } },
 ];
 
 // 지금 설정이 어떤 프리셋인지 판정. 끝 사라짐 간격은 프리셋과 독립이라 제외.

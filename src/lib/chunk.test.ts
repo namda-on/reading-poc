@@ -15,7 +15,7 @@ describe('chunkByWord', () => {
 
 describe('chunkByRule', () => {
   it('전치사·to부정사 앞에서 끊는다', () => {
-    expect(chunkByRule('I want to go to Rome').map((c) => c.text)).toEqual(['I', 'want to go', 'to Rome']);
+    expect(chunkByRule('I want to go to Rome').map((c) => c.text)).toEqual(['I want to go', 'to Rome']);
   });
   it('고정표현 a lot of 는 쪼개지 않는다', () => {
     expect(chunkByRule('There are a lot of people').map((c) => c.text)).toEqual(['There are', 'a lot of people']);
@@ -38,6 +38,14 @@ describe('chunkByRule', () => {
       'I worked',
       'on it',
       'for months.',
+    ]);
+  });
+  it('쉼표·wh단어·주어대명사 경계로 의미 단위처럼 끊는다', () => {
+    expect(chunkByRule('Hello, how can I help you today?', 3).map((c) => c.text)).toEqual([
+      'Hello,',
+      'how can I',
+      'help you',
+      'today?',
     ]);
   });
   it('트리거 없는 문장도 최대 길이로 쪼갠다', () => {
