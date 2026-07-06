@@ -11,7 +11,7 @@ import './ReadingSession.css';
 const MIN_DWELL_MS = 100; // 하한. 너무 높으면 짧은 단어가 바닥에 걸려 속도 설정이 무력화된다.
 const GAP_MS = 400;
 const FADE_OUT_MS = 500; // 마지막 청크가 페이드아웃(CSS 450ms)된 뒤 문제로 넘어감
-const READY_MS = 800; // 시작 전 준비 신호(첫 텍스트 자리에 dot 깜빡임)
+const INTRO_MS = 1000; // 대화 시작 전 문제 + 준비 dot 을 함께 잠깐 노출
 
 function speakerInfo(speaker: 'A' | 'B') {
   return speaker === 'A' ? { name: 'A', avatar: '🐻' } : { name: 'B', avatar: '🐰' };
@@ -31,7 +31,7 @@ export function ReadingSession({ topic, onFinish, onBack }: {
   const [index, setIndex] = useState(0);
   const [currentChunks, setCurrentChunks] = useState<Chunk[]>([]);
   const [settingsOpen, setSettingsOpen] = useState(false);
-  const [ready, setReady] = useState(false); // 준비 신호 뒤 재생 시작
+  const [intro, setIntro] = useState(true); // 문제 + 준비 dot 을 보여주는 인트로 단계
 
   const { visible, play } = useSlidingReveal();
   const gapTimer = useRef<number | null>(null);
@@ -42,14 +42,14 @@ export function ReadingSession({ topic, onFinish, onBack }: {
     endRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
   }, [index]);
 
-  // 곧바로 노출되면 당황스러우니, 첫 텍스트 자리에 dot 을 잠깐 깜빡인 뒤 시작한다.
+  // 문제 + 준비 dot 을 잠깐 보여준 뒤 대화를 시작한다.
   useEffect(() => {
-    const t = window.setTimeout(() => setReady(true), READY_MS);
+    const t = window.setTimeout(() => setIntro(false), INTRO_MS);
     return () => window.clearTimeout(t);
   }, []);
 
   useEffect(() => {
-    if (!ready) return;
+    if (intro) return;
     const script = topic.scripts[index];
     if (!script) return;
     const s = settingsRef.current;
@@ -73,7 +73,7 @@ export function ReadingSession({ topic, onFinish, onBack }: {
       gapTimer.current = null;
       finishTimer.current = null;
     };
-  }, [ready, index, topic, play]);
+  }, [intro, index, topic, play]);
 
   const total = topic.scripts.length;
   const progressPct = Math.round(((index + 1) / total) * 100);
@@ -103,7 +103,7 @@ export function ReadingSession({ topic, onFinish, onBack }: {
       <QuestionBanner topicSeq={topic.topicSeq} />
 
       <div className="chat">
-        {!ready ? (
+        {intro ? (
           <div className="msg">
             <div className="avatar-col">
               <div className="avatar">{speakerInfo(topic.scripts[0].speaker).avatar}</div>

@@ -7,6 +7,7 @@ import './ListeningSession.css';
 
 const GAP_MS = 500; // 문장 사이 간격
 const FINISH_GAP_MS = 700; // 마지막 오디오 후 퀴즈로 넘어가기 전 여유
+const INTRO_MS = 1000; // 대화 시작 전 문제만 먼저 노출하는 시간
 
 function speakerInfo(speaker: 'A' | 'B') {
   return speaker === 'A' ? { name: 'A', avatar: '🐻' } : { name: 'B', avatar: '🐰' };
@@ -21,6 +22,7 @@ export function ListeningSession({ topic, onFinish, onBack }: {
   onFinishRef.current = onFinish;
 
   const [index, setIndex] = useState(0);
+  const [intro, setIntro] = useState(true); // 문제를 먼저 보여주는 인트로 단계
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const endRef = useRef<HTMLDivElement>(null);
 
@@ -28,7 +30,14 @@ export function ListeningSession({ topic, onFinish, onBack }: {
     endRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
   }, [index]);
 
+  // 문제를 먼저 노출한 뒤 오디오를 시작한다.
   useEffect(() => {
+    const t = window.setTimeout(() => setIntro(false), INTRO_MS);
+    return () => window.clearTimeout(t);
+  }, []);
+
+  useEffect(() => {
+    if (intro) return;
     const script = topic.scripts[index];
     if (!script) return;
     const audio = audioRef.current;
@@ -65,7 +74,7 @@ export function ListeningSession({ topic, onFinish, onBack }: {
       audio.pause();
       if (gap) window.clearTimeout(gap);
     };
-  }, [index, topic]);
+  }, [intro, index, topic]);
 
   const total = topic.scripts.length;
   const progressPct = Math.round(((index + 1) / total) * 100);
@@ -90,7 +99,7 @@ export function ListeningSession({ topic, onFinish, onBack }: {
       <QuestionBanner topicSeq={topic.topicSeq} />
 
       <div className="chat">
-        {topic.scripts.slice(0, index + 1).map((s, i) => {
+        {topic.scripts.slice(0, intro ? 0 : index + 1).map((s, i) => {
           const info = speakerInfo(s.speaker);
           const playing = i === index;
           return (

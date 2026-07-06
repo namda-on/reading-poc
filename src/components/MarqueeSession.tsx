@@ -9,6 +9,7 @@ import './MarqueeSession.css';
 // 다음 말풍선을 이어 등장시킬 때의 여백(px). 문장 사이 간격 → 연속 흐름 유지.
 const NEXT_GAP_PX = 90;
 const MIN_DURATION_MS = 800;
+const INTRO_MS = 1000; // 대화 시작 전 문제만 먼저 노출하는 시간
 
 function speakerInfo(speaker: 'A' | 'B') {
   return speaker === 'A' ? { name: 'A', avatar: '🐻' } : { name: 'B', avatar: '🐰' };
@@ -80,12 +81,19 @@ export function MarqueeSession({ topic, onFinish, onBack }: {
   onFinishRef.current = onFinish;
 
   const total = topic.scripts.length;
+  const [intro, setIntro] = useState(true); // 문제를 먼저 보여주는 인트로 단계
   const [revealed, setRevealed] = useState(1); // 등장한 말풍선 수
   const endRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
   }, [revealed]);
+
+  // 문제를 먼저 노출한 뒤 전광판 흐름을 시작한다.
+  useEffect(() => {
+    const t = window.setTimeout(() => setIntro(false), INTRO_MS);
+    return () => window.clearTimeout(t);
+  }, []);
 
   const progressPct = Math.round((revealed / total) * 100);
 
@@ -107,7 +115,7 @@ export function MarqueeSession({ topic, onFinish, onBack }: {
       <QuestionBanner topicSeq={topic.topicSeq} />
 
       <div className="chat">
-        {topic.scripts.slice(0, revealed).map((s, i) => (
+        {topic.scripts.slice(0, intro ? 0 : revealed).map((s, i) => (
           <MarqueeBubble
             key={s.seq}
             script={s}
