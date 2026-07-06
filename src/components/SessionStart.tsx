@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { Mode, Topic } from '../data/types';
-import { useSettings } from '../settings/SettingsContext';
+import { useSettings, DEFAULT_SETTINGS } from '../settings/SettingsContext';
 import { SettingsPanel } from './SettingsPanel';
 import './ReadingSession.css';
 import './SessionStart.css';
@@ -18,6 +18,13 @@ export function SessionStart({ topic, onStart, onBack }: {
 }) {
   const { settings, setSettings } = useSettings();
   const [mode, setMode] = useState<Mode>('reading');
+
+  // 토픽 진입 시 리딩 옵션을 기본 프리셋(단어)으로 초기화한다(저장된 값보다 우선).
+  // 전광판 흐름 속도는 리딩과 무관하므로 유지.
+  useEffect(() => {
+    setSettings({ ...DEFAULT_SETTINGS, marqueeSpeed: settings.marqueeSpeed });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="session">
