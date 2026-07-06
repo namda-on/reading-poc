@@ -57,7 +57,7 @@ python3 scripts/extract.py   # 대화 데이터(dialogs.json) 재생성
 
 ## Quirks / 주의
 
-- **노출 규칙**: 청크 i는 (i+N)번째 청크가 등장하는 순간 사라진다(항상 최근 N개 유지). dwell = `max(300ms, 음절수 × 속도설정)`. 기본은 opacity 450ms 페이드(자리는 유지)이며 등장/사라짐을 각각 "페이드 인"(`fadeIn`)·"페이드 아웃"(`fadeOut`)으로 끌 수 있다. transition은 `DialogBubble`이 방향별로 인라인 지정한다(값이 바뀌는 순간의 transition이 등장/사라짐을 결정 — 보이면 fadeIn, 숨기면 fadeOut). "오래된 청크 숨기기"를 끄면(`hideOld=false`) 창 크기를 무시하고 문장 끝까지 누적한다. 상세는 `reveal.ts`.
+- **노출 규칙**: 청크 i는 (i+N)번째 청크가 등장하는 순간 사라진다(항상 최근 N개 유지). dwell = `max(100ms, 음절수 × 속도설정)`(하한이 높으면 짧은 단어가 바닥에 걸려 속도 설정이 안 먹히므로 `MIN_DWELL_MS`는 낮게 유지). 기본은 opacity 450ms 페이드(자리는 유지)이며 등장/사라짐을 각각 "페이드 인"(`fadeIn`)·"페이드 아웃"(`fadeOut`)으로 끌 수 있다. transition은 `DialogBubble`이 방향별로 인라인 지정한다(값이 바뀌는 순간의 transition이 등장/사라짐을 결정 — 보이면 fadeIn, 숨기면 fadeOut). "오래된 청크 숨기기"를 끄면(`hideOld=false`) 창 크기를 무시하고 문장 끝까지 누적한다. 상세는 `reveal.ts`.
 - **퀴즈 정답은 반드시 노출되는 턴(현재 4턴) 안에 있어야 한다.** `MAX_SCRIPTS`를 줄이면 정답이 잘린 문제가 생기므로 해당 퀴즈를 재작성해야 한다. 재생성 후 `dialogs.json`에 정답 근거 문구가 있는지 확인할 것.
 - **localStorage 키**: `reading-poc:settings`(설정) · `reading-poc:solved`(푼 토픽). 기존 저장값이 있으면 기본값보다 우선하므로, 새 기본값 확인 시 저장소를 비운다.
 - **모드 선택·다시 듣기**: 토픽 진입 시 `SessionStart`(모드 선택 + 리딩 설정)를 거쳐 재생. 리딩 노출 설정은 리딩 모드에서만 노출. 퀴즈의 "다시 듣기"는 시작 화면을 건너뛰고 **같은 모드로 즉시** 처음부터 재생(`sessionRun` 증가로 세션 리마운트).

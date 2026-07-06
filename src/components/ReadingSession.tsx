@@ -8,7 +8,7 @@ import { SettingsPanel } from './SettingsPanel';
 import { QuestionBanner } from './QuestionBanner';
 import './ReadingSession.css';
 
-const MIN_DWELL_MS = 300;
+const MIN_DWELL_MS = 100; // 하한. 너무 높으면 짧은 단어가 바닥에 걸려 속도 설정이 무력화된다.
 const GAP_MS = 400;
 const FADE_OUT_MS = 500; // 마지막 청크가 페이드아웃(CSS 450ms)된 뒤 문제로 넘어감
 const READY_MS = 800; // 시작 전 준비 신호(첫 텍스트 자리에 dot 깜빡임)
