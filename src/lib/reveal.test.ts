@@ -30,6 +30,14 @@ describe('buildRevealSchedule', () => {
     const { steps } = buildRevealSchedule(chunks, { ...S, windowSize: 2 });
     expect(steps[0].hideAt).toBe(600); // c(index2) 등장 시 a off
   });
+  it('마지막 창의 청크들은 동시에 사라지지 않고 하나씩 빠진다(drain)', () => {
+    const chunks = [ch('a'), ch('b'), ch('c'), ch('d'), ch('e')]; // dwell 300, shownMs 1500, drainStep 160
+    const { steps, totalMs } = buildRevealSchedule(chunks, { ...S, windowSize: 2 });
+    const hides = steps.map((s) => s.hideAt);
+    expect(hides).toEqual([600, 900, 1200, 1500, 1660]); // 앞은 등장 리듬(300), 꼬리는 drain(160)
+    expect(new Set(hides).size).toBe(hides.length); // 전부 다른 시각(동시 소멸 없음)
+    expect(totalMs).toBe(1660);
+  });
   it('hideOld=false 면 창 크기와 무관하게 문장 끝까지 유지', () => {
     const chunks = [ch('a'), ch('b'), ch('c')];
     const { steps, totalMs } = buildRevealSchedule(chunks, { ...S, hideOld: false });

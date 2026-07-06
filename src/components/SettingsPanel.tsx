@@ -3,17 +3,19 @@ import { useSettings, type Settings } from '../settings/SettingsContext';
 import './SettingsPanel.css';
 
 // 리딩 옵션 프리셋. 처음 쓰는 사람은 여기서 한 번에 고른다.
-// 페이드·전광판 속도는 프리셋과 독립이므로 노출 관련 필드만 담는다.
-type PresetSettings = Pick<Settings, 'unit' | 'windowSize' | 'baseMsPerSyllable' | 'maxChunkWords' | 'hideOld'>;
+// 노출 관련 필드 + 페이드까지 프리셋이 지정(청크·누적은 페이드 인 켜기가 기본).
+// 끝 사라짐 간격·전광판 속도는 프리셋과 독립.
+type PresetSettings = Pick<Settings, 'unit' | 'windowSize' | 'baseMsPerSyllable' | 'maxChunkWords' | 'hideOld' | 'fadeIn' | 'fadeOut'>;
 const PRESETS: { key: string; name: string; desc: string; settings: PresetSettings }[] = [
-  { key: 'word', name: '단어', desc: '단어 하나씩', settings: { unit: 'word', windowSize: 4, baseMsPerSyllable: 300, maxChunkWords: 3, hideOld: true } },
-  { key: 'chunk', name: '청크', desc: '여러 단어 묶음', settings: { unit: 'chunk', windowSize: 4, baseMsPerSyllable: 300, maxChunkWords: 3, hideOld: true } },
-  { key: 'accumulate', name: '누적', desc: '청크가 쌓임', settings: { unit: 'chunk', windowSize: 4, baseMsPerSyllable: 300, maxChunkWords: 3, hideOld: false } },
+  { key: 'word', name: '단어', desc: '단어 하나씩', settings: { unit: 'word', windowSize: 4, baseMsPerSyllable: 300, maxChunkWords: 3, hideOld: true, fadeIn: false, fadeOut: true } },
+  { key: 'chunk', name: '청크', desc: '여러 단어 묶음', settings: { unit: 'chunk', windowSize: 2, baseMsPerSyllable: 300, maxChunkWords: 3, hideOld: true, fadeIn: true, fadeOut: true } },
+  { key: 'accumulate', name: '누적', desc: '청크가 쌓임', settings: { unit: 'chunk', windowSize: 4, baseMsPerSyllable: 300, maxChunkWords: 3, hideOld: false, fadeIn: true, fadeOut: true } },
 ];
 
-// 지금 설정이 어떤 프리셋인지 판정. 페이드는 프리셋과 독립된 옵션이라 판정에서 제외.
+// 지금 설정이 어떤 프리셋인지 판정. 끝 사라짐 간격은 프리셋과 독립이라 제외.
 function matchesPreset(s: Settings, p: (typeof PRESETS)[number]['settings']): boolean {
   if (s.unit !== p.unit || s.baseMsPerSyllable !== p.baseMsPerSyllable || s.hideOld !== p.hideOld) return false;
+  if (s.fadeIn !== p.fadeIn || s.fadeOut !== p.fadeOut) return false;
   if (p.unit === 'chunk' && s.maxChunkWords !== p.maxChunkWords) return false;
   if (p.hideOld && s.windowSize !== p.windowSize) return false;
   return true;
@@ -27,6 +29,7 @@ const OPTION_HELP: { title: string; desc: string }[] = [
   { title: '창 크기 N', desc: '화면에 동시에 남는 덩어리 개수 — 클수록 여유롭게 보임' },
   { title: '최대 청크 길이', desc: '한 청크에 묶을 최대 단어 수 (청크 모드에서만)' },
   { title: '속도(ms/음절)', desc: '음절 하나당 노출 시간 — 클수록 천천히 넘어감' },
+  { title: '끝 사라짐 간격(ms)', desc: '문장 끝 단어들이 하나씩 빠지는 간격 — 작을수록 빨리 사라짐' },
 ];
 
 export function SettingsPanel() {
@@ -172,6 +175,18 @@ export function SettingsPanel() {
                 step={20}
                 value={settings.baseMsPerSyllable}
                 onChange={(e) => setSettings({ ...settings, baseMsPerSyllable: Number(e.target.value) })}
+              />
+            </label>
+            <label style={{ opacity: settings.hideOld ? 1 : 0.4 }}>
+              끝 사라짐 간격(ms): {settings.drainStepMs}
+              <input
+                type="range"
+                min={40}
+                max={400}
+                step={20}
+                value={settings.drainStepMs}
+                disabled={!settings.hideOld}
+                onChange={(e) => setSettings({ ...settings, drainStepMs: Number(e.target.value) })}
               />
             </label>
           </div>

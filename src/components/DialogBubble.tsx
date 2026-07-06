@@ -1,7 +1,8 @@
 import type { Chunk } from '../lib/chunk';
 import './DialogBubble.css';
 
-const FADE = 'opacity 450ms ease';
+const FADE_IN = 'opacity 450ms ease';
+const FADE_OUT = 'opacity 250ms ease'; // 사라짐은 더 빠르게(꼬리가 차례대로 산뜻하게 빠지도록)
 
 export function DialogBubble({ name, avatar, chunks, visible, fadeIn = true, fadeOut = true }: {
   name: string;
@@ -21,7 +22,7 @@ export function DialogBubble({ name, avatar, chunks, visible, fadeIn = true, fad
         {chunks.map((c, i) => {
           const on = visible.has(i);
           // 값이 바뀌는 순간의 transition 이 방향(등장/사라짐)을 결정한다.
-          const transition = on ? (fadeIn ? FADE : 'none') : (fadeOut ? FADE : 'none');
+          const transition = on ? (fadeIn ? FADE_IN : 'none') : (fadeOut ? FADE_OUT : 'none');
           return (
             <span key={i} className="chunk" style={{ opacity: on ? 1 : 0, transition }}>
               {c.text}{' '}
