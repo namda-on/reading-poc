@@ -54,6 +54,16 @@
 .story-text { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
 .story-title { font-size: 17px; font-weight: 700; color: #2f3e52; }
 .story-sub { font-size: 13px; color: #8496ab; }
+.story-badge {
+  margin-left: 8px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #ff5a8a;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  vertical-align: middle;
+}
 
 /* 토픽 목록 */
 .topic-screen { min-height: 100vh; }

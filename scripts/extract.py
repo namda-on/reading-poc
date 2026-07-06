@@ -9,8 +9,8 @@ DEFAULT_SQLITE = os.path.normpath(
 SQLITE = os.environ.get("READING_POC_SQLITE") or (sys.argv[1] if len(sys.argv) > 1 else DEFAULT_SQLITE)
 LEVEL = 2
 MAX_SCRIPTS = 4  # 리딩 모드 분량: 자연스러운 도입부 4턴만
-# 포함할 스토리(코스). 표시 순서대로.
-INCLUDE = [25, 17, 2]
+# 포함할 스토리(코스). 표시 순서대로. 첫 솔로 여행(2)을 맨 위 추천으로.
+INCLUDE = [2, 25, 17]
 OUT = os.path.join(os.path.dirname(__file__), "..", "src", "data", "dialogs.json")
 
 # 리스닝 모드용 TTS 오디오. speech.epop.ai(인증 없는 공개 CDN)에서 문장 단위로 재생한다.

@@ -39,7 +39,7 @@ python3 scripts/extract.py   # 대화 데이터(dialogs.json) 재생성
 
 - 출처: bi의 `server.sqlite` (이 레포 밖). 경로는 `READING_POC_SQLITE` 환경변수 또는 CLI 인자로 지정. 없으면 명확한 에러로 종료한다.
   - 필수 테이블: `ConversationDialogScriptKR`(스크립트 + `voiceInfos` 해시), `ResourceFileKR`의 `ConversationCourses`(코스/토픽 + 대화별 `di[].h` = dialogHash). 사전 전용 오래된 export에는 대화 테이블이 없으니 **최신 export를 쓸 것**.
-- 포함 코스: `INCLUDE = [25(잡스), 17(투자), 2(뉴욕여행)]`, 레벨 A2(=2) 고정.
+- 포함 코스: `INCLUDE = [2(뉴욕여행·추천), 25(잡스), 17(투자)]`(배열 순서 = 화면 표시 순서), 레벨 A2(=2) 고정. 첫 코스(2)는 `StoryList`에서 "추천" 배지.
 - 각 에피소드는 **도입부 4턴(`MAX_SCRIPTS`)만** 사용 — 리딩 분량을 짧게.
 - 단어 경계는 tagList가 아니라 문장 문자열을 직접 파싱(문장부호 보존).
 - **리스닝 오디오 URL**을 스크립트마다 `audioUrl`로 구워 넣는다. 형식:
@@ -65,3 +65,6 @@ python3 scripts/extract.py   # 대화 데이터(dialogs.json) 재생성
 - **전광판 재생**: 각 말풍선(`MarqueeSession`)이 자기 텍스트를 Web Animations API로 오른쪽→왼쪽 1회 흘려보낸다(`overflow:hidden` 레인, 흐름 뒤엔 빈 말풍선으로 남음). 다음 말풍선은 현재 문장이 화면에 다 들어온 시점(문장 폭+여백÷속도)에 **겹쳐서** 등장해 풀-스톱 없이 연속 흐른다 — 문장 끝까지 기다리면 템포가 끊기므로. 속도는 `marqueeSpeed`(px/초).
 - **Vercel 배포**: 커밋 author 이메일이 GitHub 계정(namda-on)에 등록된 주소여야 배포가 식별된다. 이 레포는 `user.email = namda1571@gmail.com`으로 설정돼 있다.
 - **화자 표시는 A/B**, 에피소드 제목은 "Episode N"만 — 제목·상대역이 주제를 노출해 문제가 쉬워지는 것을 막기 위함.
+- **리딩 시작 준비 신호**: 곧바로 노출되면 당황스러우므로, 첫 텍스트 자리에 dot 을 `READY_MS`(0.8s) 동안 깜빡인 뒤 재생을 시작한다(`ready` 게이트).
+- **설정 옵션 설명**: 패널이 복잡해지지 않도록 각 옵션 설명은 인라인이 아니라 "ⓘ 옵션 설명" 토글(`SettingsPanel`의 `showHelp`)로 펼치는 별도 블록에 모은다.
+- **퀴즈 보기 셔플**: 저작 데이터(`quizzes.json`)가 정답을 대부분 1번(`answerIndex:0`)에 두어 위치로 답을 유추할 수 있으므로, `Quiz`가 마운트 시 보기를 1회 셔플한다(정답 위치 균등 분산). 데이터의 `answerIndex`는 그대로 두고 런타임에서만 섞는다.

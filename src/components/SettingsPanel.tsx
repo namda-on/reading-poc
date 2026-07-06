@@ -1,10 +1,41 @@
+import { useState } from 'react';
 import { useSettings } from '../settings/SettingsContext';
 import './SettingsPanel.css';
 
+// 옵션 설명은 패널을 어지럽히지 않도록 접어두고, 토글로 펼쳐 본다.
+const OPTION_HELP: { title: string; desc: string }[] = [
+  { title: '노출 단위', desc: '한 번에 드러나는 덩어리 — 단어 하나씩 또는 여러 단어 묶음(청크)' },
+  { title: '오래된 청크 숨기기', desc: '지나간 덩어리를 지워 되돌아보기 차단 — 끄면 문장 끝까지 쌓임' },
+  { title: '창 크기 N', desc: '화면에 동시에 남는 덩어리 개수 — 클수록 여유롭게 보임' },
+  { title: '최대 청크 길이', desc: '한 청크에 묶을 최대 단어 수 (청크 모드에서만)' },
+  { title: '속도(ms/음절)', desc: '음절 하나당 노출 시간 — 클수록 천천히 넘어감' },
+];
+
 export function SettingsPanel() {
   const { settings, setSettings } = useSettings();
+  const [showHelp, setShowHelp] = useState(false);
+
   return (
     <div className="settings-panel">
+      <button
+        type="button"
+        className="opt-help-toggle"
+        aria-expanded={showHelp}
+        onClick={() => setShowHelp((v) => !v)}
+      >
+        ⓘ 옵션 설명 {showHelp ? '▲' : '▼'}
+      </button>
+
+      {showHelp && (
+        <div className="opt-help">
+          {OPTION_HELP.map((o) => (
+            <div key={o.title}>
+              <b>{o.title}</b> — {o.desc}
+            </div>
+          ))}
+        </div>
+      )}
+
       <label>
         노출 단위
         <div className="seg-toggle" role="group">

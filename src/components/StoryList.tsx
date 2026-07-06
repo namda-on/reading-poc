@@ -3,6 +3,7 @@ import type { DialogsData } from '../data/types';
 
 const DATA = dialogs as unknown as DialogsData;
 const EMOJI: Record<number, string> = { 25: '🍎', 17: '📈', 2: '✈️' };
+const RECOMMENDED = 2; // 첫 솔로 여행 — 입문용 추천 코스
 
 export function StoryList({ onPick }: { onPick: (courseSeq: number) => void }) {
   return (
@@ -17,7 +18,10 @@ export function StoryList({ onPick }: { onPick: (courseSeq: number) => void }) {
             <button onClick={() => onPick(s.courseSeq)}>
               <span className="story-emoji">{EMOJI[s.courseSeq] ?? '📖'}</span>
               <span className="story-text">
-                <span className="story-title">{s.title}</span>
+                <span className="story-title">
+                  {s.title}
+                  {s.courseSeq === RECOMMENDED && <span className="story-badge">추천</span>}
+                </span>
                 <span className="story-sub">{s.subtitle}</span>
               </span>
             </button>

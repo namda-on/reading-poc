@@ -58,6 +58,7 @@ export function SessionStart({ topic, onStart, onBack }: {
             <div className="settings-panel">
               <label>
                 흐름 속도(px/초): {settings.marqueeSpeed}
+                <span className="opt-desc">문구가 흐르는 빠르기 — 클수록 빨리 지나감</span>
                 <input
                   type="range"
                   min={40}

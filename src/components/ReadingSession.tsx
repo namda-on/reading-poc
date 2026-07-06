@@ -10,6 +10,7 @@ import './ReadingSession.css';
 const MIN_DWELL_MS = 300;
 const GAP_MS = 400;
 const FADE_OUT_MS = 500; // 마지막 청크가 페이드아웃(CSS 450ms)된 뒤 문제로 넘어감
+const READY_MS = 800; // 시작 전 준비 신호(첫 텍스트 자리에 dot 깜빡임)
 
 function speakerInfo(speaker: 'A' | 'B') {
   return speaker === 'A' ? { name: 'A', avatar: '🐻' } : { name: 'B', avatar: '🐰' };
@@ -29,6 +30,7 @@ export function ReadingSession({ topic, onFinish, onBack }: {
   const [index, setIndex] = useState(0);
   const [currentChunks, setCurrentChunks] = useState<Chunk[]>([]);
   const [settingsOpen, setSettingsOpen] = useState(false);
+  const [ready, setReady] = useState(false); // 준비 신호 뒤 재생 시작
 
   const { visible, play } = useSlidingReveal();
   const gapTimer = useRef<number | null>(null);
@@ -39,7 +41,14 @@ export function ReadingSession({ topic, onFinish, onBack }: {
     endRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
   }, [index]);
 
+  // 곧바로 노출되면 당황스러우니, 첫 텍스트 자리에 dot 을 잠깐 깜빡인 뒤 시작한다.
   useEffect(() => {
+    const t = window.setTimeout(() => setReady(true), READY_MS);
+    return () => window.clearTimeout(t);
+  }, []);
+
+  useEffect(() => {
+    if (!ready) return;
     const script = topic.scripts[index];
     if (!script) return;
     const s = settingsRef.current;
@@ -63,7 +72,7 @@ export function ReadingSession({ topic, onFinish, onBack }: {
       gapTimer.current = null;
       finishTimer.current = null;
     };
-  }, [index, topic, play]);
+  }, [ready, index, topic, play]);
 
   const total = topic.scripts.length;
   const progressPct = Math.round(((index + 1) / total) * 100);
@@ -91,18 +100,30 @@ export function ReadingSession({ topic, onFinish, onBack }: {
       )}
 
       <div className="chat">
-        {topic.scripts.slice(0, index + 1).map((s, i) => {
-          const info = speakerInfo(s.speaker);
-          return (
-            <DialogBubble
-              key={s.seq}
-              name={info.name}
-              avatar={info.avatar}
-              chunks={i === index ? currentChunks : chunkSentence(s.english, settings.unit, settings.maxChunkWords)}
-              visible={i === index ? visible : new Set<number>()}
-            />
-          );
-        })}
+        {!ready ? (
+          <div className="msg">
+            <div className="avatar-col">
+              <div className="avatar">{speakerInfo(topic.scripts[0].speaker).avatar}</div>
+              <div className="avatar-name">{speakerInfo(topic.scripts[0].speaker).name}</div>
+            </div>
+            <div className="bubble ready-bubble">
+              <span className="ready-dots" aria-label="곧 시작"><i /><i /><i /></span>
+            </div>
+          </div>
+        ) : (
+          topic.scripts.slice(0, index + 1).map((s, i) => {
+            const info = speakerInfo(s.speaker);
+            return (
+              <DialogBubble
+                key={s.seq}
+                name={info.name}
+                avatar={info.avatar}
+                chunks={i === index ? currentChunks : chunkSentence(s.english, settings.unit, settings.maxChunkWords)}
+                visible={i === index ? visible : new Set<number>()}
+              />
+            );
+          })
+        )}
         <div ref={endRef} />
       </div>
     </div>
