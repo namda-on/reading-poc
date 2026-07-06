@@ -11,7 +11,7 @@ export interface Settings {
   marqueeSpeed: number; // 전광판 흐름 속도(px/초).
 }
 
-export const DEFAULT_SETTINGS: Settings = { unit: 'word', windowSize: 4, baseMsPerSyllable: 200, maxChunkWords: 3, hideOld: true, fadeIn: false, fadeOut: true, marqueeSpeed: 120 };
+export const DEFAULT_SETTINGS: Settings = { unit: 'word', windowSize: 4, baseMsPerSyllable: 300, maxChunkWords: 3, hideOld: true, fadeIn: false, fadeOut: true, marqueeSpeed: 120 };
 
 const STORAGE_KEY = 'reading-poc:settings';
 

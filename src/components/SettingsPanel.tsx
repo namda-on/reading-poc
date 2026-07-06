@@ -6,9 +6,9 @@ import './SettingsPanel.css';
 // 페이드·전광판 속도는 프리셋과 독립이므로 노출 관련 필드만 담는다.
 type PresetSettings = Pick<Settings, 'unit' | 'windowSize' | 'baseMsPerSyllable' | 'maxChunkWords' | 'hideOld'>;
 const PRESETS: { key: string; name: string; desc: string; settings: PresetSettings }[] = [
-  { key: 'word', name: '단어', desc: '단어 하나씩', settings: { unit: 'word', windowSize: 4, baseMsPerSyllable: 200, maxChunkWords: 3, hideOld: true } },
-  { key: 'chunk', name: '청크', desc: '여러 단어 묶음', settings: { unit: 'chunk', windowSize: 4, baseMsPerSyllable: 200, maxChunkWords: 3, hideOld: true } },
-  { key: 'accumulate', name: '누적', desc: '청크가 쌓임', settings: { unit: 'chunk', windowSize: 4, baseMsPerSyllable: 200, maxChunkWords: 3, hideOld: false } },
+  { key: 'word', name: '단어', desc: '단어 하나씩', settings: { unit: 'word', windowSize: 4, baseMsPerSyllable: 300, maxChunkWords: 3, hideOld: true } },
+  { key: 'chunk', name: '청크', desc: '여러 단어 묶음', settings: { unit: 'chunk', windowSize: 4, baseMsPerSyllable: 300, maxChunkWords: 3, hideOld: true } },
+  { key: 'accumulate', name: '누적', desc: '청크가 쌓임', settings: { unit: 'chunk', windowSize: 4, baseMsPerSyllable: 300, maxChunkWords: 3, hideOld: false } },
 ];
 
 // 지금 설정이 어떤 프리셋인지 판정. 페이드는 프리셋과 독립된 옵션이라 판정에서 제외.
