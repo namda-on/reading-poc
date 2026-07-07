@@ -36,3 +36,14 @@
   overflow: hidden;
   box-shadow: 0 6px 18px rgba(30, 60, 110, 0.12);
 }
+
+/* 문제 유형 선택 */
+.quiztype-row {
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.quiztype-label { font-size: 13px; font-weight: 700; color: #3a567d; }
+.quiztype-row .seg-toggle { background: #dbe6f5; }

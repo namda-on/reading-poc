@@ -1,0 +1,69 @@
+/* 배열·받아쓰기 문제 공통 */
+.ex-label { font-size: 13px; color: #6b7c93; margin: 0 0 6px; font-weight: 600; }
+.ex-korean { font-size: 17px; font-weight: 700; color: #2f3e52; margin: 0 0 14px; line-height: 1.4; }
+
+/* 단어 배열: 정답 영역 */
+.ex-answer {
+  min-height: 52px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-content: flex-start;
+  padding: 10px;
+  border-radius: 12px;
+  background: #f2f6fb;
+  border: 1px dashed #cddcf1;
+  margin-bottom: 12px;
+}
+.ex-answer.correct { background: #ddf3e2; border-color: #46b366; border-style: solid; }
+.ex-answer.wrong { background: #fbe1e1; border-color: #e5645a; border-style: solid; }
+.ex-placeholder { color: #9db0c6; font-size: 14px; align-self: center; }
+
+/* 단어 은행 */
+.ex-bank { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+
+.ex-chip {
+  border: 1px solid #cddcf1;
+  background: #fff;
+  border-radius: 10px;
+  padding: 9px 14px;
+  font-size: 16px;
+  color: #2f3e52;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(30, 60, 110, 0.1);
+}
+.ex-chip.in-answer { background: #eaf1fb; border-color: #4b83d6; }
+
+/* 받아쓰기 */
+.ex-audio {
+  border: none;
+  background: #6b5bd6;
+  color: #fff;
+  border-radius: 999px;
+  padding: 10px 18px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-bottom: 12px;
+}
+.ex-input {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #cddcf1;
+  border-radius: 12px;
+  padding: 12px;
+  font-size: 16px;
+  color: #2f3e52;
+  resize: vertical;
+  margin-bottom: 12px;
+  font-family: inherit;
+}
+.ex-input:focus { outline: none; border-color: #4b83d6; }
+.ex-answer-text { font-size: 15px; font-weight: 700; color: #294a75; margin: 6px 0 12px; }
+.ex-ok { color: #2e9e57; font-weight: 700; }
+.ex-no { color: #d1584e; font-weight: 700; }
+
+.ex-check { width: 100%; }
+.ex-check:disabled { opacity: 0.5; cursor: default; }
+.ex-result { text-align: center; }
+.ex-result .primary { margin-top: 4px; }

@@ -17,10 +17,11 @@ function speakerInfo(speaker: 'A' | 'B') {
   return speaker === 'A' ? { name: 'A', avatar: '🐻' } : { name: 'B', avatar: '🐰' };
 }
 
-export function ReadingSession({ topic, onFinish, onBack }: {
+export function ReadingSession({ topic, onFinish, onBack, showQuestion = true }: {
   topic: Topic;
   onFinish: () => void;
   onBack: () => void;
+  showQuestion?: boolean;
 }) {
   const { settings } = useSettings();
   const settingsRef = useRef(settings);
@@ -100,7 +101,7 @@ export function ReadingSession({ topic, onFinish, onBack }: {
         </div>
       )}
 
-      <QuestionBanner topicSeq={topic.topicSeq} />
+      {showQuestion && <QuestionBanner topicSeq={topic.topicSeq} />}
 
       <div className="chat">
         {intro ? (

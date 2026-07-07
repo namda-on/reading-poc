@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import dialogs from './data/dialogs.json';
-import type { DialogsData, Mode } from './data/types';
+import type { DialogsData, Mode, QuizType } from './data/types';
 import { StoryList } from './components/StoryList';
 import { TopicList } from './components/TopicList';
 import { SessionStart } from './components/SessionStart';
@@ -14,24 +14,27 @@ import './App.css';
 const DATA = dialogs as unknown as DialogsData;
 type Screen = 'stories' | 'topics' | 'session' | 'quiz';
 
-// 마지막에 고른 모드를 기억해 다음에 기본 선택으로 쓴다.
+// 마지막에 고른 모드·문제 유형을 기억해 다음에 기본 선택으로 쓴다.
 const MODE_KEY = 'reading-poc:mode';
+const QUIZ_KEY = 'reading-poc:quizType';
 const MODES: Mode[] = ['reading', 'listening', 'marquee', 'fixed'];
-function loadMode(): Mode {
+const QUIZ_TYPES: QuizType[] = ['comprehension', 'arrange', 'dictation'];
+function loadPref<T extends string>(key: string, allowed: T[], fallback: T): T {
   try {
-    const m = localStorage.getItem(MODE_KEY);
-    if (m && (MODES as string[]).includes(m)) return m as Mode;
+    const v = localStorage.getItem(key);
+    if (v && (allowed as string[]).includes(v)) return v as T;
   } catch {
     // localStorage 사용 불가 환경은 무시.
   }
-  return 'reading';
+  return fallback;
 }
 
 export default function App() {
   const [screen, setScreen] = useState<Screen>('stories');
   const [storySeq, setStorySeq] = useState<number | null>(null);
   const [topicSeq, setTopicSeq] = useState<number | null>(null);
-  const [mode, setMode] = useState<Mode>(loadMode);
+  const [mode, setMode] = useState<Mode>(() => loadPref(MODE_KEY, MODES, 'reading'));
+  const [quizType, setQuizType] = useState<QuizType>(() => loadPref(QUIZ_KEY, QUIZ_TYPES, 'comprehension'));
   const [playing, setPlaying] = useState(false); // 시작 화면(false) → 재생(true)
   const [sessionRun, setSessionRun] = useState(0); // 다시 듣기 시 세션 리마운트용
 
@@ -63,10 +66,13 @@ export default function App() {
         <SessionStart
           topic={topic}
           initialMode={mode}
-          onStart={(m) => {
+          initialQuizType={quizType}
+          onStart={(m, q) => {
             setMode(m);
+            setQuizType(q);
             try {
               localStorage.setItem(MODE_KEY, m); // 마지막 모드 기억
+              localStorage.setItem(QUIZ_KEY, q); // 마지막 문제 유형 기억
             } catch {
               // 무시
             }
@@ -79,6 +85,7 @@ export default function App() {
       {(screen === 'session' || screen === 'quiz') && topic && playing && (() => {
         const props = {
           topic,
+          showQuestion: quizType === 'comprehension', // 이해 문제일 때만 상단에 질문 미리보기
           onFinish: () => setScreen('quiz'),
           onBack: () => {
             setPlaying(false);
@@ -93,7 +100,8 @@ export default function App() {
       })()}
       {screen === 'quiz' && topic && (
         <QuizSheet
-          topicSeq={topic.topicSeq}
+          topic={topic}
+          quizType={quizType}
           onReplay={() => {
             setSessionRun((r) => r + 1); // 세션 리마운트 → 처음부터, 같은 모드로 즉시 재생
             setScreen('session');

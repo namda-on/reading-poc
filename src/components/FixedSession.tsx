@@ -16,10 +16,11 @@ function speakerInfo(speaker: 'A' | 'B') {
 }
 
 // 시선 고정(RSVP) 모드: 한 자리에서 단어/청크가 제자리 교체된다. 화자·진행으로 대화 맥락 유지.
-export function FixedSession({ topic, onFinish, onBack }: {
+export function FixedSession({ topic, onFinish, onBack, showQuestion = true }: {
   topic: Topic;
   onFinish: () => void;
   onBack: () => void;
+  showQuestion?: boolean;
 }) {
   const { settings } = useSettings();
   const settingsRef = useRef(settings);
@@ -89,7 +90,7 @@ export function FixedSession({ topic, onFinish, onBack }: {
         </div>
       </header>
 
-      <QuestionBanner topicSeq={topic.topicSeq} />
+      {showQuestion && <QuestionBanner topicSeq={topic.topicSeq} />}
 
       <div className="fixed-stage">
         {/* 대화 맥락: 지금 누구 말인지 */}

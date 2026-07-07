@@ -13,10 +13,11 @@ function speakerInfo(speaker: 'A' | 'B') {
   return speaker === 'A' ? { name: 'A', avatar: '🐻' } : { name: 'B', avatar: '🐰' };
 }
 
-export function ListeningSession({ topic, onFinish, onBack }: {
+export function ListeningSession({ topic, onFinish, onBack, showQuestion = true }: {
   topic: Topic;
   onFinish: () => void;
   onBack: () => void;
+  showQuestion?: boolean;
 }) {
   const onFinishRef = useRef(onFinish);
   onFinishRef.current = onFinish;
@@ -96,7 +97,7 @@ export function ListeningSession({ topic, onFinish, onBack }: {
 
       <audio ref={audioRef} preload="auto" />
 
-      <QuestionBanner topicSeq={topic.topicSeq} />
+      {showQuestion && <QuestionBanner topicSeq={topic.topicSeq} />}
 
       <div className="chat">
         {topic.scripts.slice(0, intro ? 0 : index + 1).map((s, i) => {

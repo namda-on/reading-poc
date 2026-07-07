@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { Mode, Topic } from '../data/types';
+import type { Mode, QuizType, Topic } from '../data/types';
 import { useSettings } from '../settings/SettingsContext';
 import { SettingsPanel } from './SettingsPanel';
 import './ReadingSession.css';
@@ -12,14 +12,22 @@ const MODES: { value: Mode; label: string; icon: string; desc: string }[] = [
   { value: 'fixed', label: '고정', icon: '🎯', desc: '한 자리에서 제자리 교체' },
 ];
 
-export function SessionStart({ topic, onStart, onBack, initialMode = 'reading' }: {
+const QUIZ_TYPES: { value: QuizType; label: string }[] = [
+  { value: 'comprehension', label: '이해' },
+  { value: 'arrange', label: '단어 배열' },
+  { value: 'dictation', label: '받아쓰기' },
+];
+
+export function SessionStart({ topic, onStart, onBack, initialMode = 'reading', initialQuizType = 'comprehension' }: {
   topic: Topic;
-  onStart: (mode: Mode) => void;
+  onStart: (mode: Mode, quizType: QuizType) => void;
   onBack: () => void;
   initialMode?: Mode; // 마지막에 고른 모드를 기본 선택으로
+  initialQuizType?: QuizType; // 마지막에 고른 문제 유형을 기본 선택으로
 }) {
   const { settings, setSettings } = useSettings();
   const [mode, setMode] = useState<Mode>(initialMode);
+  const [quizType, setQuizType] = useState<QuizType>(initialQuizType);
 
   return (
     <div className="session">
@@ -114,7 +122,24 @@ export function SessionStart({ topic, onStart, onBack, initialMode = 'reading' }
           </div>
         )}
 
-        <button className="start-btn" onClick={() => onStart(mode)}>▶ 시작</button>
+        {/* 세션 후 풀 문제 유형(다시 풀 때 지루하지 않게 바꿀 수 있다). */}
+        <div className="quiztype-row">
+          <span className="quiztype-label">문제 유형</span>
+          <div className="seg-toggle" role="group" aria-label="문제 유형">
+            {QUIZ_TYPES.map((q) => (
+              <button
+                key={q.value}
+                type="button"
+                className={quizType === q.value ? 'on' : ''}
+                onClick={() => setQuizType(q.value)}
+              >
+                {q.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <button className="start-btn" onClick={() => onStart(mode, quizType)}>▶ 시작</button>
       </div>
     </div>
   );

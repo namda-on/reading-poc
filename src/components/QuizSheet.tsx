@@ -1,8 +1,12 @@
+import type { QuizType, Topic } from '../data/types';
 import { Quiz } from './Quiz';
+import { ArrangeQuiz } from './ArrangeQuiz';
+import { DictationQuiz } from './DictationQuiz';
 import './QuizSheet.css';
 
-export function QuizSheet({ topicSeq, onReplay, onClose }: {
-  topicSeq: number;
+export function QuizSheet({ topic, quizType, onReplay, onClose }: {
+  topic: Topic;
+  quizType: QuizType;
   onReplay: () => void;
   onClose: () => void;
 }) {
@@ -16,7 +20,13 @@ export function QuizSheet({ topicSeq, onReplay, onClose }: {
           <button className="sheet-replay" onClick={onReplay}>🔁 다시 듣기</button>
         </div>
         <div className="sheet-body">
-          <Quiz topicSeq={topicSeq} onDone={onClose} />
+          {quizType === 'arrange' ? (
+            <ArrangeQuiz topic={topic} onDone={onClose} />
+          ) : quizType === 'dictation' ? (
+            <DictationQuiz topic={topic} onDone={onClose} />
+          ) : (
+            <Quiz topicSeq={topic.topicSeq} onDone={onClose} />
+          )}
         </div>
       </div>
     </>

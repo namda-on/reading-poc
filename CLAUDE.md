@@ -25,9 +25,10 @@ python3 scripts/extract.py   # 대화 데이터(dialogs.json) 재생성
 - `src/lib/chunk.ts` — 문장 → 청크 분할(순수 함수). 단어 모드 / 규칙 모드.
 - `src/lib/reveal.ts` — 노출 스케줄(순수 함수). 음절 기반 dwell 계산.
 - `src/hooks/useSlidingReveal.ts` — 스케줄을 타이머로 구동(generation guard).
-- `src/components/` — `StoryList`(첫 화면) · `TopicList` · `SessionStart`(모드 선택 시작 화면) · `ReadingSession`(리딩 재생) · `ListeningSession`(리스닝 오디오 재생, 텍스트 숨김) · `MarqueeSession`(전광판식 가로 흐름) · `FixedSession`(시선 고정 RSVP) · `DialogBubble` · `SettingsPanel` · `QuizSheet`/`Quiz`.
+- `src/components/` — `StoryList`(첫 화면) · `TopicList` · `SessionStart`(모드 선택 시작 화면) · `ReadingSession`(리딩 재생) · `ListeningSession`(리스닝 오디오 재생, 텍스트 숨김) · `MarqueeSession`(전광판식 가로 흐름) · `FixedSession`(시선 고정 RSVP) · `DialogBubble` · `SettingsPanel` · `QuizSheet`(문제 바텀시트) · `Quiz`(객관식)/`ArrangeQuiz`(단어 배열)/`DictationQuiz`(받아쓰기).
 - `src/settings/SettingsContext.tsx` — 설정 상태 + localStorage.
 - `src/lib/progress.ts` — 푼 토픽 localStorage 저장.
+- `src/lib/keySentence.ts` — 배열·받아쓰기 문제에 쓸 '핵심 1문장' 선택(3~9단어 중 가장 긴 문장).
 - `src/data/` — `dialogs.json`(생성물, 커밋됨) · `quizzes.json`(수기 저작) · `types.ts` · `quizTypes.ts`.
 - `scripts/extract.py` — 외부 sqlite에서 대화 추출.
 
@@ -68,6 +69,7 @@ python3 scripts/extract.py   # 대화 데이터(dialogs.json) 재생성
 - **화자 표시는 A/B**, 에피소드 제목은 "Episode N"만 — 제목·상대역이 주제를 노출해 문제가 쉬워지는 것을 막기 위함.
 - **리딩 시작 준비 신호**: 곧바로 노출되면 당황스러우므로, 첫 텍스트 자리에 dot 을 `READY_MS`(0.8s) 동안 깜빡인 뒤 재생을 시작한다(`ready` 게이트).
 - **리딩 옵션 프리셋**: `SettingsPanel`은 프리셋 3개(단어 / 청크 / 누적)를 원클릭 제공하고, "직접 설정"을 펼치면 개별 옵션을 조절한다(옵션 설명은 그 안 맨 아래에 표시). 프리셋은 노출 관련 필드(단위·창·속도·hideOld·최대청크)와 **페이드 인/아웃**을 지정한다(청크 프리셋은 창2 — 다음 청크 등장 시 이전 청크가 밀려나는 슬라이딩이 보이도록, 청크·누적은 페이드 인 켜기가 기본). **끝 사라짐 간격·전광판 속도는 프리셋과 독립**(프리셋 클릭 시 유지, `matchesPreset` 판정에서도 제외). 현재 설정이 프리셋과 일치하면 하이라이트, 아니면 "커스텀" 배지.
-- **설정 지속**: 설정은 `reading-poc:settings`에 저장돼 마지막 상태가 유지된다(진입 시 리셋하지 않음). 마지막에 고른 모드도 `reading-poc:mode`에 저장돼 다음 토픽 진입 시 기본 선택된다(`App`이 저장, `SessionStart`의 `initialMode`). 기본값(`DEFAULT_SETTINGS`)은 단어·창4·속도300·hideOld켜기·**페이드 인 끄기/아웃 켜기**.
-- **문제 미리보기**: 세션(리딩/리스닝/전광판) 상단에 `QuestionBanner`로 해당 토픽 퀴즈의 질문을 처음부터 노출한다(선택지는 끝난 뒤 `QuizSheet`에서). 질문은 `quizzes.json`에서 `topicSeq`로 읽는다.
+- **설정 지속**: 설정은 `reading-poc:settings`에 저장돼 마지막 상태가 유지된다(진입 시 리셋하지 않음). 마지막에 고른 모드(`reading-poc:mode`)와 문제 유형(`reading-poc:quizType`)도 저장돼 다음 토픽 진입 시 기본 선택된다(`App`이 저장, `SessionStart`의 `initialMode`·`initialQuizType`). 기본값(`DEFAULT_SETTINGS`)은 단어·창4·속도300·hideOld켜기·**페이드 인 끄기/아웃 켜기**.
+- **문제 유형**: 세션 후 문제를 시작 화면에서 고른다 — `comprehension`(객관식 이해, `quizzes.json`), `arrange`(한국어 뜻→영어 단어 순서 맞추기), `dictation`(오디오 듣고 타이핑, 대소문자·문장부호 무시 채점). 배열·받아쓰기는 `pickKeyScript`로 고른 핵심 1문장을 대상으로 하며 기존 데이터(english·translated·audioUrl)만 사용. 마지막 유형은 `reading-poc:quizType`에 저장. 다시 풀 때 유형을 바꿔 지루함을 줄인다.
+- **문제 미리보기**: 이해(`comprehension`) 유형일 때만 세션 상단에 `QuestionBanner`로 질문을 처음부터 노출한다(`App`이 `showQuestion`으로 전달; 배열·받아쓰기는 어떤 문장이 나올지가 문제라 숨김). 질문은 `quizzes.json`에서 `topicSeq`로 읽고, 선택지는 끝난 뒤 `QuizSheet`에서.
 - **퀴즈 보기 셔플**: 저작 데이터(`quizzes.json`)가 정답을 대부분 1번(`answerIndex:0`)에 두어 위치로 답을 유추할 수 있으므로, `Quiz`가 마운트 시 보기를 1회 셔플한다(정답 위치 균등 분산). 데이터의 `answerIndex`는 그대로 두고 런타임에서만 섞는다.

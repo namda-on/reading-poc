@@ -37,3 +37,6 @@ export interface DialogsData {
 
 // 세션 재생 방식: 리딩(슬라이딩) / 리스닝(TTS) / 전광판(가로 흐름) / 고정(제자리 RSVP).
 export type Mode = 'reading' | 'listening' | 'marquee' | 'fixed';
+
+// 세션 후 문제 유형: 이해(객관식) / 배열(한국어→영어 단어 순서) / 받아쓰기(타이핑).
+export type QuizType = 'comprehension' | 'arrange' | 'dictation';

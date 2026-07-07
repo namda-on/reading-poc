@@ -70,10 +70,11 @@ function MarqueeBubble({ script, speed, onReadyForNext, onFinished }: {
   );
 }
 
-export function MarqueeSession({ topic, onFinish, onBack }: {
+export function MarqueeSession({ topic, onFinish, onBack, showQuestion = true }: {
   topic: Topic;
   onFinish: () => void;
   onBack: () => void;
+  showQuestion?: boolean;
 }) {
   const { settings } = useSettings();
   const speed = settings.marqueeSpeed;
@@ -112,7 +113,7 @@ export function MarqueeSession({ topic, onFinish, onBack }: {
         </div>
       </header>
 
-      <QuestionBanner topicSeq={topic.topicSeq} />
+      {showQuestion && <QuestionBanner topicSeq={topic.topicSeq} />}
 
       <div className="chat">
         {topic.scripts.slice(0, intro ? 0 : revealed).map((s, i) => (
