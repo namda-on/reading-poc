@@ -28,9 +28,10 @@
   .dlg-card .f { font-size:12px; color:var(--sub); margin-top:4px; }
   .home .note { font-size:12px; color:#3a567d; opacity:.85; margin-top:16px; line-height:1.6; }
 
-  /* 채팅 — reading-poc 리스닝 모드와 동일한 연출. 내부에서만 스크롤(문제 패널은 하단 고정) */
-  .chat { flex:1; min-height:0; padding:10px 14px 16px; overflow-y:auto; }
+  /* 채팅 — reading-poc 리스닝 연출 + 실제 채팅 배치(A 왼쪽 / B 오른쪽). 내부 스크롤만(문제 패널 하단 고정) */
+  .chat { flex:1; min-height:0; padding:10px 14px 16px; overflow-y:auto; display:flex; flex-direction:column; }
   .msg { display:flex; align-items:flex-start; gap:10px; margin:14px 0; animation:pop .25s ease; }
+  .msg.b { flex-direction:row-reverse; }        /* B는 오른쪽 */
   @keyframes pop { from{opacity:0;transform:translateY(6px);} to{opacity:1;transform:none;} }
   .avatar-col { display:flex; flex-direction:column; align-items:center; gap:4px; flex-shrink:0; width:52px; }
   .avatar { width:48px; height:48px; border-radius:50%; background:#fff; display:flex; align-items:center;
@@ -45,10 +46,13 @@
   .hidden-bubble.playing .wave i { width:4px; height:8px; border-radius:2px; background:#4b83d6; animation:wave .9s ease-in-out infinite; }
   .hidden-bubble.playing .wave i:nth-child(2){animation-delay:.15s;} .hidden-bubble.playing .wave i:nth-child(3){animation-delay:.3s;}
   @keyframes wave { 0%,100%{height:8px;} 50%{height:18px;} }
+  .msg.b .hidden-bubble { background:#4b83d6; }                         /* B 말풍선 파랑 */
+  .msg.b .hidden-bubble.playing .wave i { background:rgba(255,255,255,.9); }
 
-  /* 배운 표현: 해당 줄이 재생될 때 그 말풍선 아래에 붙어 뜬다 */
-  .learn-chip { margin:-6px 0 14px 62px; background:#fff6dc; border:1px solid #f2e2a8; border-radius:12px;
+  /* 배운 표현: 해당 줄이 재생될 때 그 말풍선 쪽에 붙어 뜬다 */
+  .learn-chip { align-self:flex-start; margin:-6px 0 14px 62px; background:#fff6dc; border:1px solid #f2e2a8; border-radius:12px;
     padding:8px 12px; font-size:13px; color:#6b5410; line-height:1.45; animation:chipin .3s ease; max-width:calc(100% - 62px); }
+  .learn-chip.b { align-self:flex-end; margin:-6px 62px 14px 0; text-align:right; }
   @keyframes chipin { from{opacity:0;transform:translateX(-6px);} to{opacity:1;transform:none;} }
   .learn-chip b { color:#8a6d15; }
   .learn-chip .k { display:inline-block; background:#f0b429; color:#fff; font-size:11px; font-weight:800; border-radius:999px; padding:1px 8px; margin-right:6px; }
@@ -232,14 +236,14 @@ function renderHome(){
 
 function addBubble(who){
   const info = who==='B' ? {n:'B',a:'🐰'} : {n:'A',a:'🐻'};
-  const m=document.createElement('div'); m.className='msg';
+  const m=document.createElement('div'); m.className='msg'+(who==='B'?' b':'');
   m.innerHTML=`<div class="avatar-col"><div class="avatar">${info.a}</div><div class="avatar-name">${info.n}</div></div>
     <div class="bubble hidden-bubble"><span class="wave"><i></i><i></i><i></i></span></div>`;
   chat.appendChild(m); scrollToBottom();
   return m.querySelector('.bubble');
 }
-function addLearnChip(x){
-  const c=document.createElement('div'); c.className='learn-chip';
+function addLearnChip(x, who){
+  const c=document.createElement('div'); c.className='learn-chip'+(who==='B'?' b':'');
   c.innerHTML=`<span class="k">배운 표현</span><b>${x.name}</b> — ${x.note}`;
   chat.appendChild(c); scrollToBottom();
 }
@@ -256,7 +260,7 @@ async function startDialogue(i){
     if(myRun!==runId) return; // 화면을 벗어나면 중단
     if(!turn.quiz){
       const bub=addBubble(turn.s); if(turn.s==='A') lastA=turn.text;
-      if(turn.learned){ noteLearned(turn.learned); addLearnChip(turn.learned); } // 재생되는 순간 표현 배너
+      if(turn.learned){ noteLearned(turn.learned); addLearnChip(turn.learned, turn.s); } // 재생되는 순간 표현 배너
       bub.classList.add('playing'); await speak(turn.text, turn.s);
       if(myRun!==runId) return;
       bub.classList.remove('playing');
