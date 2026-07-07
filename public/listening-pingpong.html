@@ -21,28 +21,55 @@
 
   .home { flex:1; padding:22px 18px; overflow-y:auto; }
   .home h1 { font-size:24px; margin:6px 0 4px; color:#25406a; }
-  .home p.sub { color:#3a567d; margin:0 0 16px; font-size:14px; }
-  .home h2.grp { font-size:13px; font-weight:800; color:#2f4a70; margin:20px 0 8px; }
-  .voice-box { display:flex; flex-direction:column; gap:8px; }
+  .home p.sub { color:#3a567d; margin:0 0 16px; font-size:14px; line-height:1.5; }
+  .voice-box { display:flex; flex-direction:column; gap:8px; margin-bottom:8px; }
   .voice-row { display:flex; align-items:center; gap:8px; font-size:13px; color:#3a567d; background:#ffffff88; border-radius:12px; padding:8px 12px; }
   .voice-row span { min-width:62px; font-weight:700; }
   .voice-row select { flex:1; padding:8px; border-radius:10px; border:1px solid #cddcf1; background:#fff; font-size:13px; }
-  .dlg-card { display:block; width:100%; text-align:left; background:var(--card); border:none; border-radius:16px;
+  .ex-card { display:block; width:100%; text-align:left; background:var(--card); border:none; border-radius:16px;
     padding:15px 18px; margin-bottom:10px; cursor:pointer; box-shadow:0 3px 12px rgba(30,60,110,.12); }
-  .dlg-card .t { font-size:16px; font-weight:800; color:#2f3e52; }
-  .dlg-card .f { font-size:12px; color:var(--sub); margin-top:4px; }
-  .dlg-card .step { display:inline-block; font-size:11px; font-weight:800; color:#8a6d15; background:#fff6dc; border:1px solid #f2e2a8; border-radius:999px; padding:2px 8px; margin-top:6px; }
+  .ex-card .t { font-size:16px; font-weight:800; color:#2f3e52; }
+  .ex-card .f { font-size:12px; color:var(--sub); margin-top:4px; }
+  .ex-card .step { display:inline-block; font-size:11px; font-weight:800; color:#2f6ab0; background:#e7f0fb; border:1px solid #cfe0f5; border-radius:999px; padding:2px 8px; margin-top:7px; }
   .home .note { font-size:12px; color:#3a567d; opacity:.85; margin-top:16px; line-height:1.6; }
+
+  /* 단계 라벨 */
+  .stage-label { text-align:center; font-size:13px; font-weight:800; color:#2f6ab0; margin:4px 0 14px; letter-spacing:.02em; }
+
+  /* 1) 어휘 */
+  .vocab { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:22px 20px 40px; gap:18px; }
+  .vocab-card { width:100%; background:#fff; border-radius:20px; padding:34px 20px; text-align:center; box-shadow:0 4px 16px rgba(30,60,110,.14); }
+  .vocab-word { font-size:38px; font-weight:800; color:#233; }
+  .vocab-ko { font-size:18px; color:#5b6b80; margin-top:10px; }
+  .vocab-play { margin-top:20px; border:none; background:#eef4fb; color:#2f6ab0; font-weight:700; border-radius:999px; padding:10px 20px; font-size:14px; cursor:pointer; }
+  .vocab .next-btn { width:100%; }
+
+  /* 2) 표현 배열 */
+  .arrange { flex:1; overflow-y:auto; padding:8px 16px 24px; }
+  .ex-focus { }
+  .ex-expr { }
+  .ex-label { font-size:13px; color:var(--sub); font-weight:600; margin-bottom:6px; }
+  .ex-ko { font-size:19px; font-weight:800; color:#2f3e52; margin:6px 0 16px; line-height:1.4; }
+  .ex-answer { min-height:54px; display:flex; flex-wrap:wrap; gap:8px; align-content:flex-start; padding:10px; border-radius:12px; background:#eef4fb; border:1px dashed #cddcf1; margin-bottom:14px; }
+  .ex-answer.correct{background:#ddf3e2;border-color:#46b366;border-style:solid;} .ex-answer.wrong{background:#fbe1e1;border-color:#e5645a;border-style:solid;}
+  .ex-ph { color:#9db0c6; font-size:14px; align-self:center; }
+  .ex-bank { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px; }
+  .ex-chip { border:1px solid #cddcf1; background:#fff; border-radius:10px; padding:10px 15px; font-size:16px; color:#2f3e52; cursor:pointer; box-shadow:0 1px 3px rgba(30,60,110,.1); }
+  .ex-chip.inans { background:#eaf1fb; border-color:#4b83d6; }
+  .ex-result { font-size:14px; font-weight:700; text-align:center; margin:6px 0 8px; }
+  .ex-sentence { text-align:center; font-size:19px; font-weight:700; color:#2f3e52; margin-bottom:12px; }
+  .learned-box { background:#fff6dc; border:1px solid #f2e2a8; border-radius:12px; padding:10px 13px; margin:8px 0 4px; font-size:13.5px; color:#6b5410; line-height:1.5; }
+  .learned-box .k { display:inline-block; background:#f0b429; color:#fff; font-size:11px; font-weight:800; border-radius:999px; padding:1px 8px; margin-right:6px; }
 
   /* 채팅 — 리스닝 연출 + 실제 채팅 배치(A 왼쪽/B 오른쪽) */
   .chat { flex:1; min-height:0; padding:10px 14px 16px; overflow-y:auto; display:flex; flex-direction:column; }
-  .msg { display:flex; align-items:flex-start; gap:10px; margin:14px 0; animation:pop .25s ease; }
+  .msg { display:flex; align-items:flex-start; gap:10px; margin:12px 0; animation:pop .25s ease; }
   .msg.b { flex-direction:row-reverse; }
   @keyframes pop { from{opacity:0;transform:translateY(6px);} to{opacity:1;transform:none;} }
   .avatar-col { display:flex; flex-direction:column; align-items:center; gap:4px; flex-shrink:0; width:52px; }
   .avatar { width:48px; height:48px; border-radius:50%; background:#fff; display:flex; align-items:center; justify-content:center; font-size:26px; box-shadow:0 2px 6px rgba(30,60,110,.15); }
   .avatar-name { font-size:12px; font-weight:700; color:#45566b; text-align:center; line-height:1.2; }
-  .bubble { position:relative; max-width:100%; padding:13px 16px; border-radius:16px; background:#fff; box-shadow:0 2px 8px rgba(30,60,110,.12); }
+  .bubble { position:relative; max-width:78%; padding:13px 16px; border-radius:16px; background:#fff; box-shadow:0 2px 8px rgba(30,60,110,.12); }
   .hidden-bubble { min-width:72px; min-height:22px; display:flex; align-items:center; justify-content:center; }
   .hidden-bubble .wave { display:none; }
   .hidden-bubble:not(.playing) { opacity:.5; }
@@ -52,38 +79,29 @@
   @keyframes wave { 0%,100%{height:8px;} 50%{height:18px;} }
   .msg.b .hidden-bubble { background:#4b83d6; }
   .msg.b .hidden-bubble.playing .wave i { background:rgba(255,255,255,.9); }
+  /* 다 들은 뒤 텍스트로 열리는 말풍선(배운 표현/어휘 강조) */
+  .bubble.revealed { font-size:16px; line-height:1.5; color:#2f3e52; animation:reveal .3s ease; }
+  .msg.b .bubble.revealed { background:#4b83d6; color:#fff; }
+  @keyframes reveal { from{opacity:.4;} to{opacity:1;} }
 
-  .learn-chip { align-self:flex-start; margin:-6px 0 14px 62px; background:#fff6dc; border:1px solid #f2e2a8; border-radius:12px; padding:8px 12px; font-size:13px; color:#6b5410; line-height:1.45; animation:chipin .3s ease; max-width:calc(100% - 62px); }
-  .learn-chip.b { align-self:flex-end; margin:-6px 62px 14px 0; text-align:right; }
-  @keyframes chipin { from{opacity:0;transform:translateX(-6px);} to{opacity:1;transform:none;} }
-  .learn-chip b { color:#8a6d15; }
-  .learn-chip .k { display:inline-block; background:#f0b429; color:#fff; font-size:11px; font-weight:800; border-radius:999px; padding:1px 8px; margin-right:6px; }
+  /* 형광펜(배운 표현) · 밑줄(배운 어휘) */
+  .hl-expr { background:#ffe372; color:#3a2f00; border-radius:4px; padding:0 3px; -webkit-box-decoration-break:clone; box-decoration-break:clone; }
+  .hl-vocab { text-decoration:underline; text-decoration-color:#4b83d6; text-decoration-thickness:2px; text-underline-offset:3px; }
+  .msg.b .bubble.revealed .hl-vocab { text-decoration-color:#fff; }
 
-  /* 배열 학습 */
-  .arrange { flex:1; overflow-y:auto; padding:18px 16px 24px; }
-  .ex-label { font-size:13px; color:var(--sub); font-weight:600; margin-bottom:6px; }
-  .ex-ko { font-size:19px; font-weight:800; color:#2f3e52; margin:6px 0 16px; line-height:1.4; }
-  .ex-answer { min-height:54px; display:flex; flex-wrap:wrap; gap:8px; align-content:flex-start; padding:10px; border-radius:12px; background:#eef4fb; border:1px dashed #cddcf1; margin-bottom:14px; }
-  .ex-answer.correct{background:#ddf3e2;border-color:#46b366;border-style:solid;} .ex-answer.wrong{background:#fbe1e1;border-color:#e5645a;border-style:solid;}
-  .ex-ph { color:#9db0c6; font-size:14px; align-self:center; }
-  .ex-bank { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px; }
-  .ex-chip { border:1px solid #cddcf1; background:#fff; border-radius:10px; padding:10px 15px; font-size:16px; color:#2f3e52; cursor:pointer; box-shadow:0 1px 3px rgba(30,60,110,.1); }
-  .ex-chip.inans { background:#eaf1fb; border-color:#4b83d6; }
-  .ex-result { font-size:14px; font-weight:700; text-align:center; margin:6px 0 10px; }
-
-  .quiz { flex-shrink:0; max-height:60vh; overflow-y:auto; background:#eef4fb; border-top:1px solid #d3e0f1; padding:14px 14px 20px; }
+  .quiz { flex-shrink:0; max-height:62vh; overflow-y:auto; background:#eef4fb; border-top:1px solid #d3e0f1; padding:14px 14px 20px; }
   .quiz-q { display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; }
   .quiz-q span { font-size:15px; font-weight:800; color:#25406a; }
   .replay { border:none; background:#6b5bd6; color:#fff; border-radius:999px; padding:7px 14px; font-size:13px; font-weight:700; cursor:pointer; }
   .opt { display:block; width:100%; text-align:left; background:#fff; border:1.5px solid #d3e0f1; border-radius:12px; padding:13px 15px; margin:8px 0; font-size:15.5px; color:#2f3e52; cursor:pointer; }
+  .opt .opt-text { line-height:1.45; }
   .opt .why { display:none; margin-top:8px; font-size:13px; line-height:1.45; color:#5b6b80; border-top:1px dashed #d3e0f1; padding-top:7px; }
   .opt.show-why .why { display:block; }
   .opt.correct { background:#ddf3e2; border-color:#46b366; } .opt.correct .why { color:#2e6b45; }
   .opt.wrong { background:#fbe1e1; border-color:#e5645a; } .opt.wrong .why { color:#a33; }
   .opt .tag { font-weight:800; margin-right:6px; }
-  .learned-box { background:#fff6dc; border:1px solid #f2e2a8; border-radius:12px; padding:10px 13px; margin:8px 0 4px; font-size:13.5px; color:#6b5410; line-height:1.5; }
-  .learned-box .k { display:inline-block; background:#f0b429; color:#fff; font-size:11px; font-weight:800; border-radius:999px; padding:1px 8px; margin-right:6px; }
-  .learned-box b { color:#8a6d15; }
+  .legend { font-size:12px; color:#5b6b80; text-align:center; margin:10px 0 2px; }
+  .legend mark, .legend u { font-size:12px; }
   .next-btn { width:100%; border:none; border-radius:14px; padding:13px; background:var(--blue); color:#fff; font-size:16px; font-weight:800; cursor:pointer; margin-top:8px; }
   .next-btn:disabled { opacity:.5; cursor:default; }
   .hint-tap { font-size:12px; color:var(--sub); text-align:center; margin-top:6px; }
@@ -106,24 +124,32 @@
 <div class="app">
   <div class="topbar hidden" id="topbar">
     <button class="icon-btn" id="backBtn" aria-label="뒤로">‹</button>
-    <div class="progress" id="progress"><div class="bar-count" id="barCount">0/3</div><div class="bar-track"><div class="bar-fill" id="barFill"></div></div></div>
+    <div class="progress" id="progress"><div class="bar-count" id="barCount">0/2</div><div class="bar-track"><div class="bar-fill" id="barFill"></div></div></div>
   </div>
 
   <div class="home" id="home">
     <h1>리스닝 핑퐁</h1>
-    <p class="sub">대화를 <b>듣고</b>, B가 할 말을 골라 대화를 완성하세요.</p>
+    <p class="sub"><b>어휘 → 표현 → 리스닝</b> 순서로, 방금 배운 표현이 실제 대화에서 어떻게 쓰이는지 듣고 골라보세요.</p>
     <div class="voice-box">
       <div class="voice-row"><span>🐻 A 음성</span><select id="voiceSelA"></select></div>
       <div class="voice-row"><span>🐰 B 음성</span><select id="voiceSelB"></select></div>
     </div>
-    <h2 class="grp">표현 학습 → 리스닝 (실제 흐름)</h2>
-    <div id="flowList"></div>
-    <h2 class="grp">리스닝만</h2>
-    <div id="dlgList"></div>
-    <p class="note">🎧 소리를 켜 주세요. 대화는 <b>텍스트 없이 음성만</b> 나옵니다.<br>💡 배운 표현이 대화나 정답에 나오면 자동으로 짚어드려요.</p>
+    <div id="exList"></div>
+    <p class="note">🎧 소리를 켜 주세요. 대화는 <b>텍스트 없이 음성만</b> 나옵니다.<br>🖍 배운 표현·어휘가 나온 부분은 <b>듣고 난 뒤</b> 형광펜·밑줄로 짚어드려요.</p>
+  </div>
+
+  <div class="vocab hidden" id="vocab">
+    <div class="stage-label">1 · 어휘 배우기</div>
+    <div class="vocab-card">
+      <div class="vocab-word" id="vWord"></div>
+      <div class="vocab-ko" id="vKo"></div>
+      <button class="vocab-play" id="vPlay">🔊 들어보기</button>
+    </div>
+    <button class="next-btn" id="vNext">표현 배우러 가기 ▶</button>
   </div>
 
   <div class="arrange hidden" id="arrange">
+    <div class="stage-label">2 · 표현 배우기</div>
     <div class="learned-box" id="arrExpr"></div>
     <div class="ex-label">뜻에 맞게 영어 단어를 순서대로 배열하세요</div>
     <div class="ex-ko" id="arrKo"></div>
@@ -147,77 +173,176 @@
     <div class="learned-list hidden" id="learnedList"></div>
     <div class="row">
       <button class="btn ghost" id="doneList">목록으로</button>
-      <button class="btn" id="doneRetry">다시 하기</button>
+      <button class="btn" id="doneRetry">다시 듣기</button>
     </div>
   </div>
 </div>
 
 <script>
-// ── 콘텐츠 — learned 는 실제 표현 뱅크(ExpressionUnitKR) 패턴(t/tr) ────────────
-const DIALOGUES = [
+// ── 표현/어휘 데이터 ─────────────────────────────────────────────────────────
+// 표현은 실제 표현 학습 뱅크(ExpressionUnitKR)의 항목. hl = 다 들은 뒤 강조할 구간
+//  (kind:'expr' → 형광펜=배운 표현, kind:'vocab' → 밑줄=배운 어휘). 정답·주어진 B줄에만 learned.
+const E = {
+  where:{ name:"Where's ~?", note:"~은 어디인가요?" },
+  get:{ name:"Can I get ~?", note:"~를 받을 수 있을까요?" },
+  have:{ name:"Do you have ~?", note:"~가 있나요?" },
+  ill:{ name:"I'll have ~.", note:"~로 주세요." },
+  howget:{ name:"How do I get ~?", note:"~에 어떻게 가나요?" },
+  borrow:{ name:"Can I borrow ~?", note:"~를 빌릴 수 있을까요?" },
+};
+
+const EXAMPLES = [
   {
-    title: "Bloom Café", focus: "카페에서 주문하기",
-    turns: [
-      { s:'A', text:"Hi! Welcome to Bloom Café. What can I get for you?" },
-      { s:'B', text:"Hi! I'll have a latte, please.", learned:{ name:"I'll have ~.", note:"~로 주세요." } },
-      { s:'A', text:"Sure. We're actually out of oat milk today — is regular milk okay?" },
+    vocab:{ word:"elevator", ko:"엘리베이터" },
+    expr:{ ...E.where, arrange:{ en:"Where's the elevator?", ko:"엘리베이터는 어디에 있나요?", hl:[{text:"Where's",kind:'expr'},{text:"elevator",kind:'vocab'}] } },
+    dialogue:{ title:"호텔 로비", focus:"체크인하고 안내 받기", turns:[
+      { s:'A', text:"You're all set — room 402, on the fourth floor." },
+      { s:'B', text:"Thanks! Where's the elevator?", learned:E.where, hl:[{text:"Where's",kind:'expr'},{text:"elevator",kind:'vocab'}] },
+      { s:'A', text:"Just past the lounge on your right. Anything else?" },
       { s:'B', quiz:true, options:[
-        { text:"Hmm, can I get it with soy milk instead?", correct:true, why:"오트밀크가 품절이라, 두유(soy)로 바꿔 달라고 자연스럽게 요청했어요.", learned:{ name:"Can I get it with ~?", note:"~랑 같이 주실 수 있나요?" } },
-        { text:"Oh, then I'll have oat milk, please.", why:"‘I'll have ~’는 배운 표현이지만, 오트밀크는 방금 <b>품절</b>이라고 했어요. 들었다면 고를 수 없죠." },
-        { text:"Great, oat milk it is!", why:"오트밀크가 품절이라 했는데 오트밀크로 하겠다는 건 안 들은 거예요." },
-        { text:"No thanks, I'll pay in cash.", why:"우유 얘기 중인데 갑자기 결제 얘기는 맥락이 안 맞아요." },
+        { text:"Yes, can I get a luggage cart?", correct:true, learned:E.get, hl:[{text:"can I get",kind:'expr'}], why:"짐 옮길 카트가 필요해 정중히 요청했어요." },
+        { text:"Do you have the elevator?", hl:[{text:"Do you have",kind:'expr'},{text:"elevator",kind:'vocab'}], why:"‘Do you have ~?’는 배운 표현이지만, 엘리베이터는 위치를 묻지 있냐고 묻지 않아요." },
+        { text:"It's on the fourth floor, right?", why:"방금 A가 알려준 정보를 되묻는 건 어색해요." },
+        { text:"Sure, I'll take the stairs to the moon.", why:"대화와 상관없는 엉뚱한 답이에요." },
       ]},
-      { s:'A', text:"Of course, soy is no problem. Would you like a pastry with that?" },
+      { s:'A', text:"Of course, I'll send one up. Need anything to drink?" },
       { s:'B', quiz:true, options:[
-        { text:"Maybe — what do you recommend?", correct:true, why:"먹을 것을 물어봐서, 추천을 되물으며 자연스럽게 대화를 이어갔어요.", learned:{ name:"What do you recommend?", note:"무엇을 추천하시나요?" } },
-        { text:"Yes, I'll have another latte.", why:"‘I'll have ~’는 익숙하지만, A는 <b>먹을 것(pastry)</b>을 물었는데 음료를 주문했어요." },
-        { text:"Sure, can I get it with soy milk?", why:"‘Can I get it with ~?’도 배운 표현이지만, 페이스트리에 두유를 넣어달라는 건 맥락이 안 맞아요." },
-        { text:"No, I've already climbed Everest.", why:"대화와 상관없는 엉뚱한 답이에요." },
+        { text:"Do you have any sparkling water?", correct:true, learned:E.have, hl:[{text:"Do you have",kind:'expr'}], why:"마실 것을 물어봐서, 있는지 정중히 물었어요." },
+        { text:"I'll have the fourth floor, please.", hl:[{text:"I'll have",kind:'expr'}], why:"‘I'll have ~’는 배운 표현이지만, 층을 주문할 순 없어요." },
+        { text:"Where's the water?", hl:[{text:"Where's",kind:'expr'}], why:"‘Where's ~?’는 배웠지만, 주문도 안 한 물의 위치부터 묻는 건 어색해요." },
+        { text:"No thanks, I'll return it tomorrow.", why:"무엇을 반납한다는 건지 맥락이 없어요." },
       ]},
-      { s:'A', text:"The almond croissant is a favorite. Is that for here or to go?" },
-      { s:'B', quiz:true, options:[
-        { text:"Sounds good — to go, please.", correct:true, why:"‘여기서/포장’을 물었고, 포장(to go)을 골랐어요.", learned:{ name:"To go.", note:"가져갈게요." } },
-        { text:"What do you recommend — here or to go?", why:"‘What do you recommend?’는 배운 표현이지만, 여기서 먹을지 포장할지는 <b>본인이</b> 정하는 거예요." },
-        { text:"Actually, I'll have two croissants.", why:"여기/포장을 물었는데 추가 주문으로 답했어요." },
-        { text:"Sure, two sugars please.", why:"여기/포장을 물었는데 설탕 얘기예요." },
-      ]},
-    ],
+    ]},
   },
   {
-    title: "Lost near the station", focus: "길 묻고 교통편 확인하기",
-    turns: [
-      { s:'A', text:"You look a little lost — can I help you find something?" },
-      { s:'B', text:"Oh, thanks! How do I get to the train station?", learned:{ name:"How do I get ~?", note:"~에 어떻게 가나요?" } },
-      { s:'A', text:"Sure. Go straight two blocks and turn left at the bakery." },
+    vocab:{ word:"latte", ko:"라떼" },
+    expr:{ ...E.ill, arrange:{ en:"I'll have a latte.", ko:"라떼로 주세요.", hl:[{text:"I'll have",kind:'expr'},{text:"latte",kind:'vocab'}] } },
+    dialogue:{ title:"카페 주문", focus:"카페에서 주문하기", turns:[
+      { s:'A', text:"Hi! What can I get started for you?" },
+      { s:'B', text:"Hi! I'll have a latte, please.", learned:E.ill, hl:[{text:"I'll have",kind:'expr'},{text:"latte",kind:'vocab'}] },
+      { s:'A', text:"Great. We're out of oat milk today — is regular okay?" },
       { s:'B', quiz:true, options:[
-        { text:"Got it. How long does it take to get there?", correct:true, why:"길 안내를 이해한 뒤, 소요 시간을 물으며 대화를 이어갔어요.", learned:{ name:"How long does it take to get to ~?", note:"~까지 얼마나 걸리나요?" } },
-        { text:"Thanks — where's the ticket machine?", why:"‘Where's ~?’는 배운 표현이지만, 아직 역에 도착도 안 했어요(길 안내를 방금 받음)." },
+        { text:"Hmm, can I get it with soy milk instead?", correct:true, learned:E.get, hl:[{text:"can I get",kind:'expr'}], why:"오트밀크가 품절이라 두유로 바꿔 달라고 요청했어요." },
+        { text:"Then I'll have oat milk, please.", hl:[{text:"I'll have",kind:'expr'}], why:"‘I'll have ~’는 배운 표현이지만, 오트밀크는 방금 품절이라고 했어요." },
+        { text:"Do you have the latte?", hl:[{text:"Do you have",kind:'expr'},{text:"latte",kind:'vocab'}], why:"방금 라떼를 주문했는데 있냐고 되묻는 건 어색해요." },
+        { text:"No, I've already climbed Everest.", why:"대화와 상관없는 답이에요." },
+      ]},
+      { s:'A', text:"Sure, soy's fine. Anything to eat?" },
+      { s:'B', quiz:true, options:[
+        { text:"Do you have any croissants?", correct:true, learned:E.have, hl:[{text:"Do you have",kind:'expr'}], why:"먹을 것을 물어봐서, 있는지 물었어요." },
+        { text:"Where's my latte?", hl:[{text:"Where's",kind:'expr'},{text:"latte",kind:'vocab'}], why:"‘Where's ~?’는 배웠지만, 아직 만들지도 않은 라떼를 찾는 건 성급해요." },
+        { text:"Can I get the oat milk back?", hl:[{text:"Can I get",kind:'expr'}], why:"품절이라 바꿨는데 다시 달라는 건 앞뒤가 안 맞아요." },
+        { text:"Sure, two sugars please.", why:"먹을 것을 물었는데 설탕 얘기는 살짝 빗나가요." },
+      ]},
+    ]},
+  },
+  {
+    vocab:{ word:"station", ko:"(기차)역" },
+    expr:{ ...E.howget, arrange:{ en:"How do I get to the station?", ko:"역에 어떻게 가나요?", hl:[{text:"How do I get",kind:'expr'},{text:"station",kind:'vocab'}] } },
+    dialogue:{ title:"길 묻기", focus:"길과 위치 묻기", turns:[
+      { s:'A', text:"You look lost — need a hand?" },
+      { s:'B', text:"Oh, thanks! How do I get to the station?", learned:E.howget, hl:[{text:"How do I get",kind:'expr'},{text:"station",kind:'vocab'}] },
+      { s:'A', text:"Go straight two blocks, then turn left at the bakery." },
+      { s:'B', quiz:true, options:[
+        { text:"Thanks! Do you have a map?", correct:true, learned:E.have, hl:[{text:"Do you have",kind:'expr'}], why:"길을 들은 뒤, 지도가 있는지 물어 더 확실히 하려 했어요." },
         { text:"Turn right at the bakery, thanks!", why:"A는 <b>왼쪽(left)</b>이라고 했어요. 오른쪽이 아니에요." },
+        { text:"How do I get to the bakery?", hl:[{text:"How do I get",kind:'expr'}], why:"‘How do I get ~?’는 배웠지만, 빵집은 방금 길 안내에 나온 지점이에요." },
         { text:"Great, I'll buy ten cakes!", why:"빵집이 나왔다고 케이크 열 개는 엉뚱하죠." },
       ]},
-      { s:'A', text:"About ten minutes on foot. Are you in a hurry?" },
+      { s:'A', text:"Sure, here's a map. It's about a ten-minute walk." },
       { s:'B', quiz:true, options:[
-        { text:"A little — when's the next train?", correct:true, why:"급하냐는 물음에 답하며, 다음 기차 시간을 물었어요.", learned:{ name:"When's the next train?", note:"다음 기차가 언제인가요?" } },
-        { text:"How long does it take by bus, then?", why:"‘How long does it take ~?’는 배운 표현이지만, 방금 <b>도보 10분</b>이라고 들었고 버스 얘긴 없었어요." },
-        { text:"Yes, five blocks that way.", why:"B는 길을 <b>묻는</b> 쪽이에요. 길안내를 하면 안 되죠." },
-        { text:"No thanks, I'm not hungry.", why:"급한지 물었는데 배고픔 얘기는 엉뚱해요." },
-      ]},
-      { s:'A', text:"There's one in fifteen minutes. You can buy tickets inside." },
-      { s:'B', quiz:true, options:[
-        { text:"Perfect. Where's the ticket machine?", correct:true, why:"안에서 표를 살 수 있다는 안내를 듣고, 매표기 위치를 물었어요.", learned:{ name:"Where's ~?", note:"~은 어디인가요?" } },
-        { text:"Wait, when's the next train?", why:"‘When's the next train?’는 배운 표현이지만, 방금 <b>15분 뒤</b>라고 알려줬어요(안 들은 셈이에요)." },
-        { text:"Which way was the bakery again?", why:"목적지는 <b>역</b>인데 빵집을 다시 묻는 건 엉뚱해요." },
+        { text:"Perfect. Where's the ticket machine?", correct:true, learned:E.where, hl:[{text:"Where's",kind:'expr'}], why:"역에서 표를 살 매표기 위치를 물었어요." },
+        { text:"How do I get to the map?", hl:[{text:"How do I get",kind:'expr'}], why:"지도로 가는 길을 물을 순 없어요(엉뚱)." },
+        { text:"Can I get a taxi instead?", hl:[{text:"Can I get",kind:'expr'}], why:"방금 걸어서 10분이라고 했는데 택시로 바꾸는 건 흐름에 안 맞아요." },
         { text:"Thanks, I'll return it tomorrow.", why:"무엇을 반납한다는 건지 맥락이 없어요." },
       ]},
-    ],
+    ]},
+  },
+  {
+    vocab:{ word:"charger", ko:"충전기" },
+    expr:{ ...E.have, arrange:{ en:"Do you have a charger?", ko:"충전기가 있나요?", hl:[{text:"Do you have",kind:'expr'},{text:"charger",kind:'vocab'}] } },
+    dialogue:{ title:"프런트 데스크", focus:"필요한 물건 있는지 묻기", turns:[
+      { s:'A', text:"Front desk, how can I help?" },
+      { s:'B', text:"Hi, do you have a phone charger?", learned:E.have, hl:[{text:"do you have",kind:'expr'},{text:"charger",kind:'vocab'}] },
+      { s:'A', text:"We do! I can send one up. Which room?" },
+      { s:'B', quiz:true, options:[
+        { text:"Room 402. Can I get some batteries too?", correct:true, learned:E.get, hl:[{text:"Can I get",kind:'expr'}], why:"방 번호를 말하고, 배터리도 받을 수 있는지 함께 요청했어요." },
+        { text:"Where's my phone charger?", hl:[{text:"Where's",kind:'expr'},{text:"charger",kind:'vocab'}], why:"‘Where's ~?’는 배웠지만, 아직 보내주지도 않은 걸 어디 있냐 묻는 건 성급해요." },
+        { text:"Do you have my room?", hl:[{text:"Do you have",kind:'expr'}], why:"방이 있냐고 묻는 건 어색해요(엉뚱)." },
+        { text:"Sure, I'll return it tomorrow.", why:"맥락 없는 답이에요." },
+      ]},
+      { s:'A', text:"Got it. Anything else you need?" },
+      { s:'B', quiz:true, options:[
+        { text:"Do you have an adapter as well?", correct:true, learned:E.have, hl:[{text:"Do you have",kind:'expr'}], why:"필요한 게 더 있냐고 물어서, 어댑터가 있는지 물었어요." },
+        { text:"I'll have room 402, please.", hl:[{text:"I'll have",kind:'expr'}], why:"‘I'll have ~’는 배웠지만, 방을 주문할 순 없어요." },
+        { text:"How do I get a charger?", hl:[{text:"How do I get",kind:'expr'},{text:"charger",kind:'vocab'}], why:"‘How do I get ~?’는 배웠지만, 이미 보내준다고 했어요." },
+        { text:"No thanks, I've already climbed Everest.", why:"엉뚱한 답이에요." },
+      ]},
+    ]},
+  },
+  {
+    vocab:{ word:"towels", ko:"수건" },
+    expr:{ ...E.get, arrange:{ en:"Can I get some towels?", ko:"수건 좀 받을 수 있을까요?", hl:[{text:"Can I get",kind:'expr'},{text:"towels",kind:'vocab'}] } },
+    dialogue:{ title:"룸서비스", focus:"객실에서 요청하기", turns:[
+      { s:'A', text:"Housekeeping — did you need something?" },
+      { s:'B', text:"Yes, can I get some extra towels?", learned:E.get, hl:[{text:"can I get",kind:'expr'},{text:"towels",kind:'vocab'}] },
+      { s:'A', text:"Of course. How many would you like?" },
+      { s:'B', quiz:true, options:[
+        { text:"Two, please. Do you have a hairdryer too?", correct:true, learned:E.have, hl:[{text:"Do you have",kind:'expr'}], why:"수건 개수를 답하고, 드라이어가 있는지 함께 물었어요." },
+        { text:"Where's the towels?", hl:[{text:"Where's",kind:'expr'},{text:"towels",kind:'vocab'}], why:"‘Where's ~?’는 배웠지만, 방금 가져다 준다고 했어요." },
+        { text:"How do I get the towels?", hl:[{text:"How do I get",kind:'expr'},{text:"towels",kind:'vocab'}], why:"‘How do I get ~?’는 배웠지만, 물건 받는 방법을 그렇게 묻진 않아요." },
+        { text:"Sure, I'll race you there!", why:"엉뚱한 답이에요." },
+      ]},
+      { s:'A', text:"There's one in the closet, but I'll bring a fresh one. Anything else?" },
+      { s:'B', quiz:true, options:[
+        { text:"Can I get some bottled water?", correct:true, learned:E.get, hl:[{text:"Can I get",kind:'expr'}], why:"더 필요한 게 있냐고 해서, 생수를 받을 수 있는지 물었어요." },
+        { text:"I'll have the closet, please.", hl:[{text:"I'll have",kind:'expr'}], why:"‘I'll have ~’는 배웠지만, 벽장을 주문할 순 없어요." },
+        { text:"Do you have my towels yet?", hl:[{text:"Do you have",kind:'expr'},{text:"towels",kind:'vocab'}], why:"방금 가져다준다고 했는데 벌써 있냐고 재촉하는 건 어색해요." },
+        { text:"No thanks, I'll return it tomorrow.", why:"맥락 없는 답이에요." },
+      ]},
+    ]},
+  },
+  {
+    vocab:{ word:"umbrella", ko:"우산" },
+    expr:{ ...E.borrow, arrange:{ en:"Can I borrow an umbrella?", ko:"우산을 빌릴 수 있을까요?", hl:[{text:"Can I borrow",kind:'expr'},{text:"umbrella",kind:'vocab'}] } },
+    dialogue:{ title:"친구에게 빌리기", focus:"물건 빌려 달라고 하기", turns:[
+      { s:'A', text:"Ready to head out? It's pouring outside." },
+      { s:'B', text:"Oh no. Can I borrow an umbrella?", learned:E.borrow, hl:[{text:"Can I borrow",kind:'expr'},{text:"umbrella",kind:'vocab'}] },
+      { s:'A', text:"Sure, take the blue one by the door. Need anything else?" },
+      { s:'B', quiz:true, options:[
+        { text:"Thanks! Can I borrow a bag too?", correct:true, learned:E.borrow, hl:[{text:"Can I borrow",kind:'expr'}], why:"우산을 빌린 김에, 가방도 빌릴 수 있는지 물었어요." },
+        { text:"Can I get the rain, please?", hl:[{text:"Can I get",kind:'expr'}], why:"비를 달라고 할 순 없죠(엉뚱)." },
+        { text:"Where's the blue one?", hl:[{text:"Where's",kind:'expr'}], why:"‘Where's ~?’는 배웠지만, 방금 문 옆이라고 알려줬어요." },
+        { text:"Sure, I'll return the moon tomorrow.", why:"엉뚱한 답이에요." },
+      ]},
+      { s:'A', text:"Here you go. Oh, do you have your keys?" },
+      { s:'B', quiz:true, options:[
+        { text:"Let me check — do you have a spare?", correct:true, learned:E.have, hl:[{text:"do you have",kind:'expr'}], why:"열쇠가 있냐고 물어서, 여분이 있는지 되물었어요." },
+        { text:"I'll have the umbrella, please.", hl:[{text:"I'll have",kind:'expr'},{text:"umbrella",kind:'vocab'}], why:"‘I'll have ~’는 배웠지만, 이미 우산은 빌렸어요." },
+        { text:"Can I borrow your keys forever?", hl:[{text:"Can I borrow",kind:'expr'}], why:"‘Can I borrow ~?’는 잠깐 빌리는 표현이라 ‘forever(영원히)’와 안 어울려요." },
+        { text:"No thanks, I'm not hungry.", why:"열쇠 얘기에 배고픔은 엉뚱해요." },
+      ]},
+    ]},
   },
 ];
 
-// 표현 배열 학습 → 그 표현 기준 리스닝 (실제 학습 흐름)
-const FLOWS = [
-  { expr:{ name:"Can I get it with ~?", note:"~랑 같이 주실 수 있나요?" }, arrange:{ en:"Can I get it with soy milk?", ko:"두유랑 같이 주실 수 있나요?" }, dialogue:0 },
-  { expr:{ name:"How do I get ~?", note:"~에 어떻게 가나요?" }, arrange:{ en:"How do I get to the station?", ko:"역에 어떻게 가나요?" }, dialogue:1 },
-];
+// ── 강조 마크업 ──────────────────────────────────────────────────────────────
+function escapeHtml(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function markup(text, hl){
+  if(!hl || !hl.length) return escapeHtml(text);
+  const spans = hl.map(h=>({ ...h, i:text.indexOf(h.text) })).filter(h=>h.i>=0).sort((a,b)=>a.i-b.i);
+  let out='', pos=0;
+  for(const s of spans){
+    if(s.i < pos) continue; // 겹치면 건너뜀
+    out += escapeHtml(text.slice(pos, s.i));
+    out += s.kind==='vocab'
+      ? `<u class="hl-vocab">${escapeHtml(s.text)}</u>`
+      : `<mark class="hl-expr">${escapeHtml(s.text)}</mark>`;
+    pos = s.i + s.text.length;
+  }
+  out += escapeHtml(text.slice(pos));
+  return out;
+}
 
 // ── 음성 ──────────────────────────────────────────────────────────────────
 // 실제 대화처럼 A/B에 서로 다른 목소리(가능하면 여성/남성)를 배정한다.
@@ -232,8 +357,8 @@ function pickAuto(){
   const pool = en.slice().sort((a,b)=>rank(b)-rank(a));
   const fem = pool.filter(v=>FEMALE.test(v.name));
   const male = pool.filter(v=>MALE.test(v.name));
-  vA = fem[0] || pool[0];                                   // A: 여성 우선
-  vB = male.find(v=>v!==vA) || pool.find(v=>v!==vA) || vA;  // B: 남성(또는 A와 다른) 우선
+  vA = fem[0] || pool[0];
+  vB = male.find(v=>v!==vA) || pool.find(v=>v!==vA) || vA;
 }
 function chooseVoices(){
   voices = window.speechSynthesis ? speechSynthesis.getVoices() : [];
@@ -274,9 +399,9 @@ const wait = ms => new Promise(r=>setTimeout(r,ms));
 
 // ── 화면 ──────────────────────────────────────────────────────────────────
 const el=id=>document.getElementById(id);
-const home=el('home'), arrange=el('arrange'), chat=el('chat'), quiz=el('quiz'), done=el('done'), topbar=el('topbar');
-let current=null, curFlow=null, lastA='', correctCount=0, learnedSeen=[], runId=0;
-function show(...ids){ [home,arrange,chat,quiz,done,topbar].forEach(n=>n.classList.add('hidden')); ids.forEach(n=>n.classList.remove('hidden')); }
+const home=el('home'), vocab=el('vocab'), arrange=el('arrange'), chat=el('chat'), quiz=el('quiz'), done=el('done'), topbar=el('topbar');
+let curExample=null, current=null, lastA='', correctCount=0, learnedSeen=[], runId=0;
+function show(...ids){ [home,vocab,arrange,chat,quiz,done,topbar].forEach(n=>n.classList.add('hidden')); ids.forEach(n=>n.classList.remove('hidden')); }
 function noteLearned(x){ if(x && !learnedSeen.some(y=>y.name===x.name)) learnedSeen.push(x); }
 function scrollToBottom(){ requestAnimationFrame(()=>{ chat.scrollTo({top:chat.scrollHeight, behavior:'smooth'}); }); }
 function showProgress(on){ el('progress').style.visibility = on?'visible':'hidden'; }
@@ -284,22 +409,29 @@ function shuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){const j=Math.flo
 
 function renderHome(){
   show(home); fillVoicePicker();
-  const fl=el('flowList'); fl.innerHTML='';
-  FLOWS.forEach((f,i)=>{ const b=document.createElement('button'); b.className='dlg-card';
-    b.innerHTML=`<div class="t">${f.expr.name}</div><div class="f">${DIALOGUES[f.dialogue].title} · ${f.expr.note}</div><span class="step">배열 → 리스닝</span>`;
-    b.onclick=()=>startFlow(i); fl.appendChild(b); });
-  const dl=el('dlgList'); dl.innerHTML='';
-  DIALOGUES.forEach((d,i)=>{ const b=document.createElement('button'); b.className='dlg-card';
-    b.innerHTML=`<div class="t">${d.title}</div><div class="f">${d.focus}</div>`; b.onclick=()=>startDialogue(i); dl.appendChild(b); });
+  const list=el('exList'); list.innerHTML='';
+  EXAMPLES.forEach((ex,i)=>{ const b=document.createElement('button'); b.className='ex-card';
+    b.innerHTML=`<div class="t">${ex.expr.name}</div><div class="f">어휘 ${ex.vocab.word} · ${ex.dialogue.title}</div><span class="step">어휘 → 표현 → 리스닝</span>`;
+    b.onclick=()=>startExample(i); list.appendChild(b); });
 }
 
-// ── 배열 학습 → 리스닝 ─────────────────────────────────────────────────────
-function startFlow(i){ curFlow=FLOWS[i]; showArrange(curFlow); }
-function showArrange(flow){
+// 1) 어휘 ────────────────────────────────────────────────────────────────────
+function startExample(i){ curExample=EXAMPLES[i]; showVocab(); }
+function showVocab(){
+  runId++; stopAudio(); show(topbar, vocab); showProgress(false);
+  el('vWord').textContent=curExample.vocab.word;
+  el('vKo').textContent=curExample.vocab.ko;
+  el('vPlay').onclick=()=>speak(curExample.vocab.word,'A');
+  el('vNext').onclick=()=>showArrange();
+}
+
+// 2) 표현 배열 ────────────────────────────────────────────────────────────────
+function showArrange(){
   runId++; stopAudio(); show(topbar, arrange); showProgress(false);
-  el('arrExpr').innerHTML=`<span class="k">배운 표현</span><b>${flow.expr.name}</b> — ${flow.expr.note}`;
-  el('arrKo').textContent=flow.arrange.ko;
-  const tokens=flow.arrange.en.trim().split(/\s+/);
+  const expr=curExample.expr;
+  el('arrExpr').innerHTML=`<span class="k">배운 표현</span><b>${expr.name}</b> — ${expr.note}`;
+  el('arrKo').textContent=expr.arrange.ko;
+  const tokens=expr.arrange.en.trim().split(/\s+/);
   let bank=shuffle(tokens.map((t,i)=>({id:i,text:t}))), ans=[], checked=false;
   const bankEl=el('arrBank'), ansEl=el('arrAnswer'), afterEl=el('arrAfter');
   const mk=(t,cls,on)=>{ const b=document.createElement('button'); b.className=cls; b.textContent=t; b.onclick=on; return b; };
@@ -311,14 +443,18 @@ function showArrange(flow){
     bankEl.innerHTML=''; bank.forEach(w=> bankEl.appendChild(mk(w.text,'ex-chip',()=>{ if(checked)return; bank=bank.filter(x=>x.id!==w.id); ans.push(w); render(); })));
     afterEl.innerHTML='';
     if(!checked){ const c=mk('확인','next-btn',()=>{ checked=true; render(); }); c.disabled=bank.length>0; afterEl.appendChild(c); }
-    else { const p=document.createElement('div'); p.className='ex-result'; p.style.color=ok?'#2e9e57':'#d1584e';
-      p.innerHTML=ok?'정답이에요! 🎉':`정답: ${tokens.join(' ')}`; afterEl.appendChild(p);
-      afterEl.appendChild(mk('이 표현으로 리스닝 하기 ▶','next-btn',()=>startDialogue(flow.dialogue))); }
+    else {
+      const r=document.createElement('div'); r.className='ex-result'; r.style.color=ok?'#2e9e57':'#d1584e';
+      r.textContent=ok?'정답이에요! 🎉':`정답: ${tokens.join(' ')}`; afterEl.appendChild(r);
+      const sent=document.createElement('div'); sent.className='ex-sentence'; sent.innerHTML=markup(expr.arrange.en, expr.arrange.hl); afterEl.appendChild(sent);
+      const leg=document.createElement('div'); leg.className='legend'; leg.innerHTML='<mark class="hl-expr">형광펜</mark> 배운 표현 · <u class="hl-vocab">밑줄</u> 배운 어휘'; afterEl.appendChild(leg);
+      afterEl.appendChild(mk('이 표현으로 리스닝 하기 ▶','next-btn',()=>startDialogue(curExample.dialogue)));
+    }
   }
   render();
 }
 
-// ── 리스닝(핑퐁) ───────────────────────────────────────────────────────────
+// 3) 리스닝(핑퐁) ─────────────────────────────────────────────────────────────
 function addBubble(who){
   const info = who==='B' ? {n:'B',a:'🐰'} : {n:'A',a:'🐻'};
   const m=document.createElement('div'); m.className='msg'+(who==='B'?' b':'');
@@ -326,35 +462,32 @@ function addBubble(who){
     <div class="bubble hidden-bubble"><span class="wave"><i></i><i></i><i></i></span></div>`;
   chat.appendChild(m); scrollToBottom(); return m.querySelector('.bubble');
 }
-function addLearnChip(x, who){
-  const c=document.createElement('div'); c.className='learn-chip'+(who==='B'?' b':'');
-  c.innerHTML=`<span class="k">배운 표현</span><b>${x.name}</b> — ${x.note}`; chat.appendChild(c); scrollToBottom();
-}
+// 다 들은 뒤 말풍선을 텍스트로 열고, 배운 표현·어휘를 형광펜·밑줄로 강조.
+function revealBubble(bub, text, hl){ bub.classList.remove('hidden-bubble','playing'); bub.classList.add('revealed'); bub.innerHTML=markup(text, hl); }
 function correctOpt(turn){ return turn.options.find(o=>o.correct); }
 function setProgress(n){ const t=current.turns.filter(x=>x.quiz).length; el('barCount').textContent=`${n}/${t}`; el('barFill').style.width=`${Math.round(n/t*100)}%`; }
 
-async function startDialogue(i){
+async function startDialogue(dialogue){
   const myRun=++runId; stopAudio();
-  current=DIALOGUES[i]; correctCount=0; learnedSeen=[]; chat.innerHTML=''; show(topbar,chat); showProgress(true); setProgress(0);
+  current=dialogue; correctCount=0; learnedSeen=[]; chat.innerHTML=''; show(topbar,chat); showProgress(true); setProgress(0);
   let quizDone=0;
-  for(const turn of current.turns){
+  for(const turn of dialogue.turns){
     if(myRun!==runId) return;
     if(!turn.quiz){
       const bub=addBubble(turn.s); if(turn.s==='A') lastA=turn.text;
       bub.classList.add('playing'); await speak(turn.text, turn.s);
       if(myRun!==runId) return; bub.classList.remove('playing');
-      // 표현은 문장을 다 들은 뒤에 짚어준다(들으면서 읽는 방해 방지).
-      if(turn.learned){ noteLearned(turn.learned); addLearnChip(turn.learned, turn.s); await wait(650); }
+      if(turn.hl){ if(turn.learned) noteLearned(turn.learned); revealBubble(bub, turn.text, turn.hl); scrollToBottom(); await wait(750); }
       else await wait(250);
     } else {
       show(topbar,chat,quiz); scrollToBottom();
-      const gotCorrect=await askQuiz(turn, myRun); if(myRun!==runId) return;
-      if(gotCorrect) correctCount++;
+      const ok=await askQuiz(turn, myRun); if(myRun!==runId) return;
+      if(ok) correctCount++;
       quiz.classList.add('hidden'); el('quizAfter').innerHTML='';
       const co=correctOpt(turn); const bub=addBubble('B');
       bub.classList.add('playing'); await speak(co.text,'B'); if(myRun!==runId) return; bub.classList.remove('playing');
-      if(co.learned) noteLearned(co.learned);
-      quizDone++; setProgress(quizDone); await wait(300);
+      if(co.hl){ if(co.learned) noteLearned(co.learned); revealBubble(bub, co.text, co.hl); scrollToBottom(); }
+      quizDone++; setProgress(quizDone); await wait(500);
     }
   }
   if(myRun!==runId) return; showDone();
@@ -367,18 +500,21 @@ function askQuiz(turn, myRun){
     const tag = ok => ok?'<span class="tag" style="color:#2e9e57">✓ 정답</span>':'<span class="tag" style="color:#d1584e">✕</span>';
     opts.forEach(o=>{
       const b=document.createElement('button'); b.className='opt';
-      b.innerHTML=`<div>${o.text}</div><div class="why"></div>`;
+      b.innerHTML=`<div class="opt-text"></div><div class="why"></div>`;
+      b.querySelector('.opt-text').textContent=o.text;
       b.onclick=()=>{
         if(!answered){
           answered=true;
-          Array.from(box.children).forEach(c=>{ const opt=opts.find(x=>x.text===c.querySelector('div').textContent);
+          Array.from(box.children).forEach(c=>{ const opt=opts.find(x=>x.text===c.querySelector('.opt-text').textContent);
+            if(opt.hl) c.querySelector('.opt-text').innerHTML=markup(opt.text, opt.hl); // 답변 후 강조
             c.querySelector('.why').innerHTML=tag(!!opt.correct)+opt.why; });
           if(o.correct) b.classList.add('correct'); else b.classList.add('wrong');
-          const cb=Array.from(box.children).find(c=>c.querySelector('div').textContent===correctOpt(turn).text);
-          cb.classList.add('correct'); b.classList.add('show-why'); cb.classList.add('show-why');
+          const cb=Array.from(box.children).find(c=>c.querySelector('.opt-text').textContent===correctOpt(turn).text);
+          cb.classList.add('correct','show-why'); b.classList.add('show-why');
           const after=el('quizAfter'); const co=correctOpt(turn);
           if(co.learned){ const lb=document.createElement('div'); lb.className='learned-box';
-            lb.innerHTML=`<span class="k">배운 표현</span>정답은 이 표현을 <b>상황에 맞게</b> 썼어요 — <b>${co.learned.name}</b><br>${co.learned.note}`; after.appendChild(lb); }
+            lb.innerHTML=`<span class="k">배운 표현</span>정답은 이 표현을 <b>상황에 맞게</b> 썼어요 — <mark class="hl-expr">${co.learned.name}</mark> ${co.learned.note}`; after.appendChild(lb); }
+          const leg=document.createElement('div'); leg.className='legend'; leg.innerHTML='<mark class="hl-expr">형광펜</mark> 배운 표현 · <u class="hl-vocab">밑줄</u> 배운 어휘'; after.appendChild(leg);
           const tip=document.createElement('div'); tip.className='hint-tap'; tip.textContent='다른 선택지를 눌러 왜 아닌지 볼 수 있어요'; after.appendChild(tip);
           const nx=document.createElement('button'); nx.className='next-btn'; nx.textContent='다음 ▶'; nx.onclick=()=>{ if(myRun===runId) resolve(!!o.correct); }; after.appendChild(nx);
         } else { b.classList.toggle('show-why'); }
@@ -401,7 +537,7 @@ function showDone(){
 function leave(){ runId++; stopAudio(); renderHome(); }
 el('backBtn').onclick=leave;
 el('doneList').onclick=leave;
-el('doneRetry').onclick=()=>{ if(curFlow && current===DIALOGUES[curFlow.dialogue]) startFlow(FLOWS.indexOf(curFlow)); else startDialogue(DIALOGUES.indexOf(current)); };
+el('doneRetry').onclick=()=>startDialogue(curExample.dialogue);
 el('replayBtn').onclick=()=>{ if(lastA) speak(lastA,'A'); };
 window.addEventListener('pagehide', stopAudio);
 renderHome();
