@@ -1,6 +1,7 @@
 import { useMemo, useRef, useState } from 'react';
 import type { Topic } from '../data/types';
-import { pickKeyScript } from '../lib/keySentence';
+import { pickKeySentence } from '../lib/keySentence';
+import { quizHintFor } from '../lib/quizHint';
 import { markSolved } from '../lib/progress';
 import './Quiz.css';
 import './ExerciseQuiz.css';
@@ -10,7 +11,7 @@ const normalize = (s: string) => s.toLowerCase().replace(/[^a-z0-9']+/g, ' ').tr
 
 // 오디오를 듣고 문장을 직접 타이핑한다.
 export function DictationQuiz({ topic, onDone }: { topic: Topic; onDone: () => void }) {
-  const key = useMemo(() => pickKeyScript(topic.scripts), [topic]);
+  const key = useMemo(() => pickKeySentence(topic.scripts, quizHintFor(topic.topicSeq)), [topic]);
   const [value, setValue] = useState('');
   const [checked, setChecked] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);

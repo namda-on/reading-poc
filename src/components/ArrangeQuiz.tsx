@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import type { Topic } from '../data/types';
-import { pickKeyScript } from '../lib/keySentence';
+import { pickKeySentence } from '../lib/keySentence';
+import { quizHintFor } from '../lib/quizHint';
 import { markSolved } from '../lib/progress';
 import './Quiz.css';
 import './ExerciseQuiz.css';
@@ -21,7 +22,7 @@ function shuffle<T>(arr: T[]): T[] {
 
 // 한국어 뜻을 주고, 뒤섞인 영어 단어를 순서대로 탭해 문장을 완성한다.
 export function ArrangeQuiz({ topic, onDone }: { topic: Topic; onDone: () => void }) {
-  const key = useMemo(() => pickKeyScript(topic.scripts), [topic]);
+  const key = useMemo(() => pickKeySentence(topic.scripts, quizHintFor(topic.topicSeq)), [topic]);
   const tokens = useMemo(() => key.english.trim().split(/\s+/), [key]);
   const [bank, setBank] = useState<Word[]>(() => shuffle(tokens.map((t, i) => ({ id: i, text: t }))));
   const [answer, setAnswer] = useState<Word[]>([]);
