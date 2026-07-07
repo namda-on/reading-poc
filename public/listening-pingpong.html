@@ -23,7 +23,9 @@
   .home h1 { font-size:24px; margin:6px 0 4px; color:#25406a; }
   .home p.sub { color:#3a567d; margin:0 0 16px; font-size:14px; }
   .home h2.grp { font-size:13px; font-weight:800; color:#2f4a70; margin:20px 0 8px; }
+  .voice-box { display:flex; flex-direction:column; gap:8px; }
   .voice-row { display:flex; align-items:center; gap:8px; font-size:13px; color:#3a567d; background:#ffffff88; border-radius:12px; padding:8px 12px; }
+  .voice-row span { min-width:62px; font-weight:700; }
   .voice-row select { flex:1; padding:8px; border-radius:10px; border:1px solid #cddcf1; background:#fff; font-size:13px; }
   .dlg-card { display:block; width:100%; text-align:left; background:var(--card); border:none; border-radius:16px;
     padding:15px 18px; margin-bottom:10px; cursor:pointer; box-shadow:0 3px 12px rgba(30,60,110,.12); }
@@ -110,7 +112,10 @@
   <div class="home" id="home">
     <h1>리스닝 핑퐁</h1>
     <p class="sub">대화를 <b>듣고</b>, B가 할 말을 골라 대화를 완성하세요.</p>
-    <div class="voice-row"><span>🔊 음성</span><select id="voiceSel"><option value="">자동(추천)</option></select></div>
+    <div class="voice-box">
+      <div class="voice-row"><span>🐻 A 음성</span><select id="voiceSelA"></select></div>
+      <div class="voice-row"><span>🐰 B 음성</span><select id="voiceSelB"></select></div>
+    </div>
     <h2 class="grp">표현 학습 → 리스닝 (실제 흐름)</h2>
     <div id="flowList"></div>
     <h2 class="grp">리스닝만</h2>
@@ -215,35 +220,50 @@ const FLOWS = [
 ];
 
 // ── 음성 ──────────────────────────────────────────────────────────────────
-let voices=[], vA=null, vB=null, chosenVoice='';
+// 실제 대화처럼 A/B에 서로 다른 목소리(가능하면 여성/남성)를 배정한다.
+const NOVELTY=/bad news|good news|bahh|bells|boing|bubbles|cellos|jester|organ|superstar|trinoids|wobble|zarvox|whisper/i;
+const FEMALE=/samantha|karen|moira|tessa|catherine|martha|kathy|nicky|shelley|sandy|flo|grandma|victoria|fiona|allison|ava|susan|zoe|serena|female/i;
+const MALE=/aaron|daniel|fred|rishi|arthur|albert|gordon|ralph|reed|eddy|rocko|grandpa|junior|alex|thomas|oliver|male/i;
+let voices=[], vA=null, vB=null, chosenA='', chosenB='';
+function pickAuto(){
+  const en = voices.filter(v=>/en(-|_)/i.test(v.lang) && !NOVELTY.test(v.name));
+  if(!en.length){ vA=vB=null; return; }
+  const rank = v => (v.localService?0:2) + (/en-US|en-GB/i.test(v.lang)?1:0);
+  const pool = en.slice().sort((a,b)=>rank(b)-rank(a));
+  const fem = pool.filter(v=>FEMALE.test(v.name));
+  const male = pool.filter(v=>MALE.test(v.name));
+  vA = fem[0] || pool[0];                                   // A: 여성 우선
+  vB = male.find(v=>v!==vA) || pool.find(v=>v!==vA) || vA;  // B: 남성(또는 A와 다른) 우선
+}
 function chooseVoices(){
   voices = window.speechSynthesis ? speechSynthesis.getVoices() : [];
-  const en = voices.filter(v=>/en(-|_)/i.test(v.lang));
-  if(en.length){
-    const rank = v => (v.localService?0:4) + (/Google|Natural|Neural|Samantha|Daniel|Karen|Aaron|Zoe|Serena/i.test(v.name)?2:0) + (/en-US|en-GB/i.test(v.lang)?1:0);
-    const sorted = en.slice().sort((a,b)=>rank(b)-rank(a));
-    vA=sorted[0]; vB=sorted.find(v=>v!==vA)||sorted[0];
-  }
+  pickAuto();
+  if(!chosenA && vA) chosenA=vA.name;
+  if(!chosenB && vB) chosenB=vB.name;
   fillVoicePicker();
 }
 function fillVoicePicker(){
-  const sel=document.getElementById('voiceSel'); if(!sel) return;
   const en=voices.filter(v=>/en(-|_)/i.test(v.lang));
-  const cur=sel.value||chosenVoice;
-  sel.innerHTML='<option value="">자동(추천)</option>'+en.map(v=>`<option value="${v.name}">${v.name}${v.localService?'':' ★온라인'}</option>`).join('');
-  sel.value=cur; sel.onchange=()=>{ chosenVoice=sel.value; };
+  [['voiceSelA','A'],['voiceSelB','B']].forEach(([id,who])=>{
+    const sel=document.getElementById(id); if(!sel) return;
+    const chosen = who==='A'?chosenA:chosenB;
+    sel.innerHTML=en.map(v=>`<option value="${v.name}">${v.name}${v.localService?'':' ★온라인'}</option>`).join('');
+    if(chosen) sel.value=chosen;
+    sel.onchange=()=>{ if(who==='A') chosenA=sel.value; else chosenB=sel.value; };
+  });
 }
 if(window.speechSynthesis){ chooseVoices(); speechSynthesis.onvoiceschanged=chooseVoices; }
 function speak(text, who){
   return new Promise(res=>{
     if(!window.speechSynthesis) return setTimeout(res,700);
-    if(!vA) chooseVoices();
+    if(!voices.length) chooseVoices();
     try{ speechSynthesis.cancel(); }catch(e){}
     const u=new SpeechSynthesisUtterance(text); u.lang='en-US'; u.rate=0.9;
-    let v = chosenVoice ? voices.find(x=>x.name===chosenVoice) : (who==='B'?vB:vA);
+    const name = who==='B'?chosenB:chosenA;
+    const v = name ? voices.find(x=>x.name===name) : (who==='B'?vB:vA);
     if(v) u.voice=v;
-    const sameVoice = !!chosenVoice || !(vA&&vB&&vA!==vB);
-    u.pitch = sameVoice ? (who==='B'?1.08:0.92) : 1.0; // 목소리 하나면 피치로 A/B 구분
+    const same = !chosenA || !chosenB || chosenA===chosenB;
+    u.pitch = same ? (who==='B'?1.12:0.9) : 1.0; // 같은 목소리를 고르면 피치로 A/B 구분
     let done=false; const fin=()=>{ if(!done){done=true;res();} };
     u.onend=fin; u.onerror=fin; speechSynthesis.speak(u);
     setTimeout(fin, Math.max(1900, text.length*95));
