@@ -32,6 +32,7 @@ python3 scripts/extract.py   # 대화 데이터(dialogs.json) 재생성
 - `src/lib/quizHint.ts` — `topicSeq`의 퀴즈 질문·정답·해설을 합친 한국어 힌트(핵심 문장 선정용).
 - `src/data/` — `dialogs.json`(생성물, 커밋됨) · `quizzes.json`(수기 저작) · `types.ts` · `quizTypes.ts`.
 - `scripts/extract.py` — 외부 sqlite에서 대화 추출.
+- `public/listening-pingpong.html` — **별도** 리스닝 핑퐁 프로토타입(자체 완결형 HTML, 저작 대화 + 브라우저 TTS). 본 앱과 무관, `/listening-pingpong.html`로 서빙. A/B 대화를 들으며 B의 턴 3개를 영어 4지선다로 고르는 방식.
 
 화면 흐름: 스토리 선택 → 에피소드(토픽) 목록 → 시작 화면(모드 선택) → 세션(리딩/리스닝 재생) → 퀴즈(바텀시트). `App.tsx`가 상태기계로 관리(`mode`·`playing` 상태).
 
