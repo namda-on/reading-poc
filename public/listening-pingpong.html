@@ -158,23 +158,23 @@ const DIALOGUES = [
       { s:'A', text:"Sure. We're actually out of oat milk today — is regular milk okay?" },
       { s:'B', quiz:true, options:[
         { text:"Hmm, can I get it with soy milk instead?", correct:true, why:"오트밀크가 품절이라, 두유(soy)로 바꿔 달라고 자연스럽게 요청했어요.", learned:{ name:"Can I get it with ~?", note:"~랑 같이 주실 수 있나요?" } },
-        { text:"Great, oat milk it is!", why:"A가 방금 오트밀크가 <b>품절</b>이라고 했어요. 들었다면 고를 수 없죠." },
-        { text:"No thanks, I'll pay in cash.", why:"문법은 맞지만 우유 얘기 중인데 결제 얘기는 아직 맥락이 아니에요." },
-        { text:"Do you have any puppies?", why:"카페 주문과 전혀 상관없는 엉뚱한 질문이에요." },
+        { text:"Oh, then I'll have oat milk, please.", why:"‘I'll have ~’는 배운 표현이지만, 오트밀크는 방금 <b>품절</b>이라고 했어요. 들었다면 고를 수 없죠." },
+        { text:"Great, oat milk it is!", why:"오트밀크가 품절이라 했는데 오트밀크로 하겠다는 건 안 들은 거예요." },
+        { text:"No thanks, I'll pay in cash.", why:"우유 얘기 중인데 갑자기 결제 얘기는 맥락이 안 맞아요." },
       ]},
       { s:'A', text:"Of course, soy is no problem. Would you like a pastry with that?" },
       { s:'B', quiz:true, options:[
         { text:"Maybe — what do you recommend?", correct:true, why:"먹을 것을 물어봐서, 추천을 되물으며 자연스럽게 대화를 이어갔어요.", learned:{ name:"What do you recommend?", note:"무엇을 추천하시나요?" } },
-        { text:"Yes, another latte, please.", why:"A는 <b>먹을 것(pastry)</b>을 물었는데 음료 얘기를 했어요." },
-        { text:"I'd like to cancel, please.", why:"취소할 상황이 아니에요. 맥락에 안 맞아요." },
+        { text:"Yes, I'll have another latte.", why:"‘I'll have ~’는 익숙하지만, A는 <b>먹을 것(pastry)</b>을 물었는데 음료를 주문했어요." },
+        { text:"Sure, can I get it with soy milk?", why:"‘Can I get it with ~?’도 배운 표현이지만, 페이스트리에 두유를 넣어달라는 건 맥락이 안 맞아요." },
         { text:"No, I've already climbed Everest.", why:"대화와 상관없는 엉뚱한 답이에요." },
       ]},
       { s:'A', text:"The almond croissant is a favorite. Is that for here or to go?" },
       { s:'B', quiz:true, options:[
         { text:"Sounds good — to go, please.", correct:true, why:"‘여기서/포장’을 물었고, 포장(to go)을 골랐어요.", learned:{ name:"To go.", note:"가져갈게요." } },
-        { text:"It was delicious, thank you!", why:"아직 받지도 않았어요. 시점이 안 맞아요." },
+        { text:"What do you recommend — here or to go?", why:"‘What do you recommend?’는 배운 표현이지만, 여기서 먹을지 포장할지는 <b>본인이</b> 정하는 거예요." },
+        { text:"Actually, I'll have two croissants.", why:"여기/포장을 물었는데 추가 주문으로 답했어요." },
         { text:"Sure, two sugars please.", why:"여기/포장을 물었는데 설탕 얘기예요." },
-        { text:"I'll return it tomorrow.", why:"무엇을 반납한다는 건지 맥락이 없어요(유머)." },
       ]},
     ],
   },
@@ -186,23 +186,23 @@ const DIALOGUES = [
       { s:'A', text:"Sure. Go straight two blocks and turn left at the bakery." },
       { s:'B', quiz:true, options:[
         { text:"Got it. How long does it take to get there?", correct:true, why:"길 안내를 이해한 뒤, 소요 시간을 물으며 대화를 이어갔어요.", learned:{ name:"How long does it take to get to ~?", note:"~까지 얼마나 걸리나요?" } },
+        { text:"Thanks — where's the ticket machine?", why:"‘Where's ~?’는 배운 표현이지만, 아직 역에 도착도 안 했어요(길 안내를 방금 받음)." },
         { text:"Turn right at the bakery, thanks!", why:"A는 <b>왼쪽(left)</b>이라고 했어요. 오른쪽이 아니에요." },
-        { text:"So the station is closed today?", why:"문 닫았다는 얘기는 나온 적이 없어요." },
-        { text:"Great, I'll buy ten cakes!", why:"빵집이 나왔다고 케이크 열 개는 엉뚱하죠(유머)." },
+        { text:"Great, I'll buy ten cakes!", why:"빵집이 나왔다고 케이크 열 개는 엉뚱하죠." },
       ]},
       { s:'A', text:"About ten minutes on foot. Are you in a hurry?" },
       { s:'B', quiz:true, options:[
         { text:"A little — when's the next train?", correct:true, why:"급하냐는 물음에 답하며, 다음 기차 시간을 물었어요.", learned:{ name:"When's the next train?", note:"다음 기차가 언제인가요?" } },
+        { text:"How long does it take by bus, then?", why:"‘How long does it take ~?’는 배운 표현이지만, 방금 <b>도보 10분</b>이라고 들었고 버스 얘긴 없었어요." },
         { text:"Yes, five blocks that way.", why:"B는 길을 <b>묻는</b> 쪽이에요. 길안내를 하면 안 되죠." },
         { text:"No thanks, I'm not hungry.", why:"급한지 물었는데 배고픔 얘기는 엉뚱해요." },
-        { text:"Sure, I'll race you there!", why:"대화와 무관한 유머예요." },
       ]},
       { s:'A', text:"There's one in fifteen minutes. You can buy tickets inside." },
       { s:'B', quiz:true, options:[
         { text:"Perfect. Where's the ticket machine?", correct:true, why:"안에서 표를 살 수 있다는 안내를 듣고, 매표기 위치를 물었어요.", learned:{ name:"Where's ~?", note:"~은 어디인가요?" } },
-        { text:"Okay, I'll just take a taxi.", why:"방금 시간 충분하고 안에서 표를 살 수 있다고 했는데 택시는 모순이에요." },
+        { text:"Wait, when's the next train?", why:"‘When's the next train?’는 배운 표현이지만, 방금 <b>15분 뒤</b>라고 알려줬어요(안 들은 셈이에요)." },
         { text:"Which way was the bakery again?", why:"목적지는 <b>역</b>인데 빵집을 다시 묻는 건 엉뚱해요." },
-        { text:"Thanks, I'll return it tomorrow.", why:"무엇을 반납한다는 건지 맥락이 없어요(유머)." },
+        { text:"Thanks, I'll return it tomorrow.", why:"무엇을 반납한다는 건지 맥락이 없어요." },
       ]},
     ],
   },
@@ -321,9 +321,11 @@ async function startDialogue(i){
     if(myRun!==runId) return;
     if(!turn.quiz){
       const bub=addBubble(turn.s); if(turn.s==='A') lastA=turn.text;
-      if(turn.learned){ noteLearned(turn.learned); addLearnChip(turn.learned, turn.s); }
       bub.classList.add('playing'); await speak(turn.text, turn.s);
-      if(myRun!==runId) return; bub.classList.remove('playing'); await wait(250);
+      if(myRun!==runId) return; bub.classList.remove('playing');
+      // 표현은 문장을 다 들은 뒤에 짚어준다(들으면서 읽는 방해 방지).
+      if(turn.learned){ noteLearned(turn.learned); addLearnChip(turn.learned, turn.s); await wait(650); }
+      else await wait(250);
     } else {
       show(topbar,chat,quiz); scrollToBottom();
       const gotCorrect=await askQuiz(turn, myRun); if(myRun!==runId) return;
@@ -356,10 +358,9 @@ function askQuiz(turn, myRun){
           cb.classList.add('correct'); b.classList.add('show-why'); cb.classList.add('show-why');
           const after=el('quizAfter'); const co=correctOpt(turn);
           if(co.learned){ const lb=document.createElement('div'); lb.className='learned-box';
-            lb.innerHTML=`<span class="k">배운 표현</span>이 정답에 들어있어요 — <b>${co.learned.name}</b><br>${co.learned.note}`; after.appendChild(lb); }
+            lb.innerHTML=`<span class="k">배운 표현</span>정답은 이 표현을 <b>상황에 맞게</b> 썼어요 — <b>${co.learned.name}</b><br>${co.learned.note}`; after.appendChild(lb); }
           const tip=document.createElement('div'); tip.className='hint-tap'; tip.textContent='다른 선택지를 눌러 왜 아닌지 볼 수 있어요'; after.appendChild(tip);
           const nx=document.createElement('button'); nx.className='next-btn'; nx.textContent='다음 ▶'; nx.onclick=()=>{ if(myRun===runId) resolve(!!o.correct); }; after.appendChild(nx);
-          quiz.scrollTo({top:quiz.scrollHeight, behavior:'smooth'});
         } else { b.classList.toggle('show-why'); }
       };
       box.appendChild(b);
