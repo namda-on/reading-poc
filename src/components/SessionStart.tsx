@@ -102,17 +102,37 @@ export function SessionStart({ topic, onStart, onBack, initialMode = 'reading', 
           </div>
         )}
 
-        {/* 전광판은 흐름 속도만 조절한다. */}
+        {/* 전광판: 흐름 방식(문장/낱개) + 속도. 낱개면 노출 단위도 조절. */}
         {mode === 'marquee' && (
           <div className="start-settings">
             <div className="settings-panel">
+              <label>
+                흐름 방식
+                <span className="opt-desc">문장별 말풍선 vs 한 줄에서 문장 전체가 연속으로 흐름</span>
+                <div className="seg-toggle" role="group">
+                  <button
+                    type="button"
+                    className={settings.marqueeStyle === 'sentence' ? 'on' : ''}
+                    onClick={() => setSettings({ ...settings, marqueeStyle: 'sentence' })}
+                  >
+                    문장별
+                  </button>
+                  <button
+                    type="button"
+                    className={settings.marqueeStyle === 'stream' ? 'on' : ''}
+                    onClick={() => setSettings({ ...settings, marqueeStyle: 'stream' })}
+                  >
+                    한 줄
+                  </button>
+                </div>
+              </label>
               <label>
                 흐름 속도(px/초): {settings.marqueeSpeed}
                 <span className="opt-desc">문구가 흐르는 빠르기 — 클수록 빨리 지나감</span>
                 <input
                   type="range"
                   min={40}
-                  max={240}
+                  max={400}
                   step={20}
                   value={settings.marqueeSpeed}
                   onChange={(e) => setSettings({ ...settings, marqueeSpeed: Number(e.target.value) })}

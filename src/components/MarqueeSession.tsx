@@ -2,9 +2,23 @@ import { useEffect, useRef, useState } from 'react';
 import type { Script, Topic } from '../data/types';
 import { useSettings } from '../settings/SettingsContext';
 import { QuestionBanner } from './QuestionBanner';
+import { MarqueeStreamSession } from './MarqueeStreamSession';
 import './ReadingSession.css';
 import './DialogBubble.css';
 import './MarqueeSession.css';
+
+// 전광판 진입점: 하위 방식(문장별 말풍선 / 한 줄 연속 스트림)에 따라 분기.
+export function MarqueeSession(props: {
+  topic: Topic;
+  onFinish: () => void;
+  onBack: () => void;
+  showQuestion?: boolean;
+}) {
+  const { settings } = useSettings();
+  return settings.marqueeStyle === 'stream'
+    ? <MarqueeStreamSession {...props} />
+    : <MarqueeSentenceSession {...props} />;
+}
 
 // 다음 말풍선을 이어 등장시킬 때의 여백(px). 문장 사이 간격 → 연속 흐름 유지.
 const NEXT_GAP_PX = 90;
@@ -70,7 +84,8 @@ function MarqueeBubble({ script, speed, onReadyForNext, onFinished }: {
   );
 }
 
-export function MarqueeSession({ topic, onFinish, onBack, showQuestion = true }: {
+// 문장 통째 흐름(각 말풍선이 자기 문장을 좌→우로 흘려보냄).
+function MarqueeSentenceSession({ topic, onFinish, onBack, showQuestion = true }: {
   topic: Topic;
   onFinish: () => void;
   onBack: () => void;

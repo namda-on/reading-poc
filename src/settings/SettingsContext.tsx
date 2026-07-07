@@ -10,9 +10,10 @@ export interface Settings {
   fadeOut: boolean; // 청크 사라짐 페이드. false 면 즉시 사라짐.
   drainStepMs: number; // 문장 끝 마지막 창이 하나씩 빠지는 간격(ms). 작을수록 빨리.
   marqueeSpeed: number; // 전광판 흐름 속도(px/초).
+  marqueeStyle: 'sentence' | 'stream'; // 전광판 레이아웃: 문장별 말풍선 / 한 줄 연속 스트림.
 }
 
-export const DEFAULT_SETTINGS: Settings = { unit: 'word', windowSize: 4, baseMsPerSyllable: 300, maxChunkWords: 3, hideOld: true, fadeIn: false, fadeOut: true, drainStepMs: 160, marqueeSpeed: 120 };
+export const DEFAULT_SETTINGS: Settings = { unit: 'word', windowSize: 4, baseMsPerSyllable: 300, maxChunkWords: 3, hideOld: true, fadeIn: false, fadeOut: true, drainStepMs: 160, marqueeSpeed: 120, marqueeStyle: 'sentence' };
 
 const STORAGE_KEY = 'reading-poc:settings';
 
