@@ -5,7 +5,7 @@
 리스닝이 불가능한 환경에서도 같은 회화 콘텐츠로 훈련하는 **리딩 모드 POC**.
 리스닝의 "실시간 처리"를 소리 없이 재현한다 — 문장 크기만큼 확보된 말풍선 위를 N개짜리 창(window)이 청크의 실제 위치를 따라 슬라이딩하며 노출하고, 지나간/미래 청크는 빈 공백으로 남겨 되돌아가기·미리보기를 차단한다. 대화가 끝나면 한국어 객관식 1문항을 바텀시트로 푼다.
 
-세션 시작 화면에서 **리딩 / 리스닝 / 전광판** 모드를 고른다. 리스닝은 같은 대화를 실제 TTS 음성(speech.epop.ai)으로 재생하되 텍스트는 완전히 숨긴다(순수 듣기). 전광판은 같은 말풍선 레이아웃에서 각 문장이 오른쪽→왼쪽으로 흘러 지나가는 LED 전광판식 노출이다. 세 모드 모두 끝나면 같은 퀴즈로 이어진다.
+세션 시작 화면에서 **리딩 / 리스닝 / 전광판 / 고정** 모드를 고른다. 리스닝은 같은 대화를 실제 TTS 음성(speech.epop.ai)으로 재생하되 텍스트는 완전히 숨긴다(순수 듣기). 전광판은 같은 말풍선 레이아웃에서 각 문장이 오른쪽→왼쪽으로 흘러 지나가는 LED 전광판식 노출이다. 고정은 시선을 한 곳에 둔 채 화면 중앙에서 단어/청크가 제자리 교체되는 RSVP식 노출이다(시선 이동 없이 읽기 비교용). 모든 모드가 끝나면 같은 퀴즈로 이어진다.
 
 **주관적 체험용 프로토타입**이다. 정량 로깅·서버·백엔드 없음. 실험 축은 노출 단위(단어/청크)·창 크기 N·속도(ms/음절).
 
@@ -25,7 +25,7 @@ python3 scripts/extract.py   # 대화 데이터(dialogs.json) 재생성
 - `src/lib/chunk.ts` — 문장 → 청크 분할(순수 함수). 단어 모드 / 규칙 모드.
 - `src/lib/reveal.ts` — 노출 스케줄(순수 함수). 음절 기반 dwell 계산.
 - `src/hooks/useSlidingReveal.ts` — 스케줄을 타이머로 구동(generation guard).
-- `src/components/` — `StoryList`(첫 화면) · `TopicList` · `SessionStart`(모드 선택 시작 화면) · `ReadingSession`(리딩 재생) · `ListeningSession`(리스닝 오디오 재생, 텍스트 숨김) · `MarqueeSession`(전광판식 가로 흐름) · `DialogBubble` · `SettingsPanel` · `QuizSheet`/`Quiz`.
+- `src/components/` — `StoryList`(첫 화면) · `TopicList` · `SessionStart`(모드 선택 시작 화면) · `ReadingSession`(리딩 재생) · `ListeningSession`(리스닝 오디오 재생, 텍스트 숨김) · `MarqueeSession`(전광판식 가로 흐름) · `FixedSession`(시선 고정 RSVP) · `DialogBubble` · `SettingsPanel` · `QuizSheet`/`Quiz`.
 - `src/settings/SettingsContext.tsx` — 설정 상태 + localStorage.
 - `src/lib/progress.ts` — 푼 토픽 localStorage 저장.
 - `src/data/` — `dialogs.json`(생성물, 커밋됨) · `quizzes.json`(수기 저작) · `types.ts` · `quizTypes.ts`.
@@ -62,11 +62,12 @@ python3 scripts/extract.py   # 대화 데이터(dialogs.json) 재생성
 - **localStorage 키**: `reading-poc:settings`(설정) · `reading-poc:solved`(푼 토픽). 기존 저장값이 있으면 기본값보다 우선하므로, 새 기본값 확인 시 저장소를 비운다.
 - **모드 선택·다시 듣기**: 토픽 진입 시 `SessionStart`(모드 선택 + 리딩 설정)를 거쳐 재생. 리딩 노출 설정은 리딩 모드에서만 노출. 퀴즈의 "다시 듣기"는 시작 화면을 건너뛰고 **같은 모드로 즉시** 처음부터 재생(`sessionRun` 증가로 세션 리마운트).
 - **리스닝 재생**: 문장 단위 오디오를 순차 재생, `ended`(또는 `error`)에 다음으로. 자동재생은 시작 버튼 클릭(사용자 제스처) 직후라 허용된다. 텍스트는 숨기고 재생 중 말풍선에만 웨이브 인디케이터를 표시.
+- **고정 재생**: `FixedSession`이 화면 중앙 한 곳에서 단어/청크를 제자리 교체(RSVP). 창·페이드·hideOld 등은 무관하고 **노출 단위(단어/청크)와 속도(ms/음절)만** 따른다(dwell = `max(100ms, 음절수×속도)`, `reveal.ts`의 `dwellMs` 재사용). 대화 맥락은 현재 화자(A/B)·진행바로 유지. 시작 화면에서 고정 모드는 단위·속도만 조절.
 - **전광판 재생**: 각 말풍선(`MarqueeSession`)이 자기 텍스트를 Web Animations API로 오른쪽→왼쪽 1회 흘려보낸다(`overflow:hidden` 레인, 흐름 뒤엔 빈 말풍선으로 남음). 다음 말풍선은 현재 문장이 화면에 다 들어온 시점(문장 폭+여백÷속도)에 **겹쳐서** 등장해 풀-스톱 없이 연속 흐른다 — 문장 끝까지 기다리면 템포가 끊기므로. 속도는 `marqueeSpeed`(px/초).
 - **Vercel 배포**: 커밋 author 이메일이 GitHub 계정(namda-on)에 등록된 주소여야 배포가 식별된다. 이 레포는 `user.email = namda1571@gmail.com`으로 설정돼 있다.
 - **화자 표시는 A/B**, 에피소드 제목은 "Episode N"만 — 제목·상대역이 주제를 노출해 문제가 쉬워지는 것을 막기 위함.
 - **리딩 시작 준비 신호**: 곧바로 노출되면 당황스러우므로, 첫 텍스트 자리에 dot 을 `READY_MS`(0.8s) 동안 깜빡인 뒤 재생을 시작한다(`ready` 게이트).
 - **리딩 옵션 프리셋**: `SettingsPanel`은 프리셋 3개(단어 / 청크 / 누적)를 원클릭 제공하고, "직접 설정"을 펼치면 개별 옵션을 조절한다(옵션 설명은 그 안 맨 아래에 표시). 프리셋은 노출 관련 필드(단위·창·속도·hideOld·최대청크)와 **페이드 인/아웃**을 지정한다(청크 프리셋은 창2 — 다음 청크 등장 시 이전 청크가 밀려나는 슬라이딩이 보이도록, 청크·누적은 페이드 인 켜기가 기본). **끝 사라짐 간격·전광판 속도는 프리셋과 독립**(프리셋 클릭 시 유지, `matchesPreset` 판정에서도 제외). 현재 설정이 프리셋과 일치하면 하이라이트, 아니면 "커스텀" 배지.
-- **설정 지속**: 설정은 `reading-poc:settings`에 저장돼 마지막 상태가 유지된다(진입 시 리셋하지 않음). 기본값(`DEFAULT_SETTINGS`)은 단어·창4·속도300·hideOld켜기·**페이드 인 끄기/아웃 켜기**.
+- **설정 지속**: 설정은 `reading-poc:settings`에 저장돼 마지막 상태가 유지된다(진입 시 리셋하지 않음). 마지막에 고른 모드도 `reading-poc:mode`에 저장돼 다음 토픽 진입 시 기본 선택된다(`App`이 저장, `SessionStart`의 `initialMode`). 기본값(`DEFAULT_SETTINGS`)은 단어·창4·속도300·hideOld켜기·**페이드 인 끄기/아웃 켜기**.
 - **문제 미리보기**: 세션(리딩/리스닝/전광판) 상단에 `QuestionBanner`로 해당 토픽 퀴즈의 질문을 처음부터 노출한다(선택지는 끝난 뒤 `QuizSheet`에서). 질문은 `quizzes.json`에서 `topicSeq`로 읽는다.
 - **퀴즈 보기 셔플**: 저작 데이터(`quizzes.json`)가 정답을 대부분 1번(`answerIndex:0`)에 두어 위치로 답을 유추할 수 있으므로, `Quiz`가 마운트 시 보기를 1회 셔플한다(정답 위치 균등 분산). 데이터의 `answerIndex`는 그대로 두고 런타임에서만 섞는다.

@@ -1,0 +1,74 @@
+/* 시선 고정 모드: 화면 한 곳(중앙)에서 단어/청크가 제자리 교체. */
+.fixed-stage {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  padding: 24px;
+}
+
+/* 대화 맥락: 현재 화자 */
+.fixed-speaker {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #6b7c93;
+  font-size: 14px;
+  font-weight: 700;
+}
+.fixed-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  box-shadow: 0 2px 6px rgba(30, 60, 110, 0.15);
+}
+
+/* 시선 고정 지점: 항상 같은 자리, 위/아래 얇은 가이드 라인. */
+.fixed-focus {
+  width: 100%;
+  min-height: 96px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top: 2px solid rgba(75, 131, 214, 0.25);
+  border-bottom: 2px solid rgba(75, 131, 214, 0.25);
+}
+.fixed-word {
+  font-size: clamp(32px, 9vw, 64px);
+  font-weight: 800;
+  color: #1f2937;
+  text-align: center;
+  line-height: 1.2;
+  /* 제자리에서 또렷하게 나타남 */
+  animation: fixed-pop 140ms ease-out;
+}
+@keyframes fixed-pop {
+  from { opacity: 0.3; }
+  to { opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fixed-word { animation: none; }
+}
+
+/* 시작 준비 dot */
+.fixed-dots { display: inline-flex; gap: 8px; align-items: center; }
+.fixed-dots i {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #9db6d8;
+  animation: fixed-blink 1s ease-in-out infinite;
+}
+.fixed-dots i:nth-child(2) { animation-delay: 200ms; }
+.fixed-dots i:nth-child(3) { animation-delay: 400ms; }
+@keyframes fixed-blink {
+  0%, 100% { opacity: 0.25; }
+  50% { opacity: 1; }
+}
