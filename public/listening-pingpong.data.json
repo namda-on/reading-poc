@@ -28,102 +28,6 @@
   "examples": [
     {
       "vocab": {
-        "word": "elevator",
-        "meaning": "엘리베이터",
-        "dictSeq": 2557,
-        "audioUrl": "https://speech.epop.ai/sentence/actor/usFemaleNormal/0002557.K0wWy.ogg"
-      },
-      "expression": "where",
-      "arrange": {
-        "en": "Where's the elevator?",
-        "ko": "엘리베이터는 어디에 있나요?"
-      },
-      "dialogue": {
-        "title": "호텔 로비",
-        "turns": [
-          {
-            "speaker": "A",
-            "text": "Welcome! Your room's on the 15th floor. Do you need directions?"
-          },
-          {
-            "speaker": "B",
-            "options": [
-              {
-                "text": "Yes, where's the elevator?",
-                "correct": true,
-                "expr": "where",
-                "vocab": "elevator",
-                "reason": "‘길 안내가 필요하냐’는 물음에 ‘네, 엘리베이터는 어디예요?’로 답한 자연스러운 흐름이에요."
-              },
-              {
-                "text": "I'll have the elevator.",
-                "expr": "ill",
-                "reason": "‘I'll have ~’는 주문 표현이에요. 엘리베이터는 주문할 수 없죠."
-              },
-              {
-                "text": "No, it's on the roof!",
-                "reason": "엘리베이터가 옥상에 있다니, 엉뚱한 답이에요."
-              }
-            ]
-          },
-          {
-            "speaker": "A",
-            "text": "Sure — it's around the corner. Can I help with your bags?"
-          },
-          {
-            "speaker": "B",
-            "options": [
-              {
-                "text": "Yes, can I get a cart?",
-                "correct": true,
-                "expr": "get",
-                "reason": "‘짐 도와줄까요?’에 ‘네, 카트 받을 수 있어요?’로 답한 자연스러운 흐름이에요."
-              },
-              {
-                "text": "Where's my bag?",
-                "expr": "where",
-                "reason": "가방은 본인이 들고 있는데 위치를 묻는 건 이상해요."
-              },
-              {
-                "text": "I'll have a helicopter.",
-                "expr": "ill",
-                "reason": "헬리콥터라니, 엉뚱한 답이에요."
-              }
-            ]
-          },
-          {
-            "speaker": "A",
-            "text": "Of course. Are you interested in our facilities?"
-          },
-          {
-            "speaker": "B",
-            "options": [
-              {
-                "text": "Yes, do you have a gym?",
-                "correct": true,
-                "expr": "have",
-                "reason": "‘부대시설에 관심 있냐’는 물음에 ‘네, 헬스장 있어요?’로 답한 자연스러운 흐름이에요."
-              },
-              {
-                "text": "I'll have a swimming pool!",
-                "expr": "ill",
-                "reason": "수영장을 주문할 순 없죠(엉뚱)."
-              },
-              {
-                "text": "At 3 o'clock.",
-                "reason": "시설이 있냐고 물었는데 시간으로 답하는 건 엉뚱해요."
-              }
-            ]
-          },
-          {
-            "speaker": "A",
-            "text": "We have a gym on the second floor. Enjoy your stay!"
-          }
-        ]
-      }
-    },
-    {
-      "vocab": {
         "word": "latte",
         "meaning": "카페 라떼",
         "dictSeq": 5835,
@@ -223,233 +127,137 @@
     },
     {
       "vocab": {
-        "word": "station",
-        "meaning": "역 (기차)",
-        "dictSeq": 3837,
-        "audioUrl": "https://speech.epop.ai/sentence/actor/usFemaleNormal/0003837.FK9Se.ogg"
+        "word": "sandwich",
+        "meaning": "샌드위치",
+        "dictSeq": 2016,
+        "audioUrl": "https://speech.epop.ai/sentence/actor/usFemaleNormal/0002016.6j43f.ogg"
       },
-      "expression": "howget",
+      "expression": "ill",
       "arrange": {
-        "en": "How do I get to the station?",
-        "ko": "역에 어떻게 가나요?"
+        "en": "I'll have a sandwich.",
+        "ko": "샌드위치로 주세요."
       },
       "dialogue": {
-        "title": "길 묻기",
+        "title": "샌드위치 가게",
         "turns": [
           {
             "speaker": "A",
-            "text": "You look lost. Are you trying to find the station?"
+            "text": "Hi there! Have you decided?"
           },
           {
             "speaker": "B",
             "options": [
               {
-                "text": "Yes, how do I get to the station?",
+                "text": "Yes, I'll have a sandwich.",
                 "correct": true,
-                "expr": "howget",
-                "vocab": "station",
-                "reason": "‘역을 찾느냐’는 물음에 ‘네, 역에 어떻게 가요?’로 답한 자연스러운 흐름이에요."
-              },
-              {
-                "text": "I'll have the station.",
                 "expr": "ill",
-                "vocab": "station",
-                "reason": "역을 주문할 순 없죠(엉뚱)."
+                "vocab": "sandwich",
+                "reason": "‘정하셨어요?’에 ‘네, 샌드위치로 주세요’로 답한 자연스러운 흐름이에요."
               },
               {
-                "text": "At 6 o'clock.",
-                "reason": "어디로 가냐가 아니라 시간으로 답하는 건 엉뚱해요."
+                "text": "Where's the sandwich?",
+                "expr": "where",
+                "vocab": "sandwich",
+                "reason": "주문 전에 위치를 묻는 건 엉뚱해요."
+              },
+              {
+                "text": "Can I get a spaceship?",
+                "expr": "get",
+                "reason": "우주선이라니, 엉뚱한 답이에요."
               }
             ]
           },
           {
             "speaker": "A",
-            "text": "It's two blocks straight ahead. Would a map help?"
+            "text": "Good choice. Do you want anything to drink?"
           },
           {
             "speaker": "B",
             "options": [
               {
-                "text": "Yes, do you have a map?",
+                "text": "Yes, do you have lemonade?",
                 "correct": true,
                 "expr": "have",
-                "reason": "‘지도가 도움이 될까요?’에 ‘네, 지도 있어요?’로 답한 자연스러운 흐름이에요."
+                "reason": "‘마실 것 드릴까요?’에 ‘네, 레모네이드 있어요?’로 답한 자연스러운 흐름이에요."
               },
               {
-                "text": "How do I get a map?",
-                "expr": "howget",
-                "reason": "‘How do I get ~?’는 장소로 가는 길을 묻는 표현이에요."
+                "text": "I'll have a chair.",
+                "expr": "ill",
+                "reason": "의자를 주문할 순 없죠(엉뚱)."
               },
               {
-                "text": "Turn left into the sky?",
-                "reason": "하늘로 좌회전이라니, 엉뚱한 답이에요."
+                "text": "At noon.",
+                "reason": "마실 것을 물었는데 시간으로 답하는 건 엉뚱해요."
               }
             ]
           },
           {
             "speaker": "A",
-            "text": "Here you go. Do you need to buy a ticket?"
+            "text": "We do. Is that everything?"
           },
           {
             "speaker": "B",
             "options": [
               {
-                "text": "Yes, where's the ticket machine?",
+                "text": "Yes, can I get a napkin?",
                 "correct": true,
-                "expr": "where",
-                "reason": "‘표 사야 하냐’는 물음에 ‘네, 매표기 어디 있어요?’로 답한 자연스러운 흐름이에요."
-              },
-              {
-                "text": "How do I get to the ticket?",
-                "expr": "howget",
-                "reason": "표로 가는 길을 물을 순 없어요(엉뚱)."
-              },
-              {
-                "text": "Can I get a helicopter?",
                 "expr": "get",
-                "reason": "헬리콥터라니, 엉뚱한 답이에요."
+                "reason": "‘그게 다예요?’에 ‘네, 냅킨 받을 수 있어요?’로 답한 자연스러운 흐름이에요."
+              },
+              {
+                "text": "Where's my sandwich?",
+                "expr": "where",
+                "vocab": "sandwich",
+                "reason": "아직 만드는 중인데 어디 있냐 묻는 건 성급해요."
+              },
+              {
+                "text": "I'll have it last week!",
+                "expr": "ill",
+                "reason": "지난주에 받을 순 없죠(엉뚱)."
               }
             ]
           },
           {
             "speaker": "A",
-            "text": "Right inside the entrance. Safe travels!"
+            "text": "Coming right up!"
           }
         ]
       }
     },
     {
       "vocab": {
-        "word": "charger",
-        "meaning": "충전기",
-        "dictSeq": 35848,
-        "audioUrl": "https://speech.epop.ai/sentence/actor/usFemaleNormal/0035848.77ZYw.ogg"
+        "word": "salad",
+        "meaning": "샐러드",
+        "dictSeq": 195,
+        "audioUrl": "https://speech.epop.ai/sentence/actor/usFemaleNormal/0000195.8PyYF.ogg"
       },
-      "expression": "have",
+      "expression": "ill",
       "arrange": {
-        "en": "Do you have a charger?",
-        "ko": "충전기가 있나요?"
+        "en": "I'll have a salad.",
+        "ko": "샐러드로 주세요."
       },
       "dialogue": {
-        "title": "프런트 데스크",
+        "title": "레스토랑",
         "turns": [
           {
             "speaker": "A",
-            "text": "Front desk. Is there something you need?"
+            "text": "Good evening. Are you ready to order?"
           },
           {
             "speaker": "B",
             "options": [
               {
-                "text": "Yes, do you have a charger?",
+                "text": "Yes, I'll have a salad.",
                 "correct": true,
-                "expr": "have",
-                "vocab": "charger",
-                "reason": "‘필요한 게 있냐’는 물음에 ‘네, 충전기 있어요?’로 답한 자연스러운 흐름이에요."
-              },
-              {
-                "text": "I'll have a charger.",
                 "expr": "ill",
-                "vocab": "charger",
-                "reason": "‘I'll have ~’는 주문 표현이라 프런트 요청엔 어색해요."
+                "vocab": "salad",
+                "reason": "‘주문하시겠어요?’에 ‘네, 샐러드로 주세요’로 답한 자연스러운 흐름이에요."
               },
               {
-                "text": "Nice weather today!",
-                "reason": "대화와 상관없는 엉뚱한 답이에요."
-              }
-            ]
-          },
-          {
-            "speaker": "A",
-            "text": "We do — I'll send one up. Would you like some ice, too?"
-          },
-          {
-            "speaker": "B",
-            "options": [
-              {
-                "text": "Yes, can I get some ice?",
-                "correct": true,
-                "expr": "get",
-                "reason": "‘얼음도 드릴까요?’에 ‘네, 얼음 받을 수 있어요?’로 답한 자연스러운 흐름이에요."
-              },
-              {
-                "text": "Where's my charger?",
+                "text": "Where's the salad?",
                 "expr": "where",
-                "vocab": "charger",
-                "reason": "방금 보내준다고 했는데 벌써 어디 있냐 묻는 건 성급해요."
-              },
-              {
-                "text": "I'll have a penguin.",
-                "expr": "ill",
-                "reason": "펭귄이라니, 엉뚱한 답이에요."
-              }
-            ]
-          },
-          {
-            "speaker": "A",
-            "text": "Sure. Do you need an extra pillow?"
-          },
-          {
-            "speaker": "B",
-            "options": [
-              {
-                "text": "Yes, do you have a spare?",
-                "correct": true,
-                "expr": "have",
-                "reason": "‘베개 더 필요하냐’는 물음에 ‘네, 여분 있어요?’로 답한 자연스러운 흐름이에요."
-              },
-              {
-                "text": "How do I get a pillow?",
-                "expr": "howget",
-                "reason": "‘How do I get ~?’는 길을 묻는 표현이에요."
-              },
-              {
-                "text": "At midnight, please.",
-                "reason": "베개가 필요하냐고 물었는데 시간으로 답하는 건 엉뚱해요."
-              }
-            ]
-          },
-          {
-            "speaker": "A",
-            "text": "I'll bring one right up — good night!"
-          }
-        ]
-      }
-    },
-    {
-      "vocab": {
-        "word": "towel",
-        "meaning": "수건, 타월",
-        "dictSeq": 4107,
-        "audioUrl": "https://speech.epop.ai/sentence/actor/usFemaleNormal/0004107.xI4vn.ogg"
-      },
-      "expression": "get",
-      "arrange": {
-        "en": "Can I get some towels?",
-        "ko": "수건 좀 받을 수 있을까요?"
-      },
-      "dialogue": {
-        "title": "룸서비스",
-        "turns": [
-          {
-            "speaker": "A",
-            "text": "Housekeeping. Did you call for something?"
-          },
-          {
-            "speaker": "B",
-            "options": [
-              {
-                "text": "Yes, can I get some towels?",
-                "correct": true,
-                "expr": "get",
-                "vocab": "towels",
-                "reason": "‘뭔가 부르셨냐’는 물음에 ‘네, 수건 받을 수 있어요?’로 답한 자연스러운 흐름이에요."
-              },
-              {
-                "text": "I'll have some towels.",
-                "expr": "ill",
-                "vocab": "towels",
-                "reason": "‘I'll have ~’는 음식 주문 표현이라 요청엔 어색해요."
+                "vocab": "salad",
+                "reason": "주문 전에 위치를 묻는 건 엉뚱해요."
               },
               {
                 "text": "Can I get a dragon?",
@@ -460,156 +268,354 @@
           },
           {
             "speaker": "A",
-            "text": "Of course. Are you missing anything else?"
+            "text": "Excellent. Would you like some soup, too?"
           },
           {
             "speaker": "B",
             "options": [
               {
-                "text": "Yes, do you have a hairdryer?",
+                "text": "Yes, do you have tomato soup?",
                 "correct": true,
                 "expr": "have",
-                "reason": "‘더 없는 게 있냐’는 물음에 ‘네, 드라이어 있어요?’로 답한 자연스러운 흐름이에요."
+                "reason": "‘수프도 드릴까요?’에 ‘네, 토마토 수프 있어요?’로 답한 자연스러운 흐름이에요."
               },
               {
-                "text": "Where's the hairdryer?",
-                "expr": "where",
-                "reason": "있는지부터 물어야 하는데 위치부터 묻는 건 성급해요."
-              },
-              {
-                "text": "I'll have ten pizzas!",
+                "text": "I'll have a waiter.",
                 "expr": "ill",
-                "reason": "객실 요청과 상관없는 엉뚱한 답이에요."
+                "reason": "웨이터를 주문할 순 없죠(엉뚱)."
+              },
+              {
+                "text": "At 8 o'clock.",
+                "reason": "수프를 물었는데 시간으로 답하는 건 엉뚱해요."
               }
             ]
           },
           {
             "speaker": "A",
-            "text": "I'll bring one. Would you like some water?"
+            "text": "Of course. Anything to drink?"
           },
           {
             "speaker": "B",
             "options": [
               {
-                "text": "Yes, can I get a bottle?",
+                "text": "Yes, can I get some water?",
                 "correct": true,
                 "expr": "get",
-                "reason": "‘물 드릴까요?’에 ‘네, 한 병 받을 수 있어요?’로 답한 자연스러운 흐름이에요."
+                "reason": "‘마실 것 드릴까요?’에 ‘네, 물 받을 수 있어요?’로 답한 자연스러운 흐름이에요."
               },
               {
-                "text": "How do I get towels?",
-                "expr": "howget",
-                "vocab": "towels",
-                "reason": "‘How do I get ~?’는 길을 묻는 표현이에요."
+                "text": "Where's my salad?",
+                "expr": "where",
+                "vocab": "salad",
+                "reason": "아직 만드는 중인데 어디 있냐 묻는 건 성급해요."
               },
               {
-                "text": "At 3 a.m., please.",
-                "reason": "물 드릴까 물었는데 시간으로 답하는 건 엉뚱해요."
+                "text": "I'll have it in 3025!",
+                "expr": "ill",
+                "reason": "먼 미래에 받겠다니, 엉뚱한 답이에요."
               }
             ]
           },
           {
             "speaker": "A",
-            "text": "No problem — right up!"
+            "text": "I'll bring it right out!"
           }
         ]
       }
     },
     {
       "vocab": {
-        "word": "umbrella",
-        "meaning": "우산",
-        "dictSeq": 3272,
-        "audioUrl": "https://speech.epop.ai/sentence/actor/usFemaleNormal/0003272.gjTs2.ogg"
+        "word": "burger",
+        "meaning": "햄버거",
+        "dictSeq": 36437,
+        "audioUrl": "https://speech.epop.ai/sentence/actor/usFemaleNormal/0036437.ZUAJp.ogg"
       },
-      "expression": "borrow",
+      "expression": "ill",
       "arrange": {
-        "en": "Can I borrow an umbrella?",
-        "ko": "우산을 빌릴 수 있을까요?"
+        "en": "I'll have a burger.",
+        "ko": "버거로 주세요."
       },
       "dialogue": {
-        "title": "친구에게 빌리기",
+        "title": "버거 가게",
         "turns": [
           {
             "speaker": "A",
-            "text": "It's really pouring out. Are you going out anyway?"
+            "text": "Hi! Can I take your order?"
           },
           {
             "speaker": "B",
             "options": [
               {
-                "text": "Yes, can I borrow an umbrella?",
+                "text": "Yes, I'll have a burger.",
                 "correct": true,
-                "expr": "borrow",
-                "vocab": "umbrella",
-                "reason": "‘그래도 나갈 거냐’는 물음에 ‘응, 우산 좀 빌릴 수 있어?’로 답한 자연스러운 흐름이에요."
-              },
-              {
-                "text": "Can I get an umbrella?",
-                "expr": "get",
-                "vocab": "umbrella",
-                "reason": "사서 갖는 게 아니라 잠깐 빌리는 거라 ‘Can I borrow ~?’가 맞아요."
-              },
-              {
-                "text": "I'll have some sunshine!",
                 "expr": "ill",
-                "reason": "햇빛을 주문할 순 없죠(엉뚱)."
-              }
-            ]
-          },
-          {
-            "speaker": "A",
-            "text": "Sure, it's by the door. Do you need anything else?"
-          },
-          {
-            "speaker": "B",
-            "options": [
-              {
-                "text": "Yes, can I borrow a bag?",
-                "correct": true,
-                "expr": "borrow",
-                "reason": "‘더 필요하냐’는 물음에 ‘응, 가방도 빌릴 수 있어?’로 답한 자연스러운 흐름이에요."
+                "vocab": "burger",
+                "reason": "‘주문받을까요?’에 ‘네, 버거로 주세요’로 답한 자연스러운 흐름이에요."
               },
               {
-                "text": "Where's the umbrella?",
+                "text": "Where's the burger?",
                 "expr": "where",
-                "vocab": "umbrella",
-                "reason": "방금 문 옆이라고 알려줬어요."
+                "vocab": "burger",
+                "reason": "주문 전에 위치를 묻는 건 엉뚱해요."
               },
               {
-                "text": "Can I borrow the moon?",
-                "expr": "borrow",
-                "reason": "달을 빌린다니, 엉뚱한 답이에요."
+                "text": "Can I get a unicorn?",
+                "expr": "get",
+                "reason": "유니콘이라니, 엉뚱한 답이에요."
               }
             ]
           },
           {
             "speaker": "A",
-            "text": "Here. Oh, do you have your keys?"
+            "text": "Sure. Would you like fries with that?"
           },
           {
             "speaker": "B",
             "options": [
               {
-                "text": "Actually no — do you have a spare?",
+                "text": "Yes, do you have onion rings?",
                 "correct": true,
                 "expr": "have",
-                "reason": "‘열쇠 있냐’는 물음에 ‘아니, 여분 있어?’로 답한 자연스러운 흐름이에요."
+                "reason": "‘감자튀김 드릴까요?’에 ‘네, 어니언링 있어요?’로 답한 자연스러운 흐름이에요."
               },
               {
-                "text": "I'll have your keys.",
+                "text": "I'll have a parking lot.",
                 "expr": "ill",
-                "reason": "‘I'll have ~’지만, 열쇠를 주문할 순 없죠."
+                "reason": "주차장을 주문할 순 없죠(엉뚱)."
               },
               {
-                "text": "Keys are at 5 o'clock.",
-                "reason": "열쇠 있냐고 물었는데 시간으로 답하는 건 엉뚱해요."
+                "text": "At midnight.",
+                "reason": "사이드를 물었는데 시간으로 답하는 건 엉뚱해요."
               }
             ]
           },
           {
             "speaker": "A",
-            "text": "Here's the spare — let's go!"
+            "text": "We do. Anything else for you?"
+          },
+          {
+            "speaker": "B",
+            "options": [
+              {
+                "text": "Yes, can I get some ketchup?",
+                "correct": true,
+                "expr": "get",
+                "reason": "‘더 필요하세요?’에 ‘네, 케첩 받을 수 있어요?’로 답한 자연스러운 흐름이에요."
+              },
+              {
+                "text": "Where's my burger?",
+                "expr": "where",
+                "vocab": "burger",
+                "reason": "아직 만드는 중인데 어디 있냐 묻는 건 성급해요."
+              },
+              {
+                "text": "I'll have it yesterday!",
+                "expr": "ill",
+                "reason": "어제 받을 순 없죠(엉뚱)."
+              }
+            ]
+          },
+          {
+            "speaker": "A",
+            "text": "Order coming right up!"
+          }
+        ]
+      }
+    },
+    {
+      "vocab": {
+        "word": "cake",
+        "meaning": "케이크",
+        "dictSeq": 1589,
+        "audioUrl": "https://speech.epop.ai/sentence/actor/usFemaleNormal/0001589.CONKy.ogg"
+      },
+      "expression": "ill",
+      "arrange": {
+        "en": "I'll have some cake.",
+        "ko": "케이크로 주세요."
+      },
+      "dialogue": {
+        "title": "베이커리",
+        "turns": [
+          {
+            "speaker": "A",
+            "text": "Hello! Do you know what you'd like?"
+          },
+          {
+            "speaker": "B",
+            "options": [
+              {
+                "text": "Yes, I'll have some cake.",
+                "correct": true,
+                "expr": "ill",
+                "vocab": "cake",
+                "reason": "‘무엇으로 드릴까요?’에 ‘네, 케이크로 주세요’로 답한 자연스러운 흐름이에요."
+              },
+              {
+                "text": "Where's the cake?",
+                "expr": "where",
+                "vocab": "cake",
+                "reason": "주문 전에 위치를 묻는 건 엉뚱해요."
+              },
+              {
+                "text": "Can I get a rainbow?",
+                "expr": "get",
+                "reason": "무지개라니, 엉뚱한 답이에요."
+              }
+            ]
+          },
+          {
+            "speaker": "A",
+            "text": "Great. Would you like it in a box?"
+          },
+          {
+            "speaker": "B",
+            "options": [
+              {
+                "text": "Yes, do you have a gift box?",
+                "correct": true,
+                "expr": "have",
+                "reason": "‘상자에 담아드릴까요?’에 ‘네, 선물 상자 있어요?’로 답한 자연스러운 흐름이에요."
+              },
+              {
+                "text": "I'll have the oven.",
+                "expr": "ill",
+                "reason": "오븐을 주문할 순 없죠(엉뚱)."
+              },
+              {
+                "text": "At 5 p.m.",
+                "reason": "상자를 물었는데 시간으로 답하는 건 엉뚱해요."
+              }
+            ]
+          },
+          {
+            "speaker": "A",
+            "text": "Sure. Anything else?"
+          },
+          {
+            "speaker": "B",
+            "options": [
+              {
+                "text": "Yes, can I get some candles?",
+                "correct": true,
+                "expr": "get",
+                "reason": "‘더 필요하세요?’에 ‘네, 초 받을 수 있어요?’로 답한 자연스러운 흐름이에요."
+              },
+              {
+                "text": "Where's my cake?",
+                "expr": "where",
+                "vocab": "cake",
+                "reason": "아직 담는 중인데 어디 있냐 묻는 건 성급해요."
+              },
+              {
+                "text": "I'll have it last year!",
+                "expr": "ill",
+                "reason": "작년에 받을 순 없죠(엉뚱)."
+              }
+            ]
+          },
+          {
+            "speaker": "A",
+            "text": "All set — enjoy!"
+          }
+        ]
+      }
+    },
+    {
+      "vocab": {
+        "word": "tea",
+        "meaning": "차",
+        "dictSeq": 3478,
+        "audioUrl": "https://speech.epop.ai/sentence/actor/usFemaleNormal/0003478.7o4ES.ogg"
+      },
+      "expression": "ill",
+      "arrange": {
+        "en": "I'll have some tea.",
+        "ko": "차로 주세요."
+      },
+      "dialogue": {
+        "title": "티하우스",
+        "turns": [
+          {
+            "speaker": "A",
+            "text": "Welcome! Shall I start your order?"
+          },
+          {
+            "speaker": "B",
+            "options": [
+              {
+                "text": "Yes, I'll have some tea.",
+                "correct": true,
+                "expr": "ill",
+                "vocab": "tea",
+                "reason": "‘주문 시작할까요?’에 ‘네, 차로 주세요’로 답한 자연스러운 흐름이에요."
+              },
+              {
+                "text": "Where's the tea?",
+                "expr": "where",
+                "vocab": "tea",
+                "reason": "주문 전에 위치를 묻는 건 엉뚱해요."
+              },
+              {
+                "text": "Can I get a helicopter?",
+                "expr": "get",
+                "reason": "헬리콥터라니, 엉뚱한 답이에요."
+              }
+            ]
+          },
+          {
+            "speaker": "A",
+            "text": "Of course. Would you like milk with it?"
+          },
+          {
+            "speaker": "B",
+            "options": [
+              {
+                "text": "Yes, do you have oat milk?",
+                "correct": true,
+                "expr": "have",
+                "reason": "‘우유 넣어드릴까요?’에 ‘네, 오트밀크 있어요?’로 답한 자연스러운 흐름이에요."
+              },
+              {
+                "text": "I'll have a mountain.",
+                "expr": "ill",
+                "reason": "산을 주문할 순 없죠(엉뚱)."
+              },
+              {
+                "text": "At 7 o'clock.",
+                "reason": "우유를 물었는데 시간으로 답하는 건 엉뚱해요."
+              }
+            ]
+          },
+          {
+            "speaker": "A",
+            "text": "We do. Anything to eat?"
+          },
+          {
+            "speaker": "B",
+            "options": [
+              {
+                "text": "Yes, can I get a scone?",
+                "correct": true,
+                "expr": "get",
+                "reason": "‘드실 것 있으세요?’에 ‘네, 스콘 받을 수 있어요?’로 답한 자연스러운 흐름이에요."
+              },
+              {
+                "text": "Where's my tea?",
+                "expr": "where",
+                "vocab": "tea",
+                "reason": "아직 우려내는 중인데 어디 있냐 묻는 건 성급해요."
+              },
+              {
+                "text": "I'll have it in 1850!",
+                "expr": "ill",
+                "reason": "먼 과거에 받을 순 없죠(엉뚱)."
+              }
+            ]
+          },
+          {
+            "speaker": "A",
+            "text": "Coming right up!"
           }
         ]
       }
