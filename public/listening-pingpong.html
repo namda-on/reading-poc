@@ -60,6 +60,11 @@
   .ex-sentence { text-align:center; font-size:19px; font-weight:700; color:#2f3e52; margin-bottom:12px; }
   .learned-box { background:#fff6dc; border:1px solid #f2e2a8; border-radius:12px; padding:10px 13px; margin:8px 0 4px; font-size:15px; color:#6b5410; line-height:1.5; }
   .learned-box .k { display:inline-block; background:#f0b429; color:#fff; font-size:11px; font-weight:800; border-radius:999px; padding:1px 8px; margin-right:6px; vertical-align:middle; }
+  .learned-box .ln-head { font-size:12.5px; font-weight:700; color:#8a6d15; }
+  .learned-box .ln-a { font-size:16px; color:#4a3c10; margin:5px 0 8px; }
+  .learned-box .ln-a .ln-mark { font-weight:800; color:#000; }
+  .learned-box .ln-expr { font-size:14px; }
+  .learned-box .ln-expr b { font-weight:800; }
   /* 표현 표기: 영어(굵게) 위, 뜻(연하게) 아래 — 대시 없이 두 줄로 */
   .expr-en { font-weight:800; }
   .expr-ko { display:block; font-weight:600; font-size:13.5px; opacity:.8; margin-top:3px; }
@@ -218,9 +223,10 @@ function buildExample(ex){
     if (t.role==='A'){ prevA = t.text||''; return { s:'A', text:t.text, kr:t.kr }; }
     const correct = (t.choices||[]).find(c=>c.correct);
     const hasExpr = (prevA + ' ' + (correct?correct.text:'')).toLowerCase().includes(fixed.toLowerCase());
+    const aLine = prevA; // 배운 표현이 담긴 직전 A 대사(오디오라 안 보였던 것)
     return { s:'B', quiz:true, options:(t.choices||[]).map(c=>({
       text:c.text, kr:c.kr, correct:!!c.correct, why:c.explain,
-      learned: (c.correct && hasExpr) ? { name:exprEn, note:exprKr } : undefined,
+      learned: (c.correct && hasExpr) ? { name:exprEn, note:exprKr, aLine, fixed } : undefined,
     })) };
   });
   return { vocab:{ word:ex.vocab.word, ko:ex.vocab.meaning }, expr, dialogue:{ title:ex.title, turns } };
@@ -242,6 +248,13 @@ function escapeHtml(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').repl
 function exprHtml(e){ return `<b class="expr-en">${e.name}</b><span class="expr-ko">${e.note}</span>`; }
 // 배운 표현/어휘의 형광펜·밑줄 표시는 쓰지 않는다(텍스트만 노출).
 function markup(text){ return escapeHtml(text); }
+// A 대사 안에서 배운 표현이 있던 자리를 볼드로 짚어준다(대소문자 무시).
+function boldExpr(text, fixed){
+  if(!fixed) return escapeHtml(text);
+  const i=text.toLowerCase().indexOf(fixed.toLowerCase());
+  if(i<0) return escapeHtml(text);
+  return escapeHtml(text.slice(0,i))+'<b class="ln-mark">'+escapeHtml(text.substr(i,fixed.length))+'</b>'+escapeHtml(text.slice(i+fixed.length));
+}
 
 // ── 음성 ──────────────────────────────────────────────────────────────────
 // 실제 대화처럼 A/B에 서로 다른 목소리(가능하면 여성/남성)를 배정한다.
@@ -444,9 +457,11 @@ function askQuiz(turn, myRun){
           cb.classList.add('correct','show-why'); b.classList.add('show-why');
           const after=el('quizAfter'); const co=correctOpt(turn);
           if(co.learned){ const lb=document.createElement('div'); lb.className='learned-box';
-            // 이번 예시에서 방금 배운 표현만 '방금', 예전에 배운 표현은 '배운'으로 구분
-            const justNow = curExample && co.learned.name===curExample.expr.name;
-            lb.innerHTML=`<span class="k">${justNow?'방금 배운 표현':'배운 표현'}</span>${exprHtml(co.learned)}`; after.appendChild(lb); }
+            // 방금 (오디오로) 들었던 A 대사를 보여주고, 거기 배운 표현이 있었음을 연결해준다
+            lb.innerHTML=`<div class="ln-head">🎧 방금 A가 이렇게 말했어요</div>`+
+              `<div class="ln-a">“${boldExpr(co.learned.aLine||'', co.learned.fixed)}”</div>`+
+              `<div class="ln-expr"><span class="k">배운 표현</span><b>${co.learned.name}</b> ${co.learned.note} 가 여기 있었어요</div>`;
+            after.appendChild(lb); }
           const nx=document.createElement('button'); nx.className='next-btn'; nx.textContent='다음 ▶'; nx.onclick=()=>{ if(myRun===runId) resolve(!!o.correct); }; after.appendChild(nx);
         } else { b.classList.toggle('show-why'); }
       };
