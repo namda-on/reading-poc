@@ -212,25 +212,25 @@ const EXAMPLES = [
     vocab:{ word:"elevator", seq:2557, ko:"엘리베이터", audioUrl:"https://speech.epop.ai/sentence/actor/usFemaleNormal/0002557.K0wWy.ogg" },
     expr:{ ...E.where, arrange:{ en:"Where's the elevator?", ko:"엘리베이터는 어디에 있나요?", hl:[{text:"Where's",kind:'expr'},{text:"elevator",kind:'vocab'}] } },
     dialogue:{ title:"호텔 로비", focus:"체크인하고 안내 받기", turns:[
-      { s:'A', text:"You're all set — room 402, on the fourth floor." },
+      { s:'A', text:"You're all checked in — room 402, on the fourth floor." },
       { s:'B', quiz:true, options:[
-        { text:"Where's the ice machine?", correct:true, learned:E.where, hl:[{text:"Where's",kind:'expr'}], why:"체크인 후, 제빙기 위치를 물었어요." },
-        { text:"Where's my room?", hl:[{text:"Where's",kind:'expr'}], why:"‘Where's ~?’지만, 방금 402호라고 알려줬어요." },
-        { text:"It's on the fourth floor.", why:"A가 알려준 정보예요. B가 할 말이 아니에요." },
+        { text:"Where's the elevator?", correct:true, learned:E.where, hl:[{text:"Where's",kind:'expr'},{text:"elevator",kind:'vocab'}], why:"4층 방으로 올라가야 해서, 엘리베이터가 어디인지 물었어요." },
+        { text:"Where's my room?", hl:[{text:"Where's",kind:'expr'}], why:"‘Where's ~?’지만, 방은 방금 402호라고 알려줬어요." },
+        { text:"It's on the fourth floor.", why:"A가 알려준 정보를 되풀이한 거예요. B가 할 말이 아니에요." },
       ]},
-      { s:'A', text:"Right next to the elevator on your floor." },
+      { s:'A', text:"Right down the hall on your left. Anything else?" },
       { s:'B', quiz:true, options:[
-        { text:"Can I get a luggage cart?", correct:true, learned:E.get, hl:[{text:"Can I get",kind:'expr'}], why:"짐을 옮길 카트를 요청했어요." },
-        { text:"Do you have the ice machine?", hl:[{text:"Do you have",kind:'expr'}], why:"‘Do you have ~?’지만, 제빙기는 있냐고 묻지 않아요." },
-        { text:"Thanks, good night!", why:"아직 부탁할 게 남았는데 대화를 끝내버려요." },
+        { text:"Can I get a wake-up call at 7?", correct:true, learned:E.get, hl:[{text:"Can I get",kind:'expr'}], why:"‘더 필요한 거 있냐’고 해서, 7시 모닝콜을 요청했어요." },
+        { text:"I'll have a wake-up call.", hl:[{text:"I'll have",kind:'expr'}], why:"‘I'll have ~’는 음식 주문 표현이라 모닝콜 요청엔 안 맞아요." },
+        { text:"Where's the wake-up call?", hl:[{text:"Where's",kind:'expr'}], why:"모닝콜은 위치가 있는 게 아니라서 ‘Where's ~?’와 안 맞아요." },
       ]},
-      { s:'A', text:"Sure, I'll bring one up. Anything else?" },
+      { s:'A', text:"Of course, 7 a.m. Anything else?" },
       { s:'B', quiz:true, options:[
-        { text:"Do you have bottled water?", correct:true, learned:E.have, hl:[{text:"Do you have",kind:'expr'}], why:"필요한 게 더 있냐고 해서, 물이 있는지 물었어요." },
-        { text:"I'll have the fourth floor.", hl:[{text:"I'll have",kind:'expr'}], why:"‘I'll have ~’지만, 층을 주문할 순 없어요." },
-        { text:"Yes, room 402.", why:"더 필요하냐는 물음에 방 번호는 엉뚱해요." },
+        { text:"Do you have a gym?", correct:true, learned:E.have, hl:[{text:"Do you have",kind:'expr'}], why:"호텔에 헬스장이 있는지 물었어요." },
+        { text:"I'll have a gym.", hl:[{text:"I'll have",kind:'expr'}], why:"‘I'll have ~’지만, 헬스장을 주문할 순 없어요." },
+        { text:"Where's room 402?", hl:[{text:"Where's",kind:'expr'}], why:"본인 방 번호인데 위치를 되묻는 건 어색해요." },
       ]},
-      { s:'A', text:"Perfect — enjoy your stay!" },
+      { s:'A', text:"We do — it's on the second floor. Enjoy your stay!" },
     ]},
   },
   {
@@ -535,10 +535,11 @@ async function startDialogue(dialogue){
       const ok=await askQuiz(turn, myRun); if(myRun!==runId) return;
       if(ok) correctCount++;
       quiz.classList.add('hidden'); el('quizAfter').innerHTML='';
-      // 유저가 고른 답이므로 음성·웨이브 연출 없이 바로 텍스트로 표시
+      // 유저가 고른 답이므로 웨이브 연출 없이 바로 텍스트로 표시하되, 음성은 재생
       const co=correctOpt(turn); if(co.learned) noteLearned(co.learned);
       const bub=addBubble('B'); revealBubble(bub, co.text, co.hl); scrollToBottom();
-      quizDone++; setProgress(quizDone); await wait(500);
+      await speak(co.text,'B'); if(myRun!==runId) return;
+      quizDone++; setProgress(quizDone); await wait(400);
     }
   }
   if(myRun!==runId) return; showDone();
