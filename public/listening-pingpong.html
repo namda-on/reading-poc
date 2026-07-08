@@ -60,7 +60,7 @@
   .learned-box .k { display:inline-block; background:#f0b429; color:#fff; font-size:11px; font-weight:800; border-radius:999px; padding:1px 8px; margin-right:6px; vertical-align:middle; }
   .learned-box .ln-head { font-size:12.5px; font-weight:700; color:#8a6d15; }
   .learned-box .ln-a { font-size:16px; color:#4a3c10; margin:5px 0 8px; }
-  .learned-box .ln-a .ln-mark { font-weight:800; color:#000; }
+  .learned-box .ln-a .ln-hl { background:#ffe372; color:#3a2f00; border-radius:4px; padding:0 4px; }
   .learned-box .ln-expr { font-size:14px; }
   .learned-box .ln-expr b { font-weight:800; }
   /* 오답 교정: A 말 다시 듣고 단어 배열 */
@@ -255,12 +255,12 @@ function escapeHtml(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').repl
 function exprHtml(e){ return `<b class="expr-en">${e.name}</b><span class="expr-ko">${e.note}</span>`; }
 // 배운 표현/어휘의 형광펜·밑줄 표시는 쓰지 않는다(텍스트만 노출).
 function markup(text){ return escapeHtml(text); }
-// A 대사 안에서 배운 표현이 있던 자리를 볼드로 짚어준다(대소문자 무시).
-function boldExpr(text, fixed){
+// A 대사 안에서 배운 표현이 있던 자리를 형광펜으로 짚어준다(대소문자 무시).
+function hlExpr(text, fixed){
   if(!fixed) return escapeHtml(text);
   const i=text.toLowerCase().indexOf(fixed.toLowerCase());
   if(i<0) return escapeHtml(text);
-  return escapeHtml(text.slice(0,i))+'<b class="ln-mark">'+escapeHtml(text.substr(i,fixed.length))+'</b>'+escapeHtml(text.slice(i+fixed.length));
+  return escapeHtml(text.slice(0,i))+'<mark class="ln-hl">'+escapeHtml(text.substr(i,fixed.length))+'</mark>'+escapeHtml(text.slice(i+fixed.length));
 }
 
 // ── 음성 ──────────────────────────────────────────────────────────────────
@@ -530,8 +530,8 @@ function askQuiz(turn, myRun){
             if(co.learned){ const lb=document.createElement('div'); lb.className='learned-box';
               // 방금 (오디오로) 들었던 A 대사를 보여주고, 거기 배운 표현이 있었음을 연결해준다
               lb.innerHTML=`<div class="ln-head">🎧 방금 A가 이렇게 말했어요</div>`+
-                `<div class="ln-a">“${boldExpr(co.learned.aLine||'', co.learned.fixed)}”</div>`+
-                `<div class="ln-expr"><span class="k">배운 표현</span><b>${co.learned.name}</b> ${co.learned.note}</div>`;
+                `<div class="ln-a">“${hlExpr(co.learned.aLine||'', co.learned.fixed)}”</div>`+
+                `<div class="ln-expr"><span class="k">방금 배운 표현</span><b>${co.learned.name}</b> ${co.learned.note}</div>`;
               after.appendChild(lb); }
             const nx=document.createElement('button'); nx.className='next-btn'; nx.textContent='다음 ▶'; nx.onclick=()=>{ if(myRun===runId) resolve(!!o.correct); }; after.appendChild(nx);
           };
