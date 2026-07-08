@@ -87,11 +87,6 @@
   .msg.b .bubble.revealed { background:#4b83d6; color:#fff; }
   @keyframes reveal { from{opacity:.4;} to{opacity:1;} }
 
-  /* 형광펜(배운 표현) · 연한 점선 밑줄(배운 어휘) */
-  .hl-expr { background:#ffe372; color:#3a2f00; border-radius:4px; padding:0 3px; -webkit-box-decoration-break:clone; box-decoration-break:clone; }
-  .hl-vocab { text-decoration:underline; text-decoration-style:dotted; text-decoration-color:#a9b6c9; text-decoration-thickness:1.5px; text-underline-offset:3px; }
-  .msg.b .bubble.revealed .hl-vocab { text-decoration-color:rgba(255,255,255,.7); }
-
   .quiz { flex-shrink:0; max-height:62vh; overflow-y:auto; background:#eef4fb; border-top:1px solid #d3e0f1; padding:14px 14px 20px; }
   .quiz-q { display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; }
   .quiz-q span { font-size:15px; font-weight:800; color:#25406a; }
@@ -124,6 +119,10 @@
   .script-top { display:flex; align-items:center; gap:10px; padding:14px 16px; flex-shrink:0; font-size:17px; color:#25406a; }
   .script-top .icon-btn { color:#25406a; }
   .script-list { flex:1; min-height:0; overflow-y:auto; padding:4px 14px 20px; display:flex; flex-direction:column; }
+  /* 리스닝 시작 전 준비 카운트다운 */
+  .ready-gate { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:16px; text-align:center; }
+  .ready-msg { font-size:16px; font-weight:700; color:#3a567d; }
+  .ready-num { font-size:60px; font-weight:800; color:var(--blue); line-height:1; animation:pop .3s ease; }
   .script-kr { margin-top:4px; font-size:12.5px; color:#6b7c93; }
   .msg.b .bubble.revealed .script-kr { color:rgba(255,255,255,.85); }
   .hidden { display:none !important; }
@@ -242,21 +241,8 @@ async function loadData(){
 function escapeHtml(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 // 표현 표기(영어 굵게 + 뜻 아래 줄). 대시 없이 두 줄로 가독성 확보.
 function exprHtml(e){ return `<b class="expr-en">${e.name}</b><span class="expr-ko">${e.note}</span>`; }
-function markup(text, hl){
-  if(!hl || !hl.length) return escapeHtml(text);
-  const spans = hl.map(h=>({ ...h, i:text.indexOf(h.text) })).filter(h=>h.i>=0).sort((a,b)=>a.i-b.i);
-  let out='', pos=0;
-  for(const s of spans){
-    if(s.i < pos) continue; // 겹치면 건너뜀
-    out += escapeHtml(text.slice(pos, s.i));
-    out += s.kind==='vocab'
-      ? `<u class="hl-vocab">${escapeHtml(s.text)}</u>`
-      : `<mark class="hl-expr">${escapeHtml(s.text)}</mark>`;
-    pos = s.i + s.text.length;
-  }
-  out += escapeHtml(text.slice(pos));
-  return out;
-}
+// 배운 표현/어휘의 형광펜·밑줄 표시는 쓰지 않는다(텍스트만 노출).
+function markup(text){ return escapeHtml(text); }
 
 // ── 음성 ──────────────────────────────────────────────────────────────────
 // 실제 대화처럼 A/B에 서로 다른 목소리(가능하면 여성/남성)를 배정한다.
@@ -395,10 +381,26 @@ function revealBubble(bub, text, hl){ bub.classList.remove('hidden-bubble','play
 function correctOpt(turn){ return turn.options.find(o=>o.correct); }
 function setProgress(n){ const t=current.turns.filter(x=>x.quiz).length; el('barCount').textContent=`${n}/${t}`; el('barFill').style.width=`${Math.round(n/t*100)}%`; }
 
+// 리스닝 시작 전 마음의 준비(카운트다운). 음성이 갑자기 나오지 않도록.
+async function readyGate(myRun){
+  const g=document.createElement('div'); g.className='ready-gate';
+  g.innerHTML='<div class="ready-msg">🎧 잘 듣고 답을 골라보세요</div><div class="ready-num"></div>';
+  chat.appendChild(g);
+  const num=g.querySelector('.ready-num');
+  for(const n of ['3','2','1','시작!']){
+    if(myRun!==runId){ g.remove(); return false; }
+    num.textContent=n; num.style.animation='none'; void num.offsetWidth; num.style.animation='';
+    await wait(n==='시작!'?500:650);
+  }
+  g.remove();
+  return myRun===runId;
+}
+
 async function startDialogue(dialogue){
   const myRun=++runId; stopAudio();
   current=dialogue; correctCount=0; learnedSeen=[]; chat.innerHTML=''; show(topbar,chat); showProgress(true); setProgress(0);
   let quizDone=0;
+  if(!await readyGate(myRun)) return;
   for(const turn of dialogue.turns){
     if(myRun!==runId) return;
     if(!turn.quiz){
