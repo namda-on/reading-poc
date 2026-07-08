@@ -166,12 +166,13 @@
           { "text": "It's one of the oldest spots in town.", "kr": "이 동네에서 제일 오래된 곳이에요.", "correct": false, "trap": "내용어 오청", "explain": "'order(주문)'를 'older(더 오래된)'로 들은 답이에요." },
           { "text": "Sorry about the smell, I'll open a window.", "kr": "냄새 죄송해요, 창문 열게요.", "correct": false, "trap": "내용어 오청", "explain": "'order'를 'odor(냄새)'로 들은 답이에요." }
         ] },
-        { "role": "A", "text": "Could I get the bill?", "kr": "계산서 주시겠어요?" },
+        { "role": "A", "text": "Then could I get the fried rice?", "kr": "그럼 볶음밥 주실 수 있어요?" },
         { "role": "B", "prompt": "B가 할 말로 알맞은 것은?", "choices": [
-          { "text": "Of course, I'll bring it right over.", "kr": "네, 바로 가져다드릴게요.", "correct": true, "trap": "정답", "explain": "계산서를 달라는 걸 정확히 듣고 답했어요." },
-          { "text": "Just ring it if you need anything.", "kr": "필요하시면 벨 눌러 주세요.", "correct": false, "trap": "내용어 오청", "explain": "'bill(계산서)'을 'bell(벨)'로 들은 답이에요." },
-          { "text": "Sure, I'll get you some more water.", "kr": "네, 물 더 갖다드릴게요.", "correct": false, "trap": "프레임 오청", "explain": "'the bill'을 'a refill(리필)'처럼 들은 답이에요." }
-        ] }
+          { "text": "Good choice, I'll put it in.", "kr": "좋은 선택이에요, 주문 넣을게요.", "correct": true, "trap": "정답", "explain": "볶음밥을 주문하는 걸 정확히 듣고 주문을 받았어요." },
+          { "text": "Sure, I'll add some ice.", "kr": "네, 얼음 좀 넣어드릴게요.", "correct": false, "trap": "내용어 오청", "explain": "'rice(밥)'를 'ice(얼음)'로 들은 답이에요." },
+          { "text": "That comes to twelve dollars.", "kr": "다 해서 12달러예요.", "correct": false, "trap": "내용어 오청", "explain": "'rice(밥)'를 'price(가격)'로 들은 답이에요." }
+        ] },
+        { "role": "A", "text": "Thanks a lot!", "kr": "정말 고마워요!" }
       ]
     }
   ]
