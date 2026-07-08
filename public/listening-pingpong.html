@@ -68,6 +68,7 @@
   .rem-head { font-size:13.5px; font-weight:700; color:#3a567d; margin-bottom:8px; }
   .rem-replay { margin-bottom:10px; }
   .rem-ko { font-size:16px; font-weight:700; color:#2f3e52; margin:2px 0 10px; }
+  .rem-ko-done { text-align:center; margin:4px 0 2px; }
   .rem-box .ex-answer { min-height:44px; }
   /* 표현 표기: 영어(굵게) 위, 뜻(연하게) 아래 — 대시 없이 두 줄로 */
   .expr-en { font-weight:800; }
@@ -363,7 +364,6 @@ function successChime(){
 function buildArrange(container, sentence, ko, onDone){
   const tokens=sentence.trim().split(/\s+/);
   let bank=shuffle(tokens.map((t,i)=>({id:i,text:t}))), ans=[], checked=false;
-  if(ko){ const k=document.createElement('div'); k.className='rem-ko'; k.textContent=ko; container.appendChild(k); }
   const ansEl=document.createElement('div'); ansEl.className='ex-answer';
   const bankEl=document.createElement('div'); bankEl.className='ex-bank';
   const afterEl=document.createElement('div');
@@ -377,7 +377,8 @@ function buildArrange(container, sentence, ko, onDone){
     bankEl.innerHTML=''; bank.forEach(w=> bankEl.appendChild(mk(w.text,'ex-chip',()=>{ if(checked)return; speak(w.text,'A'); bank=bank.filter(x=>x.id!==w.id); ans.push(w); render(); })));
     afterEl.innerHTML='';
     if(!checked){ const c=mk('확인','next-btn',()=>{ checked=true; if(ans.map(x=>x.text).join(' ')===tokens.join(' ')) successChime(); render(); onDone&&onDone(); }); c.disabled=bank.length>0; afterEl.appendChild(c); }
-    else { const r=document.createElement('div'); r.className='ex-result'; r.style.color=ok?'#2e9e57':'#d1584e'; r.textContent=ok?'정답이에요! 🎉':`정답: ${tokens.join(' ')}`; afterEl.appendChild(r); }
+    else { const r=document.createElement('div'); r.className='ex-result'; r.style.color=ok?'#2e9e57':'#d1584e'; r.textContent=ok?'정답이에요! 🎉':`정답: ${tokens.join(' ')}`; afterEl.appendChild(r);
+      if(ko){ const k=document.createElement('div'); k.className='rem-ko rem-ko-done'; k.textContent=ko; afterEl.appendChild(k); } }
   }
   render();
 }
