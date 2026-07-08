@@ -103,11 +103,8 @@
   .opt.correct { background:#ddf3e2; border-color:#46b366; } .opt.correct .why { color:#2e6b45; }
   .opt.wrong { background:#fbe1e1; border-color:#e5645a; } .opt.wrong .why { color:#a33; }
   .opt .tag { font-weight:800; margin-right:6px; }
-  .legend { font-size:12px; color:#5b6b80; text-align:center; margin:10px 0 2px; }
-  .legend mark, .legend u { font-size:12px; }
   .next-btn { width:100%; border:none; border-radius:14px; padding:13px; background:var(--blue); color:#fff; font-size:16px; font-weight:800; cursor:pointer; margin-top:8px; }
   .next-btn:disabled { opacity:.5; cursor:default; }
-  .hint-tap { font-size:12px; color:var(--sub); text-align:center; margin-top:6px; }
 
   .done { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; padding:30px 22px; text-align:center; overflow-y:auto; }
   .done .emoji { font-size:52px; }
@@ -372,7 +369,6 @@ function showArrange(){
       const r=document.createElement('div'); r.className='ex-result'; r.style.color=ok?'#2e9e57':'#d1584e';
       r.textContent=ok?'정답이에요! 🎉':`정답: ${tokens.join(' ')}`; afterEl.appendChild(r);
       const sent=document.createElement('div'); sent.className='ex-sentence'; sent.innerHTML=markup(expr.arrange.en, expr.arrange.hl); afterEl.appendChild(sent);
-      const leg=document.createElement('div'); leg.className='legend'; leg.innerHTML='<mark class="hl-expr">형광펜</mark> 배운 표현 · <u class="hl-vocab">밑줄</u> 배운 어휘'; afterEl.appendChild(leg);
       afterEl.appendChild(mk('이 표현으로 리스닝 하기 ▶','next-btn',()=>startDialogue(curExample.dialogue)));
     }
   }
@@ -442,8 +438,6 @@ function askQuiz(turn, myRun){
             // 이번 예시에서 방금 배운 표현만 '방금', 예전에 배운 표현은 '배운'으로 구분
             const justNow = curExample && co.learned.name===curExample.expr.name;
             lb.innerHTML=`<span class="k">${justNow?'방금 배운 표현':'배운 표현'}</span>${exprHtml(co.learned)}`; after.appendChild(lb); }
-          const leg=document.createElement('div'); leg.className='legend'; leg.innerHTML='<mark class="hl-expr">형광펜</mark> 배운 표현 · <u class="hl-vocab">밑줄</u> 배운 어휘'; after.appendChild(leg);
-          const tip=document.createElement('div'); tip.className='hint-tap'; tip.textContent='다른 선택지를 눌러 왜 아닌지 볼 수 있어요'; after.appendChild(tip);
           const nx=document.createElement('button'); nx.className='next-btn'; nx.textContent='다음 ▶'; nx.onclick=()=>{ if(myRun===runId) resolve(!!o.correct); }; after.appendChild(nx);
         } else { b.classList.toggle('show-why'); }
       };
