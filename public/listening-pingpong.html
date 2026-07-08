@@ -58,8 +58,11 @@
   .ex-chip.inans { background:#eaf1fb; border-color:#4b83d6; }
   .ex-result { font-size:14px; font-weight:700; text-align:center; margin:6px 0 8px; }
   .ex-sentence { text-align:center; font-size:19px; font-weight:700; color:#2f3e52; margin-bottom:12px; }
-  .learned-box { background:#fff6dc; border:1px solid #f2e2a8; border-radius:12px; padding:10px 13px; margin:8px 0 4px; font-size:13.5px; color:#6b5410; line-height:1.5; }
-  .learned-box .k { display:inline-block; background:#f0b429; color:#fff; font-size:11px; font-weight:800; border-radius:999px; padding:1px 8px; margin-right:6px; }
+  .learned-box { background:#fff6dc; border:1px solid #f2e2a8; border-radius:12px; padding:10px 13px; margin:8px 0 4px; font-size:15px; color:#6b5410; line-height:1.5; }
+  .learned-box .k { display:inline-block; background:#f0b429; color:#fff; font-size:11px; font-weight:800; border-radius:999px; padding:1px 8px; margin-right:6px; vertical-align:middle; }
+  /* 표현 표기: 영어(굵게) 위, 뜻(연하게) 아래 — 대시 없이 두 줄로 */
+  .expr-en { font-weight:800; }
+  .expr-ko { display:block; font-weight:600; font-size:13.5px; opacity:.8; margin-top:3px; }
 
   /* 채팅 — 리스닝 연출 + 실제 채팅 배치(A 왼쪽/B 오른쪽) */
   .chat { flex:1; min-height:0; padding:10px 14px 16px; overflow-y:auto; display:flex; flex-direction:column; }
@@ -124,7 +127,7 @@
 <div class="app">
   <div class="topbar hidden" id="topbar">
     <button class="icon-btn" id="backBtn" aria-label="뒤로">‹</button>
-    <div class="progress" id="progress"><div class="bar-count" id="barCount">0/2</div><div class="bar-track"><div class="bar-fill" id="barFill"></div></div></div>
+    <div class="progress" id="progress"><div class="bar-count" id="barCount">0/3</div><div class="bar-track"><div class="bar-fill" id="barFill"></div></div></div>
   </div>
 
   <div class="home" id="home">
@@ -199,7 +202,11 @@ const EXAMPLES = [
     expr:{ ...E.where, arrange:{ en:"Where's the elevator?", ko:"엘리베이터는 어디에 있나요?", hl:[{text:"Where's",kind:'expr'},{text:"elevator",kind:'vocab'}] } },
     dialogue:{ title:"호텔 로비", focus:"체크인하고 안내 받기", turns:[
       { s:'A', text:"You're all set — room 402, on the fourth floor." },
-      { s:'B', text:"Thanks! Where's the elevator?", learned:E.where, hl:[{text:"Where's",kind:'expr'},{text:"elevator",kind:'vocab'}] },
+      { s:'B', quiz:true, options:[
+        { text:"Where's the elevator?", correct:true, learned:E.where, hl:[{text:"Where's",kind:'expr'},{text:"elevator",kind:'vocab'}], why:"방을 안내받고, 엘리베이터 위치를 물었어요." },
+        { text:"Where's my room?", hl:[{text:"Where's",kind:'expr'}], why:"‘Where's ~?’지만, 방금 402호라고 알려줬어요." },
+        { text:"It's on the fourth floor.", why:"A가 알려준 정보예요. B가 할 말이 아니에요." },
+      ]},
       { s:'A', text:"Just past the lounge on your right. Anything else?" },
       { s:'B', quiz:true, options:[
         { text:"Can I get a map?", correct:true, learned:E.get, hl:[{text:"Can I get",kind:'expr'}], why:"필요한 걸 정중히 요청했어요." },
@@ -219,7 +226,11 @@ const EXAMPLES = [
     expr:{ ...E.ill, arrange:{ en:"I'll have a latte.", ko:"라떼로 주세요.", hl:[{text:"I'll have",kind:'expr'},{text:"latte",kind:'vocab'}] } },
     dialogue:{ title:"카페 주문", focus:"카페에서 주문하기", turns:[
       { s:'A', text:"Hi! What can I get started for you?" },
-      { s:'B', text:"Hi! I'll have a latte, please.", learned:E.ill, hl:[{text:"I'll have",kind:'expr'},{text:"latte",kind:'vocab'}] },
+      { s:'B', quiz:true, options:[
+        { text:"I'll have a latte.", correct:true, learned:E.ill, hl:[{text:"I'll have",kind:'expr'},{text:"latte",kind:'vocab'}], why:"주문을 받길래 라떼로 달라고 했어요." },
+        { text:"Do you have a latte?", hl:[{text:"Do you have",kind:'expr'},{text:"latte",kind:'vocab'}], why:"주문하는 자리라 ‘있나요?’보다 ‘~로 주세요’가 자연스러워요." },
+        { text:"Where's the latte?", hl:[{text:"Where's",kind:'expr'},{text:"latte",kind:'vocab'}], why:"주문도 전에 위치를 묻는 건 어색해요." },
+      ]},
       { s:'A', text:"Great. We're out of oat milk today — is regular okay?" },
       { s:'B', quiz:true, options:[
         { text:"Can I get soy milk?", correct:true, learned:E.get, hl:[{text:"Can I get",kind:'expr'}], why:"오트밀크가 품절이라 두유로 바꿔 요청했어요." },
@@ -239,7 +250,11 @@ const EXAMPLES = [
     expr:{ ...E.howget, arrange:{ en:"How do I get to the station?", ko:"역에 어떻게 가나요?", hl:[{text:"How do I get",kind:'expr'},{text:"station",kind:'vocab'}] } },
     dialogue:{ title:"길 묻기", focus:"길과 위치 묻기", turns:[
       { s:'A', text:"You look lost — need a hand?" },
-      { s:'B', text:"Oh, thanks! How do I get to the station?", learned:E.howget, hl:[{text:"How do I get",kind:'expr'},{text:"station",kind:'vocab'}] },
+      { s:'B', quiz:true, options:[
+        { text:"How do I get to the station?", correct:true, learned:E.howget, hl:[{text:"How do I get",kind:'expr'},{text:"station",kind:'vocab'}], why:"도움을 준다길래 역에 가는 방법을 물었어요." },
+        { text:"I'll have a station.", hl:[{text:"I'll have",kind:'expr'},{text:"station",kind:'vocab'}], why:"‘I'll have ~’지만, 역을 주문할 순 없어요." },
+        { text:"No, thank you.", why:"길을 물어야 하는데 도움을 거절했어요." },
+      ]},
       { s:'A', text:"Go straight two blocks, then turn left at the bakery." },
       { s:'B', quiz:true, options:[
         { text:"Do you have a map?", correct:true, learned:E.have, hl:[{text:"Do you have",kind:'expr'}], why:"길을 들은 뒤 지도가 있는지 물었어요." },
@@ -259,7 +274,11 @@ const EXAMPLES = [
     expr:{ ...E.have, arrange:{ en:"Do you have a charger?", ko:"충전기가 있나요?", hl:[{text:"Do you have",kind:'expr'},{text:"charger",kind:'vocab'}] } },
     dialogue:{ title:"프런트 데스크", focus:"필요한 물건 있는지 묻기", turns:[
       { s:'A', text:"Front desk, how can I help?" },
-      { s:'B', text:"Hi, do you have a phone charger?", learned:E.have, hl:[{text:"do you have",kind:'expr'},{text:"charger",kind:'vocab'}] },
+      { s:'B', quiz:true, options:[
+        { text:"Do you have a charger?", correct:true, learned:E.have, hl:[{text:"Do you have",kind:'expr'},{text:"charger",kind:'vocab'}], why:"충전기가 있는지 물었어요." },
+        { text:"I'll have a charger.", hl:[{text:"I'll have",kind:'expr'},{text:"charger",kind:'vocab'}], why:"‘I'll have ~’는 주문 표현이라 여기선 어색해요." },
+        { text:"How can I help you?", why:"A가 한 말이에요. B가 할 말이 아니에요." },
+      ]},
       { s:'A', text:"We do! I'll send one up. Anything else?" },
       { s:'B', quiz:true, options:[
         { text:"Can I get batteries too?", correct:true, learned:E.get, hl:[{text:"Can I get",kind:'expr'}], why:"충전기에 더해 배터리도 요청했어요." },
@@ -279,7 +298,11 @@ const EXAMPLES = [
     expr:{ ...E.get, arrange:{ en:"Can I get some towels?", ko:"수건 좀 받을 수 있을까요?", hl:[{text:"Can I get",kind:'expr'},{text:"towels",kind:'vocab'}] } },
     dialogue:{ title:"룸서비스", focus:"객실에서 요청하기", turns:[
       { s:'A', text:"Housekeeping — did you need something?" },
-      { s:'B', text:"Yes, can I get some extra towels?", learned:E.get, hl:[{text:"can I get",kind:'expr'},{text:"towels",kind:'vocab'}] },
+      { s:'B', quiz:true, options:[
+        { text:"Can I get some towels?", correct:true, learned:E.get, hl:[{text:"Can I get",kind:'expr'},{text:"towels",kind:'vocab'}], why:"수건을 받을 수 있는지 요청했어요." },
+        { text:"Where's the towel?", hl:[{text:"Where's",kind:'expr'},{text:"towel",kind:'vocab'}], why:"아직 요청도 안 했는데 위치를 묻는 건 이상해요." },
+        { text:"No, I'm fine.", why:"수건이 필요한데 괜찮다고 하면 안 되죠." },
+      ]},
       { s:'A', text:"Of course. Anything else?" },
       { s:'B', quiz:true, options:[
         { text:"Do you have a hairdryer?", correct:true, learned:E.have, hl:[{text:"Do you have",kind:'expr'}], why:"수건에 더해 드라이어가 있는지 물었어요." },
@@ -299,7 +322,11 @@ const EXAMPLES = [
     expr:{ ...E.borrow, arrange:{ en:"Can I borrow an umbrella?", ko:"우산을 빌릴 수 있을까요?", hl:[{text:"Can I borrow",kind:'expr'},{text:"umbrella",kind:'vocab'}] } },
     dialogue:{ title:"친구에게 빌리기", focus:"물건 빌려 달라고 하기", turns:[
       { s:'A', text:"Ready to head out? It's pouring outside." },
-      { s:'B', text:"Oh no. Can I borrow an umbrella?", learned:E.borrow, hl:[{text:"Can I borrow",kind:'expr'},{text:"umbrella",kind:'vocab'}] },
+      { s:'B', quiz:true, options:[
+        { text:"Can I borrow an umbrella?", correct:true, learned:E.borrow, hl:[{text:"Can I borrow",kind:'expr'},{text:"umbrella",kind:'vocab'}], why:"잠깐 우산을 빌릴 수 있는지 물었어요." },
+        { text:"Can I get an umbrella?", hl:[{text:"Can I get",kind:'expr'},{text:"umbrella",kind:'vocab'}], why:"사서 갖는 게 아니라 잠깐 빌리는 거라 ‘Can I borrow ~?’가 맞아요." },
+        { text:"It's pouring outside.", why:"A가 한 말이에요. B가 할 말이 아니에요." },
+      ]},
       { s:'A', text:"Sure, take the blue one by the door. Need anything else?" },
       { s:'B', quiz:true, options:[
         { text:"Can I borrow a bag?", correct:true, learned:E.borrow, hl:[{text:"Can I borrow",kind:'expr'}], why:"가방도 빌릴 수 있는지 물었어요." },
@@ -318,6 +345,8 @@ const EXAMPLES = [
 
 // ── 강조 마크업 ──────────────────────────────────────────────────────────────
 function escapeHtml(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+// 표현 표기(영어 굵게 + 뜻 아래 줄). 대시 없이 두 줄로 가독성 확보.
+function exprHtml(e){ return `<b class="expr-en">${e.name}</b><span class="expr-ko">${e.note}</span>`; }
 function markup(text, hl){
   if(!hl || !hl.length) return escapeHtml(text);
   const spans = hl.map(h=>({ ...h, i:text.indexOf(h.text) })).filter(h=>h.i>=0).sort((a,b)=>a.i-b.i);
@@ -430,7 +459,7 @@ function showVocab(){
 function showArrange(){
   runId++; stopAudio(); show(topbar, arrange); showProgress(false);
   const expr=curExample.expr;
-  el('arrExpr').innerHTML=`<span class="k">배운 표현</span><b>${expr.name}</b> — ${expr.note}`;
+  el('arrExpr').innerHTML=`<span class="k">배운 표현</span>${exprHtml(expr)}`;
   el('arrKo').textContent=expr.arrange.ko;
   const tokens=expr.arrange.en.trim().split(/\s+/);
   let bank=shuffle(tokens.map((t,i)=>({id:i,text:t}))), ans=[], checked=false;
@@ -514,7 +543,7 @@ function askQuiz(turn, myRun){
           cb.classList.add('correct','show-why'); b.classList.add('show-why');
           const after=el('quizAfter'); const co=correctOpt(turn);
           if(co.learned){ const lb=document.createElement('div'); lb.className='learned-box';
-            lb.innerHTML=`<span class="k">배운 표현</span>정답은 이 표현을 <b>상황에 맞게</b> 썼어요 — <mark class="hl-expr">${co.learned.name}</mark> ${co.learned.note}`; after.appendChild(lb); }
+            lb.innerHTML=`<span class="k">방금 배운 표현</span>${exprHtml(co.learned)}`; after.appendChild(lb); }
           const leg=document.createElement('div'); leg.className='legend'; leg.innerHTML='<mark class="hl-expr">형광펜</mark> 배운 표현 · <u class="hl-vocab">밑줄</u> 배운 어휘'; after.appendChild(leg);
           const tip=document.createElement('div'); tip.className='hint-tap'; tip.textContent='다른 선택지를 눌러 왜 아닌지 볼 수 있어요'; after.appendChild(tip);
           const nx=document.createElement('button'); nx.className='next-btn'; nx.textContent='다음 ▶'; nx.onclick=()=>{ if(myRun===runId) resolve(!!o.correct); }; after.appendChild(nx);
@@ -531,7 +560,7 @@ function showDone(){
   el('doneScore').textContent=`${t}번 중 ${correctCount}번 한 번에 맞혔어요.`;
   const ll=el('learnedList');
   if(learnedSeen.length){ ll.classList.remove('hidden');
-    ll.innerHTML='<div class="h">💡 이번 대화에 나온 배운 표현</div>'+learnedSeen.map(x=>`<div class="it"><b>${x.name}</b> — ${x.note}</div>`).join('');
+    ll.innerHTML='<div class="h">💡 이번 대화에 나온 배운 표현</div>'+learnedSeen.map(x=>`<div class="it">${exprHtml(x)}</div>`).join('');
   } else ll.classList.add('hidden');
 }
 
