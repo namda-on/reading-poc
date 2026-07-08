@@ -67,6 +67,7 @@
   .rem-box { background:#eef4fb; border:1px solid #d3e0f1; border-radius:12px; padding:12px 13px; margin:8px 0 4px; }
   .rem-head { font-size:13.5px; font-weight:700; color:#3a567d; margin-bottom:8px; }
   .rem-replay { margin-bottom:10px; }
+  .rem-ko { font-size:16px; font-weight:700; color:#2f3e52; margin:2px 0 10px; }
   .rem-box .ex-answer { min-height:44px; }
   /* 표현 표기: 영어(굵게) 위, 뜻(연하게) 아래 — 대시 없이 두 줄로 */
   .expr-en { font-weight:800; }
@@ -308,7 +309,7 @@ const wait = ms => new Promise(r=>setTimeout(r,ms));
 // ── 화면 ──────────────────────────────────────────────────────────────────
 const el=id=>document.getElementById(id);
 const home=el('home'), arrange=el('arrange'), chat=el('chat'), quiz=el('quiz'), done=el('done'), topbar=el('topbar'), script=el('script');
-let curExample=null, current=null, lastA='', correctCount=0, learnedSeen=[], runId=0;
+let curExample=null, current=null, lastA='', lastAKr='', correctCount=0, learnedSeen=[], runId=0;
 function show(...ids){ [home,arrange,chat,quiz,done,script,topbar].forEach(n=>n.classList.add('hidden')); ids.forEach(n=>n.classList.remove('hidden')); }
 function noteLearned(x){ if(x && !learnedSeen.some(y=>y.name===x.name)) learnedSeen.push(x); }
 function scrollToBottom(){ requestAnimationFrame(()=>{ chat.scrollTo({top:chat.scrollHeight, behavior:'smooth'}); }); }
@@ -358,10 +359,11 @@ function successChime(){
   }catch(e){}
 }
 
-// 재사용 배열 위젯: 주어진 문장을 단어 배열로 맞추게 한다(확인 시 onDone).
-function buildArrange(container, sentence, onDone){
+// 재사용 배열 위젯: 주어진 문장을 단어 배열로 맞추게 한다(뜻 ko 표시, 확인 시 onDone).
+function buildArrange(container, sentence, ko, onDone){
   const tokens=sentence.trim().split(/\s+/);
   let bank=shuffle(tokens.map((t,i)=>({id:i,text:t}))), ans=[], checked=false;
+  if(ko){ const k=document.createElement('div'); k.className='rem-ko'; k.textContent=ko; container.appendChild(k); }
   const ansEl=document.createElement('div'); ansEl.className='ex-answer';
   const bankEl=document.createElement('div'); bankEl.className='ex-bank';
   const afterEl=document.createElement('div');
@@ -443,7 +445,7 @@ async function startDialogue(dialogue){
   for(const turn of dialogue.turns){
     if(myRun!==runId) return;
     if(!turn.quiz){
-      const bub=addBubble(turn.s); if(turn.s==='A') lastA=turn.text;
+      const bub=addBubble(turn.s); if(turn.s==='A'){ lastA=turn.text; lastAKr=turn.kr||''; }
       bub.classList.add('playing'); await speak(turn.text, turn.s);
       if(myRun!==runId) return; bub.classList.remove('playing');
       if(turn.hl){ if(turn.learned) noteLearned(turn.learned); revealBubble(bub, turn.text, turn.hl); scrollToBottom(); await wait(750); }
@@ -502,7 +504,7 @@ function askQuiz(turn, myRun){
             rem.append(head, replay, arrWrap); after.appendChild(rem);
             rem.scrollIntoView({behavior:'smooth', block:'nearest'});
             let advanced=false;
-            buildArrange(arrWrap, lastA, ()=>{ if(advanced) return; advanced=true; showLearnedAndNext(); });
+            buildArrange(arrWrap, lastA, lastAKr, ()=>{ if(advanced) return; advanced=true; showLearnedAndNext(); });
             speak(lastA,'A'); // 교정 진입 시 A 말 자동 재생
           }
         } else { b.classList.toggle('show-why'); }
