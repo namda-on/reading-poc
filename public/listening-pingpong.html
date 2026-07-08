@@ -191,9 +191,11 @@ const E = {
   borrow:{ name:"Can I borrow ~?", note:"~를 빌릴 수 있을까요?" },
 };
 
+// 어휘는 실제 어휘 뱅크(Dictionary/DictionaryKR)의 seq·뜻을 그대로 사용.
+// audioUrl = 뱅크 실음성(speech.epop.ai/sentence/actor/{voice}/{dictSeq:07d}.{hash}.ogg, Voice 테이블 해시).
 const EXAMPLES = [
   {
-    vocab:{ word:"elevator", ko:"엘리베이터" },
+    vocab:{ word:"elevator", seq:2557, ko:"엘리베이터", audioUrl:"https://speech.epop.ai/sentence/actor/usFemaleNormal/0002557.K0wWy.ogg" },
     expr:{ ...E.where, arrange:{ en:"Where's the elevator?", ko:"엘리베이터는 어디에 있나요?", hl:[{text:"Where's",kind:'expr'},{text:"elevator",kind:'vocab'}] } },
     dialogue:{ title:"호텔 로비", focus:"체크인하고 안내 받기", turns:[
       { s:'A', text:"You're all set — room 402, on the fourth floor." },
@@ -215,7 +217,7 @@ const EXAMPLES = [
     ]},
   },
   {
-    vocab:{ word:"latte", ko:"라떼" },
+    vocab:{ word:"latte", seq:5835, ko:"카페 라떼", audioUrl:"https://speech.epop.ai/sentence/actor/usFemaleNormal/0005835.LIXaP.ogg" },
     expr:{ ...E.ill, arrange:{ en:"I'll have a latte.", ko:"라떼로 주세요.", hl:[{text:"I'll have",kind:'expr'},{text:"latte",kind:'vocab'}] } },
     dialogue:{ title:"카페 주문", focus:"카페에서 주문하기", turns:[
       { s:'A', text:"Hi! What can I get started for you?" },
@@ -237,7 +239,7 @@ const EXAMPLES = [
     ]},
   },
   {
-    vocab:{ word:"station", ko:"(기차)역" },
+    vocab:{ word:"station", seq:3837, ko:"역 (기차)", audioUrl:"https://speech.epop.ai/sentence/actor/usFemaleNormal/0003837.FK9Se.ogg" },
     expr:{ ...E.howget, arrange:{ en:"How do I get to the station?", ko:"역에 어떻게 가나요?", hl:[{text:"How do I get",kind:'expr'},{text:"station",kind:'vocab'}] } },
     dialogue:{ title:"길 묻기", focus:"길과 위치 묻기", turns:[
       { s:'A', text:"You look lost — need a hand?" },
@@ -259,7 +261,7 @@ const EXAMPLES = [
     ]},
   },
   {
-    vocab:{ word:"charger", ko:"충전기" },
+    vocab:{ word:"charger", seq:35848, ko:"충전기", audioUrl:"https://speech.epop.ai/sentence/actor/usFemaleNormal/0035848.77ZYw.ogg" },
     expr:{ ...E.have, arrange:{ en:"Do you have a charger?", ko:"충전기가 있나요?", hl:[{text:"Do you have",kind:'expr'},{text:"charger",kind:'vocab'}] } },
     dialogue:{ title:"프런트 데스크", focus:"필요한 물건 있는지 묻기", turns:[
       { s:'A', text:"Front desk, how can I help?" },
@@ -281,7 +283,7 @@ const EXAMPLES = [
     ]},
   },
   {
-    vocab:{ word:"towels", ko:"수건" },
+    vocab:{ word:"towel", seq:4107, ko:"수건, 타월", audioUrl:"https://speech.epop.ai/sentence/actor/usFemaleNormal/0004107.xI4vn.ogg" },
     expr:{ ...E.get, arrange:{ en:"Can I get some towels?", ko:"수건 좀 받을 수 있을까요?", hl:[{text:"Can I get",kind:'expr'},{text:"towels",kind:'vocab'}] } },
     dialogue:{ title:"룸서비스", focus:"객실에서 요청하기", turns:[
       { s:'A', text:"Housekeeping — did you need something?" },
@@ -303,7 +305,7 @@ const EXAMPLES = [
     ]},
   },
   {
-    vocab:{ word:"umbrella", ko:"우산" },
+    vocab:{ word:"umbrella", seq:3272, ko:"우산", audioUrl:"https://speech.epop.ai/sentence/actor/usFemaleNormal/0003272.gjTs2.ogg" },
     expr:{ ...E.borrow, arrange:{ en:"Can I borrow an umbrella?", ko:"우산을 빌릴 수 있을까요?", hl:[{text:"Can I borrow",kind:'expr'},{text:"umbrella",kind:'vocab'}] } },
     dialogue:{ title:"친구에게 빌리기", focus:"물건 빌려 달라고 하기", turns:[
       { s:'A', text:"Ready to head out? It's pouring outside." },
@@ -394,7 +396,7 @@ function speak(text, who){
     setTimeout(fin, Math.max(1900, text.length*95));
   });
 }
-function stopAudio(){ try{ speechSynthesis.cancel(); }catch(e){} }
+function stopAudio(){ try{ speechSynthesis.cancel(); }catch(e){} try{ if(vAudio) vAudio.pause(); }catch(e){} }
 const wait = ms => new Promise(r=>setTimeout(r,ms));
 
 // ── 화면 ──────────────────────────────────────────────────────────────────
@@ -417,12 +419,23 @@ function renderHome(){
 
 // 1) 어휘 ────────────────────────────────────────────────────────────────────
 function startExample(i){ curExample=EXAMPLES[i]; showVocab(); }
+let vAudio=null;
+function playVocab(v){
+  stopAudio();
+  if(v.audioUrl){ // 어휘 뱅크 실음성 우선, 실패 시 브라우저 TTS
+    try{ vAudio && vAudio.pause(); }catch(e){}
+    vAudio=new Audio(v.audioUrl);
+    vAudio.onerror=()=>speak(v.word,'A');
+    vAudio.play().catch(()=>speak(v.word,'A'));
+  } else speak(v.word,'A');
+}
 function showVocab(){
   runId++; stopAudio(); show(topbar, vocab); showProgress(false);
   el('vWord').textContent=curExample.vocab.word;
   el('vKo').textContent=curExample.vocab.ko;
-  el('vPlay').onclick=()=>speak(curExample.vocab.word,'A');
+  el('vPlay').onclick=()=>playVocab(curExample.vocab);
   el('vNext').onclick=()=>showArrange();
+  playVocab(curExample.vocab); // 어휘 진입 시 자동 재생(사용자 제스처 직후)
 }
 
 // 2) 표현 배열 ────────────────────────────────────────────────────────────────

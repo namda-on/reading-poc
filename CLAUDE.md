@@ -32,7 +32,7 @@ python3 scripts/extract.py   # 대화 데이터(dialogs.json) 재생성
 - `src/lib/quizHint.ts` — `topicSeq`의 퀴즈 질문·정답·해설을 합친 한국어 힌트(핵심 문장 선정용).
 - `src/data/` — `dialogs.json`(생성물, 커밋됨) · `quizzes.json`(수기 저작) · `types.ts` · `quizTypes.ts`.
 - `scripts/extract.py` — 외부 sqlite에서 대화 추출.
-- `public/listening-pingpong.html` — **별도** 리스닝 핑퐁 프로토타입(자체 완결형 HTML, 저작 대화 + 브라우저 TTS). 본 앱과 무관, `/listening-pingpong.html`로 서빙. 실제 학습 흐름(**어휘 → 표현 → 리스닝**)을 재현: 예시마다 어휘 카드 → 그 어휘가 든 표현 문장 단어 배열 → 그 표현이 쓰인 A/B 대화 리스닝(B 턴 2개를 영어 4지선다). 대화는 텍스트 없이 음성만 나오고, 배운 표현·어휘가 나온 줄은 **다 들은 뒤** 말풍선을 텍스트로 열어 형광펜(표현)·밑줄(어휘)로 짚어준다. 선택지는 답한 뒤 같은 방식으로 강조. 표현은 실제 표현 뱅크(ExpressionUnitKR) 항목이고, 오답에도 배운 표현을 (틀린 맥락으로) 넣어 표현 인지만으로 정답을 유추하지 못하게 한다. A/B는 서로 다른 음성(여성/남성 우선)으로 재생하며 홈에서 각각 고를 수 있다.
+- `public/listening-pingpong.html` — **별도** 리스닝 핑퐁 프로토타입(자체 완결형 HTML, 저작 대화 + 브라우저 TTS). 본 앱과 무관, `/listening-pingpong.html`로 서빙. 실제 학습 흐름(**어휘 → 표현 → 리스닝**)을 재현: 예시마다 어휘 카드 → 그 어휘가 든 표현 문장 단어 배열 → 그 표현이 쓰인 A/B 대화 리스닝(B 턴 2개를 영어 4지선다). 대화는 텍스트 없이 음성만 나오고, 배운 표현·어휘가 나온 줄은 **다 들은 뒤** 말풍선을 텍스트로 열어 형광펜(표현)·밑줄(어휘)로 짚어준다. 선택지는 답한 뒤 같은 방식으로 강조. 표현은 실제 표현 뱅크(ExpressionUnitKR) 항목이고, 오답에도 배운 표현을 (틀린 맥락으로) 넣어 표현 인지만으로 정답을 유추하지 못하게 한다. 어휘는 실제 어휘 뱅크(Dictionary/DictionaryKR)의 seq·뜻을 쓰고, 발음은 뱅크 실음성(`speech.epop.ai/sentence/actor/{voice}/{dictSeq:07d}.{voiceHash}.ogg` — dictSeq는 Dictionary.seq, voiceHash는 Voice 테이블 `infos[voiceIdx].hash`; 단어 오디오도 문장과 같은 `sentence/actor` 경로를 쓴다)을 재생하고 실패 시 브라우저 TTS로 폴백한다. A/B 대화는 서로 다른 음성(여성/남성 우선)으로 재생하며 홈에서 각각 고를 수 있다.
 
 화면 흐름: 스토리 선택 → 에피소드(토픽) 목록 → 시작 화면(모드 선택) → 세션(리딩/리스닝 재생) → 퀴즈(바텀시트). `App.tsx`가 상태기계로 관리(`mode`·`playing` 상태).
 
