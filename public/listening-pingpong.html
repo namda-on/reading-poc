@@ -124,6 +124,8 @@
   .script-top { display:flex; align-items:center; gap:10px; padding:14px 16px; flex-shrink:0; font-size:17px; color:#25406a; }
   .script-top .icon-btn { color:#25406a; }
   .script-list { flex:1; min-height:0; overflow-y:auto; padding:4px 14px 20px; display:flex; flex-direction:column; }
+  .script-kr { margin-top:4px; font-size:12.5px; color:#6b7c93; }
+  .msg.b .bubble.revealed .script-kr { color:rgba(255,255,255,.85); }
   .hidden { display:none !important; }
 </style>
 </head>
@@ -191,39 +193,44 @@
 
 <script>
 // ── 데이터 로드 ─────────────────────────────────────────────────────────────
-// 콘텐츠는 외부 JSON(listening-pingpong.data.json)에서 불러온다. 스키마는 그 파일 참고.
-// 표현/어휘 강조(hl)는 여기서 자동 계산 — 저작자는 오프셋·대소문자를 신경 쓸 필요가 없다.
-let EXPR = {}, EXAMPLES = [];
-// 표현 패턴에서 형광펜으로 칠할 고정부('~' 앞부분)를 뽑는다: "Where's ~?" → "Where's"
+// 콘텐츠는 외부 JSON(listening-pingpong.data.json)에서 불러온다.
+// 표현은 실제 표현 뱅크(ExpressionUnitKR) 항목이고, '표현 배우기(배열)' 문장은
+// 대화에서 그 표현이 쓰인 줄로 자동 생성한다. 강조(hl)도 여기서 자동 계산.
+let EXAMPLES = [];
+// 표현 패턴의 고정부('~' 앞): "Where's ~?" → "Where's", "To go." → "To go"
 function exprPhrase(pattern){ return pattern.split('~')[0].trim().replace(/[?.!,]+$/,'').trim(); }
 // 대소문자 무시하고 찾아, 실제 문장에 나온 그대로의 부분문자열을 돌려준다.
 function findCI(text, phrase){ if(!phrase) return null; const i=text.toLowerCase().indexOf(phrase.toLowerCase()); return i<0?null:text.substr(i, phrase.length); }
-function buildHl(text, exprId, vocabSurface){
-  const hl=[];
-  if(exprId && EXPR[exprId]){ const m=findCI(text, exprPhrase(EXPR[exprId].pattern)); if(m) hl.push({text:m, kind:'expr'}); }
-  if(vocabSurface){ const m=findCI(text, vocabSurface); if(m) hl.push({text:m, kind:'vocab'}); }
-  return hl;
-}
 function buildExample(ex){
-  const e = EXPR[ex.expression] || {pattern:'', meaning:''};
-  const expr = { name:e.pattern, note:e.meaning,
-    arrange:{ en:ex.arrange.en, ko:ex.arrange.ko, hl:buildHl(ex.arrange.en, ex.expression, ex.vocab.word) } };
-  const turns = ex.dialogue.turns.map(t=>{
-    if(!t.options) return { s:t.speaker, text:t.text };
-    return { s:t.speaker, quiz:true, options:t.options.map(o=>({
-      text:o.text, correct:!!o.correct, why:o.reason,
-      learned: (o.correct && o.expr && EXPR[o.expr]) ? { name:EXPR[o.expr].pattern, note:EXPR[o.expr].meaning } : undefined,
-      hl: buildHl(o.text, o.expr, o.vocab),
-    })) };
+  const exprEn = ex.expression.en, exprKr = ex.expression.kr;
+  const fixed = exprPhrase(exprEn);
+  // 표현 배열 문장: 대화(A 대사·B 정답) 중 표현이 쓰인 가장 짧은 문장을 고른다.
+  const cands = [];
+  for (const t of ex.dialogue){
+    if (t.role==='A' && t.text) cands.push({ en:t.text, ko:t.kr||'' });
+    else if (t.role==='B' && t.choices){ const c=t.choices.find(x=>x.correct); if(c) cands.push({ en:c.text, ko:exprKr }); }
+  }
+  const withExpr = cands.filter(c=> c.en.toLowerCase().includes(fixed.toLowerCase()));
+  const src = (withExpr.length?withExpr:cands).sort((a,b)=>a.en.length-b.en.length)[0] || {en:exprEn, ko:exprKr};
+  const arrangeHl = [];
+  { const m=findCI(src.en, fixed); if(m) arrangeHl.push({text:m, kind:'expr'}); }
+  { const m=findCI(src.en, ex.vocab.word); if(m) arrangeHl.push({text:m, kind:'vocab'}); }
+  const expr = { name:exprEn, note:exprKr, arrange:{ en:src.en, ko:src.ko, hl:arrangeHl } };
+
+  const turns = ex.dialogue.map(t=>{
+    if (t.role==='A') return { s:'A', text:t.text, kr:t.kr };
+    return { s:'B', quiz:true, options:(t.choices||[]).map(c=>{
+      const hl=[]; if(c.highlight){ const m=findCI(c.text, c.highlight); if(m) hl.push({text:m, kind:'expr'}); }
+      return { text:c.text, correct:!!c.correct, why:c.explain,
+        learned: c.correct ? { name:exprEn, note:exprKr } : undefined, hl };
+    }) };
   });
-  return { vocab:{ word:ex.vocab.word, ko:ex.vocab.meaning, seq:ex.vocab.dictSeq, audioUrl:ex.vocab.audioUrl },
-    expr, dialogue:{ title:ex.dialogue.title, turns } };
+  return { vocab:{ word:ex.vocab.word, ko:ex.vocab.meaning }, expr, dialogue:{ title:ex.title, turns } };
 }
 async function loadData(){
   try{
     const res = await fetch('./listening-pingpong.data.json', {cache:'no-store'});
     const data = await res.json();
-    EXPR = data.expressions || {};
     EXAMPLES = (data.examples || []).map(buildExample);
     renderHome();
   }catch(err){
@@ -463,9 +470,10 @@ function showScript(){
   current.turns.forEach(t=>{
     const who=t.s; const info = who==='B' ? {n:'B',a:'🐰'} : {n:'A',a:'🐻'};
     const line = t.quiz ? correctOpt(t) : t;
+    const krLine = t.kr ? `<div class="script-kr">${escapeHtml(t.kr)}</div>` : '';
     const m=document.createElement('div'); m.className='msg'+(who==='B'?' b':'');
     m.innerHTML=`<div class="avatar-col"><div class="avatar">${info.a}</div><div class="avatar-name">${info.n}</div></div>
-      <div class="bubble revealed">${markup(line.text, line.hl)}</div>`;
+      <div class="bubble revealed">${markup(line.text, line.hl)}${krLine}</div>`;
     box.appendChild(m);
   });
 }

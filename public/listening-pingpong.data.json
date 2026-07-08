@@ -1,618 +1,290 @@
 {
-  "expressions": {
-    "where": {
-      "pattern": "Where's ~?",
-      "meaning": "~은 어디인가요?"
-    },
-    "get": {
-      "pattern": "Can I get ~?",
-      "meaning": "~를 받을 수 있을까요?"
-    },
-    "have": {
-      "pattern": "Do you have ~?",
-      "meaning": "~가 있나요?"
-    },
-    "ill": {
-      "pattern": "I'll have ~.",
-      "meaning": "~로 주세요."
-    },
-    "howget": {
-      "pattern": "How do I get ~?",
-      "meaning": "~에 어떻게 가나요?"
-    },
-    "borrow": {
-      "pattern": "Can I borrow ~?",
-      "meaning": "~를 빌릴 수 있을까요?"
-    }
+  "meta": {
+    "type": "listening-pingpong",
+    "level": "A1-A2",
+    "theme": "travel/daily",
+    "note": "A=상대(트리거 발화), B=학습자 3지선다. 정답은 정확히 들어야만; 오답은 특정 오청 대응."
   },
   "examples": [
     {
-      "vocab": {
-        "word": "latte",
-        "meaning": "카페 라떼",
-        "dictSeq": 5835,
-        "audioUrl": "https://speech.epop.ai/sentence/actor/usFemaleNormal/0005835.LIXaP.ogg"
-      },
-      "expression": "ill",
-      "arrange": {
-        "en": "I'll have a latte.",
-        "ko": "라떼로 주세요."
-      },
-      "dialogue": {
-        "title": "카페 주문",
-        "turns": [
-          {
-            "speaker": "A",
-            "text": "Hi! Are you ready to order?"
-          },
-          {
-            "speaker": "B",
-            "options": [
-              {
-                "text": "Yes, I'll have a latte.",
-                "correct": true,
-                "expr": "ill",
-                "vocab": "latte",
-                "reason": "‘주문하시겠어요?’에 ‘네, 라떼로 주세요’로 답한 자연스러운 흐름이에요."
-              },
-              {
-                "text": "Where's the latte?",
-                "expr": "where",
-                "vocab": "latte",
-                "reason": "주문하는 자리에서 위치를 묻는 건 엉뚱해요."
-              },
-              {
-                "text": "Can I get a dinosaur?",
-                "expr": "get",
-                "reason": "공룡이라니, 엉뚱한 답이에요."
-              }
-            ]
-          },
-          {
-            "speaker": "A",
-            "text": "Sure. Would you like anything to eat?"
-          },
-          {
-            "speaker": "B",
-            "options": [
-              {
-                "text": "Yes, do you have any bagels?",
-                "correct": true,
-                "expr": "have",
-                "reason": "‘드실 것 있으세요?’에 ‘네, 베이글 있어요?’로 답한 자연스러운 흐름이에요."
-              },
-              {
-                "text": "I'll have a table.",
-                "expr": "ill",
-                "reason": "테이블을 주문할 순 없죠(엉뚱)."
-              },
-              {
-                "text": "At 3 o'clock.",
-                "reason": "먹을 것을 물었는데 시간으로 답하는 건 엉뚱해요."
-              }
-            ]
-          },
-          {
-            "speaker": "A",
-            "text": "Great. Is this order to go?"
-          },
-          {
-            "speaker": "B",
-            "options": [
-              {
-                "text": "Yes, can I get a to-go bag?",
-                "correct": true,
-                "expr": "get",
-                "reason": "‘포장이세요?’에 ‘네, 포장 봉투 받을 수 있어요?’로 답한 자연스러운 흐름이에요."
-              },
-              {
-                "text": "Where's my latte?",
-                "expr": "where",
-                "vocab": "latte",
-                "reason": "아직 만드는 중인데 어디 있냐 묻는 건 성급해요."
-              },
-              {
-                "text": "I'll have it yesterday!",
-                "expr": "ill",
-                "reason": "어제 받을 순 없죠(엉뚱)."
-              }
-            ]
-          },
-          {
-            "speaker": "A",
-            "text": "You got it — coming right up!"
-          }
-        ]
-      }
+      "id": 1,
+      "title": "카페 주문",
+      "level": "A2",
+      "vocab": { "word": "salad", "meaning": "샐러드", "cefr": "A1", "rank": 677 },
+      "expression": { "csv_id": 28, "en": "To go.", "kr": "가져갈게요.", "category": "DT" },
+      "dialogue": [
+        { "role": "A", "text": "For here or to go?", "kr": "여기서 드세요, 가져가세요?" },
+        { "role": "B", "prompt": "B가 할 말로 알맞은 것은?", "choices": [
+          { "text": "To go, please.", "correct": true, "trap": "정답", "explain": "'For here or to go?' 선택을 정확히 듣고 '포장할게요'로 답했어요." },
+          { "text": "Yes, please.", "correct": false, "trap": "프레임 오청", "explain": "선택 질문을 예·아니오로 잘못 들으면 Yes로 답하게 돼요." },
+          { "text": "Four, please.", "correct": false, "trap": "내용어 오청", "explain": "'for here'를 숫자 'four'로 잘못 들은 답이에요." }
+        ] },
+        { "role": "A", "text": "Soup or salad?", "kr": "수프 드릴까요, 샐러드 드릴까요?" },
+        { "role": "B", "prompt": "B가 할 말로 알맞은 것은?", "choices": [
+          { "text": "Salad, please.", "correct": true, "trap": "정답", "highlight": "salad", "explain": "'Soup or salad?'를 정확히 듣고 '샐러드요'로 답했어요." },
+          { "text": "Yes, please.", "correct": false, "trap": "프레임 오청", "explain": "'super salad?'처럼 한 단어로 잘못 들으면 예·아니오로 답하게 돼요." },
+          { "text": "A big one, please.", "correct": false, "trap": "내용어 오청", "explain": "'super salad(큰 샐러드)'로 잘못 들으면 크기를 답하게 돼요." }
+        ] },
+        { "role": "A", "text": "That's thirteen dollars.", "kr": "13달러입니다." },
+        { "role": "B", "prompt": "B가 할 말로 알맞은 것은?", "choices": [
+          { "text": "Thirteen — here you go.", "correct": true, "trap": "정답", "highlight": "thirteen", "explain": "'thirteen(13)'을 정확히 듣고 돈을 냈어요." },
+          { "text": "Thirty? Okay.", "correct": false, "trap": "숫자 오청", "explain": "'thirteen(13)'을 'thirty(30)'로 잘못 들은 답이에요." },
+          { "text": "At three?", "correct": false, "trap": "숫자 오청", "explain": "숫자를 시간(3시)으로 잘못 들은 답이에요." }
+        ] },
+        { "role": "A", "text": "Thank you — enjoy!", "kr": "감사합니다, 맛있게 드세요!" }
+      ]
     },
     {
-      "vocab": {
-        "word": "station",
-        "meaning": "역 (기차)",
-        "dictSeq": 3837,
-        "audioUrl": "https://speech.epop.ai/sentence/actor/usFemaleNormal/0003837.FK9Se.ogg"
-      },
-      "expression": "howget",
-      "arrange": {
-        "en": "How do I get to the station?",
-        "ko": "역에 어떻게 가나요?"
-      },
-      "dialogue": {
-        "title": "길 묻기",
-        "turns": [
-          {
-            "speaker": "A",
-            "text": "You look lost. Are you trying to find the station?"
-          },
-          {
-            "speaker": "B",
-            "options": [
-              {
-                "text": "Yes, how do I get to the station?",
-                "correct": true,
-                "expr": "howget",
-                "vocab": "station",
-                "reason": "‘역을 찾느냐’는 물음에 ‘네, 역에 어떻게 가요?’로 답한 자연스러운 흐름이에요."
-              },
-              {
-                "text": "I'll have the station.",
-                "expr": "ill",
-                "vocab": "station",
-                "reason": "역을 주문할 순 없죠(엉뚱)."
-              },
-              {
-                "text": "At 6 o'clock.",
-                "reason": "어디로 가냐가 아니라 시간으로 답하는 건 엉뚱해요."
-              }
-            ]
-          },
-          {
-            "speaker": "A",
-            "text": "It's two blocks straight ahead. Would a map help?"
-          },
-          {
-            "speaker": "B",
-            "options": [
-              {
-                "text": "Yes, do you have a map?",
-                "correct": true,
-                "expr": "have",
-                "reason": "‘지도가 도움이 될까요?’에 ‘네, 지도 있어요?’로 답한 자연스러운 흐름이에요."
-              },
-              {
-                "text": "How do I get a map?",
-                "expr": "howget",
-                "reason": "‘How do I get ~?’는 장소로 가는 길을 묻는 표현이에요."
-              },
-              {
-                "text": "Turn left into the sky?",
-                "reason": "하늘로 좌회전이라니, 엉뚱한 답이에요."
-              }
-            ]
-          },
-          {
-            "speaker": "A",
-            "text": "Here you go. Do you need to buy a ticket?"
-          },
-          {
-            "speaker": "B",
-            "options": [
-              {
-                "text": "Yes, where's the ticket machine?",
-                "correct": true,
-                "expr": "where",
-                "reason": "‘표 사야 하냐’는 물음에 ‘네, 매표기 어디 있어요?’로 답한 자연스러운 흐름이에요."
-              },
-              {
-                "text": "How do I get to the ticket?",
-                "expr": "howget",
-                "reason": "표로 가는 길을 물을 순 없어요(엉뚱)."
-              },
-              {
-                "text": "Can I get a helicopter?",
-                "expr": "get",
-                "reason": "헬리콥터라니, 엉뚱한 답이에요."
-              }
-            ]
-          },
-          {
-            "speaker": "A",
-            "text": "Right inside the entrance. Safe travels!"
-          }
-        ]
-      }
+      "id": 2,
+      "title": "호텔 프런트",
+      "level": "A2",
+      "vocab": { "word": "map", "meaning": "지도", "cefr": "A1", "rank": 1144 },
+      "expression": { "csv_id": 5, "en": "Do you have ~?", "kr": "~가 있나요?", "category": "DTB" },
+      "dialogue": [
+        { "role": "A", "text": "Do you have a map?", "kr": "지도 있어요?" },
+        { "role": "B", "prompt": "B가 할 말로 알맞은 것은?", "choices": [
+          { "text": "Yes, here you go.", "correct": true, "trap": "정답", "highlight": "map", "explain": "지도가 있냐는 질문을 정확히 듣고 건네줬어요." },
+          { "text": "Sorry, I need a nap.", "correct": false, "trap": "내용어 오청", "explain": "'map'을 'nap(낮잠)'으로 잘못 들은 답이에요." },
+          { "text": "Yes, I have time.", "correct": false, "trap": "내용어 오청", "explain": "'a map'을 놓치고 'have'만 들으면 시간 있냐는 말로 답하게 돼요." }
+        ] },
+        { "role": "A", "text": "Thanks. Is the pool free?", "kr": "수영장은 무료예요?" },
+        { "role": "B", "prompt": "B가 할 말로 알맞은 것은?", "choices": [
+          { "text": "Yes, it's free.", "correct": true, "trap": "정답", "highlight": "free", "explain": "'free(무료)'를 정확히 들었어요." },
+          { "text": "No, it's at three.", "correct": false, "trap": "프레임 오청", "explain": "'free'를 'three'로 잘못 들으면 시간으로 답하게 돼요." },
+          { "text": "Three dollars? Okay.", "correct": false, "trap": "내용어 오청", "explain": "'free'를 'three'로 잘못 들어 값을 물은 답이에요." }
+        ] },
+        { "role": "A", "text": "Great. Which floor is it on?", "kr": "몇 층에 있어요?" },
+        { "role": "B", "prompt": "B가 할 말로 알맞은 것은?", "choices": [
+          { "text": "The fourth floor.", "correct": true, "trap": "정답", "highlight": "floor", "explain": "몇 층이냐는 질문을 정확히 듣고 층으로 답했어요." },
+          { "text": "A flower?", "correct": false, "trap": "내용어 오청", "explain": "'floor'를 'flower(꽃)'로 잘못 들은 답이에요." },
+          { "text": "At four o'clock.", "correct": false, "trap": "숫자 오청", "explain": "'floor'를 'four'로 듣고 시간으로 답한 거예요." }
+        ] },
+        { "role": "A", "text": "Perfect — thank you!", "kr": "좋아요, 감사합니다!" }
+      ]
     },
     {
-      "vocab": {
-        "word": "charger",
-        "meaning": "충전기",
-        "dictSeq": 35848,
-        "audioUrl": "https://speech.epop.ai/sentence/actor/usFemaleNormal/0035848.77ZYw.ogg"
-      },
-      "expression": "have",
-      "arrange": {
-        "en": "Do you have a charger?",
-        "ko": "충전기가 있나요?"
-      },
-      "dialogue": {
-        "title": "프런트 데스크",
-        "turns": [
-          {
-            "speaker": "A",
-            "text": "Front desk. Is there something you need?"
-          },
-          {
-            "speaker": "B",
-            "options": [
-              {
-                "text": "Yes, do you have a charger?",
-                "correct": true,
-                "expr": "have",
-                "vocab": "charger",
-                "reason": "‘필요한 게 있냐’는 물음에 ‘네, 충전기 있어요?’로 답한 자연스러운 흐름이에요."
-              },
-              {
-                "text": "I'll have a charger.",
-                "expr": "ill",
-                "vocab": "charger",
-                "reason": "‘I'll have ~’는 주문 표현이라 프런트 요청엔 어색해요."
-              },
-              {
-                "text": "Nice weather today!",
-                "reason": "대화와 상관없는 엉뚱한 답이에요."
-              }
-            ]
-          },
-          {
-            "speaker": "A",
-            "text": "We do — I'll send one up. Would you like some ice, too?"
-          },
-          {
-            "speaker": "B",
-            "options": [
-              {
-                "text": "Yes, can I get some ice?",
-                "correct": true,
-                "expr": "get",
-                "reason": "‘얼음도 드릴까요?’에 ‘네, 얼음 받을 수 있어요?’로 답한 자연스러운 흐름이에요."
-              },
-              {
-                "text": "Where's my charger?",
-                "expr": "where",
-                "vocab": "charger",
-                "reason": "방금 보내준다고 했는데 벌써 어디 있냐 묻는 건 성급해요."
-              },
-              {
-                "text": "I'll have a penguin.",
-                "expr": "ill",
-                "reason": "펭귄이라니, 엉뚱한 답이에요."
-              }
-            ]
-          },
-          {
-            "speaker": "A",
-            "text": "Sure. Do you need an extra pillow?"
-          },
-          {
-            "speaker": "B",
-            "options": [
-              {
-                "text": "Yes, do you have a spare?",
-                "correct": true,
-                "expr": "have",
-                "reason": "‘베개 더 필요하냐’는 물음에 ‘네, 여분 있어요?’로 답한 자연스러운 흐름이에요."
-              },
-              {
-                "text": "How do I get a pillow?",
-                "expr": "howget",
-                "reason": "‘How do I get ~?’는 길을 묻는 표현이에요."
-              },
-              {
-                "text": "At midnight, please.",
-                "reason": "베개가 필요하냐고 물었는데 시간으로 답하는 건 엉뚱해요."
-              }
-            ]
-          },
-          {
-            "speaker": "A",
-            "text": "I'll bring one right up — good night!"
-          }
-        ]
-      }
+      "id": 3,
+      "title": "친구에게",
+      "level": "A2",
+      "vocab": { "word": "pen", "meaning": "펜", "cefr": "A1", "rank": 49 },
+      "expression": { "csv_id": 14, "en": "Can I borrow ~?", "kr": "~를 빌릴 수 있을까요?", "category": "DTB" },
+      "dialogue": [
+        { "role": "A", "text": "Can I borrow your pen?", "kr": "펜 좀 빌려줄래?" },
+        { "role": "B", "prompt": "B가 할 말로 알맞은 것은?", "choices": [
+          { "text": "Sure, here you go.", "correct": true, "trap": "정답", "highlight": "pen", "explain": "빌려달라는 요청을 정확히 듣고 건네줬어요." },
+          { "text": "Sorry, it's not for sale.", "correct": false, "trap": "프레임 오청", "explain": "'borrow(빌리다)'를 'buy(사다)'로 잘못 들으면 파는 거냐고 답하게 돼요." },
+          { "text": "Ten? Here you go.", "correct": false, "trap": "내용어 오청", "explain": "'pen'을 숫자 'ten'으로 잘못 들은 답이에요." }
+        ] },
+        { "role": "A", "text": "Thanks! Are you free after class?", "kr": "수업 끝나고 시간 돼?" },
+        { "role": "B", "prompt": "B가 할 말로 알맞은 것은?", "choices": [
+          { "text": "Yeah, I'm free.", "correct": true, "trap": "정답", "highlight": "free", "explain": "시간 되냐는 질문을 정확히 듣고 답했어요." },
+          { "text": "No, it's ten dollars.", "correct": false, "trap": "프레임 오청", "explain": "'Are you free?(한가해?)'를 'Is it free?(무료야?)'로 잘못 들으면 값으로 답하게 돼요." },
+          { "text": "No, it's four, not three.", "correct": false, "trap": "내용어 오청", "explain": "'free'를 'three'로 잘못 들은 답이에요." }
+        ] },
+        { "role": "A", "text": "Do you like coffee?", "kr": "커피 좋아해? (같이 마시러 가자는 뉘앙스)" },
+        { "role": "B", "prompt": "B가 할 말로 알맞은 것은?", "choices": [
+          { "text": "Yes, I love it.", "correct": true, "trap": "정답", "explain": "'Do you like coffee?'를 정확히 듣고 좋다고 답했어요." },
+          { "text": "A copy? Of what?", "correct": false, "trap": "내용어 오청", "explain": "'coffee'를 'copy(복사)'로 잘못 들은 답이에요." },
+          { "text": "No, I don't have any.", "correct": false, "trap": "프레임 오청", "explain": "'Do you like ~?'를 'Do you have ~?'로 잘못 들으면 있냐 없냐로 답하게 돼요." }
+        ] },
+        { "role": "A", "text": "Great — let's go!", "kr": "좋아, 가자!" }
+      ]
     },
     {
-      "vocab": {
-        "word": "towel",
-        "meaning": "수건, 타월",
-        "dictSeq": 4107,
-        "audioUrl": "https://speech.epop.ai/sentence/actor/usFemaleNormal/0004107.xI4vn.ogg"
-      },
-      "expression": "get",
-      "arrange": {
-        "en": "Can I get some towels?",
-        "ko": "수건 좀 받을 수 있을까요?"
-      },
-      "dialogue": {
-        "title": "룸서비스",
-        "turns": [
-          {
-            "speaker": "A",
-            "text": "Housekeeping. Did you call for something?"
-          },
-          {
-            "speaker": "B",
-            "options": [
-              {
-                "text": "Yes, can I get some towels?",
-                "correct": true,
-                "expr": "get",
-                "vocab": "towels",
-                "reason": "‘뭔가 부르셨냐’는 물음에 ‘네, 수건 받을 수 있어요?’로 답한 자연스러운 흐름이에요."
-              },
-              {
-                "text": "I'll have some towels.",
-                "expr": "ill",
-                "vocab": "towels",
-                "reason": "‘I'll have ~’는 음식 주문 표현이라 요청엔 어색해요."
-              },
-              {
-                "text": "Can I get a dragon?",
-                "expr": "get",
-                "reason": "용이라니, 엉뚱한 답이에요."
-              }
-            ]
-          },
-          {
-            "speaker": "A",
-            "text": "Of course. Are you missing anything else?"
-          },
-          {
-            "speaker": "B",
-            "options": [
-              {
-                "text": "Yes, do you have a hairdryer?",
-                "correct": true,
-                "expr": "have",
-                "reason": "‘더 없는 게 있냐’는 물음에 ‘네, 드라이어 있어요?’로 답한 자연스러운 흐름이에요."
-              },
-              {
-                "text": "Where's the hairdryer?",
-                "expr": "where",
-                "reason": "있는지부터 물어야 하는데 위치부터 묻는 건 성급해요."
-              },
-              {
-                "text": "I'll have ten pizzas!",
-                "expr": "ill",
-                "reason": "객실 요청과 상관없는 엉뚱한 답이에요."
-              }
-            ]
-          },
-          {
-            "speaker": "A",
-            "text": "I'll bring one. Would you like some water?"
-          },
-          {
-            "speaker": "B",
-            "options": [
-              {
-                "text": "Yes, can I get a bottle?",
-                "correct": true,
-                "expr": "get",
-                "reason": "‘물 드릴까요?’에 ‘네, 한 병 받을 수 있어요?’로 답한 자연스러운 흐름이에요."
-              },
-              {
-                "text": "How do I get towels?",
-                "expr": "howget",
-                "vocab": "towels",
-                "reason": "‘How do I get ~?’는 길을 묻는 표현이에요."
-              },
-              {
-                "text": "At 3 a.m., please.",
-                "reason": "물 드릴까 물었는데 시간으로 답하는 건 엉뚱해요."
-              }
-            ]
-          },
-          {
-            "speaker": "A",
-            "text": "No problem — right up!"
-          }
-        ]
-      }
+      "id": 4,
+      "title": "길에서 (버스)",
+      "level": "A2",
+      "vocab": { "word": "bus", "meaning": "버스", "cefr": "A1", "rank": 202 },
+      "expression": { "csv_id": 1, "en": "Where's ~?", "kr": "~은 어디인가요?", "category": "DTB" },
+      "dialogue": [
+        { "role": "A", "text": "Where's the bus?", "kr": "버스가 어디예요?" },
+        { "role": "B", "prompt": "B가 할 말로 알맞은 것은?", "choices": [
+          { "text": "It's right there.", "correct": true, "trap": "정답", "highlight": "bus", "explain": "위치를 물은 걸 정확히 듣고 장소로 답했어요." },
+          { "text": "At two o'clock.", "correct": false, "trap": "프레임 오청", "explain": "'Where(어디)'를 'When(언제)'으로 잘못 들으면 시간으로 답하게 돼요." },
+          { "text": "Yes, there's one.", "correct": false, "trap": "프레임 오청", "explain": "'Where's the bus?'를 'Is there a bus?'로 잘못 들으면 예/아니오로 답하게 돼요." }
+        ] },
+        { "role": "A", "text": "The bus is number fifteen.", "kr": "15번 버스예요." },
+        { "role": "B", "prompt": "B가 할 말로 알맞은 것은?", "choices": [
+          { "text": "Number fifteen, got it.", "correct": true, "trap": "정답", "highlight": "fifteen", "explain": "'fifteen(15)'을 정확히 들었어요." },
+          { "text": "Fifty? Really?", "correct": false, "trap": "숫자 오청", "explain": "'fifteen(15)'을 'fifty(50)'로 잘못 들은 답이에요." },
+          { "text": "For fifteen minutes?", "correct": false, "trap": "숫자 오청", "explain": "번호를 시간(15분)으로 잘못 들은 답이에요." }
+        ] },
+        { "role": "A", "text": "It leaves at eight.", "kr": "8시에 출발해요." },
+        { "role": "B", "prompt": "B가 할 말로 알맞은 것은?", "choices": [
+          { "text": "Okay, at eight.", "correct": true, "trap": "정답", "explain": "'at eight(8시)'을 정확히 들었어요." },
+          { "text": "From which gate?", "correct": false, "trap": "내용어 오청", "explain": "'eight'을 'gate(게이트)'로 잘못 들은 답이에요." },
+          { "text": "It already ate?", "correct": false, "trap": "내용어 오청", "explain": "'eight'을 'ate(먹었다)'로 잘못 들은 답이에요." }
+        ] },
+        { "role": "A", "text": "Have a good trip!", "kr": "좋은 여행 되세요!" }
+      ]
     },
     {
-      "vocab": {
-        "word": "umbrella",
-        "meaning": "우산",
-        "dictSeq": 3272,
-        "audioUrl": "https://speech.epop.ai/sentence/actor/usFemaleNormal/0003272.gjTs2.ogg"
-      },
-      "expression": "borrow",
-      "arrange": {
-        "en": "Can I borrow an umbrella?",
-        "ko": "우산을 빌릴 수 있을까요?"
-      },
-      "dialogue": {
-        "title": "친구에게 빌리기",
-        "turns": [
-          {
-            "speaker": "A",
-            "text": "It's really pouring out. Are you going out anyway?"
-          },
-          {
-            "speaker": "B",
-            "options": [
-              {
-                "text": "Yes, can I borrow an umbrella?",
-                "correct": true,
-                "expr": "borrow",
-                "vocab": "umbrella",
-                "reason": "‘그래도 나갈 거냐’는 물음에 ‘응, 우산 좀 빌릴 수 있어?’로 답한 자연스러운 흐름이에요."
-              },
-              {
-                "text": "Can I get an umbrella?",
-                "expr": "get",
-                "vocab": "umbrella",
-                "reason": "사서 갖는 게 아니라 잠깐 빌리는 거라 ‘Can I borrow ~?’가 맞아요."
-              },
-              {
-                "text": "I'll have some sunshine!",
-                "expr": "ill",
-                "reason": "햇빛을 주문할 순 없죠(엉뚱)."
-              }
-            ]
-          },
-          {
-            "speaker": "A",
-            "text": "Sure, it's by the door. Do you need anything else?"
-          },
-          {
-            "speaker": "B",
-            "options": [
-              {
-                "text": "Yes, can I borrow a bag?",
-                "correct": true,
-                "expr": "borrow",
-                "reason": "‘더 필요하냐’는 물음에 ‘응, 가방도 빌릴 수 있어?’로 답한 자연스러운 흐름이에요."
-              },
-              {
-                "text": "Where's the umbrella?",
-                "expr": "where",
-                "vocab": "umbrella",
-                "reason": "방금 문 옆이라고 알려줬어요."
-              },
-              {
-                "text": "Can I borrow the moon?",
-                "expr": "borrow",
-                "reason": "달을 빌린다니, 엉뚱한 답이에요."
-              }
-            ]
-          },
-          {
-            "speaker": "A",
-            "text": "Here. Oh, do you have your keys?"
-          },
-          {
-            "speaker": "B",
-            "options": [
-              {
-                "text": "Actually no — do you have a spare?",
-                "correct": true,
-                "expr": "have",
-                "reason": "‘열쇠 있냐’는 물음에 ‘아니, 여분 있어?’로 답한 자연스러운 흐름이에요."
-              },
-              {
-                "text": "I'll have your keys.",
-                "expr": "ill",
-                "reason": "‘I'll have ~’지만, 열쇠를 주문할 순 없죠."
-              },
-              {
-                "text": "Keys are at 5 o'clock.",
-                "reason": "열쇠 있냐고 물었는데 시간으로 답하는 건 엉뚱해요."
-              }
-            ]
-          },
-          {
-            "speaker": "A",
-            "text": "Here's the spare — let's go!"
-          }
-        ]
-      }
+      "id": 5,
+      "title": "가게 계산",
+      "level": "A2",
+      "vocab": { "word": "card", "meaning": "카드", "cefr": "A2", "rank": 1595 },
+      "expression": { "csv_id": 467, "en": "Do you take ~?", "kr": "(결제수단) ~을 받나요?", "category": "DT" },
+      "dialogue": [
+        { "role": "A", "text": "Do you take card?", "kr": "카드 받으세요?" },
+        { "role": "B", "prompt": "B가 할 말로 알맞은 것은?", "choices": [
+          { "text": "Yes, card is fine.", "correct": true, "trap": "정답", "highlight": "card", "explain": "카드를 받냐는 질문을 정확히 듣고 답했어요." },
+          { "text": "Sorry, no cars here.", "correct": false, "trap": "내용어 오청", "explain": "'card'를 'car(차)'로 잘못 들으면 차 얘기로 답하게 돼요." },
+          { "text": "Cake? We have some.", "correct": false, "trap": "내용어 오청", "explain": "'card'를 'cake(케이크)'로 잘못 들은 답이에요." }
+        ] },
+        { "role": "A", "text": "That's fourteen dollars.", "kr": "14달러입니다." },
+        { "role": "B", "prompt": "B가 할 말로 알맞은 것은?", "choices": [
+          { "text": "Fourteen — here you go.", "correct": true, "trap": "정답", "highlight": "fourteen", "explain": "'fourteen(14)'을 정확히 들었어요." },
+          { "text": "Forty? Okay.", "correct": false, "trap": "숫자 오청", "explain": "'fourteen(14)'을 'forty(40)'로 잘못 들은 답이에요." },
+          { "text": "At four?", "correct": false, "trap": "숫자 오청", "explain": "숫자를 시간(4시)으로 잘못 들은 답이에요." }
+        ] },
+        { "role": "A", "text": "Do you need a bag?", "kr": "봉투 필요하세요?" },
+        { "role": "B", "prompt": "B가 할 말로 알맞은 것은?", "choices": [
+          { "text": "Yes, please.", "correct": true, "trap": "정답", "highlight": "bag", "explain": "봉투가 필요하냐는 질문을 정확히 듣고 답했어요." },
+          { "text": "My back? It's fine.", "correct": false, "trap": "내용어 오청", "explain": "'bag'을 'back(등)'으로 잘못 들은 답이에요." },
+          { "text": "A big one? No.", "correct": false, "trap": "내용어 오청", "explain": "'bag'을 'big(큰)'으로 잘못 들은 답이에요." }
+        ] },
+        { "role": "A", "text": "Here you go — have a nice day!", "kr": "여기요, 좋은 하루 되세요!" }
+      ]
     },
     {
-      "vocab": {
-        "word": "elevator",
-        "meaning": "엘리베이터",
-        "dictSeq": 2557,
-        "audioUrl": "https://speech.epop.ai/sentence/actor/usFemaleNormal/0002557.K0wWy.ogg"
-      },
-      "expression": "where",
-      "arrange": {
-        "en": "Where's the elevator?",
-        "ko": "엘리베이터는 어디에 있나요?"
-      },
-      "dialogue": {
-        "title": "호텔 로비",
-        "turns": [
-          {
-            "speaker": "A",
-            "text": "Welcome! Your room's on the 15th floor. Do you need directions?"
-          },
-          {
-            "speaker": "B",
-            "options": [
-              {
-                "text": "Yes, where's the elevator?",
-                "correct": true,
-                "expr": "where",
-                "vocab": "elevator",
-                "reason": "‘길 안내가 필요하냐’는 물음에 ‘네, 엘리베이터는 어디예요?’로 답한 자연스러운 흐름이에요."
-              },
-              {
-                "text": "I'll have the elevator.",
-                "expr": "ill",
-                "reason": "‘I'll have ~’는 주문 표현이에요. 엘리베이터는 주문할 수 없죠."
-              },
-              {
-                "text": "No, it's on the roof!",
-                "reason": "엘리베이터가 옥상에 있다니, 엉뚱한 답이에요."
-              }
-            ]
-          },
-          {
-            "speaker": "A",
-            "text": "Sure — it's around the corner. Can I help with your bags?"
-          },
-          {
-            "speaker": "B",
-            "options": [
-              {
-                "text": "Yes, can I get a cart?",
-                "correct": true,
-                "expr": "get",
-                "reason": "‘짐 도와줄까요?’에 ‘네, 카트 받을 수 있어요?’로 답한 자연스러운 흐름이에요."
-              },
-              {
-                "text": "Where's my bag?",
-                "expr": "where",
-                "reason": "가방은 본인이 들고 있는데 위치를 묻는 건 이상해요."
-              },
-              {
-                "text": "I'll have a helicopter.",
-                "expr": "ill",
-                "reason": "헬리콥터라니, 엉뚱한 답이에요."
-              }
-            ]
-          },
-          {
-            "speaker": "A",
-            "text": "Of course. Are you interested in our facilities?"
-          },
-          {
-            "speaker": "B",
-            "options": [
-              {
-                "text": "Yes, do you have a gym?",
-                "correct": true,
-                "expr": "have",
-                "reason": "‘부대시설에 관심 있냐’는 물음에 ‘네, 헬스장 있어요?’로 답한 자연스러운 흐름이에요."
-              },
-              {
-                "text": "I'll have a swimming pool!",
-                "expr": "ill",
-                "reason": "수영장을 주문할 순 없죠(엉뚱)."
-              },
-              {
-                "text": "At 3 o'clock.",
-                "reason": "시설이 있냐고 물었는데 시간으로 답하는 건 엉뚱해요."
-              }
-            ]
-          },
-          {
-            "speaker": "A",
-            "text": "We have a gym on the second floor. Enjoy your stay!"
-          }
-        ]
-      }
+      "id": 6,
+      "title": "식당 (주문)",
+      "level": "A2",
+      "vocab": { "word": "water", "meaning": "물", "cefr": "A1", "rank": 92 },
+      "expression": { "csv_id": 13, "en": "Can I get ~?", "kr": "~를 받을 수 있을까요?", "category": "DTB" },
+      "dialogue": [
+        { "role": "A", "text": "Can I get some water?", "kr": "물 좀 주실 수 있어요?" },
+        { "role": "B", "prompt": "B가 할 말로 알맞은 것은?", "choices": [
+          { "text": "Sure, here you go.", "correct": true, "trap": "정답", "highlight": "water", "explain": "물을 달라는 요청을 정확히 듣고 가져다줬어요." },
+          { "text": "The waiter? One moment.", "correct": false, "trap": "내용어 오청", "explain": "'water'를 'waiter(종업원)'로 잘못 들은 답이에요." },
+          { "text": "Your daughter? Where?", "correct": false, "trap": "내용어 오청", "explain": "'water'를 'daughter(딸)'로 잘못 들은 답이에요." }
+        ] },
+        { "role": "A", "text": "Anything to eat?", "kr": "드실 것도 있으세요?" },
+        { "role": "B", "prompt": "B가 할 말로 알맞은 것은?", "choices": [
+          { "text": "Yes, a salad.", "correct": true, "trap": "정답", "explain": "먹을 것을 묻는 걸 정확히 듣고 음식으로 답했어요." },
+          { "text": "At eight?", "correct": false, "trap": "내용어 오청", "explain": "'to eat'을 'at eight(8시)'으로 잘못 들은 답이에요." },
+          { "text": "Yes, I already ate.", "correct": false, "trap": "내용어 오청", "explain": "'to eat'을 'ate(먹었다)'로 잘못 들으면 과거로 답하게 돼요." }
+        ] },
+        { "role": "A", "text": "Here's your bill.", "kr": "계산서 여기 있습니다." },
+        { "role": "B", "prompt": "B가 할 말로 알맞은 것은?", "choices": [
+          { "text": "Thank you.", "correct": true, "trap": "정답", "highlight": "bill", "explain": "계산서를 준다는 걸 정확히 듣고 인사했어요." },
+          { "text": "A ball? For what?", "correct": false, "trap": "내용어 오청", "explain": "'bill'을 'ball(공)'로 잘못 들은 답이에요." },
+          { "text": "Bring the menu, please.", "correct": false, "trap": "프레임 오청", "explain": "계산서를 주는 상황을 놓치고 다시 주문하려는 엉뚱한 답이에요." }
+        ] },
+        { "role": "A", "text": "Thank you, come again!", "kr": "감사합니다, 또 오세요!" }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "기차역",
+      "level": "A2",
+      "vocab": { "word": "train", "meaning": "기차", "cefr": "A1", "rank": 1031 },
+      "expression": { "csv_id": 56, "en": "Is this the train to ~?", "kr": "이거 ~행 기차 맞나요?", "category": "DT" },
+      "dialogue": [
+        { "role": "A", "text": "Is this the train to Busan?", "kr": "이거 부산행 기차 맞아요?" },
+        { "role": "B", "prompt": "B가 할 말로 알맞은 것은?", "choices": [
+          { "text": "Yes, it is.", "correct": true, "trap": "정답", "highlight": "train", "explain": "부산행 기차가 맞냐는 질문을 정확히 듣고 답했어요." },
+          { "text": "Rain? I hope not.", "correct": false, "trap": "내용어 오청", "explain": "'train'을 'rain(비)'으로 잘못 들은 답이에요." },
+          { "text": "No, I'm not busy.", "correct": false, "trap": "내용어 오청", "explain": "'to Busan'을 'busy(바쁜)'로 잘못 들은 답이에요." }
+        ] },
+        { "role": "A", "text": "It leaves in fifteen minutes.", "kr": "15분 뒤에 떠나요." },
+        { "role": "B", "prompt": "B가 할 말로 알맞은 것은?", "choices": [
+          { "text": "Fifteen, got it.", "correct": true, "trap": "정답", "highlight": "fifteen", "explain": "'fifteen(15)'을 정확히 들었어요." },
+          { "text": "Fifty, really?", "correct": false, "trap": "숫자 오청", "explain": "'fifteen(15)'을 'fifty(50)'로 잘못 들은 답이에요." },
+          { "text": "For fifteen dollars?", "correct": false, "trap": "프레임 오청", "explain": "시간을 값으로 잘못 들은 답이에요." }
+        ] },
+        { "role": "A", "text": "Your seat is by the window.", "kr": "자리는 창가 쪽이에요." },
+        { "role": "B", "prompt": "B가 할 말로 알맞은 것은?", "choices": [
+          { "text": "Great, thank you.", "correct": true, "trap": "정답", "explain": "자리가 창가라는 걸 정확히 듣고 인사했어요." },
+          { "text": "Let's meet there.", "correct": false, "trap": "내용어 오청", "explain": "'seat'을 'meet(만나다)'으로 잘못 들은 답이에요." },
+          { "text": "I can't eat now.", "correct": false, "trap": "내용어 오청", "explain": "'seat'을 'eat(먹다)'으로 잘못 들은 답이에요." }
+        ] },
+        { "role": "A", "text": "Enjoy your trip!", "kr": "즐거운 여행 되세요!" }
+      ]
+    },
+    {
+      "id": 8,
+      "title": "친구와 카페 계획",
+      "level": "A2",
+      "vocab": { "word": "tea", "meaning": "차", "cefr": "A2", "rank": 2552 },
+      "expression": { "csv_id": 400, "en": "Do you like ~?", "kr": "~ 좋아해?", "category": "DTB" },
+      "dialogue": [
+        { "role": "A", "text": "Do you like tea?", "kr": "차 좋아해?" },
+        { "role": "B", "prompt": "B가 할 말로 알맞은 것은?", "choices": [
+          { "text": "Yes, I love it.", "correct": true, "trap": "정답", "highlight": "tea", "explain": "차를 좋아하냐는 질문을 정확히 듣고 답했어요." },
+          { "text": "Three? Three what?", "correct": false, "trap": "내용어 오청", "explain": "'tea'를 'three(3)'로 잘못 들은 답이에요." },
+          { "text": "No, I don't have any.", "correct": false, "trap": "프레임 오청", "explain": "'Do you like ~?'를 'Do you have ~?'로 잘못 들으면 유무로 답하게 돼요." }
+        ] },
+        { "role": "A", "text": "There's a café by the tree.", "kr": "나무 옆에 카페가 있어." },
+        { "role": "B", "prompt": "B가 할 말로 알맞은 것은?", "choices": [
+          { "text": "Okay, by the tree.", "correct": true, "trap": "정답", "explain": "나무 옆이라는 위치를 정확히 들었어요." },
+          { "text": "At three? Sure.", "correct": false, "trap": "내용어 오청", "explain": "'tree'를 'three(3시)'로 잘못 들은 답이에요." },
+          { "text": "Free? Nice!", "correct": false, "trap": "내용어 오청", "explain": "'tree'를 'free(무료)'로 잘못 들은 답이에요." }
+        ] },
+        { "role": "A", "text": "They have great cake.", "kr": "거기 케이크 맛있어." },
+        { "role": "B", "prompt": "B가 할 말로 알맞은 것은?", "choices": [
+          { "text": "Yum, I love cake.", "correct": true, "trap": "정답", "highlight": "cake", "explain": "케이크가 맛있다는 걸 정확히 들었어요." },
+          { "text": "Take what?", "correct": false, "trap": "내용어 오청", "explain": "'cake'를 'take(가져가다)'로 잘못 들은 답이에요." },
+          { "text": "Make it at home?", "correct": false, "trap": "내용어 오청", "explain": "'cake'를 'make(만들다)'로 잘못 들은 답이에요." }
+        ] },
+        { "role": "A", "text": "Let's go together!", "kr": "같이 가자!" }
+      ]
+    },
+    {
+      "id": 9,
+      "title": "카페 바리스타 (내가 점원)",
+      "level": "A2",
+      "vocab": { "word": "coffee", "meaning": "커피", "cefr": "A1", "rank": 89 },
+      "expression": { "csv_id": 7, "en": "Can I have three ~?", "kr": "~ 세 잔 주문할 수 있을까요?", "category": "DT" },
+      "dialogue": [
+        { "role": "A", "text": "Can I have three coffees?", "kr": "커피 세 잔 주실 수 있어요?" },
+        { "role": "B", "prompt": "B가 할 말로 알맞은 것은?", "choices": [
+          { "text": "Sure, three coffees.", "correct": true, "trap": "정답", "highlight": "coffee", "explain": "'three(3)'와 'coffees'를 정확히 들었어요." },
+          { "text": "They're free? No.", "correct": false, "trap": "내용어 오청", "explain": "'three'를 'free(무료)'로 잘못 들은 답이에요." },
+          { "text": "Three copies?", "correct": false, "trap": "내용어 오청", "explain": "'coffees'를 'copies(복사본)'로 잘못 들은 답이에요." }
+        ] },
+        { "role": "A", "text": "That's fifteen dollars.", "kr": "15달러입니다." },
+        { "role": "B", "prompt": "B가 할 말로 알맞은 것은?", "choices": [
+          { "text": "Fifteen, here you go.", "correct": true, "trap": "정답", "highlight": "fifteen", "explain": "'fifteen(15)'을 정확히 들었어요." },
+          { "text": "Fifty? Wow.", "correct": false, "trap": "숫자 오청", "explain": "'fifteen(15)'을 'fifty(50)'로 잘못 들은 답이에요." },
+          { "text": "For fifteen minutes?", "correct": false, "trap": "숫자 오청", "explain": "값을 시간으로 잘못 들은 답이에요." }
+        ] },
+        { "role": "A", "text": "What's the name for the order?", "kr": "주문하실 성함이요?" },
+        { "role": "B", "prompt": "B가 할 말로 알맞은 것은?", "choices": [
+          { "text": "It's Sunny.", "correct": true, "trap": "정답", "explain": "이름을 묻는 걸 정확히 듣고 답했어요." },
+          { "text": "A game? No.", "correct": false, "trap": "내용어 오청", "explain": "'name'을 'game(게임)'으로 잘못 들은 답이에요." },
+          { "text": "The same, please.", "correct": false, "trap": "내용어 오청", "explain": "'name'을 'same(같은 것)'으로 잘못 들은 답이에요." }
+        ] },
+        { "role": "A", "text": "Thanks, it'll be right up!", "kr": "감사합니다, 곧 준비할게요!" }
+      ]
+    },
+    {
+      "id": 10,
+      "title": "길 안내 (관광객이 물음)",
+      "level": "A2",
+      "vocab": { "word": "gate", "meaning": "게이트, 정문", "cefr": "A2", "rank": 4161 },
+      "expression": { "csv_id": 54, "en": "How do I get ~?", "kr": "~에 어떻게 가나요?", "category": "DT" },
+      "dialogue": [
+        { "role": "A", "text": "How do I get to the gate?", "kr": "게이트에 어떻게 가나요?" },
+        { "role": "B", "prompt": "B가 할 말로 알맞은 것은?", "choices": [
+          { "text": "Go straight ahead.", "correct": true, "trap": "정답", "highlight": "gate", "explain": "가는 길을 물은 걸 정확히 듣고 방향으로 답했어요." },
+          { "text": "At eight? Okay.", "correct": false, "trap": "내용어 오청", "explain": "'gate'를 'eight(8시)'로 잘못 들은 답이에요." },
+          { "text": "Wait for what?", "correct": false, "trap": "내용어 오청", "explain": "'gate'를 'wait(기다리다)'로 잘못 들은 답이에요." }
+        ] },
+        { "role": "A", "text": "Is it on the fourth floor?", "kr": "4층에 있나요?" },
+        { "role": "B", "prompt": "B가 할 말로 알맞은 것은?", "choices": [
+          { "text": "Yes, the fourth floor.", "correct": true, "trap": "정답", "highlight": "floor", "explain": "'fourth floor(4층)'를 정확히 들었어요." },
+          { "text": "A flower? For me?", "correct": false, "trap": "내용어 오청", "explain": "'floor'를 'flower(꽃)'로 잘못 들은 답이에요." },
+          { "text": "For four people?", "correct": false, "trap": "내용어 오청", "explain": "'floor'를 'for/four'로 잘못 들은 답이에요." }
+        ] },
+        { "role": "A", "text": "Great, and it opens at nine?", "kr": "그리고 9시에 열어요?" },
+        { "role": "B", "prompt": "B가 할 말로 알맞은 것은?", "choices": [
+          { "text": "Yes, at nine.", "correct": true, "trap": "정답", "explain": "'at nine(9시)'을 정확히 들었어요." },
+          { "text": "It's not mine.", "correct": false, "trap": "내용어 오청", "explain": "'nine'을 'mine(내 것)'으로 잘못 들은 답이에요." },
+          { "text": "Yes, it's fine.", "correct": false, "trap": "내용어 오청", "explain": "'nine'을 'fine(괜찮은)'으로 잘못 들은 답이에요." }
+        ] },
+        { "role": "A", "text": "Thank you so much!", "kr": "정말 감사합니다!" }
+      ]
     }
   ]
 }
