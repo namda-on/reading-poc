@@ -93,6 +93,8 @@
   .replay { border:none; background:#6b5bd6; color:#fff; border-radius:999px; padding:7px 14px; font-size:13px; font-weight:700; cursor:pointer; }
   .opt { display:block; width:100%; text-align:left; background:#fff; border:1.5px solid #d3e0f1; border-radius:12px; padding:13px 15px; margin:8px 0; font-size:15.5px; color:#2f3e52; cursor:pointer; }
   .opt .opt-text { line-height:1.45; }
+  .opt .opt-kr { font-size:13px; color:#6b7c93; margin-top:3px; }
+  .opt .opt-kr:empty { display:none; }
   .opt .why { display:none; margin-top:8px; font-size:13px; line-height:1.45; color:#5b6b80; border-top:1px dashed #d3e0f1; padding-top:7px; }
   .opt.show-why .why { display:block; }
   .opt.correct { background:#ddf3e2; border-color:#46b366; } .opt.correct .why { color:#2e6b45; }
@@ -201,14 +203,13 @@ function exprPhrase(pattern){ return pattern.split('~')[0].trim().replace(/[?.!,
 function buildExample(ex){
   const exprEn = ex.expression.en, exprKr = ex.expression.kr;
   const fixed = exprPhrase(exprEn);
-  // 표현 배열 문장: 대화(A 대사·B 정답) 중 표현이 쓰인 가장 짧은 문장을 고른다.
-  const cands = [];
-  for (const t of ex.dialogue){
-    if (t.role==='A' && t.text) cands.push({ en:t.text, ko:t.kr||'' });
-    else if (t.role==='B' && t.choices){ const c=t.choices.find(x=>x.correct); if(c) cands.push({ en:c.text, ko:exprKr }); }
+  // 표현 배열 문장: 표현에 빈칸(~)이 있으면 그 표현이 쓰인 A 대사(구체 문장)를,
+  // 없으면(예: "To go.") 표현 자체를 쓴다.
+  let src = { en:exprEn, ko:exprKr };
+  if (exprEn.includes('~')){
+    const aLine = ex.dialogue.find(t=> t.role==='A' && t.text && t.text.toLowerCase().includes(fixed.toLowerCase()));
+    if (aLine) src = { en:aLine.text, ko:aLine.kr||'' };
   }
-  const withExpr = cands.filter(c=> c.en.toLowerCase().includes(fixed.toLowerCase()));
-  const src = (withExpr.length?withExpr:cands).sort((a,b)=>a.en.length-b.en.length)[0] || {en:exprEn, ko:exprKr};
   const expr = { name:exprEn, note:exprKr, arrange:{ en:src.en, ko:src.ko } };
 
   // '방금 배운 표현' 박스는 그 문제(직전 A 대사 또는 정답)에 실제로 표현이 나올 때만 붙인다.
@@ -218,7 +219,7 @@ function buildExample(ex){
     const correct = (t.choices||[]).find(c=>c.correct);
     const hasExpr = (prevA + ' ' + (correct?correct.text:'')).toLowerCase().includes(fixed.toLowerCase());
     return { s:'B', quiz:true, options:(t.choices||[]).map(c=>({
-      text:c.text, correct:!!c.correct, why:c.explain,
+      text:c.text, kr:c.kr, correct:!!c.correct, why:c.explain,
       learned: (c.correct && hasExpr) ? { name:exprEn, note:exprKr } : undefined,
     })) };
   });
@@ -429,13 +430,14 @@ function askQuiz(turn, myRun){
     const tag = ok => ok?'<span class="tag" style="color:#2e9e57">✓ 정답</span>':'<span class="tag" style="color:#d1584e">✕</span>';
     opts.forEach(o=>{
       const b=document.createElement('button'); b.className='opt';
-      b.innerHTML=`<div class="opt-text"></div><div class="why"></div>`;
+      b.innerHTML=`<div class="opt-text"></div><div class="opt-kr"></div><div class="why"></div>`;
       b.querySelector('.opt-text').textContent=o.text;
       b.onclick=()=>{
         if(!answered){
           answered=true;
+          // 답변 후 각 선택지의 한국어 뜻과 해설을 함께 노출
           Array.from(box.children).forEach(c=>{ const opt=opts.find(x=>x.text===c.querySelector('.opt-text').textContent);
-            if(opt.hl) c.querySelector('.opt-text').innerHTML=markup(opt.text, opt.hl); // 답변 후 강조
+            if(opt.kr) c.querySelector('.opt-kr').textContent=opt.kr;
             c.querySelector('.why').innerHTML=tag(!!opt.correct)+opt.why; });
           if(o.correct) b.classList.add('correct'); else b.classList.add('wrong');
           const cb=Array.from(box.children).find(c=>c.querySelector('.opt-text').textContent===correctOpt(turn).text);
@@ -470,7 +472,8 @@ function showScript(){
   current.turns.forEach(t=>{
     const who=t.s; const info = who==='B' ? {n:'B',a:'🐰'} : {n:'A',a:'🐻'};
     const line = t.quiz ? correctOpt(t) : t;
-    const krLine = t.kr ? `<div class="script-kr">${escapeHtml(t.kr)}</div>` : '';
+    const krText = t.quiz ? (line.kr||'') : (t.kr||'');
+    const krLine = krText ? `<div class="script-kr">${escapeHtml(krText)}</div>` : '';
     const m=document.createElement('div'); m.className='msg'+(who==='B'?' b':'');
     m.innerHTML=`<div class="avatar-col"><div class="avatar">${info.a}</div><div class="avatar-name">${info.n}</div></div>
       <div class="bubble revealed">${markup(line.text, line.hl)}${krLine}</div>`;
