@@ -194,12 +194,10 @@
 // ── 데이터 로드 ─────────────────────────────────────────────────────────────
 // 콘텐츠는 외부 JSON(listening-pingpong.data.json)에서 불러온다.
 // 표현은 실제 표현 뱅크(ExpressionUnitKR) 항목이고, '표현 배우기(배열)' 문장은
-// 대화에서 그 표현이 쓰인 줄로 자동 생성한다. 강조(hl)도 여기서 자동 계산.
+// 대화에서 그 표현이 쓰인 줄로 자동 생성한다.
 let EXAMPLES = [];
 // 표현 패턴의 고정부('~' 앞): "Where's ~?" → "Where's", "To go." → "To go"
 function exprPhrase(pattern){ return pattern.split('~')[0].trim().replace(/[?.!,]+$/,'').trim(); }
-// 대소문자 무시하고 찾아, 실제 문장에 나온 그대로의 부분문자열을 돌려준다.
-function findCI(text, phrase){ if(!phrase) return null; const i=text.toLowerCase().indexOf(phrase.toLowerCase()); return i<0?null:text.substr(i, phrase.length); }
 function buildExample(ex){
   const exprEn = ex.expression.en, exprKr = ex.expression.kr;
   const fixed = exprPhrase(exprEn);
@@ -211,18 +209,18 @@ function buildExample(ex){
   }
   const withExpr = cands.filter(c=> c.en.toLowerCase().includes(fixed.toLowerCase()));
   const src = (withExpr.length?withExpr:cands).sort((a,b)=>a.en.length-b.en.length)[0] || {en:exprEn, ko:exprKr};
-  const arrangeHl = [];
-  { const m=findCI(src.en, fixed); if(m) arrangeHl.push({text:m, kind:'expr'}); }
-  { const m=findCI(src.en, ex.vocab.word); if(m) arrangeHl.push({text:m, kind:'vocab'}); }
-  const expr = { name:exprEn, note:exprKr, arrange:{ en:src.en, ko:src.ko, hl:arrangeHl } };
+  const expr = { name:exprEn, note:exprKr, arrange:{ en:src.en, ko:src.ko } };
 
+  // '방금 배운 표현' 박스는 그 문제(직전 A 대사 또는 정답)에 실제로 표현이 나올 때만 붙인다.
+  let prevA = '';
   const turns = ex.dialogue.map(t=>{
-    if (t.role==='A') return { s:'A', text:t.text, kr:t.kr };
-    return { s:'B', quiz:true, options:(t.choices||[]).map(c=>{
-      const hl=[]; if(c.highlight){ const m=findCI(c.text, c.highlight); if(m) hl.push({text:m, kind:'expr'}); }
-      return { text:c.text, correct:!!c.correct, why:c.explain,
-        learned: c.correct ? { name:exprEn, note:exprKr } : undefined, hl };
-    }) };
+    if (t.role==='A'){ prevA = t.text||''; return { s:'A', text:t.text, kr:t.kr }; }
+    const correct = (t.choices||[]).find(c=>c.correct);
+    const hasExpr = (prevA + ' ' + (correct?correct.text:'')).toLowerCase().includes(fixed.toLowerCase());
+    return { s:'B', quiz:true, options:(t.choices||[]).map(c=>({
+      text:c.text, correct:!!c.correct, why:c.explain,
+      learned: (c.correct && hasExpr) ? { name:exprEn, note:exprKr } : undefined,
+    })) };
   });
   return { vocab:{ word:ex.vocab.word, ko:ex.vocab.meaning }, expr, dialogue:{ title:ex.title, turns } };
 }
@@ -387,10 +385,10 @@ async function readyGate(myRun){
   g.innerHTML='<div class="ready-msg">🎧 잘 듣고 답을 골라보세요</div><div class="ready-num"></div>';
   chat.appendChild(g);
   const num=g.querySelector('.ready-num');
-  for(const n of ['3','2','1','시작!']){
+  for(const n of ['3','2','1']){
     if(myRun!==runId){ g.remove(); return false; }
     num.textContent=n; num.style.animation='none'; void num.offsetWidth; num.style.animation='';
-    await wait(n==='시작!'?500:650);
+    await wait(600);
   }
   g.remove();
   return myRun===runId;
