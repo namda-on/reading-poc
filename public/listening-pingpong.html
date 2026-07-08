@@ -87,10 +87,10 @@
   .msg.b .bubble.revealed { background:#4b83d6; color:#fff; }
   @keyframes reveal { from{opacity:.4;} to{opacity:1;} }
 
-  /* 형광펜(배운 표현) · 밑줄(배운 어휘) */
+  /* 형광펜(배운 표현) · 연한 점선 밑줄(배운 어휘) */
   .hl-expr { background:#ffe372; color:#3a2f00; border-radius:4px; padding:0 3px; -webkit-box-decoration-break:clone; box-decoration-break:clone; }
-  .hl-vocab { text-decoration:underline; text-decoration-color:#4b83d6; text-decoration-thickness:2px; text-underline-offset:3px; }
-  .msg.b .bubble.revealed .hl-vocab { text-decoration-color:#fff; }
+  .hl-vocab { text-decoration:underline; text-decoration-style:dotted; text-decoration-color:#a9b6c9; text-decoration-thickness:1.5px; text-underline-offset:3px; }
+  .msg.b .bubble.revealed .hl-vocab { text-decoration-color:rgba(255,255,255,.7); }
 
   .quiz { flex-shrink:0; max-height:62vh; overflow-y:auto; background:#eef4fb; border-top:1px solid #d3e0f1; padding:14px 14px 20px; }
   .quiz-q { display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; }
@@ -119,7 +119,14 @@
   .learned-list .it b { color:#7a5f12; }
   .btn { border:none; border-radius:26px; padding:14px 30px; background:var(--blue); color:#fff; font-size:16px; font-weight:700; cursor:pointer; box-shadow:0 4px 14px rgba(30,60,110,.25); }
   .btn.ghost { background:#fff; color:#45566b; }
+  .btn.script-btn { background:#fff; color:#2f6ab0; box-shadow:none; border:1.5px solid #cfe0f5; }
   .row { display:flex; gap:10px; }
+
+  /* 정답 후 확인하는 전체 스크립트 */
+  .script { flex:1; display:flex; flex-direction:column; min-height:0; }
+  .script-top { display:flex; align-items:center; gap:10px; padding:14px 16px; flex-shrink:0; font-size:17px; color:#25406a; }
+  .script-top .icon-btn { color:#25406a; }
+  .script-list { flex:1; min-height:0; overflow-y:auto; padding:4px 14px 20px; display:flex; flex-direction:column; }
   .hidden { display:none !important; }
 </style>
 </head>
@@ -174,10 +181,16 @@
     <h2>완료!</h2>
     <p id="doneScore"></p>
     <div class="learned-list hidden" id="learnedList"></div>
+    <button class="btn script-btn" id="doneScript">📄 전체 스크립트 보기</button>
     <div class="row">
       <button class="btn ghost" id="doneList">목록으로</button>
       <button class="btn" id="doneRetry">다시 듣기</button>
     </div>
+  </div>
+
+  <div class="script hidden" id="script">
+    <div class="script-top"><button class="icon-btn dark" id="scriptBack" aria-label="뒤로">‹</button><b>전체 스크립트</b></div>
+    <div class="script-list" id="scriptList"></div>
   </div>
 </div>
 
@@ -207,17 +220,17 @@ const EXAMPLES = [
         { text:"Where's my room?", hl:[{text:"Where's",kind:'expr'}], why:"‘Where's ~?’지만, 방금 402호라고 알려줬어요." },
         { text:"It's on the fourth floor.", why:"A가 알려준 정보예요. B가 할 말이 아니에요." },
       ]},
-      { s:'A', text:"Just past the lounge on your right. Anything else?" },
+      { s:'A', text:"Just around the corner, past the lounge." },
       { s:'B', quiz:true, options:[
-        { text:"Can I get a map?", correct:true, learned:E.get, hl:[{text:"Can I get",kind:'expr'}], why:"필요한 걸 정중히 요청했어요." },
+        { text:"Can I get a luggage cart?", correct:true, learned:E.get, hl:[{text:"Can I get",kind:'expr'}], why:"짐을 옮길 카트가 필요해 요청했어요." },
         { text:"Do you have the elevator?", hl:[{text:"Do you have",kind:'expr'},{text:"elevator",kind:'vocab'}], why:"‘Do you have ~?’지만, 엘리베이터는 있냐고 묻지 않아요." },
-        { text:"It's on the fourth floor.", why:"A가 알려준 정보예요. B가 할 말이 아니에요." },
+        { text:"Thanks, good night!", why:"아직 부탁할 게 남았는데 대화를 끝내버려요." },
       ]},
-      { s:'A', text:"Of course, I'll send one up. Need anything to drink?" },
+      { s:'A', text:"Sure, I'll bring one over. Anything else?" },
       { s:'B', quiz:true, options:[
-        { text:"Do you have water?", correct:true, learned:E.have, hl:[{text:"Do you have",kind:'expr'}], why:"마실 것이 있는지 물었어요." },
-        { text:"I'll have the elevator.", hl:[{text:"I'll have",kind:'expr'},{text:"elevator",kind:'vocab'}], why:"‘I'll have ~’지만, 엘리베이터를 주문할 순 없어요." },
-        { text:"Where's the water?", hl:[{text:"Where's",kind:'expr'}], why:"주문도 안 한 물 위치부터 묻는 건 성급해요." },
+        { text:"Do you have bottled water?", correct:true, learned:E.have, hl:[{text:"Do you have",kind:'expr'}], why:"필요한 게 더 있냐고 해서, 물이 있는지 물었어요." },
+        { text:"I'll have the fourth floor.", hl:[{text:"I'll have",kind:'expr'}], why:"‘I'll have ~’지만, 층을 주문할 순 없어요." },
+        { text:"Yes, room 402.", why:"더 필요하냐는 물음에 방 번호는 엉뚱해요." },
       ]},
     ]},
   },
@@ -261,11 +274,11 @@ const EXAMPLES = [
         { text:"Turn right at the bakery?", why:"A는 <b>왼쪽(left)</b>이라 했어요." },
         { text:"How do I get a cake?", hl:[{text:"How do I get",kind:'expr'}], why:"‘How do I get ~?’는 장소로 가는 길을 묻는 표현이에요." },
       ]},
-      { s:'A', text:"Sure, here's a map. It's about a ten-minute walk." },
+      { s:'A', text:"Sure, here's a map. The station's right across the street." },
       { s:'B', quiz:true, options:[
-        { text:"Where's the ticket machine?", correct:true, learned:E.where, hl:[{text:"Where's",kind:'expr'}], why:"역에서 표 살 곳을 물었어요." },
+        { text:"Where's the ticket machine?", correct:true, learned:E.where, hl:[{text:"Where's",kind:'expr'}], why:"역이 바로 앞이라, 표 살 곳을 물었어요." },
         { text:"How do I get to the map?", hl:[{text:"How do I get",kind:'expr'}], why:"지도로 가는 길을 물을 순 없어요." },
-        { text:"Can I get a taxi?", hl:[{text:"Can I get",kind:'expr'}], why:"걸어서 10분이라는데 택시는 흐름에 안 맞아요." },
+        { text:"Can I get a taxi?", hl:[{text:"Can I get",kind:'expr'}], why:"역이 바로 앞인데 택시는 흐름에 안 맞아요." },
       ]},
     ]},
   },
@@ -285,7 +298,7 @@ const EXAMPLES = [
         { text:"Where's my charger?", hl:[{text:"Where's",kind:'expr'},{text:"charger",kind:'vocab'}], why:"아직 보내주지도 않은 걸 어디 있냐 묻는 건 성급해요." },
         { text:"Do you have my room?", hl:[{text:"Do you have",kind:'expr'}], why:"방이 있냐고 묻는 건 어색해요." },
       ]},
-      { s:'A', text:"Got it. Anything else?" },
+      { s:'A', text:"Got it — batteries too. Need anything else?" },
       { s:'B', quiz:true, options:[
         { text:"Do you have an adapter?", correct:true, learned:E.have, hl:[{text:"Do you have",kind:'expr'}], why:"필요한 게 더 있냐고 해서 어댑터가 있는지 물었어요." },
         { text:"I'll have room 402.", hl:[{text:"I'll have",kind:'expr'}], why:"‘I'll have ~’지만, 방을 주문할 순 없어요." },
@@ -306,7 +319,7 @@ const EXAMPLES = [
       { s:'A', text:"Of course. Anything else?" },
       { s:'B', quiz:true, options:[
         { text:"Do you have a hairdryer?", correct:true, learned:E.have, hl:[{text:"Do you have",kind:'expr'}], why:"수건에 더해 드라이어가 있는지 물었어요." },
-        { text:"Where's the towel?", hl:[{text:"Where's",kind:'expr'},{text:"towel",kind:'vocab'}], why:"방금 가져다준다고 했어요." },
+        { text:"Where's the towel?", hl:[{text:"Where's",kind:'expr'},{text:"towel",kind:'vocab'}], why:"막 부탁한 수건인데 위치부터 묻는 건 성급해요." },
         { text:"How do I get towels?", hl:[{text:"How do I get",kind:'expr'},{text:"towels",kind:'vocab'}], why:"물건 받는 방법을 그렇게 묻진 않아요." },
       ]},
       { s:'A', text:"I'll bring those up. Need anything more?" },
@@ -418,9 +431,9 @@ const wait = ms => new Promise(r=>setTimeout(r,ms));
 
 // ── 화면 ──────────────────────────────────────────────────────────────────
 const el=id=>document.getElementById(id);
-const home=el('home'), vocab=el('vocab'), arrange=el('arrange'), chat=el('chat'), quiz=el('quiz'), done=el('done'), topbar=el('topbar');
+const home=el('home'), vocab=el('vocab'), arrange=el('arrange'), chat=el('chat'), quiz=el('quiz'), done=el('done'), topbar=el('topbar'), script=el('script');
 let curExample=null, current=null, lastA='', correctCount=0, learnedSeen=[], runId=0;
-function show(...ids){ [home,vocab,arrange,chat,quiz,done,topbar].forEach(n=>n.classList.add('hidden')); ids.forEach(n=>n.classList.remove('hidden')); }
+function show(...ids){ [home,vocab,arrange,chat,quiz,done,script,topbar].forEach(n=>n.classList.add('hidden')); ids.forEach(n=>n.classList.remove('hidden')); }
 function noteLearned(x){ if(x && !learnedSeen.some(y=>y.name===x.name)) learnedSeen.push(x); }
 function scrollToBottom(){ requestAnimationFrame(()=>{ chat.scrollTo({top:chat.scrollHeight, behavior:'smooth'}); }); }
 function showProgress(on){ el('progress').style.visibility = on?'visible':'hidden'; }
@@ -543,7 +556,9 @@ function askQuiz(turn, myRun){
           cb.classList.add('correct','show-why'); b.classList.add('show-why');
           const after=el('quizAfter'); const co=correctOpt(turn);
           if(co.learned){ const lb=document.createElement('div'); lb.className='learned-box';
-            lb.innerHTML=`<span class="k">방금 배운 표현</span>${exprHtml(co.learned)}`; after.appendChild(lb); }
+            // 이번 예시에서 방금 배운 표현만 '방금', 예전에 배운 표현은 '배운'으로 구분
+            const justNow = curExample && co.learned.name===curExample.expr.name;
+            lb.innerHTML=`<span class="k">${justNow?'방금 배운 표현':'배운 표현'}</span>${exprHtml(co.learned)}`; after.appendChild(lb); }
           const leg=document.createElement('div'); leg.className='legend'; leg.innerHTML='<mark class="hl-expr">형광펜</mark> 배운 표현 · <u class="hl-vocab">밑줄</u> 배운 어휘'; after.appendChild(leg);
           const tip=document.createElement('div'); tip.className='hint-tap'; tip.textContent='다른 선택지를 눌러 왜 아닌지 볼 수 있어요'; after.appendChild(tip);
           const nx=document.createElement('button'); nx.className='next-btn'; nx.textContent='다음 ▶'; nx.onclick=()=>{ if(myRun===runId) resolve(!!o.correct); }; after.appendChild(nx);
@@ -564,10 +579,26 @@ function showDone(){
   } else ll.classList.add('hidden');
 }
 
+// 정답을 다 풀고 나면 전체 대화를 텍스트로 확인(배운 표현·어휘 강조 그대로).
+function showScript(){
+  runId++; stopAudio(); show(script);
+  const box=el('scriptList'); box.innerHTML='';
+  current.turns.forEach(t=>{
+    const who=t.s; const info = who==='B' ? {n:'B',a:'🐰'} : {n:'A',a:'🐻'};
+    const line = t.quiz ? correctOpt(t) : t;
+    const m=document.createElement('div'); m.className='msg'+(who==='B'?' b':'');
+    m.innerHTML=`<div class="avatar-col"><div class="avatar">${info.a}</div><div class="avatar-name">${info.n}</div></div>
+      <div class="bubble revealed">${markup(line.text, line.hl)}</div>`;
+    box.appendChild(m);
+  });
+}
+
 function leave(){ runId++; stopAudio(); renderHome(); }
 el('backBtn').onclick=leave;
 el('doneList').onclick=leave;
 el('doneRetry').onclick=()=>startDialogue(curExample.dialogue);
+el('doneScript').onclick=showScript;
+el('scriptBack').onclick=showDone;
 el('replayBtn').onclick=()=>{ if(lastA) speak(lastA,'A'); };
 window.addEventListener('pagehide', stopAudio);
 renderHome();
