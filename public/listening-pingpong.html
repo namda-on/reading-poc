@@ -26,11 +26,17 @@
   .voice-row { display:flex; align-items:center; gap:8px; font-size:13px; color:#3a567d; background:#ffffff88; border-radius:12px; padding:8px 12px; }
   .voice-row span { min-width:62px; font-weight:700; }
   .voice-row select { flex:1; padding:8px; border-radius:10px; border:1px solid #cddcf1; background:#fff; font-size:13px; }
-  .ex-card { display:block; width:100%; text-align:left; background:var(--card); border:none; border-radius:16px;
+  .grp-head { display:flex; justify-content:space-between; align-items:baseline; margin:20px 4px 8px; }
+  .grp-head span:first-child { font-size:15px; font-weight:800; color:#25406a; }
+  .grp-head .grp-count { font-size:12px; font-weight:700; color:#5b7c93; }
+  .ex-card { position:relative; display:block; width:100%; text-align:left; background:var(--card); border:none; border-radius:16px;
     padding:15px 18px; margin-bottom:10px; cursor:pointer; box-shadow:0 3px 12px rgba(30,60,110,.12); }
+  .ex-card.cleared { background:#f1faf3; box-shadow:0 2px 8px rgba(46,158,87,.12); }
   .ex-card .t { font-size:16px; font-weight:800; color:#2f3e52; }
+  .ex-card.cleared .t { color:#3f6b50; }
   .ex-card .f { font-size:12px; color:var(--sub); margin-top:4px; }
   .ex-card .step { display:inline-block; font-size:11px; font-weight:800; color:#2f6ab0; background:#e7f0fb; border:1px solid #cfe0f5; border-radius:999px; padding:2px 8px; margin-top:7px; }
+  .ex-card .clear-badge { position:absolute; top:14px; right:16px; font-size:13px; font-weight:800; color:#2e9e57; }
   .home .note { font-size:12px; color:#3a567d; opacity:.85; margin-top:16px; line-height:1.6; }
 
   /* 단계 라벨 */
@@ -190,44 +196,46 @@
 // 콘텐츠는 외부 JSON(listening-pingpong.data.json)에서 불러온다.
 // 표현은 실제 표현 뱅크(ExpressionUnitKR) 항목이고, '표현 배우기(배열)' 문장은
 // 대화에서 그 표현이 쓰인 줄로 자동 생성한다.
-let EXAMPLES = [];
+let GROUPS = [];
 // 표현 패턴의 고정부('~' 앞): "Where's ~?" → "Where's", "To go." → "To go"
 function exprPhrase(pattern){ return pattern.split('~')[0].trim().replace(/[?.!,]+$/,'').trim(); }
 function buildExample(ex){
   const exprEn = ex.expression.en, exprKr = ex.expression.kr;
   const fixed = exprPhrase(exprEn);
-  // 표현 배열 문장: 표현에 빈칸(~)이 있으면 그 표현이 쓰인 A 대사(구체 문장)를,
-  // 없으면(예: "To go.") 표현 자체를 쓴다.
+  const aTurns = ex.dialogue.filter(t=>t.role==='A');
+  const trigA = aTurns[1] || aTurns[0] || null; // 2번째 A = 표현이 나오는 트리거 대사
+  // 표현 배열 문장: 표현에 빈칸(~)이 있으면 트리거 A 대사(구체 문장), 없으면(To go. 등) 표현 자체
   let src = { en:exprEn, ko:exprKr };
-  if (exprEn.includes('~')){
-    const aLine = ex.dialogue.find(t=> t.role==='A' && t.text && t.text.toLowerCase().includes(fixed.toLowerCase()));
-    if (aLine) src = { en:aLine.text, ko:aLine.kr||'' };
-  }
+  if (exprEn.includes('~') && trigA) src = { en:trigA.text, ko:trigA.kr||'' };
   const expr = { name:exprEn, note:exprKr, arrange:{ en:src.en, ko:src.ko } };
 
-  // '방금 배운 표현' 박스는 그 문제(직전 A 대사 또는 정답)에 실제로 표현이 나올 때만 붙인다.
-  let prevA = '';
+  // '방금 배운 표현' 박스는 트리거 대사(2번째 A) 바로 다음 문제에만 붙인다.
+  let prevA = null;
   const turns = ex.dialogue.map(t=>{
-    if (t.role==='A'){ prevA = t.text||''; return { s:'A', text:t.text, kr:t.kr }; }
-    const correct = (t.choices||[]).find(c=>c.correct);
-    const hasExpr = (prevA + ' ' + (correct?correct.text:'')).toLowerCase().includes(fixed.toLowerCase());
-    const aLine = prevA; // 배운 표현이 담긴 직전 A 대사(오디오라 안 보였던 것)
+    if (t.role==='A'){ prevA = t; return { s:'A', text:t.text, kr:t.kr }; }
+    const isTrigger = prevA===trigA;
     return { s:'B', quiz:true, options:(t.choices||[]).map(c=>({
       text:c.text, kr:c.kr, correct:!!c.correct, why:c.explain,
-      learned: (c.correct && hasExpr) ? { name:exprEn, note:exprKr, aLine, fixed } : undefined,
+      learned: (c.correct && isTrigger && trigA) ? { name:exprEn, note:exprKr, aLine:trigA.text, fixed } : undefined,
     })) };
   });
-  return { vocab:{ word:ex.vocab.word, ko:ex.vocab.meaning }, expr, dialogue:{ title:ex.title, turns } };
+  return { id:ex.id, level:ex.level, vocab:{ word:ex.vocab.word, ko:ex.vocab.meaning }, expr, dialogue:{ title:ex.title, turns } };
 }
+const DATA_GROUPS = [
+  { label:'초급', gid:'a', file:'./listening-pingpong.data.json' },
+  { label:'중급', gid:'b', file:'./listening-pingpong.data.b.json' },
+];
 async function loadData(){
-  try{
-    const res = await fetch('./listening-pingpong.data.json', {cache:'no-store'});
-    const data = await res.json();
-    EXAMPLES = (data.examples || []).map(buildExample);
-    renderHome();
-  }catch(err){
-    const el=document.getElementById('exList'); if(el) el.innerHTML='<p style="color:#b00">데이터를 불러오지 못했어요: '+err+'</p>';
+  GROUPS=[];
+  for(const g of DATA_GROUPS){
+    try{
+      const res=await fetch(g.file,{cache:'no-store'}); const data=await res.json();
+      const examples=(data.examples||[]).map(ex=>{ const b=buildExample(ex); b.key=g.gid+'-'+ex.id; return b; });
+      if(examples.length) GROUPS.push({ label:g.label, examples });
+    }catch(e){ /* 그룹 파일 없으면 건너뜀 */ }
   }
+  if(!GROUPS.length){ const el=document.getElementById('exList'); if(el) el.innerHTML='<p style="color:#b00">데이터를 불러오지 못했어요.</p>'; return; }
+  renderHome();
 }
 
 // ── 강조 마크업 ──────────────────────────────────────────────────────────────
@@ -307,15 +315,31 @@ function scrollToBottom(){ requestAnimationFrame(()=>{ chat.scrollTo({top:chat.s
 function showProgress(on){ el('progress').style.visibility = on?'visible':'hidden'; }
 function shuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
 
+// 완료(클리어) 저장 — 하나씩 깨는 재미
+const CLEAR_KEY='lp:cleared';
+function clearedSet(){ try{ return new Set(JSON.parse(localStorage.getItem(CLEAR_KEY)||'[]')); }catch(e){ return new Set(); } }
+function isCleared(k){ return clearedSet().has(k); }
+function markCleared(k){ const s=clearedSet(); s.add(k); try{ localStorage.setItem(CLEAR_KEY, JSON.stringify([...s])); }catch(e){} }
+
 function renderHome(){
   show(home); fillVoicePicker();
   const list=el('exList'); list.innerHTML='';
-  EXAMPLES.forEach((ex,i)=>{ const b=document.createElement('button'); b.className='ex-card';
-    b.innerHTML=`<div class="t">${ex.expr.name}</div><div class="f">${ex.dialogue.title}</div><span class="step">표현 → 리스닝</span>`;
-    b.onclick=()=>startExample(i); list.appendChild(b); });
+  GROUPS.forEach(g=>{
+    const done=g.examples.filter(e=>isCleared(e.key)).length;
+    const h=document.createElement('div'); h.className='grp-head';
+    h.innerHTML=`<span>${g.label}</span><span class="grp-count">${done}/${g.examples.length} 완료</span>`;
+    list.appendChild(h);
+    g.examples.forEach(ex=>{
+      const cleared=isCleared(ex.key);
+      const b=document.createElement('button'); b.className='ex-card'+(cleared?' cleared':'');
+      b.innerHTML=`<div class="t">${ex.expr.name}</div><div class="f">${ex.dialogue.title}</div>`+
+        (cleared?'<span class="clear-badge">✓ 완료</span>':'<span class="step">표현 → 리스닝</span>');
+      b.onclick=()=>startExample(ex); list.appendChild(b);
+    });
+  });
 }
 
-function startExample(i){ curExample=EXAMPLES[i]; showArrange(); }
+function startExample(ex){ curExample=ex; showArrange(); }
 
 // 정답 배열 완성 시 짧은 상승 아르페지오(외부 파일 없이 WebAudio로 합성)
 function successChime(){
@@ -489,6 +513,7 @@ function askQuiz(turn, myRun){
 }
 
 function showDone(){
+  if(curExample&&curExample.key) markCleared(curExample.key); // 완료 표시 저장
   show(topbar,done); showProgress(true);
   const t=current.turns.filter(x=>x.quiz).length;
   el('doneScore').textContent=`${t}번 중 ${correctCount}번 한 번에 맞혔어요.`;

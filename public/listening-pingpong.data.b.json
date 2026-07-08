@@ -1,0 +1,179 @@
+{
+  "meta": {
+    "type": "listening-pingpong",
+    "level": "B1-B2",
+    "theme": "travel/daily",
+    "triggerTurn": 3,
+    "note": "중급(B1/B2). 각 예시 level 참고. A=상대(트리거 turn3), B=학습자 3지선다, 정답은 비-에코, 오답=특정 오청, 각 선택지 kr 포함."
+  },
+  "examples": [
+    {
+      "id": 1,
+      "title": "식당 (버거 주문)",
+      "level": "B1",
+      "vocab": { "word": "fries", "meaning": "감자튀김", "cefr": "A2", "rank": null },
+      "expression": { "csv_id": 468, "en": "Does it come with ~?", "kr": "~이 함께 나오나요?", "category": "DTB" },
+      "dialogue": [
+        { "role": "A", "text": "Would you like meat or cheese?", "kr": "고기로 하실래요, 치즈로 하실래요?" },
+        { "role": "B", "prompt": "B가 할 말로 알맞은 것은?", "choices": [
+          { "text": "Cheese, please.", "kr": "치즈로 주세요.", "correct": true, "trap": "정답", "explain": "선택 질문을 정확히 듣고 하나를 골랐어요." },
+          { "text": "Meet? Meet who?", "kr": "만나요? 누구를요?", "correct": false, "trap": "내용어 오청", "explain": "'meat(고기)'를 'meet(만나다)'로 잘못 들은 답이에요." },
+          { "text": "Yes, both are fine.", "kr": "네, 둘 다 좋아요.", "correct": false, "trap": "프레임 오청", "explain": "선택 질문을 예/아니오로 잘못 들은 답이에요." }
+        ] },
+        { "role": "A", "text": "Does it come with fries?", "kr": "감자튀김이 같이 나오나요?" },
+        { "role": "B", "prompt": "B가 할 말로 알맞은 것은?", "choices": [
+          { "text": "Yes, a big basket.", "kr": "네, 한 바구니 가득이요.", "correct": true, "trap": "정답", "explain": "감자튀김이 함께 나오냐는 걸 정확히 듣고 답했어요.", "highlight": "fries" },
+          { "text": "Flies? That's not clean!", "kr": "파리요? 위생이 별로네요!", "correct": false, "trap": "내용어 오청", "explain": "'fries'를 'flies(파리)'로 잘못 들은 답이에요." },
+          { "text": "With friends? I'm alone.", "kr": "친구랑요? 저 혼자예요.", "correct": false, "trap": "내용어 오청", "explain": "'fries'를 'friends(친구들)'로 잘못 들은 답이에요." }
+        ] },
+        { "role": "A", "text": "Would you like a dessert?", "kr": "디저트도 드릴까요?" },
+        { "role": "B", "prompt": "B가 할 말로 알맞은 것은?", "choices": [
+          { "text": "Maybe some ice cream.", "kr": "아이스크림 정도요.", "correct": true, "trap": "정답", "explain": "디저트를 권하는 걸 정확히 듣고 답했어요." },
+          { "text": "The desert? Too far.", "kr": "사막이요? 너무 멀어요.", "correct": false, "trap": "내용어 오청", "explain": "'dessert(디저트)'를 'desert(사막)'로 잘못 들은 답이에요." },
+          { "text": "Yes, I deserve it!", "kr": "네, 그럴 자격 있죠!", "correct": false, "trap": "내용어 오청", "explain": "'dessert'를 'deserve(자격이 있다)'로 잘못 들은 답이에요." }
+        ] },
+        { "role": "A", "text": "I'll bring it right over.", "kr": "바로 가져다드릴게요." }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "공항 (탑승 대기)",
+      "level": "B1",
+      "vocab": { "word": "gate", "meaning": "탑승구", "cefr": "A2", "rank": 4161 },
+      "expression": { "csv_id": 462, "en": "How far is ~ from here?", "kr": "여기서 ~까지 얼마나 머나요?", "category": "T" },
+      "dialogue": [
+        { "role": "A", "text": "Is that our plane?", "kr": "저게 우리 비행기야?" },
+        { "role": "B", "prompt": "B가 할 말로 알맞은 것은?", "choices": [
+          { "text": "Yes, the big white one.", "kr": "응, 저 큰 흰색.", "correct": true, "trap": "정답", "explain": "비행기를 가리키는 걸 정확히 듣고 답했어요." },
+          { "text": "Plain? No, I like spicy.", "kr": "담백한 거? 아니, 매운 게 좋아.", "correct": false, "trap": "내용어 오청", "explain": "'plane(비행기)'을 'plain(담백한)'으로 잘못 들은 답이에요." },
+          { "text": "The plan? Let's check it.", "kr": "계획이요? 확인해보자.", "correct": false, "trap": "내용어 오청", "explain": "'plane'을 'plan(계획)'으로 잘못 들은 답이에요." }
+        ] },
+        { "role": "A", "text": "How far is the gate from here?", "kr": "여기서 탑승구까지 얼마나 멀어요?" },
+        { "role": "B", "prompt": "B가 할 말로 알맞은 것은?", "choices": [
+          { "text": "Just a five-minute walk.", "kr": "걸어서 5분이요.", "correct": true, "trap": "정답", "explain": "탑승구까지 거리를 묻는 걸 정확히 듣고 답했어요.", "highlight": "gate" },
+          { "text": "The fare? About ten dollars.", "kr": "요금이요? 10달러쯤이요.", "correct": false, "trap": "내용어 오청", "explain": "'far(멀다)'를 'fare(요금)'로 잘못 들은 답이에요." },
+          { "text": "At eight? That's the flight time.", "kr": "8시요? 그건 비행 시간이에요.", "correct": false, "trap": "내용어 오청", "explain": "'gate'를 'eight(8시)'로 잘못 들은 답이에요." }
+        ] },
+        { "role": "A", "text": "Should we board now?", "kr": "이제 타야 할까?" },
+        { "role": "B", "prompt": "B가 할 말로 알맞은 것은?", "choices": [
+          { "text": "Yes, it's time to go.", "kr": "응, 갈 시간이야.", "correct": true, "trap": "정답", "explain": "탑승할지 묻는 걸 정확히 듣고 답했어요." },
+          { "text": "Bored? Watch a movie.", "kr": "지루해? 영화 봐.", "correct": false, "trap": "내용어 오청", "explain": "'board(탑승하다)'를 'bored(지루한)'로 잘못 들은 답이에요." },
+          { "text": "A board? For what?", "kr": "판자요? 뭐 하러요?", "correct": false, "trap": "프레임 오청", "explain": "'board(탑승)'를 명사 'a board(판자)'로 잘못 들은 답이에요." }
+        ] },
+        { "role": "A", "text": "Let's go, then!", "kr": "그럼 가자!" }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "호텔 프런트",
+      "level": "B1",
+      "vocab": { "word": "tour", "meaning": "투어, 관광", "cefr": "A2", "rank": null },
+      "expression": { "csv_id": 449, "en": "Is ~ included?", "kr": "~가 포함되나요?", "category": "DTB" },
+      "dialogue": [
+        { "role": "A", "text": "Is the room quiet?", "kr": "방이 조용한가요?" },
+        { "role": "B", "prompt": "B가 할 말로 알맞은 것은?", "choices": [
+          { "text": "Yes, very peaceful.", "kr": "네, 아주 조용해요.", "correct": true, "trap": "정답", "explain": "방이 조용하냐는 걸 정확히 듣고 답했어요." },
+          { "text": "Quite big, you mean?", "kr": "꽤 크냐고요?", "correct": false, "trap": "내용어 오청", "explain": "'quiet(조용한)'을 'quite(꽤)'로 잘못 들은 답이에요." },
+          { "text": "Yes, it's room 302.", "kr": "네, 302호예요.", "correct": false, "trap": "프레임 오청", "explain": "'quiet'을 놓치고 방 번호를 묻는 말로 들은 답이에요." }
+        ] },
+        { "role": "A", "text": "Is the tour included?", "kr": "투어가 포함되나요?" },
+        { "role": "B", "prompt": "B가 할 말로 알맞은 것은?", "choices": [
+          { "text": "Yes, all of it.", "kr": "네, 전부 포함이에요.", "correct": true, "trap": "정답", "explain": "투어가 포함되냐는 걸 정확히 듣고 답했어요.", "highlight": "tour" },
+          { "text": "The tower? It's that way.", "kr": "타워요? 저쪽이에요.", "correct": false, "trap": "내용어 오청", "explain": "'tour(투어)'를 'tower(타워)'로 잘못 들은 답이에요." },
+          { "text": "Yes, breakfast too.", "kr": "네, 아침도요.", "correct": false, "trap": "프레임 오청", "explain": "'tour'를 놓치고 다른 포함 항목으로 답한 오청이에요." }
+        ] },
+        { "role": "A", "text": "Is there an extra fee?", "kr": "추가 요금이 있나요?" },
+        { "role": "B", "prompt": "B가 할 말로 알맞은 것은?", "choices": [
+          { "text": "No, it's all in the price.", "kr": "아니요, 요금에 다 포함이에요.", "correct": true, "trap": "정답", "explain": "추가 요금이 있냐는 걸 정확히 듣고 답했어요.", "highlight": "fee" },
+          { "text": "Free? Nothing to pay?", "kr": "공짜요? 낼 거 없어요?", "correct": false, "trap": "내용어 오청", "explain": "'fee(요금)'를 'free(무료)'로 잘못 들은 답이에요." },
+          { "text": "Yes, at the front desk.", "kr": "네, 프런트에서요.", "correct": false, "trap": "프레임 오청", "explain": "'fee'를 놓치고 위치를 묻는 말로 들은 답이에요." }
+        ] },
+        { "role": "A", "text": "Great, thank you!", "kr": "좋아요, 감사합니다!" }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "렌터카 반납",
+      "level": "B2",
+      "vocab": { "word": "downtown", "meaning": "시내", "cefr": "B1", "rank": 5173 },
+      "expression": { "csv_id": 474, "en": "Can I drop it off ~?", "kr": "~에 반납할 수 있나요?", "category": "DT" },
+      "dialogue": [
+        { "role": "A", "text": "Is there a fee for a late return?", "kr": "늦게 반납하면 요금이 있나요?" },
+        { "role": "B", "prompt": "B가 할 말로 알맞은 것은?", "choices": [
+          { "text": "Only after an hour.", "kr": "한 시간 넘으면요.", "correct": true, "trap": "정답", "explain": "늦은 반납 요금을 묻는 걸 정확히 듣고 답했어요." },
+          { "text": "Free? So no charge?", "kr": "공짜요? 그럼 안 내요?", "correct": false, "trap": "내용어 오청", "explain": "'fee(요금)'를 'free(무료)'로 잘못 들은 답이에요." },
+          { "text": "Yes, the tank is full.", "kr": "네, 기름 가득이요.", "correct": false, "trap": "프레임 오청", "explain": "요금을 묻는 걸 놓치고 엉뚱하게 답한 오청이에요." }
+        ] },
+        { "role": "A", "text": "Can I drop it off downtown?", "kr": "시내에 반납해도 되나요?" },
+        { "role": "B", "prompt": "B가 할 말로 알맞은 것은?", "choices": [
+          { "text": "Sure, at any of our branches.", "kr": "네, 저희 지점 아무 데나요.", "correct": true, "trap": "정답", "explain": "시내 반납이 되냐는 걸 정확히 듣고 답했어요.", "highlight": "downtown" },
+          { "text": "Did you drop it? Is it broken?", "kr": "떨어뜨리셨어요? 깨졌어요?", "correct": false, "trap": "프레임 오청", "explain": "'drop it off(반납하다)'를 'drop it(떨어뜨리다)'로 잘못 들은 답이에요." },
+          { "text": "Which town exactly?", "kr": "정확히 어느 도시요?", "correct": false, "trap": "내용어 오청", "explain": "'downtown(시내)'을 'town(도시)'으로 잘못 들은 답이에요." }
+        ] },
+        { "role": "A", "text": "Will I get my money back?", "kr": "보증금 돌려받나요?" },
+        { "role": "B", "prompt": "B가 할 말로 알맞은 것은?", "choices": [
+          { "text": "Yes, in a few days.", "kr": "네, 며칠 뒤에요.", "correct": true, "trap": "정답", "explain": "환불을 묻는 걸 정확히 듣고 답했어요." },
+          { "text": "Your bag? Check the seat.", "kr": "가방이요? 자리 확인해보세요.", "correct": false, "trap": "내용어 오청", "explain": "'back'을 'bag(가방)'으로 잘못 들은 답이에요." },
+          { "text": "Yes, it's all clean.", "kr": "네, 다 깨끗해요.", "correct": false, "trap": "프레임 오청", "explain": "'money back(환불)'을 놓치고 엉뚱하게 답한 오청이에요." }
+        ] },
+        { "role": "A", "text": "Thanks for your help!", "kr": "도와줘서 고마워요!" }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "길에서 (관광객)",
+      "level": "B2",
+      "vocab": { "word": "way", "meaning": "길, 방향", "cefr": "A1", "rank": 931 },
+      "expression": { "csv_id": 116, "en": "Would you happen to know ~?", "kr": "혹시 ~ 아시나요?", "category": "DTB" },
+      "dialogue": [
+        { "role": "A", "text": "Is the museum far?", "kr": "박물관이 먼가요?" },
+        { "role": "B", "prompt": "B가 할 말로 알맞은 것은?", "choices": [
+          { "text": "No, a short walk.", "kr": "아니요, 가까워요.", "correct": true, "trap": "정답", "explain": "박물관이 머냐는 걸 정확히 듣고 답했어요." },
+          { "text": "The fair? It's next week.", "kr": "축제요? 다음 주예요.", "correct": false, "trap": "내용어 오청", "explain": "'far(멀다)'를 'fair(축제/박람회)'로 잘못 들은 답이에요." },
+          { "text": "Yes, it's very old.", "kr": "네, 아주 오래됐어요.", "correct": false, "trap": "프레임 오청", "explain": "'far'를 놓치고 박물관 자체를 묻는 말로 들은 답이에요." }
+        ] },
+        { "role": "A", "text": "Would you happen to know the way?", "kr": "혹시 길 아세요?" },
+        { "role": "B", "prompt": "B가 할 말로 알맞은 것은?", "choices": [
+          { "text": "Sure, follow this street.", "kr": "네, 이 길 따라가세요.", "correct": true, "trap": "정답", "explain": "길을 아냐는 걸 정확히 듣고 방향으로 답했어요.", "highlight": "way" },
+          { "text": "Weigh what? Your bag?", "kr": "뭘 달아요? 가방이요?", "correct": false, "trap": "내용어 오청", "explain": "'way(길)'를 'weigh(무게를 달다)'로 잘못 들은 답이에요." },
+          { "text": "Yes, it happened yesterday.", "kr": "네, 어제 일어났어요.", "correct": false, "trap": "프레임 오청", "explain": "'know the way'를 놓치고 'happen(일어나다)'만 들은 오청이에요." }
+        ] },
+        { "role": "A", "text": "Can I get there on foot?", "kr": "걸어서 갈 수 있어요?" },
+        { "role": "B", "prompt": "B가 할 말로 알맞은 것은?", "choices": [
+          { "text": "Yes, about ten minutes.", "kr": "네, 10분쯤이요.", "correct": true, "trap": "정답", "explain": "걸어갈 수 있냐는 걸 정확히 듣고 답했어요." },
+          { "text": "Food? There's a café nearby.", "kr": "음식이요? 근처에 카페 있어요.", "correct": false, "trap": "내용어 오청", "explain": "'foot(걸어서)'을 'food(음식)'으로 잘못 들은 답이에요." },
+          { "text": "Yes, by bus too.", "kr": "네, 버스로도요.", "correct": false, "trap": "프레임 오청", "explain": "'on foot(도보)'를 놓치고 교통수단 전반으로 답한 오청이에요." }
+        ] },
+        { "role": "A", "text": "Thank you so much!", "kr": "정말 감사합니다!" }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "식당 (마감 무렵)",
+      "level": "B2",
+      "vocab": { "word": "order", "meaning": "주문", "cefr": "A1", "rank": null },
+      "expression": { "csv_id": 109, "en": "Is it too late to ~?", "kr": "~하기에 너무 늦었나요?", "category": "DTB" },
+      "dialogue": [
+        { "role": "A", "text": "Is the kitchen still open?", "kr": "주방 아직 열려 있어요?" },
+        { "role": "B", "prompt": "B가 할 말로 알맞은 것은?", "choices": [
+          { "text": "Yes, until ten.", "kr": "네, 10시까지요.", "correct": true, "trap": "정답", "explain": "주방이 열려 있냐는 걸 정확히 듣고 답했어요." },
+          { "text": "Chicken? It's on the menu.", "kr": "치킨이요? 메뉴에 있어요.", "correct": false, "trap": "내용어 오청", "explain": "'kitchen(주방)'을 'chicken(치킨)'으로 잘못 들은 답이에요." },
+          { "text": "Yes, room service too.", "kr": "네, 룸서비스도요.", "correct": false, "trap": "프레임 오청", "explain": "'kitchen'을 놓치고 다른 서비스로 답한 오청이에요." }
+        ] },
+        { "role": "A", "text": "Is it too late to order?", "kr": "주문하기엔 너무 늦었나요?" },
+        { "role": "B", "prompt": "B가 할 말로 알맞은 것은?", "choices": [
+          { "text": "No, you still have time.", "kr": "아니요, 아직 시간 있어요.", "correct": true, "trap": "정답", "explain": "주문 가능하냐는 걸 정확히 듣고 답했어요.", "highlight": "order" },
+          { "text": "Older? The building, you mean?", "kr": "오래됐냐고요? 건물이요?", "correct": false, "trap": "내용어 오청", "explain": "'order(주문)'를 'older(더 오래된)'로 잘못 들은 답이에요." },
+          { "text": "Yes, the bill is ready.", "kr": "네, 계산서 준비됐어요.", "correct": false, "trap": "프레임 오청", "explain": "'order'를 놓치고 계산 얘기로 답한 오청이에요." }
+        ] },
+        { "role": "A", "text": "Could I get the bill?", "kr": "계산서 주시겠어요?" },
+        { "role": "B", "prompt": "B가 할 말로 알맞은 것은?", "choices": [
+          { "text": "Of course, one moment.", "kr": "네, 잠시만요.", "correct": true, "trap": "정답", "explain": "계산서를 달라는 걸 정확히 듣고 답했어요." },
+          { "text": "The bell? It's by the door.", "kr": "벨이요? 문 옆에 있어요.", "correct": false, "trap": "내용어 오청", "explain": "'bill(계산서)'을 'bell(벨)'로 잘못 들은 답이에요." },
+          { "text": "Yes, here's the menu.", "kr": "네, 메뉴 여기요.", "correct": false, "trap": "프레임 오청", "explain": "'bill'을 놓치고 다시 주문하려는 말로 들은 오청이에요." }
+        ] },
+        { "role": "A", "text": "Thanks a lot!", "kr": "정말 고마워요!" }
+      ]
+    }
+  ]
+}
