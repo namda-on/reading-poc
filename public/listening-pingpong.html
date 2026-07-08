@@ -36,15 +36,7 @@
   /* 단계 라벨 */
   .stage-label { text-align:center; font-size:13px; font-weight:800; color:#2f6ab0; margin:4px 0 14px; letter-spacing:.02em; }
 
-  /* 1) 어휘 */
-  .vocab { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:22px 20px 40px; gap:18px; }
-  .vocab-card { width:100%; background:#fff; border-radius:20px; padding:34px 20px; text-align:center; box-shadow:0 4px 16px rgba(30,60,110,.14); }
-  .vocab-word { font-size:38px; font-weight:800; color:#233; }
-  .vocab-ko { font-size:18px; color:#5b6b80; margin-top:10px; }
-  .vocab-play { margin-top:20px; border:none; background:#eef4fb; color:#2f6ab0; font-weight:700; border-radius:999px; padding:10px 20px; font-size:14px; cursor:pointer; }
-  .vocab .next-btn { width:100%; }
-
-  /* 2) 표현 배열 */
+  /* 표현 배열 */
   .arrange { flex:1; overflow-y:auto; padding:8px 16px 24px; }
   .ex-focus { }
   .ex-expr { }
@@ -144,7 +136,7 @@
 
   <div class="home" id="home">
     <h1>리스닝 핑퐁</h1>
-    <p class="sub"><b>어휘 → 표현 → 리스닝</b> 순서로, 방금 배운 표현이 실제 대화에서 어떻게 쓰이는지 듣고 골라보세요.</p>
+    <p class="sub"><b>표현 → 리스닝</b> 순서로, 방금 배운 표현이 실제 대화에서 어떻게 쓰이는지 듣고 골라보세요.</p>
     <div class="voice-box">
       <div class="voice-row"><span>🐻 A 음성</span><select id="voiceSelA"></select></div>
       <div class="voice-row"><span>🐰 B 음성</span><select id="voiceSelB"></select></div>
@@ -153,17 +145,8 @@
     <p class="note">🎧 소리를 켜 주세요. 대화는 <b>텍스트 없이 음성만</b> 나옵니다.<br>🖍 배운 표현·어휘가 나온 부분은 <b>듣고 난 뒤</b> 형광펜·밑줄로 짚어드려요.</p>
   </div>
 
-  <div class="vocab hidden" id="vocab">
-    <div class="stage-label">1 · 어휘 배우기</div>
-    <div class="vocab-card">
-      <div class="vocab-word" id="vWord"></div>
-      <div class="vocab-ko" id="vKo"></div>
-    </div>
-    <button class="next-btn" id="vNext">표현 배우러 가기 ▶</button>
-  </div>
-
   <div class="arrange hidden" id="arrange">
-    <div class="stage-label">2 · 표현 배우기</div>
+    <div class="stage-label">1 · 표현 배우기</div>
     <div class="ex-label">뜻에 맞게 영어 단어를 순서대로 배열하세요</div>
     <div class="ex-ko" id="arrKo"></div>
     <div class="ex-answer" id="arrAnswer"></div>
@@ -311,9 +294,9 @@ const wait = ms => new Promise(r=>setTimeout(r,ms));
 
 // ── 화면 ──────────────────────────────────────────────────────────────────
 const el=id=>document.getElementById(id);
-const home=el('home'), vocab=el('vocab'), arrange=el('arrange'), chat=el('chat'), quiz=el('quiz'), done=el('done'), topbar=el('topbar'), script=el('script');
+const home=el('home'), arrange=el('arrange'), chat=el('chat'), quiz=el('quiz'), done=el('done'), topbar=el('topbar'), script=el('script');
 let curExample=null, current=null, lastA='', correctCount=0, learnedSeen=[], runId=0;
-function show(...ids){ [home,vocab,arrange,chat,quiz,done,script,topbar].forEach(n=>n.classList.add('hidden')); ids.forEach(n=>n.classList.remove('hidden')); }
+function show(...ids){ [home,arrange,chat,quiz,done,script,topbar].forEach(n=>n.classList.add('hidden')); ids.forEach(n=>n.classList.remove('hidden')); }
 function noteLearned(x){ if(x && !learnedSeen.some(y=>y.name===x.name)) learnedSeen.push(x); }
 function scrollToBottom(){ requestAnimationFrame(()=>{ chat.scrollTo({top:chat.scrollHeight, behavior:'smooth'}); }); }
 function showProgress(on){ el('progress').style.visibility = on?'visible':'hidden'; }
@@ -323,18 +306,11 @@ function renderHome(){
   show(home); fillVoicePicker();
   const list=el('exList'); list.innerHTML='';
   EXAMPLES.forEach((ex,i)=>{ const b=document.createElement('button'); b.className='ex-card';
-    b.innerHTML=`<div class="t">${ex.expr.name}</div><div class="f">어휘 ${ex.vocab.word} · ${ex.dialogue.title}</div><span class="step">어휘 → 표현 → 리스닝</span>`;
+    b.innerHTML=`<div class="t">${ex.expr.name}</div><div class="f">${ex.dialogue.title}</div><span class="step">표현 → 리스닝</span>`;
     b.onclick=()=>startExample(i); list.appendChild(b); });
 }
 
-// 1) 어휘 ────────────────────────────────────────────────────────────────────
-function startExample(i){ curExample=EXAMPLES[i]; showVocab(); }
-function showVocab(){
-  runId++; stopAudio(); show(topbar, vocab); showProgress(false);
-  el('vWord').textContent=curExample.vocab.word;
-  el('vKo').textContent=curExample.vocab.ko;
-  el('vNext').onclick=()=>showArrange();
-}
+function startExample(i){ curExample=EXAMPLES[i]; showArrange(); }
 
 // 정답 배열 완성 시 짧은 상승 아르페지오(외부 파일 없이 WebAudio로 합성)
 function successChime(){
@@ -460,7 +436,7 @@ function askQuiz(turn, myRun){
             // 방금 (오디오로) 들었던 A 대사를 보여주고, 거기 배운 표현이 있었음을 연결해준다
             lb.innerHTML=`<div class="ln-head">🎧 방금 A가 이렇게 말했어요</div>`+
               `<div class="ln-a">“${boldExpr(co.learned.aLine||'', co.learned.fixed)}”</div>`+
-              `<div class="ln-expr"><span class="k">배운 표현</span><b>${co.learned.name}</b> ${co.learned.note} 가 여기 있었어요</div>`;
+              `<div class="ln-expr"><span class="k">배운 표현</span><b>${co.learned.name}</b> ${co.learned.note}</div>`;
             after.appendChild(lb); }
           const nx=document.createElement('button'); nx.className='next-btn'; nx.textContent='다음 ▶'; nx.onclick=()=>{ if(myRun===runId) resolve(!!o.correct); }; after.appendChild(nx);
         } else { b.classList.toggle('show-why'); }
