@@ -57,6 +57,11 @@
   .learned-box .ln-a .ln-mark { font-weight:800; color:#000; }
   .learned-box .ln-expr { font-size:14px; }
   .learned-box .ln-expr b { font-weight:800; }
+  /* 오답 교정: A 말 다시 듣고 단어 배열 */
+  .rem-box { background:#eef4fb; border:1px solid #d3e0f1; border-radius:12px; padding:12px 13px; margin:8px 0 4px; }
+  .rem-head { font-size:13.5px; font-weight:700; color:#3a567d; margin-bottom:8px; }
+  .rem-replay { margin-bottom:10px; }
+  .rem-box .ex-answer { min-height:44px; }
   /* 표현 표기: 영어(굵게) 위, 뜻(연하게) 아래 — 대시 없이 두 줄로 */
   .expr-en { font-weight:800; }
   .expr-ko { display:block; font-weight:600; font-size:13.5px; opacity:.8; margin-top:3px; }
@@ -329,6 +334,28 @@ function successChime(){
   }catch(e){}
 }
 
+// 재사용 배열 위젯: 주어진 문장을 단어 배열로 맞추게 한다(확인 시 onDone).
+function buildArrange(container, sentence, onDone){
+  const tokens=sentence.trim().split(/\s+/);
+  let bank=shuffle(tokens.map((t,i)=>({id:i,text:t}))), ans=[], checked=false;
+  const ansEl=document.createElement('div'); ansEl.className='ex-answer';
+  const bankEl=document.createElement('div'); bankEl.className='ex-bank';
+  const afterEl=document.createElement('div');
+  container.append(ansEl, bankEl, afterEl);
+  const mk=(t,cls,on)=>{ const b=document.createElement('button'); b.type='button'; b.className=cls; b.textContent=t; b.onclick=on; return b; };
+  function render(){
+    const ok=ans.map(x=>x.text).join(' ')===tokens.join(' ');
+    ansEl.className='ex-answer'+(checked?(ok?' correct':' wrong'):'');
+    ansEl.innerHTML=''; if(!ans.length) ansEl.innerHTML='<span class="ex-ph">단어를 순서대로 탭하세요</span>';
+    ans.forEach(w=> ansEl.appendChild(mk(w.text,'ex-chip inans',()=>{ if(checked)return; ans=ans.filter(x=>x.id!==w.id); bank.push(w); render(); })));
+    bankEl.innerHTML=''; bank.forEach(w=> bankEl.appendChild(mk(w.text,'ex-chip',()=>{ if(checked)return; speak(w.text,'A'); bank=bank.filter(x=>x.id!==w.id); ans.push(w); render(); })));
+    afterEl.innerHTML='';
+    if(!checked){ const c=mk('확인','next-btn',()=>{ checked=true; if(ans.map(x=>x.text).join(' ')===tokens.join(' ')) successChime(); render(); onDone&&onDone(); }); c.disabled=bank.length>0; afterEl.appendChild(c); }
+    else { const r=document.createElement('div'); r.className='ex-result'; r.style.color=ok?'#2e9e57':'#d1584e'; r.textContent=ok?'정답이에요! 🎉':`정답: ${tokens.join(' ')}`; afterEl.appendChild(r); }
+  }
+  render();
+}
+
 // 2) 표현 배열 ────────────────────────────────────────────────────────────────
 function showArrange(){
   runId++; stopAudio(); show(topbar, arrange); showProgress(false);
@@ -432,13 +459,28 @@ function askQuiz(turn, myRun){
           const cb=Array.from(box.children).find(c=>c.querySelector('.opt-text').textContent===correctOpt(turn).text);
           cb.classList.add('correct','show-why'); b.classList.add('show-why');
           const after=el('quizAfter'); const co=correctOpt(turn);
-          if(co.learned){ const lb=document.createElement('div'); lb.className='learned-box';
-            // 방금 (오디오로) 들었던 A 대사를 보여주고, 거기 배운 표현이 있었음을 연결해준다
-            lb.innerHTML=`<div class="ln-head">🎧 방금 A가 이렇게 말했어요</div>`+
-              `<div class="ln-a">“${boldExpr(co.learned.aLine||'', co.learned.fixed)}”</div>`+
-              `<div class="ln-expr"><span class="k">배운 표현</span><b>${co.learned.name}</b> ${co.learned.note}</div>`;
-            after.appendChild(lb); }
-          const nx=document.createElement('button'); nx.className='next-btn'; nx.textContent='다음 ▶'; nx.onclick=()=>{ if(myRun===runId) resolve(!!o.correct); }; after.appendChild(nx);
+          const showLearnedAndNext=()=>{
+            if(co.learned){ const lb=document.createElement('div'); lb.className='learned-box';
+              // 방금 (오디오로) 들었던 A 대사를 보여주고, 거기 배운 표현이 있었음을 연결해준다
+              lb.innerHTML=`<div class="ln-head">🎧 방금 A가 이렇게 말했어요</div>`+
+                `<div class="ln-a">“${boldExpr(co.learned.aLine||'', co.learned.fixed)}”</div>`+
+                `<div class="ln-expr"><span class="k">배운 표현</span><b>${co.learned.name}</b> ${co.learned.note}</div>`;
+              after.appendChild(lb); }
+            const nx=document.createElement('button'); nx.className='next-btn'; nx.textContent='다음 ▶'; nx.onclick=()=>{ if(myRun===runId) resolve(!!o.correct); }; after.appendChild(nx);
+          };
+          if(o.correct){ showLearnedAndNext(); }
+          else {
+            // 오답: A가 한 말을 다시 듣고 그 문장을 단어 배열로 재구성하는 교정 단계
+            const rem=document.createElement('div'); rem.className='rem-box';
+            const head=document.createElement('div'); head.className='rem-head'; head.textContent='다시 듣고, A가 한 말을 순서대로 맞춰보세요';
+            const replay=document.createElement('button'); replay.className='replay rem-replay'; replay.textContent='🔊 다시 듣기'; replay.onclick=()=>speak(lastA,'A');
+            const arrWrap=document.createElement('div');
+            rem.append(head, replay, arrWrap); after.appendChild(rem);
+            rem.scrollIntoView({behavior:'smooth', block:'nearest'});
+            let advanced=false;
+            buildArrange(arrWrap, lastA, ()=>{ if(advanced) return; advanced=true; showLearnedAndNext(); });
+            speak(lastA,'A'); // 교정 진입 시 A 말 자동 재생
+          }
         } else { b.classList.toggle('show-why'); }
       };
       box.appendChild(b);
