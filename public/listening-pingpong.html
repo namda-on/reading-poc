@@ -66,7 +66,16 @@
   /* 오답 교정: A 말 다시 듣고 단어 배열 */
   .rem-box { background:#eef4fb; border:1px solid #d3e0f1; border-radius:12px; padding:12px 13px; margin:8px 0 4px; }
   .rem-head { font-size:13.5px; font-weight:700; color:#3a567d; margin-bottom:8px; }
-  .rem-replay { margin-bottom:10px; }
+  .rem-player { margin-bottom:12px; }
+  /* 음성 플레이어(스피커 + 파동) */
+  .vplayer { display:inline-flex; align-items:center; gap:9px; background:#eaf1fb; border:none; border-radius:999px; padding:8px 16px 8px 13px; cursor:pointer; }
+  .vplayer:active { transform:scale(.98); }
+  .vp-icon { display:inline-flex; align-items:center; color:#4b83d6; }
+  .vp-wave { display:inline-flex; align-items:center; gap:3px; height:24px; }
+  .vp-wave i { width:3px; border-radius:2px; background:#9db8dd; transform-origin:center; }
+  .vplayer.playing .vp-icon { color:#2f6ab0; }
+  .vplayer.playing .vp-wave i { background:#4b83d6; animation:vpwave .85s ease-in-out infinite; }
+  @keyframes vpwave { 0%,100%{ transform:scaleY(.45); } 50%{ transform:scaleY(1); } }
   .rem-ko { font-size:16px; font-weight:700; color:#2f3e52; margin:2px 0 10px; }
   .rem-ko-done { text-align:center; margin:4px 0 2px; }
   .rem-box .ex-answer { min-height:44px; }
@@ -359,6 +368,37 @@ function successChime(){
     setTimeout(()=>{ try{ ctx.close(); }catch(e){} }, 800);
   }catch(e){}
 }
+// 부드러운 두 음(하강) — 오답이어도 부정적이지 않게
+function wrongChime(){
+  try{
+    const AC=window.AudioContext||window.webkitAudioContext; if(!AC) return;
+    const ctx=new AC(); const now=ctx.currentTime;
+    [[392,0],[330,0.14]].forEach(([f,t])=>{
+      const o=ctx.createOscillator(), g=ctx.createGain();
+      o.type='sine'; o.frequency.value=f; o.connect(g); g.connect(ctx.destination);
+      g.gain.setValueAtTime(0.0001, now+t);
+      g.gain.exponentialRampToValueAtTime(0.14, now+t+0.03);
+      g.gain.exponentialRampToValueAtTime(0.0001, now+t+0.22);
+      o.start(now+t); o.stop(now+t+0.25);
+    });
+    setTimeout(()=>{ try{ ctx.close(); }catch(e){} }, 700);
+  }catch(e){}
+}
+
+// 첨부 이미지식 음성 플레이어(스피커 + 파동). 재생 중엔 파동 애니메이션, 눌러서 정지/재생 토글.
+const SPEAKER_SVG='<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M4 9v6h4l5 4V5L8 9H4z"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M16 9a4 4 0 010 6"/></svg>';
+function makeVoicePlayer(sentence, who){
+  const heights=[3,4,6,10,15,21,11,17,23,13,19,8,5,4,3];
+  const el=document.createElement('button'); el.type='button'; el.className='vplayer'; el.setAttribute('aria-label','음성 재생/정지');
+  el.innerHTML=`<span class="vp-icon">${SPEAKER_SVG}</span><span class="vp-wave">`+
+    heights.map((h,i)=>`<i style="height:${h}px;animation-delay:${(i*0.06).toFixed(2)}s"></i>`).join('')+`</span>`;
+  let playing=false, gen=0;
+  const setP=p=>{ playing=p; el.classList.toggle('playing',p); };
+  async function play(){ const t=++gen; stopAudio(); setP(true); await speak(sentence, who); if(t===gen) setP(false); }
+  el.onclick=()=>{ if(playing){ gen++; stopAudio(); setP(false); } else play(); };
+  el.autoPlay=play;
+  return el;
+}
 
 // 재사용 배열 위젯: 주어진 문장을 단어 배열로 맞추게 한다(뜻 ko 표시, 확인 시 onDone).
 function buildArrange(container, sentence, ko, onDone){
@@ -495,18 +535,19 @@ function askQuiz(turn, myRun){
               after.appendChild(lb); }
             const nx=document.createElement('button'); nx.className='next-btn'; nx.textContent='다음 ▶'; nx.onclick=()=>{ if(myRun===runId) resolve(!!o.correct); }; after.appendChild(nx);
           };
-          if(o.correct){ showLearnedAndNext(); }
+          if(o.correct){ successChime(); showLearnedAndNext(); }
           else {
+            wrongChime(); // 부드러운 오답음
             // 오답: A가 한 말을 다시 듣고 그 문장을 단어 배열로 재구성하는 교정 단계
             const rem=document.createElement('div'); rem.className='rem-box';
             const head=document.createElement('div'); head.className='rem-head'; head.textContent='다시 듣고, A가 한 말을 순서대로 맞춰보세요';
-            const replay=document.createElement('button'); replay.className='replay rem-replay'; replay.textContent='🔊 다시 듣기'; replay.onclick=()=>speak(lastA,'A');
+            const player=makeVoicePlayer(lastA,'A'); player.classList.add('rem-player');
             const arrWrap=document.createElement('div');
-            rem.append(head, replay, arrWrap); after.appendChild(rem);
+            rem.append(head, player, arrWrap); after.appendChild(rem);
             rem.scrollIntoView({behavior:'smooth', block:'nearest'});
             let advanced=false;
             buildArrange(arrWrap, lastA, lastAKr, ()=>{ if(advanced) return; advanced=true; showLearnedAndNext(); });
-            speak(lastA,'A'); // 교정 진입 시 A 말 자동 재생
+            setTimeout(()=>{ if(myRun===runId) player.autoPlay(); }, 560); // 오답음 뒤 A 자동재생(파동)
           }
         } else { b.classList.toggle('show-why'); }
       };
