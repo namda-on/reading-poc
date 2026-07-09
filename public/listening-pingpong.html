@@ -26,6 +26,7 @@
   .voice-row { display:flex; align-items:center; gap:8px; font-size:13px; color:#3a567d; background:#ffffff88; border-radius:12px; padding:8px 12px; }
   .voice-row span { min-width:62px; font-weight:700; }
   .voice-row select { flex:1; padding:8px; border-radius:10px; border:1px solid #cddcf1; background:#fff; font-size:13px; }
+  .voice-hint { font-size:12px; color:#3a567d; opacity:.85; margin:-2px 2px 6px; }
   .grp-head { display:flex; justify-content:space-between; align-items:baseline; margin:20px 4px 8px; }
   .grp-head span:first-child { font-size:15px; font-weight:800; color:#25406a; }
   .grp-head .grp-count { font-size:12px; font-weight:700; color:#5b7c93; }
@@ -169,6 +170,7 @@
         <option value="1.4">아주 빠르게</option>
       </select></div>
     </div>
+    <p class="voice-hint" id="voiceHint"></p>
     <div id="exList"></div>
   </div>
 
@@ -295,13 +297,21 @@ function chooseVoices(){
 }
 function fillVoicePicker(){
   const en=voices.filter(v=>/en(-|_)/i.test(v.lang));
+  const online=en.filter(v=>!v.localService), local=en.filter(v=>v.localService);
+  const opts=list=>list.map(v=>`<option value="${v.name}">${v.name}</option>`).join('');
+  let html='';
+  if(online.length) html+=`<optgroup label="🌐 온라인 음성 (더 자연스러움)">${opts(online)}</optgroup>`;
+  if(local.length)  html+=`<optgroup label="기기 음성">${opts(local)}</optgroup>`;
   [['voiceSelA','A'],['voiceSelB','B']].forEach(([id,who])=>{
     const sel=document.getElementById(id); if(!sel) return;
     const chosen = who==='A'?chosenA:chosenB;
-    sel.innerHTML=en.map(v=>`<option value="${v.name}">${v.name}${v.localService?'':' ★온라인'}</option>`).join('');
+    sel.innerHTML=html;
     if(chosen) sel.value=chosen;
     sel.onchange=()=>{ if(who==='A') chosenA=sel.value; else chosenB=sel.value; };
   });
+  // 온라인 음성 유무 안내(브라우저에 없으면 Chrome 권장)
+  const hint=document.getElementById('voiceHint');
+  if(hint) hint.textContent = online.length ? `🌐 온라인 음성 ${online.length}개 사용 가능 — 더 자연스러워요` : '이 브라우저엔 온라인 음성이 없어요. Chrome에서 열면 더 자연스러운 음성을 쓸 수 있어요.';
   const rs=document.getElementById('rateSel');
   if(rs){ rs.value=String(speechRate); rs.onchange=()=>{ speechRate=Number(rs.value)||1; try{ localStorage.setItem('lp:rate', rs.value); }catch(e){} }; }
 }
