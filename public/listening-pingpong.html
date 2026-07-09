@@ -162,6 +162,12 @@
     <div class="voice-box">
       <div class="voice-row"><span>🐻 A 음성</span><select id="voiceSelA"></select></div>
       <div class="voice-row"><span>🐰 B 음성</span><select id="voiceSelB"></select></div>
+      <div class="voice-row"><span>⏩ 속도</span><select id="rateSel">
+        <option value="0.85">느리게</option>
+        <option value="1">보통</option>
+        <option value="1.2">빠르게 (원어민 속도)</option>
+        <option value="1.4">아주 빠르게</option>
+      </select></div>
     </div>
     <div id="exList"></div>
   </div>
@@ -268,6 +274,8 @@ const NOVELTY=/bad news|good news|bahh|bells|boing|bubbles|cellos|jester|organ|s
 const FEMALE=/samantha|karen|moira|tessa|catherine|martha|kathy|nicky|shelley|sandy|flo|grandma|victoria|fiona|allison|ava|susan|zoe|serena|female/i;
 const MALE=/aaron|daniel|fred|rishi|arthur|albert|gordon|ralph|reed|eddy|rocko|grandpa|junior|alex|thomas|oliver|male/i;
 let voices=[], vA=null, vB=null, chosenA='', chosenB='';
+// 재생 속도(원어민스럽게 빠르게 등). 브라우저 TTS의 rate로 조절, localStorage 저장.
+let speechRate = (()=>{ try{ return Number(localStorage.getItem('lp:rate'))||1; }catch(e){ return 1; } })();
 function pickAuto(){
   const en = voices.filter(v=>/en(-|_)/i.test(v.lang) && !NOVELTY.test(v.name));
   if(!en.length){ vA=vB=null; return; }
@@ -294,6 +302,8 @@ function fillVoicePicker(){
     if(chosen) sel.value=chosen;
     sel.onchange=()=>{ if(who==='A') chosenA=sel.value; else chosenB=sel.value; };
   });
+  const rs=document.getElementById('rateSel');
+  if(rs){ rs.value=String(speechRate); rs.onchange=()=>{ speechRate=Number(rs.value)||1; try{ localStorage.setItem('lp:rate', rs.value); }catch(e){} }; }
 }
 if(window.speechSynthesis){ chooseVoices(); speechSynthesis.onvoiceschanged=chooseVoices; }
 function speak(text, who){
@@ -301,7 +311,7 @@ function speak(text, who){
     if(!window.speechSynthesis) return setTimeout(res,700);
     if(!voices.length) chooseVoices();
     try{ speechSynthesis.cancel(); }catch(e){}
-    const u=new SpeechSynthesisUtterance(text); u.lang='en-US'; u.rate=0.9;
+    const u=new SpeechSynthesisUtterance(text); u.lang='en-US'; u.rate=speechRate;
     const name = who==='B'?chosenB:chosenA;
     const v = name ? voices.find(x=>x.name===name) : (who==='B'?vB:vA);
     if(v) u.voice=v;
