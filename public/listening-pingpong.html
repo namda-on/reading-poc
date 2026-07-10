@@ -106,6 +106,24 @@
   .bubble.revealed { font-size:16px; line-height:1.5; color:#2f3e52; animation:reveal .3s ease; }
   .msg.b .bubble.revealed { background:#4b83d6; color:#fff; }
   @keyframes reveal { from{opacity:.4;} to{opacity:1;} }
+  /* 답한 뒤, A 말풍선을 탭하면 영어를 펼쳐 본다(펼침 전엔 '영어 보기' 안내) */
+  .hidden-bubble.peekable { opacity:1; cursor:pointer; }
+  .peek-hint { font-size:12.5px; font-weight:700; color:#7d95b8; white-space:nowrap; }
+  .hidden-bubble.peeked { display:block; text-align:left; opacity:1; font-size:16px; line-height:1.5; color:#2f3e52; cursor:pointer; animation:reveal .3s ease; }
+  /* 고정(읽기) 노출: 대화 화면 위(중앙)에 큰 단어를 하나씩 제자리 교체(RSVP).
+     화면을 통째로 바꾸지 않고 대화 영역만 덮어 살짝 흐리게(blur) — 상단 진행바는 그대로 보여 '같은 화면' 느낌 유지, 부드럽게 페이드 인/아웃 */
+  .rsvp-center { position:fixed; z-index:40; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; padding:24px; text-align:center;
+    background:rgba(169,204,242,.62); -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); opacity:0; transition:opacity .25s ease; }
+  .rsvp-center.show { opacity:1; }
+  .rsvp-center .who { display:flex; flex-direction:column; align-items:center; gap:5px; font-size:13px; font-weight:800; color:#3a567d; }
+  .rsvp-center .who .av { width:44px; height:44px; border-radius:50%; background:#fff; display:flex; align-items:center; justify-content:center; font-size:24px; box-shadow:0 2px 6px rgba(30,60,110,.15); }
+  .rsvp-center .word { font-size:38px; font-weight:800; color:#25406a; line-height:1.25; min-height:1.25em; }
+  .rsvp-word { display:inline-block; animation:rsvpPop .16s ease; }
+  @keyframes rsvpPop { from{opacity:.15; transform:translateY(4px);} to{opacity:1; transform:none;} }
+  /* 첫 단어 직전 시선 고정용 준비 점(짧게 깜빡) — 무방비로 첫 단어를 놓치지 않도록 */
+  .rsvp-dot { display:inline-block; width:16px; height:16px; border-radius:50%; background:#4b83d6; animation:rsvpDot .5s ease-in-out infinite; }
+  @keyframes rsvpDot { 0%,100%{ transform:scale(.55); opacity:.35; } 50%{ transform:scale(1); opacity:1; } }
+  .rsvp-play span:last-child { font-weight:800; color:#3a6bd0; font-size:14px; }
 
   .quiz { flex-shrink:0; max-height:62vh; overflow-y:auto; background:#eef4fb; border-top:1px solid #d3e0f1; padding:14px 14px 20px; }
   .quiz-q { display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; }
@@ -159,7 +177,7 @@
 
   <div class="home" id="home">
     <h1>리스닝 핑퐁</h1>
-    <p class="sub"><b>표현 → 리스닝</b> 순서로, 방금 배운 표현이 실제 대화에서 어떻게 쓰이는지 듣고 골라보세요.</p>
+    <p class="sub"><b>표현 → 리스닝</b> 순서로, 내가 배운 표현이 실제 대화에서 어떻게 쓰이는지 듣고 골라보세요.</p>
     <div class="voice-box">
       <div class="voice-row"><span>🐻 A 음성</span><select id="voiceSelA"></select></div>
       <div class="voice-row"><span>🐰 B 음성</span><select id="voiceSelB"></select></div>
@@ -168,6 +186,10 @@
         <option value="1">보통</option>
         <option value="1.2">빠르게 (원어민 속도)</option>
         <option value="1.4">아주 빠르게</option>
+      </select></div>
+      <div class="voice-row"><span>👀 A 노출</span><select id="exposeSel">
+        <option value="listen">듣기 (음성)</option>
+        <option value="fixed">고정 · 읽기 (화면에 흐름)</option>
       </select></div>
     </div>
     <p class="voice-hint" id="voiceHint"></p>
@@ -227,7 +249,7 @@ function buildExample(ex){
   if (exprEn.includes('~') && trigA) src = { en:trigA.text, ko:trigA.kr||'' };
   const expr = { name:exprEn, note:exprKr, arrange:{ en:src.en, ko:src.ko } };
 
-  // '방금 배운 표현' 박스는 트리거 대사(2번째 A) 바로 다음 문제에만 붙인다.
+  // '내가 배운 표현' 박스는 트리거 대사(2번째 A) 바로 다음 문제에만 붙인다.
   let prevA = null;
   const turns = ex.dialogue.map(t=>{
     if (t.role==='A'){ prevA = t; return { s:'A', text:t.text, kr:t.kr }; }
@@ -278,6 +300,8 @@ const MALE=/aaron|daniel|fred|rishi|arthur|albert|gordon|ralph|reed|eddy|rocko|g
 let voices=[], vA=null, vB=null, chosenA='', chosenB='';
 // 재생 속도(원어민스럽게 빠르게 등). 브라우저 TTS의 rate로 조절, localStorage 저장.
 let speechRate = (()=>{ try{ return Number(localStorage.getItem('lp:rate'))||1; }catch(e){ return 1; } })();
+// A 노출 방식: 'listen'(음성) | 'fixed'(음성 없이 단어를 제자리 교체하며 읽기, RSVP). 고정 모드에선 속도가 RSVP 속도를 겸한다.
+let exposeMode = (()=>{ try{ return localStorage.getItem('lp:expose')||'listen'; }catch(e){ return 'listen'; } })();
 function pickAuto(){
   const en = voices.filter(v=>/en(-|_)/i.test(v.lang) && !NOVELTY.test(v.name));
   if(!en.length){ vA=vB=null; return; }
@@ -314,6 +338,8 @@ function fillVoicePicker(){
   if(hint) hint.textContent = online.length ? `🌐 온라인 음성 ${online.length}개 사용 가능 — 더 자연스러워요` : '이 브라우저엔 온라인 음성이 없어요. Chrome에서 열면 더 자연스러운 음성을 쓸 수 있어요.';
   const rs=document.getElementById('rateSel');
   if(rs){ rs.value=String(speechRate); rs.onchange=()=>{ speechRate=Number(rs.value)||1; try{ localStorage.setItem('lp:rate', rs.value); }catch(e){} }; }
+  const es=document.getElementById('exposeSel');
+  if(es){ es.value=exposeMode; es.onchange=()=>{ exposeMode=es.value||'listen'; try{ localStorage.setItem('lp:expose', exposeMode); }catch(e){} }; }
 }
 if(window.speechSynthesis){ chooseVoices(); speechSynthesis.onvoiceschanged=chooseVoices; }
 function speak(text, who){
@@ -479,13 +505,70 @@ function addBubble(who){
 }
 // 다 들은 뒤 말풍선을 텍스트로 열고, 배운 표현·어휘를 형광펜·밑줄로 강조.
 function revealBubble(bub, text, hl){ bub.classList.remove('hidden-bubble','playing'); bub.classList.add('revealed'); bub.innerHTML=markup(text, hl); }
+
+// A 말풍선에 '탭하면 영어 펼치기'를 붙인다. 잠금(peekable 아님) 상태에선 반응 없음.
+function setupPeek(bub, text){
+  bub.classList.add('abub'); bub.dataset.en=text;
+  bub.addEventListener('click', ()=>{
+    if(!bub.classList.contains('peekable')) return;
+    if(bub.classList.contains('peeked')){ bub.classList.remove('peeked'); bub.innerHTML='<span class="peek-hint">영어 보기</span>'; }
+    else { bub.classList.add('peeked'); bub.innerHTML=escapeHtml(bub.dataset.en); }
+  });
+}
+// 답한 뒤 A 말풍선 열람 허용('영어 보기' 안내 노출)
+function unlockA(bub){
+  if(!bub || bub.classList.contains('peekable')) return;
+  bub.classList.remove('playing','rsvp');
+  bub.classList.add('peekable');
+  if(!bub.classList.contains('peeked')) bub.innerHTML='<span class="peek-hint">영어 보기</span>';
+}
+// 단어의 대략적 음절 수(모음 그룹 세기) — RSVP dwell 계산용
+function syllOf(w){ return (w.match(/[aeiouy]+/gi)||[]).length||1; }
+function rsvpDwell(w){ return Math.max(160, Math.round(syllOf(w)*280/speechRate)); }
+// 고정(읽기): 대화 영역 위에 겹쳐 단어를 하나씩 제자리 교체(RSVP). 시선을 한 곳에 두고 읽는다.
+// 화면 전체를 바꾸지 않고 채팅 영역(chat)에만 겹쳐 흐리게 → 되돌아올 때 끊김 없이 페이드로 사라진다.
+const RSVP_READY_MS=800; // 각 A 대사 시작 직전 준비 점을 보여주는 시간(3·2·1보다 짧게, 무방비 방지)
+let rsvpToken=0;
+async function rsvpReveal(text, myRun){
+  const token=++rsvpToken;
+  document.querySelectorAll('.rsvp-center').forEach(n=>n.remove());
+  const ov=document.createElement('div'); ov.className='rsvp-center';
+  ov.innerHTML='<div class="who"><div class="av">🐻</div>A</div><div class="word"></div>';
+  const r=chat.getBoundingClientRect(); // 채팅 영역에만 겹치도록 위치·크기 지정(상단바/퀴즈는 안 덮음)
+  ov.style.top=r.top+'px'; ov.style.left=r.left+'px'; ov.style.width=r.width+'px'; ov.style.height=r.height+'px';
+  const wordEl=ov.querySelector('.word');
+  (document.querySelector('.app')||document.body).appendChild(ov);
+  requestAnimationFrame(()=>ov.classList.add('show')); // 부드럽게 페이드인
+  const dead=()=> myRun!==runId || token!==rsvpToken;
+  // 준비 신호: 첫 단어가 뜰 자리에 점을 잠깐 깜빡여 시선을 고정시킨다(첫 단어 놓침 방지)
+  wordEl.innerHTML='<span class="rsvp-dot"></span>';
+  await wait(RSVP_READY_MS);
+  if(dead()){ ov.remove(); return false; }
+  for(const w of text.split(/\s+/).filter(Boolean)){
+    if(dead()){ ov.remove(); return false; }
+    wordEl.innerHTML='<span class="rsvp-word">'+escapeHtml(w)+'</span>';
+    await wait(rsvpDwell(w));
+  }
+  if(dead()){ ov.remove(); return false; }
+  await wait(240);
+  if(token===rsvpToken){ ov.classList.remove('show'); await wait(260); if(ov.parentNode&&token===rsvpToken) ov.remove(); } // 페이드아웃 후 제거
+  return myRun===runId;
+}
+// 오답 교정용 '다시 보기' 버튼(음성 플레이어의 고정 모드 짝) — 눌러서 중앙 RSVP 재생
+function makeRsvpPlayer(sentence){
+  const el=document.createElement('button'); el.type='button'; el.className='vplayer rsvp-play'; el.setAttribute('aria-label','다시 보기');
+  el.innerHTML='<span class="vp-icon">👀</span><span>다시 보기</span>';
+  el.onclick=()=>rsvpReveal(sentence, runId);
+  return el;
+}
 function correctOpt(turn){ return turn.options.find(o=>o.correct); }
 function setProgress(n){ const t=current.turns.filter(x=>x.quiz).length; el('barCount').textContent=`${n}/${t}`; el('barFill').style.width=`${Math.round(n/t*100)}%`; }
 
 // 리스닝 시작 전 마음의 준비(카운트다운). 음성이 갑자기 나오지 않도록.
 async function readyGate(myRun){
   const g=document.createElement('div'); g.className='ready-gate';
-  g.innerHTML='<div class="ready-msg">🎧 잘 듣고 답을 골라보세요</div><div class="ready-num"></div>';
+  const msg = exposeMode==='fixed' ? '👀 잘 보고 답을 골라보세요' : '🎧 잘 듣고 답을 골라보세요';
+  g.innerHTML=`<div class="ready-msg">${msg}</div><div class="ready-num"></div>`;
   chat.appendChild(g);
   const num=g.querySelector('.ready-num');
   for(const n of ['3','2','1']){
@@ -501,15 +584,24 @@ async function startDialogue(dialogue){
   const myRun=++runId; stopAudio();
   current=dialogue; correctCount=0; learnedSeen=[]; chat.innerHTML=''; show(topbar,chat); showProgress(true); setProgress(0);
   let quizDone=0;
+  el('replayBtn').textContent = exposeMode==='fixed' ? '👀 다시 보기' : '🔊 다시 듣기';
   if(!await readyGate(myRun)) return;
-  for(const turn of dialogue.turns){
+  for(let ti=0; ti<dialogue.turns.length; ti++){
+    const turn=dialogue.turns[ti];
     if(myRun!==runId) return;
     if(!turn.quiz){
-      const bub=addBubble(turn.s); if(turn.s==='A'){ lastA=turn.text; lastAKr=turn.kr||''; }
-      bub.classList.add('playing'); await speak(turn.text, turn.s);
-      if(myRun!==runId) return; bub.classList.remove('playing');
+      const bub=addBubble(turn.s);
+      if(turn.s==='A'){ lastA=turn.text; lastAKr=turn.kr||''; setupPeek(bub, turn.text); }
+      if(turn.s==='A' && exposeMode==='fixed'){
+        if(!await rsvpReveal(turn.text, myRun)) return;
+      } else {
+        bub.classList.add('playing'); await speak(turn.text, turn.s);
+        if(myRun!==runId) return; bub.classList.remove('playing');
+      }
       if(turn.hl){ if(turn.learned) noteLearned(turn.learned); revealBubble(bub, turn.text, turn.hl); scrollToBottom(); await wait(750); }
       else await wait(250);
+      // 뒤에 퀴즈가 없는 A 대사(마지막 인사 등)는 가릴 이유가 없으니 바로 열람 허용
+      if(turn.s==='A' && !(dialogue.turns[ti+1] && dialogue.turns[ti+1].quiz)) unlockA(bub);
     } else {
       show(topbar,chat,quiz); scrollToBottom();
       const ok=await askQuiz(turn, myRun); if(myRun!==runId) return;
@@ -537,6 +629,8 @@ function askQuiz(turn, myRun){
       b.onclick=()=>{
         if(!answered){
           answered=true;
+          // 답한 뒤부터 A 말풍선 탭 열람 허용(그 전엔 잠금 — 리스닝/읽기 훈련 유지)
+          chat.querySelectorAll('.abub:not(.peekable)').forEach(unlockA);
           // 답변 후 각 선택지의 한국어 뜻과 해설을 함께 노출
           Array.from(box.children).forEach(c=>{ const opt=opts.find(x=>x.text===c.querySelector('.opt-text').textContent);
             if(opt.kr) c.querySelector('.opt-kr').textContent=opt.kr;
@@ -547,26 +641,29 @@ function askQuiz(turn, myRun){
           const after=el('quizAfter'); const co=correctOpt(turn);
           const showLearnedAndNext=()=>{
             if(co.learned){ const lb=document.createElement('div'); lb.className='learned-box';
-              // 방금 (오디오로) 들었던 A 대사를 보여주고, 거기 배운 표현이 있었음을 연결해준다
-              lb.innerHTML=`<div class="ln-head">🎧 방금 A가 이렇게 말했어요</div>`+
+              // 방금 (오디오/화면으로) 접한 A 대사를 보여주고, 거기 배운 표현이 있었음을 연결해준다
+              lb.innerHTML=`<div class="ln-head">${exposeMode==='fixed'?'👀':'🎧'} 방금 A가 이렇게 말했어요</div>`+
                 `<div class="ln-a">“${hlExpr(co.learned.aLine||'', co.learned.fixed)}”</div>`+
-                `<div class="ln-expr"><span class="k">방금 배운 표현</span><b>${co.learned.name}</b> ${co.learned.note}</div>`;
+                `<div class="ln-expr"><span class="k">내가 배운 표현</span><b>${co.learned.name}</b> ${co.learned.note}</div>`;
               after.appendChild(lb); }
             const nx=document.createElement('button'); nx.className='next-btn'; nx.textContent='다음 ▶'; nx.onclick=()=>{ if(myRun===runId) resolve(!!o.correct); }; after.appendChild(nx);
           };
           if(o.correct){ successChime(); showLearnedAndNext(); }
           else {
             wrongChime(); // 부드러운 오답음
-            // 오답: A가 한 말을 다시 듣고 그 문장을 단어 배열로 재구성하는 교정 단계
+            // 오답: A가 한 말을 다시 접하고(듣기/보기) 그 문장을 단어 배열로 재구성하는 교정 단계
+            const fixed = exposeMode==='fixed';
             const rem=document.createElement('div'); rem.className='rem-box';
-            const head=document.createElement('div'); head.className='rem-head'; head.textContent='다시 듣고, A가 한 말을 순서대로 맞춰보세요';
-            const player=makeVoicePlayer(lastA,'A'); player.classList.add('rem-player');
+            const head=document.createElement('div'); head.className='rem-head';
+            head.textContent = fixed ? '다시 보고, A가 한 말을 순서대로 맞춰보세요' : '다시 듣고, A가 한 말을 순서대로 맞춰보세요';
+            const player = fixed ? makeRsvpPlayer(lastA) : makeVoicePlayer(lastA,'A'); player.classList.add('rem-player');
             const arrWrap=document.createElement('div');
             rem.append(head, player, arrWrap); after.appendChild(rem);
             rem.scrollIntoView({behavior:'smooth', block:'nearest'});
             let advanced=false;
             buildArrange(arrWrap, lastA, lastAKr, ()=>{ if(advanced) return; advanced=true; showLearnedAndNext(); });
-            setTimeout(()=>{ if(myRun===runId) player.autoPlay(); }, 560); // 오답음 뒤 A 자동재생(파동)
+            // 듣기: 오답음 뒤 A 음성을 부드럽게 자동 재생 / 고정: 갑자기 뜨지 않도록 '다시 보기'를 눌러야 노출
+            if(!fixed) setTimeout(()=>{ if(myRun===runId) player.autoPlay(); }, 560);
           }
         } else { b.classList.toggle('show-why'); }
       };
@@ -608,7 +705,11 @@ el('doneList').onclick=leave;
 el('doneRetry').onclick=()=>startDialogue(curExample.dialogue);
 el('doneScript').onclick=showScript;
 el('scriptBack').onclick=showDone;
-el('replayBtn').onclick=()=>{ if(lastA) speak(lastA,'A'); };
+el('replayBtn').onclick=()=>{
+  if(!lastA) return;
+  if(exposeMode==='fixed') rsvpReveal(lastA, runId);
+  else speak(lastA,'A');
+};
 window.addEventListener('pagehide', stopAudio);
 loadData();
 </script>
