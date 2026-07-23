@@ -34,9 +34,14 @@
                 "en": "Excuse me? Where's gate 7?",
                 "kr": "실례합니다. 7번 게이트가 어디인가요?",
                 "trigger": "gate",
-                "title_en": "Where's ~?",
-                "title_kr": "~은 어디인가요?",
-                "category": "DTB"
+                "pattern_en": "Where's ~?",
+                "pattern_kr": "~은 어디인가요?",
+                "category": "DTB",
+                "siblings": [
+                  "restroom",
+                  "elevator",
+                  "lobby"
+                ]
               }
             },
             {
@@ -58,9 +63,14 @@
                 "en": "Excuse me? Where's the nearest restroom?",
                 "kr": "실례합니다. 가장 가까운 화장실이 어디인가요?",
                 "trigger": "restroom",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DTB"
+                "pattern_en": "Where's ~?",
+                "pattern_kr": "~은 어디인가요?",
+                "category": "DTB",
+                "siblings": [
+                  "gate",
+                  "elevator",
+                  "lobby"
+                ]
               }
             },
             {
@@ -81,9 +91,14 @@
                 "en": "Excuse me? Where's the elevator?",
                 "kr": "실례합니다. 엘리베이터가 어디 있나요?",
                 "trigger": "elevator",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DTB"
+                "pattern_en": "Where's ~?",
+                "pattern_kr": "~은 어디인가요?",
+                "category": "DTB",
+                "siblings": [
+                  "gate",
+                  "restroom",
+                  "lobby"
+                ]
               }
             },
             {
@@ -105,9 +120,14 @@
                 "en": "Excuse me? Where's the lobby?",
                 "kr": "실례합니다. 로비가 어디인가요?",
                 "trigger": "lobby",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DTB"
+                "pattern_en": "Where's ~?",
+                "pattern_kr": "~은 어디인가요?",
+                "category": "DTB",
+                "siblings": [
+                  "gate",
+                  "restroom",
+                  "elevator"
+                ]
               }
             },
             {
@@ -128,9 +148,14 @@
                 "en": "Excuse me? Where's the gym?",
                 "kr": "실례합니다. 헬스장이 어디인가요?",
                 "trigger": "gym",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DTB"
+                "pattern_en": "Where's ~?",
+                "pattern_kr": "~은 어디인가요?",
+                "category": "DTB",
+                "siblings": [
+                  "gate",
+                  "restroom",
+                  "elevator"
+                ]
               }
             }
           ]
@@ -158,9 +183,14 @@
                 "en": "Yes, can I have a pillow?",
                 "kr": "네, 베개 하나 주실 수 있나요?",
                 "trigger": "pillow",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DT"
+                "pattern_en": "Can I have a/an ~?",
+                "pattern_kr": "~를 주실 수 있나요?",
+                "category": "DT",
+                "siblings": [
+                  "pen",
+                  "glass",
+                  "schedule"
+                ]
               }
             },
             {
@@ -181,9 +211,14 @@
                 "en": "Can I have a pen?",
                 "kr": "펜 하나 받을 수 있을까요?",
                 "trigger": "pen",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DT"
+                "pattern_en": "Can I have a/an ~?",
+                "pattern_kr": "~를 주실 수 있나요?",
+                "category": "DT",
+                "siblings": [
+                  "pillow",
+                  "glass",
+                  "schedule"
+                ]
               }
             },
             {
@@ -204,9 +239,14 @@
                 "en": "Can I have a glass of water?",
                 "kr": "물 한 잔 주시겠어요?",
                 "trigger": "glass",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DT"
+                "pattern_en": "Can I have a/an ~?",
+                "pattern_kr": "~를 주실 수 있나요?",
+                "category": "DT",
+                "siblings": [
+                  "pillow",
+                  "pen",
+                  "schedule"
+                ]
               }
             },
             {
@@ -228,9 +268,14 @@
                 "en": "Can I have an airport shuttle schedule?",
                 "kr": "공항 셔틀 시간표 하나 받을 수 있을까요?",
                 "trigger": "schedule",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DT"
+                "pattern_en": "Can I have a/an ~?",
+                "pattern_kr": "~를 주실 수 있나요?",
+                "category": "DT",
+                "siblings": [
+                  "pillow",
+                  "pen",
+                  "glass"
+                ]
               }
             },
             {
@@ -251,9 +296,14 @@
                 "en": "Can I have two vanilla lattes?",
                 "kr": "바닐라라테 두 잔 주문할 수 있을까요?",
                 "trigger": "latte",
-                "title_en": "Can I have two/three/four ~?",
-                "title_kr": "~개 주문할 수 있을까요?",
-                "category": "DT"
+                "pattern_en": "Can I have two/three/four ~?",
+                "pattern_kr": "~개 주문할 수 있을까요?",
+                "category": "DT",
+                "siblings": [
+                  "bagel",
+                  "cappuccino",
+                  "umbrella"
+                ]
               }
             }
           ]
@@ -281,9 +331,14 @@
                 "en": "Great. Do I have to make a reservation?",
                 "kr": "좋네요. 예약을 해야 하나요?",
                 "trigger": "reservation",
-                "title_en": "Do I have to ~?",
-                "title_kr": "~해야 하나요?",
-                "category": "DTB"
+                "pattern_en": "Do I have to ~?",
+                "pattern_kr": "~해야 하나요?",
+                "category": "DTB",
+                "siblings": [
+                  "towel",
+                  "book",
+                  "ID"
+                ]
               }
             },
             {
@@ -304,9 +359,14 @@
                 "en": "Great. Do I have to bring a towel?",
                 "kr": "좋네요. 수건을 가지고 와야 할까요?",
                 "trigger": "towel",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DTB"
+                "pattern_en": "Do I have to ~?",
+                "pattern_kr": "~해야 하나요?",
+                "category": "DTB",
+                "siblings": [
+                  "reservation",
+                  "book",
+                  "ID"
+                ]
               }
             },
             {
@@ -328,9 +388,14 @@
                 "en": "Do I have to book in advance?",
                 "kr": "미리 예약해야 하나요?",
                 "trigger": "book",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DTB"
+                "pattern_en": "Do I have to ~?",
+                "pattern_kr": "~해야 하나요?",
+                "category": "DTB",
+                "siblings": [
+                  "reservation",
+                  "towel",
+                  "ID"
+                ]
               }
             },
             {
@@ -351,9 +416,14 @@
                 "en": "Do I have to bring my ID?",
                 "kr": "신분증을 가져와야 하나요?",
                 "trigger": "ID",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DTB"
+                "pattern_en": "Do I have to ~?",
+                "pattern_kr": "~해야 하나요?",
+                "category": "DTB",
+                "siblings": [
+                  "reservation",
+                  "towel",
+                  "book"
+                ]
               }
             },
             {
@@ -374,9 +444,14 @@
                 "en": "Do I have to fill out this form?",
                 "kr": "이 양식을 작성해야 하나요?",
                 "trigger": "form",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DTB"
+                "pattern_en": "Do I have to ~?",
+                "pattern_kr": "~해야 하나요?",
+                "category": "DTB",
+                "siblings": [
+                  "reservation",
+                  "towel",
+                  "book"
+                ]
               }
             }
           ]
@@ -404,9 +479,14 @@
                 "en": "Can I borrow an umbrella?",
                 "kr": "우산 하나 빌릴 수 있나요?",
                 "trigger": "umbrella",
-                "title_en": "Can I borrow ~?",
-                "title_kr": "~를 빌릴 수 있을까요?",
-                "category": "DTB"
+                "pattern_en": "Can I borrow ~?",
+                "pattern_kr": "~를 빌릴 수 있을까요?",
+                "category": "DTB",
+                "siblings": [
+                  "charger",
+                  "pen",
+                  "corkscrew"
+                ]
               }
             },
             {
@@ -427,9 +507,14 @@
                 "en": "Can I borrow a phone charger?",
                 "kr": "휴대폰 충전기를 빌릴 수 있을까요?",
                 "trigger": "charger",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DTB"
+                "pattern_en": "Can I borrow ~?",
+                "pattern_kr": "~를 빌릴 수 있을까요?",
+                "category": "DTB",
+                "siblings": [
+                  "umbrella",
+                  "pen",
+                  "corkscrew"
+                ]
               }
             },
             {
@@ -450,9 +535,14 @@
                 "en": "Can I borrow a pen?",
                 "kr": "펜 하나 빌릴 수 있나요?",
                 "trigger": "pen",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DTB"
+                "pattern_en": "Can I borrow ~?",
+                "pattern_kr": "~를 빌릴 수 있을까요?",
+                "category": "DTB",
+                "siblings": [
+                  "umbrella",
+                  "charger",
+                  "corkscrew"
+                ]
               }
             },
             {
@@ -473,9 +563,14 @@
                 "en": "Can I borrow a corkscrew?",
                 "kr": "와인 따개를 빌릴 수 있을까요?",
                 "trigger": "corkscrew",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DTB"
+                "pattern_en": "Can I borrow ~?",
+                "pattern_kr": "~를 빌릴 수 있을까요?",
+                "category": "DTB",
+                "siblings": [
+                  "umbrella",
+                  "charger",
+                  "pen"
+                ]
               }
             },
             {
@@ -496,9 +591,14 @@
                 "en": "Yes, can I borrow a pencil?",
                 "kr": "네, 연필 하나 빌릴 수 있을까요?",
                 "trigger": "pencil",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DTB"
+                "pattern_en": "Can I borrow ~?",
+                "pattern_kr": "~를 빌릴 수 있을까요?",
+                "category": "DTB",
+                "siblings": [
+                  "umbrella",
+                  "charger",
+                  "pen"
+                ]
               }
             }
           ]
@@ -526,9 +626,12 @@
                 "en": "Can I pay with cash?",
                 "kr": "현금으로 계산할 수 있을까요?",
                 "trigger": "cash",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DT"
+                "pattern_en": "Can I pay with ~",
+                "pattern_kr": "~로 계산할 수 있을까요?",
+                "category": "DT",
+                "siblings": [
+                  "dollar"
+                ]
               }
             },
             {
@@ -549,9 +652,12 @@
                 "en": "Can I pay with US dollars?",
                 "kr": "미국 달러로 결제할 수 있나요?",
                 "trigger": "dollar",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DT"
+                "pattern_en": "Can I pay with ~",
+                "pattern_kr": "~로 계산할 수 있을까요?",
+                "category": "DT",
+                "siblings": [
+                  "cash"
+                ]
               }
             },
             {
@@ -573,9 +679,10 @@
                 "en": "Actually, can I have the receipt, please?",
                 "kr": "그런데 영수증 받을 수 있을까요?",
                 "trigger": "receipt",
-                "title_en": "Can I have the receipt?",
-                "title_kr": "영수증 주실 수 있나요?",
-                "category": "DT"
+                "pattern_en": "Can I have the receipt?",
+                "pattern_kr": "영수증 주실 수 있나요?",
+                "category": "DT",
+                "siblings": []
               }
             },
             {
@@ -598,9 +705,12 @@
                 "en": "How long does it take?",
                 "kr": "얼마나 걸리나요?",
                 "trigger": "take",
-                "title_en": "How long does it take?",
-                "title_kr": "얼마나 걸리나요?",
-                "category": "DTB"
+                "pattern_en": "How long does it take?",
+                "pattern_kr": "얼마나 걸리나요?",
+                "category": "DTB",
+                "siblings": [
+                  "thank"
+                ]
               }
             },
             {
@@ -621,9 +731,12 @@
                 "en": "Okay, thanks! How long does it take?",
                 "kr": "알겠어요, 감사합니다! 얼마나 걸리나요?",
                 "trigger": "thank",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DTB"
+                "pattern_en": "How long does it take?",
+                "pattern_kr": "얼마나 걸리나요?",
+                "category": "DTB",
+                "siblings": [
+                  "take"
+                ]
               }
             }
           ]
@@ -651,9 +764,12 @@
                 "en": "Hi! Can I check in?",
                 "kr": "안녕하세요! 체크인해도 되나요?",
                 "trigger": "check",
-                "title_en": "Can I check in ~?",
-                "title_kr": "체크인해도 되나요?",
-                "category": "T"
+                "pattern_en": "Can I check in ~?",
+                "pattern_kr": "체크인해도 되나요?",
+                "category": "T",
+                "siblings": [
+                  "bit"
+                ]
               }
             },
             {
@@ -675,9 +791,12 @@
                 "en": "Hi. Can I check in a bit early tomorrow?",
                 "kr": "안녕하세요. 내일 조금 일찍 체크인해도 될까요?",
                 "trigger": "bit",
-                "title_en": "",
-                "title_kr": "",
-                "category": "T"
+                "pattern_en": "Can I check in ~?",
+                "pattern_kr": "체크인해도 되나요?",
+                "category": "T",
+                "siblings": [
+                  "check"
+                ]
               }
             },
             {
@@ -700,9 +819,14 @@
                 "en": "\"Complimentary\"? What does that mean?",
                 "kr": "\"Complimentary\"요? 그건 무슨 뜻인가요?",
                 "trigger": "complimentary",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DTB"
+                "pattern_en": "What does that mean?",
+                "pattern_kr": "그건 무슨 뜻인가요?",
+                "category": "DTB",
+                "siblings": [
+                  "house",
+                  "trip",
+                  "queasy"
+                ]
               }
             },
             {
@@ -723,9 +847,14 @@
                 "en": "\"On the house\"? What does that mean?",
                 "kr": "\"On the house\"요? 그건 무슨 뜻인가요?",
                 "trigger": "house",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DTB"
+                "pattern_en": "What does that mean?",
+                "pattern_kr": "그건 무슨 뜻인가요?",
+                "category": "DTB",
+                "siblings": [
+                  "complimentary",
+                  "trip",
+                  "queasy"
+                ]
               }
             },
             {
@@ -746,9 +875,14 @@
                 "en": "\"Round-trip\"? What does that mean?",
                 "kr": "\"Round-trip\"이요? 그건 무슨 뜻인가요?",
                 "trigger": "trip",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DTB"
+                "pattern_en": "What does that mean?",
+                "pattern_kr": "그건 무슨 뜻인가요?",
+                "category": "DTB",
+                "siblings": [
+                  "complimentary",
+                  "house",
+                  "queasy"
+                ]
               }
             }
           ]
@@ -776,9 +910,10 @@
                 "en": "Can I have the check, please?",
                 "kr": "계산서 주실 수 있나요?",
                 "trigger": "check",
-                "title_en": "Can I have the check?",
-                "title_kr": "계산서 주실 수 있나요?",
-                "category": "DT"
+                "pattern_en": "Can I have the check?",
+                "pattern_kr": "계산서 주실 수 있나요?",
+                "category": "DT",
+                "siblings": []
               }
             },
             {
@@ -799,9 +934,14 @@
                 "en": "Yes, I'm looking for a blouse.",
                 "kr": "네, 블라우스를 찾고 있어요.",
                 "trigger": "blouse",
-                "title_en": "I'm looking for ~",
-                "title_kr": "저는 ~를 찾고 있어요.",
-                "category": "DT"
+                "pattern_en": "I'm looking for ~",
+                "pattern_kr": "저는 ~를 찾고 있어요.",
+                "category": "DT",
+                "siblings": [
+                  "pair",
+                  "coat",
+                  "ATM"
+                ]
               }
             },
             {
@@ -822,9 +962,14 @@
                 "en": "Yeah, I'm looking for a pair of running shoes.",
                 "kr": "네, 운동화를 찾고 있어요.",
                 "trigger": "pair",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DT"
+                "pattern_en": "I'm looking for ~",
+                "pattern_kr": "저는 ~를 찾고 있어요.",
+                "category": "DT",
+                "siblings": [
+                  "blouse",
+                  "coat",
+                  "ATM"
+                ]
               }
             },
             {
@@ -846,9 +991,14 @@
                 "en": "Yeah, I'm looking for a winter coat.",
                 "kr": "네, 겨울 코트를 찾고 있어요.",
                 "trigger": "coat",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DT"
+                "pattern_en": "I'm looking for ~",
+                "pattern_kr": "저는 ~를 찾고 있어요.",
+                "category": "DT",
+                "siblings": [
+                  "blouse",
+                  "pair",
+                  "ATM"
+                ]
               }
             },
             {
@@ -870,9 +1020,14 @@
                 "en": "Yeah, actually. I'm looking for an ATM.",
                 "kr": "아, 그게요. 현금인출기를 찾는 중이에요.",
                 "trigger": "ATM",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DT"
+                "pattern_en": "I'm looking for ~",
+                "pattern_kr": "저는 ~를 찾고 있어요.",
+                "category": "DT",
+                "siblings": [
+                  "blouse",
+                  "pair",
+                  "coat"
+                ]
               }
             }
           ]
@@ -900,9 +1055,14 @@
                 "en": "How have you been?",
                 "kr": "어떻게 지냈어?",
                 "trigger": "how",
-                "title_en": "How have you been?",
-                "title_kr": "어떻게 지냈어?",
-                "category": "DB"
+                "pattern_en": "How have you been?",
+                "pattern_kr": "어떻게 지냈어?",
+                "category": "DB",
+                "siblings": [
+                  "lately",
+                  "day",
+                  "job"
+                ]
               }
             },
             {
@@ -923,9 +1083,14 @@
                 "en": "How have you been lately?",
                 "kr": "요즘 어떻게 지내?",
                 "trigger": "lately",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DB"
+                "pattern_en": "How have you been?",
+                "pattern_kr": "어떻게 지냈어?",
+                "category": "DB",
+                "siblings": [
+                  "how",
+                  "day",
+                  "job"
+                ]
               }
             },
             {
@@ -947,9 +1112,14 @@
                 "en": "How have you been these days?",
                 "kr": "요즘 어떻게 지내?",
                 "trigger": "day",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DB"
+                "pattern_en": "How have you been?",
+                "pattern_kr": "어떻게 지냈어?",
+                "category": "DB",
+                "siblings": [
+                  "how",
+                  "lately",
+                  "job"
+                ]
               }
             },
             {
@@ -970,9 +1140,14 @@
                 "en": "How've you been? I heard you changed jobs.",
                 "kr": "어떻게 지냈어? 직장 옮겼다고 들었어.",
                 "trigger": "job",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DB"
+                "pattern_en": "How have you been?",
+                "pattern_kr": "어떻게 지냈어?",
+                "category": "DB",
+                "siblings": [
+                  "how",
+                  "lately",
+                  "day"
+                ]
               }
             },
             {
@@ -993,9 +1168,14 @@
                 "en": "I haven't seen you since graduation! How've you been?",
                 "kr": "졸업 이후로 못 봤네! 어떻게 지냈어?",
                 "trigger": "graduation",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DB"
+                "pattern_en": "How have you been?",
+                "pattern_kr": "어떻게 지냈어?",
+                "category": "DB",
+                "siblings": [
+                  "how",
+                  "lately",
+                  "day"
+                ]
               }
             }
           ]
@@ -1023,9 +1203,10 @@
                 "en": "Hi. I have a reservation under \"Johnson\".",
                 "kr": "안녕하세요. \"존슨\"으로 예약했어요.",
                 "trigger": "reservation",
-                "title_en": "I have a reservation under ~.",
-                "title_kr": "~ 이름으로 예약했어요.",
-                "category": "DT"
+                "pattern_en": "I have a reservation under ~.",
+                "pattern_kr": "~ 이름으로 예약했어요.",
+                "category": "DT",
+                "siblings": []
               }
             },
             {
@@ -1047,9 +1228,10 @@
                 "en": "How long is the wait?",
                 "kr": "대기 시간이 얼마나 되나요?",
                 "trigger": "wait",
-                "title_en": "How long is the wait?",
-                "title_kr": "대기 시간이 얼마나 되나요?",
-                "category": "DT"
+                "pattern_en": "How long is the wait?",
+                "pattern_kr": "대기 시간이 얼마나 되나요?",
+                "category": "DT",
+                "siblings": []
               }
             },
             {
@@ -1070,9 +1252,14 @@
                 "en": "Does this have cilantro in it?",
                 "kr": "여기 고수 들어가 있나요?",
                 "trigger": "cilantro",
-                "title_en": "Does this have ~?",
-                "title_kr": "~ 들어가 있나요?",
-                "category": "DT"
+                "pattern_en": "Does this have ~?",
+                "pattern_kr": "~ 들어가 있나요?",
+                "category": "DT",
+                "siblings": [
+                  "shrimp",
+                  "cucumber",
+                  "meat"
+                ]
               }
             },
             {
@@ -1093,9 +1280,14 @@
                 "en": "Does this have shrimp in it?",
                 "kr": "여기 새우 들어가 있나요?",
                 "trigger": "shrimp",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DT"
+                "pattern_en": "Does this have ~?",
+                "pattern_kr": "~ 들어가 있나요?",
+                "category": "DT",
+                "siblings": [
+                  "cilantro",
+                  "cucumber",
+                  "meat"
+                ]
               }
             },
             {
@@ -1116,9 +1308,14 @@
                 "en": "Does this have cucumbers in it?",
                 "kr": "여기 오이 들어가 있나요?",
                 "trigger": "cucumber",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DT"
+                "pattern_en": "Does this have ~?",
+                "pattern_kr": "~ 들어가 있나요?",
+                "category": "DT",
+                "siblings": [
+                  "cilantro",
+                  "shrimp",
+                  "meat"
+                ]
               }
             }
           ]
@@ -1146,9 +1343,10 @@
                 "en": "Can I get a refill?",
                 "kr": "리필해 주실 수 있나요?",
                 "trigger": "refill",
-                "title_en": "Can I get a refill?",
-                "title_kr": "리필해 주실 수 있나요?",
-                "category": "DT"
+                "pattern_en": "Can I get a refill?",
+                "pattern_kr": "리필해 주실 수 있나요?",
+                "category": "DT",
+                "siblings": []
               }
             },
             {
@@ -1169,9 +1367,12 @@
                 "en": "No. I'm just looking around. Thank you.",
                 "kr": "아니요. 그냥 둘러보는 중이에요. 감사합니다.",
                 "trigger": "look",
-                "title_en": "I'm just looking around.",
-                "title_kr": "저는 그냥 둘러보는 중이에요.",
-                "category": "DT"
+                "pattern_en": "I'm just looking around.",
+                "pattern_kr": "저는 그냥 둘러보는 중이에요.",
+                "category": "DT",
+                "siblings": [
+                  "yep"
+                ]
               }
             },
             {
@@ -1195,9 +1396,12 @@
                 "en": "Yep, I'm just looking around for now. Thanks.",
                 "kr": "네, 지금 그냥 둘러보는 중이에요. 감사합니다.",
                 "trigger": "yep",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DT"
+                "pattern_en": "I'm just looking around.",
+                "pattern_kr": "저는 그냥 둘러보는 중이에요.",
+                "category": "DT",
+                "siblings": [
+                  "look"
+                ]
               }
             },
             {
@@ -1218,9 +1422,13 @@
                 "en": "When's the next train to the airport?",
                 "kr": "공항으로 가는 다음 기차가 언제인가요?",
                 "trigger": "train",
-                "title_en": "When's the next train?",
-                "title_kr": "다음 기차가 언제인가요?",
-                "category": "DT"
+                "pattern_en": "When's the next train?",
+                "pattern_kr": "다음 기차가 언제인가요?",
+                "category": "DT",
+                "siblings": [
+                  "Montreal",
+                  "station"
+                ]
               }
             },
             {
@@ -1241,9 +1449,13 @@
                 "en": "Hi. When's the next train to Montreal?",
                 "kr": "안녕하세요. 몬트리올로 가는 다음 기차가 언제인가요?",
                 "trigger": "Montreal",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DT"
+                "pattern_en": "When's the next train?",
+                "pattern_kr": "다음 기차가 언제인가요?",
+                "category": "DT",
+                "siblings": [
+                  "train",
+                  "station"
+                ]
               }
             }
           ]
@@ -1272,9 +1484,10 @@
                 "en": "Could you take a picture of us?",
                 "kr": "저희 사진 좀 찍어주시겠어요?",
                 "trigger": "picture",
-                "title_en": "Could you take a picture?",
-                "title_kr": "사진 좀 찍어주시겠어요?",
-                "category": "T"
+                "pattern_en": "Could you take a picture?",
+                "pattern_kr": "사진 좀 찍어주시겠어요?",
+                "category": "T",
+                "siblings": []
               }
             },
             {
@@ -1296,9 +1509,13 @@
                 "en": "How's your day going?",
                 "kr": "오늘 하루 어떻게 지내고 있어?",
                 "trigger": "go",
-                "title_en": "How's your day going?",
-                "title_kr": "오늘 하루 어떻게 지내고 있어?",
-                "category": "D"
+                "pattern_en": "How's your day going?",
+                "pattern_kr": "오늘 하루 어떻게 지내고 있어?",
+                "category": "D",
+                "siblings": [
+                  "good",
+                  "want"
+                ]
               }
             },
             {
@@ -1321,9 +1538,13 @@
                 "en": "Yeah, now's good. How's your day going?",
                 "kr": "응, 지금은 좋아. 오늘 하루 어떻게 지내고 있어?",
                 "trigger": "good",
-                "title_en": "",
-                "title_kr": "",
-                "category": "D"
+                "pattern_en": "How's your day going?",
+                "pattern_kr": "오늘 하루 어떻게 지내고 있어?",
+                "category": "D",
+                "siblings": [
+                  "go",
+                  "want"
+                ]
               }
             },
             {
@@ -1344,9 +1565,13 @@
                 "en": "Just wanted to chat. How's your day going?",
                 "kr": "잠깐 이야기하고 싶어서. 오늘 하루 어떻게 지내고 있어?",
                 "trigger": "want",
-                "title_en": "",
-                "title_kr": "",
-                "category": "D"
+                "pattern_en": "How's your day going?",
+                "pattern_kr": "오늘 하루 어떻게 지내고 있어?",
+                "category": "D",
+                "siblings": [
+                  "go",
+                  "good"
+                ]
               }
             },
             {
@@ -1368,9 +1593,10 @@
                 "en": "Are you free on Friday?",
                 "kr": "금요일에 시간 있어?",
                 "trigger": "free",
-                "title_en": "Are you free on ~?",
-                "title_kr": "~에 시간 있어?",
-                "category": "DB"
+                "pattern_en": "Are you free on ~?",
+                "pattern_kr": "~에 시간 있어?",
+                "category": "DB",
+                "siblings": []
               }
             }
           ]
@@ -1398,9 +1624,14 @@
                 "en": "I'm here on vacation.",
                 "kr": "휴가차 왔어요.",
                 "trigger": "vacation",
-                "title_en": "I'm here on vacation.",
-                "title_kr": "휴가차 왔어요.",
-                "category": "T"
+                "pattern_en": "I'm here on vacation.",
+                "pattern_kr": "휴가차 왔어요.",
+                "category": "T",
+                "siblings": [
+                  "wife",
+                  "couple",
+                  "next"
+                ]
               }
             },
             {
@@ -1421,9 +1652,14 @@
                 "en": "I'm here on vacation with my wife.",
                 "kr": "아내랑 휴가차 왔어요.",
                 "trigger": "wife",
-                "title_en": "",
-                "title_kr": "",
-                "category": "T"
+                "pattern_en": "I'm here on vacation.",
+                "pattern_kr": "휴가차 왔어요.",
+                "category": "T",
+                "siblings": [
+                  "vacation",
+                  "couple",
+                  "next"
+                ]
               }
             },
             {
@@ -1444,9 +1680,14 @@
                 "en": "I'm here on vacation with a couple of friends.",
                 "kr": "친구 몇 명과 함께 휴가차 왔어요.",
                 "trigger": "couple",
-                "title_en": "",
-                "title_kr": "",
-                "category": "T"
+                "pattern_en": "I'm here on vacation.",
+                "pattern_kr": "휴가차 왔어요.",
+                "category": "T",
+                "siblings": [
+                  "vacation",
+                  "wife",
+                  "next"
+                ]
               }
             },
             {
@@ -1467,9 +1708,14 @@
                 "en": "I'm here on vacation until next Monday.",
                 "kr": "휴가차 왔어요. 다음 주 월요일까지 있을 거예요.",
                 "trigger": "next",
-                "title_en": "",
-                "title_kr": "",
-                "category": "T"
+                "pattern_en": "I'm here on vacation.",
+                "pattern_kr": "휴가차 왔어요.",
+                "category": "T",
+                "siblings": [
+                  "vacation",
+                  "wife",
+                  "couple"
+                ]
               }
             },
             {
@@ -1490,9 +1736,14 @@
                 "en": "I'm here on vacation with my family.",
                 "kr": "가족들과 함께 휴가차 왔어요.",
                 "trigger": "family",
-                "title_en": "",
-                "title_kr": "",
-                "category": "T"
+                "pattern_en": "I'm here on vacation.",
+                "pattern_kr": "휴가차 왔어요.",
+                "category": "T",
+                "siblings": [
+                  "vacation",
+                  "wife",
+                  "couple"
+                ]
               }
             }
           ]
@@ -1521,9 +1772,14 @@
                 "en": "Could you bring me another fork, please?",
                 "kr": "포크 하나 더 가져다주실 수 있나요?",
                 "trigger": "fork",
-                "title_en": "Could you bring me/us ~?",
-                "title_kr": "~를 가져다주실 수 있나요?",
-                "category": "DTB"
+                "pattern_en": "Could you bring me/us ~?",
+                "pattern_kr": "~를 가져다주실 수 있나요?",
+                "category": "DTB",
+                "siblings": [
+                  "spoon",
+                  "knife",
+                  "menu"
+                ]
               }
             },
             {
@@ -1544,9 +1800,14 @@
                 "en": "Yeah, could you bring me another spoon? I dropped mine.",
                 "kr": "네, 숟가락 하나 더 가져다 주실 수 있나요? 제 거 떨어뜨렸어요.",
                 "trigger": "spoon",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DTB"
+                "pattern_en": "Could you bring me/us ~?",
+                "pattern_kr": "~를 가져다주실 수 있나요?",
+                "category": "DTB",
+                "siblings": [
+                  "fork",
+                  "knife",
+                  "menu"
+                ]
               }
             },
             {
@@ -1567,9 +1828,14 @@
                 "en": "Could you bring me another knife, please?",
                 "kr": "칼 하나 더 가져다주실 수 있나요?",
                 "trigger": "knife",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DTB"
+                "pattern_en": "Could you bring me/us ~?",
+                "pattern_kr": "~를 가져다주실 수 있나요?",
+                "category": "DTB",
+                "siblings": [
+                  "fork",
+                  "spoon",
+                  "menu"
+                ]
               }
             },
             {
@@ -1590,9 +1856,14 @@
                 "en": "Could you bring me the dessert menu, please?",
                 "kr": "디저트 메뉴를 가져다주실 수 있나요?",
                 "trigger": "menu",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DTB"
+                "pattern_en": "Could you bring me/us ~?",
+                "pattern_kr": "~를 가져다주실 수 있나요?",
+                "category": "DTB",
+                "siblings": [
+                  "fork",
+                  "spoon",
+                  "knife"
+                ]
               }
             },
             {
@@ -1613,9 +1884,14 @@
                 "en": "Where can I get on the express train?",
                 "kr": "급행열차는 어디서 타나요?",
                 "trigger": "train",
-                "title_en": "Where can I get on ~?",
-                "title_kr": "~는 어디서 타나요?",
-                "category": "DT"
+                "pattern_en": "Where can I get on ~?",
+                "pattern_kr": "~는 어디서 타나요?",
+                "category": "DT",
+                "siblings": [
+                  "bus",
+                  "line",
+                  "ferry"
+                ]
               }
             }
           ]
@@ -1644,9 +1920,14 @@
                 "en": "Do you know how to get there?",
                 "kr": "거기 어떻게 가는지 알아?",
                 "trigger": "know",
-                "title_en": "Do you know how to get ~?",
-                "title_kr": "~ 어떻게 가는지 알아?",
-                "category": "DT"
+                "pattern_en": "Do you know how to get ~?",
+                "pattern_kr": "~ 어떻게 가는지 알아?",
+                "category": "DT",
+                "siblings": [
+                  "library",
+                  "main",
+                  "station"
+                ]
               }
             },
             {
@@ -1667,9 +1948,14 @@
                 "en": "Do you know how to get to the library?",
                 "kr": "도서관에 어떻게 가는지 알아?",
                 "trigger": "library",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DT"
+                "pattern_en": "Do you know how to get ~?",
+                "pattern_kr": "~ 어떻게 가는지 알아?",
+                "category": "DT",
+                "siblings": [
+                  "know",
+                  "main",
+                  "station"
+                ]
               }
             },
             {
@@ -1692,9 +1978,14 @@
                 "en": "Do you know how to get to the Starbucks on Main?",
                 "kr": "메인가의 스타벅스에 어떻게 가는지 알아?",
                 "trigger": "main",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DT"
+                "pattern_en": "Do you know how to get ~?",
+                "pattern_kr": "~ 어떻게 가는지 알아?",
+                "category": "DT",
+                "siblings": [
+                  "know",
+                  "library",
+                  "station"
+                ]
               }
             },
             {
@@ -1716,9 +2007,14 @@
                 "en": "Do you know how to get to the station from here?",
                 "kr": "여기서 역까지 어떻게 가는지 아시나요?",
                 "trigger": "station",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DT"
+                "pattern_en": "Do you know how to get ~?",
+                "pattern_kr": "~ 어떻게 가는지 알아?",
+                "category": "DT",
+                "siblings": [
+                  "know",
+                  "library",
+                  "main"
+                ]
               }
             },
             {
@@ -1739,9 +2035,14 @@
                 "en": "Do you know how to get to the airport from here?",
                 "kr": "여기서 공항까지 어떻게 가는지 아시나요?",
                 "trigger": "airport",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DT"
+                "pattern_en": "Do you know how to get ~?",
+                "pattern_kr": "~ 어떻게 가는지 알아?",
+                "category": "DT",
+                "siblings": [
+                  "know",
+                  "library",
+                  "main"
+                ]
               }
             }
           ]
@@ -1769,9 +2070,14 @@
                 "en": "Hi! Could you recommend a few restaurants around here?",
                 "kr": "안녕하세요! 이 근처 식당 좀 추천해 주시겠어요?",
                 "trigger": "restaurant",
-                "title_en": "Could you recommend ~?",
-                "title_kr": "~를 추천해 주시겠어요?",
-                "category": "DT"
+                "pattern_en": "Could you recommend ~?",
+                "pattern_kr": "~를 추천해 주시겠어요?",
+                "category": "DT",
+                "siblings": [
+                  "spa",
+                  "place",
+                  "indoor"
+                ]
               }
             },
             {
@@ -1793,9 +2099,14 @@
                 "en": "Could you recommend a good massage spa nearby?",
                 "kr": "근처에 잘하는 마사지 스파 추천해 주시겠어요?",
                 "trigger": "spa",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DT"
+                "pattern_en": "Could you recommend ~?",
+                "pattern_kr": "~를 추천해 주시겠어요?",
+                "category": "DT",
+                "siblings": [
+                  "restaurant",
+                  "place",
+                  "indoor"
+                ]
               }
             },
             {
@@ -1817,9 +2128,14 @@
                 "en": "Could you recommend a good place around here to go shopping?",
                 "kr": "이 근처에 쇼핑하기 좋은 곳 추천해 주시겠어요?",
                 "trigger": "place",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DT"
+                "pattern_en": "Could you recommend ~?",
+                "pattern_kr": "~를 추천해 주시겠어요?",
+                "category": "DT",
+                "siblings": [
+                  "restaurant",
+                  "spa",
+                  "indoor"
+                ]
               }
             },
             {
@@ -1841,9 +2157,14 @@
                 "en": "Could you recommend something we can do indoors?",
                 "kr": "실내에서 할 수 있는 것 좀 추천해 주시겠어요?",
                 "trigger": "indoor",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DT"
+                "pattern_en": "Could you recommend ~?",
+                "pattern_kr": "~를 추천해 주시겠어요?",
+                "category": "DT",
+                "siblings": [
+                  "restaurant",
+                  "spa",
+                  "place"
+                ]
               }
             },
             {
@@ -1864,9 +2185,14 @@
                 "en": "Could you recommend something for us to do in the evening?",
                 "kr": "저녁에 할 만한 것 좀 추천해 주시겠어요?",
                 "trigger": "recommend",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DT"
+                "pattern_en": "Could you recommend ~?",
+                "pattern_kr": "~를 추천해 주시겠어요?",
+                "category": "DT",
+                "siblings": [
+                  "restaurant",
+                  "spa",
+                  "place"
+                ]
               }
             }
           ]
@@ -1895,9 +2221,10 @@
                 "en": "Can I leave my luggage here?",
                 "kr": "여기에 제 짐 좀 맡길 수 있나요?",
                 "trigger": "luggage",
-                "title_en": "Can I leave my luggage here?",
-                "title_kr": "여기에 제 짐 좀 맡길 수 있나요?",
-                "category": "T"
+                "pattern_en": "Can I leave my luggage here?",
+                "pattern_kr": "여기에 제 짐 좀 맡길 수 있나요?",
+                "category": "T",
+                "siblings": []
               }
             },
             {
@@ -1918,9 +2245,14 @@
                 "en": "Oh! Okay. Where can I leave my stuff until then?",
                 "kr": "아! 그렇군요. 그때까지 제 짐을 어디에 맡길 수 있나요?",
                 "trigger": "stuff",
-                "title_en": "Where can I leave my ~?",
-                "title_kr": "~를 어디에 맡길 수 있나요?",
-                "category": "T"
+                "pattern_en": "Where can I leave my ~?",
+                "pattern_kr": "~를 어디에 맡길 수 있나요?",
+                "category": "T",
+                "siblings": [
+                  "luggage",
+                  "suitcase",
+                  "bag"
+                ]
               }
             },
             {
@@ -1941,9 +2273,14 @@
                 "en": "Excuse me? Where can I leave my suitcase until check-in?",
                 "kr": "죄송한데, 체크인 전까지 제 캐리어를 어디에 맡길 수 있나요?",
                 "trigger": "suitcase",
-                "title_en": "",
-                "title_kr": "",
-                "category": "T"
+                "pattern_en": "Where can I leave my ~?",
+                "pattern_kr": "~를 어디에 맡길 수 있나요?",
+                "category": "T",
+                "siblings": [
+                  "stuff",
+                  "luggage",
+                  "bag"
+                ]
               }
             },
             {
@@ -1964,9 +2301,14 @@
                 "en": "Excuse me? Where can I leave my bag until check-in?",
                 "kr": "죄송한데, 체크인 전까지 제 가방을 어디에 맡길 수 있나요?",
                 "trigger": "bag",
-                "title_en": "",
-                "title_kr": "",
-                "category": "T"
+                "pattern_en": "Where can I leave my ~?",
+                "pattern_kr": "~를 어디에 맡길 수 있나요?",
+                "category": "T",
+                "siblings": [
+                  "stuff",
+                  "luggage",
+                  "suitcase"
+                ]
               }
             },
             {
@@ -1987,9 +2329,14 @@
                 "en": "Where can I leave my phone while I'm in the sauna?",
                 "kr": "사우나에 들어가 있는 동안 제 전화를 어디에 맡길 수 있나요?",
                 "trigger": "phone",
-                "title_en": "",
-                "title_kr": "",
-                "category": "T"
+                "pattern_en": "Where can I leave my ~?",
+                "pattern_kr": "~를 어디에 맡길 수 있나요?",
+                "category": "T",
+                "siblings": [
+                  "stuff",
+                  "luggage",
+                  "suitcase"
+                ]
               }
             }
           ]
@@ -2017,9 +2364,14 @@
                 "en": "I'm studying business at Harvard.",
                 "kr": "저는 하버드에서 경영학을 공부하고 있습니다.",
                 "trigger": "business",
-                "title_en": "I'm studying ... at ~ .",
-                "title_kr": "저는 지금 ~에서 ~을 공부하고 있어요.",
-                "category": "D"
+                "pattern_en": "I'm studying ... at ~ .",
+                "pattern_kr": "저는 지금 ~에서 ~을 공부하고 있어요.",
+                "category": "D",
+                "siblings": [
+                  "law",
+                  "engineering",
+                  "music"
+                ]
               }
             },
             {
@@ -2041,9 +2393,14 @@
                 "en": "I'm studying law at Yale.",
                 "kr": "저는 예일에서 법학을 공부하고 있습니다.",
                 "trigger": "law",
-                "title_en": "",
-                "title_kr": "",
-                "category": "D"
+                "pattern_en": "I'm studying ... at ~ .",
+                "pattern_kr": "저는 지금 ~에서 ~을 공부하고 있어요.",
+                "category": "D",
+                "siblings": [
+                  "business",
+                  "engineering",
+                  "music"
+                ]
               }
             },
             {
@@ -2064,9 +2421,14 @@
                 "en": "I'm studying engineering at MIT.",
                 "kr": "저는 MIT에서 공학을 공부하고 있습니다.",
                 "trigger": "engineering",
-                "title_en": "",
-                "title_kr": "",
-                "category": "D"
+                "pattern_en": "I'm studying ... at ~ .",
+                "pattern_kr": "저는 지금 ~에서 ~을 공부하고 있어요.",
+                "category": "D",
+                "siblings": [
+                  "business",
+                  "law",
+                  "music"
+                ]
               }
             },
             {
@@ -2087,9 +2449,14 @@
                 "en": "I'm studying music at Berkeley.",
                 "kr": "저는 버클리에서 음악을 공부하고 있습니다.",
                 "trigger": "music",
-                "title_en": "",
-                "title_kr": "",
-                "category": "D"
+                "pattern_en": "I'm studying ... at ~ .",
+                "pattern_kr": "저는 지금 ~에서 ~을 공부하고 있어요.",
+                "category": "D",
+                "siblings": [
+                  "business",
+                  "law",
+                  "engineering"
+                ]
               }
             },
             {
@@ -2112,9 +2479,14 @@
                 "en": "I'm studying economics at Princeton.",
                 "kr": "저는 프린스턴에서 경제학을 공부하고 있습니다.",
                 "trigger": "economic",
-                "title_en": "",
-                "title_kr": "",
-                "category": "D"
+                "pattern_en": "I'm studying ... at ~ .",
+                "pattern_kr": "저는 지금 ~에서 ~을 공부하고 있어요.",
+                "category": "D",
+                "siblings": [
+                  "business",
+                  "law",
+                  "engineering"
+                ]
               }
             }
           ]
@@ -2142,9 +2514,12 @@
                 "en": "I'd like to cancel my reservation.",
                 "kr": "제 예약 취소하고 싶어요.",
                 "trigger": "reservation",
-                "title_en": "I'd like to cancel my reservation.",
-                "title_kr": "제 예약 취소하고 싶어요.",
-                "category": "DT"
+                "pattern_en": "I'd like to cancel my reservation.",
+                "pattern_kr": "제 예약 취소하고 싶어요.",
+                "category": "DT",
+                "siblings": [
+                  "sorry"
+                ]
               }
             },
             {
@@ -2166,9 +2541,12 @@
                 "en": "I'm sorry, but I'd like to cancel my reservation for tonight.",
                 "kr": "죄송한데요, 오늘 저녁 예약 취소하고 싶어요.",
                 "trigger": "sorry",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DT"
+                "pattern_en": "I'd like to cancel my reservation.",
+                "pattern_kr": "제 예약 취소하고 싶어요.",
+                "category": "DT",
+                "siblings": [
+                  "reservation"
+                ]
               }
             },
             {
@@ -2190,9 +2568,13 @@
                 "en": "I'd like to change my order.",
                 "kr": "저 주문 변경하고 싶어요.",
                 "trigger": "order",
-                "title_en": "I'd like to change my order.",
-                "title_kr": "주문을 변경하고 싶어요.",
-                "category": "DT"
+                "pattern_en": "I'd like to change my order.",
+                "pattern_kr": "주문을 변경하고 싶어요.",
+                "category": "DT",
+                "siblings": [
+                  "sorry",
+                  "trouble"
+                ]
               }
             },
             {
@@ -2214,9 +2596,13 @@
                 "en": "Excuse me? I'd like to change my order if it's not too much trouble.",
                 "kr": "실례합니다. 괜찮으시다면 주문을 변경하고 싶은데요.",
                 "trigger": "trouble",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DT"
+                "pattern_en": "I'd like to change my order.",
+                "pattern_kr": "주문을 변경하고 싶어요.",
+                "category": "DT",
+                "siblings": [
+                  "order",
+                  "sorry"
+                ]
               }
             },
             {
@@ -2237,9 +2623,10 @@
                 "en": "I have a stuffy nose.",
                 "kr": "코가 막혔어요.",
                 "trigger": "nose",
-                "title_en": "I have a stuffy nose.",
-                "title_kr": "코가 막혔어요.",
-                "category": "DT"
+                "pattern_en": "I have a stuffy nose.",
+                "pattern_kr": "코가 막혔어요.",
+                "category": "DT",
+                "siblings": []
               }
             }
           ]
@@ -2267,9 +2654,14 @@
                 "en": "What's new with you?",
                 "kr": "넌 새로운 소식 있어?",
                 "trigger": "new",
-                "title_en": "What's new with ~?",
-                "title_kr": "새로운 소식 있어?",
-                "category": "D"
+                "pattern_en": "What's new with ~?",
+                "pattern_kr": "새로운 소식 있어?",
+                "category": "D",
+                "siblings": [
+                  "see",
+                  "thank",
+                  "lot"
+                ]
               }
             },
             {
@@ -2290,9 +2682,14 @@
                 "en": "Good to see you, too! What's new with you?",
                 "kr": "만나서 반가워! 요즘 뭐 새로운 소식 있어?",
                 "trigger": "see",
-                "title_en": "",
-                "title_kr": "",
-                "category": "D"
+                "pattern_en": "What's new with ~?",
+                "pattern_kr": "새로운 소식 있어?",
+                "category": "D",
+                "siblings": [
+                  "new",
+                  "thank",
+                  "lot"
+                ]
               }
             },
             {
@@ -2313,9 +2710,14 @@
                 "en": "Good, thanks. What's new with you lately?",
                 "kr": "잘 지냈어, 고마워. 넌 요즘 새로운 소식 있어?",
                 "trigger": "thank",
-                "title_en": "",
-                "title_kr": "",
-                "category": "D"
+                "pattern_en": "What's new with ~?",
+                "pattern_kr": "새로운 소식 있어?",
+                "category": "D",
+                "siblings": [
+                  "new",
+                  "see",
+                  "lot"
+                ]
               }
             },
             {
@@ -2337,9 +2739,14 @@
                 "en": "Not a whole lot. What's new with you?",
                 "kr": "별로 없어.넌 새로운 소식 있어?",
                 "trigger": "lot",
-                "title_en": "",
-                "title_kr": "",
-                "category": "D"
+                "pattern_en": "What's new with ~?",
+                "pattern_kr": "새로운 소식 있어?",
+                "category": "D",
+                "siblings": [
+                  "new",
+                  "see",
+                  "thank"
+                ]
               }
             },
             {
@@ -2360,9 +2767,14 @@
                 "en": "Why don't we take a taxi?",
                 "kr": "택시 타는 거 어때?",
                 "trigger": "taxi",
-                "title_en": "Why don't we take ~?",
-                "title_kr": "~ 타는 거 어때?",
-                "category": "DT"
+                "pattern_en": "Why don't we take ~?",
+                "pattern_kr": "~ 타는 거 어때?",
+                "category": "DT",
+                "siblings": [
+                  "bus",
+                  "subway",
+                  "car"
+                ]
               }
             }
           ]
@@ -2390,9 +2802,12 @@
                 "en": "Is it enough for two people?",
                 "kr": "2명(이 먹기)에 충분한가요?",
                 "trigger": "enough",
-                "title_en": "Is it enough for ~?",
-                "title_kr": "~에게 충분한가요?",
-                "category": "DT"
+                "pattern_en": "Is it enough for ~?",
+                "pattern_kr": "~에게 충분한가요?",
+                "category": "DT",
+                "siblings": [
+                  "hungry"
+                ]
               }
             },
             {
@@ -2413,9 +2828,12 @@
                 "en": "Is it enough for someone who's really hungry?",
                 "kr": "정말 배고픈 사람(이 먹기)에 충분한가요?",
                 "trigger": "hungry",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DT"
+                "pattern_en": "Is it enough for ~?",
+                "pattern_kr": "~에게 충분한가요?",
+                "category": "DT",
+                "siblings": [
+                  "enough"
+                ]
               }
             },
             {
@@ -2437,9 +2855,13 @@
                 "en": "Oh, I didn't order this.",
                 "kr": "어, 저는 이거 주문 안했는데요.",
                 "trigger": "order",
-                "title_en": "I didn't order this.",
-                "title_kr": "저는 이걸 주문하지 않았어요.",
-                "category": "DT"
+                "pattern_en": "I didn't order this.",
+                "pattern_kr": "저는 이걸 주문하지 않았어요.",
+                "category": "DT",
+                "siblings": [
+                  "Hawaiian",
+                  "vegetarian"
+                ]
               }
             },
             {
@@ -2460,9 +2882,13 @@
                 "en": "Is this Hawaiian? I didn't order this.",
                 "kr": "이거 하와이안 피자인가요? 저는 이거 주문 안했는데요.",
                 "trigger": "Hawaiian",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DT"
+                "pattern_en": "I didn't order this.",
+                "pattern_kr": "저는 이걸 주문하지 않았어요.",
+                "category": "DT",
+                "siblings": [
+                  "order",
+                  "vegetarian"
+                ]
               }
             },
             {
@@ -2483,9 +2909,13 @@
                 "en": "I didn't order this. I'm a vegetarian.",
                 "kr": "저는 이걸 주문하지 않았는데요. 저는 채식주의자예요.",
                 "trigger": "vegetarian",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DT"
+                "pattern_en": "I didn't order this.",
+                "pattern_kr": "저는 이걸 주문하지 않았어요.",
+                "category": "DT",
+                "siblings": [
+                  "order",
+                  "Hawaiian"
+                ]
               }
             }
           ]
@@ -2513,9 +2943,14 @@
                 "en": "Excuse me? We're still waiting for our drinks.",
                 "kr": "실례합니다만, 저희 음료가 아직 안 나왔어요.",
                 "trigger": "drink",
-                "title_en": "We're still waiting for our ~.",
-                "title_kr": "저희 ~가 아직 안 나왔어요.",
-                "category": "DT"
+                "pattern_en": "We're still waiting for our ~.",
+                "pattern_kr": "저희 ~가 아직 안 나왔어요.",
+                "category": "DT",
+                "siblings": [
+                  "dessert",
+                  "food",
+                  "salad"
+                ]
               }
             },
             {
@@ -2536,9 +2971,14 @@
                 "en": "Excuse me? We're still waiting for our dessert.",
                 "kr": "실례합니다만, 저희 후식이 아직 안 나왔어요.",
                 "trigger": "dessert",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DT"
+                "pattern_en": "We're still waiting for our ~.",
+                "pattern_kr": "저희 ~가 아직 안 나왔어요.",
+                "category": "DT",
+                "siblings": [
+                  "drink",
+                  "food",
+                  "salad"
+                ]
               }
             },
             {
@@ -2559,9 +2999,14 @@
                 "en": "Excuse me? We're still waiting for our food. Do you know how much longer it'll take?",
                 "kr": "실례합니다만, 저희 음식이 아직 안 나왔는데요. 얼마나 더 걸릴까요?",
                 "trigger": "food",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DT"
+                "pattern_en": "We're still waiting for our ~.",
+                "pattern_kr": "저희 ~가 아직 안 나왔어요.",
+                "category": "DT",
+                "siblings": [
+                  "drink",
+                  "dessert",
+                  "salad"
+                ]
               }
             },
             {
@@ -2582,9 +3027,14 @@
                 "en": "Excuse me? We're still waiting for our side salads.",
                 "kr": "실례합니다만, 저희 사이드 샐러드가 안 나왔어요.",
                 "trigger": "salad",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DT"
+                "pattern_en": "We're still waiting for our ~.",
+                "pattern_kr": "저희 ~가 아직 안 나왔어요.",
+                "category": "DT",
+                "siblings": [
+                  "drink",
+                  "dessert",
+                  "food"
+                ]
               }
             },
             {
@@ -2606,9 +3056,14 @@
                 "en": "Excuse me? We're still waiting for our kids' meals.",
                 "kr": "실례합니다만, 저희 키즈밀이 아직 안 나왔어요.",
                 "trigger": "meal",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DT"
+                "pattern_en": "We're still waiting for our ~.",
+                "pattern_kr": "저희 ~가 아직 안 나왔어요.",
+                "category": "DT",
+                "siblings": [
+                  "drink",
+                  "dessert",
+                  "food"
+                ]
               }
             }
           ]
@@ -2636,9 +3091,10 @@
                 "en": "I have to be there in half an hour.",
                 "kr": "30분 안에 거기에 도착해야 돼요.",
                 "trigger": "hour",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DTB"
+                "pattern_en": "I have to be there in ~.",
+                "pattern_kr": "~ 안에 거기에 도착해야 돼요.",
+                "category": "DTB",
+                "siblings": []
               }
             },
             {
@@ -2660,9 +3116,13 @@
                 "en": "JFK. I have to be there by 4:30.",
                 "kr": "JFK 공항이요. 4시 30분까지 거기에 도착해야 돼요.",
                 "trigger": "have",
-                "title_en": "I have to be there by ~.",
-                "title_kr": "~까지 거기에 도착해야 돼요.",
-                "category": "DTB"
+                "pattern_en": "I have to be there by ~.",
+                "pattern_kr": "~까지 거기에 도착해야 돼요.",
+                "category": "DTB",
+                "siblings": [
+                  "late",
+                  "airport"
+                ]
               }
             },
             {
@@ -2683,9 +3143,13 @@
                 "en": "I have to be there by 2:45 at the latest.",
                 "kr": "늦어도 2시 45분까지 거기에 도착해야 돼요.",
                 "trigger": "late",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DTB"
+                "pattern_en": "I have to be there by ~.",
+                "pattern_kr": "~까지 거기에 도착해야 돼요.",
+                "category": "DTB",
+                "siblings": [
+                  "have",
+                  "airport"
+                ]
               }
             },
             {
@@ -2706,9 +3170,13 @@
                 "en": "The airport. I have to be there by nine.",
                 "kr": "공항이요. 9시까지 거기에 도착해야 돼요.",
                 "trigger": "airport",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DTB"
+                "pattern_en": "I have to be there by ~.",
+                "pattern_kr": "~까지 거기에 도착해야 돼요.",
+                "category": "DTB",
+                "siblings": [
+                  "have",
+                  "late"
+                ]
               }
             },
             {
@@ -2730,9 +3198,14 @@
                 "en": "The toilet's clogged.",
                 "kr": "변기가 막혔어요.",
                 "trigger": "toilet",
-                "title_en": "~'s clogged.",
-                "title_kr": "~가 막혔어요.",
-                "category": "DT"
+                "pattern_en": "~'s clogged.",
+                "pattern_kr": "~가 막혔어요.",
+                "category": "DT",
+                "siblings": [
+                  "shower",
+                  "bathtub",
+                  "bathroom"
+                ]
               }
             }
           ]
@@ -2761,9 +3234,14 @@
                 "en": "Could you just let me out here?",
                 "kr": "그냥 여기서 내려주실 수 있나요?",
                 "trigger": "let",
-                "title_en": "Could you just let me out ~?",
-                "title_kr": "그냥 ~에서 내려주실 수 있나요?",
-                "category": "DT"
+                "pattern_en": "Could you just let me out ~?",
+                "pattern_kr": "그냥 ~에서 내려주실 수 있나요?",
+                "category": "DT",
+                "siblings": [
+                  "corner",
+                  "crosswalk",
+                  "case"
+                ]
               }
             },
             {
@@ -2784,9 +3262,14 @@
                 "en": "Hmm. Could you just let me out at the next corner?",
                 "kr": "흠. 그냥 다음 모퉁이에서 내려주실 수 있나요?",
                 "trigger": "corner",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DT"
+                "pattern_en": "Could you just let me out ~?",
+                "pattern_kr": "그냥 ~에서 내려주실 수 있나요?",
+                "category": "DT",
+                "siblings": [
+                  "let",
+                  "crosswalk",
+                  "case"
+                ]
               }
             },
             {
@@ -2807,9 +3290,14 @@
                 "en": "Actually, could you just let me out at the crosswalk?",
                 "kr": "그게요, 그냥 횡단보도에서 내려주실 수 있나요?",
                 "trigger": "crosswalk",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DT"
+                "pattern_en": "Could you just let me out ~?",
+                "pattern_kr": "그냥 ~에서 내려주실 수 있나요?",
+                "category": "DT",
+                "siblings": [
+                  "let",
+                  "corner",
+                  "case"
+                ]
               }
             },
             {
@@ -2831,9 +3319,14 @@
                 "en": "In that case, could you just let me out across the street?",
                 "kr": "그러면, 그냥 길 건너편에서 내려주실 수 있나요?",
                 "trigger": "case",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DT"
+                "pattern_en": "Could you just let me out ~?",
+                "pattern_kr": "그냥 ~에서 내려주실 수 있나요?",
+                "category": "DT",
+                "siblings": [
+                  "let",
+                  "corner",
+                  "crosswalk"
+                ]
               }
             },
             {
@@ -2854,9 +3347,14 @@
                 "en": "Sorry to bother you, but could you point me in the direction of Central Park?",
                 "kr": "귀찮게 해서 죄송합니다만, 센트럴 파크가 어느 방향인지 알려주실 수 있나요?",
                 "trigger": "direction",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DTB"
+                "pattern_en": "Sorry to bother you, but ~.",
+                "pattern_kr": "방해해서 죄송합니다만 ~.",
+                "category": "DTB",
+                "siblings": [
+                  "picture",
+                  "bus",
+                  "station"
+                ]
               }
             }
           ]
@@ -2885,9 +3383,14 @@
                 "en": "Yes, I think it's undercooked.",
                 "kr": "네, 이거 덜 익은 것 같아요.",
                 "trigger": "think",
-                "title_en": "It's undercooked.",
-                "title_kr": "이거 덜 익었어요.",
-                "category": "DT"
+                "pattern_en": "It's undercooked.",
+                "pattern_kr": "이거 덜 익었어요.",
+                "category": "DT",
+                "siblings": [
+                  "hate",
+                  "pink",
+                  "order"
+                ]
               }
             },
             {
@@ -2908,9 +3411,14 @@
                 "en": "Actually, I hate to complain, but I think it's undercooked.",
                 "kr": "사실, 말씀드리기 죄송하지만, 덜 익은 것 같아요.",
                 "trigger": "hate",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DT"
+                "pattern_en": "It's undercooked.",
+                "pattern_kr": "이거 덜 익었어요.",
+                "category": "DT",
+                "siblings": [
+                  "think",
+                  "pink",
+                  "order"
+                ]
               }
             },
             {
@@ -2931,9 +3439,14 @@
                 "en": "Yeah, it's undercooked. It's still kind of pink inside.",
                 "kr": "네, 덜 익었어요. 안에 아직 약간 분홍색이에요.",
                 "trigger": "pink",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DT"
+                "pattern_en": "It's undercooked.",
+                "pattern_kr": "이거 덜 익었어요.",
+                "category": "DT",
+                "siblings": [
+                  "think",
+                  "hate",
+                  "order"
+                ]
               }
             },
             {
@@ -2955,9 +3468,14 @@
                 "en": "Yeah, I ordered it well-done, but it seems like it's undercooked.",
                 "kr": "네, 저는 웰던으로 주문했는데 덜 익은 것 같아요.",
                 "trigger": "order",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DT"
+                "pattern_en": "It's undercooked.",
+                "pattern_kr": "이거 덜 익었어요.",
+                "category": "DT",
+                "siblings": [
+                  "think",
+                  "hate",
+                  "pink"
+                ]
               }
             },
             {
@@ -2979,9 +3497,12 @@
                 "en": "Yes, it's overcooked. I can barely cut through it.",
                 "kr": "네, 너무 익었네요. 거의 자를 수가 없어요.",
                 "trigger": "overcook",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DT"
+                "pattern_en": "It's overcooked.",
+                "pattern_kr": "이거 너무 익었어요.",
+                "category": "DT",
+                "siblings": [
+                  "think"
+                ]
               }
             }
           ]
@@ -3009,9 +3530,14 @@
                 "en": "Excuse me? I was wondering if I can get onion rings instead of fries.",
                 "kr": "여기요? 감자튀김 대신 어니언링을 주문할 수 있는지 궁금합니다.",
                 "trigger": "ring",
-                "title_en": "I was wondering if ~.",
-                "title_kr": "~가 궁금해요.",
-                "category": "DTB"
+                "pattern_en": "I was wondering if ~.",
+                "pattern_kr": "~가 궁금해요.",
+                "category": "DTB",
+                "siblings": [
+                  "umbrella",
+                  "refill",
+                  "Coke"
+                ]
               }
             },
             {
@@ -3032,9 +3558,14 @@
                 "en": "Excuse me? I was wondering if I could borrow an umbrella.",
                 "kr": "실례합니다. 우산 좀 빌릴 수 있을까요?",
                 "trigger": "umbrella",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DTB"
+                "pattern_en": "I was wondering if ~.",
+                "pattern_kr": "~가 궁금해요.",
+                "category": "DTB",
+                "siblings": [
+                  "ring",
+                  "refill",
+                  "Coke"
+                ]
               }
             },
             {
@@ -3055,9 +3586,14 @@
                 "en": "Excuse me? I was wondering if I could get a refill.",
                 "kr": "실례합니다. 리필 좀 받을 수 있을까요?",
                 "trigger": "refill",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DTB"
+                "pattern_en": "I was wondering if ~.",
+                "pattern_kr": "~가 궁금해요.",
+                "category": "DTB",
+                "siblings": [
+                  "ring",
+                  "umbrella",
+                  "Coke"
+                ]
               }
             },
             {
@@ -3080,9 +3616,14 @@
                 "en": "Excuse me? I was wondering if I could get Coke instead of Sprite.",
                 "kr": "실례합니다만, 스프라이트 대신 콜라로 바꿀 수 있을까요?",
                 "trigger": "Coke",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DTB"
+                "pattern_en": "I was wondering if ~.",
+                "pattern_kr": "~가 궁금해요.",
+                "category": "DTB",
+                "siblings": [
+                  "ring",
+                  "umbrella",
+                  "refill"
+                ]
               }
             },
             {
@@ -3103,9 +3644,14 @@
                 "en": "Excuse me? I was wondering if I could get a different sauce.",
                 "kr": "실례합니다만, 다른 소스로 바꿀 수 있을까요?",
                 "trigger": "sauce",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DTB"
+                "pattern_en": "I was wondering if ~.",
+                "pattern_kr": "~가 궁금해요.",
+                "category": "DTB",
+                "siblings": [
+                  "ring",
+                  "umbrella",
+                  "refill"
+                ]
               }
             }
           ]
@@ -3134,9 +3680,14 @@
                 "en": "Would you happen to know where the restroom is?",
                 "kr": "혹시 화장실이 어디 있는지 아시나요?",
                 "trigger": "restroom",
-                "title_en": "Would you happen to know ~?",
-                "title_kr": "혹시 ~ 아시나요?",
-                "category": "DTB"
+                "pattern_en": "Would you happen to know ~?",
+                "pattern_kr": "혹시 ~ 아시나요?",
+                "category": "DTB",
+                "siblings": [
+                  "ATM",
+                  "password",
+                  "restaurant"
+                ]
               }
             },
             {
@@ -3158,9 +3709,14 @@
                 "en": "Would you happen to know if there's an ATM nearby?",
                 "kr": "혹시 이 근처에 ATM이 있는지 아시나요?",
                 "trigger": "ATM",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DTB"
+                "pattern_en": "Would you happen to know ~?",
+                "pattern_kr": "혹시 ~ 아시나요?",
+                "category": "DTB",
+                "siblings": [
+                  "restroom",
+                  "password",
+                  "restaurant"
+                ]
               }
             },
             {
@@ -3181,9 +3737,14 @@
                 "en": "Would you happen to know the WiFi password?",
                 "kr": "혹시 와이파이 비밀번호를 아시나요?",
                 "trigger": "password",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DTB"
+                "pattern_en": "Would you happen to know ~?",
+                "pattern_kr": "혹시 ~ 아시나요?",
+                "category": "DTB",
+                "siblings": [
+                  "restroom",
+                  "ATM",
+                  "restaurant"
+                ]
               }
             },
             {
@@ -3204,9 +3765,14 @@
                 "en": "Would you happen to know any good restaurants nearby?",
                 "kr": "혹시 근처에 괜찮은 식당을 아시나요?",
                 "trigger": "restaurant",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DTB"
+                "pattern_en": "Would you happen to know ~?",
+                "pattern_kr": "혹시 ~ 아시나요?",
+                "category": "DTB",
+                "siblings": [
+                  "restroom",
+                  "ATM",
+                  "password"
+                ]
               }
             },
             {
@@ -3227,9 +3793,14 @@
                 "en": "Would you happen to know how much the bus fare is?",
                 "kr": "혹시 버스 요금이 얼마인지 아시나요?",
                 "trigger": "bus",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DTB"
+                "pattern_en": "Would you happen to know ~?",
+                "pattern_kr": "혹시 ~ 아시나요?",
+                "category": "DTB",
+                "siblings": [
+                  "restroom",
+                  "ATM",
+                  "password"
+                ]
               }
             }
           ]
@@ -3257,9 +3828,14 @@
                 "en": "Something came up at work. Can we meet at 3 instead?",
                 "kr": "직장에서 일이 생겼어. 대신 3시에 만날 수 있을까?",
                 "trigger": "work",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DB"
+                "pattern_en": "Something came up.",
+                "pattern_kr": "일이 생겼어.",
+                "category": "DB",
+                "siblings": [
+                  "bit",
+                  "way",
+                  "sorry"
+                ]
               }
             },
             {
@@ -3281,9 +3857,14 @@
                 "en": "Hey, sorry, I'm going to be a bit late. Something came up.",
                 "kr": "있잖아, 미안한데 좀 늦을 것 같아. 일이 생겼거든.",
                 "trigger": "bit",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DB"
+                "pattern_en": "Something came up.",
+                "pattern_kr": "일이 생겼어.",
+                "category": "DB",
+                "siblings": [
+                  "work",
+                  "way",
+                  "sorry"
+                ]
               }
             },
             {
@@ -3305,9 +3886,14 @@
                 "en": "Something came up, but I'm on my way now.",
                 "kr": "일이 생겼는데, 지금 가는 중이야.",
                 "trigger": "way",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DB"
+                "pattern_en": "Something came up.",
+                "pattern_kr": "일이 생겼어.",
+                "category": "DB",
+                "siblings": [
+                  "work",
+                  "bit",
+                  "sorry"
+                ]
               }
             },
             {
@@ -3329,9 +3915,14 @@
                 "en": "I know, I'm sorry. Something came up at work.",
                 "kr": "알아, 미안해. 직장에서 일이 생겼어.",
                 "trigger": "sorry",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DB"
+                "pattern_en": "Something came up.",
+                "pattern_kr": "일이 생겼어.",
+                "category": "DB",
+                "siblings": [
+                  "work",
+                  "bit",
+                  "way"
+                ]
               }
             },
             {
@@ -3353,9 +3944,14 @@
                 "en": "Do you want to stop by a cafe on the way?",
                 "kr": "가는 길에 카페도 갈래?",
                 "trigger": "cafe",
-                "title_en": "stop by ~ on the way",
-                "title_kr": "가는 길에 ~도 가다.",
-                "category": "DT"
+                "pattern_en": "stop by ~ on the way",
+                "pattern_kr": "가는 길에 ~도 가다.",
+                "category": "DT",
+                "siblings": [
+                  "mall",
+                  "house",
+                  "bank"
+                ]
               }
             }
           ]
@@ -3383,9 +3979,14 @@
                 "en": "This is the best pizza I've ever had.",
                 "kr": "내가 먹어본 피자 중에 최고야.",
                 "trigger": "pizza",
-                "title_en": "This is the best ~ I've ever had.",
-                "title_kr": "이건 내가 먹어본 ~ 중에 최고야.",
-                "category": "DT"
+                "pattern_en": "This is the best ~ I've ever had.",
+                "pattern_kr": "이건 내가 먹어본 ~ 중에 최고야.",
+                "category": "DT",
+                "siblings": [
+                  "coffee",
+                  "steak",
+                  "cake"
+                ]
               }
             },
             {
@@ -3406,9 +4007,14 @@
                 "en": "This is the best coffee I've ever had.",
                 "kr": "내가 먹어본 커피 중에 최고야.",
                 "trigger": "coffee",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DT"
+                "pattern_en": "This is the best ~ I've ever had.",
+                "pattern_kr": "이건 내가 먹어본 ~ 중에 최고야.",
+                "category": "DT",
+                "siblings": [
+                  "pizza",
+                  "steak",
+                  "cake"
+                ]
               }
             },
             {
@@ -3430,9 +4036,14 @@
                 "en": "This is the best steak I've ever had.",
                 "kr": "내가 먹어본 스테이크 중에 최고야.",
                 "trigger": "steak",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DT"
+                "pattern_en": "This is the best ~ I've ever had.",
+                "pattern_kr": "이건 내가 먹어본 ~ 중에 최고야.",
+                "category": "DT",
+                "siblings": [
+                  "pizza",
+                  "coffee",
+                  "cake"
+                ]
               }
             },
             {
@@ -3454,9 +4065,14 @@
                 "en": "This is the best cake I've ever had.",
                 "kr": "내가 먹어본 케이크 중에 최고야.",
                 "trigger": "cake",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DT"
+                "pattern_en": "This is the best ~ I've ever had.",
+                "pattern_kr": "이건 내가 먹어본 ~ 중에 최고야.",
+                "category": "DT",
+                "siblings": [
+                  "pizza",
+                  "coffee",
+                  "steak"
+                ]
               }
             },
             {
@@ -3477,9 +4093,14 @@
                 "en": "This is the best tea I've ever had.",
                 "kr": "내가 마셔본 차 중에 최고야.",
                 "trigger": "tea",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DT"
+                "pattern_en": "This is the best ~ I've ever had.",
+                "pattern_kr": "이건 내가 먹어본 ~ 중에 최고야.",
+                "category": "DT",
+                "siblings": [
+                  "pizza",
+                  "coffee",
+                  "steak"
+                ]
               }
             }
           ]
@@ -3508,9 +4129,14 @@
                 "en": "Do you want to swing by a cafe on the way?",
                 "kr": "가는 길에 카페에 잠깐 들르시겠어요?",
                 "trigger": "cafe",
-                "title_en": "swing by ~ on the way",
-                "title_kr": "가는 길에 ~에 잠깐 들르다.",
-                "category": "DT"
+                "pattern_en": "swing by ~ on the way",
+                "pattern_kr": "가는 길에 ~에 잠깐 들르다.",
+                "category": "DT",
+                "siblings": [
+                  "drugstore",
+                  "library",
+                  "bakery"
+                ]
               }
             },
             {
@@ -3531,9 +4157,14 @@
                 "en": "I'm feeling a little nauseous. Can we swing by the drugstore on the way?",
                 "kr": "좀 메스껍네. 가는 길에 약국에 잠깐 들를 수 있을까?",
                 "trigger": "drugstore",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DT"
+                "pattern_en": "swing by ~ on the way",
+                "pattern_kr": "가는 길에 ~에 잠깐 들르다.",
+                "category": "DT",
+                "siblings": [
+                  "cafe",
+                  "library",
+                  "bakery"
+                ]
               }
             },
             {
@@ -3554,9 +4185,14 @@
                 "en": "Can we swing by the library on the way home?",
                 "kr": "집에 가는 길에 도서관에 잠깐 들를 수 있을까?",
                 "trigger": "library",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DT"
+                "pattern_en": "swing by ~ on the way",
+                "pattern_kr": "가는 길에 ~에 잠깐 들르다.",
+                "category": "DT",
+                "siblings": [
+                  "cafe",
+                  "drugstore",
+                  "bakery"
+                ]
               }
             },
             {
@@ -3577,9 +4213,14 @@
                 "en": "That's okay, we can swing by the bakery on the way.",
                 "kr": "괜찮아, 가는 길에 빵집에 잠깐 들를 수 있어.",
                 "trigger": "bakery",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DT"
+                "pattern_en": "swing by ~ on the way",
+                "pattern_kr": "가는 길에 ~에 잠깐 들르다.",
+                "category": "DT",
+                "siblings": [
+                  "cafe",
+                  "drugstore",
+                  "library"
+                ]
               }
             },
             {
@@ -3600,9 +4241,14 @@
                 "en": "Can we swing by the bank on the way home?",
                 "kr": "집에 가는 길에 은행에 잠깐 들를 수 있을까?",
                 "trigger": "bank",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DT"
+                "pattern_en": "swing by ~ on the way",
+                "pattern_kr": "가는 길에 ~에 잠깐 들르다.",
+                "category": "DT",
+                "siblings": [
+                  "cafe",
+                  "drugstore",
+                  "library"
+                ]
               }
             }
           ]
@@ -3631,9 +4277,12 @@
                 "en": "I've got a lot on my plate.",
                 "kr": "할 일이 너무 많아.",
                 "trigger": "lot",
-                "title_en": "I've got a lot on my plate.",
-                "title_kr": "나는 할 일이 너무 많아.",
-                "category": "DB"
+                "pattern_en": "I've got a lot on my plate.",
+                "pattern_kr": "나는 할 일이 너무 많아.",
+                "category": "DB",
+                "siblings": [
+                  "sorry"
+                ]
               }
             },
             {
@@ -3655,9 +4304,12 @@
                 "en": "I'm sorry. I've got a lot on my plate these days.",
                 "kr": "미안해. 요즘 할 일이 너무 많아.",
                 "trigger": "sorry",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DB"
+                "pattern_en": "I've got a lot on my plate.",
+                "pattern_kr": "나는 할 일이 너무 많아.",
+                "category": "DB",
+                "siblings": [
+                  "lot"
+                ]
               }
             },
             {
@@ -3678,9 +4330,10 @@
                 "en": "That's the plan. Do you have any dietary restrictions I should know about?",
                 "kr": "그게 계획이야. 내가 알아야 할 못 먹는 음식 있어?",
                 "trigger": "plan",
-                "title_en": "",
-                "title_kr": "",
-                "category": "D"
+                "pattern_en": "Do you have any dietary restrictions?",
+                "pattern_kr": "못 먹는 음식 있어?",
+                "category": "D",
+                "siblings": []
               }
             },
             {
@@ -3701,9 +4354,14 @@
                 "en": "Geez, it's really coming down out there. So much for our picnic.",
                 "kr": "아이고, 밖에 비가 엄청 쏟아지네. 피크닉은 물 건너갔네.",
                 "trigger": "picnic",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DT"
+                "pattern_en": "It's really coming down out there!",
+                "pattern_kr": "밖에 비가 엄청 쏟아지네!",
+                "category": "DT",
+                "siblings": [
+                  "man",
+                  "know",
+                  "drive"
+                ]
               }
             },
             {
@@ -3724,9 +4382,14 @@
                 "en": "Man, it's really coming down out there!",
                 "kr": "어휴, 밖에 비가 엄청 쏟아지네!",
                 "trigger": "man",
-                "title_en": "",
-                "title_kr": "",
-                "category": "DT"
+                "pattern_en": "It's really coming down out there!",
+                "pattern_kr": "밖에 비가 엄청 쏟아지네!",
+                "category": "DT",
+                "siblings": [
+                  "picnic",
+                  "know",
+                  "drive"
+                ]
               }
             }
           ]
@@ -3760,8 +4423,13 @@
                 "en": "I am happy.",
                 "kr": "나는 행복해.",
                 "trigger": "happy",
-                "title_kr": "인칭대명사와 be동사",
-                "sub": "be 현재 + 형용사"
+                "pattern_kr": "be 현재 + 형용사",
+                "big": "인칭대명사와 be동사",
+                "siblings": [
+                  "smart",
+                  "cute",
+                  "nice"
+                ]
               }
             },
             {
@@ -3782,8 +4450,13 @@
                 "en": "You are smart.",
                 "kr": "너는 똑똑해.",
                 "trigger": "smart",
-                "title_kr": "인칭대명사와 be동사",
-                "sub": ""
+                "pattern_kr": "be 현재 + 형용사",
+                "big": "인칭대명사와 be동사",
+                "siblings": [
+                  "happy",
+                  "cute",
+                  "nice"
+                ]
               }
             },
             {
@@ -3804,8 +4477,13 @@
                 "en": "She is cute.",
                 "kr": "그녀는 귀여워.",
                 "trigger": "cute",
-                "title_kr": "인칭대명사와 be동사",
-                "sub": ""
+                "pattern_kr": "be 현재 + 형용사",
+                "big": "인칭대명사와 be동사",
+                "siblings": [
+                  "happy",
+                  "smart",
+                  "nice"
+                ]
               }
             },
             {
@@ -3826,8 +4504,13 @@
                 "en": "He is nice.",
                 "kr": "그는 착해.",
                 "trigger": "nice",
-                "title_kr": "인칭대명사와 be동사",
-                "sub": ""
+                "pattern_kr": "be 현재 + 형용사",
+                "big": "인칭대명사와 be동사",
+                "siblings": [
+                  "happy",
+                  "smart",
+                  "cute"
+                ]
               }
             },
             {
@@ -3848,8 +4531,13 @@
                 "en": "Emily is angry.",
                 "kr": "에밀리는 화났어.",
                 "trigger": "angry",
-                "title_kr": "인칭대명사와 be동사",
-                "sub": ""
+                "pattern_kr": "be 현재 + 형용사",
+                "big": "인칭대명사와 be동사",
+                "siblings": [
+                  "happy",
+                  "smart",
+                  "cute"
+                ]
               }
             }
           ]
@@ -3877,8 +4565,13 @@
                 "en": "I like her.",
                 "kr": "나는 그녀를 좋아해.",
                 "trigger": "like",
-                "title_kr": "일반동사의 긍정문/부정문",
-                "sub": "긍정문 (동사원형)"
+                "pattern_kr": "긍정문 (동사원형)",
+                "big": "일반동사의 긍정문/부정문",
+                "siblings": [
+                  "love",
+                  "believe",
+                  "ignore"
+                ]
               }
             },
             {
@@ -3899,8 +4592,13 @@
                 "en": "I love you.",
                 "kr": "나는 너를 사랑해.",
                 "trigger": "love",
-                "title_kr": "일반동사의 긍정문/부정문",
-                "sub": ""
+                "pattern_kr": "긍정문 (동사원형)",
+                "big": "일반동사의 긍정문/부정문",
+                "siblings": [
+                  "like",
+                  "believe",
+                  "ignore"
+                ]
               }
             },
             {
@@ -3921,8 +4619,13 @@
                 "en": "I believe him.",
                 "kr": "나는 그를 믿어.",
                 "trigger": "believe",
-                "title_kr": "일반동사의 긍정문/부정문",
-                "sub": ""
+                "pattern_kr": "긍정문 (동사원형)",
+                "big": "일반동사의 긍정문/부정문",
+                "siblings": [
+                  "like",
+                  "love",
+                  "ignore"
+                ]
               }
             },
             {
@@ -3943,8 +4646,13 @@
                 "en": "They ignore me.",
                 "kr": "그들은 나를 무시해.",
                 "trigger": "ignore",
-                "title_kr": "일반동사의 긍정문/부정문",
-                "sub": ""
+                "pattern_kr": "긍정문 (동사원형)",
+                "big": "일반동사의 긍정문/부정문",
+                "siblings": [
+                  "like",
+                  "love",
+                  "believe"
+                ]
               }
             },
             {
@@ -3965,8 +4673,13 @@
                 "en": "I play soccer.",
                 "kr": "나는 축구를 해.",
                 "trigger": "soccer",
-                "title_kr": "일반동사의 긍정문/부정문",
-                "sub": ""
+                "pattern_kr": "긍정문 (동사원형)",
+                "big": "일반동사의 긍정문/부정문",
+                "siblings": [
+                  "like",
+                  "love",
+                  "believe"
+                ]
               }
             }
           ]
@@ -3994,8 +4707,13 @@
                 "en": "Are you hungry?",
                 "kr": "너 배고파?",
                 "trigger": "hungry",
-                "title_kr": "Yes/No 의문문",
-                "sub": "be 현재"
+                "pattern_kr": "be 현재",
+                "big": "Yes/No 의문문",
+                "siblings": [
+                  "tall",
+                  "sister",
+                  "nurse"
+                ]
               }
             },
             {
@@ -4016,8 +4734,13 @@
                 "en": "Is he tall?",
                 "kr": "그는 키가 커?",
                 "trigger": "tall",
-                "title_kr": "Yes/No 의문문",
-                "sub": ""
+                "pattern_kr": "be 현재",
+                "big": "Yes/No 의문문",
+                "siblings": [
+                  "hungry",
+                  "sister",
+                  "nurse"
+                ]
               }
             },
             {
@@ -4039,8 +4762,13 @@
                 "en": "Is she your sister?",
                 "kr": "그녀는 너의 여동생이야?",
                 "trigger": "sister",
-                "title_kr": "Yes/No 의문문",
-                "sub": ""
+                "pattern_kr": "be 현재",
+                "big": "Yes/No 의문문",
+                "siblings": [
+                  "hungry",
+                  "tall",
+                  "nurse"
+                ]
               }
             },
             {
@@ -4061,8 +4789,13 @@
                 "en": "Is Sam a nurse?",
                 "kr": "샘은 간호사니?",
                 "trigger": "nurse",
-                "title_kr": "Yes/No 의문문",
-                "sub": ""
+                "pattern_kr": "be 현재",
+                "big": "Yes/No 의문문",
+                "siblings": [
+                  "hungry",
+                  "tall",
+                  "sister"
+                ]
               }
             },
             {
@@ -4083,8 +4816,13 @@
                 "en": "Are you thirsty?",
                 "kr": "너 목말라?",
                 "trigger": "thirsty",
-                "title_kr": "Yes/No 의문문",
-                "sub": ""
+                "pattern_kr": "be 현재",
+                "big": "Yes/No 의문문",
+                "siblings": [
+                  "hungry",
+                  "tall",
+                  "sister"
+                ]
               }
             }
           ]
@@ -4112,8 +4850,13 @@
                 "en": "What is this?",
                 "kr": "이건 뭐야?",
                 "trigger": "what",
-                "title_kr": "의문사로 시작하는 의문문",
-                "sub": "what, who, where, when, why, how+be"
+                "pattern_kr": "what, who, where, when, why, how+be",
+                "big": "의문사로 시작하는 의문문",
+                "siblings": [
+                  "who",
+                  "trip",
+                  "bank"
+                ]
               }
             },
             {
@@ -4134,8 +4877,13 @@
                 "en": "Who is she?",
                 "kr": "그녀는 누구야?",
                 "trigger": "who",
-                "title_kr": "의문사로 시작하는 의문문",
-                "sub": ""
+                "pattern_kr": "what, who, where, when, why, how+be",
+                "big": "의문사로 시작하는 의문문",
+                "siblings": [
+                  "what",
+                  "trip",
+                  "bank"
+                ]
               }
             },
             {
@@ -4156,8 +4904,13 @@
                 "en": "How was your trip?",
                 "kr": "여행은 어땠어?",
                 "trigger": "trip",
-                "title_kr": "의문사로 시작하는 의문문",
-                "sub": ""
+                "pattern_kr": "what, who, where, when, why, how+be",
+                "big": "의문사로 시작하는 의문문",
+                "siblings": [
+                  "what",
+                  "who",
+                  "bank"
+                ]
               }
             },
             {
@@ -4178,8 +4931,13 @@
                 "en": "Where is the bank?",
                 "kr": "은행은 어디에 있나요?",
                 "trigger": "bank",
-                "title_kr": "의문사로 시작하는 의문문",
-                "sub": ""
+                "pattern_kr": "what, who, where, when, why, how+be",
+                "big": "의문사로 시작하는 의문문",
+                "siblings": [
+                  "what",
+                  "who",
+                  "trip"
+                ]
               }
             },
             {
@@ -4200,8 +4958,13 @@
                 "en": "Why is it pink?",
                 "kr": "그건 왜 분홍색이야?",
                 "trigger": "pink",
-                "title_kr": "의문사로 시작하는 의문문",
-                "sub": ""
+                "pattern_kr": "what, who, where, when, why, how+be",
+                "big": "의문사로 시작하는 의문문",
+                "siblings": [
+                  "what",
+                  "who",
+                  "trip"
+                ]
               }
             }
           ]
@@ -4232,8 +4995,13 @@
                 "en": "Listen carefully.",
                 "kr": "주의 깊게 들어.",
                 "trigger": "listen",
-                "title_kr": "부사의 역할과 형용사를 부사로 만드는 법",
-                "sub": "동사 수식"
+                "pattern_kr": "동사 수식",
+                "big": "부사의 역할과 형용사를 부사로 만드는 법",
+                "siblings": [
+                  "sing",
+                  "read",
+                  "think"
+                ]
               }
             },
             {
@@ -4254,8 +5022,13 @@
                 "en": "Alana sings beautifully.",
                 "kr": "얼래나는 아름답게 노래해.",
                 "trigger": "sing",
-                "title_kr": "부사의 역할과 형용사를 부사로 만드는 법",
-                "sub": ""
+                "pattern_kr": "동사 수식",
+                "big": "부사의 역할과 형용사를 부사로 만드는 법",
+                "siblings": [
+                  "listen",
+                  "read",
+                  "think"
+                ]
               }
             },
             {
@@ -4276,8 +5049,13 @@
                 "en": "Please read quietly.",
                 "kr": "조용히 읽어주세요.",
                 "trigger": "read",
-                "title_kr": "부사의 역할과 형용사를 부사로 만드는 법",
-                "sub": ""
+                "pattern_kr": "동사 수식",
+                "big": "부사의 역할과 형용사를 부사로 만드는 법",
+                "siblings": [
+                  "listen",
+                  "sing",
+                  "think"
+                ]
               }
             },
             {
@@ -4299,8 +5077,13 @@
                 "en": "Steve thinks differently.",
                 "kr": "스티브는 다르게 생각해요.",
                 "trigger": "think",
-                "title_kr": "부사의 역할과 형용사를 부사로 만드는 법",
-                "sub": ""
+                "pattern_kr": "동사 수식",
+                "big": "부사의 역할과 형용사를 부사로 만드는 법",
+                "siblings": [
+                  "listen",
+                  "sing",
+                  "read"
+                ]
               }
             },
             {
@@ -4322,8 +5105,13 @@
                 "en": "Please talk quietly.",
                 "kr": "조용히 말씀해 주세요.",
                 "trigger": "talk",
-                "title_kr": "부사의 역할과 형용사를 부사로 만드는 법",
-                "sub": ""
+                "pattern_kr": "동사 수식",
+                "big": "부사의 역할과 형용사를 부사로 만드는 법",
+                "siblings": [
+                  "listen",
+                  "sing",
+                  "read"
+                ]
               }
             }
           ]
@@ -4351,8 +5139,13 @@
                 "en": "She isn't dancing.",
                 "kr": "그녀는 춤추고 있지 않아.",
                 "trigger": "dance",
-                "title_kr": "(진행시제) 동사의 -ing형 I",
-                "sub": ""
+                "pattern_kr": "(진행시제) 동사의 -ing형 I",
+                "big": "(진행시제) 동사의 -ing형 I",
+                "siblings": [
+                  "coffee",
+                  "try",
+                  "movie"
+                ]
               }
             },
             {
@@ -4373,8 +5166,13 @@
                 "en": "Is Paul drinking coffee?",
                 "kr": "폴은 커피를 마시고 있나요?",
                 "trigger": "coffee",
-                "title_kr": "(진행시제) 동사의 -ing형 I",
-                "sub": ""
+                "pattern_kr": "(진행시제) 동사의 -ing형 I",
+                "big": "(진행시제) 동사의 -ing형 I",
+                "siblings": [
+                  "dance",
+                  "try",
+                  "movie"
+                ]
               }
             },
             {
@@ -4396,8 +5194,13 @@
                 "en": "I am trying my best.",
                 "kr": "나는 최선을 다하고 있어.",
                 "trigger": "try",
-                "title_kr": "(진행시제) 동사의 -ing형 I",
-                "sub": ""
+                "pattern_kr": "(진행시제) 동사의 -ing형 I",
+                "big": "(진행시제) 동사의 -ing형 I",
+                "siblings": [
+                  "dance",
+                  "coffee",
+                  "movie"
+                ]
               }
             },
             {
@@ -4418,8 +5221,13 @@
                 "en": "We are watching a movie.",
                 "kr": "우리는 영화를 보는 중이야.",
                 "trigger": "movie",
-                "title_kr": "(진행시제) 동사의 -ing형 I",
-                "sub": ""
+                "pattern_kr": "(진행시제) 동사의 -ing형 I",
+                "big": "(진행시제) 동사의 -ing형 I",
+                "siblings": [
+                  "dance",
+                  "coffee",
+                  "try"
+                ]
               }
             },
             {
@@ -4440,8 +5248,13 @@
                 "en": "My friends are studying English.",
                 "kr": "내 친구들은 영어 공부하는 중이야.",
                 "trigger": "English",
-                "title_kr": "(진행시제) 동사의 -ing형 I",
-                "sub": ""
+                "pattern_kr": "(진행시제) 동사의 -ing형 I",
+                "big": "(진행시제) 동사의 -ing형 I",
+                "siblings": [
+                  "dance",
+                  "coffee",
+                  "try"
+                ]
               }
             }
           ]
@@ -4470,8 +5283,13 @@
                 "en": "He spoke quickly.",
                 "kr": "그는 빠르게 말했다.",
                 "trigger": "speak",
-                "title_kr": "(과거시제)일반동사의 불규칙 변화형",
-                "sub": ""
+                "pattern_kr": "(과거시제)일반동사의 불규칙 변화형",
+                "big": "(과거시제)일반동사의 불규칙 변화형",
+                "siblings": [
+                  "people",
+                  "fish",
+                  "mug"
+                ]
               }
             },
             {
@@ -4492,8 +5310,13 @@
                 "en": "Only twelve people came.",
                 "kr": "12명만 왔어.",
                 "trigger": "people",
-                "title_kr": "(과거시제)일반동사의 불규칙 변화형",
-                "sub": ""
+                "pattern_kr": "(과거시제)일반동사의 불규칙 변화형",
+                "big": "(과거시제)일반동사의 불규칙 변화형",
+                "siblings": [
+                  "speak",
+                  "fish",
+                  "mug"
+                ]
               }
             },
             {
@@ -4515,8 +5338,13 @@
                 "en": "I caught a fish!",
                 "kr": "내가 물고기를 잡았어!",
                 "trigger": "fish",
-                "title_kr": "(과거시제)일반동사의 불규칙 변화형",
-                "sub": ""
+                "pattern_kr": "(과거시제)일반동사의 불규칙 변화형",
+                "big": "(과거시제)일반동사의 불규칙 변화형",
+                "siblings": [
+                  "speak",
+                  "people",
+                  "mug"
+                ]
               }
             },
             {
@@ -4537,8 +5365,13 @@
                 "en": "He broke my favorite mug.",
                 "kr": "그는 내가 가장 좋아하는 머그잔을 깼어.",
                 "trigger": "mug",
-                "title_kr": "(과거시제)일반동사의 불규칙 변화형",
-                "sub": ""
+                "pattern_kr": "(과거시제)일반동사의 불규칙 변화형",
+                "big": "(과거시제)일반동사의 불규칙 변화형",
+                "siblings": [
+                  "speak",
+                  "people",
+                  "fish"
+                ]
               }
             },
             {
@@ -4559,8 +5392,13 @@
                 "en": "He taught English in Thailand.",
                 "kr": "그는 태국에서 영어를 가르쳤어요.",
                 "trigger": "English",
-                "title_kr": "(과거시제)일반동사의 불규칙 변화형",
-                "sub": ""
+                "pattern_kr": "(과거시제)일반동사의 불규칙 변화형",
+                "big": "(과거시제)일반동사의 불규칙 변화형",
+                "siblings": [
+                  "speak",
+                  "people",
+                  "fish"
+                ]
               }
             }
           ]
@@ -4589,8 +5427,13 @@
                 "en": "She gave me a book.",
                 "kr": "그녀가 나에게 책을 한 권 줬어.",
                 "trigger": "book",
-                "title_kr": "두 개의 목적어를 필요로 하는 동사",
-                "sub": "4형식"
+                "pattern_kr": "4형식",
+                "big": "두 개의 목적어를 필요로 하는 동사",
+                "siblings": [
+                  "email",
+                  "message",
+                  "letter"
+                ]
               }
             },
             {
@@ -4611,8 +5454,13 @@
                 "en": "Did you send her an email?",
                 "kr": "당신은 그녀에게 이메일을 보냈나요?",
                 "trigger": "email",
-                "title_kr": "두 개의 목적어를 필요로 하는 동사",
-                "sub": ""
+                "pattern_kr": "4형식",
+                "big": "두 개의 목적어를 필요로 하는 동사",
+                "siblings": [
+                  "book",
+                  "message",
+                  "letter"
+                ]
               }
             },
             {
@@ -4634,8 +5482,13 @@
                 "en": "They didn't leave me a message.",
                 "kr": "그들은 나에게 메시지를 남기지 않았어.",
                 "trigger": "message",
-                "title_kr": "두 개의 목적어를 필요로 하는 동사",
-                "sub": ""
+                "pattern_kr": "4형식",
+                "big": "두 개의 목적어를 필요로 하는 동사",
+                "siblings": [
+                  "book",
+                  "email",
+                  "letter"
+                ]
               }
             },
             {
@@ -4657,8 +5510,13 @@
                 "en": "Did you write her a letter?",
                 "kr": "너는 그녀에게 편지를 썼니?",
                 "trigger": "letter",
-                "title_kr": "두 개의 목적어를 필요로 하는 동사",
-                "sub": ""
+                "pattern_kr": "4형식",
+                "big": "두 개의 목적어를 필요로 하는 동사",
+                "siblings": [
+                  "book",
+                  "email",
+                  "message"
+                ]
               }
             },
             {
@@ -4680,8 +5538,13 @@
                 "en": "We bought her a cake.",
                 "kr": "우리는 그녀에게 케이크를 사 줬어.",
                 "trigger": "cake",
-                "title_kr": "두 개의 목적어를 필요로 하는 동사",
-                "sub": ""
+                "pattern_kr": "4형식",
+                "big": "두 개의 목적어를 필요로 하는 동사",
+                "siblings": [
+                  "book",
+                  "email",
+                  "message"
+                ]
               }
             }
           ]
@@ -4709,8 +5572,13 @@
                 "en": "Music makes me happy.",
                 "kr": "음악은 나를 행복하게 만들어.",
                 "trigger": "music",
-                "title_kr": "목적격 보어를 필요로 하는 동사 I",
-                "sub": ""
+                "pattern_kr": "5형식",
+                "big": "목적격 보어를 필요로 하는 동사 I",
+                "siblings": [
+                  "food",
+                  "keep",
+                  "dog"
+                ]
               }
             },
             {
@@ -4731,8 +5599,13 @@
                 "en": "It keeps the food warm.",
                 "kr": "그것은 음식을 따뜻하게 유지해 줘.",
                 "trigger": "food",
-                "title_kr": "목적격 보어를 필요로 하는 동사 I",
-                "sub": ""
+                "pattern_kr": "5형식",
+                "big": "목적격 보어를 필요로 하는 동사 I",
+                "siblings": [
+                  "music",
+                  "keep",
+                  "dog"
+                ]
               }
             },
             {
@@ -4753,8 +5626,13 @@
                 "en": "Keep it safe.",
                 "kr": "그것을 안전하게 보관해 주세요.",
                 "trigger": "keep",
-                "title_kr": "목적격 보어를 필요로 하는 동사 I",
-                "sub": ""
+                "pattern_kr": "5형식",
+                "big": "목적격 보어를 필요로 하는 동사 I",
+                "siblings": [
+                  "music",
+                  "food",
+                  "dog"
+                ]
               }
             },
             {
@@ -4775,8 +5653,13 @@
                 "en": "I named our dog Max.",
                 "kr": "나는 우리 개를 맥스라고 이름 지었어.",
                 "trigger": "dog",
-                "title_kr": "목적격 보어를 필요로 하는 동사 I",
-                "sub": ""
+                "pattern_kr": "5형식",
+                "big": "목적격 보어를 필요로 하는 동사 I",
+                "siblings": [
+                  "music",
+                  "food",
+                  "keep"
+                ]
               }
             },
             {
@@ -4797,8 +5680,13 @@
                 "en": "They found the decision unfair.",
                 "kr": "그들은 그 결정이 불공평하다고 생각했다.",
                 "trigger": "decision",
-                "title_kr": "목적격 보어를 필요로 하는 동사 I",
-                "sub": ""
+                "pattern_kr": "5형식",
+                "big": "목적격 보어를 필요로 하는 동사 I",
+                "siblings": [
+                  "music",
+                  "food",
+                  "keep"
+                ]
               }
             }
           ]
@@ -4827,8 +5715,13 @@
                 "en": "Turn off the light.",
                 "kr": "불 꺼.",
                 "trigger": "light",
-                "title_kr": "타동사+부사의 어순",
-                "sub": "목적어가 명사인 경우"
+                "pattern_kr": "목적어가 명사인 경우",
+                "big": "타동사+부사의 어순",
+                "siblings": [
+                  "TV",
+                  "computer",
+                  "toy"
+                ]
               }
             },
             {
@@ -4849,8 +5742,13 @@
                 "en": "Did you turn on the TV?",
                 "kr": "네가 TV 켰어?",
                 "trigger": "TV",
-                "title_kr": "타동사+부사의 어순",
-                "sub": ""
+                "pattern_kr": "목적어가 명사인 경우",
+                "big": "타동사+부사의 어순",
+                "siblings": [
+                  "light",
+                  "computer",
+                  "toy"
+                ]
               }
             },
             {
@@ -4871,8 +5769,13 @@
                 "en": "Did you turn on the computer?",
                 "kr": "네가 컴퓨터 켰어?",
                 "trigger": "computer",
-                "title_kr": "타동사+부사의 어순",
-                "sub": ""
+                "pattern_kr": "목적어가 명사인 경우",
+                "big": "타동사+부사의 어순",
+                "siblings": [
+                  "light",
+                  "TV",
+                  "toy"
+                ]
               }
             },
             {
@@ -4893,8 +5796,13 @@
                 "en": "Pick up your toys.",
                 "kr": "네 장난감들 주워.",
                 "trigger": "toy",
-                "title_kr": "타동사+부사의 어순",
-                "sub": ""
+                "pattern_kr": "목적어가 명사인 경우",
+                "big": "타동사+부사의 어순",
+                "siblings": [
+                  "light",
+                  "TV",
+                  "computer"
+                ]
               }
             },
             {
@@ -4915,8 +5823,13 @@
                 "en": "Put down your pencils.",
                 "kr": "연필들 내려놓으세요.",
                 "trigger": "pencil",
-                "title_kr": "타동사+부사의 어순",
-                "sub": ""
+                "pattern_kr": "목적어가 명사인 경우",
+                "big": "타동사+부사의 어순",
+                "siblings": [
+                  "light",
+                  "TV",
+                  "computer"
+                ]
               }
             }
           ]
@@ -4946,8 +5859,13 @@
                 "en": "We will do our best.",
                 "kr": "우리는 최선을 다할 겁니다.",
                 "trigger": "good",
-                "title_kr": "미래시제",
-                "sub": "will"
+                "pattern_kr": "will",
+                "big": "미래시제",
+                "siblings": [
+                  "call",
+                  "rain",
+                  "soon"
+                ]
               }
             },
             {
@@ -4968,8 +5886,13 @@
                 "en": "Will you call me back later?",
                 "kr": "나중에 저한테 다시 전화해주시겠어요?",
                 "trigger": "call",
-                "title_kr": "미래시제",
-                "sub": ""
+                "pattern_kr": "will",
+                "big": "미래시제",
+                "siblings": [
+                  "good",
+                  "rain",
+                  "soon"
+                ]
               }
             },
             {
@@ -4990,8 +5913,13 @@
                 "en": "It will rain next Sunday.",
                 "kr": "다음 주 일요일에 비가 올 겁니다.",
                 "trigger": "rain",
-                "title_kr": "미래시제",
-                "sub": ""
+                "pattern_kr": "will",
+                "big": "미래시제",
+                "siblings": [
+                  "good",
+                  "call",
+                  "soon"
+                ]
               }
             },
             {
@@ -5012,8 +5940,13 @@
                 "en": "She will be here soon.",
                 "kr": "그녀는 곧 여기에 올 거야.",
                 "trigger": "soon",
-                "title_kr": "미래시제",
-                "sub": ""
+                "pattern_kr": "will",
+                "big": "미래시제",
+                "siblings": [
+                  "good",
+                  "call",
+                  "rain"
+                ]
               }
             },
             {
@@ -5035,8 +5968,13 @@
                 "en": "I will think about it.",
                 "kr": "그것에 대해 생각해 볼게요.",
                 "trigger": "think",
-                "title_kr": "미래시제",
-                "sub": ""
+                "pattern_kr": "will",
+                "big": "미래시제",
+                "siblings": [
+                  "good",
+                  "call",
+                  "rain"
+                ]
               }
             }
           ]
@@ -5065,8 +6003,13 @@
                 "en": "If it rains, we will stay home.",
                 "kr": "비가 온다면, 우리는 집에 머무를 거야.",
                 "trigger": "stay",
-                "title_kr": "조건을 나타내는 if",
-                "sub": "현재나 미래에 실제로 일어날 수 있는 사건"
+                "pattern_kr": "현재나 미래에 실제로 일어날 수 있는 사건",
+                "big": "조건을 나타내는 if",
+                "siblings": [
+                  "pencil",
+                  "dish",
+                  "let"
+                ]
               }
             },
             {
@@ -5087,8 +6030,13 @@
                 "en": "If you need a pencil, I can lend you one.",
                 "kr": "너 연필 필요하면, 내가 하나 빌려줄 수 있어.",
                 "trigger": "pencil",
-                "title_kr": "조건을 나타내는 if",
-                "sub": ""
+                "pattern_kr": "현재나 미래에 실제로 일어날 수 있는 사건",
+                "big": "조건을 나타내는 if",
+                "siblings": [
+                  "stay",
+                  "dish",
+                  "let"
+                ]
               }
             },
             {
@@ -5109,8 +6057,13 @@
                 "en": "If you make dinner, I'll do the dishes.",
                 "kr": "네가 저녁을 하면 내가 설거지를 할게.",
                 "trigger": "dish",
-                "title_kr": "조건을 나타내는 if",
-                "sub": ""
+                "pattern_kr": "현재나 미래에 실제로 일어날 수 있는 사건",
+                "big": "조건을 나타내는 if",
+                "siblings": [
+                  "stay",
+                  "pencil",
+                  "let"
+                ]
               }
             },
             {
@@ -5132,8 +6085,13 @@
                 "en": "If you figure it out, let me know.",
                 "kr": "네가 그걸 알아내면, 나한테 알려줘.",
                 "trigger": "let",
-                "title_kr": "조건을 나타내는 if",
-                "sub": ""
+                "pattern_kr": "현재나 미래에 실제로 일어날 수 있는 사건",
+                "big": "조건을 나타내는 if",
+                "siblings": [
+                  "stay",
+                  "pencil",
+                  "dish"
+                ]
               }
             },
             {
@@ -5154,8 +6112,13 @@
                 "en": "If it rains, we'll need to cancel the picnic.",
                 "kr": "비가 온다면, 우리는 소풍을 취소해야 할 거야.",
                 "trigger": "picnic",
-                "title_kr": "조건을 나타내는 if",
-                "sub": ""
+                "pattern_kr": "현재나 미래에 실제로 일어날 수 있는 사건",
+                "big": "조건을 나타내는 if",
+                "siblings": [
+                  "stay",
+                  "pencil",
+                  "dish"
+                ]
               }
             }
           ]
@@ -5183,8 +6146,13 @@
                 "en": "I want to study English.",
                 "kr": "나는 영어 공부하기를 원해.",
                 "trigger": "English",
-                "title_kr": "목적어로 쓰이는 to부정사",
-                "sub": "기본"
+                "pattern_kr": "기본",
+                "big": "목적어로 쓰이는 to부정사",
+                "siblings": [
+                  "Spanish",
+                  "hiking",
+                  "singer"
+                ]
               }
             },
             {
@@ -5205,8 +6173,13 @@
                 "en": "My friend wants to learn Spanish.",
                 "kr": "내 친구는 스페인어 배우기를 원해.",
                 "trigger": "Spanish",
-                "title_kr": "목적어로 쓰이는 to부정사",
-                "sub": ""
+                "pattern_kr": "기본",
+                "big": "목적어로 쓰이는 to부정사",
+                "siblings": [
+                  "English",
+                  "hiking",
+                  "singer"
+                ]
               }
             },
             {
@@ -5227,8 +6200,13 @@
                 "en": "Did you decide to go hiking?",
                 "kr": "하이킹 가는 것을 결정했니?",
                 "trigger": "hiking",
-                "title_kr": "목적어로 쓰이는 to부정사",
-                "sub": ""
+                "pattern_kr": "기본",
+                "big": "목적어로 쓰이는 to부정사",
+                "siblings": [
+                  "English",
+                  "Spanish",
+                  "singer"
+                ]
               }
             },
             {
@@ -5249,8 +6227,13 @@
                 "en": "I hope to be a famous singer.",
                 "kr": "나는 유명한 가수가 되는 것을 희망해.",
                 "trigger": "singer",
-                "title_kr": "목적어로 쓰이는 to부정사",
-                "sub": ""
+                "pattern_kr": "기본",
+                "big": "목적어로 쓰이는 to부정사",
+                "siblings": [
+                  "English",
+                  "Spanish",
+                  "hiking"
+                ]
               }
             },
             {
@@ -5271,8 +6254,13 @@
                 "en": "He hopes to start his own business soon.",
                 "kr": "그는 곧 자신의 사업을 시작하는 것을 희망하고 있습니다.",
                 "trigger": "business",
-                "title_kr": "목적어로 쓰이는 to부정사",
-                "sub": ""
+                "pattern_kr": "기본",
+                "big": "목적어로 쓰이는 to부정사",
+                "siblings": [
+                  "English",
+                  "Spanish",
+                  "hiking"
+                ]
               }
             }
           ]
@@ -5300,8 +6288,13 @@
                 "en": "He's taller than me.",
                 "kr": "그는 나보다 키가 더 커.",
                 "trigger": "tall",
-                "title_kr": "비교급",
-                "sub": "비교급"
+                "pattern_kr": "비교급",
+                "big": "비교급",
+                "siblings": [
+                  "dirty",
+                  "fat",
+                  "one"
+                ]
               }
             },
             {
@@ -5322,8 +6315,13 @@
                 "en": "His room is dirtier than mine.",
                 "kr": "그의 방이 내 방보다 더 더러워.",
                 "trigger": "dirty",
-                "title_kr": "비교급",
-                "sub": ""
+                "pattern_kr": "비교급",
+                "big": "비교급",
+                "siblings": [
+                  "tall",
+                  "fat",
+                  "one"
+                ]
               }
             },
             {
@@ -5344,8 +6342,13 @@
                 "en": "He's fatter than our other cats.",
                 "kr": "쟤는 우리 다른 고양이들보다 더 뚱뚱해.",
                 "trigger": "fat",
-                "title_kr": "비교급",
-                "sub": ""
+                "pattern_kr": "비교급",
+                "big": "비교급",
+                "siblings": [
+                  "tall",
+                  "dirty",
+                  "one"
+                ]
               }
             },
             {
@@ -5366,8 +6369,13 @@
                 "en": "Is this one cheaper?",
                 "kr": "이게 더 싼가요?",
                 "trigger": "one",
-                "title_kr": "비교급",
-                "sub": ""
+                "pattern_kr": "비교급",
+                "big": "비교급",
+                "siblings": [
+                  "tall",
+                  "dirty",
+                  "fat"
+                ]
               }
             },
             {
@@ -5389,8 +6397,13 @@
                 "en": "Come in! It's warmer inside.",
                 "kr": "들어오세요! 안이 더 따뜻해요.",
                 "trigger": "come",
-                "title_kr": "비교급",
-                "sub": ""
+                "pattern_kr": "비교급",
+                "big": "비교급",
+                "siblings": [
+                  "tall",
+                  "dirty",
+                  "fat"
+                ]
               }
             }
           ]
@@ -5418,8 +6431,13 @@
                 "en": "All their songs are written by her.",
                 "kr": "그들의 노래 전부는 그녀에 의해 쓰입니다.",
                 "trigger": "song",
-                "title_kr": "수동태 문장 만드는 법",
-                "sub": ""
+                "pattern_kr": "수동태 문장 만드는 법",
+                "big": "수동태 문장 만드는 법",
+                "siblings": [
+                  "content",
+                  "people",
+                  "million"
+                ]
               }
             },
             {
@@ -5440,8 +6458,13 @@
                 "en": "All of our content is reviewed by experts.",
                 "kr": "우리의 콘텐츠 전부는 전문가들에 의해 검토됩니다.",
                 "trigger": "content",
-                "title_kr": "수동태 문장 만드는 법",
-                "sub": ""
+                "pattern_kr": "수동태 문장 만드는 법",
+                "big": "수동태 문장 만드는 법",
+                "siblings": [
+                  "song",
+                  "people",
+                  "million"
+                ]
               }
             },
             {
@@ -5462,8 +6485,13 @@
                 "en": "Their music is enjoyed by people all over the world.",
                 "kr": "그들의 음악은 전 세계 사람들에 의해 즐겨집니다.",
                 "trigger": "people",
-                "title_kr": "수동태 문장 만드는 법",
-                "sub": ""
+                "pattern_kr": "수동태 문장 만드는 법",
+                "big": "수동태 문장 만드는 법",
+                "siblings": [
+                  "song",
+                  "content",
+                  "million"
+                ]
               }
             },
             {
@@ -5484,8 +6512,13 @@
                 "en": "This museum is visited by millions of people every year.",
                 "kr": "이 박물관은 매년 수백만 명의 사람들에 의해 방문 됩니다.",
                 "trigger": "million",
-                "title_kr": "수동태 문장 만드는 법",
-                "sub": ""
+                "pattern_kr": "수동태 문장 만드는 법",
+                "big": "수동태 문장 만드는 법",
+                "siblings": [
+                  "song",
+                  "content",
+                  "people"
+                ]
               }
             },
             {
@@ -5508,8 +6541,13 @@
                 "en": "This expression is used by native speakers.",
                 "kr": "이 표현은 원어민에 의해 사용됩니다.",
                 "trigger": "speaker",
-                "title_kr": "수동태 문장 만드는 법",
-                "sub": ""
+                "pattern_kr": "수동태 문장 만드는 법",
+                "big": "수동태 문장 만드는 법",
+                "siblings": [
+                  "song",
+                  "content",
+                  "people"
+                ]
               }
             }
           ]
@@ -5537,8 +6575,13 @@
                 "en": "It isn't easy to use chopsticks.",
                 "kr": "젓가락을 사용하는 것은 쉽지 않아요.",
                 "trigger": "easy",
-                "title_kr": "가주어 it / 가목적어 it",
-                "sub": "가주어 it ~ to"
+                "pattern_kr": "가주어 it ~ to",
+                "big": "가주어 it / 가목적어 it",
+                "siblings": [
+                  "guitar",
+                  "fun",
+                  "hard"
+                ]
               }
             },
             {
@@ -5560,8 +6603,13 @@
                 "en": "It's fun to play the guitar.",
                 "kr": "기타를 치는 것은 재미있어.",
                 "trigger": "guitar",
-                "title_kr": "가주어 it / 가목적어 it",
-                "sub": ""
+                "pattern_kr": "가주어 it ~ to",
+                "big": "가주어 it / 가목적어 it",
+                "siblings": [
+                  "easy",
+                  "fun",
+                  "hard"
+                ]
               }
             },
             {
@@ -5583,8 +6631,13 @@
                 "en": "It isn't fun to lose.",
                 "kr": "지는 건 재미없어.",
                 "trigger": "fun",
-                "title_kr": "가주어 it / 가목적어 it",
-                "sub": ""
+                "pattern_kr": "가주어 it ~ to",
+                "big": "가주어 it / 가목적어 it",
+                "siblings": [
+                  "easy",
+                  "guitar",
+                  "hard"
+                ]
               }
             },
             {
@@ -5606,8 +6659,13 @@
                 "en": "It's hard to make her happy.",
                 "kr": "그녀를 행복하게 하는 건 어려워.",
                 "trigger": "hard",
-                "title_kr": "가주어 it / 가목적어 it",
-                "sub": ""
+                "pattern_kr": "가주어 it ~ to",
+                "big": "가주어 it / 가목적어 it",
+                "siblings": [
+                  "easy",
+                  "guitar",
+                  "fun"
+                ]
               }
             },
             {
@@ -5628,8 +6686,13 @@
                 "en": "It's important to eat lots of vegetables.",
                 "kr": "야채를 많이 먹는 것은 중요해.",
                 "trigger": "important",
-                "title_kr": "가주어 it / 가목적어 it",
-                "sub": ""
+                "pattern_kr": "가주어 it ~ to",
+                "big": "가주어 it / 가목적어 it",
+                "siblings": [
+                  "easy",
+                  "guitar",
+                  "fun"
+                ]
               }
             }
           ]
@@ -5657,8 +6720,13 @@
                 "en": "Saving is very important.",
                 "kr": "저축하는 것은 매우 중요합니다.",
                 "trigger": "important",
-                "title_kr": "주어와 보어로 쓰이는 동명사",
-                "sub": ""
+                "pattern_kr": "주어",
+                "big": "주어와 보어로 쓰이는 동명사",
+                "siblings": [
+                  "family",
+                  "lot",
+                  "help"
+                ]
               }
             },
             {
@@ -5679,8 +6747,13 @@
                 "en": "Cooking for my family makes me happy.",
                 "kr": "가족을 위해 요리하는 것은 나를 행복하게 만들어.",
                 "trigger": "family",
-                "title_kr": "주어와 보어로 쓰이는 동명사",
-                "sub": ""
+                "pattern_kr": "주어",
+                "big": "주어와 보어로 쓰이는 동명사",
+                "siblings": [
+                  "important",
+                  "lot",
+                  "help"
+                ]
               }
             },
             {
@@ -5702,8 +6775,13 @@
                 "en": "Does traveling cost a lot of money?",
                 "kr": "여행하는 것은 많은 돈이 드나요?",
                 "trigger": "lot",
-                "title_kr": "주어와 보어로 쓰이는 동명사",
-                "sub": ""
+                "pattern_kr": "주어",
+                "big": "주어와 보어로 쓰이는 동명사",
+                "siblings": [
+                  "important",
+                  "family",
+                  "help"
+                ]
               }
             },
             {
@@ -5724,8 +6802,13 @@
                 "en": "Does listening to music help you focus?",
                 "kr": "음악을 듣는 것이 집중하는 데 도움이 되나요?",
                 "trigger": "help",
-                "title_kr": "주어와 보어로 쓰이는 동명사",
-                "sub": ""
+                "pattern_kr": "주어",
+                "big": "주어와 보어로 쓰이는 동명사",
+                "siblings": [
+                  "important",
+                  "family",
+                  "lot"
+                ]
               }
             },
             {
@@ -5746,8 +6829,13 @@
                 "en": "Is running a good way to relieve stress?",
                 "kr": "달리는 것이 스트레스를 푸는 좋은 방법일까요?",
                 "trigger": "stress",
-                "title_kr": "주어와 보어로 쓰이는 동명사",
-                "sub": ""
+                "pattern_kr": "주어",
+                "big": "주어와 보어로 쓰이는 동명사",
+                "siblings": [
+                  "important",
+                  "family",
+                  "lot"
+                ]
               }
             }
           ]
@@ -5775,8 +6863,13 @@
                 "en": "This is the team that beat us last time.",
                 "kr": "이쪽은 지난번에 우리를 이긴 팀이에요.",
                 "trigger": "team",
-                "title_kr": "that",
-                "sub": ""
+                "pattern_kr": "보어절 that",
+                "big": "that",
+                "siblings": [
+                  "reliable",
+                  "different",
+                  "point"
+                ]
               }
             },
             {
@@ -5798,8 +6891,13 @@
                 "en": "Is there a store that sells office supplies around here?",
                 "kr": "이 주변에 사무용품을 파는 가게가 있나요?",
                 "trigger": "store",
-                "title_kr": "that",
-                "sub": ""
+                "pattern_kr": "보어절 that",
+                "big": "that",
+                "siblings": [
+                  "reliable",
+                  "different",
+                  "point"
+                ]
               }
             },
             {
@@ -5820,8 +6918,13 @@
                 "en": "Do you know any restaurants that have a kids menu around here?",
                 "kr": "이 주변에 어린이 메뉴가 있는 식당들 알아?",
                 "trigger": "restaurant",
-                "title_kr": "that",
-                "sub": ""
+                "pattern_kr": "보어절 that",
+                "big": "that",
+                "siblings": [
+                  "reliable",
+                  "different",
+                  "point"
+                ]
               }
             },
             {
@@ -5842,8 +6945,13 @@
                 "en": "These are the rooms that need to be cleaned.",
                 "kr": "이것들이 청소가 필요한 그 방들이야.",
                 "trigger": "room",
-                "title_kr": "that",
-                "sub": ""
+                "pattern_kr": "보어절 that",
+                "big": "that",
+                "siblings": [
+                  "reliable",
+                  "different",
+                  "point"
+                ]
               }
             },
             {
@@ -5864,8 +6972,13 @@
                 "en": "This is the bakery that makes blueberry donuts.",
                 "kr": "여기는 블루베리 도넛을 만드는 빵집이야.",
                 "trigger": "bakery",
-                "title_kr": "that",
-                "sub": ""
+                "pattern_kr": "보어절 that",
+                "big": "that",
+                "siblings": [
+                  "reliable",
+                  "different",
+                  "point"
+                ]
               }
             }
           ]
@@ -5894,8 +7007,13 @@
                 "en": "There's nothing better than hanging out with friends.",
                 "kr": "친구들과 시간을 보내는 것보다 더 좋은 건 아무것도 없어.",
                 "trigger": "friend",
-                "title_kr": "There is nothing ~ 비교급 + than",
-                "sub": "There is nothing + 비교급 + than"
+                "pattern_kr": "There is nothing + 비교급 + than",
+                "big": "There is nothing ~ 비교급 + than",
+                "siblings": [
+                  "massage",
+                  "care",
+                  "home"
+                ]
               }
             },
             {
@@ -5916,8 +7034,13 @@
                 "en": "There's nothing more relaxing than a nice massage.",
                 "kr": "좋은 마사지보다 더 편한 건 아무것도 없어.",
                 "trigger": "massage",
-                "title_kr": "There is nothing ~ 비교급 + than",
-                "sub": ""
+                "pattern_kr": "There is nothing + 비교급 + than",
+                "big": "There is nothing ~ 비교급 + than",
+                "siblings": [
+                  "friend",
+                  "care",
+                  "home"
+                ]
               }
             },
             {
@@ -5938,8 +7061,13 @@
                 "en": "There's nothing more exhausting than taking care of toddlers.",
                 "kr": "걸음마를 배우는 아이를 돌보는 것보다 더 힘든 건 아무것도 없어.",
                 "trigger": "care",
-                "title_kr": "There is nothing ~ 비교급 + than",
-                "sub": ""
+                "pattern_kr": "There is nothing + 비교급 + than",
+                "big": "There is nothing ~ 비교급 + than",
+                "siblings": [
+                  "friend",
+                  "massage",
+                  "home"
+                ]
               }
             },
             {
@@ -5960,8 +7088,13 @@
                 "en": "There's nothing better than a quiet evening at home.",
                 "kr": "집에서 보내는 조용한 저녁보다 더 좋은 건 아무것도 없어.",
                 "trigger": "home",
-                "title_kr": "There is nothing ~ 비교급 + than",
-                "sub": ""
+                "pattern_kr": "There is nothing + 비교급 + than",
+                "big": "There is nothing ~ 비교급 + than",
+                "siblings": [
+                  "friend",
+                  "massage",
+                  "care"
+                ]
               }
             },
             {
@@ -5983,8 +7116,13 @@
                 "en": "There's nothing more romantic than a walk on the beach.",
                 "kr": "해변에서의 산책보다 더 낭만적인 것은 아무것도 없어.",
                 "trigger": "walk",
-                "title_kr": "There is nothing ~ 비교급 + than",
-                "sub": ""
+                "pattern_kr": "There is nothing + 비교급 + than",
+                "big": "There is nothing ~ 비교급 + than",
+                "siblings": [
+                  "friend",
+                  "massage",
+                  "care"
+                ]
               }
             }
           ]
@@ -6012,8 +7150,13 @@
                 "en": "This is the house in which he was born.",
                 "kr": "여기가 그가 태어난 집이에요.",
                 "trigger": "house",
-                "title_kr": "전치사+관계대명사",
-                "sub": "전치사+관계대명사"
+                "pattern_kr": "전치사+관계대명사",
+                "big": "전치사+관계대명사",
+                "siblings": [
+                  "birthday",
+                  "song",
+                  "gratitude"
+                ]
               }
             },
             {
@@ -6034,8 +7177,13 @@
                 "en": "Your birthday is the day on which you were born.",
                 "kr": "생일은 태어난 날입니다.",
                 "trigger": "birthday",
-                "title_kr": "전치사+관계대명사",
-                "sub": ""
+                "pattern_kr": "전치사+관계대명사",
+                "big": "전치사+관계대명사",
+                "siblings": [
+                  "house",
+                  "song",
+                  "gratitude"
+                ]
               }
             },
             {
@@ -6056,8 +7204,13 @@
                 "en": "She's the one for whom the song was written.",
                 "kr": "그녀는 그 노래가 쓰여진 이유가 되는 사람이에요.",
                 "trigger": "song",
-                "title_kr": "전치사+관계대명사",
-                "sub": ""
+                "pattern_kr": "전치사+관계대명사",
+                "big": "전치사+관계대명사",
+                "siblings": [
+                  "house",
+                  "birthday",
+                  "gratitude"
+                ]
               }
             },
             {
@@ -6078,8 +7231,13 @@
                 "en": "He's the one to whom we owe our gratitude.",
                 "kr": "그는 우리가 감사해야 하는 사람이에요.",
                 "trigger": "gratitude",
-                "title_kr": "전치사+관계대명사",
-                "sub": ""
+                "pattern_kr": "전치사+관계대명사",
+                "big": "전치사+관계대명사",
+                "siblings": [
+                  "house",
+                  "birthday",
+                  "song"
+                ]
               }
             },
             {
@@ -6101,8 +7259,13 @@
                 "en": "It's said that Christmas is the day on which Jesus was born.",
                 "kr": "크리스마스는 예수가 태어난 날이라고 합니다.",
                 "trigger": "say",
-                "title_kr": "전치사+관계대명사",
-                "sub": ""
+                "pattern_kr": "전치사+관계대명사",
+                "big": "전치사+관계대명사",
+                "siblings": [
+                  "house",
+                  "birthday",
+                  "song"
+                ]
               }
             }
           ]
@@ -6131,8 +7294,13 @@
                 "en": "Do you know what her name is?",
                 "kr": "너는 그녀의 이름이 뭔지 알아?",
                 "trigger": "name",
-                "title_kr": "간접의문문I",
-                "sub": "의문사가 있는 경우"
+                "pattern_kr": "의문사가 있는 경우",
+                "big": "간접의문문I",
+                "siblings": [
+                  "hear",
+                  "know",
+                  "see"
+                ]
               }
             },
             {
@@ -6153,8 +7321,13 @@
                 "en": "Did you hear what he said?",
                 "kr": "너는 그가 뭐라고 말했는지 들었어?",
                 "trigger": "hear",
-                "title_kr": "간접의문문I",
-                "sub": ""
+                "pattern_kr": "의문사가 있는 경우",
+                "big": "간접의문문I",
+                "siblings": [
+                  "name",
+                  "know",
+                  "see"
+                ]
               }
             },
             {
@@ -6176,8 +7349,13 @@
                 "en": "Do you know who helped her?",
                 "kr": "당신은 누가 그녀를 도와줬는지 아시나요?",
                 "trigger": "know",
-                "title_kr": "간접의문문I",
-                "sub": ""
+                "pattern_kr": "의문사가 있는 경우",
+                "big": "간접의문문I",
+                "siblings": [
+                  "name",
+                  "hear",
+                  "see"
+                ]
               }
             },
             {
@@ -6198,8 +7376,13 @@
                 "en": "Did you see who did this?",
                 "kr": "너는 누가 이걸 했는지 봤어?",
                 "trigger": "see",
-                "title_kr": "간접의문문I",
-                "sub": ""
+                "pattern_kr": "의문사가 있는 경우",
+                "big": "간접의문문I",
+                "siblings": [
+                  "name",
+                  "hear",
+                  "know"
+                ]
               }
             },
             {
@@ -6221,8 +7404,13 @@
                 "en": "Did she say when she's arriving?",
                 "kr": "그녀가 언제 도착하는지 말했나요?",
                 "trigger": "say",
-                "title_kr": "간접의문문I",
-                "sub": ""
+                "pattern_kr": "의문사가 있는 경우",
+                "big": "간접의문문I",
+                "siblings": [
+                  "name",
+                  "hear",
+                  "know"
+                ]
               }
             }
           ]
@@ -6253,8 +7441,13 @@
                 "en": "It's my office that I'll miss the most.",
                 "kr": "내가 가장 그리워할 것은 바로 나의 사무실이야.",
                 "trigger": "office",
-                "title_kr": "it의 특별 용법",
-                "sub": "it ~ that 강조 구문"
+                "pattern_kr": "it ~ that 강조 구문",
+                "big": "it의 특별 용법",
+                "siblings": [
+                  "beach",
+                  "temper",
+                  "optimism"
+                ]
               }
             },
             {
@@ -6275,8 +7468,13 @@
                 "en": "It's the beaches that made me fall in love with this city.",
                 "kr": "내가 이 도시와 사랑에 빠지게 만든 것은 바로 해변들이야.",
                 "trigger": "beach",
-                "title_kr": "it의 특별 용법",
-                "sub": ""
+                "pattern_kr": "it ~ that 강조 구문",
+                "big": "it의 특별 용법",
+                "siblings": [
+                  "office",
+                  "temper",
+                  "optimism"
+                ]
               }
             },
             {
@@ -6297,8 +7495,13 @@
                 "en": "It's his temper that makes him hard to work with.",
                 "kr": "그를 함께 일하기 어렵게 만드는 것은 바로 그의 성질입니다.",
                 "trigger": "temper",
-                "title_kr": "it의 특별 용법",
-                "sub": ""
+                "pattern_kr": "it ~ that 강조 구문",
+                "big": "it의 특별 용법",
+                "siblings": [
+                  "office",
+                  "beach",
+                  "optimism"
+                ]
               }
             },
             {
@@ -6320,8 +7523,13 @@
                 "en": "It's her optimism that I love the most.",
                 "kr": "내가 가장 사랑하는 것은 바로 그녀의 낙관주의야.",
                 "trigger": "optimism",
-                "title_kr": "it의 특별 용법",
-                "sub": ""
+                "pattern_kr": "it ~ that 강조 구문",
+                "big": "it의 특별 용법",
+                "siblings": [
+                  "office",
+                  "beach",
+                  "temper"
+                ]
               }
             },
             {
@@ -6342,8 +7550,13 @@
                 "en": "It was in this house that the Beatles wrote their early songs.",
                 "kr": "비틀스가 자신들의 초기 곡을 만든 것은 바로 이 집에서야.",
                 "trigger": "song",
-                "title_kr": "it의 특별 용법",
-                "sub": ""
+                "pattern_kr": "it ~ that 강조 구문",
+                "big": "it의 특별 용법",
+                "siblings": [
+                  "office",
+                  "beach",
+                  "temper"
+                ]
               }
             }
           ]
@@ -6371,8 +7584,9 @@
                 "en": "Jog slowly so that you don't get tired.",
                 "kr": "지치지 않도록 천천히 조깅하세요.",
                 "trigger": "jog",
-                "title_kr": "so that ~, so ~ that",
-                "sub": "so that ~ (목적)"
+                "pattern_kr": "so that ~ (목적)",
+                "big": "so that ~, so ~ that",
+                "siblings": []
               }
             },
             {
@@ -6393,8 +7607,13 @@
                 "en": "We should leave early so that we're not late.",
                 "kr": "우리는 늦지 않도록 일찍 출발해야 해.",
                 "trigger": "leave",
-                "title_kr": "so that ~, so ~ that",
-                "sub": "that 생략하고 정답 맞히면 원래 들어가야할 거 맞혀볼래?"
+                "pattern_kr": "that 생략하고 정답 맞히면 원래 들어가야할 거 맞혀볼래?",
+                "big": "so that ~, so ~ that",
+                "siblings": [
+                  "coat",
+                  "send",
+                  "stuff"
+                ]
               }
             },
             {
@@ -6416,8 +7635,13 @@
                 "en": "Bring a coat so that you don't get cold.",
                 "kr": "추워지지 않도록 코트를 가져오세요.",
                 "trigger": "coat",
-                "title_kr": "so that ~, so ~ that",
-                "sub": ""
+                "pattern_kr": "that 생략하고 정답 맞히면 원래 들어가야할 거 맞혀볼래?",
+                "big": "so that ~, so ~ that",
+                "siblings": [
+                  "leave",
+                  "send",
+                  "stuff"
+                ]
               }
             },
             {
@@ -6439,8 +7663,13 @@
                 "en": "I'll send it today so that you get it by Friday.",
                 "kr": "당신이 금요일까지 그걸 받도록 제가 그걸 오늘 보낼게요.",
                 "trigger": "send",
-                "title_kr": "so that ~, so ~ that",
-                "sub": ""
+                "pattern_kr": "that 생략하고 정답 맞히면 원래 들어가야할 거 맞혀볼래?",
+                "big": "so that ~, so ~ that",
+                "siblings": [
+                  "leave",
+                  "coat",
+                  "stuff"
+                ]
               }
             },
             {
@@ -6461,8 +7690,13 @@
                 "en": "Let's go by car so that we can take more stuff.",
                 "kr": "우리가 더 많은 물건을 가져갈 수 있도록 차를 타고 갑시다.",
                 "trigger": "stuff",
-                "title_kr": "so that ~, so ~ that",
-                "sub": ""
+                "pattern_kr": "that 생략하고 정답 맞히면 원래 들어가야할 거 맞혀볼래?",
+                "big": "so that ~, so ~ that",
+                "siblings": [
+                  "leave",
+                  "coat",
+                  "send"
+                ]
               }
             }
           ]
@@ -6491,8 +7725,12 @@
                 "en": "I've finally finished my project.",
                 "kr": "나는 마침내 프로젝트를 끝냈어.",
                 "trigger": "project",
-                "title_kr": "현재완료의 형태",
-                "sub": "평서문"
+                "pattern_kr": "평서문",
+                "big": "현재완료의 형태",
+                "siblings": [
+                  "Chicago",
+                  "Paris"
+                ]
               }
             },
             {
@@ -6513,8 +7751,12 @@
                 "en": "She's lived in Chicago for five years.",
                 "kr": "그녀는 시카고에서 5년 동안 살아왔다.",
                 "trigger": "Chicago",
-                "title_kr": "현재완료의 형태",
-                "sub": ""
+                "pattern_kr": "평서문",
+                "big": "현재완료의 형태",
+                "siblings": [
+                  "project",
+                  "Paris"
+                ]
               }
             },
             {
@@ -6537,8 +7779,12 @@
                 "en": "He's gone back to Paris for good.",
                 "kr": "그는 파리로 영원히 돌아갔다.",
                 "trigger": "Paris",
-                "title_kr": "현재완료의 형태",
-                "sub": ""
+                "pattern_kr": "평서문",
+                "big": "현재완료의 형태",
+                "siblings": [
+                  "project",
+                  "Chicago"
+                ]
               }
             },
             {
@@ -6560,8 +7806,13 @@
                 "en": "I haven't forgotten her name.",
                 "kr": "나는 그녀의 이름을 잊지 않았어.",
                 "trigger": "name",
-                "title_kr": "현재완료의 형태",
-                "sub": "부정문"
+                "pattern_kr": "부정문",
+                "big": "현재완료의 형태",
+                "siblings": [
+                  "news",
+                  "homework",
+                  "talk"
+                ]
               }
             },
             {
@@ -6583,8 +7834,13 @@
                 "en": "We haven't told everyone the news.",
                 "kr": "우리는 그 소식을 모두에게 알리지 않았어.",
                 "trigger": "news",
-                "title_kr": "현재완료의 형태",
-                "sub": ""
+                "pattern_kr": "부정문",
+                "big": "현재완료의 형태",
+                "siblings": [
+                  "name",
+                  "homework",
+                  "talk"
+                ]
               }
             }
           ]
@@ -6612,8 +7868,13 @@
                 "en": "An ancient city has been discovered in Australia.",
                 "kr": "고대 도시가 호주에서 발견되었습니다.",
                 "trigger": "Australia",
-                "title_kr": "현재완료 진행시제",
-                "sub": ""
+                "pattern_kr": "현재완료 진행시제",
+                "big": "현재완료 진행시제",
+                "siblings": [
+                  "piano",
+                  "lot",
+                  "English"
+                ]
               }
             },
             {
@@ -6634,8 +7895,13 @@
                 "en": "Plastic straws have been replaced by paper straws at Starbucks.",
                 "kr": "스타벅스에서 플라스틱 빨대는 종이 빨대에 의해 대체되었습니다.",
                 "trigger": "straw",
-                "title_kr": "현재완료 진행시제",
-                "sub": ""
+                "pattern_kr": "현재완료 진행시제",
+                "big": "현재완료 진행시제",
+                "siblings": [
+                  "piano",
+                  "lot",
+                  "English"
+                ]
               }
             },
             {
@@ -6656,8 +7922,13 @@
                 "en": "That computer hasn't been used in years.",
                 "kr": "그 컴퓨터는 수년간 사용되지 않았어.",
                 "trigger": "computer",
-                "title_kr": "현재완료 진행시제",
-                "sub": ""
+                "pattern_kr": "현재완료 진행시제",
+                "big": "현재완료 진행시제",
+                "siblings": [
+                  "piano",
+                  "lot",
+                  "English"
+                ]
               }
             },
             {
@@ -6678,8 +7949,13 @@
                 "en": "I haven't been invited to any parties this year.",
                 "kr": "나는 올해 어떤 파티에도 초대받은 적이 없어.",
                 "trigger": "party",
-                "title_kr": "현재완료 진행시제",
-                "sub": ""
+                "pattern_kr": "현재완료 진행시제",
+                "big": "현재완료 진행시제",
+                "siblings": [
+                  "piano",
+                  "lot",
+                  "English"
+                ]
               }
             },
             {
@@ -6701,8 +7977,13 @@
                 "en": "This place hasn't been cleaned in months.",
                 "kr": "이 곳은 몇 달 동안 청소되지 않았어.",
                 "trigger": "place",
-                "title_kr": "현재완료 진행시제",
-                "sub": ""
+                "pattern_kr": "현재완료 진행시제",
+                "big": "현재완료 진행시제",
+                "siblings": [
+                  "piano",
+                  "lot",
+                  "English"
+                ]
               }
             }
           ]
@@ -6731,8 +8012,13 @@
                 "en": "This money is used to help the poor.",
                 "kr": "이 돈은 가난한 사람들을 돕는 데 사용됩니다.",
                 "trigger": "money",
-                "title_kr": "the+형용사",
-                "sub": ""
+                "pattern_kr": "목적어로 쓰인 경우",
+                "big": "the+형용사",
+                "siblings": [
+                  "law",
+                  "hospital",
+                  "tax"
+                ]
               }
             },
             {
@@ -6754,8 +8040,13 @@
                 "en": "This law only benefits the rich.",
                 "kr": "이 법은 부자들에게만 이익이 됩니다.",
                 "trigger": "law",
-                "title_kr": "the+형용사",
-                "sub": ""
+                "pattern_kr": "목적어로 쓰인 경우",
+                "big": "the+형용사",
+                "siblings": [
+                  "money",
+                  "hospital",
+                  "tax"
+                ]
               }
             },
             {
@@ -6776,8 +8067,13 @@
                 "en": "They transported the injured to the nearest hospital.",
                 "kr": "그들은 부상자들을 가장 가까운 병원으로 수송했다.",
                 "trigger": "hospital",
-                "title_kr": "the+형용사",
-                "sub": ""
+                "pattern_kr": "목적어로 쓰인 경우",
+                "big": "the+형용사",
+                "siblings": [
+                  "money",
+                  "law",
+                  "tax"
+                ]
               }
             },
             {
@@ -6798,8 +8094,13 @@
                 "en": "Does he plan to raise taxes on the wealthy?",
                 "kr": "그는 부유층에 대한 세금을 인상할 계획인가요?",
                 "trigger": "tax",
-                "title_kr": "the+형용사",
-                "sub": ""
+                "pattern_kr": "목적어로 쓰인 경우",
+                "big": "the+형용사",
+                "siblings": [
+                  "money",
+                  "law",
+                  "hospital"
+                ]
               }
             },
             {
@@ -6820,8 +8121,13 @@
                 "en": "We serve food to the homeless twice a month.",
                 "kr": "우리는 한 달에 두 번 노숙자들에게 음식을 제공합니다.",
                 "trigger": "food",
-                "title_kr": "the+형용사",
-                "sub": ""
+                "pattern_kr": "목적어로 쓰인 경우",
+                "big": "the+형용사",
+                "siblings": [
+                  "money",
+                  "law",
+                  "hospital"
+                ]
               }
             }
           ]
@@ -6849,8 +8155,13 @@
                 "en": "If we took the subway, we'd be there by five.",
                 "kr": "만약 우리가 지하철을 탄다면, 5시까지 거기에 도착할 텐데.",
                 "trigger": "subway",
-                "title_kr": "if + 가정법 과거",
-                "sub": ""
+                "pattern_kr": "일반 동사",
+                "big": "if + 가정법 과거",
+                "siblings": [
+                  "tired",
+                  "number",
+                  "wallet"
+                ]
               }
             },
             {
@@ -6871,8 +8182,13 @@
                 "en": "If you went to sleep earlier, you wouldn't be so tired.",
                 "kr": "네가 더 일찍 잔다면, 그렇게 피곤하지 않을 텐데.",
                 "trigger": "tired",
-                "title_kr": "if + 가정법 과거",
-                "sub": ""
+                "pattern_kr": "일반 동사",
+                "big": "if + 가정법 과거",
+                "siblings": [
+                  "subway",
+                  "number",
+                  "wallet"
+                ]
               }
             },
             {
@@ -6893,8 +8209,13 @@
                 "en": "If I knew her phone number, I would call her.",
                 "kr": "만약 내가 그녀의 전화번호를 안다면, 그녀에게 전화할 텐데.",
                 "trigger": "number",
-                "title_kr": "if + 가정법 과거",
-                "sub": ""
+                "pattern_kr": "일반 동사",
+                "big": "if + 가정법 과거",
+                "siblings": [
+                  "subway",
+                  "tired",
+                  "wallet"
+                ]
               }
             },
             {
@@ -6915,8 +8236,13 @@
                 "en": "If I had my wallet on me right now, I'd definitely buy this.",
                 "kr": "지금 당장 나한테 지갑이 있다면, 이걸 꼭 살 텐데.",
                 "trigger": "wallet",
-                "title_kr": "if + 가정법 과거",
-                "sub": ""
+                "pattern_kr": "일반 동사",
+                "big": "if + 가정법 과거",
+                "siblings": [
+                  "subway",
+                  "tired",
+                  "number"
+                ]
               }
             },
             {
@@ -6938,8 +8264,13 @@
                 "en": "If I knew how to bake, I'd bake you a birthday cake.",
                 "kr": "내가 (빵) 굽는 법을 안다면 너에게 생일 케이크를 만들어 줄 텐데.",
                 "trigger": "cake",
-                "title_kr": "if + 가정법 과거",
-                "sub": ""
+                "pattern_kr": "일반 동사",
+                "big": "if + 가정법 과거",
+                "siblings": [
+                  "subway",
+                  "tired",
+                  "number"
+                ]
               }
             }
           ]
@@ -6968,8 +8299,13 @@
                 "en": "If we had known it was cancelled, we wouldn't have come.",
                 "kr": "그것이 취소된 걸 알았더라면, 우리는 오지 않았을 텐데.",
                 "trigger": "come",
-                "title_kr": "if + 가정법 과거완료",
-                "sub": ""
+                "pattern_kr": "if + 가정법 과거완료",
+                "big": "if + 가정법 과거완료",
+                "siblings": [
+                  "beach",
+                  "go",
+                  "concert"
+                ]
               }
             },
             {
@@ -6990,8 +8326,13 @@
                 "en": "If it hadn't been rainy, we would have gone to the beach.",
                 "kr": "비가 오지 않았더라면 우리는 해변에 갔을 텐데.",
                 "trigger": "beach",
-                "title_kr": "if + 가정법 과거완료",
-                "sub": ""
+                "pattern_kr": "if + 가정법 과거완료",
+                "big": "if + 가정법 과거완료",
+                "siblings": [
+                  "come",
+                  "go",
+                  "concert"
+                ]
               }
             },
             {
@@ -7013,8 +8354,13 @@
                 "en": "I would have gone if it hadn't been so cold.",
                 "kr": "그렇게 춥지 않았더라면 나는 갔을 텐데.",
                 "trigger": "go",
-                "title_kr": "if + 가정법 과거완료",
-                "sub": ""
+                "pattern_kr": "if + 가정법 과거완료",
+                "big": "if + 가정법 과거완료",
+                "siblings": [
+                  "come",
+                  "beach",
+                  "concert"
+                ]
               }
             },
             {
@@ -7036,8 +8382,13 @@
                 "en": "If I hadn't gone to the concert, I would have regretted it.",
                 "kr": "그 콘서트에 가지 않았다면 나는 후회했을 거야.",
                 "trigger": "concert",
-                "title_kr": "if + 가정법 과거완료",
-                "sub": ""
+                "pattern_kr": "if + 가정법 과거완료",
+                "big": "if + 가정법 과거완료",
+                "siblings": [
+                  "come",
+                  "beach",
+                  "go"
+                ]
               }
             },
             {
@@ -7058,8 +8409,13 @@
                 "en": "If you hadn't come to the party, we would never have met.",
                 "kr": "네가 그 파티에 오지 않았더라면, 우리는 결코 만나지 못했을 거야.",
                 "trigger": "party",
-                "title_kr": "if + 가정법 과거완료",
-                "sub": ""
+                "pattern_kr": "if + 가정법 과거완료",
+                "big": "if + 가정법 과거완료",
+                "siblings": [
+                  "come",
+                  "beach",
+                  "go"
+                ]
               }
             }
           ]
@@ -7088,8 +8444,13 @@
                 "en": "Were you a girl, you would understand.",
                 "kr": "네가 여자라면 이해할 텐데.",
                 "trigger": "girl",
-                "title_kr": "if의 생략",
-                "sub": "가정법 과거"
+                "pattern_kr": "가정법 과거",
+                "big": "if의 생략",
+                "siblings": [
+                  "proud",
+                  "know",
+                  "dinner"
+                ]
               }
             },
             {
@@ -7110,8 +8471,13 @@
                 "en": "Were your grandfather here, he would be so proud.",
                 "kr": "네 할아버지가 여기 계신다면 정말 자랑스러워하실 텐데.",
                 "trigger": "proud",
-                "title_kr": "if의 생략",
-                "sub": ""
+                "pattern_kr": "가정법 과거",
+                "big": "if의 생략",
+                "siblings": [
+                  "girl",
+                  "know",
+                  "dinner"
+                ]
               }
             },
             {
@@ -7133,8 +8499,13 @@
                 "en": "Were Rick here, he would know what to do.",
                 "kr": "릭이 여기 있다면 그는 무엇을 해야 할지 알 텐데.",
                 "trigger": "know",
-                "title_kr": "if의 생략",
-                "sub": ""
+                "pattern_kr": "가정법 과거",
+                "big": "if의 생략",
+                "siblings": [
+                  "girl",
+                  "proud",
+                  "dinner"
+                ]
               }
             },
             {
@@ -7155,8 +8526,13 @@
                 "en": "Were James here, he would eat dinner with us.",
                 "kr": "제임스가 여기 있다면 우리와 함께 저녁을 먹을 텐데.",
                 "trigger": "dinner",
-                "title_kr": "if의 생략",
-                "sub": ""
+                "pattern_kr": "가정법 과거",
+                "big": "if의 생략",
+                "siblings": [
+                  "girl",
+                  "proud",
+                  "know"
+                ]
               }
             },
             {
@@ -7177,8 +8553,13 @@
                 "en": "Were I that rich, I would use my money to help people.",
                 "kr": "내가 그렇게 부유하다면, 나는 내 돈을 사람들을 돕기 위해 쓸 텐데.",
                 "trigger": "people",
-                "title_kr": "if의 생략",
-                "sub": ""
+                "pattern_kr": "가정법 과거",
+                "big": "if의 생략",
+                "siblings": [
+                  "girl",
+                  "proud",
+                  "know"
+                ]
               }
             }
           ]
@@ -7206,8 +8587,13 @@
                 "en": "Should you have any questions, feel free to ask.",
                 "kr": "질문이 있다면, 부담 갖지 말고 물어보세요.",
                 "trigger": "question",
-                "title_kr": "if의 생략",
-                "sub": ""
+                "pattern_kr": "가정법 과거완료",
+                "big": "if의 생략",
+                "siblings": [
+                  "late",
+                  "help",
+                  "bus"
+                ]
               }
             },
             {
@@ -7228,8 +8614,13 @@
                 "en": "Should you have any inquiries, please contact customer support.",
                 "kr": "문의 사항이 있다면, 고객센터로 연락해 주세요.",
                 "trigger": "support",
-                "title_kr": "if의 생략",
-                "sub": ""
+                "pattern_kr": "가정법 과거완료",
+                "big": "if의 생략",
+                "siblings": [
+                  "late",
+                  "help",
+                  "bus"
+                ]
               }
             },
             {
@@ -7250,8 +8641,13 @@
                 "en": "Should any problems arise, please contact Mr. Anderson.",
                 "kr": "조금이라도 문제가 발생한다면, 앤더슨 씨에게 연락해 주세요.",
                 "trigger": "problem",
-                "title_kr": "if의 생략",
-                "sub": ""
+                "pattern_kr": "가정법 과거완료",
+                "big": "if의 생략",
+                "siblings": [
+                  "late",
+                  "help",
+                  "bus"
+                ]
               }
             },
             {
@@ -7272,8 +8668,13 @@
                 "en": "He requested that she extend his contract.",
                 "kr": "그는 그녀가 그의 계약을 연장해야 한다고 요구했다.",
                 "trigger": "contract",
-                "title_kr": "가정법 현재 명사절",
-                "sub": "that+주어+should+동사원형에서 should 생략"
+                "pattern_kr": "that+주어+should+동사원형에서 should 생략",
+                "big": "가정법 현재 명사절",
+                "siblings": [
+                  "size",
+                  "money",
+                  "class"
+                ]
               }
             },
             {
@@ -7294,8 +8695,13 @@
                 "en": "Emma suggested that the store sell bigger sizes.",
                 "kr": "엠마는 그 가게가 더 큰 사이즈를 팔아야 한다고 제안했다.",
                 "trigger": "size",
-                "title_kr": "가정법 현재 명사절",
-                "sub": ""
+                "pattern_kr": "that+주어+should+동사원형에서 should 생략",
+                "big": "가정법 현재 명사절",
+                "siblings": [
+                  "contract",
+                  "money",
+                  "class"
+                ]
               }
             }
           ]

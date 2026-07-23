@@ -144,14 +144,29 @@ def build_mode(csv_path, kind, vocab_by_seq, cefr_by_seq):
         C = dict(level=6, sentence=10, trans=11, big=21, sub=22, cw=23, seq=25)
 
     ncol = max(C.values()) + 1
-    # 병합셀(빈칸) forward-fill 대상 컬럼
-    ff_cols = [C["level"]] + ([C["cat"]] if kind == "expression" else [C["big"]])
+    # 병합셀(빈칸) forward-fill 대상 컬럼: 레벨 + (표현: 카테고리·표현 제목 / 문법: 큰제목·소제목)
+    ff_cols = [C["level"]] + ([C["cat"], C["title_en"], C["title_kr"]] if kind == "expression" else [C["big"], C["sub"]])
     ff = {c: "" for c in ff_cols}
 
-    levels = {}   # level -> {items, seen_words, big}
+    # 패턴별 필러(트리거 단어) 수집 → 정답 후 '다른 단어도 이렇게 써요' 일반화용
+    pattern_fillers = {}  # patternKey -> [content_word ...] (등장순, 중복 제거)
+
+    def pattern_key():
+        if kind == "expression":
+            return (ff[C["title_en"]] or ff[C["title_kr"]]).strip()
+        return (ff[C["big"]] + "::" + ff[C["sub"]]).strip("::")
+
+    levels = {}   # level -> {items, seen, ...}
+    all_items = []
+    prev_big = None
     for r in rows[1:]:
         if len(r) < ncol:
             continue
+        # 큰제목이 바뀌면 소제목 forward-fill을 리셋(다음 큰제목으로 번지지 않게)
+        if kind == "grammar" and r[C["big"]].strip() and r[C["big"]].strip() != prev_big:
+            prev_big = r[C["big"]].strip()
+            if not r[C["sub"]].strip():
+                ff[C["sub"]] = ""
         for c in ff_cols:
             if r[c].strip():
                 ff[c] = r[c].strip()
@@ -177,44 +192,60 @@ def build_mode(csv_path, kind, vocab_by_seq, cefr_by_seq):
         if vex is None:
             continue
 
-        bucket = levels.setdefault(lv, {"items": [], "seen": set(), "big": ff.get(C.get("big", -1), "") if kind == "grammar" else ""})
+        # 패턴별 필러 누적(레벨 상한과 무관하게 전체 스캔에서 모음)
+        pk = pattern_key()
+        if pk:
+            lst = pattern_fillers.setdefault(pk, [])
+            if cw not in lst:
+                lst.append(cw)
+
+        bucket = levels.setdefault(lv, {"items": [], "seen": set()})
         if len(bucket["items"]) >= ITEMS_PER_LEVEL:
             continue
         if cw.lower() in bucket["seen"]:
             continue
         bucket["seen"].add(cw.lower())
 
+        s = {
+            "en": strip_markup(sent),
+            "kr": strip_markup(trans),
+            "trigger": cw,
+            "_pk": pk,
+        }
+        if kind == "expression":
+            s["pattern_en"] = ff[C["title_en"]]
+            s["pattern_kr"] = ff[C["title_kr"]]
+            s["category"] = ff[C["cat"]]
+        else:
+            s["pattern_kr"] = ff[C["sub"]] or ff[C["big"]]
+            s["big"] = ff[C["big"]]
         item = {
             "word": vocab["spelling"],
             "meaning": vocab["meaning"],
             "pos": vocab["pos"],
             "cefr": cefr_by_seq.get(int(seq), ""),
             "vocab": vex,
-            "sentence": {
-                "en": strip_markup(sent),
-                "kr": strip_markup(trans),
-                "trigger": cw,
-            },
+            "sentence": s,
         }
-        if kind == "expression":
-            item["sentence"]["title_en"] = r[C["title_en"]].strip()
-            item["sentence"]["title_kr"] = r[C["title_kr"]].strip()
-            item["sentence"]["category"] = ff[C["cat"]]
-        else:
-            item["sentence"]["title_kr"] = ff[C["big"]]
-            item["sentence"]["sub"] = r[C["sub"]].strip()
         bucket["items"].append(item)
+        all_items.append(item)
+
+    # 같은 패턴의 다른 필러(트리거 단어)를 최대 3개 붙인다(자기 자신 제외)
+    for it in all_items:
+        s = it["sentence"]
+        pk = s.pop("_pk", "")
+        sibs = [w for w in pattern_fillers.get(pk, []) if w.lower() != s["trigger"].lower()]
+        s["siblings"] = sibs[:3]
 
     out_levels = []
     for lv in sorted(levels):
         b = levels[lv]
         if not b["items"]:
             continue
-        label = f"레벨 {lv}"
-        sublabel = b["items"][0]["sentence"].get("title_kr", "") if kind == "grammar" else ""
+        sublabel = b["items"][0]["sentence"].get("big", "") if kind == "grammar" else ""
         out_levels.append({
             "level": lv,
-            "label": label,
+            "label": f"레벨 {lv}",
             "sublabel": sublabel,
             "items": b["items"],
         })

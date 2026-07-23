@@ -80,10 +80,15 @@
   .answer-reveal { text-align:center; font-size:14px; color:var(--sub); margin-top:10px; }
   .answer-reveal b { color:var(--green); font-size:16px; }
 
-  /* 트리거 연결 박스 */
-  .trigger-box { background:#efe9fb; border:1px solid #d9ccf3; border-radius:12px; padding:11px 14px; margin:2px 0 16px; font-size:14.5px; color:#4a3b73; line-height:1.5; display:flex; gap:9px; align-items:flex-start; }
-  .trigger-box .ic { font-size:18px; line-height:1.3; }
+  /* 트리거 연결 박스 — 패턴 전면 */
+  .trigger-box { background:#efe9fb; border:1px solid #d9ccf3; border-radius:12px; padding:12px 14px; margin:2px 0 16px; font-size:14.5px; color:#4a3b73; line-height:1.5; display:flex; gap:9px; align-items:flex-start; }
+  .trigger-box .ic { font-size:18px; line-height:1.3; flex-shrink:0; }
   .trigger-box b { color:#5b3fb0; }
+  .pat-chip { display:block; width:fit-content; margin-top:9px; background:#fff; border:1px solid #d3c6f0; border-radius:999px; padding:6px 14px; font-weight:800; color:#5b3fb0; font-size:16px; }
+  .pat-chip .kr { color:#8878b3; font-weight:600; font-size:13px; margin-left:7px; }
+  /* 정답 후 일반화 줄 */
+  .gen-line { background:#f1faf3; border:1px solid #cdeed7; border-radius:12px; padding:10px 13px; margin:8px 0 2px; font-size:13.5px; color:#3f6b50; line-height:1.5; text-align:center; }
+  .gen-line b { color:#2e7d4f; }
 
   /* 문장 배열 */
   .ex-answer { min-height:56px; display:flex; flex-wrap:wrap; gap:8px; align-content:flex-start; padding:12px; border-radius:12px; background:#eef4fb; border:1px dashed #cddcf1; margin-bottom:14px; }
@@ -298,6 +303,33 @@ function renderVocab(){
   };
 }
 
+// 트리거 박스: 패턴을 전면에 내세우고 방금 배운 단어는 '여기에 넣는 값'으로 연결
+function triggerBoxHtml(item){
+  const s=item.sentence, w=escapeHtml(item.word);
+  const patEn=(s.pattern_en||'').trim(), patKr=(s.pattern_kr||'').trim();
+  const modeWord = curMode==='grammar' ? '문법' : '표현';
+  let lead, chip='';
+  if(curMode==='expression' && patEn){
+    lead=`방금 배운 <b>${w}</b>, 이런 ${modeWord}에서 이렇게 써요`;
+    chip=`<span class="pat-chip">${escapeHtml(patEn)}${patKr?`<span class="kr">${escapeHtml(patKr)}</span>`:''}</span>`;
+  } else if(curMode==='grammar' && patKr){
+    lead=`방금 배운 <b>${w}</b>, 이 ${modeWord}으로 말해요`;
+    chip=`<span class="pat-chip">${escapeHtml(patKr)}</span>`;
+  } else {
+    lead=`방금 배운 <b>${w}</b>, 실제 문장에선 이렇게 써요`;
+  }
+  return `<div class="trigger-box"><span class="ic">💡</span><span><div>${lead}</div>${chip}</span></div>`;
+}
+// 정답 후 일반화: 같은 패턴에 다른 단어도 쓰인다는 걸 보여줘 학습 효용감 강화
+function genLineHtml(item){
+  const s=item.sentence, sibs=(s.siblings||[]);
+  if(!sibs.length) return '';
+  const pat = curMode==='expression' ? (s.pattern_en||s.pattern_kr||'') : (s.pattern_kr||'');
+  const sibStr = sibs.map(escapeHtml).join(', ');
+  const patStr = pat ? `<b>${escapeHtml(pat)}</b> — ` : '';
+  return `<div class="gen-line">${patStr}<b>${sibStr}</b> 같은 단어에도 그대로 써요</div>`;
+}
+
 // [2] 문장 배열 ────────────────────────────────────────────────────────────────
 function renderArrange(){
   const item=curLevel.items[itemIdx], s=item.sentence;
@@ -305,9 +337,8 @@ function renderArrange(){
   const modeWord = curMode==='grammar' ? '문법 문장' : '표현';
   stage.innerHTML=`
     <div class="stage-label"><span class="num">2</span> ${modeWord} 배우기 · 문장 배열</div>
-    <div class="trigger-box"><span class="ic">💡</span><span>방금 배운 <b>${escapeHtml(item.word)}</b> — 이 단어로 만든 ${modeWord}이에요. 순서대로 배열해 보세요.</span></div>
+    ${triggerBoxHtml(item)}
     <div class="prompt-ko">${escapeHtml(s.kr)}</div>
-    ${s.title_kr && curMode==='expression' ? `<div class="prompt-meta">${escapeHtml(s.title_kr)}</div>` : ''}
     <div class="ex-answer" id="arrAns"></div>
     <div class="ex-bank" id="arrBank"></div>
     <div id="arrAfter"></div>
@@ -334,7 +365,8 @@ function renderArrange(){
       afterEl.appendChild(r);
       const sent=document.createElement('div'); sent.className='ex-sentence'; sent.innerHTML=hlTrigger(s.en, s.trigger); afterEl.appendChild(sent);
       const ko=document.createElement('div'); ko.className='ex-sentence-ko'; ko.textContent=s.kr; afterEl.appendChild(ko);
-      const next=document.createElement('button'); next.className='btn-primary'; next.style.marginTop='4px';
+      if(ok){ const g=genLineHtml(item); if(g){ const gd=document.createElement('div'); gd.innerHTML=g; afterEl.appendChild(gd.firstChild); } }
+      const next=document.createElement('button'); next.className='btn-primary'; next.style.marginTop='8px';
       const last=itemIdx>=curLevel.items.length-1;
       next.textContent= last ? '완료하기 🎉' : '다음 문항 ▶';
       next.onclick=()=>{ learned.push(item); if(last){ renderDone(); } else { itemIdx++; renderVocab(); } };
