@@ -1,0 +1,832 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<title>리스닝 핑퐁 프로토타입 v2</title>
+<style>
+  :root { --bg:#a9ccf2; --card:#fff; --ink:#1f2937; --sub:#6b7c93; --blue:#4b83d6; }
+  * { box-sizing:border-box; }
+  html, body { margin:0; height:100%; }
+  body { font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+    background:linear-gradient(180deg,#b3d7f5 0%,#c3e2f2 55%,#d9f2e6 100%) fixed; color:var(--ink); display:flex; justify-content:center; }
+  .app { width:100%; max-width:460px; height:100dvh; min-height:100vh; display:flex; flex-direction:column; }
+
+  .topbar { display:flex; align-items:center; gap:12px; padding:14px 14px; flex-shrink:0; }
+  .icon-btn { width:34px; height:34px; border:none; background:transparent; color:#fff; font-size:24px; cursor:pointer; border-radius:50%; }
+  .progress { flex:1; }
+  .bar-count { font-size:12px; font-weight:800; color:#2f6ab0; margin-left:46px; }
+  .bar-row { display:flex; align-items:center; margin-top:2px; }
+  .bar-trophy { width:36px; height:36px; border-radius:50%; background:#fff; display:flex; align-items:center; justify-content:center; font-size:19px; box-shadow:0 2px 8px rgba(30,60,110,.18); z-index:1; flex-shrink:0; }
+  .bar-track { flex:1; height:13px; border-radius:8px; background:rgba(255,255,255,.55); overflow:hidden; margin-left:-10px; }
+  .bar-fill { height:100%; background:#7fb1e8; width:0; transition:width .4s ease; }
+
+  .home { flex:1; padding:22px 18px; overflow-y:auto; }
+  .home h1 { font-size:24px; margin:6px 0 4px; color:#25406a; }
+  .home p.sub { color:#3a567d; margin:0 0 16px; font-size:14px; line-height:1.5; }
+  .voice-box { display:flex; flex-direction:column; gap:8px; margin-bottom:8px; }
+  .voice-row { display:flex; align-items:center; gap:8px; font-size:13px; color:#3a567d; background:#ffffff88; border-radius:12px; padding:8px 12px; }
+  .voice-row span { min-width:62px; font-weight:700; }
+  .voice-row select { flex:1; padding:8px; border-radius:10px; border:1px solid #cddcf1; background:#fff; font-size:13px; }
+  .voice-hint { font-size:12px; color:#3a567d; opacity:.85; margin:-2px 2px 6px; }
+  .grp-head { display:flex; justify-content:space-between; align-items:baseline; margin:20px 4px 8px; }
+  .grp-head span:first-child { font-size:15px; font-weight:800; color:#25406a; }
+  .grp-head .grp-count { font-size:12px; font-weight:700; color:#5b7c93; }
+  .ex-card { position:relative; display:block; width:100%; text-align:left; background:var(--card); border:none; border-radius:16px;
+    padding:15px 18px; margin-bottom:10px; cursor:pointer; box-shadow:0 3px 12px rgba(30,60,110,.12); }
+  .ex-card.cleared { background:#f1faf3; box-shadow:0 2px 8px rgba(46,158,87,.12); }
+  .ex-card .t { font-size:16px; font-weight:800; color:#2f3e52; }
+  .ex-card.cleared .t { color:#3f6b50; }
+  .ex-card .f { font-size:12px; color:var(--sub); margin-top:4px; }
+  .ex-card .step { display:inline-block; font-size:11px; font-weight:800; color:#2f6ab0; background:#e7f0fb; border:1px solid #cfe0f5; border-radius:999px; padding:2px 8px; margin-top:7px; }
+  .ex-card .clear-badge { position:absolute; top:14px; right:16px; font-size:13px; font-weight:800; color:#2e9e57; }
+  .home .note { font-size:12px; color:#3a567d; opacity:.85; margin-top:16px; line-height:1.6; }
+
+  /* 재생 화면: 문제 카드(위) + 답안 영역(아래) 2단 구성 */
+  .stage { flex:1; min-height:0; display:flex; flex-direction:column; gap:12px; padding:4px 14px 14px; }
+  .pcard { flex:1; min-height:0; display:flex; flex-direction:column; background:var(--card); border-radius:22px; box-shadow:0 10px 26px rgba(30,60,110,.16); overflow:hidden; }
+  .pcard-head { flex-shrink:0; background:#bfdcf7; color:#28517e; font-size:13.5px; font-weight:800; padding:10px 16px; }
+  .pcard-foot { flex-shrink:0; display:flex; align-items:center; padding:6px 14px 12px; }
+  .pfoot-btn { width:54px; height:44px; border:1.5px solid #e3e9f4; background:#fff; border-radius:14px; font-size:20px; cursor:pointer; box-shadow:0 2px 6px rgba(30,60,110,.08); }
+  .ex-answer { min-height:54px; display:flex; flex-wrap:wrap; gap:8px; align-content:flex-start; padding:10px; border-radius:12px; background:#eef4fb; border:1px dashed #cddcf1; margin-bottom:14px; }
+  .ex-answer.correct{background:#ddf3e2;border-color:#46b366;border-style:solid;} .ex-answer.wrong{background:#fbe1e1;border-color:#e5645a;border-style:solid;}
+  .ex-ph { color:#9db0c6; font-size:14px; align-self:center; }
+  .ex-bank { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px; }
+  .ex-chip { border:1px solid #cddcf1; background:#fff; border-radius:10px; padding:10px 15px; font-size:16px; color:#2f3e52; cursor:pointer; box-shadow:0 1px 3px rgba(30,60,110,.1); }
+  .ex-chip.inans { background:#eaf1fb; border-color:#4b83d6; }
+  .ex-result { font-size:14px; font-weight:700; text-align:center; margin:6px 0 8px; }
+  .learned-box { background:#fff6dc; border:1px solid #f2e2a8; border-radius:12px; padding:10px 13px; margin:8px 0 4px; font-size:15px; color:#6b5410; line-height:1.5; }
+  .learned-box .k { display:inline-block; background:#f0b429; color:#fff; font-size:11px; font-weight:800; border-radius:999px; padding:1px 8px; margin-right:6px; vertical-align:middle; }
+  .learned-box .ln-head { font-size:12.5px; font-weight:700; color:#8a6d15; }
+  .learned-box .ln-a { font-size:16px; color:#4a3c10; margin:5px 0 8px; }
+  .learned-box .ln-a .ln-hl { background:#ffe372; color:#3a2f00; border-radius:4px; padding:0 4px; }
+  .learned-box .ln-expr { font-size:14px; }
+  .learned-box .ln-expr b { font-weight:800; }
+  /* 오답 교정: 문제 카드에 뜻·플레이어·배열 줄을 띄운다(문제마다 새로 만드는 화면) */
+  .fix { display:flex; flex-direction:column; overflow-y:auto; }
+  .fix-prompt { background:#eaf3fd; padding:18px; }
+  .fix-head { font-size:13px; font-weight:700; color:#3a567d; margin-bottom:8px; }
+  .fix-ko { font-size:20px; font-weight:800; color:#2f3e52; line-height:1.4; }
+  .fix-player { margin-top:12px; }
+  .fix-player .vplayer { background:#fff; box-shadow:0 2px 6px rgba(30,60,110,.10); }
+  .fix-ans { padding:20px 16px; }
+  .fix-ans .ex-answer { background:transparent; border:none; border-bottom:1.5px solid #cddcf1; border-radius:0; padding:8px 2px 12px; margin-bottom:0; }
+  .fix-ans .ex-answer.correct { background:#ddf3e2; border:1.5px solid #46b366; border-radius:12px; }
+  .fix-ans .ex-answer.wrong { background:#fbe1e1; border:1.5px solid #e5645a; border-radius:12px; }
+  /* 음성 플레이어(스피커 + 파동) */
+  .vplayer { display:inline-flex; align-items:center; gap:9px; background:#eaf1fb; border:none; border-radius:999px; padding:8px 16px 8px 13px; cursor:pointer; }
+  .vplayer:active { transform:scale(.98); }
+  .vp-icon { display:inline-flex; align-items:center; color:#4b83d6; }
+  .vp-wave { display:inline-flex; align-items:center; gap:3px; height:24px; }
+  .vp-wave i { width:3px; border-radius:2px; background:#9db8dd; transform-origin:center; }
+  .vplayer.playing .vp-icon { color:#2f6ab0; }
+  .vplayer.playing .vp-wave i { background:#4b83d6; animation:vpwave .85s ease-in-out infinite; }
+  @keyframes vpwave { 0%,100%{ transform:scaleY(.45); } 50%{ transform:scaleY(1); } }
+  /* 답변 직후 해설(💡 박스) */
+  .fb { margin:10px 0; padding:0 4px; animation:pop .25s ease; }
+  .tip-box { display:flex; gap:10px; align-items:flex-start; background:#f9c74f; border-radius:14px; padding:11px 14px; font-size:14.5px; font-weight:700; color:#5c4304; line-height:1.5; }
+  .tip-box .bulb { width:34px; height:34px; border-radius:50%; background:#fff; display:flex; align-items:center; justify-content:center; font-size:17px; flex-shrink:0; }
+  .tip-box .tip-body { flex:1; min-width:0; }
+  .tip-box.ok { background:#a9e3bb; color:#2b5c3e; } /* 정답 해설은 초록 계열 */
+  .tip-picked { margin-bottom:8px; padding-bottom:8px; border-bottom:1px solid #dfb43c; } /* 고른 답과 해설 사이 수평선 */
+  .tip-picked b { font-weight:800; }
+  /* 오답 노트 팝업 */
+  .note-ov { position:fixed; inset:0; z-index:60; background:rgba(30,50,80,.45); display:flex; align-items:center; justify-content:center; padding:24px; }
+  .note { width:100%; max-width:400px; max-height:72vh; overflow-y:auto; background:#fff; border-radius:18px; padding:14px 18px 8px; box-shadow:0 12px 34px rgba(20,40,80,.3); animation:pop .2s ease; }
+  .note-top { display:flex; justify-content:space-between; align-items:center; color:#25406a; font-size:16px; }
+  .note-x { border:none; background:transparent; font-size:18px; color:#8aa0bd; cursor:pointer; padding:4px 6px; }
+  .note-it { padding:13px 0; }
+  .note-it + .note-it { border-top:1px dashed #e3eaf4; }
+  .note-badge { display:inline-block; font-size:11px; font-weight:800; color:#b07a12; background:#fdeec9; border-radius:999px; padding:2px 8px; margin-bottom:7px; }
+  /* 모범답안(정답) 섹션 — 연한 파랑 배경 + 보라 배지 */
+  .note-model { background:#eaf3fd; border-radius:12px; padding:12px 14px; margin:10px 0 4px; }
+  .note-badge.model { color:#5b5bd6; background:#e7e7fb; }
+  .note-en { font-size:16px; font-weight:800; color:#2f3e52; }
+  .note-kr { font-size:13px; color:#6b7c93; margin-top:2px; }
+  .note-why { font-size:13.5px; color:#5b6b80; margin-top:6px; line-height:1.5; }
+  /* 표현 표기: 영어(굵게) 위, 뜻(연하게) 아래 — 대시 없이 두 줄로 */
+  .expr-en { font-weight:800; }
+  .expr-ko { display:block; font-weight:600; font-size:13.5px; opacity:.8; margin-top:3px; }
+
+  /* 문제 화면 버퍼(스왑 체인) — 표시될 때 오른쪽에서 슬라이드 인 */
+  .screens { flex:1; min-height:0; position:relative; }
+  .screen { position:absolute; inset:0; display:flex; flex-direction:column; overflow:hidden; animation:slideInR .3s ease; }
+  /* back 버퍼는 display:none 대신 visibility로 숨긴다 — 레이아웃이 살아 있어 준비 단계에서 스크롤까지 끝낼 수 있다 */
+  .screen.back { visibility:hidden; }
+  .screen > .chat, .screen > .fix { flex:1; min-height:0; }
+  /* 채팅 — 기본 화면엔 현재 문답만(문답 시작을 맨 위에 고정), 이전 내역은 위로 스크롤해 열람 */
+  .chat { position:relative; padding:10px 14px 16px; overflow-y:auto; display:flex; flex-direction:column; }
+  /* 문제 영역 스크롤바 숨김(스크롤 기능은 유지) */
+  .chat, .fix { scrollbar-width:none; }
+  .chat::-webkit-scrollbar, .fix::-webkit-scrollbar { display:none; }
+  /* 하단 필러: 현재 문답을 맨 위로 스크롤할 수 있게 여유 공간 확보(없으면 스크롤이 클램프되어 이전 내역이 보임) */
+  .chat::after { content:''; flex:0 0 86%; }
+  /* 문제 전환(퀴즈 ↔ 문장 배열) 슬라이드 인 */
+  @keyframes slideInR { from{opacity:0; transform:translateX(48px);} to{opacity:1; transform:none;} }
+  .msg { display:flex; align-items:flex-start; gap:10px; margin:12px 0; animation:pop .25s ease; }
+  .msg.b { flex-direction:row-reverse; }
+  @keyframes pop { from{opacity:0;transform:translateY(6px);} to{opacity:1;transform:none;} }
+  .avatar-col { display:flex; flex-direction:column; align-items:center; gap:4px; flex-shrink:0; width:52px; }
+  .avatar { width:48px; height:48px; border-radius:50%; background:#eef4fb; display:flex; align-items:center; justify-content:center; font-size:26px; }
+  .avatar-name { font-size:12px; font-weight:700; color:#45566b; text-align:center; line-height:1.2; }
+  .bubble { position:relative; max-width:78%; padding:13px 16px; border-radius:16px; background:#eef4fb; }
+  .hidden-bubble { min-width:72px; min-height:22px; display:flex; align-items:center; justify-content:center; }
+  /* 재생 전/후에도 정적 웨이브를 그대로 보여 말풍선 크기가 변하지 않게(빈 알약처럼 깨져 보이는 것 방지) */
+  .hidden-bubble .wave { display:inline-flex; gap:4px; align-items:center; height:20px; }
+  .hidden-bubble .wave i { width:4px; height:8px; border-radius:2px; background:#9db8dd; }
+  .hidden-bubble:not(.playing) { opacity:.6; }
+  .hidden-bubble.playing .wave i { background:#4b83d6; animation:wave .9s ease-in-out infinite; }
+  .hidden-bubble.playing .wave i:nth-child(2){animation-delay:.15s;} .hidden-bubble.playing .wave i:nth-child(3){animation-delay:.3s;}
+  @keyframes wave { 0%,100%{height:8px;} 50%{height:18px;} }
+  .msg.b .hidden-bubble { background:#4b83d6; }
+  .msg.b .hidden-bubble .wave i { background:rgba(255,255,255,.7); }
+  .msg.b .hidden-bubble.playing .wave i { background:rgba(255,255,255,.9); }
+  /* 다 들은 뒤 텍스트로 열리는 말풍선(배운 표현/어휘 강조) */
+  .bubble.revealed { font-size:16px; line-height:1.5; color:#2f3e52; animation:reveal .3s ease; }
+  .msg.b .bubble.revealed { background:#4b83d6; color:#fff; }
+  @keyframes reveal { from{opacity:.4;} to{opacity:1;} }
+  /* 답한 뒤, A 말풍선을 탭하면 영어를 펼쳐 본다(펼침 전엔 '영어 보기' 안내) */
+  .hidden-bubble.peekable { opacity:1; cursor:pointer; }
+  .peek-hint { font-size:12.5px; font-weight:700; color:#7d95b8; white-space:nowrap; }
+  .hidden-bubble.peeked { display:block; text-align:left; opacity:1; font-size:16px; line-height:1.5; color:#2f3e52; cursor:pointer; animation:reveal .3s ease; }
+  /* 고정(읽기) 노출: 대화 화면 위(중앙)에 큰 단어를 하나씩 제자리 교체(RSVP).
+     화면을 통째로 바꾸지 않고 대화 영역만 덮어 살짝 흐리게(blur) — 상단 진행바는 그대로 보여 '같은 화면' 느낌 유지, 부드럽게 페이드 인/아웃 */
+  .rsvp-center { position:fixed; z-index:40; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; padding:24px; text-align:center;
+    background:rgba(169,204,242,.62); -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); opacity:0; transition:opacity .25s ease; }
+  .rsvp-center.show { opacity:1; }
+  .rsvp-center .who { display:flex; flex-direction:column; align-items:center; gap:5px; font-size:13px; font-weight:800; color:#3a567d; }
+  .rsvp-center .who .av { width:44px; height:44px; border-radius:50%; background:#fff; display:flex; align-items:center; justify-content:center; font-size:24px; box-shadow:0 2px 6px rgba(30,60,110,.15); }
+  .rsvp-center .word { font-size:38px; font-weight:800; color:#25406a; line-height:1.25; min-height:1.25em; }
+  .rsvp-word { display:inline-block; animation:rsvpPop .16s ease; }
+  @keyframes rsvpPop { from{opacity:.15; transform:translateY(4px);} to{opacity:1; transform:none;} }
+  /* 첫 단어 직전 시선 고정용 준비 점(짧게 깜빡) — 무방비로 첫 단어를 놓치지 않도록 */
+  .rsvp-dot { display:inline-block; width:16px; height:16px; border-radius:50%; background:#4b83d6; animation:rsvpDot .5s ease-in-out infinite; }
+  @keyframes rsvpDot { 0%,100%{ transform:scale(.55); opacity:.35; } 50%{ transform:scale(1); opacity:1; } }
+  .rsvp-play span:last-child { font-weight:800; color:#3a6bd0; font-size:14px; }
+
+  .answer { flex-shrink:0; min-height:30vh; max-height:52vh; overflow-y:auto; padding:2px 2px 6px; }
+  .quiz-q { text-align:center; font-size:15px; font-weight:800; color:#25406a; margin:2px 0 10px; }
+  .ans-idle { text-align:center; color:#41608a; font-size:14px; font-weight:700; padding:30px 0; opacity:.7; }
+  .opt { display:block; width:100%; text-align:left; background:#fff; border:1.5px solid transparent; border-radius:16px; padding:14px 16px; margin:9px 0; font-size:15.5px; font-weight:700; color:#2f3e52; cursor:pointer; box-shadow:0 3px 10px rgba(30,60,110,.12); }
+  .opt .opt-text { line-height:1.45; }
+  .next-btn { width:100%; border:none; border-radius:14px; padding:13px; background:var(--blue); color:#fff; font-size:16px; font-weight:800; cursor:pointer; margin-top:8px; }
+  .next-btn:disabled { opacity:.5; cursor:default; }
+  .next-btn.ghost { background:#fff; color:#2f6ab0; border:1.5px solid #cfe0f5; }
+
+  .done { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; padding:30px 22px; text-align:center; overflow-y:auto; }
+  .done .emoji { font-size:52px; }
+  .done h2 { color:#25406a; margin:0; }
+  .done p { color:#3a567d; margin:0; }
+  .learned-list { width:100%; background:#fff6dc; border:1px solid #f2e2a8; border-radius:14px; padding:12px 14px; text-align:left; }
+  .learned-list .h { font-size:13px; font-weight:800; color:#8a6d15; margin-bottom:6px; }
+  .learned-list .it { font-size:14px; color:#6b5410; margin:5px 0; line-height:1.4; }
+  .learned-list .it b { color:#7a5f12; }
+  .btn { border:none; border-radius:26px; padding:14px 30px; background:var(--blue); color:#fff; font-size:16px; font-weight:700; cursor:pointer; box-shadow:0 4px 14px rgba(30,60,110,.25); }
+  .btn.ghost { background:#fff; color:#45566b; }
+  .btn.script-btn { background:#fff; color:#2f6ab0; box-shadow:none; border:1.5px solid #cfe0f5; }
+  .row { display:flex; gap:10px; }
+
+  /* 정답 후 확인하는 전체 스크립트 */
+  .script { flex:1; display:flex; flex-direction:column; min-height:0; }
+  .script-top { display:flex; align-items:center; gap:10px; padding:14px 16px; flex-shrink:0; font-size:17px; color:#25406a; }
+  .script-top .icon-btn { color:#25406a; }
+  .script-list { flex:1; min-height:0; overflow-y:auto; padding:4px 14px 20px; display:flex; flex-direction:column; }
+  /* 리스닝 시작 전 준비 카운트다운(채팅 위 오버레이 — 하단 필러 영향 없이 중앙 정렬) */
+  .ready-gate { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:16px; text-align:center; }
+  .ready-msg { font-size:16px; font-weight:700; color:#3a567d; }
+  .ready-num { font-size:60px; font-weight:800; color:var(--blue); line-height:1; animation:pop .3s ease; }
+  .script-kr { margin-top:4px; font-size:12.5px; color:#6b7c93; }
+  .msg.b .bubble.revealed .script-kr { color:rgba(255,255,255,.85); }
+  .hidden { display:none !important; }
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="topbar hidden" id="topbar">
+    <button class="icon-btn" id="backBtn" aria-label="뒤로">‹</button>
+    <div class="progress" id="progress">
+      <div class="bar-count" id="barCount">0/3</div>
+      <div class="bar-row"><div class="bar-trophy">🏆</div><div class="bar-track"><div class="bar-fill" id="barFill"></div></div></div>
+    </div>
+  </div>
+
+  <div class="home" id="home">
+    <h1>리스닝 핑퐁 <small style="font-size:13px;color:#3a6bd0;vertical-align:middle">UI v2</small></h1>
+    <p class="sub">배운 표현이 실제 대화에서 어떻게 쓰이는지 듣고 골라보세요.</p>
+    <div class="voice-box">
+      <div class="voice-row"><span>🐻 A 음성</span><select id="voiceSelA"></select></div>
+      <div class="voice-row"><span>🐰 B 음성</span><select id="voiceSelB"></select></div>
+      <div class="voice-row"><span>⏩ 속도</span><select id="rateSel">
+        <option value="0.85">느리게</option>
+        <option value="1">보통</option>
+        <option value="1.2">빠르게 (원어민 속도)</option>
+        <option value="1.4">아주 빠르게</option>
+      </select></div>
+      <div class="voice-row"><span>👀 A 노출</span><select id="exposeSel">
+        <option value="listen">듣기 (음성)</option>
+        <option value="fixed">고정 · 읽기 (화면에 흐름)</option>
+      </select></div>
+    </div>
+    <p class="voice-hint" id="voiceHint"></p>
+    <div id="exList"></div>
+  </div>
+
+  <div class="stage hidden" id="stage">
+    <div class="pcard">
+      <div class="pcard-head" id="pcardHead"></div>
+      <!-- 문제 화면 스왑 체인(크기 2): 한쪽이 보이는 동안 다른 쪽에 다음 문제 화면을 미리 만든다 -->
+      <div class="screens">
+        <div class="screen" id="scrA"></div>
+        <div class="screen back" id="scrB"></div>
+      </div>
+      <div class="pcard-foot"><button class="pfoot-btn" id="replayBtn" aria-label="다시 듣기">🔊</button></div>
+    </div>
+    <div class="answer" id="answer">
+      <div class="quiz-q hidden" id="quizQ">B가 할 말로 알맞은 것은?</div>
+      <div id="opts"></div>
+      <div id="quizAfter"></div>
+    </div>
+  </div>
+
+  <div class="done hidden" id="done">
+    <div class="emoji">🎉</div>
+    <h2>완료!</h2>
+    <p id="doneScore"></p>
+    <div class="learned-list hidden" id="learnedList"></div>
+    <button class="btn script-btn" id="doneScript">📄 전체 스크립트 보기</button>
+    <div class="row">
+      <button class="btn ghost" id="doneRetry">다시 듣기</button>
+      <button class="btn" id="doneList">목록으로</button>
+    </div>
+  </div>
+
+  <div class="script hidden" id="script">
+    <div class="script-top"><button class="icon-btn dark" id="scriptBack" aria-label="뒤로">‹</button><b>전체 스크립트</b></div>
+    <div class="script-list" id="scriptList"></div>
+  </div>
+</div>
+
+<script>
+// ── 데이터 로드 ─────────────────────────────────────────────────────────────
+// 콘텐츠는 외부 JSON(listening-pingpong.data.json)에서 불러온다.
+// 표현은 실제 표현 뱅크(ExpressionUnitKR) 항목이다. (v2: 표현 배열 단계 없이 바로 리스닝)
+let GROUPS = [];
+// 표현 패턴의 고정부('~' 앞): "Where's ~?" → "Where's", "To go." → "To go"
+function exprPhrase(pattern){ return pattern.split('~')[0].trim().replace(/[?.!,]+$/,'').trim(); }
+function buildExample(ex){
+  const exprEn = ex.expression.en, exprKr = ex.expression.kr;
+  const fixed = exprPhrase(exprEn);
+  const aTurns = ex.dialogue.filter(t=>t.role==='A');
+  const trigA = aTurns[1] || aTurns[0] || null; // 2번째 A = 표현이 나오는 트리거 대사
+  const expr = { name:exprEn, note:exprKr };
+
+  // '내가 배운 표현' 박스는 트리거 대사(2번째 A) 바로 다음 문제에만 붙인다.
+  let prevA = null;
+  const turns = ex.dialogue.map(t=>{
+    if (t.role==='A'){ prevA = t; return { s:'A', text:t.text, kr:t.kr }; }
+    const isTrigger = prevA===trigA;
+    return { s:'B', quiz:true, options:(t.choices||[]).map(c=>({
+      text:c.text, kr:c.kr, correct:!!c.correct, why:c.explain,
+      learned: (c.correct && isTrigger && trigA) ? { name:exprEn, note:exprKr, aLine:trigA.text, fixed } : undefined,
+    })) };
+  });
+  return { id:ex.id, level:ex.level, vocab:{ word:ex.vocab.word, ko:ex.vocab.meaning }, expr, dialogue:{ title:ex.title, turns } };
+}
+const DATA_GROUPS = [
+  { label:'초급', gid:'a', file:'./listening-pingpong.data.json' },
+  { label:'중급', gid:'b', file:'./listening-pingpong.data.b.json' },
+];
+async function loadData(){
+  GROUPS=[];
+  for(const g of DATA_GROUPS){
+    try{
+      const res=await fetch(g.file,{cache:'no-store'}); const data=await res.json();
+      const examples=(data.examples||[]).map(ex=>{ const b=buildExample(ex); b.key=g.gid+'-'+ex.id; return b; });
+      if(examples.length) GROUPS.push({ label:g.label, examples });
+    }catch(e){ /* 그룹 파일 없으면 건너뜀 */ }
+  }
+  if(!GROUPS.length){ const el=document.getElementById('exList'); if(el) el.innerHTML='<p style="color:#b00">데이터를 불러오지 못했어요.</p>'; return; }
+  renderHome();
+}
+
+// ── 강조 마크업 ──────────────────────────────────────────────────────────────
+function escapeHtml(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+// 표현 표기(영어 굵게 + 뜻 아래 줄). 대시 없이 두 줄로 가독성 확보.
+function exprHtml(e){ return `<b class="expr-en">${e.name}</b><span class="expr-ko">${e.note}</span>`; }
+// 배운 표현/어휘의 형광펜·밑줄 표시는 쓰지 않는다(텍스트만 노출).
+function markup(text){ return escapeHtml(text); }
+// A 대사 안에서 배운 표현이 있던 자리를 형광펜으로 짚어준다(대소문자 무시).
+function hlExpr(text, fixed){
+  if(!fixed) return escapeHtml(text);
+  const i=text.toLowerCase().indexOf(fixed.toLowerCase());
+  if(i<0) return escapeHtml(text);
+  return escapeHtml(text.slice(0,i))+'<mark class="ln-hl">'+escapeHtml(text.substr(i,fixed.length))+'</mark>'+escapeHtml(text.slice(i+fixed.length));
+}
+
+// ── 음성 ──────────────────────────────────────────────────────────────────
+// 실제 대화처럼 A/B에 서로 다른 목소리(가능하면 여성/남성)를 배정한다.
+const NOVELTY=/bad news|good news|bahh|bells|boing|bubbles|cellos|jester|organ|superstar|trinoids|wobble|zarvox|whisper/i;
+const FEMALE=/samantha|karen|moira|tessa|catherine|martha|kathy|nicky|shelley|sandy|flo|grandma|victoria|fiona|allison|ava|susan|zoe|serena|female/i;
+const MALE=/aaron|daniel|fred|rishi|arthur|albert|gordon|ralph|reed|eddy|rocko|grandpa|junior|alex|thomas|oliver|male/i;
+let voices=[], vA=null, vB=null, chosenA='', chosenB='';
+// 재생 속도(원어민스럽게 빠르게 등). 브라우저 TTS의 rate로 조절, localStorage 저장.
+let speechRate = (()=>{ try{ return Number(localStorage.getItem('lp:rate'))||1; }catch(e){ return 1; } })();
+// A 노출 방식: 'listen'(음성) | 'fixed'(음성 없이 단어를 제자리 교체하며 읽기, RSVP). 고정 모드에선 속도가 RSVP 속도를 겸한다.
+let exposeMode = (()=>{ try{ return localStorage.getItem('lp:expose')||'listen'; }catch(e){ return 'listen'; } })();
+function pickAuto(){
+  const en = voices.filter(v=>/en(-|_)/i.test(v.lang) && !NOVELTY.test(v.name));
+  if(!en.length){ vA=vB=null; return; }
+  const rank = v => (v.localService?0:2) + (/en-US|en-GB/i.test(v.lang)?1:0);
+  const pool = en.slice().sort((a,b)=>rank(b)-rank(a));
+  const fem = pool.filter(v=>FEMALE.test(v.name));
+  const male = pool.filter(v=>MALE.test(v.name));
+  vA = fem[0] || pool[0];
+  vB = male.find(v=>v!==vA) || pool.find(v=>v!==vA) || vA;
+}
+function chooseVoices(){
+  voices = window.speechSynthesis ? speechSynthesis.getVoices() : [];
+  pickAuto();
+  if(!chosenA && vA) chosenA=vA.name;
+  if(!chosenB && vB) chosenB=vB.name;
+  fillVoicePicker();
+}
+function fillVoicePicker(){
+  const en=voices.filter(v=>/en(-|_)/i.test(v.lang));
+  const online=en.filter(v=>!v.localService), local=en.filter(v=>v.localService);
+  const opts=list=>list.map(v=>`<option value="${v.name}">${v.name}</option>`).join('');
+  let html='';
+  if(online.length) html+=`<optgroup label="🌐 온라인 음성 (더 자연스러움)">${opts(online)}</optgroup>`;
+  if(local.length)  html+=`<optgroup label="기기 음성">${opts(local)}</optgroup>`;
+  [['voiceSelA','A'],['voiceSelB','B']].forEach(([id,who])=>{
+    const sel=document.getElementById(id); if(!sel) return;
+    const chosen = who==='A'?chosenA:chosenB;
+    sel.innerHTML=html;
+    if(chosen) sel.value=chosen;
+    sel.onchange=()=>{ if(who==='A') chosenA=sel.value; else chosenB=sel.value; };
+  });
+  // 온라인 음성 유무 안내(브라우저에 없으면 Chrome 권장)
+  const hint=document.getElementById('voiceHint');
+  if(hint) hint.textContent = online.length ? `🌐 온라인 음성 ${online.length}개 사용 가능 — 더 자연스러워요` : '이 브라우저엔 온라인 음성이 없어요. Chrome에서 열면 더 자연스러운 음성을 쓸 수 있어요.';
+  const rs=document.getElementById('rateSel');
+  if(rs){ rs.value=String(speechRate); rs.onchange=()=>{ speechRate=Number(rs.value)||1; try{ localStorage.setItem('lp:rate', rs.value); }catch(e){} }; }
+  const es=document.getElementById('exposeSel');
+  if(es){ es.value=exposeMode; es.onchange=()=>{ exposeMode=es.value||'listen'; try{ localStorage.setItem('lp:expose', exposeMode); }catch(e){} }; }
+}
+if(window.speechSynthesis){ chooseVoices(); speechSynthesis.onvoiceschanged=chooseVoices; }
+function speak(text, who){
+  return new Promise(res=>{
+    if(!window.speechSynthesis) return setTimeout(res,700);
+    if(!voices.length) chooseVoices();
+    try{ speechSynthesis.cancel(); }catch(e){}
+    const u=new SpeechSynthesisUtterance(text); u.lang='en-US'; u.rate=speechRate;
+    const name = who==='B'?chosenB:chosenA;
+    const v = name ? voices.find(x=>x.name===name) : (who==='B'?vB:vA);
+    if(v) u.voice=v;
+    const same = !chosenA || !chosenB || chosenA===chosenB;
+    u.pitch = same ? (who==='B'?1.12:0.9) : 1.0; // 같은 목소리를 고르면 피치로 A/B 구분
+    let done=false; const fin=()=>{ if(!done){done=true;res();} };
+    u.onend=fin; u.onerror=fin; speechSynthesis.speak(u);
+    setTimeout(fin, Math.max(1900, text.length*95));
+  });
+}
+function stopAudio(){ try{ speechSynthesis.cancel(); }catch(e){} }
+const wait = ms => new Promise(r=>setTimeout(r,ms));
+
+// ── 화면 ──────────────────────────────────────────────────────────────────
+const el=id=>document.getElementById(id);
+const home=el('home'), stage=el('stage'), done=el('done'), topbar=el('topbar'), script=el('script');
+let curExample=null, current=null, lastA='', lastAKr='', correctCount=0, learnedSeen=[], runId=0;
+function show(...ids){ [home,stage,done,script,topbar].forEach(n=>n.classList.add('hidden')); ids.forEach(n=>n.classList.remove('hidden')); }
+// 답안 영역 대기 상태(퀴즈가 없는 동안에도 2단 구성 유지)
+function setAnswerIdle(){ el('quizQ').classList.add('hidden'); el('opts').innerHTML=`<div class="ans-idle">${exposeMode==='fixed'?'👀 잘 보세요…':'🎧 잘 들어보세요…'}</div>`; el('quizAfter').innerHTML=''; }
+// 문제 화면 스왑 체인(크기 2): front가 보이는 화면, back에 다음 문제 화면을 미리 만들어 두고 '다음'에서 교체한다.
+// 각 문제 화면은 매번 새로 만드는 별개 컴포넌트이며, 이전 대화 내역은 DOM 복제가 아니라
+// 대화 데이터(turns)에서 다시 렌더링한다(위로 스크롤해 열람, 퀴즈 턴은 정답 대사로 표시).
+let front=null, back=null, chatEl=null;
+function swapScreens(){
+  back.classList.remove('back'); front.classList.add('back');
+  const t=front; front=back; back=t; back.innerHTML='';
+  chatEl=front.querySelector('.chat');
+  // 배열 화면엔 자체 플레이어가 있으므로 카드 하단 다시 듣기 버튼은 채팅 화면에서만 보인다
+  el('replayBtn').parentElement.classList.toggle('hidden', !chatEl);
+  front.style.animation='none'; void front.offsetWidth; front.style.animation=''; // 슬라이드 인 재생(visibility 토글은 자동 재생 안 됨)
+}
+function newChatScreen(target, history){
+  const c=document.createElement('div'); c.className='chat';
+  (history||[]).forEach(t=>{
+    const who=t.s, line=t.quiz?correctOpt(t):t;
+    const info = who==='B' ? {n:'B',a:'🐰'} : {n:'A',a:'🐻'};
+    const m=document.createElement('div'); m.className='msg'+(who==='B'?' b':'');
+    m.innerHTML=`<div class="avatar-col"><div class="avatar">${info.a}</div><div class="avatar-name">${info.n}</div></div>
+      <div class="bubble revealed">${markup(line.text, line.hl)}</div>`;
+    c.appendChild(m);
+  });
+  attachSnapBack(c); // 현재 문답 sticky(놓으면 복귀)
+  target.innerHTML=''; target.appendChild(c);
+  if(target===front) chatEl=c;
+  return c;
+}
+function noteLearned(x){ if(x && !learnedSeen.some(y=>y.name===x.name)) learnedSeen.push(x); }
+// 스크롤 포커스: 현재 문답(exStart)의 시작을 화면 맨 위에 고정해 기본적으로 현재 문답만 보이고,
+// 이전 대화 내역은 위로 스크롤해 열람한다. 문답이 화면보다 길어지면 최신 내용을 따라간다.
+let exStart=null; // 현재 문답의 첫 요소(A 말풍선 .msg)
+function scrollToBottom(){
+  requestAnimationFrame(()=>{
+    if(!chatEl) return;
+    const last=chatEl.lastElementChild;
+    const bottomNeed = last ? last.offsetTop+last.offsetHeight-chatEl.clientHeight+12 : 0; // 최신 내용이 보이는 최소 스크롤
+    const top = exStart ? Math.max(exStart.offsetTop-6, bottomNeed) : chatEl.scrollHeight;
+    chatEl.scrollTo({top, behavior:'smooth'});
+  });
+}
+// 현재 문답에 sticky: 위로 스크롤해 이전 대화를 올려다볼 수는 있지만,
+// 손을 떼면(스크롤이 잦아들면) 현재 문답 위치로 자동 복귀한다.
+function attachSnapBack(c){
+  let t=null;
+  const arm=ms=>{ clearTimeout(t); t=setTimeout(()=>{ if(chatEl===c) scrollToBottom(); }, ms); };
+  c.addEventListener('scroll', ()=>arm(600), {passive:true});
+  c.addEventListener('touchend', ()=>arm(120), {passive:true});
+}
+function showProgress(on){ el('progress').style.visibility = on?'visible':'hidden'; }
+function shuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
+
+// 완료(클리어) 저장 — 하나씩 깨는 재미
+const CLEAR_KEY='lp:cleared';
+function clearedSet(){ try{ return new Set(JSON.parse(localStorage.getItem(CLEAR_KEY)||'[]')); }catch(e){ return new Set(); } }
+function isCleared(k){ return clearedSet().has(k); }
+function markCleared(k){ const s=clearedSet(); s.add(k); try{ localStorage.setItem(CLEAR_KEY, JSON.stringify([...s])); }catch(e){} }
+
+function renderHome(){
+  show(home); fillVoicePicker();
+  const list=el('exList'); list.innerHTML='';
+  GROUPS.forEach(g=>{
+    const done=g.examples.filter(e=>isCleared(e.key)).length;
+    const h=document.createElement('div'); h.className='grp-head';
+    h.innerHTML=`<span>${g.label}</span><span class="grp-count">${done}/${g.examples.length} 완료</span>`;
+    list.appendChild(h);
+    g.examples.forEach(ex=>{
+      const cleared=isCleared(ex.key);
+      const b=document.createElement('button'); b.className='ex-card'+(cleared?' cleared':'');
+      b.innerHTML=`<div class="t">${ex.expr.name}</div><div class="f">${ex.dialogue.title}</div>`+
+        (cleared?'<span class="clear-badge">✓ 완료</span>':'<span class="step">리스닝</span>');
+      b.onclick=()=>startExample(ex); list.appendChild(b);
+    });
+  });
+}
+
+function startExample(ex){ curExample=ex; startDialogue(ex.dialogue); }
+
+// 정답 배열 완성 시 짧은 상승 아르페지오(외부 파일 없이 WebAudio로 합성)
+function successChime(){
+  try{
+    const AC=window.AudioContext||window.webkitAudioContext; if(!AC) return;
+    const ctx=new AC(); const now=ctx.currentTime;
+    [[784,0],[1047,0.11],[1319,0.22]].forEach(([f,t])=>{
+      const o=ctx.createOscillator(), g=ctx.createGain();
+      o.type='sine'; o.frequency.value=f; o.connect(g); g.connect(ctx.destination);
+      g.gain.setValueAtTime(0.0001, now+t);
+      g.gain.exponentialRampToValueAtTime(0.25, now+t+0.02);
+      g.gain.exponentialRampToValueAtTime(0.0001, now+t+0.18);
+      o.start(now+t); o.stop(now+t+0.2);
+    });
+    setTimeout(()=>{ try{ ctx.close(); }catch(e){} }, 800);
+  }catch(e){}
+}
+// 부드러운 두 음(하강) — 오답이어도 부정적이지 않게
+function wrongChime(){
+  try{
+    const AC=window.AudioContext||window.webkitAudioContext; if(!AC) return;
+    const ctx=new AC(); const now=ctx.currentTime;
+    [[392,0],[330,0.14]].forEach(([f,t])=>{
+      const o=ctx.createOscillator(), g=ctx.createGain();
+      o.type='sine'; o.frequency.value=f; o.connect(g); g.connect(ctx.destination);
+      g.gain.setValueAtTime(0.0001, now+t);
+      g.gain.exponentialRampToValueAtTime(0.14, now+t+0.03);
+      g.gain.exponentialRampToValueAtTime(0.0001, now+t+0.22);
+      o.start(now+t); o.stop(now+t+0.25);
+    });
+    setTimeout(()=>{ try{ ctx.close(); }catch(e){} }, 700);
+  }catch(e){}
+}
+
+// 첨부 이미지식 음성 플레이어(스피커 + 파동). 재생 중엔 파동 애니메이션, 눌러서 정지/재생 토글.
+const SPEAKER_SVG='<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M4 9v6h4l5 4V5L8 9H4z"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M16 9a4 4 0 010 6"/></svg>';
+function makeVoicePlayer(sentence, who){
+  const heights=[3,4,6,10,15,21,11,17,23,13,19,8,5,4,3];
+  const el=document.createElement('button'); el.type='button'; el.className='vplayer'; el.setAttribute('aria-label','음성 재생/정지');
+  el.innerHTML=`<span class="vp-icon">${SPEAKER_SVG}</span><span class="vp-wave">`+
+    heights.map((h,i)=>`<i style="height:${h}px;animation-delay:${(i*0.06).toFixed(2)}s"></i>`).join('')+`</span>`;
+  let playing=false, gen=0;
+  const setP=p=>{ playing=p; el.classList.toggle('playing',p); };
+  async function play(){ const t=++gen; stopAudio(); setP(true); await speak(sentence, who); if(t===gen) setP(false); }
+  el.onclick=()=>{ if(playing){ gen++; stopAudio(); setP(false); } else play(); };
+  el.autoPlay=play;
+  return el;
+}
+
+// 재사용 배열 위젯: 배열 줄(ansHost=문제 카드)과 단어 뱅크·확인(inputHost=답안 영역)을 나눠 그린다.
+function buildArrange(ansHost, inputHost, sentence, onDone){
+  const tokens=sentence.trim().split(/\s+/);
+  let bank=shuffle(tokens.map((t,i)=>({id:i,text:t}))), ans=[], checked=false;
+  const ansEl=document.createElement('div'); ansEl.className='ex-answer';
+  ansHost.appendChild(ansEl);
+  const bankEl=document.createElement('div'); bankEl.className='ex-bank';
+  const afterEl=document.createElement('div');
+  inputHost.append(bankEl, afterEl);
+  const mk=(t,cls,on)=>{ const b=document.createElement('button'); b.type='button'; b.className=cls; b.textContent=t; b.onclick=on; return b; };
+  function render(){
+    const ok=ans.map(x=>x.text).join(' ')===tokens.join(' ');
+    ansEl.className='ex-answer'+(checked?(ok?' correct':' wrong'):'');
+    ansEl.innerHTML=''; if(!ans.length) ansEl.innerHTML='<span class="ex-ph">아래에서 단어를 순서대로 탭하세요</span>';
+    ans.forEach(w=> ansEl.appendChild(mk(w.text,'ex-chip inans',()=>{ if(checked)return; ans=ans.filter(x=>x.id!==w.id); bank.push(w); render(); })));
+    bankEl.innerHTML=''; bank.forEach(w=> bankEl.appendChild(mk(w.text,'ex-chip',()=>{ if(checked)return; speak(w.text,'A'); bank=bank.filter(x=>x.id!==w.id); ans.push(w); render(); })));
+    afterEl.innerHTML='';
+    if(!checked){ const c=mk('확인','next-btn',()=>{ checked=true; if(ans.map(x=>x.text).join(' ')===tokens.join(' ')) successChime(); render(); onDone&&onDone(); }); c.disabled=bank.length>0; afterEl.appendChild(c); }
+    else { const r=document.createElement('div'); r.className='ex-result'; r.style.color=ok?'#2e9e57':'#d1584e'; r.textContent=ok?'정답이에요! 🎉':`정답: ${tokens.join(' ')}`; ansHost.appendChild(r); } // 채점 결과는 배열 줄 바로 아래(문제 카드)에
+  }
+  render();
+}
+
+// 2) 리스닝(핑퐁) ─────────────────────────────────────────────────────────────
+function addBubble(who, target){
+  const info = who==='B' ? {n:'B',a:'🐰'} : {n:'A',a:'🐻'};
+  const m=document.createElement('div'); m.className='msg'+(who==='B'?' b':'');
+  m.innerHTML=`<div class="avatar-col"><div class="avatar">${info.a}</div><div class="avatar-name">${info.n}</div></div>
+    <div class="bubble hidden-bubble"><span class="wave"><i></i><i></i><i></i></span></div>`;
+  (target||chatEl).appendChild(m); if(!target) scrollToBottom(); return m.querySelector('.bubble');
+}
+// 다 들은 뒤 말풍선을 텍스트로 열고, 배운 표현·어휘를 형광펜·밑줄로 강조.
+function revealBubble(bub, text, hl){ bub.classList.remove('hidden-bubble','playing'); bub.classList.add('revealed'); bub.innerHTML=markup(text, hl); }
+
+// A 말풍선에 '탭하면 영어 펼치기'를 붙인다. 잠금(peekable 아님) 상태에선 반응 없음.
+function setupPeek(bub, text){
+  bub.classList.add('abub'); bub.dataset.en=text;
+  bub.addEventListener('click', ()=>{
+    if(!bub.classList.contains('peekable')) return;
+    if(bub.classList.contains('peeked')){ bub.classList.remove('peeked'); bub.innerHTML='<span class="peek-hint">영어 보기</span>'; }
+    else { bub.classList.add('peeked'); bub.innerHTML=escapeHtml(bub.dataset.en); }
+  });
+}
+// 답한 뒤 A 말풍선 열람 허용('영어 보기' 안내 노출)
+function unlockA(bub){
+  if(!bub || bub.classList.contains('peekable')) return;
+  bub.classList.remove('playing','rsvp');
+  bub.classList.add('peekable');
+  if(!bub.classList.contains('peeked')) bub.innerHTML='<span class="peek-hint">영어 보기</span>';
+}
+// 단어의 대략적 음절 수(모음 그룹 세기) — RSVP dwell 계산용
+function syllOf(w){ return (w.match(/[aeiouy]+/gi)||[]).length||1; }
+function rsvpDwell(w){ return Math.max(160, Math.round(syllOf(w)*280/speechRate)); }
+// 고정(읽기): 대화 영역 위에 겹쳐 단어를 하나씩 제자리 교체(RSVP). 시선을 한 곳에 두고 읽는다.
+// 화면 전체를 바꾸지 않고 채팅 영역(chat)에만 겹쳐 흐리게 → 되돌아올 때 끊김 없이 페이드로 사라진다.
+const RSVP_READY_MS=800; // 각 A 대사 시작 직전 준비 점을 보여주는 시간(3·2·1보다 짧게, 무방비 방지)
+let rsvpToken=0;
+async function rsvpReveal(text, myRun){
+  const token=++rsvpToken;
+  document.querySelectorAll('.rsvp-center').forEach(n=>n.remove());
+  const ov=document.createElement('div'); ov.className='rsvp-center';
+  ov.innerHTML='<div class="who"><div class="av">🐻</div>A</div><div class="word"></div>';
+  const r=document.querySelector('.pcard').getBoundingClientRect(); // 문제 카드에만 겹치도록(교정 뷰에선 chat이 숨겨져 있어 카드 기준)
+  ov.style.top=r.top+'px'; ov.style.left=r.left+'px'; ov.style.width=r.width+'px'; ov.style.height=r.height+'px';
+  const wordEl=ov.querySelector('.word');
+  (document.querySelector('.app')||document.body).appendChild(ov);
+  requestAnimationFrame(()=>ov.classList.add('show')); // 부드럽게 페이드인
+  const dead=()=> myRun!==runId || token!==rsvpToken;
+  // 준비 신호: 첫 단어가 뜰 자리에 점을 잠깐 깜빡여 시선을 고정시킨다(첫 단어 놓침 방지)
+  wordEl.innerHTML='<span class="rsvp-dot"></span>';
+  await wait(RSVP_READY_MS);
+  if(dead()){ ov.remove(); return false; }
+  for(const w of text.split(/\s+/).filter(Boolean)){
+    if(dead()){ ov.remove(); return false; }
+    wordEl.innerHTML='<span class="rsvp-word">'+escapeHtml(w)+'</span>';
+    await wait(rsvpDwell(w));
+  }
+  if(dead()){ ov.remove(); return false; }
+  await wait(240);
+  if(token===rsvpToken){ ov.classList.remove('show'); await wait(260); if(ov.parentNode&&token===rsvpToken) ov.remove(); } // 페이드아웃 후 제거
+  return myRun===runId;
+}
+// 오답 교정용 '다시 보기' 버튼(음성 플레이어의 고정 모드 짝) — 눌러서 중앙 RSVP 재생
+function makeRsvpPlayer(sentence){
+  const el=document.createElement('button'); el.type='button'; el.className='vplayer rsvp-play'; el.setAttribute('aria-label','다시 보기');
+  el.innerHTML='<span class="vp-icon">👀</span><span>다시 보기</span>';
+  el.onclick=()=>rsvpReveal(sentence, runId);
+  return el;
+}
+function correctOpt(turn){ return turn.options.find(o=>o.correct); }
+// 답변 직후 해설(💡만): 정답/오답 문구 없이 B의 정답 대사가 바로 말풍선으로 보인다. 색으로 구분(정답 초록/오답 노랑).
+// 오답이면 내가 고른 답(문장만)을 위에, 수평선 아래에 해설을 보여준다.
+function feedbackBox(ok, picked){
+  const pickedLine = ok ? '' : `<div class="tip-picked"><b>${escapeHtml(picked.text)}</b></div>`;
+  if(!picked.why && !pickedLine) return null;
+  const d=document.createElement('div'); d.className='fb';
+  d.innerHTML=`<div class="tip-box${ok?' ok':''}"><span class="bulb">💡</span><div class="tip-body">${pickedLine}${picked.why?`<div>${picked.why}</div>`:''}</div></div>`;
+  return d;
+}
+// 오답 노트 팝업: 맨 위에 모범답안(정답), 아래에 오답 선택지들과 그 이유
+function showWrongNote(options){
+  const co=options.find(o=>o.correct);
+  const item=o=>`<div class="note-it"><span class="note-badge">오답</span><div class="note-en">${escapeHtml(o.text)}</div>`+
+    (o.kr?`<div class="note-kr">${escapeHtml(o.kr)}</div>`:'')+
+    (o.why?`<div class="note-why">${o.why}</div>`:'')+`</div>`;
+  const ov=document.createElement('div'); ov.className='note-ov';
+  ov.innerHTML=`<div class="note"><div class="note-top"><b>📒 오답 노트</b><button class="note-x" aria-label="닫기">✕</button></div>`+
+    (co?`<div class="note-model"><span class="note-badge model">모범답안</span><div class="note-en">${escapeHtml(co.text)}</div>`+
+      (co.kr?`<div class="note-kr">${escapeHtml(co.kr)}</div>`:'')+`</div>`:'')+
+    options.filter(o=>!o.correct).map(item).join('')+`</div>`;
+  ov.addEventListener('click', e=>{ if(e.target===ov || e.target.closest('.note-x')) ov.remove(); });
+  document.body.appendChild(ov);
+}
+function setProgress(n){ const t=current.turns.filter(x=>x.quiz).length; el('barCount').textContent=`${n}/${t}`; el('barFill').style.width=`${Math.round(n/t*100)}%`; }
+
+// 리스닝 시작 전 마음의 준비(카운트다운). 음성이 갑자기 나오지 않도록.
+async function readyGate(myRun){
+  const g=document.createElement('div'); g.className='ready-gate';
+  const msg = exposeMode==='fixed' ? '👀 잘 보고 답을 골라보세요' : '🎧 잘 듣고 답을 골라보세요';
+  g.innerHTML=`<div class="ready-msg">${msg}</div><div class="ready-num"></div>`;
+  chatEl.appendChild(g);
+  const num=g.querySelector('.ready-num');
+  for(const n of ['3','2','1']){
+    if(myRun!==runId){ g.remove(); return false; }
+    num.textContent=n; num.style.animation='none'; void num.offsetWidth; num.style.animation='';
+    await wait(600);
+  }
+  g.remove();
+  return myRun===runId;
+}
+
+async function startDialogue(dialogue){
+  const myRun=++runId; stopAudio();
+  current=dialogue; correctCount=0; learnedSeen=[]; lastA=''; lastAKr=''; exStart=null;
+  // 스왑 체인 초기화: scrA가 front, 첫 문답 화면을 새로 만든다
+  front=el('scrA'); back=el('scrB');
+  front.classList.remove('back'); back.classList.add('back');
+  front.innerHTML=''; back.innerHTML='';
+  newChatScreen(front);
+  show(topbar,stage); showProgress(true); setProgress(0);
+  let quizDone=0, pending=null; // pending: back에 미리 만들어 둔 다음 문답의 말풍선
+  el('pcardHead').textContent=`레벨 ${curExample.level} | ${curExample.expr.note}`;
+  el('replayBtn').textContent = exposeMode==='fixed' ? '👀' : '🔊';
+  el('replayBtn').parentElement.classList.remove('hidden');
+  setAnswerIdle();
+  if(!await readyGate(myRun)) return;
+  for(let ti=0; ti<dialogue.turns.length; ti++){
+    const turn=dialogue.turns[ti];
+    if(myRun!==runId) return;
+    if(!turn.quiz){
+      // 스왑으로 미리 준비된 말풍선이 있으면 그대로 사용, 아니면(첫 턴 등) 현재 화면에 추가
+      const bub = pending ? pending.bub : addBubble(turn.s);
+      exStart=bub.closest('.msg'); // 이 문답을 화면 맨 위에 고정
+      if(!pending) scrollToBottom(); // 준비된 화면은 프리페어 단계에서 이미 스크롤 완료
+      pending=null;
+      if(turn.s==='A'){ lastA=turn.text; lastAKr=turn.kr||''; setupPeek(bub, turn.text); }
+      if(turn.s==='A' && exposeMode==='fixed'){
+        if(!await rsvpReveal(turn.text, myRun)) return;
+      } else {
+        bub.classList.add('playing'); await speak(turn.text, turn.s);
+        if(myRun!==runId) return; bub.classList.remove('playing');
+      }
+      if(turn.hl){ if(turn.learned) noteLearned(turn.learned); revealBubble(bub, turn.text, turn.hl); scrollToBottom(); await wait(750); }
+      else await wait(250);
+      // 뒤에 퀴즈가 없는 A 대사(마지막 인사 등)는 가릴 이유가 없으니 바로 열람 허용
+      if(turn.s==='A' && !(dialogue.turns[ti+1] && dialogue.turns[ti+1].quiz)) unlockA(bub);
+    } else {
+      // 결과 표시 시점에 호출되는 콜백: back 버퍼에 다음 문답 화면을 미리 만든다(스왑은 '다음'에서)
+      const nxt=dialogue.turns[ti+1];
+      const prepNextChat=()=>{
+        if(!nxt || nxt.quiz) return false; // 다음 화면이 없으면 완료 화면으로
+        const c=newChatScreen(back, dialogue.turns.slice(0, ti+1)); // 이전 대화는 데이터에서 렌더
+        const bub=addBubble(nxt.s, c);
+        c.scrollTop=Math.max(0, bub.closest('.msg').offsetTop-6); // 준비 단계에서 스크롤까지 완료
+        pending={ bub };
+        return true;
+      };
+      el('quizQ').classList.remove('hidden'); scrollToBottom();
+      const ok=await askQuiz(turn, myRun, prepNextChat); if(myRun!==runId) return;
+      if(ok) correctCount++;
+      setAnswerIdle();
+      const co=correctOpt(turn); if(co.learned) noteLearned(co.learned); // B 말풍선·음성은 답변 시점에 이미 표시/재생
+      quizDone++; setProgress(quizDone); await wait(400);
+    }
+  }
+  if(myRun!==runId) return; showDone();
+}
+
+function askQuiz(turn, myRun, prepNextChat){
+  return new Promise(resolve=>{
+    const box=el('opts'), after=el('quizAfter'), co=correctOpt(turn);
+    const opts=shuffle(turn.options);
+    let answered=false;
+    const mkBtn=(t,cls,on)=>{ const b=document.createElement('button'); b.className=cls; b.textContent=t; b.onclick=on; return b; };
+    function appendLearned(){
+      if(!co.learned) return;
+      const lb=document.createElement('div'); lb.className='learned-box';
+      // 방금 (오디오/화면으로) 접한 A 대사를 보여주고, 거기 배운 표현이 있었음을 연결해준다
+      lb.innerHTML=`<div class="ln-head">${exposeMode==='fixed'?'👀':'🎧'} 방금 A가 이렇게 말했어요</div>`+
+        `<div class="ln-a">“${hlExpr(co.learned.aLine||'', co.learned.fixed)}”</div>`+
+        `<div class="ln-expr"><span class="k">내가 배운 표현</span><b>${co.learned.name}</b> ${co.learned.note}</div>`;
+      chatEl.appendChild(lb); scrollToBottom(); // 피드백처럼 문제 영역(카드)에 표시
+    }
+    // 입력 단계: 보기만 보인다(한 번 답하면 문제 종료)
+    function renderOptions(){
+      el('quizQ').classList.remove('hidden');
+      box.innerHTML=''; after.innerHTML='';
+      opts.forEach(o=>{
+        const b=document.createElement('button'); b.className='opt';
+        b.innerHTML=`<div class="opt-text"></div>`;
+        b.querySelector('.opt-text').textContent=o.text;
+        b.onclick=()=>{ if(!answered){ answered=true; onAnswer(o); } };
+        box.appendChild(b);
+      });
+    }
+    // 결과 단계: B의 정답 대사가 바로 말풍선으로 보이고 💡 해설이 카드에 남는다.
+    // 결과를 보여주는 동안 back 버퍼에 다음 문제 화면을 미리 만들고, '다음'을 누르면 스왑한다.
+    function onAnswer(o){
+      // 정답이면 A 말풍선을 탭 열람('영어 보기') 허용, 오답이면 계속 숨김(문장 배열로 맞춰야 하므로)
+      if(o.correct) chatEl.querySelectorAll('.abub:not(.peekable)').forEach(unlockA);
+      box.innerHTML=''; el('quizQ').classList.add('hidden');
+      const bub=addBubble('B'); revealBubble(bub, co.text, co.hl);
+      const fb=feedbackBox(!!o.correct, o); if(fb) chatEl.appendChild(fb);
+      if(o.correct){ successChime(); appendLearned(); } else wrongChime();
+      scrollToBottom();
+      setTimeout(()=>{ if(myRun===runId) speak(co.text,'B'); }, 250); // 효과음 뒤에 B 음성
+      after.appendChild(mkBtn('📒 오답 노트','next-btn ghost',()=>showWrongNote(opts)));
+      if(o.correct){
+        const prepared=prepNextChat(); // 다음 문답 화면 미리 준비(대화 끝이면 false → 완료 화면)
+        after.appendChild(mkBtn('다음 ▶','next-btn',()=>{ if(myRun===runId){ if(prepared) swapScreens(); resolve(true); } }));
+      } else {
+        const fx=prepFixScreen(); // 문장 배열 화면 미리 준비
+        after.appendChild(mkBtn('다음 ▶','next-btn',()=>{ if(myRun===runId){ swapScreens(); startFix(fx); } }));
+      }
+    }
+    // 문장 배열 화면을 back 버퍼에 새로 만든다(문제마다 새 컴포넌트)
+    function prepFixScreen(){
+      const fixed = exposeMode==='fixed';
+      const f=document.createElement('div'); f.className='fix';
+      f.innerHTML=`<div class="fix-prompt"><div class="fix-head">${fixed?'다시 보고, A가 한 말을 순서대로 맞춰보세요':'다시 듣고, A가 한 말을 순서대로 맞춰보세요'}</div>`+
+        `<div class="fix-ko">${escapeHtml(lastAKr||'')}</div><div class="fix-player"></div></div><div class="fix-ans"></div>`;
+      const player = fixed ? makeRsvpPlayer(lastA) : makeVoicePlayer(lastA,'A');
+      f.querySelector('.fix-player').appendChild(player);
+      back.innerHTML=''; back.appendChild(f);
+      return {f, player, fixed};
+    }
+    // 스왑 직후 배열 문제 활성화. 배열 결과가 뜰 때 다음 문답 화면을 다시 미리 준비한다.
+    function startFix(fx){
+      after.innerHTML='';
+      const arrWrap=document.createElement('div'); after.appendChild(arrWrap);
+      let advanced=false;
+      buildArrange(fx.f.querySelector('.fix-ans'), arrWrap, lastA, ()=>{
+        if(advanced) return; advanced=true;
+        const prepared=prepNextChat();
+        after.appendChild(mkBtn('다음 ▶','next-btn',()=>{ if(myRun===runId){ if(prepared) swapScreens(); resolve(false); } }));
+      });
+      // 듣기: 진입 직후 A 음성을 부드럽게 자동 재생 / 고정: 갑자기 뜨지 않도록 '다시 보기'를 눌러야 노출
+      if(!fx.fixed) setTimeout(()=>{ if(myRun===runId) fx.player.autoPlay(); }, 350);
+    }
+    renderOptions();
+  });
+}
+
+function showDone(){
+  if(curExample&&curExample.key) markCleared(curExample.key); // 완료 표시 저장
+  show(topbar,done); showProgress(true);
+  const t=current.turns.filter(x=>x.quiz).length;
+  el('doneScore').textContent=`${t}번 중 ${correctCount}번 한 번에 맞혔어요.`;
+  const ll=el('learnedList');
+  if(learnedSeen.length){ ll.classList.remove('hidden');
+    ll.innerHTML='<div class="h">💡 이번 대화에 나온 배운 표현</div>'+learnedSeen.map(x=>`<div class="it">${exprHtml(x)}</div>`).join('');
+  } else ll.classList.add('hidden');
+}
+
+// 정답을 다 풀고 나면 전체 대화를 텍스트로 확인(배운 표현·어휘 강조 그대로).
+function showScript(){
+  runId++; stopAudio(); show(script);
+  const box=el('scriptList'); box.innerHTML='';
+  current.turns.forEach(t=>{
+    const who=t.s; const info = who==='B' ? {n:'B',a:'🐰'} : {n:'A',a:'🐻'};
+    const line = t.quiz ? correctOpt(t) : t;
+    const krText = t.quiz ? (line.kr||'') : (t.kr||'');
+    const krLine = krText ? `<div class="script-kr">${escapeHtml(krText)}</div>` : '';
+    const m=document.createElement('div'); m.className='msg'+(who==='B'?' b':'');
+    m.innerHTML=`<div class="avatar-col"><div class="avatar">${info.a}</div><div class="avatar-name">${info.n}</div></div>
+      <div class="bubble revealed">${markup(line.text, line.hl)}${krLine}</div>`;
+    box.appendChild(m);
+  });
+}
+
+function leave(){ runId++; stopAudio(); renderHome(); }
+el('backBtn').onclick=leave;
+el('doneList').onclick=leave;
+el('doneRetry').onclick=()=>startDialogue(curExample.dialogue);
+el('doneScript').onclick=showScript;
+el('scriptBack').onclick=showDone;
+el('replayBtn').onclick=()=>{
+  if(!lastA) return;
+  if(exposeMode==='fixed') rsvpReveal(lastA, runId);
+  else speak(lastA,'A');
+};
+window.addEventListener('pagehide', stopAudio);
+loadData();
+</script>
+</body>
+</html>
