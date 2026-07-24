@@ -84,13 +84,16 @@
   .trigger-box { background:#efe9fb; border:1px solid #d9ccf3; border-radius:12px; padding:12px 14px; margin:2px 0 16px; font-size:14.5px; color:#4a3b73; line-height:1.5; display:flex; gap:9px; align-items:flex-start; }
   .trigger-box .ic { font-size:18px; line-height:1.3; flex-shrink:0; }
   .trigger-box b { color:#5b3fb0; }
-  /* 정답 후 패턴 공개(보상) */
-  .gen-line { background:#f1faf3; border:1px solid #cdeed7; border-radius:12px; padding:11px 13px; margin:8px 0 2px; line-height:1.55; text-align:center; }
-  .gen-head { font-size:14.5px; color:#3f6b50; }
-  .gen-head b { color:#5b3fb0; font-size:16px; }
-  .gen-head .kr { color:#8878b3; font-size:12.5px; margin-left:5px; }
-  .gen-sib { font-size:13px; color:#3f6b50; margin-top:5px; }
-  .gen-sib b { color:#2e7d4f; }
+  /* 정답 후 패턴 공개(보상) — 실제 응용 예문 */
+  .payoff { background:#f1faf3; border:1px solid #cdeed7; border-radius:12px; padding:12px 14px; margin:8px 0 2px; }
+  .payoff-head { font-size:14px; color:#3f6b50; line-height:1.5; margin-bottom:6px; }
+  .pat-inline { display:inline-block; background:#efe9fb; border:1px solid #d9ccf3; border-radius:8px; padding:1px 8px; margin:0 1px; }
+  .pat-inline b { color:#5b3fb0; font-size:15px; }
+  .pat-inline .kr { color:#8878b3; font-size:12px; margin-left:5px; }
+  .payoff-ex { text-align:left; background:#fff; border-radius:9px; padding:9px 12px; margin-top:8px; }
+  .pe-en { font-size:15.5px; font-weight:700; color:#2f3e52; line-height:1.4; }
+  .pe-en .tgt { color:var(--green); }
+  .pe-kr { font-size:12.5px; color:#6b7c93; margin-top:3px; }
 
   /* 문장 배열 */
   .ex-answer { min-height:56px; display:flex; flex-wrap:wrap; gap:8px; align-content:flex-start; padding:12px; border-radius:12px; background:#eef4fb; border:1px dashed #cddcf1; margin-bottom:14px; }
@@ -305,23 +308,29 @@ function renderVocab(){
   };
 }
 
-// 트리거 박스(배열 전): 방금 배운 단어와 연결만 하고, 패턴은 노출하지 않는다
-// (패턴을 미리 보여주면 배열 정답 구조가 새어나가므로 — 정답 후에 공개).
+// 트리거 박스(배열 전): 방금 배운 단어의 '실제 사용'을 궁금하게만 열어준다.
+// 패턴은 노출하지 않는다(미리 보여주면 배열 정답이 새므로 — 정답 후 공개).
 function triggerBoxHtml(item){
   const w=escapeHtml(item.word);
-  return `<div class="trigger-box"><span class="ic">💡</span><span>방금 배운 <b>${w}</b>가 들어간 실제 문장이에요. 순서대로 배열해 보세요.</span></div>`;
+  return `<div class="trigger-box"><span class="ic">💡</span><span>방금 배운 <b>${w}</b>, 실제로 어떻게 쓸까요?</span></div>`;
 }
-// 정답 후 보상: 재사용 가능한 패턴을 공개하고, 같은 패턴의 다른 단어까지 보여줘 효용감 강화
+// 정답 후 보상: 방금 완성한 문장이 '재사용 가능한 패턴'임을 알려주고,
+// 같은 패턴의 실제 예문(다른 단어)을 보여줘 "이제 이런 말도 할 수 있구나"를 구체적으로 느끼게 한다.
 function patternPayoffHtml(item){
-  const s=item.sentence, sibs=(s.siblings||[]);
+  const s=item.sentence, sibs=(s.siblings||[]).slice(0,2);
   const patEn=(s.pattern_en||'').trim(), patKr=(s.pattern_kr||'').trim();
-  const hasPat = curMode==='expression' ? !!patEn : !!patKr;
-  if(!hasPat && !sibs.length) return '';
-  let head;
-  if(curMode==='expression') head=`이건 <b>${escapeHtml(patEn||patKr)}</b>${patEn&&patKr?` <span class="kr">${escapeHtml(patKr)}</span>`:''} 패턴이에요`;
-  else head=`이건 <b>${escapeHtml(patKr)}</b> 패턴이에요`;
-  const sibLine = sibs.length ? `<div class="gen-sib"><b>${sibs.map(escapeHtml).join(', ')}</b> 같은 단어에도 그대로 써요</div>` : '';
-  return `<div class="gen-line"><div class="gen-head">💡 ${head}</div>${sibLine}</div>`;
+  const modeWord = curMode==='grammar' ? '문법' : '표현';
+  const patTxt = curMode==='expression' ? (patEn||patKr) : patKr;
+  if(!patTxt && !sibs.length) return '';
+  const patChip = patTxt
+    ? `<span class="pat-inline"><b>${escapeHtml(patTxt)}</b>${(curMode==='expression'&&patEn&&patKr)?`<span class="kr">${escapeHtml(patKr)}</span>`:''}</span>` : '';
+  const head = sibs.length
+    ? `🔑 이 ${modeWord} ${patChip}${patChip?', ':''}이렇게도 말할 수 있어요`
+    : `🔑 핵심 ${modeWord} 패턴 ${patChip}`;
+  const exHtml = sibs.map(x=>
+    `<div class="payoff-ex"><div class="pe-en">${hlTrigger(x.en, x.word)}</div><div class="pe-kr">${escapeHtml(x.kr)}</div></div>`
+  ).join('');
+  return `<div class="payoff"><div class="payoff-head">${head}</div>${exHtml}</div>`;
 }
 
 // [2] 문장 배열 ────────────────────────────────────────────────────────────────

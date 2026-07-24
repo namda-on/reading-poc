@@ -192,12 +192,12 @@ def build_mode(csv_path, kind, vocab_by_seq, cefr_by_seq):
         if vex is None:
             continue
 
-        # 패턴별 필러 누적(레벨 상한과 무관하게 전체 스캔에서 모음)
+        # 패턴별 예문 누적(레벨 상한과 무관하게 전체 스캔에서 모음) — 정답 후 '이렇게도 써요' 응용 예문용
         pk = pattern_key()
         if pk:
             lst = pattern_fillers.setdefault(pk, [])
-            if cw not in lst:
-                lst.append(cw)
+            if not any(x["word"].lower() == cw.lower() for x in lst):
+                lst.append({"word": cw, "en": strip_markup(sent), "kr": strip_markup(trans)})
 
         bucket = levels.setdefault(lv, {"items": [], "seen": set()})
         if len(bucket["items"]) >= ITEMS_PER_LEVEL:
@@ -230,11 +230,11 @@ def build_mode(csv_path, kind, vocab_by_seq, cefr_by_seq):
         bucket["items"].append(item)
         all_items.append(item)
 
-    # 같은 패턴의 다른 필러(트리거 단어)를 최대 3개 붙인다(자기 자신 제외)
+    # 같은 패턴의 다른 예문(en+kr)을 최대 3개 붙인다(자기 자신 제외) — 응용 예문
     for it in all_items:
         s = it["sentence"]
         pk = s.pop("_pk", "")
-        sibs = [w for w in pattern_fillers.get(pk, []) if w.lower() != s["trigger"].lower()]
+        sibs = [x for x in pattern_fillers.get(pk, []) if x["word"].lower() != s["trigger"].lower()]
         s["siblings"] = sibs[:3]
 
     out_levels = []
