@@ -58,6 +58,8 @@
     border-radius:999px; padding:5px 11px; background:#ffffff66; color:#5b7c93; white-space:nowrap; }
   .sb-step.active { background:#fff; color:#2f6ab0; box-shadow:0 2px 6px rgba(30,60,110,.14); }
   .sb-step.solved { background:#cdefd8; color:#22794a; }
+  .sb-step.skipped { background:#e3e9f2; color:#6b7c93; }
+  .sb-step.skipped .n { background:#a9b8ca; }
   .sb-step .n { width:15px; height:15px; border-radius:50%; background:#c9d8ea; color:#fff; font-size:10px;
     display:inline-flex; align-items:center; justify-content:center; }
   .sb-step.active .n { background:#4b83d6; }
@@ -111,6 +113,7 @@
   .blank { field-sizing:content; min-width:66px; max-width:100%; background:#dbe8fb; border:none; border-radius:9px; padding:2px 10px;
     font:inherit; font-weight:800; color:#3a6bb0; text-align:center; outline:none; vertical-align:baseline; }
   .blank::placeholder { color:#9db8dd; font-weight:700; letter-spacing:.08em; }
+  .blank.revealed::placeholder { color:#3a6bb0; letter-spacing:0; }   /* 정답 공개 상태 */
   .blank.correct { background:#cdefd8; color:var(--green); }
   /* 카드 내 오답 피드백 박스 */
   .wrong-box { background:#cdd8f2; color:#42527a; border-radius:11px; padding:10px 14px; font-size:15px; font-weight:600; margin:14px 0 2px; }
@@ -293,9 +296,9 @@ function setOpt(k,v){
 }
 
 // 단계 배너: [① 어휘] → [② 표현]. 어휘를 맞히면 1단계가 `✓ {단어}`로 바뀌어 표현 화면까지 이어진다
-let bannerStep=0, bannerWord='';
-function renderStepBanner(step, word){
-  bannerStep=step; bannerWord=word||'';
+let bannerStep=0, bannerWord='', bannerSkipped=false;
+function renderStepBanner(step, word, skipped){
+  bannerStep=step; bannerWord=word||''; bannerSkipped=!!skipped;
   refreshBanner();
 }
 function refreshBanner(){
@@ -303,7 +306,9 @@ function refreshBanner(){
   if(!OPTS.banner || !bannerStep){ el2.classList.add('hidden'); el2.innerHTML=''; return; }
   const modeWord = curMode==='grammar' ? '문장' : '표현';
   const s1 = bannerWord
-    ? `<span class="sb-step solved"><span class="n">✓</span><span class="sb-word">${escapeHtml(bannerWord)}</span></span>`
+    ? (bannerSkipped
+        ? `<span class="sb-step skipped"><span class="n">1</span><span class="sb-word">${escapeHtml(bannerWord)}</span></span>`
+        : `<span class="sb-step solved"><span class="n">✓</span><span class="sb-word">${escapeHtml(bannerWord)}</span></span>`)
     : `<span class="sb-step${bannerStep===1?' active':''}"><span class="n">1</span>어휘 익히기</span>`;
   const s2 = `<span class="sb-step${bannerStep===2?' active':''}"><span class="n">2</span>${modeWord} 만들기</span>`;
   el2.classList.remove('hidden');
@@ -358,7 +363,7 @@ function norm(s){ return s.toLowerCase().trim().replace(/^[^\w']+|[^\w']+$/g,'')
 function tokenize(sent){ return sent.trim().replace(/[.?!]+$/,'').split(/\s+/); }
 function trailPunct(sent){ const m=sent.trim().match(/[.?!]+$/); return m?m[0]:''; }
 
-let DATA=null, curMode='expression', sessionItems=[], itemIdx=0, learned=[];
+let DATA=null, curMode='expression', sessionItems=[], itemIdx=0, learned=[], itemSkipped=false;
 
 // 상단 설정(기어) — 세션 중에도 라벨 옵션을 바로 바꿔볼 수 있게.
 // 바깥 클릭 닫기는 mousedown에서 처리하고, 기어/팝오버 내부 클릭은 contains로 걸러낸다.
@@ -435,9 +440,15 @@ function koHtml(line){
   return `<div class="chat-ko${note?' note':''}">${html}</div>`;
 }
 // 힌트 placeholder: level1=첫글자+길이, level2=정답 전체
+// 힌트 단계: 1=앞 2글자 공개(나머지는 길이만), 2=정답 전체
 function hintPlaceholder(answer, level){
   if(level>=2) return answer;
-  if(level===1){ let s=answer[0]; for(let i=1;i<answer.length;i++) s+= answer[i]===' ' ? '  ' : '_'; return s; }
+  if(level===1){
+    const show=Math.min(2, answer.length);
+    let s=answer.slice(0, show);
+    for(let i=show;i<answer.length;i++) s+= answer[i]===' ' ? '  ' : '_';
+    return s;
+  }
   return '';
 }
 // 오답 글자 비교(빨강 강조) + 다른 글자 수
@@ -460,6 +471,7 @@ function hlTrigger(sent, trig){
 function renderVocab(){
   const item=sessionItems[itemIdx], v=item.vocab, answer=v.answer;
   setProgress(itemIdx*2);
+  itemSkipped=false;
   renderStepBanner(1, '');
   let hintLevel=0, done=false;
 
@@ -494,7 +506,7 @@ function renderVocab(){
     card.classList.add('correct');
     wrongBox.classList.add('hidden');
     if(!card.querySelector('.check-mark')){ const c=document.createElement('div'); c.className='check-mark'; c.textContent='✓'; card.appendChild(c); }
-    renderStepBanner(1, item.word);          // 배운 단어를 배너에 올린다
+    renderStepBanner(1, item.word, false);   // 배운 단어를 배너에 올린다
     // 하단: (예고) + 탭 + 3버튼
     const modeWord = curMode==='grammar' ? '문장' : '표현';
     el('bottom').innerHTML=`
@@ -534,10 +546,33 @@ function renderVocab(){
   vin.addEventListener('input', onInput);
 
   el('hintBtn').onclick=()=>{
-    if(hintLevel===0){ hintLevel=1; el('hintLabel').textContent='정답 보기'; el('hintBtn').querySelector('.ic').textContent='✔'; }
-    else if(hintLevel===1){ hintLevel=2; }
-    applyHint(); vin.focus();
+    if(hintLevel===0){        // 힌트 보기 → 앞 2글자
+      hintLevel=1;
+      el('hintLabel').textContent='정답 보기'; el('hintBtn').querySelector('.ic').textContent='✔';
+      applyHint(); vin.focus();
+    }
+    else if(hintLevel===1){   // 정답 보기 → 전체 단어 + 다음 탭에서 넘어갈 수 있게
+      hintLevel=2;
+      vin.classList.add('revealed');
+      el('hintLabel').textContent='넘어가기'; el('hintBtn').querySelector('.ic').textContent='→';
+      applyHint(); vin.focus();
+    }
+    else skipItem();          // 넘어가기 → 정답 처리 없이 다음 단계로
   };
+
+  // 정답을 몰라도 막히지 않도록: 정답을 본 뒤 넘어가면 맞힘으로 치지 않고 진행한다
+  function skipItem(){
+    done=true; itemSkipped=true;
+    vin.value=answer; vin.readOnly=true; vin.placeholder='';
+    renderStepBanner(1, item.word, true);
+    const fromRect = OPTS.fly ? vin.getBoundingClientRect() : null;
+    renderArrange();
+    if(fromRect){
+      const target=(OPTS.banner?document.querySelector('#stepBanner .sb-step.skipped'):null)
+                || document.querySelector('.tile.trigger');
+      if(target) flyWord(answer, fromRect, target.getBoundingClientRect());
+    }
+  }
 }
 
 // 방금 배운 어휘와 같은 타일인지 판정. 정확일치 + 규칙 굴절형까지 인정한다
@@ -626,7 +661,7 @@ function patternPayoffHtml(item){
 function renderArrange(){
   const item=sessionItems[itemIdx], s=item.sentence;
   setProgress(itemIdx*2+1);
-  renderStepBanner(2, item.word);
+  renderStepBanner(2, item.word, itemSkipped);
   const tokens=tokenize(s.en), punct=trailPunct(s.en);
   const target=tokens.map(t=>t.toLowerCase()).join(' ');
   // 뱅크(자리 유지): placed 플래그 + 방금 배운 어휘 여부(isTrig)
