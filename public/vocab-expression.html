@@ -40,9 +40,7 @@
   .lv-card .f { font-size:12.5px; color:var(--sub); margin-top:4px; line-height:1.4; }
   .lv-card .step { display:inline-block; font-size:11px; font-weight:800; color:#2f6ab0; background:#e7f0fb; border:1px solid #cfe0f5; border-radius:999px; padding:2px 8px; margin-top:8px; }
   .lv-card .clear-badge { position:absolute; top:14px; right:16px; font-size:13px; font-weight:800; color:var(--green); }
-  .grp-head { display:flex; justify-content:space-between; align-items:baseline; margin:16px 4px 10px; }
-  .grp-head span:first-child { font-size:15px; font-weight:800; color:#25406a; }
-  .grp-head .grp-count { font-size:12px; font-weight:700; color:#5b7c93; }
+  .restart-btn { display:block; width:100%; background:none; border:none; color:#3a6bb0; font-size:13px; font-weight:700; padding:6px; cursor:pointer; text-decoration:underline; }
   .home .note { font-size:12px; color:#3a567d; opacity:.85; margin-top:18px; line-height:1.6; }
 
   /* 세션 */
@@ -103,7 +101,6 @@
   .learn-label { font-size:11.5px; font-weight:800; color:#8878b3; }
   .learn-pat { font-size:18.5px; font-weight:800; color:var(--purple-d); margin-top:3px; line-height:1.35; }
   .learn-meta { display:flex; flex-wrap:wrap; align-items:center; gap:6px; margin-top:10px; }
-  .sit-chip { background:#fff; color:#6b5aa8; font-size:11px; font-weight:800; border-radius:999px; padding:3px 10px; }
   .use-count { font-size:12.5px; font-weight:700; color:#7a6aa8; }
   .use-count b { color:var(--purple-d); font-weight:800; }
 
@@ -194,7 +191,7 @@
     <p class="sub"><b>빈칸으로 어휘를 배우고</b>, 그 어휘가 트리거하는 문장을 <b>단어 배열</b>로 완성해요.</p>
     <div class="tabs" id="tabs"></div>
     <div id="levelList"></div>
-    <div class="note">말해보카 어휘·문법 학습 UX 기반. 빈칸은 힌트·정답을 봐도 <b>직접 입력</b>해야 정답 처리돼요.</div>
+    <div class="note">진입점은 하나예요. 들어가면 문항마다 <b>트리거 어휘가 달라지고, 그에 따라 배우는 표현도 매번 달라져요.</b><br>빈칸은 힌트·정답을 봐도 직접 입력해야 정답 처리돼요.</div>
   </div>
 
   <div class="stage hidden" id="stage"></div>
@@ -206,19 +203,19 @@ const topbar = el('topbar'), home = el('home'), stage = el('stage');
 function shuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
 function escapeHtml(s){ return String(s).replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
 
-// localStorage
-const CLEAR_KEY='ve:cleared', MODE_KEY='ve:mode';
-function clearedSet(){ try{ return new Set(JSON.parse(localStorage.getItem(CLEAR_KEY)||'[]')); }catch(e){ return new Set(); } }
-function isCleared(k){ return clearedSet().has(k); }
-function markCleared(k){ const s=clearedSet(); s.add(k); try{ localStorage.setItem(CLEAR_KEY, JSON.stringify([...s])); }catch(e){} }
-function lvKey(mode,level){ return mode+':'+level; }
+// localStorage — 진입점이 하나이므로 '어디까지 풀었는지'만 모드별로 기억한다
+const MODE_KEY='ve:mode', POS_KEY='ve:pos';
+function getPos(mode){ try{ return Number(JSON.parse(localStorage.getItem(POS_KEY)||'{}')[mode])||0; }catch(e){ return 0; } }
+function setPos(mode,n){
+  try{ const o=JSON.parse(localStorage.getItem(POS_KEY)||'{}'); o[mode]=n; localStorage.setItem(POS_KEY, JSON.stringify(o)); }catch(e){}
+}
 
 // 채점 정규화 / 배열 토큰
 function norm(s){ return s.toLowerCase().trim().replace(/^[^\w']+|[^\w']+$/g,'').replace(/\s+/g,' '); }
 function tokenize(sent){ return sent.trim().replace(/[.?!]+$/,'').split(/\s+/); }
 function trailPunct(sent){ const m=sent.trim().match(/[.?!]+$/); return m?m[0]:''; }
 
-let DATA=null, curMode='expression', curLevel=null, itemIdx=0, learned=[];
+let DATA=null, curMode='expression', sessionItems=[], itemIdx=0, learned=[];
 
 fetch('vocab-expression.data.json').then(r=>r.json()).then(d=>{ DATA=d; curMode=(localStorage.getItem(MODE_KEY))||'expression'; renderHome(); })
   .catch(e=>{ home.innerHTML='<h1>데이터 로드 실패</h1><p class="sub">'+escapeHtml(String(e))+'</p>'; });
@@ -233,39 +230,41 @@ function renderHome(){
     b.onclick=()=>{ curMode=key; try{localStorage.setItem(MODE_KEY,key);}catch(e){} renderHome(); };
     tabs.appendChild(b);
   });
+  // 진입점은 하나 — 들어가면 문항마다 트리거 어휘와 표현/문법이 계속 달라진다
   const m=DATA.modes[curMode], list=el('levelList'); list.innerHTML='';
-  const total=m.levels.length, done=m.levels.filter(l=>isCleared(lvKey(curMode,l.level))).length;
-  const gh=document.createElement('div'); gh.className='grp-head';
-  gh.innerHTML=`<span>${m.label} 레벨</span><span class="grp-count">${done}/${total} 완료</span>`;
-  list.appendChild(gh);
-  m.levels.forEach(l=>{
-    const cleared=isCleared(lvKey(curMode,l.level));
-    const c=document.createElement('button'); c.className='lv-card'+(cleared?' cleared':'');
-    const sub = l.sublabel ? escapeHtml(l.sublabel) : l.items.map(i=>i.word).slice(0,4).join(', ');
-    c.innerHTML=`${cleared?'<span class="clear-badge">✓ 완료</span>':''}
-      <div class="t">${escapeHtml(l.label)}</div>
-      <div class="f">${sub}</div>
-      <span class="step">어휘 빈칸 → 문장 배열 · ${l.items.length}문항</span>`;
-    c.onclick=()=>startLesson(l);
-    list.appendChild(c);
-  });
+  const total=m.items.length, pos=Math.min(getPos(curMode), total);
+  const rest=total-pos, resume=pos>0&&rest>0;
+  const c=document.createElement('button'); c.className='lv-card'+(rest===0?' cleared':'');
+  c.innerHTML=`${rest===0?'<span class="clear-badge">✓ 완료</span>':''}
+    <div class="t">${resume?`이어서 풀기`:`${escapeHtml(m.label)} 학습 시작`}</div>
+    <div class="f">${rest===0?`${total}문항을 모두 풀었어요`:`어휘 빈칸 → 문장 배열 · 남은 ${rest}문항`}</div>
+    <span class="step">문항마다 어휘와 ${curMode==='grammar'?'문법':'표현'}이 달라져요 · 총 ${total}문항</span>`;
+  c.onclick=()=>startSession(rest===0?0:pos);
+  list.appendChild(c);
+  if(pos>0){
+    const r=document.createElement('button'); r.className='restart-btn';
+    r.textContent='처음부터 다시 풀기';
+    r.onclick=()=>{ setPos(curMode,0); startSession(0); };
+    list.appendChild(r);
+  }
 }
 
 // ── 세션 ────────────────────────────────────────────────────────────────────
-function startLesson(level){
-  curLevel=level; itemIdx=0; learned=[];
+function startSession(startIdx){
+  sessionItems=DATA.modes[curMode].items; itemIdx=Math.min(startIdx||0, sessionItems.length-1); learned=[];
   home.classList.add('hidden'); topbar.classList.remove('hidden'); stage.classList.remove('hidden');
-  el('backBtn').onclick=()=>{ if(confirm('홈으로 나갈까요? 진행이 사라져요.')) renderHome(); };
+  el('backBtn').onclick=()=>{ setPos(curMode, itemIdx); renderHome(); };
   renderVocab();
 }
-// 진행바: 어휘/배열 2단계 × 문항수. 별·카운트는 채워진 위치로 이동
+// 진행바: 어휘/배열 2단계 × 전체 문항. 별·카운트는 채워진 위치로 이동
 function setProgress(stepDone){
-  const total=curLevel.items.length*2, pct=Math.min(100, stepDone/total*100);
+  const total=sessionItems.length*2, pct=Math.min(100, stepDone/total*100);
   el('barFill').style.width=pct+'%';
   el('barStar').style.left=pct+'%';
-  const bc=el('barCount'); bc.textContent=`${itemIdx+1}/${curLevel.items.length}`; bc.style.left=pct+'%';
+  const bc=el('barCount'); bc.textContent=`${itemIdx+1}/${sessionItems.length}`; bc.style.left=pct+'%';
 }
-function chatTag(){ return `<div class="chat-tag">${escapeHtml(curLevel.label)}<span class="q">?</span></div>`; }
+// 카드 좌상단 태그 — 문항마다 레벨이 다르므로 해당 문항의 레벨을 쓴다
+function chatTag(item){ return `<div class="chat-tag">레벨 ${item.level}<span class="q">?</span></div>`; }
 
 // 한국어 번역 줄: [뜻]을 초록, (설명)줄은 muted
 function koHtml(line){
@@ -297,7 +296,7 @@ function hlTrigger(sent, trig){
 
 // [1] 어휘 빈칸 ────────────────────────────────────────────────────────────────
 function renderVocab(){
-  const item=curLevel.items[itemIdx], v=item.vocab, answer=v.answer;
+  const item=sessionItems[itemIdx], v=item.vocab, answer=v.answer;
   setProgress(itemIdx*2);
   let hintLevel=0, done=false;
 
@@ -308,7 +307,7 @@ function renderVocab(){
   stage.innerHTML=`
     <div class="stage-scroll">
       <div class="chat-card" id="card">
-        ${chatTag()}<div class="chat-badge new">New</div>
+        ${chatTag(item)}<div class="chat-badge new">New</div>
         ${ko}
         <div class="wrong-box hidden" id="wrongBox"></div>
         ${en}
@@ -401,17 +400,15 @@ function hlWord(sent, word){
   }).join('');
 }
 
-// 배열 전: 이번에 뭘 배우는지 + 그게 얼마나 쓸모있는지(상황·활용 규모)를 한눈에.
+// 배열 전: 이번에 뭘 배우는지 + 그게 얼마나 쓸모있는지(활용 규모)를 한눈에.
 // 영어 프레임(pattern_en)은 정답 순서가 새므로 여기서 노출하지 않는다.
-const SITUATION={D:'💬 일상', T:'🧳 여행', B:'💼 비즈니스'};
 function learnBoxHtml(item){
   const s=item.sentence, isG=curMode==='grammar';
   const pat=(s.pattern_kr||'').trim();   // 한국어 뜻만 (영어 틀은 정답이 새므로 제외)
   if(!pat) return `<div class="learn-box"><div class="learn-pat">초록색 단어를 넣어 문장을 완성해요</div></div>`;
   const n=s.patternCount||0;
-  const chips = isG ? '' : String(s.category||'').split('').filter(c=>SITUATION[c]).map(c=>`<span class="sit-chip">${SITUATION[c]}</span>`).join('');
-  const count = n>=3 ? `<span class="use-count">${isG?`이 문법으로 <b>${n}개 문장</b>`:`단어만 바꿔 <b>${n}가지</b>`}</span>` : '';
-  const meta = (chips||count) ? `<div class="learn-meta">${chips}${count}</div>` : '';
+  const meta = n>=3
+    ? `<div class="learn-meta"><span class="use-count">${isG?`이 문법으로 <b>${n}개 문장</b>`:`단어만 바꿔 <b>${n}가지</b>`}</span></div>` : '';
   return `<div class="learn-box">
       <div class="learn-label">이번에 배울 ${isG?'문법':'표현'}</div>
       <div class="learn-pat">${escapeHtml(pat)}</div>${meta}
@@ -445,7 +442,7 @@ function patternPayoffHtml(item){
 
 // [2] 문장 배열 ────────────────────────────────────────────────────────────────
 function renderArrange(){
-  const item=curLevel.items[itemIdx], s=item.sentence;
+  const item=sessionItems[itemIdx], s=item.sentence;
   setProgress(itemIdx*2+1);
   const tokens=tokenize(s.en), punct=trailPunct(s.en);
   const target=tokens.map(t=>t.toLowerCase()).join(' ');
@@ -456,7 +453,7 @@ function renderArrange(){
   stage.innerHTML=`
     <div class="stage-scroll">
       <div class="chat-card" id="card">
-        ${chatTag()}<div class="chat-badge new">New</div>
+        ${chatTag(item)}<div class="chat-badge new">New</div>
         <div class="chat-ko">${escapeHtml(s.kr)}</div>
         <div id="patBox">${learnBoxHtml(item)}</div>
         <div class="fill" id="fill"></div>
@@ -529,7 +526,7 @@ function renderArrange(){
     el('micFloat').classList.add('hidden');
     fillEl.innerHTML=`<div style="font-size:19px;font-weight:800;color:#2f3e52;line-height:1.5">${hlTrigger(s.en, s.trigger)}</div>`;
     el('payoffBox').innerHTML=patternPayoffHtml(item);
-    const last=itemIdx>=curLevel.items.length-1;
+    const last=itemIdx>=sessionItems.length-1;
     el('bottom').innerHTML=`<button class="btn-next" id="nextBtn">${last?'완료하기 🎉':'다음 문제 ▶'}</button>`;
     el('nextBtn').onclick=()=>{ learned.push(item); if(last) renderDone(); else { itemIdx++; renderVocab(); } };
   }
@@ -550,23 +547,24 @@ function renderArrange(){
 
 // ── 완료 ──────────────────────────────────────────────────────────────────────
 function renderDone(){
-  markCleared(lvKey(curMode, curLevel.level));
+  setPos(curMode, sessionItems.length);
   topbar.classList.add('hidden'); stage.classList.remove('hidden'); home.classList.add('hidden');
-  const items=learned.length?learned:curLevel.items;
+  const items=learned.length?learned:sessionItems;
+  const modeWord = curMode==='grammar' ? '문법' : '표현';
   stage.innerHTML=`<div class="done">
     <div class="emoji">🎉</div>
-    <h2>${escapeHtml(curLevel.label)} 완료!</h2>
-    <p>어휘 ${items.length}개와 문장을 배웠어요.</p>
+    <h2>${items.length}문항 완료!</h2>
+    <p>어휘 ${items.length}개와 서로 다른 ${modeWord} ${items.length}개를 배웠어요.</p>
     <div class="learned-list">
-      <div class="h">배운 어휘 & 문장</div>
+      <div class="h">배운 어휘 & ${modeWord}</div>
       ${items.map(it=>`<div class="it"><b>${escapeHtml(it.word)}</b> · ${escapeHtml(it.meaning)}<br><span class="en">${escapeHtml(it.sentence.en)}</span></div>`).join('')}
     </div>
     <div class="row" style="margin-top:8px;">
-      <button class="btn ghost" id="againBtn">다시 풀기</button>
+      <button class="btn ghost" id="againBtn">처음부터 다시</button>
       <button class="btn" id="homeBtn">홈으로</button>
     </div>
   </div>`;
-  el('againBtn').onclick=()=>startLesson(curLevel);
+  el('againBtn').onclick=()=>{ setPos(curMode,0); startSession(0); };
   el('homeBtn').onclick=()=>renderHome();
 }
 </script>

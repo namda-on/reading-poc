@@ -27,7 +27,7 @@ OUT = Path(__file__).resolve().parent.parent / "public" / "vocab-expression.data
 # 부적절/불필요로 표시된 어휘는 제외
 VOCAB_FILTER_SKIP = {"sexual", "unnecessary"}
 
-ITEMS_PER_LEVEL = int(os.environ.get("VE_ITEMS_PER_LEVEL", "5"))
+MAX_ITEMS = int(os.environ.get("VE_MAX_ITEMS", "60"))   # 모드별 문항 수(0이면 전체)
 MAX_LEVELS = int(os.environ.get("VE_MAX_LEVELS", "30"))  # 표현/문법 모두 구조화된 레벨은 1~30 (표현의 40은 오버플로 버킷)
 
 
@@ -131,38 +131,41 @@ def clean_choices(cell):
 
 
 def build_mode(csv_path, kind, vocab_by_seq, cefr_by_seq):
-    """kind: 'expression' | 'grammar'. 레벨별 그룹으로 아이템 추출."""
+    """kind: 'expression' | 'grammar'.
+
+    진입점은 하나이고 문항마다 트리거 어휘와 표현/문법이 모두 달라져야 하므로,
+    **패턴(표현 제목 / 문법 소제목)당 1문항만** 뽑아 레벨 오름차순 단일 시퀀스로 만든다.
+    (레벨별로 묶으면 같은 패턴이 연속돼 키워드만 바뀌는 반복이 된다.)
+    """
     if not csv_path.exists():
         die(f"CSV 없음: {csv_path}")
     rows = list(csv.reader(open(csv_path, newline="", encoding="utf-8")))
 
     if kind == "expression":
-        # unit0, id2, title_en3, title_kr4, cat5, sentence15, translation16, content_word26, dictSeq28
-        C = dict(level=0, title_en=3, title_kr=4, cat=5, sentence=15, trans=16, cw=26, seq=28)
+        # unit0, title_en3, title_kr4, sentence15, translation16, content_word26, dictSeq28
+        C = dict(level=0, title_en=3, title_kr=4, sentence=15, trans=16, cw=26, seq=28)
     else:
         # level6, sentence10, 번역11, 큰제목21, 소제목22, content_word23, dictSeq25
         C = dict(level=6, sentence=10, trans=11, big=21, sub=22, cw=23, seq=25)
 
     ncol = max(C.values()) + 1
-    # 병합셀(빈칸) forward-fill 대상 컬럼: 레벨 + (표현: 카테고리·표현 제목 / 문법: 큰제목·소제목)
-    ff_cols = [C["level"]] + ([C["cat"], C["title_en"], C["title_kr"]] if kind == "expression" else [C["big"], C["sub"]])
+    # 병합셀(빈칸) forward-fill 대상: 레벨 + (표현: 제목 / 문법: 큰제목·소제목)
+    ff_cols = [C["level"]] + ([C["title_en"], C["title_kr"]] if kind == "expression" else [C["big"], C["sub"]])
     ff = {c: "" for c in ff_cols}
-
-    # 패턴별 필러(트리거 단어) 수집 → 정답 후 '다른 단어도 이렇게 써요' 일반화용
-    pattern_fillers = {}  # patternKey -> [content_word ...] (등장순, 중복 제거)
 
     def pattern_key():
         if kind == "expression":
             return (ff[C["title_en"]] or ff[C["title_kr"]]).strip()
-        return (ff[C["big"]] + "::" + ff[C["sub"]]).strip("::")
+        return (ff[C["big"]] + "::" + ff[C["sub"]]).strip(":")
 
-    levels = {}   # level -> {items, seen, ...}
-    all_items = []
+    # 1) 전체 스캔: 패턴별 예문 수집(어휘 조인 성공 여부와 무관) — 활용 규모·응용 예문의 근거
+    pattern_examples = {}   # pk -> [{word,en,kr}]
+    candidates = []         # 어휘 조인까지 성공한 문항 후보
     prev_big = None
     for r in rows[1:]:
         if len(r) < ncol:
             continue
-        # 큰제목이 바뀌면 소제목 forward-fill을 리셋(다음 큰제목으로 번지지 않게)
+        # 큰제목이 바뀌면 소제목 forward-fill 리셋(다음 큰제목으로 번지지 않게)
         if kind == "grammar" and r[C["big"]].strip() and r[C["big"]].strip() != prev_big:
             prev_big = r[C["big"]].strip()
             if not r[C["sub"]].strip():
@@ -182,8 +185,14 @@ def build_mode(csv_path, kind, vocab_by_seq, cefr_by_seq):
         trans = r[C["trans"]].strip()
         if not (cw and sent and trans):
             continue
+        pk = pattern_key()
+        if not pk:
+            continue
 
-        # 어휘 CSV 조인 (dictSeq == seq)
+        lst = pattern_examples.setdefault(pk, [])
+        if not any(x["word"].lower() == cw.lower() for x in lst):
+            lst.append({"word": cw, "en": strip_markup(sent), "kr": strip_markup(trans)})
+
         seq = r[C["seq"]].strip()
         vocab = vocab_by_seq.get(int(seq)) if seq.isdigit() else None
         if vocab is None:
@@ -192,66 +201,42 @@ def build_mode(csv_path, kind, vocab_by_seq, cefr_by_seq):
         if vex is None:
             continue
 
-        # 패턴별 예문 누적(레벨 상한과 무관하게 전체 스캔에서 모음) — 정답 후 '이렇게도 써요' 응용 예문용
-        pk = pattern_key()
-        if pk:
-            lst = pattern_fillers.setdefault(pk, [])
-            if not any(x["word"].lower() == cw.lower() for x in lst):
-                lst.append({"word": cw, "en": strip_markup(sent), "kr": strip_markup(trans)})
-
-        bucket = levels.setdefault(lv, {"items": [], "seen": set()})
-        if len(bucket["items"]) >= ITEMS_PER_LEVEL:
-            continue
-        if cw.lower() in bucket["seen"]:
-            continue
-        bucket["seen"].add(cw.lower())
-
-        s = {
-            "en": strip_markup(sent),
-            "kr": strip_markup(trans),
-            "trigger": cw,
-            "_pk": pk,
-        }
+        s = {"en": strip_markup(sent), "kr": strip_markup(trans), "trigger": cw}
         if kind == "expression":
             s["pattern_en"] = ff[C["title_en"]]
             s["pattern_kr"] = ff[C["title_kr"]]
-            s["category"] = ff[C["cat"]]
         else:
             s["pattern_kr"] = ff[C["sub"]] or ff[C["big"]]
             s["big"] = ff[C["big"]]
-        item = {
-            "word": vocab["spelling"],
-            "meaning": vocab["meaning"],
-            "pos": vocab["pos"],
-            "cefr": cefr_by_seq.get(int(seq), ""),
-            "vocab": vex,
-            "sentence": s,
-        }
-        bucket["items"].append(item)
-        all_items.append(item)
-
-    # 같은 패턴의 다른 예문(en+kr) + 패턴 전체 규모(활용도 표시용)
-    for it in all_items:
-        s = it["sentence"]
-        pk = s.pop("_pk", "")
-        group = pattern_fillers.get(pk, [])
-        sibs = [x for x in group if x["word"].lower() != s["trigger"].lower()]
-        s["siblings"] = sibs[:4]
-        s["patternCount"] = len(group)   # 이 패턴으로 만들 수 있는 표현/문장 수
-
-    out_levels = []
-    for lv in sorted(levels):
-        b = levels[lv]
-        if not b["items"]:
-            continue
-        sublabel = b["items"][0]["sentence"].get("big", "") if kind == "grammar" else ""
-        out_levels.append({
+        candidates.append({
+            "pk": pk,
             "level": lv,
-            "label": f"레벨 {lv}",
-            "sublabel": sublabel,
-            "items": b["items"],
+            "item": {
+                "level": lv,
+                "word": vocab["spelling"],
+                "meaning": vocab["meaning"],
+                "pos": vocab["pos"],
+                "cefr": cefr_by_seq.get(int(seq), ""),
+                "vocab": vex,
+                "sentence": s,
+            },
         })
-    return out_levels
+
+    # 2) 패턴당 1문항 + 어휘 중복 제거 → 레벨 오름차순
+    items, seen_pk, seen_word = [], set(), set()
+    for c in sorted(candidates, key=lambda x: x["level"]):
+        w = c["item"]["word"].lower()
+        if c["pk"] in seen_pk or w in seen_word:
+            continue
+        seen_pk.add(c["pk"]); seen_word.add(w)
+        s = c["item"]["sentence"]
+        group = pattern_examples.get(c["pk"], [])
+        s["patternCount"] = len(group)   # 원본 데이터의 같은 패턴 예문 수
+        s["siblings"] = [x for x in group if x["word"].lower() != s["trigger"].lower()][:2]
+        items.append(c["item"])
+        if MAX_ITEMS and len(items) >= MAX_ITEMS:
+            break
+    return items
 
 
 def main():
@@ -264,19 +249,17 @@ def main():
         "meta": {
             "type": "vocab-expression",
             "flow": "어휘 빈칸 채우기 → 트리거된 문장 배열",
-            "note": "어휘 빈칸(영어 예문의 [단어]=정답, 한국어 번역의 [뜻]=초록 하이라이트) 학습 후, 그 어휘가 트리거하는 표현/문법 문장을 배열.",
-            "itemsPerLevel": ITEMS_PER_LEVEL,
+            "note": "어휘 빈칸(영어 예문의 [단어]=정답, 한국어 번역의 [뜻]=초록 하이라이트) 학습 후, 그 어휘가 트리거하는 표현/문법 문장을 배열. 진입점 하나에 문항마다 어휘·패턴이 모두 다른 단일 시퀀스.",
+            "maxItems": MAX_ITEMS,
         },
         "modes": {
-            "expression": {"label": "표현", "desc": "관용 표현 문장 배열", "levels": expr},
-            "grammar": {"label": "문법", "desc": "기초 문법 문장 배열", "levels": gram},
+            "expression": {"label": "표현", "desc": "관용 표현 문장 배열", "items": expr},
+            "grammar": {"label": "문법", "desc": "기초 문법 문장 배열", "items": gram},
         },
     }
     OUT.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
-    ec = sum(len(l["items"]) for l in expr)
-    gc = sum(len(l["items"]) for l in gram)
     print(f"[build_vocab_expression] 완료 → {OUT}")
-    print(f"  표현: {len(expr)}레벨 {ec}아이템 | 문법: {len(gram)}레벨 {gc}아이템")
+    print(f"  표현: {len(expr)}문항 | 문법: {len(gram)}문항 (각 문항 = 서로 다른 패턴)")
 
 
 if __name__ == "__main__":
