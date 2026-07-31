@@ -52,8 +52,14 @@
                     "word": "lobby",
                     "en": "Excuse me? Where's the lobby?",
                     "kr": "실례합니다. 로비가 어디인가요?"
+                  },
+                  {
+                    "word": "gym",
+                    "en": "Excuse me? Where's the gym?",
+                    "kr": "실례합니다. 헬스장이 어디인가요?"
                   }
-                ]
+                ],
+                "patternCount": 7
               }
             },
             {
@@ -93,8 +99,14 @@
                     "word": "lobby",
                     "en": "Excuse me? Where's the lobby?",
                     "kr": "실례합니다. 로비가 어디인가요?"
+                  },
+                  {
+                    "word": "gym",
+                    "en": "Excuse me? Where's the gym?",
+                    "kr": "실례합니다. 헬스장이 어디인가요?"
                   }
-                ]
+                ],
+                "patternCount": 7
               }
             },
             {
@@ -133,8 +145,14 @@
                     "word": "lobby",
                     "en": "Excuse me? Where's the lobby?",
                     "kr": "실례합니다. 로비가 어디인가요?"
+                  },
+                  {
+                    "word": "gym",
+                    "en": "Excuse me? Where's the gym?",
+                    "kr": "실례합니다. 헬스장이 어디인가요?"
                   }
-                ]
+                ],
+                "patternCount": 7
               }
             },
             {
@@ -174,8 +192,14 @@
                     "word": "elevator",
                     "en": "Excuse me? Where's the elevator?",
                     "kr": "실례합니다. 엘리베이터가 어디 있나요?"
+                  },
+                  {
+                    "word": "gym",
+                    "en": "Excuse me? Where's the gym?",
+                    "kr": "실례합니다. 헬스장이 어디인가요?"
                   }
-                ]
+                ],
+                "patternCount": 7
               }
             },
             {
@@ -214,8 +238,14 @@
                     "word": "elevator",
                     "en": "Excuse me? Where's the elevator?",
                     "kr": "실례합니다. 엘리베이터가 어디 있나요?"
+                  },
+                  {
+                    "word": "lobby",
+                    "en": "Excuse me? Where's the lobby?",
+                    "kr": "실례합니다. 로비가 어디인가요?"
                   }
-                ]
+                ],
+                "patternCount": 7
               }
             }
           ]
@@ -262,7 +292,8 @@
                     "en": "Can I have an airport shuttle schedule?",
                     "kr": "공항 셔틀 시간표 하나 받을 수 있을까요?"
                   }
-                ]
+                ],
+                "patternCount": 4
               }
             },
             {
@@ -302,7 +333,8 @@
                     "en": "Can I have an airport shuttle schedule?",
                     "kr": "공항 셔틀 시간표 하나 받을 수 있을까요?"
                   }
-                ]
+                ],
+                "patternCount": 4
               }
             },
             {
@@ -342,7 +374,8 @@
                     "en": "Can I have an airport shuttle schedule?",
                     "kr": "공항 셔틀 시간표 하나 받을 수 있을까요?"
                   }
-                ]
+                ],
+                "patternCount": 4
               }
             },
             {
@@ -383,7 +416,8 @@
                     "en": "Can I have a glass of water?",
                     "kr": "물 한 잔 주시겠어요?"
                   }
-                ]
+                ],
+                "patternCount": 4
               }
             },
             {
@@ -422,8 +456,14 @@
                     "word": "umbrella",
                     "en": "Can we have two umbrellas?",
                     "kr": "저희 우산 두 개 살 수 있을까요?"
+                  },
+                  {
+                    "word": "coffee",
+                    "en": "Hi. Can we have three iced coffees?",
+                    "kr": "안녕하세요. 저희 아이스 커피 세 잔 받을 수 있을까요?"
                   }
-                ]
+                ],
+                "patternCount": 5
               }
             }
           ]
@@ -469,8 +509,14 @@
                     "word": "ID",
                     "en": "Do I have to bring my ID?",
                     "kr": "신분증을 가져와야 하나요?"
+                  },
+                  {
+                    "word": "form",
+                    "en": "Do I have to fill out this form?",
+                    "kr": "이 양식을 작성해야 하나요?"
                   }
-                ]
+                ],
+                "patternCount": 9
               }
             },
             {
@@ -509,8 +555,14 @@
                     "word": "ID",
                     "en": "Do I have to bring my ID?",
                     "kr": "신분증을 가져와야 하나요?"
+                  },
+                  {
+                    "word": "form",
+                    "en": "Do I have to fill out this form?",
+                    "kr": "이 양식을 작성해야 하나요?"
                   }
-                ]
+                ],
+                "patternCount": 9
               }
             },
             {
@@ -550,8 +602,14 @@
                     "word": "ID",
                     "en": "Do I have to bring my ID?",
                     "kr": "신분증을 가져와야 하나요?"
+                  },
+                  {
+                    "word": "form",
+                    "en": "Do I have to fill out this form?",
+                    "kr": "이 양식을 작성해야 하나요?"
                   }
-                ]
+                ],
+                "patternCount": 9
               }
             },
             {
@@ -590,8 +648,14 @@
                     "word": "book",
                     "en": "Do I have to book in advance?",
                     "kr": "미리 예약해야 하나요?"
+                  },
+                  {
+                    "word": "form",
+                    "en": "Do I have to fill out this form?",
+                    "kr": "이 양식을 작성해야 하나요?"
                   }
-                ]
+                ],
+                "patternCount": 9
               }
             },
             {
@@ -630,8 +694,14 @@
                     "word": "book",
                     "en": "Do I have to book in advance?",
                     "kr": "미리 예약해야 하나요?"
+                  },
+                  {
+                    "word": "ID",
+                    "en": "Do I have to bring my ID?",
+                    "kr": "신분증을 가져와야 하나요?"
                   }
-                ]
+                ],
+                "patternCount": 9
               }
             }
           ]
@@ -677,8 +747,14 @@
                     "word": "corkscrew",
                     "en": "Can I borrow a corkscrew?",
                     "kr": "와인 따개를 빌릴 수 있을까요?"
+                  },
+                  {
+                    "word": "pencil",
+                    "en": "Yes, can I borrow a pencil?",
+                    "kr": "네, 연필 하나 빌릴 수 있을까요?"
                   }
-                ]
+                ],
+                "patternCount": 6
               }
             },
             {
@@ -717,8 +793,14 @@
                     "word": "corkscrew",
                     "en": "Can I borrow a corkscrew?",
                     "kr": "와인 따개를 빌릴 수 있을까요?"
+                  },
+                  {
+                    "word": "pencil",
+                    "en": "Yes, can I borrow a pencil?",
+                    "kr": "네, 연필 하나 빌릴 수 있을까요?"
                   }
-                ]
+                ],
+                "patternCount": 6
               }
             },
             {
@@ -757,8 +839,14 @@
                     "word": "corkscrew",
                     "en": "Can I borrow a corkscrew?",
                     "kr": "와인 따개를 빌릴 수 있을까요?"
+                  },
+                  {
+                    "word": "pencil",
+                    "en": "Yes, can I borrow a pencil?",
+                    "kr": "네, 연필 하나 빌릴 수 있을까요?"
                   }
-                ]
+                ],
+                "patternCount": 6
               }
             },
             {
@@ -797,8 +885,14 @@
                     "word": "pen",
                     "en": "Can I borrow a pen?",
                     "kr": "펜 하나 빌릴 수 있나요?"
+                  },
+                  {
+                    "word": "pencil",
+                    "en": "Yes, can I borrow a pencil?",
+                    "kr": "네, 연필 하나 빌릴 수 있을까요?"
                   }
-                ]
+                ],
+                "patternCount": 6
               }
             },
             {
@@ -837,8 +931,14 @@
                     "word": "pen",
                     "en": "Can I borrow a pen?",
                     "kr": "펜 하나 빌릴 수 있나요?"
+                  },
+                  {
+                    "word": "corkscrew",
+                    "en": "Can I borrow a corkscrew?",
+                    "kr": "와인 따개를 빌릴 수 있을까요?"
                   }
-                ]
+                ],
+                "patternCount": 6
               }
             }
           ]
@@ -875,7 +975,8 @@
                     "en": "Can I pay with US dollars?",
                     "kr": "미국 달러로 결제할 수 있나요?"
                   }
-                ]
+                ],
+                "patternCount": 2
               }
             },
             {
@@ -905,7 +1006,8 @@
                     "en": "Can I pay with cash?",
                     "kr": "현금으로 계산할 수 있을까요?"
                   }
-                ]
+                ],
+                "patternCount": 2
               }
             },
             {
@@ -930,7 +1032,8 @@
                 "pattern_en": "Can I have the receipt?",
                 "pattern_kr": "영수증 주실 수 있나요?",
                 "category": "DT",
-                "siblings": []
+                "siblings": [],
+                "patternCount": 1
               }
             },
             {
@@ -962,7 +1065,8 @@
                     "en": "Okay, thanks! How long does it take?",
                     "kr": "알겠어요, 감사합니다! 얼마나 걸리나요?"
                   }
-                ]
+                ],
+                "patternCount": 2
               }
             },
             {
@@ -992,7 +1096,8 @@
                     "en": "How long does it take?",
                     "kr": "얼마나 걸리나요?"
                   }
-                ]
+                ],
+                "patternCount": 2
               }
             }
           ]
@@ -1029,7 +1134,8 @@
                     "en": "Hi. Can I check in a bit early tomorrow?",
                     "kr": "안녕하세요. 내일 조금 일찍 체크인해도 될까요?"
                   }
-                ]
+                ],
+                "patternCount": 2
               }
             },
             {
@@ -1060,7 +1166,8 @@
                     "en": "Hi! Can I check in?",
                     "kr": "안녕하세요! 체크인해도 되나요?"
                   }
-                ]
+                ],
+                "patternCount": 2
               }
             },
             {
@@ -1102,7 +1209,8 @@
                     "en": "\"Queasy\"? What does that mean?",
                     "kr": "\"Queasy\"라고요? 그건 무슨 뜻인가요?"
                   }
-                ]
+                ],
+                "patternCount": 4
               }
             },
             {
@@ -1142,7 +1250,8 @@
                     "en": "\"Queasy\"? What does that mean?",
                     "kr": "\"Queasy\"라고요? 그건 무슨 뜻인가요?"
                   }
-                ]
+                ],
+                "patternCount": 4
               }
             },
             {
@@ -1182,7 +1291,8 @@
                     "en": "\"Queasy\"? What does that mean?",
                     "kr": "\"Queasy\"라고요? 그건 무슨 뜻인가요?"
                   }
-                ]
+                ],
+                "patternCount": 4
               }
             }
           ]
@@ -1213,7 +1323,8 @@
                 "pattern_en": "Can I have the check?",
                 "pattern_kr": "계산서 주실 수 있나요?",
                 "category": "DT",
-                "siblings": []
+                "siblings": [],
+                "patternCount": 1
               }
             },
             {
@@ -1252,8 +1363,14 @@
                     "word": "ATM",
                     "en": "Yeah, actually. I'm looking for an ATM.",
                     "kr": "아, 그게요. 현금인출기를 찾는 중이에요."
+                  },
+                  {
+                    "word": "bus",
+                    "en": "Kind of. I'm looking for the airport bus.",
+                    "kr": "약간요. 공항 가는 버스를 찾고 있어요."
                   }
-                ]
+                ],
+                "patternCount": 5
               }
             },
             {
@@ -1292,8 +1409,14 @@
                     "word": "ATM",
                     "en": "Yeah, actually. I'm looking for an ATM.",
                     "kr": "아, 그게요. 현금인출기를 찾는 중이에요."
+                  },
+                  {
+                    "word": "bus",
+                    "en": "Kind of. I'm looking for the airport bus.",
+                    "kr": "약간요. 공항 가는 버스를 찾고 있어요."
                   }
-                ]
+                ],
+                "patternCount": 5
               }
             },
             {
@@ -1333,8 +1456,14 @@
                     "word": "ATM",
                     "en": "Yeah, actually. I'm looking for an ATM.",
                     "kr": "아, 그게요. 현금인출기를 찾는 중이에요."
+                  },
+                  {
+                    "word": "bus",
+                    "en": "Kind of. I'm looking for the airport bus.",
+                    "kr": "약간요. 공항 가는 버스를 찾고 있어요."
                   }
-                ]
+                ],
+                "patternCount": 5
               }
             },
             {
@@ -1374,8 +1503,14 @@
                     "word": "coat",
                     "en": "Yeah, I'm looking for a winter coat.",
                     "kr": "네, 겨울 코트를 찾고 있어요."
+                  },
+                  {
+                    "word": "bus",
+                    "en": "Kind of. I'm looking for the airport bus.",
+                    "kr": "약간요. 공항 가는 버스를 찾고 있어요."
                   }
-                ]
+                ],
+                "patternCount": 5
               }
             }
           ]
@@ -1421,8 +1556,14 @@
                     "word": "job",
                     "en": "How've you been? I heard you changed jobs.",
                     "kr": "어떻게 지냈어? 직장 옮겼다고 들었어."
+                  },
+                  {
+                    "word": "graduation",
+                    "en": "I haven't seen you since graduation! How've you been?",
+                    "kr": "졸업 이후로 못 봤네! 어떻게 지냈어?"
                   }
-                ]
+                ],
+                "patternCount": 8
               }
             },
             {
@@ -1461,8 +1602,14 @@
                     "word": "job",
                     "en": "How've you been? I heard you changed jobs.",
                     "kr": "어떻게 지냈어? 직장 옮겼다고 들었어."
+                  },
+                  {
+                    "word": "graduation",
+                    "en": "I haven't seen you since graduation! How've you been?",
+                    "kr": "졸업 이후로 못 봤네! 어떻게 지냈어?"
                   }
-                ]
+                ],
+                "patternCount": 8
               }
             },
             {
@@ -1502,8 +1649,14 @@
                     "word": "job",
                     "en": "How've you been? I heard you changed jobs.",
                     "kr": "어떻게 지냈어? 직장 옮겼다고 들었어."
+                  },
+                  {
+                    "word": "graduation",
+                    "en": "I haven't seen you since graduation! How've you been?",
+                    "kr": "졸업 이후로 못 봤네! 어떻게 지냈어?"
                   }
-                ]
+                ],
+                "patternCount": 8
               }
             },
             {
@@ -1542,8 +1695,14 @@
                     "word": "day",
                     "en": "How have you been these days?",
                     "kr": "요즘 어떻게 지내?"
+                  },
+                  {
+                    "word": "graduation",
+                    "en": "I haven't seen you since graduation! How've you been?",
+                    "kr": "졸업 이후로 못 봤네! 어떻게 지냈어?"
                   }
-                ]
+                ],
+                "patternCount": 8
               }
             },
             {
@@ -1582,8 +1741,14 @@
                     "word": "day",
                     "en": "How have you been these days?",
                     "kr": "요즘 어떻게 지내?"
+                  },
+                  {
+                    "word": "job",
+                    "en": "How've you been? I heard you changed jobs.",
+                    "kr": "어떻게 지냈어? 직장 옮겼다고 들었어."
                   }
-                ]
+                ],
+                "patternCount": 8
               }
             }
           ]
@@ -1614,7 +1779,8 @@
                 "pattern_en": "I have a reservation under ~.",
                 "pattern_kr": "~ 이름으로 예약했어요.",
                 "category": "DT",
-                "siblings": []
+                "siblings": [],
+                "patternCount": 1
               }
             },
             {
@@ -1639,7 +1805,8 @@
                 "pattern_en": "How long is the wait?",
                 "pattern_kr": "대기 시간이 얼마나 되나요?",
                 "category": "DT",
-                "siblings": []
+                "siblings": [],
+                "patternCount": 1
               }
             },
             {
@@ -1678,8 +1845,14 @@
                     "word": "meat",
                     "en": "Does this have meat in it?",
                     "kr": "여기 고기가 들어가 있나요?"
+                  },
+                  {
+                    "word": "shellfish",
+                    "en": "Does this have shellfish in it?",
+                    "kr": "여기 조개류 들어가 있나요?"
                   }
-                ]
+                ],
+                "patternCount": 5
               }
             },
             {
@@ -1718,8 +1891,14 @@
                     "word": "meat",
                     "en": "Does this have meat in it?",
                     "kr": "여기 고기가 들어가 있나요?"
+                  },
+                  {
+                    "word": "shellfish",
+                    "en": "Does this have shellfish in it?",
+                    "kr": "여기 조개류 들어가 있나요?"
                   }
-                ]
+                ],
+                "patternCount": 5
               }
             },
             {
@@ -1758,8 +1937,14 @@
                     "word": "meat",
                     "en": "Does this have meat in it?",
                     "kr": "여기 고기가 들어가 있나요?"
+                  },
+                  {
+                    "word": "shellfish",
+                    "en": "Does this have shellfish in it?",
+                    "kr": "여기 조개류 들어가 있나요?"
                   }
-                ]
+                ],
+                "patternCount": 5
               }
             }
           ]
@@ -1790,7 +1975,8 @@
                 "pattern_en": "Can I get a refill?",
                 "pattern_kr": "리필해 주실 수 있나요?",
                 "category": "DT",
-                "siblings": []
+                "siblings": [],
+                "patternCount": 1
               }
             },
             {
@@ -1820,7 +2006,8 @@
                     "en": "Yep, I'm just looking around for now. Thanks.",
                     "kr": "네, 지금 그냥 둘러보는 중이에요. 감사합니다."
                   }
-                ]
+                ],
+                "patternCount": 2
               }
             },
             {
@@ -1853,7 +2040,8 @@
                     "en": "No. I'm just looking around. Thank you.",
                     "kr": "아니요. 그냥 둘러보는 중이에요. 감사합니다."
                   }
-                ]
+                ],
+                "patternCount": 2
               }
             },
             {
@@ -1888,7 +2076,8 @@
                     "en": "Hi! When's the next train to King's Cross Station?",
                     "kr": "안녕하세요! 킹스크로스 역으로 가는 다음 기차는 언제인가요?"
                   }
-                ]
+                ],
+                "patternCount": 3
               }
             },
             {
@@ -1923,7 +2112,8 @@
                     "en": "Hi! When's the next train to King's Cross Station?",
                     "kr": "안녕하세요! 킹스크로스 역으로 가는 다음 기차는 언제인가요?"
                   }
-                ]
+                ],
+                "patternCount": 3
               }
             }
           ]
@@ -1955,7 +2145,8 @@
                 "pattern_en": "Could you take a picture?",
                 "pattern_kr": "사진 좀 찍어주시겠어요?",
                 "category": "T",
-                "siblings": []
+                "siblings": [],
+                "patternCount": 1
               }
             },
             {
@@ -1991,7 +2182,8 @@
                     "en": "Just wanted to chat. How's your day going?",
                     "kr": "잠깐 이야기하고 싶어서. 오늘 하루 어떻게 지내고 있어?"
                   }
-                ]
+                ],
+                "patternCount": 3
               }
             },
             {
@@ -2028,7 +2220,8 @@
                     "en": "Just wanted to chat. How's your day going?",
                     "kr": "잠깐 이야기하고 싶어서. 오늘 하루 어떻게 지내고 있어?"
                   }
-                ]
+                ],
+                "patternCount": 3
               }
             },
             {
@@ -2063,7 +2256,8 @@
                     "en": "Yeah, now's good. How's your day going?",
                     "kr": "응, 지금은 좋아. 오늘 하루 어떻게 지내고 있어?"
                   }
-                ]
+                ],
+                "patternCount": 3
               }
             },
             {
@@ -2088,7 +2282,8 @@
                 "pattern_en": "Are you free on ~?",
                 "pattern_kr": "~에 시간 있어?",
                 "category": "DB",
-                "siblings": []
+                "siblings": [],
+                "patternCount": 1
               }
             }
           ]
@@ -2134,8 +2329,14 @@
                     "word": "next",
                     "en": "I'm here on vacation until next Monday.",
                     "kr": "휴가차 왔어요. 다음 주 월요일까지 있을 거예요."
+                  },
+                  {
+                    "word": "family",
+                    "en": "I'm here on vacation with my family.",
+                    "kr": "가족들과 함께 휴가차 왔어요."
                   }
-                ]
+                ],
+                "patternCount": 5
               }
             },
             {
@@ -2174,8 +2375,14 @@
                     "word": "next",
                     "en": "I'm here on vacation until next Monday.",
                     "kr": "휴가차 왔어요. 다음 주 월요일까지 있을 거예요."
+                  },
+                  {
+                    "word": "family",
+                    "en": "I'm here on vacation with my family.",
+                    "kr": "가족들과 함께 휴가차 왔어요."
                   }
-                ]
+                ],
+                "patternCount": 5
               }
             },
             {
@@ -2214,8 +2421,14 @@
                     "word": "next",
                     "en": "I'm here on vacation until next Monday.",
                     "kr": "휴가차 왔어요. 다음 주 월요일까지 있을 거예요."
+                  },
+                  {
+                    "word": "family",
+                    "en": "I'm here on vacation with my family.",
+                    "kr": "가족들과 함께 휴가차 왔어요."
                   }
-                ]
+                ],
+                "patternCount": 5
               }
             },
             {
@@ -2254,8 +2467,14 @@
                     "word": "couple",
                     "en": "I'm here on vacation with a couple of friends.",
                     "kr": "친구 몇 명과 함께 휴가차 왔어요."
+                  },
+                  {
+                    "word": "family",
+                    "en": "I'm here on vacation with my family.",
+                    "kr": "가족들과 함께 휴가차 왔어요."
                   }
-                ]
+                ],
+                "patternCount": 5
               }
             },
             {
@@ -2294,8 +2513,14 @@
                     "word": "couple",
                     "en": "I'm here on vacation with a couple of friends.",
                     "kr": "친구 몇 명과 함께 휴가차 왔어요."
+                  },
+                  {
+                    "word": "next",
+                    "en": "I'm here on vacation until next Monday.",
+                    "kr": "휴가차 왔어요. 다음 주 월요일까지 있을 거예요."
                   }
-                ]
+                ],
+                "patternCount": 5
               }
             }
           ]
@@ -2343,7 +2568,8 @@
                     "en": "Could you bring me the dessert menu, please?",
                     "kr": "디저트 메뉴를 가져다주실 수 있나요?"
                   }
-                ]
+                ],
+                "patternCount": 4
               }
             },
             {
@@ -2383,7 +2609,8 @@
                     "en": "Could you bring me the dessert menu, please?",
                     "kr": "디저트 메뉴를 가져다주실 수 있나요?"
                   }
-                ]
+                ],
+                "patternCount": 4
               }
             },
             {
@@ -2423,7 +2650,8 @@
                     "en": "Could you bring me the dessert menu, please?",
                     "kr": "디저트 메뉴를 가져다주실 수 있나요?"
                   }
-                ]
+                ],
+                "patternCount": 4
               }
             },
             {
@@ -2463,7 +2691,8 @@
                     "en": "Could you bring me another knife, please?",
                     "kr": "칼 하나 더 가져다주실 수 있나요?"
                   }
-                ]
+                ],
+                "patternCount": 4
               }
             },
             {
@@ -2502,8 +2731,14 @@
                     "word": "ferry",
                     "en": "Where can I get on the ferry?",
                     "kr": "페리는 어디서 타나요?"
+                  },
+                  {
+                    "word": "tram",
+                    "en": "Where can I get on the tram?",
+                    "kr": "트램은 어디서 타나요?"
                   }
-                ]
+                ],
+                "patternCount": 6
               }
             }
           ]
@@ -2550,8 +2785,14 @@
                     "word": "station",
                     "en": "Do you know how to get to the station from here?",
                     "kr": "여기서 역까지 어떻게 가는지 아시나요?"
+                  },
+                  {
+                    "word": "airport",
+                    "en": "Do you know how to get to the airport from here?",
+                    "kr": "여기서 공항까지 어떻게 가는지 아시나요?"
                   }
-                ]
+                ],
+                "patternCount": 7
               }
             },
             {
@@ -2590,8 +2831,14 @@
                     "word": "station",
                     "en": "Do you know how to get to the station from here?",
                     "kr": "여기서 역까지 어떻게 가는지 아시나요?"
+                  },
+                  {
+                    "word": "airport",
+                    "en": "Do you know how to get to the airport from here?",
+                    "kr": "여기서 공항까지 어떻게 가는지 아시나요?"
                   }
-                ]
+                ],
+                "patternCount": 7
               }
             },
             {
@@ -2632,8 +2879,14 @@
                     "word": "station",
                     "en": "Do you know how to get to the station from here?",
                     "kr": "여기서 역까지 어떻게 가는지 아시나요?"
+                  },
+                  {
+                    "word": "airport",
+                    "en": "Do you know how to get to the airport from here?",
+                    "kr": "여기서 공항까지 어떻게 가는지 아시나요?"
                   }
-                ]
+                ],
+                "patternCount": 7
               }
             },
             {
@@ -2673,8 +2926,14 @@
                     "word": "main",
                     "en": "Do you know how to get to the Starbucks on Main?",
                     "kr": "메인가의 스타벅스에 어떻게 가는지 알아?"
+                  },
+                  {
+                    "word": "airport",
+                    "en": "Do you know how to get to the airport from here?",
+                    "kr": "여기서 공항까지 어떻게 가는지 아시나요?"
                   }
-                ]
+                ],
+                "patternCount": 7
               }
             },
             {
@@ -2713,8 +2972,14 @@
                     "word": "main",
                     "en": "Do you know how to get to the Starbucks on Main?",
                     "kr": "메인가의 스타벅스에 어떻게 가는지 알아?"
+                  },
+                  {
+                    "word": "station",
+                    "en": "Do you know how to get to the station from here?",
+                    "kr": "여기서 역까지 어떻게 가는지 아시나요?"
                   }
-                ]
+                ],
+                "patternCount": 7
               }
             }
           ]
@@ -2760,8 +3025,14 @@
                     "word": "indoor",
                     "en": "Could you recommend something we can do indoors?",
                     "kr": "실내에서 할 수 있는 것 좀 추천해 주시겠어요?"
+                  },
+                  {
+                    "word": "recommend",
+                    "en": "Could you recommend something for us to do in the evening?",
+                    "kr": "저녁에 할 만한 것 좀 추천해 주시겠어요?"
                   }
-                ]
+                ],
+                "patternCount": 5
               }
             },
             {
@@ -2801,8 +3072,14 @@
                     "word": "indoor",
                     "en": "Could you recommend something we can do indoors?",
                     "kr": "실내에서 할 수 있는 것 좀 추천해 주시겠어요?"
+                  },
+                  {
+                    "word": "recommend",
+                    "en": "Could you recommend something for us to do in the evening?",
+                    "kr": "저녁에 할 만한 것 좀 추천해 주시겠어요?"
                   }
-                ]
+                ],
+                "patternCount": 5
               }
             },
             {
@@ -2842,8 +3119,14 @@
                     "word": "indoor",
                     "en": "Could you recommend something we can do indoors?",
                     "kr": "실내에서 할 수 있는 것 좀 추천해 주시겠어요?"
+                  },
+                  {
+                    "word": "recommend",
+                    "en": "Could you recommend something for us to do in the evening?",
+                    "kr": "저녁에 할 만한 것 좀 추천해 주시겠어요?"
                   }
-                ]
+                ],
+                "patternCount": 5
               }
             },
             {
@@ -2883,8 +3166,14 @@
                     "word": "place",
                     "en": "Could you recommend a good place around here to go shopping?",
                     "kr": "이 근처에 쇼핑하기 좋은 곳 추천해 주시겠어요?"
+                  },
+                  {
+                    "word": "recommend",
+                    "en": "Could you recommend something for us to do in the evening?",
+                    "kr": "저녁에 할 만한 것 좀 추천해 주시겠어요?"
                   }
-                ]
+                ],
+                "patternCount": 5
               }
             },
             {
@@ -2923,8 +3212,14 @@
                     "word": "place",
                     "en": "Could you recommend a good place around here to go shopping?",
                     "kr": "이 근처에 쇼핑하기 좋은 곳 추천해 주시겠어요?"
+                  },
+                  {
+                    "word": "indoor",
+                    "en": "Could you recommend something we can do indoors?",
+                    "kr": "실내에서 할 수 있는 것 좀 추천해 주시겠어요?"
                   }
-                ]
+                ],
+                "patternCount": 5
               }
             }
           ]
@@ -2956,7 +3251,8 @@
                 "pattern_en": "Can I leave my luggage here?",
                 "pattern_kr": "여기에 제 짐 좀 맡길 수 있나요?",
                 "category": "T",
-                "siblings": []
+                "siblings": [],
+                "patternCount": 1
               }
             },
             {
@@ -2995,8 +3291,14 @@
                     "word": "bag",
                     "en": "Excuse me? Where can I leave my bag until check-in?",
                     "kr": "죄송한데, 체크인 전까지 제 가방을 어디에 맡길 수 있나요?"
+                  },
+                  {
+                    "word": "phone",
+                    "en": "Where can I leave my phone while I'm in the sauna?",
+                    "kr": "사우나에 들어가 있는 동안 제 전화를 어디에 맡길 수 있나요?"
                   }
-                ]
+                ],
+                "patternCount": 5
               }
             },
             {
@@ -3035,8 +3337,14 @@
                     "word": "bag",
                     "en": "Excuse me? Where can I leave my bag until check-in?",
                     "kr": "죄송한데, 체크인 전까지 제 가방을 어디에 맡길 수 있나요?"
+                  },
+                  {
+                    "word": "phone",
+                    "en": "Where can I leave my phone while I'm in the sauna?",
+                    "kr": "사우나에 들어가 있는 동안 제 전화를 어디에 맡길 수 있나요?"
                   }
-                ]
+                ],
+                "patternCount": 5
               }
             },
             {
@@ -3075,8 +3383,14 @@
                     "word": "suitcase",
                     "en": "Excuse me? Where can I leave my suitcase until check-in?",
                     "kr": "죄송한데, 체크인 전까지 제 캐리어를 어디에 맡길 수 있나요?"
+                  },
+                  {
+                    "word": "phone",
+                    "en": "Where can I leave my phone while I'm in the sauna?",
+                    "kr": "사우나에 들어가 있는 동안 제 전화를 어디에 맡길 수 있나요?"
                   }
-                ]
+                ],
+                "patternCount": 5
               }
             },
             {
@@ -3115,8 +3429,14 @@
                     "word": "suitcase",
                     "en": "Excuse me? Where can I leave my suitcase until check-in?",
                     "kr": "죄송한데, 체크인 전까지 제 캐리어를 어디에 맡길 수 있나요?"
+                  },
+                  {
+                    "word": "bag",
+                    "en": "Excuse me? Where can I leave my bag until check-in?",
+                    "kr": "죄송한데, 체크인 전까지 제 가방을 어디에 맡길 수 있나요?"
                   }
-                ]
+                ],
+                "patternCount": 5
               }
             }
           ]
@@ -3162,8 +3482,14 @@
                     "word": "music",
                     "en": "I'm studying music at Berkeley.",
                     "kr": "저는 버클리에서 음악을 공부하고 있습니다."
+                  },
+                  {
+                    "word": "economic",
+                    "en": "I'm studying economics at Princeton.",
+                    "kr": "저는 프린스턴에서 경제학을 공부하고 있습니다."
                   }
-                ]
+                ],
+                "patternCount": 9
               }
             },
             {
@@ -3203,8 +3529,14 @@
                     "word": "music",
                     "en": "I'm studying music at Berkeley.",
                     "kr": "저는 버클리에서 음악을 공부하고 있습니다."
+                  },
+                  {
+                    "word": "economic",
+                    "en": "I'm studying economics at Princeton.",
+                    "kr": "저는 프린스턴에서 경제학을 공부하고 있습니다."
                   }
-                ]
+                ],
+                "patternCount": 9
               }
             },
             {
@@ -3243,8 +3575,14 @@
                     "word": "music",
                     "en": "I'm studying music at Berkeley.",
                     "kr": "저는 버클리에서 음악을 공부하고 있습니다."
+                  },
+                  {
+                    "word": "economic",
+                    "en": "I'm studying economics at Princeton.",
+                    "kr": "저는 프린스턴에서 경제학을 공부하고 있습니다."
                   }
-                ]
+                ],
+                "patternCount": 9
               }
             },
             {
@@ -3283,8 +3621,14 @@
                     "word": "engineering",
                     "en": "I'm studying engineering at MIT.",
                     "kr": "저는 MIT에서 공학을 공부하고 있습니다."
+                  },
+                  {
+                    "word": "economic",
+                    "en": "I'm studying economics at Princeton.",
+                    "kr": "저는 프린스턴에서 경제학을 공부하고 있습니다."
                   }
-                ]
+                ],
+                "patternCount": 9
               }
             },
             {
@@ -3325,8 +3669,14 @@
                     "word": "engineering",
                     "en": "I'm studying engineering at MIT.",
                     "kr": "저는 MIT에서 공학을 공부하고 있습니다."
+                  },
+                  {
+                    "word": "music",
+                    "en": "I'm studying music at Berkeley.",
+                    "kr": "저는 버클리에서 음악을 공부하고 있습니다."
                   }
-                ]
+                ],
+                "patternCount": 9
               }
             }
           ]
@@ -3363,7 +3713,8 @@
                     "en": "I'm sorry, but I'd like to cancel my reservation for tonight.",
                     "kr": "죄송한데요, 오늘 저녁 예약 취소하고 싶어요."
                   }
-                ]
+                ],
+                "patternCount": 2
               }
             },
             {
@@ -3394,7 +3745,8 @@
                     "en": "I'd like to cancel my reservation.",
                     "kr": "제 예약 취소하고 싶어요."
                   }
-                ]
+                ],
+                "patternCount": 2
               }
             },
             {
@@ -3430,7 +3782,8 @@
                     "en": "Excuse me? I'd like to change my order if it's not too much trouble.",
                     "kr": "실례합니다. 괜찮으시다면 주문을 변경하고 싶은데요."
                   }
-                ]
+                ],
+                "patternCount": 3
               }
             },
             {
@@ -3466,7 +3819,8 @@
                     "en": "I'm so sorry, but I'd like to change my order.",
                     "kr": "죄송하지만 주문을 변경하고 싶습니다."
                   }
-                ]
+                ],
+                "patternCount": 3
               }
             },
             {
@@ -3490,7 +3844,8 @@
                 "pattern_en": "I have a stuffy nose.",
                 "pattern_kr": "코가 막혔어요.",
                 "category": "DT",
-                "siblings": []
+                "siblings": [],
+                "patternCount": 1
               }
             }
           ]
@@ -3537,7 +3892,8 @@
                     "en": "Not a whole lot. What's new with you?",
                     "kr": "별로 없어.넌 새로운 소식 있어?"
                   }
-                ]
+                ],
+                "patternCount": 4
               }
             },
             {
@@ -3577,7 +3933,8 @@
                     "en": "Not a whole lot. What's new with you?",
                     "kr": "별로 없어.넌 새로운 소식 있어?"
                   }
-                ]
+                ],
+                "patternCount": 4
               }
             },
             {
@@ -3617,7 +3974,8 @@
                     "en": "Not a whole lot. What's new with you?",
                     "kr": "별로 없어.넌 새로운 소식 있어?"
                   }
-                ]
+                ],
+                "patternCount": 4
               }
             },
             {
@@ -3658,7 +4016,8 @@
                     "en": "Good, thanks. What's new with you lately?",
                     "kr": "잘 지냈어, 고마워. 넌 요즘 새로운 소식 있어?"
                   }
-                ]
+                ],
+                "patternCount": 4
               }
             },
             {
@@ -3697,8 +4056,14 @@
                     "word": "car",
                     "en": "Why don't we take my car?",
                     "kr": "내 차 타는 게 어때?"
+                  },
+                  {
+                    "word": "train",
+                    "en": "Why don't we take the express train?",
+                    "kr": "급행열차 타는 거 어때?"
                   }
-                ]
+                ],
+                "patternCount": 8
               }
             }
           ]
@@ -3735,7 +4100,8 @@
                     "en": "Is it enough for someone who's really hungry?",
                     "kr": "정말 배고픈 사람(이 먹기)에 충분한가요?"
                   }
-                ]
+                ],
+                "patternCount": 2
               }
             },
             {
@@ -3765,7 +4131,8 @@
                     "en": "Is it enough for two people?",
                     "kr": "2명(이 먹기)에 충분한가요?"
                   }
-                ]
+                ],
+                "patternCount": 2
               }
             },
             {
@@ -3801,7 +4168,8 @@
                     "en": "I didn't order this. I'm a vegetarian.",
                     "kr": "저는 이걸 주문하지 않았는데요. 저는 채식주의자예요."
                   }
-                ]
+                ],
+                "patternCount": 3
               }
             },
             {
@@ -3836,7 +4204,8 @@
                     "en": "I didn't order this. I'm a vegetarian.",
                     "kr": "저는 이걸 주문하지 않았는데요. 저는 채식주의자예요."
                   }
-                ]
+                ],
+                "patternCount": 3
               }
             },
             {
@@ -3871,7 +4240,8 @@
                     "en": "Is this Hawaiian? I didn't order this.",
                     "kr": "이거 하와이안 피자인가요? 저는 이거 주문 안했는데요."
                   }
-                ]
+                ],
+                "patternCount": 3
               }
             }
           ]
@@ -3917,8 +4287,14 @@
                     "word": "salad",
                     "en": "Excuse me? We're still waiting for our side salads.",
                     "kr": "실례합니다만, 저희 사이드 샐러드가 안 나왔어요."
+                  },
+                  {
+                    "word": "meal",
+                    "en": "Excuse me? We're still waiting for our kids' meals.",
+                    "kr": "실례합니다만, 저희 키즈밀이 아직 안 나왔어요."
                   }
-                ]
+                ],
+                "patternCount": 7
               }
             },
             {
@@ -3957,8 +4333,14 @@
                     "word": "salad",
                     "en": "Excuse me? We're still waiting for our side salads.",
                     "kr": "실례합니다만, 저희 사이드 샐러드가 안 나왔어요."
+                  },
+                  {
+                    "word": "meal",
+                    "en": "Excuse me? We're still waiting for our kids' meals.",
+                    "kr": "실례합니다만, 저희 키즈밀이 아직 안 나왔어요."
                   }
-                ]
+                ],
+                "patternCount": 7
               }
             },
             {
@@ -3997,8 +4379,14 @@
                     "word": "salad",
                     "en": "Excuse me? We're still waiting for our side salads.",
                     "kr": "실례합니다만, 저희 사이드 샐러드가 안 나왔어요."
+                  },
+                  {
+                    "word": "meal",
+                    "en": "Excuse me? We're still waiting for our kids' meals.",
+                    "kr": "실례합니다만, 저희 키즈밀이 아직 안 나왔어요."
                   }
-                ]
+                ],
+                "patternCount": 7
               }
             },
             {
@@ -4037,8 +4425,14 @@
                     "word": "food",
                     "en": "Excuse me? We're still waiting for our food. Do you know how much longer it'll take?",
                     "kr": "실례합니다만, 저희 음식이 아직 안 나왔는데요. 얼마나 더 걸릴까요?"
+                  },
+                  {
+                    "word": "meal",
+                    "en": "Excuse me? We're still waiting for our kids' meals.",
+                    "kr": "실례합니다만, 저희 키즈밀이 아직 안 나왔어요."
                   }
-                ]
+                ],
+                "patternCount": 7
               }
             },
             {
@@ -4078,8 +4472,14 @@
                     "word": "food",
                     "en": "Excuse me? We're still waiting for our food. Do you know how much longer it'll take?",
                     "kr": "실례합니다만, 저희 음식이 아직 안 나왔는데요. 얼마나 더 걸릴까요?"
+                  },
+                  {
+                    "word": "salad",
+                    "en": "Excuse me? We're still waiting for our side salads.",
+                    "kr": "실례합니다만, 저희 사이드 샐러드가 안 나왔어요."
                   }
-                ]
+                ],
+                "patternCount": 7
               }
             }
           ]
@@ -4110,7 +4510,8 @@
                 "pattern_en": "I have to be there in ~.",
                 "pattern_kr": "~ 안에 거기에 도착해야 돼요.",
                 "category": "DTB",
-                "siblings": []
+                "siblings": [],
+                "patternCount": 1
               }
             },
             {
@@ -4146,7 +4547,8 @@
                     "en": "The airport. I have to be there by nine.",
                     "kr": "공항이요. 9시까지 거기에 도착해야 돼요."
                   }
-                ]
+                ],
+                "patternCount": 3
               }
             },
             {
@@ -4181,7 +4583,8 @@
                     "en": "The airport. I have to be there by nine.",
                     "kr": "공항이요. 9시까지 거기에 도착해야 돼요."
                   }
-                ]
+                ],
+                "patternCount": 3
               }
             },
             {
@@ -4216,7 +4619,8 @@
                     "en": "I have to be there by 2:45 at the latest.",
                     "kr": "늦어도 2시 45분까지 거기에 도착해야 돼요."
                   }
-                ]
+                ],
+                "patternCount": 3
               }
             },
             {
@@ -4256,8 +4660,14 @@
                     "word": "bathroom",
                     "en": "The bathroom sink's clogged.",
                     "kr": "화장실 세면대가 막혔어요."
+                  },
+                  {
+                    "word": "kitchen",
+                    "en": "The kitchen sink's clogged.",
+                    "kr": "주방 싱크대가 막혔어요."
                   }
-                ]
+                ],
+                "patternCount": 5
               }
             }
           ]
@@ -4305,7 +4715,8 @@
                     "en": "In that case, could you just let me out across the street?",
                     "kr": "그러면, 그냥 길 건너편에서 내려주실 수 있나요?"
                   }
-                ]
+                ],
+                "patternCount": 4
               }
             },
             {
@@ -4345,7 +4756,8 @@
                     "en": "In that case, could you just let me out across the street?",
                     "kr": "그러면, 그냥 길 건너편에서 내려주실 수 있나요?"
                   }
-                ]
+                ],
+                "patternCount": 4
               }
             },
             {
@@ -4385,7 +4797,8 @@
                     "en": "In that case, could you just let me out across the street?",
                     "kr": "그러면, 그냥 길 건너편에서 내려주실 수 있나요?"
                   }
-                ]
+                ],
+                "patternCount": 4
               }
             },
             {
@@ -4426,7 +4839,8 @@
                     "en": "Actually, could you just let me out at the crosswalk?",
                     "kr": "그게요, 그냥 횡단보도에서 내려주실 수 있나요?"
                   }
-                ]
+                ],
+                "patternCount": 4
               }
             },
             {
@@ -4465,8 +4879,14 @@
                     "word": "station",
                     "en": "Sorry to bother you, but do you know where the nearest station is?",
                     "kr": "번거롭게 해서 죄송합니다만, 가장 가까운 역이 어디인지 아시나요?"
+                  },
+                  {
+                    "word": "gate",
+                    "en": "Sorry to bother you, but do you know where Gate 40 is?",
+                    "kr": "귀찮게 해서 죄송합니다만, 40번 게이트가 어디 있는지 아시나요?"
                   }
-                ]
+                ],
+                "patternCount": 8
               }
             }
           ]
@@ -4514,7 +4934,8 @@
                     "en": "Yeah, I ordered it well-done, but it seems like it's undercooked.",
                     "kr": "네, 저는 웰던으로 주문했는데 덜 익은 것 같아요."
                   }
-                ]
+                ],
+                "patternCount": 4
               }
             },
             {
@@ -4554,7 +4975,8 @@
                     "en": "Yeah, I ordered it well-done, but it seems like it's undercooked.",
                     "kr": "네, 저는 웰던으로 주문했는데 덜 익은 것 같아요."
                   }
-                ]
+                ],
+                "patternCount": 4
               }
             },
             {
@@ -4594,7 +5016,8 @@
                     "en": "Yeah, I ordered it well-done, but it seems like it's undercooked.",
                     "kr": "네, 저는 웰던으로 주문했는데 덜 익은 것 같아요."
                   }
-                ]
+                ],
+                "patternCount": 4
               }
             },
             {
@@ -4635,7 +5058,8 @@
                     "en": "Yeah, it's undercooked. It's still kind of pink inside.",
                     "kr": "네, 덜 익었어요. 안에 아직 약간 분홍색이에요."
                   }
-                ]
+                ],
+                "patternCount": 4
               }
             },
             {
@@ -4666,7 +5090,8 @@
                     "en": "Yes, I think it's overcooked.",
                     "kr": "네, 너무 익은 것 같아요."
                   }
-                ]
+                ],
+                "patternCount": 2
               }
             }
           ]
@@ -4712,8 +5137,14 @@
                     "word": "Coke",
                     "en": "Excuse me? I was wondering if I could get Coke instead of Sprite.",
                     "kr": "실례합니다만, 스프라이트 대신 콜라로 바꿀 수 있을까요?"
+                  },
+                  {
+                    "word": "sauce",
+                    "en": "Excuse me? I was wondering if I could get a different sauce.",
+                    "kr": "실례합니다만, 다른 소스로 바꿀 수 있을까요?"
                   }
-                ]
+                ],
+                "patternCount": 6
               }
             },
             {
@@ -4752,8 +5183,14 @@
                     "word": "Coke",
                     "en": "Excuse me? I was wondering if I could get Coke instead of Sprite.",
                     "kr": "실례합니다만, 스프라이트 대신 콜라로 바꿀 수 있을까요?"
+                  },
+                  {
+                    "word": "sauce",
+                    "en": "Excuse me? I was wondering if I could get a different sauce.",
+                    "kr": "실례합니다만, 다른 소스로 바꿀 수 있을까요?"
                   }
-                ]
+                ],
+                "patternCount": 6
               }
             },
             {
@@ -4792,8 +5229,14 @@
                     "word": "Coke",
                     "en": "Excuse me? I was wondering if I could get Coke instead of Sprite.",
                     "kr": "실례합니다만, 스프라이트 대신 콜라로 바꿀 수 있을까요?"
+                  },
+                  {
+                    "word": "sauce",
+                    "en": "Excuse me? I was wondering if I could get a different sauce.",
+                    "kr": "실례합니다만, 다른 소스로 바꿀 수 있을까요?"
                   }
-                ]
+                ],
+                "patternCount": 6
               }
             },
             {
@@ -4834,8 +5277,14 @@
                     "word": "refill",
                     "en": "Excuse me? I was wondering if I could get a refill.",
                     "kr": "실례합니다. 리필 좀 받을 수 있을까요?"
+                  },
+                  {
+                    "word": "sauce",
+                    "en": "Excuse me? I was wondering if I could get a different sauce.",
+                    "kr": "실례합니다만, 다른 소스로 바꿀 수 있을까요?"
                   }
-                ]
+                ],
+                "patternCount": 6
               }
             },
             {
@@ -4874,8 +5323,14 @@
                     "word": "refill",
                     "en": "Excuse me? I was wondering if I could get a refill.",
                     "kr": "실례합니다. 리필 좀 받을 수 있을까요?"
+                  },
+                  {
+                    "word": "Coke",
+                    "en": "Excuse me? I was wondering if I could get Coke instead of Sprite.",
+                    "kr": "실례합니다만, 스프라이트 대신 콜라로 바꿀 수 있을까요?"
                   }
-                ]
+                ],
+                "patternCount": 6
               }
             }
           ]
@@ -4922,8 +5377,14 @@
                     "word": "restaurant",
                     "en": "Would you happen to know any good restaurants nearby?",
                     "kr": "혹시 근처에 괜찮은 식당을 아시나요?"
+                  },
+                  {
+                    "word": "bus",
+                    "en": "Would you happen to know how much the bus fare is?",
+                    "kr": "혹시 버스 요금이 얼마인지 아시나요?"
                   }
-                ]
+                ],
+                "patternCount": 7
               }
             },
             {
@@ -4963,8 +5424,14 @@
                     "word": "restaurant",
                     "en": "Would you happen to know any good restaurants nearby?",
                     "kr": "혹시 근처에 괜찮은 식당을 아시나요?"
+                  },
+                  {
+                    "word": "bus",
+                    "en": "Would you happen to know how much the bus fare is?",
+                    "kr": "혹시 버스 요금이 얼마인지 아시나요?"
                   }
-                ]
+                ],
+                "patternCount": 7
               }
             },
             {
@@ -5003,8 +5470,14 @@
                     "word": "restaurant",
                     "en": "Would you happen to know any good restaurants nearby?",
                     "kr": "혹시 근처에 괜찮은 식당을 아시나요?"
+                  },
+                  {
+                    "word": "bus",
+                    "en": "Would you happen to know how much the bus fare is?",
+                    "kr": "혹시 버스 요금이 얼마인지 아시나요?"
                   }
-                ]
+                ],
+                "patternCount": 7
               }
             },
             {
@@ -5043,8 +5516,14 @@
                     "word": "password",
                     "en": "Would you happen to know the WiFi password?",
                     "kr": "혹시 와이파이 비밀번호를 아시나요?"
+                  },
+                  {
+                    "word": "bus",
+                    "en": "Would you happen to know how much the bus fare is?",
+                    "kr": "혹시 버스 요금이 얼마인지 아시나요?"
                   }
-                ]
+                ],
+                "patternCount": 7
               }
             },
             {
@@ -5083,8 +5562,14 @@
                     "word": "password",
                     "en": "Would you happen to know the WiFi password?",
                     "kr": "혹시 와이파이 비밀번호를 아시나요?"
+                  },
+                  {
+                    "word": "restaurant",
+                    "en": "Would you happen to know any good restaurants nearby?",
+                    "kr": "혹시 근처에 괜찮은 식당을 아시나요?"
                   }
-                ]
+                ],
+                "patternCount": 7
               }
             }
           ]
@@ -5131,7 +5616,8 @@
                     "en": "I know, I'm sorry. Something came up at work.",
                     "kr": "알아, 미안해. 직장에서 일이 생겼어."
                   }
-                ]
+                ],
+                "patternCount": 4
               }
             },
             {
@@ -5172,7 +5658,8 @@
                     "en": "I know, I'm sorry. Something came up at work.",
                     "kr": "알아, 미안해. 직장에서 일이 생겼어."
                   }
-                ]
+                ],
+                "patternCount": 4
               }
             },
             {
@@ -5213,7 +5700,8 @@
                     "en": "I know, I'm sorry. Something came up at work.",
                     "kr": "알아, 미안해. 직장에서 일이 생겼어."
                   }
-                ]
+                ],
+                "patternCount": 4
               }
             },
             {
@@ -5254,7 +5742,8 @@
                     "en": "Something came up, but I'm on my way now.",
                     "kr": "일이 생겼는데, 지금 가는 중이야."
                   }
-                ]
+                ],
+                "patternCount": 4
               }
             },
             {
@@ -5294,8 +5783,14 @@
                     "word": "bank",
                     "en": "I need to stop by the bank on the way.",
                     "kr": "가는 길에 은행에 가야 해."
+                  },
+                  {
+                    "word": "library",
+                    "en": "Why don't we stop by the library on the way?",
+                    "kr": "가는 길에 도서관도 가는 거 어때?"
                   }
-                ]
+                ],
+                "patternCount": 6
               }
             }
           ]
@@ -5341,8 +5836,14 @@
                     "word": "cake",
                     "en": "This is the best cake I've ever had.",
                     "kr": "내가 먹어본 케이크 중에 최고야."
+                  },
+                  {
+                    "word": "tea",
+                    "en": "This is the best tea I've ever had.",
+                    "kr": "내가 마셔본 차 중에 최고야."
                   }
-                ]
+                ],
+                "patternCount": 9
               }
             },
             {
@@ -5381,8 +5882,14 @@
                     "word": "cake",
                     "en": "This is the best cake I've ever had.",
                     "kr": "내가 먹어본 케이크 중에 최고야."
+                  },
+                  {
+                    "word": "tea",
+                    "en": "This is the best tea I've ever had.",
+                    "kr": "내가 마셔본 차 중에 최고야."
                   }
-                ]
+                ],
+                "patternCount": 9
               }
             },
             {
@@ -5422,8 +5929,14 @@
                     "word": "cake",
                     "en": "This is the best cake I've ever had.",
                     "kr": "내가 먹어본 케이크 중에 최고야."
+                  },
+                  {
+                    "word": "tea",
+                    "en": "This is the best tea I've ever had.",
+                    "kr": "내가 마셔본 차 중에 최고야."
                   }
-                ]
+                ],
+                "patternCount": 9
               }
             },
             {
@@ -5463,8 +5976,14 @@
                     "word": "steak",
                     "en": "This is the best steak I've ever had.",
                     "kr": "내가 먹어본 스테이크 중에 최고야."
+                  },
+                  {
+                    "word": "tea",
+                    "en": "This is the best tea I've ever had.",
+                    "kr": "내가 마셔본 차 중에 최고야."
                   }
-                ]
+                ],
+                "patternCount": 9
               }
             },
             {
@@ -5503,8 +6022,14 @@
                     "word": "steak",
                     "en": "This is the best steak I've ever had.",
                     "kr": "내가 먹어본 스테이크 중에 최고야."
+                  },
+                  {
+                    "word": "cake",
+                    "en": "This is the best cake I've ever had.",
+                    "kr": "내가 먹어본 케이크 중에 최고야."
                   }
-                ]
+                ],
+                "patternCount": 9
               }
             }
           ]
@@ -5551,8 +6076,14 @@
                     "word": "bakery",
                     "en": "That's okay, we can swing by the bakery on the way.",
                     "kr": "괜찮아, 가는 길에 빵집에 잠깐 들를 수 있어."
+                  },
+                  {
+                    "word": "bank",
+                    "en": "Can we swing by the bank on the way home?",
+                    "kr": "집에 가는 길에 은행에 잠깐 들를 수 있을까?"
                   }
-                ]
+                ],
+                "patternCount": 5
               }
             },
             {
@@ -5591,8 +6122,14 @@
                     "word": "bakery",
                     "en": "That's okay, we can swing by the bakery on the way.",
                     "kr": "괜찮아, 가는 길에 빵집에 잠깐 들를 수 있어."
+                  },
+                  {
+                    "word": "bank",
+                    "en": "Can we swing by the bank on the way home?",
+                    "kr": "집에 가는 길에 은행에 잠깐 들를 수 있을까?"
                   }
-                ]
+                ],
+                "patternCount": 5
               }
             },
             {
@@ -5631,8 +6168,14 @@
                     "word": "bakery",
                     "en": "That's okay, we can swing by the bakery on the way.",
                     "kr": "괜찮아, 가는 길에 빵집에 잠깐 들를 수 있어."
+                  },
+                  {
+                    "word": "bank",
+                    "en": "Can we swing by the bank on the way home?",
+                    "kr": "집에 가는 길에 은행에 잠깐 들를 수 있을까?"
                   }
-                ]
+                ],
+                "patternCount": 5
               }
             },
             {
@@ -5671,8 +6214,14 @@
                     "word": "library",
                     "en": "Can we swing by the library on the way home?",
                     "kr": "집에 가는 길에 도서관에 잠깐 들를 수 있을까?"
+                  },
+                  {
+                    "word": "bank",
+                    "en": "Can we swing by the bank on the way home?",
+                    "kr": "집에 가는 길에 은행에 잠깐 들를 수 있을까?"
                   }
-                ]
+                ],
+                "patternCount": 5
               }
             },
             {
@@ -5711,8 +6260,14 @@
                     "word": "library",
                     "en": "Can we swing by the library on the way home?",
                     "kr": "집에 가는 길에 도서관에 잠깐 들를 수 있을까?"
+                  },
+                  {
+                    "word": "bakery",
+                    "en": "That's okay, we can swing by the bakery on the way.",
+                    "kr": "괜찮아, 가는 길에 빵집에 잠깐 들를 수 있어."
                   }
-                ]
+                ],
+                "patternCount": 5
               }
             }
           ]
@@ -5750,7 +6305,8 @@
                     "en": "I'm sorry. I've got a lot on my plate these days.",
                     "kr": "미안해. 요즘 할 일이 너무 많아."
                   }
-                ]
+                ],
+                "patternCount": 2
               }
             },
             {
@@ -5781,7 +6337,8 @@
                     "en": "I've got a lot on my plate.",
                     "kr": "할 일이 너무 많아."
                   }
-                ]
+                ],
+                "patternCount": 2
               }
             },
             {
@@ -5805,7 +6362,8 @@
                 "pattern_en": "Do you have any dietary restrictions?",
                 "pattern_kr": "못 먹는 음식 있어?",
                 "category": "D",
-                "siblings": []
+                "siblings": [],
+                "patternCount": 1
               }
             },
             {
@@ -5845,7 +6403,8 @@
                     "en": "Okay, drive safe. It's really coming down out there.",
                     "kr": "조심히 운전해. 밖에 비가 엄청 쏟아지네."
                   }
-                ]
+                ],
+                "patternCount": 4
               }
             },
             {
@@ -5885,7 +6444,8 @@
                     "en": "Okay, drive safe. It's really coming down out there.",
                     "kr": "조심히 운전해. 밖에 비가 엄청 쏟아지네."
                   }
-                ]
+                ],
+                "patternCount": 4
               }
             }
           ]
@@ -5936,8 +6496,14 @@
                     "word": "nice",
                     "en": "He is nice.",
                     "kr": "그는 착해."
+                  },
+                  {
+                    "word": "angry",
+                    "en": "Emily is angry.",
+                    "kr": "에밀리는 화났어."
                   }
-                ]
+                ],
+                "patternCount": 10
               }
             },
             {
@@ -5975,8 +6541,14 @@
                     "word": "nice",
                     "en": "He is nice.",
                     "kr": "그는 착해."
+                  },
+                  {
+                    "word": "angry",
+                    "en": "Emily is angry.",
+                    "kr": "에밀리는 화났어."
                   }
-                ]
+                ],
+                "patternCount": 10
               }
             },
             {
@@ -6014,8 +6586,14 @@
                     "word": "nice",
                     "en": "He is nice.",
                     "kr": "그는 착해."
+                  },
+                  {
+                    "word": "angry",
+                    "en": "Emily is angry.",
+                    "kr": "에밀리는 화났어."
                   }
-                ]
+                ],
+                "patternCount": 10
               }
             },
             {
@@ -6053,8 +6631,14 @@
                     "word": "cute",
                     "en": "She is cute.",
                     "kr": "그녀는 귀여워."
+                  },
+                  {
+                    "word": "angry",
+                    "en": "Emily is angry.",
+                    "kr": "에밀리는 화났어."
                   }
-                ]
+                ],
+                "patternCount": 10
               }
             },
             {
@@ -6092,8 +6676,14 @@
                     "word": "cute",
                     "en": "She is cute.",
                     "kr": "그녀는 귀여워."
+                  },
+                  {
+                    "word": "nice",
+                    "en": "He is nice.",
+                    "kr": "그는 착해."
                   }
-                ]
+                ],
+                "patternCount": 10
               }
             }
           ]
@@ -6138,8 +6728,14 @@
                     "word": "ignore",
                     "en": "They ignore me.",
                     "kr": "그들은 나를 무시해."
+                  },
+                  {
+                    "word": "soccer",
+                    "en": "I play soccer.",
+                    "kr": "나는 축구를 해."
                   }
-                ]
+                ],
+                "patternCount": 9
               }
             },
             {
@@ -6177,8 +6773,14 @@
                     "word": "ignore",
                     "en": "They ignore me.",
                     "kr": "그들은 나를 무시해."
+                  },
+                  {
+                    "word": "soccer",
+                    "en": "I play soccer.",
+                    "kr": "나는 축구를 해."
                   }
-                ]
+                ],
+                "patternCount": 9
               }
             },
             {
@@ -6216,8 +6818,14 @@
                     "word": "ignore",
                     "en": "They ignore me.",
                     "kr": "그들은 나를 무시해."
+                  },
+                  {
+                    "word": "soccer",
+                    "en": "I play soccer.",
+                    "kr": "나는 축구를 해."
                   }
-                ]
+                ],
+                "patternCount": 9
               }
             },
             {
@@ -6255,8 +6863,14 @@
                     "word": "believe",
                     "en": "I believe him.",
                     "kr": "나는 그를 믿어."
+                  },
+                  {
+                    "word": "soccer",
+                    "en": "I play soccer.",
+                    "kr": "나는 축구를 해."
                   }
-                ]
+                ],
+                "patternCount": 9
               }
             },
             {
@@ -6294,8 +6908,14 @@
                     "word": "believe",
                     "en": "I believe him.",
                     "kr": "나는 그를 믿어."
+                  },
+                  {
+                    "word": "ignore",
+                    "en": "They ignore me.",
+                    "kr": "그들은 나를 무시해."
                   }
-                ]
+                ],
+                "patternCount": 9
               }
             }
           ]
@@ -6340,8 +6960,14 @@
                     "word": "nurse",
                     "en": "Is Sam a nurse?",
                     "kr": "샘은 간호사니?"
+                  },
+                  {
+                    "word": "thirsty",
+                    "en": "Are you thirsty?",
+                    "kr": "너 목말라?"
                   }
-                ]
+                ],
+                "patternCount": 9
               }
             },
             {
@@ -6379,8 +7005,14 @@
                     "word": "nurse",
                     "en": "Is Sam a nurse?",
                     "kr": "샘은 간호사니?"
+                  },
+                  {
+                    "word": "thirsty",
+                    "en": "Are you thirsty?",
+                    "kr": "너 목말라?"
                   }
-                ]
+                ],
+                "patternCount": 9
               }
             },
             {
@@ -6419,8 +7051,14 @@
                     "word": "nurse",
                     "en": "Is Sam a nurse?",
                     "kr": "샘은 간호사니?"
+                  },
+                  {
+                    "word": "thirsty",
+                    "en": "Are you thirsty?",
+                    "kr": "너 목말라?"
                   }
-                ]
+                ],
+                "patternCount": 9
               }
             },
             {
@@ -6458,8 +7096,14 @@
                     "word": "sister",
                     "en": "Is she your sister?",
                     "kr": "그녀는 너의 여동생이야?"
+                  },
+                  {
+                    "word": "thirsty",
+                    "en": "Are you thirsty?",
+                    "kr": "너 목말라?"
                   }
-                ]
+                ],
+                "patternCount": 9
               }
             },
             {
@@ -6497,8 +7141,14 @@
                     "word": "sister",
                     "en": "Is she your sister?",
                     "kr": "그녀는 너의 여동생이야?"
+                  },
+                  {
+                    "word": "nurse",
+                    "en": "Is Sam a nurse?",
+                    "kr": "샘은 간호사니?"
                   }
-                ]
+                ],
+                "patternCount": 9
               }
             }
           ]
@@ -6543,8 +7193,14 @@
                     "word": "bank",
                     "en": "Where is the bank?",
                     "kr": "은행은 어디에 있나요?"
+                  },
+                  {
+                    "word": "pink",
+                    "en": "Why is it pink?",
+                    "kr": "그건 왜 분홍색이야?"
                   }
-                ]
+                ],
+                "patternCount": 12
               }
             },
             {
@@ -6582,8 +7238,14 @@
                     "word": "bank",
                     "en": "Where is the bank?",
                     "kr": "은행은 어디에 있나요?"
+                  },
+                  {
+                    "word": "pink",
+                    "en": "Why is it pink?",
+                    "kr": "그건 왜 분홍색이야?"
                   }
-                ]
+                ],
+                "patternCount": 12
               }
             },
             {
@@ -6621,8 +7283,14 @@
                     "word": "bank",
                     "en": "Where is the bank?",
                     "kr": "은행은 어디에 있나요?"
+                  },
+                  {
+                    "word": "pink",
+                    "en": "Why is it pink?",
+                    "kr": "그건 왜 분홍색이야?"
                   }
-                ]
+                ],
+                "patternCount": 12
               }
             },
             {
@@ -6660,8 +7328,14 @@
                     "word": "trip",
                     "en": "How was your trip?",
                     "kr": "여행은 어땠어?"
+                  },
+                  {
+                    "word": "pink",
+                    "en": "Why is it pink?",
+                    "kr": "그건 왜 분홍색이야?"
                   }
-                ]
+                ],
+                "patternCount": 12
               }
             },
             {
@@ -6699,8 +7373,14 @@
                     "word": "trip",
                     "en": "How was your trip?",
                     "kr": "여행은 어땠어?"
+                  },
+                  {
+                    "word": "bank",
+                    "en": "Where is the bank?",
+                    "kr": "은행은 어디에 있나요?"
                   }
-                ]
+                ],
+                "patternCount": 12
               }
             }
           ]
@@ -6748,8 +7428,14 @@
                     "word": "think",
                     "en": "Steve thinks differently.",
                     "kr": "스티브는 다르게 생각해요."
+                  },
+                  {
+                    "word": "talk",
+                    "en": "Please talk quietly.",
+                    "kr": "조용히 말씀해 주세요."
                   }
-                ]
+                ],
+                "patternCount": 9
               }
             },
             {
@@ -6787,8 +7473,14 @@
                     "word": "think",
                     "en": "Steve thinks differently.",
                     "kr": "스티브는 다르게 생각해요."
+                  },
+                  {
+                    "word": "talk",
+                    "en": "Please talk quietly.",
+                    "kr": "조용히 말씀해 주세요."
                   }
-                ]
+                ],
+                "patternCount": 9
               }
             },
             {
@@ -6826,8 +7518,14 @@
                     "word": "think",
                     "en": "Steve thinks differently.",
                     "kr": "스티브는 다르게 생각해요."
+                  },
+                  {
+                    "word": "talk",
+                    "en": "Please talk quietly.",
+                    "kr": "조용히 말씀해 주세요."
                   }
-                ]
+                ],
+                "patternCount": 9
               }
             },
             {
@@ -6866,8 +7564,14 @@
                     "word": "read",
                     "en": "Please read quietly.",
                     "kr": "조용히 읽어주세요."
+                  },
+                  {
+                    "word": "talk",
+                    "en": "Please talk quietly.",
+                    "kr": "조용히 말씀해 주세요."
                   }
-                ]
+                ],
+                "patternCount": 9
               }
             },
             {
@@ -6906,8 +7610,14 @@
                     "word": "read",
                     "en": "Please read quietly.",
                     "kr": "조용히 읽어주세요."
+                  },
+                  {
+                    "word": "think",
+                    "en": "Steve thinks differently.",
+                    "kr": "스티브는 다르게 생각해요."
                   }
-                ]
+                ],
+                "patternCount": 9
               }
             }
           ]
@@ -6952,8 +7662,14 @@
                     "word": "movie",
                     "en": "We are watching a movie.",
                     "kr": "우리는 영화를 보는 중이야."
+                  },
+                  {
+                    "word": "English",
+                    "en": "My friends are studying English.",
+                    "kr": "내 친구들은 영어 공부하는 중이야."
                   }
-                ]
+                ],
+                "patternCount": 10
               }
             },
             {
@@ -6991,8 +7707,14 @@
                     "word": "movie",
                     "en": "We are watching a movie.",
                     "kr": "우리는 영화를 보는 중이야."
+                  },
+                  {
+                    "word": "English",
+                    "en": "My friends are studying English.",
+                    "kr": "내 친구들은 영어 공부하는 중이야."
                   }
-                ]
+                ],
+                "patternCount": 10
               }
             },
             {
@@ -7031,8 +7753,14 @@
                     "word": "movie",
                     "en": "We are watching a movie.",
                     "kr": "우리는 영화를 보는 중이야."
+                  },
+                  {
+                    "word": "English",
+                    "en": "My friends are studying English.",
+                    "kr": "내 친구들은 영어 공부하는 중이야."
                   }
-                ]
+                ],
+                "patternCount": 10
               }
             },
             {
@@ -7070,8 +7798,14 @@
                     "word": "try",
                     "en": "I am trying my best.",
                     "kr": "나는 최선을 다하고 있어."
+                  },
+                  {
+                    "word": "English",
+                    "en": "My friends are studying English.",
+                    "kr": "내 친구들은 영어 공부하는 중이야."
                   }
-                ]
+                ],
+                "patternCount": 10
               }
             },
             {
@@ -7109,8 +7843,14 @@
                     "word": "try",
                     "en": "I am trying my best.",
                     "kr": "나는 최선을 다하고 있어."
+                  },
+                  {
+                    "word": "movie",
+                    "en": "We are watching a movie.",
+                    "kr": "우리는 영화를 보는 중이야."
                   }
-                ]
+                ],
+                "patternCount": 10
               }
             }
           ]
@@ -7156,8 +7896,14 @@
                     "word": "mug",
                     "en": "He broke my favorite mug.",
                     "kr": "그는 내가 가장 좋아하는 머그잔을 깼어."
+                  },
+                  {
+                    "word": "English",
+                    "en": "He taught English in Thailand.",
+                    "kr": "그는 태국에서 영어를 가르쳤어요."
                   }
-                ]
+                ],
+                "patternCount": 7
               }
             },
             {
@@ -7195,8 +7941,14 @@
                     "word": "mug",
                     "en": "He broke my favorite mug.",
                     "kr": "그는 내가 가장 좋아하는 머그잔을 깼어."
+                  },
+                  {
+                    "word": "English",
+                    "en": "He taught English in Thailand.",
+                    "kr": "그는 태국에서 영어를 가르쳤어요."
                   }
-                ]
+                ],
+                "patternCount": 7
               }
             },
             {
@@ -7235,8 +7987,14 @@
                     "word": "mug",
                     "en": "He broke my favorite mug.",
                     "kr": "그는 내가 가장 좋아하는 머그잔을 깼어."
+                  },
+                  {
+                    "word": "English",
+                    "en": "He taught English in Thailand.",
+                    "kr": "그는 태국에서 영어를 가르쳤어요."
                   }
-                ]
+                ],
+                "patternCount": 7
               }
             },
             {
@@ -7274,8 +8032,14 @@
                     "word": "fish",
                     "en": "I caught a fish!",
                     "kr": "내가 물고기를 잡았어!"
+                  },
+                  {
+                    "word": "English",
+                    "en": "He taught English in Thailand.",
+                    "kr": "그는 태국에서 영어를 가르쳤어요."
                   }
-                ]
+                ],
+                "patternCount": 7
               }
             },
             {
@@ -7313,8 +8077,14 @@
                     "word": "fish",
                     "en": "I caught a fish!",
                     "kr": "내가 물고기를 잡았어!"
+                  },
+                  {
+                    "word": "mug",
+                    "en": "He broke my favorite mug.",
+                    "kr": "그는 내가 가장 좋아하는 머그잔을 깼어."
                   }
-                ]
+                ],
+                "patternCount": 7
               }
             }
           ]
@@ -7360,8 +8130,14 @@
                     "word": "letter",
                     "en": "Did you write her a letter?",
                     "kr": "너는 그녀에게 편지를 썼니?"
+                  },
+                  {
+                    "word": "cake",
+                    "en": "We bought her a cake.",
+                    "kr": "우리는 그녀에게 케이크를 사 줬어."
                   }
-                ]
+                ],
+                "patternCount": 7
               }
             },
             {
@@ -7399,8 +8175,14 @@
                     "word": "letter",
                     "en": "Did you write her a letter?",
                     "kr": "너는 그녀에게 편지를 썼니?"
+                  },
+                  {
+                    "word": "cake",
+                    "en": "We bought her a cake.",
+                    "kr": "우리는 그녀에게 케이크를 사 줬어."
                   }
-                ]
+                ],
+                "patternCount": 7
               }
             },
             {
@@ -7439,8 +8221,14 @@
                     "word": "letter",
                     "en": "Did you write her a letter?",
                     "kr": "너는 그녀에게 편지를 썼니?"
+                  },
+                  {
+                    "word": "cake",
+                    "en": "We bought her a cake.",
+                    "kr": "우리는 그녀에게 케이크를 사 줬어."
                   }
-                ]
+                ],
+                "patternCount": 7
               }
             },
             {
@@ -7479,8 +8267,14 @@
                     "word": "message",
                     "en": "They didn't leave me a message.",
                     "kr": "그들은 나에게 메시지를 남기지 않았어."
+                  },
+                  {
+                    "word": "cake",
+                    "en": "We bought her a cake.",
+                    "kr": "우리는 그녀에게 케이크를 사 줬어."
                   }
-                ]
+                ],
+                "patternCount": 7
               }
             },
             {
@@ -7519,8 +8313,14 @@
                     "word": "message",
                     "en": "They didn't leave me a message.",
                     "kr": "그들은 나에게 메시지를 남기지 않았어."
+                  },
+                  {
+                    "word": "letter",
+                    "en": "Did you write her a letter?",
+                    "kr": "너는 그녀에게 편지를 썼니?"
                   }
-                ]
+                ],
+                "patternCount": 7
               }
             }
           ]
@@ -7565,8 +8365,14 @@
                     "word": "dog",
                     "en": "I named our dog Max.",
                     "kr": "나는 우리 개를 맥스라고 이름 지었어."
+                  },
+                  {
+                    "word": "decision",
+                    "en": "They found the decision unfair.",
+                    "kr": "그들은 그 결정이 불공평하다고 생각했다."
                   }
-                ]
+                ],
+                "patternCount": 6
               }
             },
             {
@@ -7604,8 +8410,14 @@
                     "word": "dog",
                     "en": "I named our dog Max.",
                     "kr": "나는 우리 개를 맥스라고 이름 지었어."
+                  },
+                  {
+                    "word": "decision",
+                    "en": "They found the decision unfair.",
+                    "kr": "그들은 그 결정이 불공평하다고 생각했다."
                   }
-                ]
+                ],
+                "patternCount": 6
               }
             },
             {
@@ -7643,8 +8455,14 @@
                     "word": "dog",
                     "en": "I named our dog Max.",
                     "kr": "나는 우리 개를 맥스라고 이름 지었어."
+                  },
+                  {
+                    "word": "decision",
+                    "en": "They found the decision unfair.",
+                    "kr": "그들은 그 결정이 불공평하다고 생각했다."
                   }
-                ]
+                ],
+                "patternCount": 6
               }
             },
             {
@@ -7682,8 +8500,14 @@
                     "word": "keep",
                     "en": "Keep it safe.",
                     "kr": "그것을 안전하게 보관해 주세요."
+                  },
+                  {
+                    "word": "decision",
+                    "en": "They found the decision unfair.",
+                    "kr": "그들은 그 결정이 불공평하다고 생각했다."
                   }
-                ]
+                ],
+                "patternCount": 6
               }
             },
             {
@@ -7721,8 +8545,14 @@
                     "word": "keep",
                     "en": "Keep it safe.",
                     "kr": "그것을 안전하게 보관해 주세요."
+                  },
+                  {
+                    "word": "dog",
+                    "en": "I named our dog Max.",
+                    "kr": "나는 우리 개를 맥스라고 이름 지었어."
                   }
-                ]
+                ],
+                "patternCount": 6
               }
             }
           ]
@@ -7768,8 +8598,14 @@
                     "word": "toy",
                     "en": "Pick up your toys.",
                     "kr": "네 장난감들 주워."
+                  },
+                  {
+                    "word": "pencil",
+                    "en": "Put down your pencils.",
+                    "kr": "연필들 내려놓으세요."
                   }
-                ]
+                ],
+                "patternCount": 9
               }
             },
             {
@@ -7807,8 +8643,14 @@
                     "word": "toy",
                     "en": "Pick up your toys.",
                     "kr": "네 장난감들 주워."
+                  },
+                  {
+                    "word": "pencil",
+                    "en": "Put down your pencils.",
+                    "kr": "연필들 내려놓으세요."
                   }
-                ]
+                ],
+                "patternCount": 9
               }
             },
             {
@@ -7846,8 +8688,14 @@
                     "word": "toy",
                     "en": "Pick up your toys.",
                     "kr": "네 장난감들 주워."
+                  },
+                  {
+                    "word": "pencil",
+                    "en": "Put down your pencils.",
+                    "kr": "연필들 내려놓으세요."
                   }
-                ]
+                ],
+                "patternCount": 9
               }
             },
             {
@@ -7885,8 +8733,14 @@
                     "word": "computer",
                     "en": "Did you turn on the computer?",
                     "kr": "네가 컴퓨터 켰어?"
+                  },
+                  {
+                    "word": "pencil",
+                    "en": "Put down your pencils.",
+                    "kr": "연필들 내려놓으세요."
                   }
-                ]
+                ],
+                "patternCount": 9
               }
             },
             {
@@ -7924,8 +8778,14 @@
                     "word": "computer",
                     "en": "Did you turn on the computer?",
                     "kr": "네가 컴퓨터 켰어?"
+                  },
+                  {
+                    "word": "toy",
+                    "en": "Pick up your toys.",
+                    "kr": "네 장난감들 주워."
                   }
-                ]
+                ],
+                "patternCount": 9
               }
             }
           ]
@@ -7972,8 +8832,14 @@
                     "word": "soon",
                     "en": "She will be here soon.",
                     "kr": "그녀는 곧 여기에 올 거야."
+                  },
+                  {
+                    "word": "think",
+                    "en": "I will think about it.",
+                    "kr": "그것에 대해 생각해 볼게요."
                   }
-                ]
+                ],
+                "patternCount": 7
               }
             },
             {
@@ -8011,8 +8877,14 @@
                     "word": "soon",
                     "en": "She will be here soon.",
                     "kr": "그녀는 곧 여기에 올 거야."
+                  },
+                  {
+                    "word": "think",
+                    "en": "I will think about it.",
+                    "kr": "그것에 대해 생각해 볼게요."
                   }
-                ]
+                ],
+                "patternCount": 7
               }
             },
             {
@@ -8050,8 +8922,14 @@
                     "word": "soon",
                     "en": "She will be here soon.",
                     "kr": "그녀는 곧 여기에 올 거야."
+                  },
+                  {
+                    "word": "think",
+                    "en": "I will think about it.",
+                    "kr": "그것에 대해 생각해 볼게요."
                   }
-                ]
+                ],
+                "patternCount": 7
               }
             },
             {
@@ -8089,8 +8967,14 @@
                     "word": "rain",
                     "en": "It will rain next Sunday.",
                     "kr": "다음 주 일요일에 비가 올 겁니다."
+                  },
+                  {
+                    "word": "think",
+                    "en": "I will think about it.",
+                    "kr": "그것에 대해 생각해 볼게요."
                   }
-                ]
+                ],
+                "patternCount": 7
               }
             },
             {
@@ -8129,8 +9013,14 @@
                     "word": "rain",
                     "en": "It will rain next Sunday.",
                     "kr": "다음 주 일요일에 비가 올 겁니다."
+                  },
+                  {
+                    "word": "soon",
+                    "en": "She will be here soon.",
+                    "kr": "그녀는 곧 여기에 올 거야."
                   }
-                ]
+                ],
+                "patternCount": 7
               }
             }
           ]
@@ -8176,8 +9066,14 @@
                     "word": "let",
                     "en": "If you figure it out, let me know.",
                     "kr": "네가 그걸 알아내면, 나한테 알려줘."
+                  },
+                  {
+                    "word": "picnic",
+                    "en": "If it rains, we'll need to cancel the picnic.",
+                    "kr": "비가 온다면, 우리는 소풍을 취소해야 할 거야."
                   }
-                ]
+                ],
+                "patternCount": 20
               }
             },
             {
@@ -8215,8 +9111,14 @@
                     "word": "let",
                     "en": "If you figure it out, let me know.",
                     "kr": "네가 그걸 알아내면, 나한테 알려줘."
+                  },
+                  {
+                    "word": "picnic",
+                    "en": "If it rains, we'll need to cancel the picnic.",
+                    "kr": "비가 온다면, 우리는 소풍을 취소해야 할 거야."
                   }
-                ]
+                ],
+                "patternCount": 20
               }
             },
             {
@@ -8254,8 +9156,14 @@
                     "word": "let",
                     "en": "If you figure it out, let me know.",
                     "kr": "네가 그걸 알아내면, 나한테 알려줘."
+                  },
+                  {
+                    "word": "picnic",
+                    "en": "If it rains, we'll need to cancel the picnic.",
+                    "kr": "비가 온다면, 우리는 소풍을 취소해야 할 거야."
                   }
-                ]
+                ],
+                "patternCount": 20
               }
             },
             {
@@ -8294,8 +9202,14 @@
                     "word": "dish",
                     "en": "If you make dinner, I'll do the dishes.",
                     "kr": "네가 저녁을 하면 내가 설거지를 할게."
+                  },
+                  {
+                    "word": "picnic",
+                    "en": "If it rains, we'll need to cancel the picnic.",
+                    "kr": "비가 온다면, 우리는 소풍을 취소해야 할 거야."
                   }
-                ]
+                ],
+                "patternCount": 20
               }
             },
             {
@@ -8333,8 +9247,14 @@
                     "word": "dish",
                     "en": "If you make dinner, I'll do the dishes.",
                     "kr": "네가 저녁을 하면 내가 설거지를 할게."
+                  },
+                  {
+                    "word": "let",
+                    "en": "If you figure it out, let me know.",
+                    "kr": "네가 그걸 알아내면, 나한테 알려줘."
                   }
-                ]
+                ],
+                "patternCount": 20
               }
             }
           ]
@@ -8379,8 +9299,14 @@
                     "word": "singer",
                     "en": "I hope to be a famous singer.",
                     "kr": "나는 유명한 가수가 되는 것을 희망해."
+                  },
+                  {
+                    "word": "business",
+                    "en": "He hopes to start his own business soon.",
+                    "kr": "그는 곧 자신의 사업을 시작하는 것을 희망하고 있습니다."
                   }
-                ]
+                ],
+                "patternCount": 9
               }
             },
             {
@@ -8418,8 +9344,14 @@
                     "word": "singer",
                     "en": "I hope to be a famous singer.",
                     "kr": "나는 유명한 가수가 되는 것을 희망해."
+                  },
+                  {
+                    "word": "business",
+                    "en": "He hopes to start his own business soon.",
+                    "kr": "그는 곧 자신의 사업을 시작하는 것을 희망하고 있습니다."
                   }
-                ]
+                ],
+                "patternCount": 9
               }
             },
             {
@@ -8457,8 +9389,14 @@
                     "word": "singer",
                     "en": "I hope to be a famous singer.",
                     "kr": "나는 유명한 가수가 되는 것을 희망해."
+                  },
+                  {
+                    "word": "business",
+                    "en": "He hopes to start his own business soon.",
+                    "kr": "그는 곧 자신의 사업을 시작하는 것을 희망하고 있습니다."
                   }
-                ]
+                ],
+                "patternCount": 9
               }
             },
             {
@@ -8496,8 +9434,14 @@
                     "word": "hiking",
                     "en": "Did you decide to go hiking?",
                     "kr": "하이킹 가는 것을 결정했니?"
+                  },
+                  {
+                    "word": "business",
+                    "en": "He hopes to start his own business soon.",
+                    "kr": "그는 곧 자신의 사업을 시작하는 것을 희망하고 있습니다."
                   }
-                ]
+                ],
+                "patternCount": 9
               }
             },
             {
@@ -8535,8 +9479,14 @@
                     "word": "hiking",
                     "en": "Did you decide to go hiking?",
                     "kr": "하이킹 가는 것을 결정했니?"
+                  },
+                  {
+                    "word": "singer",
+                    "en": "I hope to be a famous singer.",
+                    "kr": "나는 유명한 가수가 되는 것을 희망해."
                   }
-                ]
+                ],
+                "patternCount": 9
               }
             }
           ]
@@ -8581,8 +9531,14 @@
                     "word": "one",
                     "en": "Is this one cheaper?",
                     "kr": "이게 더 싼가요?"
+                  },
+                  {
+                    "word": "come",
+                    "en": "Come in! It's warmer inside.",
+                    "kr": "들어오세요! 안이 더 따뜻해요."
                   }
-                ]
+                ],
+                "patternCount": 12
               }
             },
             {
@@ -8620,8 +9576,14 @@
                     "word": "one",
                     "en": "Is this one cheaper?",
                     "kr": "이게 더 싼가요?"
+                  },
+                  {
+                    "word": "come",
+                    "en": "Come in! It's warmer inside.",
+                    "kr": "들어오세요! 안이 더 따뜻해요."
                   }
-                ]
+                ],
+                "patternCount": 12
               }
             },
             {
@@ -8659,8 +9621,14 @@
                     "word": "one",
                     "en": "Is this one cheaper?",
                     "kr": "이게 더 싼가요?"
+                  },
+                  {
+                    "word": "come",
+                    "en": "Come in! It's warmer inside.",
+                    "kr": "들어오세요! 안이 더 따뜻해요."
                   }
-                ]
+                ],
+                "patternCount": 12
               }
             },
             {
@@ -8698,8 +9666,14 @@
                     "word": "fat",
                     "en": "He's fatter than our other cats.",
                     "kr": "쟤는 우리 다른 고양이들보다 더 뚱뚱해."
+                  },
+                  {
+                    "word": "come",
+                    "en": "Come in! It's warmer inside.",
+                    "kr": "들어오세요! 안이 더 따뜻해요."
                   }
-                ]
+                ],
+                "patternCount": 12
               }
             },
             {
@@ -8738,8 +9712,14 @@
                     "word": "fat",
                     "en": "He's fatter than our other cats.",
                     "kr": "쟤는 우리 다른 고양이들보다 더 뚱뚱해."
+                  },
+                  {
+                    "word": "one",
+                    "en": "Is this one cheaper?",
+                    "kr": "이게 더 싼가요?"
                   }
-                ]
+                ],
+                "patternCount": 12
               }
             }
           ]
@@ -8784,8 +9764,14 @@
                     "word": "million",
                     "en": "This museum is visited by millions of people every year.",
                     "kr": "이 박물관은 매년 수백만 명의 사람들에 의해 방문 됩니다."
+                  },
+                  {
+                    "word": "speaker",
+                    "en": "This expression is used by native speakers.",
+                    "kr": "이 표현은 원어민에 의해 사용됩니다."
                   }
-                ]
+                ],
+                "patternCount": 6
               }
             },
             {
@@ -8823,8 +9809,14 @@
                     "word": "million",
                     "en": "This museum is visited by millions of people every year.",
                     "kr": "이 박물관은 매년 수백만 명의 사람들에 의해 방문 됩니다."
+                  },
+                  {
+                    "word": "speaker",
+                    "en": "This expression is used by native speakers.",
+                    "kr": "이 표현은 원어민에 의해 사용됩니다."
                   }
-                ]
+                ],
+                "patternCount": 6
               }
             },
             {
@@ -8862,8 +9854,14 @@
                     "word": "million",
                     "en": "This museum is visited by millions of people every year.",
                     "kr": "이 박물관은 매년 수백만 명의 사람들에 의해 방문 됩니다."
+                  },
+                  {
+                    "word": "speaker",
+                    "en": "This expression is used by native speakers.",
+                    "kr": "이 표현은 원어민에 의해 사용됩니다."
                   }
-                ]
+                ],
+                "patternCount": 6
               }
             },
             {
@@ -8901,8 +9899,14 @@
                     "word": "people",
                     "en": "Their music is enjoyed by people all over the world.",
                     "kr": "그들의 음악은 전 세계 사람들에 의해 즐겨집니다."
+                  },
+                  {
+                    "word": "speaker",
+                    "en": "This expression is used by native speakers.",
+                    "kr": "이 표현은 원어민에 의해 사용됩니다."
                   }
-                ]
+                ],
+                "patternCount": 6
               }
             },
             {
@@ -8942,8 +9946,14 @@
                     "word": "people",
                     "en": "Their music is enjoyed by people all over the world.",
                     "kr": "그들의 음악은 전 세계 사람들에 의해 즐겨집니다."
+                  },
+                  {
+                    "word": "million",
+                    "en": "This museum is visited by millions of people every year.",
+                    "kr": "이 박물관은 매년 수백만 명의 사람들에 의해 방문 됩니다."
                   }
-                ]
+                ],
+                "patternCount": 6
               }
             }
           ]
@@ -8988,8 +9998,14 @@
                     "word": "hard",
                     "en": "It's hard to make her happy.",
                     "kr": "그녀를 행복하게 하는 건 어려워."
+                  },
+                  {
+                    "word": "important",
+                    "en": "It's important to eat lots of vegetables.",
+                    "kr": "야채를 많이 먹는 것은 중요해."
                   }
-                ]
+                ],
+                "patternCount": 12
               }
             },
             {
@@ -9028,8 +10044,14 @@
                     "word": "hard",
                     "en": "It's hard to make her happy.",
                     "kr": "그녀를 행복하게 하는 건 어려워."
+                  },
+                  {
+                    "word": "important",
+                    "en": "It's important to eat lots of vegetables.",
+                    "kr": "야채를 많이 먹는 것은 중요해."
                   }
-                ]
+                ],
+                "patternCount": 12
               }
             },
             {
@@ -9068,8 +10090,14 @@
                     "word": "hard",
                     "en": "It's hard to make her happy.",
                     "kr": "그녀를 행복하게 하는 건 어려워."
+                  },
+                  {
+                    "word": "important",
+                    "en": "It's important to eat lots of vegetables.",
+                    "kr": "야채를 많이 먹는 것은 중요해."
                   }
-                ]
+                ],
+                "patternCount": 12
               }
             },
             {
@@ -9108,8 +10136,14 @@
                     "word": "fun",
                     "en": "It isn't fun to lose.",
                     "kr": "지는 건 재미없어."
+                  },
+                  {
+                    "word": "important",
+                    "en": "It's important to eat lots of vegetables.",
+                    "kr": "야채를 많이 먹는 것은 중요해."
                   }
-                ]
+                ],
+                "patternCount": 12
               }
             },
             {
@@ -9147,8 +10181,14 @@
                     "word": "fun",
                     "en": "It isn't fun to lose.",
                     "kr": "지는 건 재미없어."
+                  },
+                  {
+                    "word": "hard",
+                    "en": "It's hard to make her happy.",
+                    "kr": "그녀를 행복하게 하는 건 어려워."
                   }
-                ]
+                ],
+                "patternCount": 12
               }
             }
           ]
@@ -9193,8 +10233,14 @@
                     "word": "help",
                     "en": "Does listening to music help you focus?",
                     "kr": "음악을 듣는 것이 집중하는 데 도움이 되나요?"
+                  },
+                  {
+                    "word": "stress",
+                    "en": "Is running a good way to relieve stress?",
+                    "kr": "달리는 것이 스트레스를 푸는 좋은 방법일까요?"
                   }
-                ]
+                ],
+                "patternCount": 11
               }
             },
             {
@@ -9232,8 +10278,14 @@
                     "word": "help",
                     "en": "Does listening to music help you focus?",
                     "kr": "음악을 듣는 것이 집중하는 데 도움이 되나요?"
+                  },
+                  {
+                    "word": "stress",
+                    "en": "Is running a good way to relieve stress?",
+                    "kr": "달리는 것이 스트레스를 푸는 좋은 방법일까요?"
                   }
-                ]
+                ],
+                "patternCount": 11
               }
             },
             {
@@ -9272,8 +10324,14 @@
                     "word": "help",
                     "en": "Does listening to music help you focus?",
                     "kr": "음악을 듣는 것이 집중하는 데 도움이 되나요?"
+                  },
+                  {
+                    "word": "stress",
+                    "en": "Is running a good way to relieve stress?",
+                    "kr": "달리는 것이 스트레스를 푸는 좋은 방법일까요?"
                   }
-                ]
+                ],
+                "patternCount": 11
               }
             },
             {
@@ -9311,8 +10369,14 @@
                     "word": "lot",
                     "en": "Does traveling cost a lot of money?",
                     "kr": "여행하는 것은 많은 돈이 드나요?"
+                  },
+                  {
+                    "word": "stress",
+                    "en": "Is running a good way to relieve stress?",
+                    "kr": "달리는 것이 스트레스를 푸는 좋은 방법일까요?"
                   }
-                ]
+                ],
+                "patternCount": 11
               }
             },
             {
@@ -9350,8 +10414,14 @@
                     "word": "lot",
                     "en": "Does traveling cost a lot of money?",
                     "kr": "여행하는 것은 많은 돈이 드나요?"
+                  },
+                  {
+                    "word": "help",
+                    "en": "Does listening to music help you focus?",
+                    "kr": "음악을 듣는 것이 집중하는 데 도움이 되나요?"
                   }
-                ]
+                ],
+                "patternCount": 11
               }
             }
           ]
@@ -9396,8 +10466,14 @@
                     "word": "point",
                     "en": "The point is that you have to study harder.",
                     "kr": "요점은 네가 더 열심히 공부해야 한다는 거야."
+                  },
+                  {
+                    "word": "nurse",
+                    "en": "The point is that she is not a nurse.",
+                    "kr": "요점은 그녀가 간호사가 아니라는 거야."
                   }
-                ]
+                ],
+                "patternCount": 14
               }
             },
             {
@@ -9436,8 +10512,14 @@
                     "word": "point",
                     "en": "The point is that you have to study harder.",
                     "kr": "요점은 네가 더 열심히 공부해야 한다는 거야."
+                  },
+                  {
+                    "word": "nurse",
+                    "en": "The point is that she is not a nurse.",
+                    "kr": "요점은 그녀가 간호사가 아니라는 거야."
                   }
-                ]
+                ],
+                "patternCount": 14
               }
             },
             {
@@ -9475,8 +10557,14 @@
                     "word": "point",
                     "en": "The point is that you have to study harder.",
                     "kr": "요점은 네가 더 열심히 공부해야 한다는 거야."
+                  },
+                  {
+                    "word": "nurse",
+                    "en": "The point is that she is not a nurse.",
+                    "kr": "요점은 그녀가 간호사가 아니라는 거야."
                   }
-                ]
+                ],
+                "patternCount": 14
               }
             },
             {
@@ -9514,8 +10602,14 @@
                     "word": "point",
                     "en": "The point is that you have to study harder.",
                     "kr": "요점은 네가 더 열심히 공부해야 한다는 거야."
+                  },
+                  {
+                    "word": "nurse",
+                    "en": "The point is that she is not a nurse.",
+                    "kr": "요점은 그녀가 간호사가 아니라는 거야."
                   }
-                ]
+                ],
+                "patternCount": 14
               }
             },
             {
@@ -9553,8 +10647,14 @@
                     "word": "point",
                     "en": "The point is that you have to study harder.",
                     "kr": "요점은 네가 더 열심히 공부해야 한다는 거야."
+                  },
+                  {
+                    "word": "nurse",
+                    "en": "The point is that she is not a nurse.",
+                    "kr": "요점은 그녀가 간호사가 아니라는 거야."
                   }
-                ]
+                ],
+                "patternCount": 14
               }
             }
           ]
@@ -9600,8 +10700,14 @@
                     "word": "home",
                     "en": "There's nothing better than a quiet evening at home.",
                     "kr": "집에서 보내는 조용한 저녁보다 더 좋은 건 아무것도 없어."
+                  },
+                  {
+                    "word": "walk",
+                    "en": "There's nothing more romantic than a walk on the beach.",
+                    "kr": "해변에서의 산책보다 더 낭만적인 것은 아무것도 없어."
                   }
-                ]
+                ],
+                "patternCount": 7
               }
             },
             {
@@ -9639,8 +10745,14 @@
                     "word": "home",
                     "en": "There's nothing better than a quiet evening at home.",
                     "kr": "집에서 보내는 조용한 저녁보다 더 좋은 건 아무것도 없어."
+                  },
+                  {
+                    "word": "walk",
+                    "en": "There's nothing more romantic than a walk on the beach.",
+                    "kr": "해변에서의 산책보다 더 낭만적인 것은 아무것도 없어."
                   }
-                ]
+                ],
+                "patternCount": 7
               }
             },
             {
@@ -9678,8 +10790,14 @@
                     "word": "home",
                     "en": "There's nothing better than a quiet evening at home.",
                     "kr": "집에서 보내는 조용한 저녁보다 더 좋은 건 아무것도 없어."
+                  },
+                  {
+                    "word": "walk",
+                    "en": "There's nothing more romantic than a walk on the beach.",
+                    "kr": "해변에서의 산책보다 더 낭만적인 것은 아무것도 없어."
                   }
-                ]
+                ],
+                "patternCount": 7
               }
             },
             {
@@ -9717,8 +10835,14 @@
                     "word": "care",
                     "en": "There's nothing more exhausting than taking care of toddlers.",
                     "kr": "걸음마를 배우는 아이를 돌보는 것보다 더 힘든 건 아무것도 없어."
+                  },
+                  {
+                    "word": "walk",
+                    "en": "There's nothing more romantic than a walk on the beach.",
+                    "kr": "해변에서의 산책보다 더 낭만적인 것은 아무것도 없어."
                   }
-                ]
+                ],
+                "patternCount": 7
               }
             },
             {
@@ -9757,8 +10881,14 @@
                     "word": "care",
                     "en": "There's nothing more exhausting than taking care of toddlers.",
                     "kr": "걸음마를 배우는 아이를 돌보는 것보다 더 힘든 건 아무것도 없어."
+                  },
+                  {
+                    "word": "home",
+                    "en": "There's nothing better than a quiet evening at home.",
+                    "kr": "집에서 보내는 조용한 저녁보다 더 좋은 건 아무것도 없어."
                   }
-                ]
+                ],
+                "patternCount": 7
               }
             }
           ]
@@ -9803,8 +10933,14 @@
                     "word": "gratitude",
                     "en": "He's the one to whom we owe our gratitude.",
                     "kr": "그는 우리가 감사해야 하는 사람이에요."
+                  },
+                  {
+                    "word": "say",
+                    "en": "It's said that Christmas is the day on which Jesus was born.",
+                    "kr": "크리스마스는 예수가 태어난 날이라고 합니다."
                   }
-                ]
+                ],
+                "patternCount": 8
               }
             },
             {
@@ -9842,8 +10978,14 @@
                     "word": "gratitude",
                     "en": "He's the one to whom we owe our gratitude.",
                     "kr": "그는 우리가 감사해야 하는 사람이에요."
+                  },
+                  {
+                    "word": "say",
+                    "en": "It's said that Christmas is the day on which Jesus was born.",
+                    "kr": "크리스마스는 예수가 태어난 날이라고 합니다."
                   }
-                ]
+                ],
+                "patternCount": 8
               }
             },
             {
@@ -9881,8 +11023,14 @@
                     "word": "gratitude",
                     "en": "He's the one to whom we owe our gratitude.",
                     "kr": "그는 우리가 감사해야 하는 사람이에요."
+                  },
+                  {
+                    "word": "say",
+                    "en": "It's said that Christmas is the day on which Jesus was born.",
+                    "kr": "크리스마스는 예수가 태어난 날이라고 합니다."
                   }
-                ]
+                ],
+                "patternCount": 8
               }
             },
             {
@@ -9920,8 +11068,14 @@
                     "word": "song",
                     "en": "She's the one for whom the song was written.",
                     "kr": "그녀는 그 노래가 쓰여진 이유가 되는 사람이에요."
+                  },
+                  {
+                    "word": "say",
+                    "en": "It's said that Christmas is the day on which Jesus was born.",
+                    "kr": "크리스마스는 예수가 태어난 날이라고 합니다."
                   }
-                ]
+                ],
+                "patternCount": 8
               }
             },
             {
@@ -9960,8 +11114,14 @@
                     "word": "song",
                     "en": "She's the one for whom the song was written.",
                     "kr": "그녀는 그 노래가 쓰여진 이유가 되는 사람이에요."
+                  },
+                  {
+                    "word": "gratitude",
+                    "en": "He's the one to whom we owe our gratitude.",
+                    "kr": "그는 우리가 감사해야 하는 사람이에요."
                   }
-                ]
+                ],
+                "patternCount": 8
               }
             }
           ]
@@ -10007,8 +11167,14 @@
                     "word": "see",
                     "en": "Did you see who did this?",
                     "kr": "너는 누가 이걸 했는지 봤어?"
+                  },
+                  {
+                    "word": "say",
+                    "en": "Did she say when she's arriving?",
+                    "kr": "그녀가 언제 도착하는지 말했나요?"
                   }
-                ]
+                ],
+                "patternCount": 8
               }
             },
             {
@@ -10046,8 +11212,14 @@
                     "word": "see",
                     "en": "Did you see who did this?",
                     "kr": "너는 누가 이걸 했는지 봤어?"
+                  },
+                  {
+                    "word": "say",
+                    "en": "Did she say when she's arriving?",
+                    "kr": "그녀가 언제 도착하는지 말했나요?"
                   }
-                ]
+                ],
+                "patternCount": 8
               }
             },
             {
@@ -10086,8 +11258,14 @@
                     "word": "see",
                     "en": "Did you see who did this?",
                     "kr": "너는 누가 이걸 했는지 봤어?"
+                  },
+                  {
+                    "word": "say",
+                    "en": "Did she say when she's arriving?",
+                    "kr": "그녀가 언제 도착하는지 말했나요?"
                   }
-                ]
+                ],
+                "patternCount": 8
               }
             },
             {
@@ -10125,8 +11303,14 @@
                     "word": "know",
                     "en": "Do you know who helped her?",
                     "kr": "당신은 누가 그녀를 도와줬는지 아시나요?"
+                  },
+                  {
+                    "word": "say",
+                    "en": "Did she say when she's arriving?",
+                    "kr": "그녀가 언제 도착하는지 말했나요?"
                   }
-                ]
+                ],
+                "patternCount": 8
               }
             },
             {
@@ -10165,8 +11349,14 @@
                     "word": "know",
                     "en": "Do you know who helped her?",
                     "kr": "당신은 누가 그녀를 도와줬는지 아시나요?"
+                  },
+                  {
+                    "word": "see",
+                    "en": "Did you see who did this?",
+                    "kr": "너는 누가 이걸 했는지 봤어?"
                   }
-                ]
+                ],
+                "patternCount": 8
               }
             }
           ]
@@ -10214,8 +11404,14 @@
                     "word": "optimism",
                     "en": "It's her optimism that I love the most.",
                     "kr": "내가 가장 사랑하는 것은 바로 그녀의 낙관주의야."
+                  },
+                  {
+                    "word": "song",
+                    "en": "It was in this house that the Beatles wrote their early songs.",
+                    "kr": "비틀스가 자신들의 초기 곡을 만든 것은 바로 이 집에서야."
                   }
-                ]
+                ],
+                "patternCount": 15
               }
             },
             {
@@ -10253,8 +11449,14 @@
                     "word": "optimism",
                     "en": "It's her optimism that I love the most.",
                     "kr": "내가 가장 사랑하는 것은 바로 그녀의 낙관주의야."
+                  },
+                  {
+                    "word": "song",
+                    "en": "It was in this house that the Beatles wrote their early songs.",
+                    "kr": "비틀스가 자신들의 초기 곡을 만든 것은 바로 이 집에서야."
                   }
-                ]
+                ],
+                "patternCount": 15
               }
             },
             {
@@ -10292,8 +11494,14 @@
                     "word": "optimism",
                     "en": "It's her optimism that I love the most.",
                     "kr": "내가 가장 사랑하는 것은 바로 그녀의 낙관주의야."
+                  },
+                  {
+                    "word": "song",
+                    "en": "It was in this house that the Beatles wrote their early songs.",
+                    "kr": "비틀스가 자신들의 초기 곡을 만든 것은 바로 이 집에서야."
                   }
-                ]
+                ],
+                "patternCount": 15
               }
             },
             {
@@ -10332,8 +11540,14 @@
                     "word": "temper",
                     "en": "It's his temper that makes him hard to work with.",
                     "kr": "그를 함께 일하기 어렵게 만드는 것은 바로 그의 성질입니다."
+                  },
+                  {
+                    "word": "song",
+                    "en": "It was in this house that the Beatles wrote their early songs.",
+                    "kr": "비틀스가 자신들의 초기 곡을 만든 것은 바로 이 집에서야."
                   }
-                ]
+                ],
+                "patternCount": 15
               }
             },
             {
@@ -10371,8 +11585,14 @@
                     "word": "temper",
                     "en": "It's his temper that makes him hard to work with.",
                     "kr": "그를 함께 일하기 어렵게 만드는 것은 바로 그의 성질입니다."
+                  },
+                  {
+                    "word": "optimism",
+                    "en": "It's her optimism that I love the most.",
+                    "kr": "내가 가장 사랑하는 것은 바로 그녀의 낙관주의야."
                   }
-                ]
+                ],
+                "patternCount": 15
               }
             }
           ]
@@ -10402,7 +11622,8 @@
                 "trigger": "jog",
                 "pattern_kr": "so that ~ (목적)",
                 "big": "so that ~, so ~ that",
-                "siblings": []
+                "siblings": [],
+                "patternCount": 1
               }
             },
             {
@@ -10440,8 +11661,14 @@
                     "word": "stuff",
                     "en": "Let's go by car so that we can take more stuff.",
                     "kr": "우리가 더 많은 물건을 가져갈 수 있도록 차를 타고 갑시다."
+                  },
+                  {
+                    "word": "Columbia",
+                    "en": "I studied hard so that I could get into Columbia.",
+                    "kr": "나는 컬럼비아대에 들어갈 수 있기 위해 열심히 공부했어."
                   }
-                ]
+                ],
+                "patternCount": 8
               }
             },
             {
@@ -10480,8 +11707,14 @@
                     "word": "stuff",
                     "en": "Let's go by car so that we can take more stuff.",
                     "kr": "우리가 더 많은 물건을 가져갈 수 있도록 차를 타고 갑시다."
+                  },
+                  {
+                    "word": "Columbia",
+                    "en": "I studied hard so that I could get into Columbia.",
+                    "kr": "나는 컬럼비아대에 들어갈 수 있기 위해 열심히 공부했어."
                   }
-                ]
+                ],
+                "patternCount": 8
               }
             },
             {
@@ -10520,8 +11753,14 @@
                     "word": "stuff",
                     "en": "Let's go by car so that we can take more stuff.",
                     "kr": "우리가 더 많은 물건을 가져갈 수 있도록 차를 타고 갑시다."
+                  },
+                  {
+                    "word": "Columbia",
+                    "en": "I studied hard so that I could get into Columbia.",
+                    "kr": "나는 컬럼비아대에 들어갈 수 있기 위해 열심히 공부했어."
                   }
-                ]
+                ],
+                "patternCount": 8
               }
             },
             {
@@ -10559,8 +11798,14 @@
                     "word": "send",
                     "en": "I'll send it today so that you get it by Friday.",
                     "kr": "당신이 금요일까지 그걸 받도록 제가 그걸 오늘 보낼게요."
+                  },
+                  {
+                    "word": "Columbia",
+                    "en": "I studied hard so that I could get into Columbia.",
+                    "kr": "나는 컬럼비아대에 들어갈 수 있기 위해 열심히 공부했어."
                   }
-                ]
+                ],
+                "patternCount": 8
               }
             }
           ]
@@ -10602,7 +11847,8 @@
                     "en": "He's gone back to Paris for good.",
                     "kr": "그는 파리로 영원히 돌아갔다."
                   }
-                ]
+                ],
+                "patternCount": 3
               }
             },
             {
@@ -10636,7 +11882,8 @@
                     "en": "He's gone back to Paris for good.",
                     "kr": "그는 파리로 영원히 돌아갔다."
                   }
-                ]
+                ],
+                "patternCount": 3
               }
             },
             {
@@ -10672,7 +11919,8 @@
                     "en": "She's lived in Chicago for five years.",
                     "kr": "그녀는 시카고에서 5년 동안 살아왔다."
                   }
-                ]
+                ],
+                "patternCount": 3
               }
             },
             {
@@ -10711,8 +11959,14 @@
                     "word": "talk",
                     "en": "I haven't talked to her about it.",
                     "kr": "나는 그것에 대해 그녀와 이야기하지 않았어."
+                  },
+                  {
+                    "word": "watch",
+                    "en": "I haven't watched any of them yet.",
+                    "kr": "나는 그것들 중 아무것도 아직 보지 않았어."
                   }
-                ]
+                ],
+                "patternCount": 6
               }
             },
             {
@@ -10751,8 +12005,14 @@
                     "word": "talk",
                     "en": "I haven't talked to her about it.",
                     "kr": "나는 그것에 대해 그녀와 이야기하지 않았어."
+                  },
+                  {
+                    "word": "watch",
+                    "en": "I haven't watched any of them yet.",
+                    "kr": "나는 그것들 중 아무것도 아직 보지 않았어."
                   }
-                ]
+                ],
+                "patternCount": 6
               }
             }
           ]
@@ -10797,8 +12057,14 @@
                     "word": "English",
                     "en": "I've been studying English for three years.",
                     "kr": "저는 3년 동안 영어를 공부해 왔습니다."
+                  },
+                  {
+                    "word": "TV",
+                    "en": "You've been watching TV a lot lately.",
+                    "kr": "너 요즘 TV를 많이 보고 있어."
                   }
-                ]
+                ],
+                "patternCount": 14
               }
             },
             {
@@ -10836,8 +12102,14 @@
                     "word": "English",
                     "en": "I've been studying English for three years.",
                     "kr": "저는 3년 동안 영어를 공부해 왔습니다."
+                  },
+                  {
+                    "word": "TV",
+                    "en": "You've been watching TV a lot lately.",
+                    "kr": "너 요즘 TV를 많이 보고 있어."
                   }
-                ]
+                ],
+                "patternCount": 14
               }
             },
             {
@@ -10875,8 +12147,14 @@
                     "word": "English",
                     "en": "I've been studying English for three years.",
                     "kr": "저는 3년 동안 영어를 공부해 왔습니다."
+                  },
+                  {
+                    "word": "TV",
+                    "en": "You've been watching TV a lot lately.",
+                    "kr": "너 요즘 TV를 많이 보고 있어."
                   }
-                ]
+                ],
+                "patternCount": 14
               }
             },
             {
@@ -10914,8 +12192,14 @@
                     "word": "English",
                     "en": "I've been studying English for three years.",
                     "kr": "저는 3년 동안 영어를 공부해 왔습니다."
+                  },
+                  {
+                    "word": "TV",
+                    "en": "You've been watching TV a lot lately.",
+                    "kr": "너 요즘 TV를 많이 보고 있어."
                   }
-                ]
+                ],
+                "patternCount": 14
               }
             },
             {
@@ -10954,8 +12238,14 @@
                     "word": "English",
                     "en": "I've been studying English for three years.",
                     "kr": "저는 3년 동안 영어를 공부해 왔습니다."
+                  },
+                  {
+                    "word": "TV",
+                    "en": "You've been watching TV a lot lately.",
+                    "kr": "너 요즘 TV를 많이 보고 있어."
                   }
-                ]
+                ],
+                "patternCount": 14
               }
             }
           ]
@@ -11001,8 +12291,14 @@
                     "word": "tax",
                     "en": "Does he plan to raise taxes on the wealthy?",
                     "kr": "그는 부유층에 대한 세금을 인상할 계획인가요?"
+                  },
+                  {
+                    "word": "food",
+                    "en": "We serve food to the homeless twice a month.",
+                    "kr": "우리는 한 달에 두 번 노숙자들에게 음식을 제공합니다."
                   }
-                ]
+                ],
+                "patternCount": 7
               }
             },
             {
@@ -11041,8 +12337,14 @@
                     "word": "tax",
                     "en": "Does he plan to raise taxes on the wealthy?",
                     "kr": "그는 부유층에 대한 세금을 인상할 계획인가요?"
+                  },
+                  {
+                    "word": "food",
+                    "en": "We serve food to the homeless twice a month.",
+                    "kr": "우리는 한 달에 두 번 노숙자들에게 음식을 제공합니다."
                   }
-                ]
+                ],
+                "patternCount": 7
               }
             },
             {
@@ -11080,8 +12382,14 @@
                     "word": "tax",
                     "en": "Does he plan to raise taxes on the wealthy?",
                     "kr": "그는 부유층에 대한 세금을 인상할 계획인가요?"
+                  },
+                  {
+                    "word": "food",
+                    "en": "We serve food to the homeless twice a month.",
+                    "kr": "우리는 한 달에 두 번 노숙자들에게 음식을 제공합니다."
                   }
-                ]
+                ],
+                "patternCount": 7
               }
             },
             {
@@ -11119,8 +12427,14 @@
                     "word": "hospital",
                     "en": "They transported the injured to the nearest hospital.",
                     "kr": "그들은 부상자들을 가장 가까운 병원으로 수송했다."
+                  },
+                  {
+                    "word": "food",
+                    "en": "We serve food to the homeless twice a month.",
+                    "kr": "우리는 한 달에 두 번 노숙자들에게 음식을 제공합니다."
                   }
-                ]
+                ],
+                "patternCount": 7
               }
             },
             {
@@ -11158,8 +12472,14 @@
                     "word": "hospital",
                     "en": "They transported the injured to the nearest hospital.",
                     "kr": "그들은 부상자들을 가장 가까운 병원으로 수송했다."
+                  },
+                  {
+                    "word": "tax",
+                    "en": "Does he plan to raise taxes on the wealthy?",
+                    "kr": "그는 부유층에 대한 세금을 인상할 계획인가요?"
                   }
-                ]
+                ],
+                "patternCount": 7
               }
             }
           ]
@@ -11204,8 +12524,14 @@
                     "word": "wallet",
                     "en": "If I had my wallet on me right now, I'd definitely buy this.",
                     "kr": "지금 당장 나한테 지갑이 있다면, 이걸 꼭 살 텐데."
+                  },
+                  {
+                    "word": "cake",
+                    "en": "If I knew how to bake, I'd bake you a birthday cake.",
+                    "kr": "내가 (빵) 굽는 법을 안다면 너에게 생일 케이크를 만들어 줄 텐데."
                   }
-                ]
+                ],
+                "patternCount": 7
               }
             },
             {
@@ -11243,8 +12569,14 @@
                     "word": "wallet",
                     "en": "If I had my wallet on me right now, I'd definitely buy this.",
                     "kr": "지금 당장 나한테 지갑이 있다면, 이걸 꼭 살 텐데."
+                  },
+                  {
+                    "word": "cake",
+                    "en": "If I knew how to bake, I'd bake you a birthday cake.",
+                    "kr": "내가 (빵) 굽는 법을 안다면 너에게 생일 케이크를 만들어 줄 텐데."
                   }
-                ]
+                ],
+                "patternCount": 7
               }
             },
             {
@@ -11282,8 +12614,14 @@
                     "word": "wallet",
                     "en": "If I had my wallet on me right now, I'd definitely buy this.",
                     "kr": "지금 당장 나한테 지갑이 있다면, 이걸 꼭 살 텐데."
+                  },
+                  {
+                    "word": "cake",
+                    "en": "If I knew how to bake, I'd bake you a birthday cake.",
+                    "kr": "내가 (빵) 굽는 법을 안다면 너에게 생일 케이크를 만들어 줄 텐데."
                   }
-                ]
+                ],
+                "patternCount": 7
               }
             },
             {
@@ -11321,8 +12659,14 @@
                     "word": "number",
                     "en": "If I knew her phone number, I would call her.",
                     "kr": "만약 내가 그녀의 전화번호를 안다면, 그녀에게 전화할 텐데."
+                  },
+                  {
+                    "word": "cake",
+                    "en": "If I knew how to bake, I'd bake you a birthday cake.",
+                    "kr": "내가 (빵) 굽는 법을 안다면 너에게 생일 케이크를 만들어 줄 텐데."
                   }
-                ]
+                ],
+                "patternCount": 7
               }
             },
             {
@@ -11361,8 +12705,14 @@
                     "word": "number",
                     "en": "If I knew her phone number, I would call her.",
                     "kr": "만약 내가 그녀의 전화번호를 안다면, 그녀에게 전화할 텐데."
+                  },
+                  {
+                    "word": "wallet",
+                    "en": "If I had my wallet on me right now, I'd definitely buy this.",
+                    "kr": "지금 당장 나한테 지갑이 있다면, 이걸 꼭 살 텐데."
                   }
-                ]
+                ],
+                "patternCount": 7
               }
             }
           ]
@@ -11408,8 +12758,14 @@
                     "word": "concert",
                     "en": "If I hadn't gone to the concert, I would have regretted it.",
                     "kr": "그 콘서트에 가지 않았다면 나는 후회했을 거야."
+                  },
+                  {
+                    "word": "party",
+                    "en": "If you hadn't come to the party, we would never have met.",
+                    "kr": "네가 그 파티에 오지 않았더라면, 우리는 결코 만나지 못했을 거야."
                   }
-                ]
+                ],
+                "patternCount": 9
               }
             },
             {
@@ -11447,8 +12803,14 @@
                     "word": "concert",
                     "en": "If I hadn't gone to the concert, I would have regretted it.",
                     "kr": "그 콘서트에 가지 않았다면 나는 후회했을 거야."
+                  },
+                  {
+                    "word": "party",
+                    "en": "If you hadn't come to the party, we would never have met.",
+                    "kr": "네가 그 파티에 오지 않았더라면, 우리는 결코 만나지 못했을 거야."
                   }
-                ]
+                ],
+                "patternCount": 9
               }
             },
             {
@@ -11487,8 +12849,14 @@
                     "word": "concert",
                     "en": "If I hadn't gone to the concert, I would have regretted it.",
                     "kr": "그 콘서트에 가지 않았다면 나는 후회했을 거야."
+                  },
+                  {
+                    "word": "party",
+                    "en": "If you hadn't come to the party, we would never have met.",
+                    "kr": "네가 그 파티에 오지 않았더라면, 우리는 결코 만나지 못했을 거야."
                   }
-                ]
+                ],
+                "patternCount": 9
               }
             },
             {
@@ -11527,8 +12895,14 @@
                     "word": "go",
                     "en": "I would have gone if it hadn't been so cold.",
                     "kr": "그렇게 춥지 않았더라면 나는 갔을 텐데."
+                  },
+                  {
+                    "word": "party",
+                    "en": "If you hadn't come to the party, we would never have met.",
+                    "kr": "네가 그 파티에 오지 않았더라면, 우리는 결코 만나지 못했을 거야."
                   }
-                ]
+                ],
+                "patternCount": 9
               }
             },
             {
@@ -11566,8 +12940,14 @@
                     "word": "go",
                     "en": "I would have gone if it hadn't been so cold.",
                     "kr": "그렇게 춥지 않았더라면 나는 갔을 텐데."
+                  },
+                  {
+                    "word": "concert",
+                    "en": "If I hadn't gone to the concert, I would have regretted it.",
+                    "kr": "그 콘서트에 가지 않았다면 나는 후회했을 거야."
                   }
-                ]
+                ],
+                "patternCount": 9
               }
             }
           ]
@@ -11613,8 +12993,14 @@
                     "word": "dinner",
                     "en": "Were James here, he would eat dinner with us.",
                     "kr": "제임스가 여기 있다면 우리와 함께 저녁을 먹을 텐데."
+                  },
+                  {
+                    "word": "people",
+                    "en": "Were I that rich, I would use my money to help people.",
+                    "kr": "내가 그렇게 부유하다면, 나는 내 돈을 사람들을 돕기 위해 쓸 텐데."
                   }
-                ]
+                ],
+                "patternCount": 6
               }
             },
             {
@@ -11652,8 +13038,14 @@
                     "word": "dinner",
                     "en": "Were James here, he would eat dinner with us.",
                     "kr": "제임스가 여기 있다면 우리와 함께 저녁을 먹을 텐데."
+                  },
+                  {
+                    "word": "people",
+                    "en": "Were I that rich, I would use my money to help people.",
+                    "kr": "내가 그렇게 부유하다면, 나는 내 돈을 사람들을 돕기 위해 쓸 텐데."
                   }
-                ]
+                ],
+                "patternCount": 6
               }
             },
             {
@@ -11692,8 +13084,14 @@
                     "word": "dinner",
                     "en": "Were James here, he would eat dinner with us.",
                     "kr": "제임스가 여기 있다면 우리와 함께 저녁을 먹을 텐데."
+                  },
+                  {
+                    "word": "people",
+                    "en": "Were I that rich, I would use my money to help people.",
+                    "kr": "내가 그렇게 부유하다면, 나는 내 돈을 사람들을 돕기 위해 쓸 텐데."
                   }
-                ]
+                ],
+                "patternCount": 6
               }
             },
             {
@@ -11731,8 +13129,14 @@
                     "word": "know",
                     "en": "Were Rick here, he would know what to do.",
                     "kr": "릭이 여기 있다면 그는 무엇을 해야 할지 알 텐데."
+                  },
+                  {
+                    "word": "people",
+                    "en": "Were I that rich, I would use my money to help people.",
+                    "kr": "내가 그렇게 부유하다면, 나는 내 돈을 사람들을 돕기 위해 쓸 텐데."
                   }
-                ]
+                ],
+                "patternCount": 6
               }
             },
             {
@@ -11770,8 +13174,14 @@
                     "word": "know",
                     "en": "Were Rick here, he would know what to do.",
                     "kr": "릭이 여기 있다면 그는 무엇을 해야 할지 알 텐데."
+                  },
+                  {
+                    "word": "dinner",
+                    "en": "Were James here, he would eat dinner with us.",
+                    "kr": "제임스가 여기 있다면 우리와 함께 저녁을 먹을 텐데."
                   }
-                ]
+                ],
+                "patternCount": 6
               }
             }
           ]
@@ -11816,8 +13226,14 @@
                     "word": "bus",
                     "en": "Had I woken up earlier, I wouldn't have missed the bus.",
                     "kr": "내가 좀 더 일찍 일어났더라면, 나는 버스를 놓치지 않았을 텐데."
+                  },
+                  {
+                    "word": "flight",
+                    "en": "Had I not set two alarms, I would have missed my flight.",
+                    "kr": "내가 알람을 두 개 맞춰두지 않았더라면, 나는 비행기를 놓쳤을 거야."
                   }
-                ]
+                ],
+                "patternCount": 10
               }
             },
             {
@@ -11855,8 +13271,14 @@
                     "word": "bus",
                     "en": "Had I woken up earlier, I wouldn't have missed the bus.",
                     "kr": "내가 좀 더 일찍 일어났더라면, 나는 버스를 놓치지 않았을 텐데."
+                  },
+                  {
+                    "word": "flight",
+                    "en": "Had I not set two alarms, I would have missed my flight.",
+                    "kr": "내가 알람을 두 개 맞춰두지 않았더라면, 나는 비행기를 놓쳤을 거야."
                   }
-                ]
+                ],
+                "patternCount": 10
               }
             },
             {
@@ -11894,8 +13316,14 @@
                     "word": "bus",
                     "en": "Had I woken up earlier, I wouldn't have missed the bus.",
                     "kr": "내가 좀 더 일찍 일어났더라면, 나는 버스를 놓치지 않았을 텐데."
+                  },
+                  {
+                    "word": "flight",
+                    "en": "Had I not set two alarms, I would have missed my flight.",
+                    "kr": "내가 알람을 두 개 맞춰두지 않았더라면, 나는 비행기를 놓쳤을 거야."
                   }
-                ]
+                ],
+                "patternCount": 10
               }
             },
             {
@@ -11933,8 +13361,14 @@
                     "word": "class",
                     "en": "I suggested that she take a baking class.",
                     "kr": "나는 그녀가 제빵 수업을 들어야 한다고 제안했다."
+                  },
+                  {
+                    "word": "important",
+                    "en": "It's important that each member get to speak.",
+                    "kr": "구성원 각자가 말할 기회를 갖는 것이 중요합니다."
                   }
-                ]
+                ],
+                "patternCount": 16
               }
             },
             {
@@ -11972,8 +13406,14 @@
                     "word": "class",
                     "en": "I suggested that she take a baking class.",
                     "kr": "나는 그녀가 제빵 수업을 들어야 한다고 제안했다."
+                  },
+                  {
+                    "word": "important",
+                    "en": "It's important that each member get to speak.",
+                    "kr": "구성원 각자가 말할 기회를 갖는 것이 중요합니다."
                   }
-                ]
+                ],
+                "patternCount": 16
               }
             }
           ]

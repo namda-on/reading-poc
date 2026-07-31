@@ -98,19 +98,28 @@
   .vbtn.b2 { background:linear-gradient(#9b8cf0,#7d6cf0); }
   .vbtn.b3 { background:linear-gradient(#6f8ef0,#5b6ef0); }
 
-  /* 배열 — 패턴 힌트(짧게: 뭘 배우는지만) */
-  .trigger-box { background:#d8ccf7; border-radius:14px; padding:11px 14px; margin:14px 0 4px; font-size:15px; color:#4a3b73; line-height:1.45; display:flex; gap:8px; align-items:center; }
-  .trigger-box .ic { font-size:16px; flex-shrink:0; }
-  .trigger-box b { color:var(--purple-d); font-weight:800; }
+  /* 배열 전 — 이번에 배울 것(무엇 + 얼마나 쓸모있나) */
+  .learn-box { background:#e2d7f8; border-radius:14px; padding:12px 14px; margin:14px 0 4px; }
+  .learn-label { font-size:11.5px; font-weight:800; color:#8878b3; }
+  .learn-pat { font-size:18.5px; font-weight:800; color:var(--purple-d); margin-top:3px; line-height:1.35; }
+  .learn-meta { display:flex; flex-wrap:wrap; align-items:center; gap:6px; margin-top:10px; }
+  .sit-chip { background:#fff; color:#6b5aa8; font-size:11px; font-weight:800; border-radius:999px; padding:3px 10px; }
+  .use-count { font-size:12.5px; font-weight:700; color:#7a6aa8; }
+  .use-count b { color:var(--purple-d); font-weight:800; }
 
-  /* 배열 정답 후 — 어휘 → 표현 연결 카드 */
-  .conn { background:#eefaf2; border:1px solid #c6ecd5; border-radius:14px; padding:12px 14px; margin:14px 0 4px; }
-  .conn-head { font-size:13.5px; color:#3f6b50; margin-bottom:9px; }
-  .conn-head b { color:#22794a; font-weight:800; }
-  .conn-body { display:flex; align-items:center; gap:9px; flex-wrap:wrap; }
-  .conn-chip { background:#cdefd8; color:#22794a; font-weight:800; font-size:16px; border-radius:9px; padding:5px 12px; }
-  .conn-arrow { color:#7bbd96; font-size:16px; font-weight:800; }
-  .conn-pat { color:var(--purple-d); font-weight:800; font-size:15.5px; }
+  /* 배열 정답 후 — 재사용 프레임 공개 + 응용 예문(효용 체감) */
+  .payoff { background:#eefaf2; border:1px solid #c6ecd5; border-radius:14px; padding:12px 14px; margin-top:16px; }
+  .payoff-top { font-size:13.5px; font-weight:800; color:#2f7d51; margin-bottom:9px; }
+  .frame { background:#fff; border:1.5px dashed #a8dcbd; border-radius:11px; padding:11px 12px; text-align:center; }
+  .frame-en { font-size:18.5px; font-weight:800; color:#22794a; line-height:1.4; }
+  .frame-en .slot { display:inline-block; min-width:38px; border-bottom:2.5px solid #7bbd96; }
+  .frame-kr { font-size:12.5px; color:#7d9a8b; margin-top:4px; }
+  .swap-label { font-size:12.5px; font-weight:700; color:#3f6b50; margin:12px 0 2px; }
+  .swap-label b { color:#22794a; font-weight:800; }
+  .swap-ex { background:#fff; border-radius:9px; padding:9px 12px; margin-top:7px; }
+  .swap-en { font-size:15px; font-weight:700; color:#2f3e52; line-height:1.4; }
+  .swap-en .sw { color:var(--green); font-weight:800; }
+  .swap-kr { font-size:12px; color:#8c9aab; margin-top:3px; }
 
   /* 배열 — 인라인 문장 채우기 */
   .fill { position:relative; display:flex; flex-wrap:wrap; align-items:center; gap:7px 8px; margin-top:16px; min-height:44px; }
@@ -382,21 +391,55 @@ function isTriggerToken(tok, trigger){
   return parts.some(a=> trigs.some(b=> matchStem(a,b)));
 }
 
-// 배열 전 힌트: 뭘 배우는지(패턴 뜻)만 짧게. 어휘 연결은 초록 칩 강조가 담당한다.
-function patternHintHtml(item){
-  const s=item.sentence, txt=((s.pattern_kr||'').trim() || (s.pattern_en||'').trim());
-  if(!txt) return `<div class="trigger-box"><span class="ic">💡</span><span>초록색 단어를 넣어 문장을 완성해요</span></div>`;
-  const body = curMode==='grammar' ? `<b>${escapeHtml(txt)}</b> 문법` : `<b>${escapeHtml(txt)}</b>`;
-  return `<div class="trigger-box"><span class="ic">💡</span><span>${body}</span></div>`;
+// 문장 안에서 해당 단어(굴절형 포함)만 초록 강조 — 문장부호는 강조 밖으로 뺀다
+function hlWord(sent, word){
+  return String(sent).split(/(\s+)/).map(t=>{
+    if(/^\s*$/.test(t)) return t;
+    if(!isTriggerToken(t, word)) return escapeHtml(t);
+    const m=t.match(/^([^A-Za-z0-9']*)(.*?)([^A-Za-z0-9']*)$/);
+    return escapeHtml(m[1])+`<span class="sw">${escapeHtml(m[2])}</span>`+escapeHtml(m[3]);
+  }).join('');
 }
-// 정답 후: 방금 배운 어휘가 어떤 표현을 만들어냈는지 생산 관계로 보여준다.
-function connectionHtml(item){
-  const s=item.sentence, w=escapeHtml(item.word);
-  const pat=((s.pattern_kr||'').trim() || (s.pattern_en||'').trim());
-  const patTxt = pat ? (curMode==='grammar' ? `${escapeHtml(pat)} 문법` : escapeHtml(pat)) : '새로운 표현';
-  return `<div class="conn">
-      <div class="conn-head">🔑 방금 배운 <b>${w}</b>, 이렇게 써먹었어요</div>
-      <div class="conn-body"><span class="conn-chip">${w}</span><span class="conn-arrow">→</span><span class="conn-pat">${patTxt}</span></div>
+
+// 배열 전: 이번에 뭘 배우는지 + 그게 얼마나 쓸모있는지(상황·활용 규모)를 한눈에.
+// 영어 프레임(pattern_en)은 정답 순서가 새므로 여기서 노출하지 않는다.
+const SITUATION={D:'💬 일상', T:'🧳 여행', B:'💼 비즈니스'};
+function learnBoxHtml(item){
+  const s=item.sentence, isG=curMode==='grammar';
+  const pat=(s.pattern_kr||'').trim();   // 한국어 뜻만 (영어 틀은 정답이 새므로 제외)
+  if(!pat) return `<div class="learn-box"><div class="learn-pat">초록색 단어를 넣어 문장을 완성해요</div></div>`;
+  const n=s.patternCount||0;
+  const chips = isG ? '' : String(s.category||'').split('').filter(c=>SITUATION[c]).map(c=>`<span class="sit-chip">${SITUATION[c]}</span>`).join('');
+  const count = n>=3 ? `<span class="use-count">${isG?`이 문법으로 <b>${n}개 문장</b>`:`단어만 바꿔 <b>${n}가지</b>`}</span>` : '';
+  const meta = (chips||count) ? `<div class="learn-meta">${chips}${count}</div>` : '';
+  return `<div class="learn-box">
+      <div class="learn-label">이번에 배울 ${isG?'문법':'표현'}</div>
+      <div class="learn-pat">${escapeHtml(pat)}</div>${meta}
+    </div>`;
+}
+
+// 정답 후: 숨겨뒀던 '재사용 프레임'을 공개하고, 단어만 바꾼 실제 예문으로
+// "이제 이런 말도 할 수 있다"는 효용을 눈으로 확인시킨다.
+function patternPayoffHtml(item){
+  const s=item.sentence, isG=curMode==='grammar';
+  const patEn=(s.pattern_en||'').trim(), patKr=(s.pattern_kr||'').trim();
+  const sibs=(s.siblings||[]).slice(0,2), n=s.patternCount||0;
+  if(!patEn && !patKr && !sibs.length) return '';
+  let frame='';
+  if(!isG && patEn){
+    frame=`<div class="frame"><div class="frame-en">${escapeHtml(patEn).replace(/~/g,'<span class="slot"></span>')}</div>${patKr?`<div class="frame-kr">${escapeHtml(patKr)}</div>`:''}</div>`;
+  } else if(patKr){
+    frame=`<div class="frame"><div class="frame-en">${escapeHtml(patKr)}</div></div>`;
+  }
+  const exs=sibs.map(x=>
+    `<div class="swap-ex"><div class="swap-en">${hlWord(x.en, x.word)}</div><div class="swap-kr">${escapeHtml(x.kr)}</div></div>`).join('');
+  const label = sibs.length
+    ? `<div class="swap-label">${ n>=3
+        ? (isG ? `이 문법으로 <b>${n}개 문장</b>을 만들 수 있어요` : `단어만 바꾸면 <b>${n}가지</b>로 말할 수 있어요`)
+        : '단어만 바꿔 이렇게도 말해요' }</div>` : '';
+  return `<div class="payoff">
+      <div class="payoff-top">🎉 이제 이 ${isG?'문법':'표현'}을 쓸 수 있어요</div>
+      ${frame}${label}${exs}
     </div>`;
 }
 
@@ -415,9 +458,10 @@ function renderArrange(){
       <div class="chat-card" id="card">
         ${chatTag()}<div class="chat-badge new">New</div>
         <div class="chat-ko">${escapeHtml(s.kr)}</div>
-        <div id="patBox">${patternHintHtml(item)}</div>
+        <div id="patBox">${learnBoxHtml(item)}</div>
         <div class="fill" id="fill"></div>
-        <div class="mic-float">🎤</div>
+        <div id="payoffBox"></div>
+        <div class="mic-float" id="micFloat">🎤</div>
       </div>
     </div>
     <div class="stage-bottom" id="bottom">
@@ -480,10 +524,11 @@ function renderArrange(){
     done=true;
     el('card').classList.add('correct');
     if(!el('card').querySelector('.check-mark')){ const c=document.createElement('div'); c.className='check-mark'; c.textContent='✓'; el('card').appendChild(c); }
-    // 배열 전 '패턴 힌트' 자리를 '어휘 → 표현 연결'로 교체 — 배운 걸 써먹었음을 같은 자리에서 확인
-    el('patBox').innerHTML=connectionHtml(item);
-    // 정답 문장을 원문 대소문자로 복원 표시(트리거 초록)
+    // 완성 문장(트리거 초록) → 그 아래 프레임·응용 예문 순서로 보여준다
+    el('patBox').innerHTML='';
+    el('micFloat').classList.add('hidden');
     fillEl.innerHTML=`<div style="font-size:19px;font-weight:800;color:#2f3e52;line-height:1.5">${hlTrigger(s.en, s.trigger)}</div>`;
+    el('payoffBox').innerHTML=patternPayoffHtml(item);
     const last=itemIdx>=curLevel.items.length-1;
     el('bottom').innerHTML=`<button class="btn-next" id="nextBtn">${last?'완료하기 🎉':'다음 문제 ▶'}</button>`;
     el('nextBtn').onclick=()=>{ learned.push(item); if(last) renderDone(); else { itemIdx++; renderVocab(); } };

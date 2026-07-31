@@ -230,12 +230,14 @@ def build_mode(csv_path, kind, vocab_by_seq, cefr_by_seq):
         bucket["items"].append(item)
         all_items.append(item)
 
-    # 같은 패턴의 다른 예문(en+kr)을 최대 3개 붙인다(자기 자신 제외) — 응용 예문
+    # 같은 패턴의 다른 예문(en+kr) + 패턴 전체 규모(활용도 표시용)
     for it in all_items:
         s = it["sentence"]
         pk = s.pop("_pk", "")
-        sibs = [x for x in pattern_fillers.get(pk, []) if x["word"].lower() != s["trigger"].lower()]
-        s["siblings"] = sibs[:3]
+        group = pattern_fillers.get(pk, [])
+        sibs = [x for x in group if x["word"].lower() != s["trigger"].lower()]
+        s["siblings"] = sibs[:4]
+        s["patternCount"] = len(group)   # 이 패턴으로 만들 수 있는 표현/문장 수
 
     out_levels = []
     for lv in sorted(levels):
