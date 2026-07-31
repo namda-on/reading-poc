@@ -77,10 +77,10 @@
   /* 옵션 스위치 */
   .opt-row { display:flex; align-items:center; justify-content:space-between; gap:10px; padding:7px 0; }
   .opt-row .rt { font-size:12.5px; font-weight:700; color:#3a567d; }
-  .sw { width:40px; height:23px; border-radius:999px; border:none; background:#cfd8e6; position:relative; cursor:pointer; flex-shrink:0; transition:background .18s; }
-  .sw::after { content:''; position:absolute; top:2.5px; left:2.5px; width:18px; height:18px; border-radius:50%; background:#fff; transition:left .18s; }
-  .sw.on { background:#46b366; }
-  .sw.on::after { left:19px; }
+  .opt-sw { width:40px; height:23px; border-radius:999px; border:none; background:#cfd8e6; position:relative; cursor:pointer; flex-shrink:0; transition:background .18s; }
+  .opt-sw::after { content:''; position:absolute; top:2.5px; left:2.5px; width:18px; height:18px; border-radius:50%; background:#fff; transition:left .18s; }
+  .opt-sw.on { background:#46b366; }
+  .opt-sw.on::after { left:19px; }
   .opt-div { height:1px; background:#e4ebf4; margin:9px 0 4px; }
 
   /* 세션 */
@@ -346,9 +346,9 @@ function renderOptions(){
     box.innerHTML=`<div class="opt-label">트리거 어휘 칩 라벨</div>${segHtml()}
       <div class="opt-div"></div>
       <div class="opt-label">어휘 → 표현 연결</div>
-      ${OPT_ROWS.map(([k,t])=>`<div class="opt-row"><span class="rt">${t}</span><button class="sw${OPTS[k]?' on':''}" data-k="${k}" aria-label="${t}"></button></div>`).join('')}`;
+      ${OPT_ROWS.map(([k,t])=>`<div class="opt-row"><span class="rt">${t}</span><button class="opt-sw${OPTS[k]?' on':''}" data-k="${k}" aria-label="${t}"></button></div>`).join('')}`;
     box.querySelectorAll('.seg-b').forEach(b=> b.onclick=()=>setChipLabelMode(b.dataset.m));
-    box.querySelectorAll('.sw').forEach(b=> b.onclick=()=>setOpt(b.dataset.k, !OPTS[b.dataset.k]));
+    box.querySelectorAll('.opt-sw').forEach(b=> b.onclick=()=>setOpt(b.dataset.k, !OPTS[b.dataset.k]));
   });
 }
 const renderChipOptions=renderOptions;   // 기존 호출부 호환
