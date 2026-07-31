@@ -98,26 +98,55 @@
   .vbtn.b2 { background:linear-gradient(#9b8cf0,#7d6cf0); }
   .vbtn.b3 { background:linear-gradient(#6f8ef0,#5b6ef0); }
 
-  /* 배열 — 보라 트리거 박스 */
-  .trigger-box { background:#d8ccf7; border-radius:14px; padding:12px 14px; margin:16px 0 4px; font-size:14.5px; color:#4a3b73; line-height:1.55; display:flex; gap:9px; align-items:flex-start; }
-  .trigger-box .ic { font-size:17px; line-height:1.4; flex-shrink:0; }
-  .trigger-box b { color:var(--purple-d); }
-  /* 배열 정답 후 개념 헤더 */
-  .concept-head { background:#d8ccf7; color:var(--purple-d); font-weight:800; font-size:15px; border-radius:12px; padding:9px 14px; margin-bottom:12px; display:flex; align-items:center; gap:7px; }
-  .concept-head .kr { color:#7a6aa8; font-weight:600; font-size:12.5px; }
+  /* 배열 — 패턴 힌트(짧게: 뭘 배우는지만) */
+  .trigger-box { background:#d8ccf7; border-radius:14px; padding:11px 14px; margin:14px 0 4px; font-size:15px; color:#4a3b73; line-height:1.45; display:flex; gap:8px; align-items:center; }
+  .trigger-box .ic { font-size:16px; flex-shrink:0; }
+  .trigger-box b { color:var(--purple-d); font-weight:800; }
+
+  /* 배열 정답 후 — 어휘 → 표현 연결 카드 */
+  .conn { background:#eefaf2; border:1px solid #c6ecd5; border-radius:14px; padding:12px 14px; margin:14px 0 4px; }
+  .conn-head { font-size:13.5px; color:#3f6b50; margin-bottom:9px; }
+  .conn-head b { color:#22794a; font-weight:800; }
+  .conn-body { display:flex; align-items:center; gap:9px; flex-wrap:wrap; }
+  .conn-chip { background:#cdefd8; color:#22794a; font-weight:800; font-size:16px; border-radius:9px; padding:5px 12px; }
+  .conn-arrow { color:#7bbd96; font-size:16px; font-weight:800; }
+  .conn-pat { color:var(--purple-d); font-weight:800; font-size:15.5px; }
 
   /* 배열 — 인라인 문장 채우기 */
-  .fill { display:flex; flex-wrap:wrap; align-items:center; gap:7px 8px; margin-top:16px; min-height:44px; }
+  .fill { position:relative; display:flex; flex-wrap:wrap; align-items:center; gap:7px 8px; margin-top:16px; min-height:44px; }
   .fill-word { background:#eaf1fb; border:1px solid #cdddf3; border-radius:9px; padding:6px 13px; font-size:17px; color:#2f3e52; cursor:pointer; }
-  .fill-word.tgt-w { color:var(--green); font-weight:800; }
+  .fill-word.trigger-w { background:#e3fbec; border-color:#8ed9ab; color:#22794a; font-weight:800; }
   .fill-blank { min-width:52px; border-bottom:2px solid #b9c7db; height:26px; }
   .fill-punct { font-size:18px; color:#2f3e52; font-weight:700; }
   .mic-float { align-self:flex-end; width:52px; height:52px; border-radius:50%; background:#fff; box-shadow:0 3px 10px rgba(30,60,110,.2); display:flex; align-items:center; justify-content:center; font-size:22px; margin:6px 2px 0 auto; color:#5b6ef0; }
 
+  /* 방금 배운 어휘를 '써먹는' 순간의 연출 (팝 + 링 반사 + 배지) */
+  .fill-word.just-used { animation:usedPop .5s ease; }
+  @keyframes usedPop { 0%{transform:scale(1);} 34%{transform:scale(1.16);} 100%{transform:scale(1);} }
+  .ring { position:absolute; border:2.5px solid #46b366; border-radius:11px; opacity:.8; pointer-events:none; animation:ringOut .62s ease-out forwards; }
+  @keyframes ringOut { to { transform:scale(1.85); opacity:0; } }
+  .used-badge { position:absolute; background:#46b366; color:#fff; font-size:11.5px; font-weight:800; padding:3px 10px; border-radius:9px; white-space:nowrap;
+    box-shadow:0 3px 8px rgba(46,158,87,.32); pointer-events:none; animation:badgeUp 1.2s ease forwards; }
+  @keyframes badgeUp {
+    0%{ opacity:0; transform:translate(-50%,5px) scale(.85); }
+    18%{ opacity:1; transform:translate(-50%,-6px) scale(1); }
+    76%{ opacity:1; transform:translate(-50%,-9px); }
+    100%{ opacity:0; transform:translate(-50%,-18px); }
+  }
+
   /* 배열 — 단어 뱅크 (자리 유지) */
-  .bank { display:flex; flex-wrap:wrap; gap:9px; margin-bottom:12px; }
-  .tile { border:1px solid #cdddf3; background:#fff; border-radius:11px; padding:12px 16px; font-size:16.5px; color:#2f3e52; cursor:pointer; box-shadow:0 1px 3px rgba(30,60,110,.08); }
-  .tile.placed { background:#e3e9f2; border-color:#dbe2ee; color:transparent; box-shadow:none; cursor:default; pointer-events:none; }
+  .bank { display:flex; flex-wrap:wrap; gap:9px; margin-bottom:12px; padding-top:9px; }
+  .tile { position:relative; border:1px solid #cdddf3; background:#fff; border-radius:11px; padding:12px 16px; font-size:16.5px; color:#2f3e52; cursor:pointer; box-shadow:0 1px 3px rgba(30,60,110,.08); }
+  /* 방금 배운 어휘 칩 — 어휘 단계의 초록 정답과 시각적으로 이어짐 */
+  .tile.trigger { border-color:#8ed9ab; background:#f4fdf7; color:#22794a; font-weight:800; animation:tilePulse 1.7s ease-in-out infinite; }
+  .tile.trigger::before { content:'방금 배운'; position:absolute; top:-9px; left:50%; transform:translateX(-50%);
+    background:#46b366; color:#fff; font-size:9px; font-weight:800; padding:1px 7px; border-radius:6px; white-space:nowrap; letter-spacing:-.02em; }
+  @keyframes tilePulse {
+    0%,100%{ box-shadow:0 0 0 3px rgba(70,179,102,.16), 0 2px 6px rgba(46,158,87,.16); }
+    50%{ box-shadow:0 0 0 8px rgba(70,179,102,.04), 0 3px 11px rgba(46,158,87,.28); }
+  }
+  .tile.placed { background:#e3e9f2; border-color:#dbe2ee; color:transparent; box-shadow:none; cursor:default; pointer-events:none; animation:none; }
+  .tile.placed::before { display:none; }
 
   /* 배열 하단 버튼 */
   .arr-btns { display:flex; gap:10px; }
@@ -328,20 +357,47 @@ function renderVocab(){
   };
 }
 
-// 배열 트리거 문구(배열 전): 앱과 동일 — 방금 배운 단어로 '패턴'을 배운다고 안내(한국어라 영어 정답은 안 샘)
-function triggerText(item){
-  const s=item.sentence, w=escapeHtml(item.word), pat=(s.pattern_kr||'').trim();
-  if(!pat) return `방금 배운 <b>${w}</b>, 실제로 어떻게 쓸까요?`;
-  return curMode==='grammar'
-    ? `방금 배운 <b>${w}</b>로 '${escapeHtml(pat)}' 문법을 배워봐요!`
-    : `방금 배운 <b>${w}</b>로 '${escapeHtml(pat)}'라고 말하는 법을 배워봐요!`;
+// 방금 배운 어휘와 같은 타일인지 판정. 정확일치 + 규칙 굴절형까지 인정한다
+// (days/jobs/going/taxes/dancing/parties/dirtier/fatter, 복합어 round-trip⊃trip).
+// speak→spoke, good→best 같은 불규칙은 매칭되지 않고, 그 경우 칩 강조·연출을 생략한다.
+const INFL_SUFFIX=/^(?:s|es|ed|d|ing|er|est|ies|ier|iest|'s|')$/;
+function normTok(s){ return String(s).toLowerCase().replace(/[^a-z0-9']/g,''); }
+function wordParts(s){ return String(s).toLowerCase().split(/[^a-z0-9']+/).filter(Boolean); }
+function matchStem(a,b){
+  if(!a || !b || b.length<2) return false;
+  if(a===b) return true;
+  if(a.startsWith(b)){
+    let rest=a.slice(b.length);
+    // CVC 자음 중복(fat→fatter): 중복 글자가 어간 끝 글자와 같을 때만 벗겨낸다
+    if(rest.length>2 && rest[0]===b[b.length-1]) rest=rest.slice(1);
+    if(!rest || INFL_SUFFIX.test(rest)) return true;
+  }
+  // 어미 e/y 탈락형 (dance→dancing, party→parties, dirty→dirtier)
+  const stem=b.replace(/[ey]$/,'');
+  return stem.length>=3 && stem!==b && a.startsWith(stem) && INFL_SUFFIX.test(a.slice(stem.length));
 }
-function conceptText(item){
-  const s=item.sentence, patKr=(s.pattern_kr||'').trim(), patEn=(s.pattern_en||'').trim();
-  if(!patKr && !patEn) return '';
-  return curMode==='grammar'
-    ? `<span>${escapeHtml(patKr)} 용법</span>`
-    : `<span>${escapeHtml(patEn||patKr)}</span>${patEn&&patKr?`<span class="kr">${escapeHtml(patKr)}</span>`:''}`;
+function isTriggerToken(tok, trigger){
+  // 하이픈 조각 단위로 비교 — Round-trip ⊃ trip은 잡고, wondering ⊃ ring 같은 오탐은 막는다
+  const parts=wordParts(tok), trigs=wordParts(trigger);
+  return parts.some(a=> trigs.some(b=> matchStem(a,b)));
+}
+
+// 배열 전 힌트: 뭘 배우는지(패턴 뜻)만 짧게. 어휘 연결은 초록 칩 강조가 담당한다.
+function patternHintHtml(item){
+  const s=item.sentence, txt=((s.pattern_kr||'').trim() || (s.pattern_en||'').trim());
+  if(!txt) return `<div class="trigger-box"><span class="ic">💡</span><span>초록색 단어를 넣어 문장을 완성해요</span></div>`;
+  const body = curMode==='grammar' ? `<b>${escapeHtml(txt)}</b> 문법` : `<b>${escapeHtml(txt)}</b>`;
+  return `<div class="trigger-box"><span class="ic">💡</span><span>${body}</span></div>`;
+}
+// 정답 후: 방금 배운 어휘가 어떤 표현을 만들어냈는지 생산 관계로 보여준다.
+function connectionHtml(item){
+  const s=item.sentence, w=escapeHtml(item.word);
+  const pat=((s.pattern_kr||'').trim() || (s.pattern_en||'').trim());
+  const patTxt = pat ? (curMode==='grammar' ? `${escapeHtml(pat)} 문법` : escapeHtml(pat)) : '새로운 표현';
+  return `<div class="conn">
+      <div class="conn-head">🔑 방금 배운 <b>${w}</b>, 이렇게 써먹었어요</div>
+      <div class="conn-body"><span class="conn-chip">${w}</span><span class="conn-arrow">→</span><span class="conn-pat">${patTxt}</span></div>
+    </div>`;
 }
 
 // [2] 문장 배열 ────────────────────────────────────────────────────────────────
@@ -350,17 +406,16 @@ function renderArrange(){
   setProgress(itemIdx*2+1);
   const tokens=tokenize(s.en), punct=trailPunct(s.en);
   const target=tokens.map(t=>t.toLowerCase()).join(' ');
-  // 뱅크(자리 유지): 각 타일에 placed 플래그
-  let bank=shuffle(tokens.map((t,i)=>({id:i, text:t.toLowerCase(), placed:false})));
-  let ans=[], done=false, revealed=false;
+  // 뱅크(자리 유지): placed 플래그 + 방금 배운 어휘 여부(isTrig)
+  let bank=shuffle(tokens.map((t,i)=>({id:i, text:t.toLowerCase(), placed:false, isTrig:isTriggerToken(t, s.trigger)})));
+  let ans=[], done=false, usedFired=false;
 
   stage.innerHTML=`
     <div class="stage-scroll">
       <div class="chat-card" id="card">
         ${chatTag()}<div class="chat-badge new">New</div>
-        <div class="concept-head hidden" id="concept"></div>
         <div class="chat-ko">${escapeHtml(s.kr)}</div>
-        <div class="trigger-box" id="trigger"><span class="ic">💡</span><span>${triggerText(item)}</span></div>
+        <div id="patBox">${patternHintHtml(item)}</div>
         <div class="fill" id="fill"></div>
         <div class="mic-float">🎤</div>
       </div>
@@ -379,7 +434,7 @@ function renderArrange(){
     let h='';
     for(let i=0;i<tokens.length;i++){
       if(i<ans.length){
-        h+=`<span class="fill-word" data-i="${i}">${escapeHtml(ans[i].text)}</span>`;
+        h+=`<span class="fill-word${ans[i].isTrig?' trigger-w':''}" data-i="${i}">${escapeHtml(ans[i].text)}</span>`;
       } else h+=`<span class="fill-blank"></span>`;
     }
     if(punct) h+=`<span class="fill-punct">${escapeHtml(punct)}</span>`;
@@ -391,20 +446,42 @@ function renderArrange(){
   function renderBank(){
     bankEl.innerHTML='';
     bank.forEach(t=>{
-      const b=document.createElement('button'); b.className='tile'+(t.placed?' placed':''); b.textContent=t.text;
-      if(!t.placed && !done) b.onclick=()=>{ if(ans.length>=tokens.length) return; t.placed=true; ans.push(t); renderAll(); };
+      const b=document.createElement('button');
+      b.className='tile'+(t.placed?' placed':'')+(t.isTrig&&!done?' trigger':'');
+      b.textContent=t.text;
+      if(!t.placed && !done) b.onclick=()=>{
+        if(ans.length>=tokens.length) return;
+        t.placed=true; ans.push(t);
+        const idx=ans.length-1;
+        renderAll();
+        if(t.isTrig && !usedFired){ usedFired=true; fireUsedEffect(idx); }
+      };
       bankEl.appendChild(b);
     });
   }
   function renderAll(){ renderFill(); renderBank(); el('confirmBtn').disabled = ans.length<tokens.length; }
 
+  // 방금 배운 어휘를 문장에 넣는 순간: 팝 + 링 반사 + 배지 + 햅틱
+  function fireUsedEffect(idx){
+    const w=fillEl.querySelector(`.fill-word[data-i="${idx}"]`);
+    if(!w) return;
+    w.classList.add('just-used');
+    const ring=document.createElement('span'); ring.className='ring';
+    ring.style.left=w.offsetLeft+'px'; ring.style.top=w.offsetTop+'px';
+    ring.style.width=w.offsetWidth+'px'; ring.style.height=w.offsetHeight+'px';
+    fillEl.appendChild(ring); setTimeout(()=>ring.remove(), 700);
+    const badge=document.createElement('span'); badge.className='used-badge'; badge.textContent='방금 배운 단어!';
+    badge.style.left=(w.offsetLeft+w.offsetWidth/2)+'px'; badge.style.top=(w.offsetTop-16)+'px';
+    fillEl.appendChild(badge); setTimeout(()=>badge.remove(), 1250);
+    try{ navigator.vibrate && navigator.vibrate([12,26,18]); }catch(e){}   // Android만 동작
+  }
+
   function finish(ok){
     done=true;
     el('card').classList.add('correct');
     if(!el('card').querySelector('.check-mark')){ const c=document.createElement('div'); c.className='check-mark'; c.textContent='✓'; el('card').appendChild(c); }
-    const concept=conceptText(item);
-    if(concept){ const ch=el('concept'); ch.classList.remove('hidden'); ch.innerHTML=`🔑 ${concept}`; }
-    el('trigger').classList.add('hidden');
+    // 배열 전 '패턴 힌트' 자리를 '어휘 → 표현 연결'로 교체 — 배운 걸 써먹었음을 같은 자리에서 확인
+    el('patBox').innerHTML=connectionHtml(item);
     // 정답 문장을 원문 대소문자로 복원 표시(트리거 초록)
     fillEl.innerHTML=`<div style="font-size:19px;font-weight:800;color:#2f3e52;line-height:1.5">${hlTrigger(s.en, s.trigger)}</div>`;
     const last=itemIdx>=curLevel.items.length-1;
@@ -418,17 +495,10 @@ function renderArrange(){
     if(ok) finish(true);
     else { // 오답: 잠깐 표시 후 정답 공개
       fillEl.querySelectorAll('.fill-word').forEach(w=>w.style.color='#e14b46');
-      setTimeout(()=>{ // 정답 순서로 채워 보여주고 마무리
-        ans=tokens.map((t,i)=>({id:i,text:t.toLowerCase(),placed:true}));
-        finish(false);
-      }, 700);
+      setTimeout(()=>{ finish(false); }, 700);
     }
   };
-  el('revealBtn').onclick=()=>{
-    revealed=true;
-    ans=tokens.map((t,i)=>({id:i,text:t.toLowerCase(),placed:true}));
-    finish(false);
-  };
+  el('revealBtn').onclick=()=>{ finish(false); };
 
   renderAll();
 }
