@@ -116,6 +116,10 @@
   /* 카드 내 오답 피드백 박스 */
   .wrong-box { background:#cdd8f2; color:#42527a; border-radius:11px; padding:10px 14px; font-size:15px; font-weight:600; margin:14px 0 2px; }
   .wrong-box .wc { color:#e14b46; font-weight:800; }
+  /* 정답 보기 후에는 입력 중에도 정답이 계속 보이게 (placeholder는 입력하면 가려짐) */
+  .answer-line { display:flex; align-items:center; gap:8px; background:#e7f0fb; border-radius:11px;
+    padding:9px 13px; margin:14px 0 2px; font-size:14px; font-weight:700; color:#5b7c93; }
+  .answer-line b { font-size:17px; font-weight:800; color:#3a6bb0; letter-spacing:.01em; }
 
   /* 어휘 하단 — 풀이 중 */
   .vtools { display:flex; justify-content:space-between; align-items:center; padding:4px 6px; }
@@ -480,6 +484,7 @@ function renderVocab(){
         ${chatTag(item)}<div class="chat-badge new">New</div>
         ${ko}
         <div class="wrong-box hidden" id="wrongBox"></div>
+        <div class="answer-line hidden" id="answerLine"></div>
         ${en}
       </div>
     </div>
@@ -500,6 +505,7 @@ function renderVocab(){
     vin.value=answer; vin.readOnly=true; vin.classList.add('correct'); vin.placeholder='';
     card.classList.add('correct');
     wrongBox.classList.add('hidden');
+    el('answerLine').classList.add('hidden');
     if(!card.querySelector('.check-mark')){ const c=document.createElement('div'); c.className='check-mark'; c.textContent='✓'; card.appendChild(c); }
     renderStepBanner(1, item.word);          // 배운 단어를 배너에 올린다
     // 하단: (예고) + 탭 + 3버튼
@@ -548,6 +554,9 @@ function renderVocab(){
     else if(hintLevel===1){   // 정답 보기 → 전체 단어
       hintLevel=2;
       vin.classList.add('revealed');
+      const al=el('answerLine');
+      al.classList.remove('hidden');
+      al.innerHTML=`정답 <b>${escapeHtml(answer)}</b> — 직접 입력해야 넘어가요`;
     }
     // 힌트·정답은 placeholder로 보여주므로, 입력값이 남아 있으면 가려진다.
     // 틀린 입력을 지워 빈 칸에서 누른 것과 똑같이 보이게 한다.
