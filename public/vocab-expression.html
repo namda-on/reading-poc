@@ -41,6 +41,15 @@
   .lv-card .step { display:inline-block; font-size:11px; font-weight:800; color:#2f6ab0; background:#e7f0fb; border:1px solid #cfe0f5; border-radius:999px; padding:2px 8px; margin-top:8px; }
   .lv-card .clear-badge { position:absolute; top:14px; right:16px; font-size:13px; font-weight:800; color:var(--green); }
   .restart-btn { display:block; width:100%; background:none; border:none; color:#3a6bb0; font-size:13px; font-weight:700; padding:6px; cursor:pointer; text-decoration:underline; }
+  /* 옵션 (홈 / 상단 설정 팝오버 공용) */
+  .opt-box { background:#ffffffcc; border-radius:14px; padding:12px 14px; margin-top:14px; }
+  .opt-label { font-size:12.5px; font-weight:800; color:#3a567d; margin-bottom:8px; }
+  .opt-hint { font-size:11.5px; color:#6b8ab0; margin-top:7px; line-height:1.5; }
+  .seg { display:flex; gap:6px; }
+  .seg-b { flex:1; border:1.5px solid #cfe0f5; background:#fff; color:#5b7c93; border-radius:10px; padding:9px 6px; font-size:13px; font-weight:800; cursor:pointer; }
+  .seg-b.on { background:#46b366; border-color:#46b366; color:#fff; }
+  .setting-pop { position:absolute; z-index:60; top:52px; right:14px; width:250px; background:#fff; border-radius:14px;
+    box-shadow:0 8px 24px rgba(30,60,110,.24); padding:13px 14px; }
   .home .note { font-size:12px; color:#3a567d; opacity:.85; margin-top:18px; line-height:1.6; }
 
   /* 세션 */
@@ -146,8 +155,8 @@
   .tile { position:relative; border:1px solid #cdddf3; background:#fff; border-radius:11px; padding:12px 16px; font-size:16.5px; color:#2f3e52; cursor:pointer; box-shadow:0 1px 3px rgba(30,60,110,.08); }
   /* 방금 배운 어휘 칩 — 어휘 단계의 초록 정답과 시각적으로 이어짐 */
   .tile.trigger { border-color:#8ed9ab; background:#f4fdf7; color:#22794a; font-weight:800; animation:tilePulse 1.7s ease-in-out infinite; }
-  .tile.trigger::before { content:'방금 배운'; position:absolute; top:-9px; left:50%; transform:translateX(-50%);
-    background:#46b366; color:#fff; font-size:9px; font-weight:800; padding:1px 7px; border-radius:6px; white-space:nowrap; letter-spacing:-.02em; }
+  .tile.trigger::before { content:attr(data-label); position:absolute; top:-9px; left:50%; transform:translateX(-50%);
+    background:#46b366; color:#fff; font-size:9px; font-weight:800; padding:1px 7px; border-radius:6px; white-space:nowrap; letter-spacing:-.02em; max-width:150px; overflow:hidden; text-overflow:ellipsis; }
   @keyframes tilePulse {
     0%,100%{ box-shadow:0 0 0 3px rgba(70,179,102,.16), 0 2px 6px rgba(46,158,87,.16); }
     50%{ box-shadow:0 0 0 8px rgba(70,179,102,.04), 0 3px 11px rgba(46,158,87,.28); }
@@ -184,7 +193,7 @@
     <button class="icon-btn" id="backBtn" aria-label="뒤로">‹</button>
     <div class="trophy">🏆</div>
     <div class="progress"><div class="bar-count" id="barCount">0/0</div><div class="bar-track"><div class="bar-fill" id="barFill"></div></div><span class="bar-star" id="barStar">⭐</span></div>
-    <button class="icon-btn gear" aria-label="설정">⚙</button>
+    <button class="icon-btn gear" id="gearBtn" aria-label="설정">⚙</button>
   </div>
 
   <div class="home" id="home">
@@ -196,6 +205,7 @@
   </div>
 
   <div class="stage hidden" id="stage"></div>
+  <div class="setting-pop hidden" id="settingPop"></div>
 </div>
 
 <script>
@@ -211,12 +221,71 @@ function setPos(mode,n){
   try{ const o=JSON.parse(localStorage.getItem(POS_KEY)||'{}'); o[mode]=n; localStorage.setItem(POS_KEY, JSON.stringify(o)); }catch(e){}
 }
 
+// 트리거 어휘 칩 라벨 옵션: 'learned'(방금 배운) | 'meaning'(단어 뜻)
+const CHIP_KEY='ve:chipLabel';
+let chipLabelMode=(()=>{ try{ return localStorage.getItem(CHIP_KEY)||'learned'; }catch(e){ return 'learned'; } })();
+function setChipLabelMode(m){
+  chipLabelMode=m;
+  try{ localStorage.setItem(CHIP_KEY,m); }catch(e){}
+  renderChipOptions();
+  applyChipLabels();          // 세션 중에도 즉시 반영
+}
+// 뜻 문자열을 라벨용으로 다듬는다: <주석>·(부연) 제거 후 앞쪽 뜻만 10자 내로
+function shortMeaning(m){
+  let t=String(m||'').replace(/<[^>]*>/g,' ').replace(/\([^)]*\)/g,' ').replace(/\s+/g,' ').trim();
+  const parts=t.split(/[,;/]/).map(x=>x.trim()).filter(Boolean);
+  let out='';
+  for(const p of parts){ const cand=out?out+', '+p:p; if(cand.length>10) break; out=cand; }
+  if(!out) out=(parts[0]||t).slice(0,10);
+  return out;
+}
+function chipLabelText(item){
+  if(chipLabelMode==='meaning'){ const m=shortMeaning(item.meaning); if(m) return m; }
+  return '방금 배운';
+}
+function applyChipLabels(){
+  const it=sessionItems[itemIdx];
+  if(!it) return;
+  document.querySelectorAll('.tile.trigger').forEach(t=>{ t.dataset.label=chipLabelText(it); });
+}
+function segHtml(){
+  return `<div class="seg">
+      <button class="seg-b${chipLabelMode==='learned'?' on':''}" data-m="learned">방금 배운</button>
+      <button class="seg-b${chipLabelMode==='meaning'?' on':''}" data-m="meaning">단어 뜻</button>
+    </div>`;
+}
+// 홈과 설정 팝오버 두 곳의 옵션 UI를 함께 다시 그린다
+function renderChipOptions(){
+  ['optHome','settingPop'].forEach(id=>{
+    const box=el(id);
+    if(!box || box.classList.contains('hidden')) return;
+    box.innerHTML=`<div class="opt-label">트리거 어휘 칩 라벨</div>${segHtml()}
+      <div class="opt-hint">배열 단계에서 방금 배운 어휘 칩 위에 무엇을 보여줄지 고릅니다.</div>`;
+    box.querySelectorAll('.seg-b').forEach(b=> b.onclick=()=>setChipLabelMode(b.dataset.m));
+  });
+}
+
 // 채점 정규화 / 배열 토큰
 function norm(s){ return s.toLowerCase().trim().replace(/^[^\w']+|[^\w']+$/g,'').replace(/\s+/g,' '); }
 function tokenize(sent){ return sent.trim().replace(/[.?!]+$/,'').split(/\s+/); }
 function trailPunct(sent){ const m=sent.trim().match(/[.?!]+$/); return m?m[0]:''; }
 
 let DATA=null, curMode='expression', sessionItems=[], itemIdx=0, learned=[];
+
+// 상단 설정(기어) — 세션 중에도 라벨 옵션을 바로 바꿔볼 수 있게.
+// 바깥 클릭 닫기는 mousedown에서 처리하고, 기어/팝오버 내부 클릭은 contains로 걸러낸다.
+el('gearBtn').addEventListener('click', ()=>{
+  const pop=el('settingPop');
+  const willOpen=pop.classList.contains('hidden');
+  pop.classList.toggle('hidden', !willOpen);
+  if(willOpen) renderChipOptions();
+});
+document.addEventListener('mousedown', e=>{
+  const pop=el('settingPop'), g=el('gearBtn');
+  if(pop.classList.contains('hidden')) return;
+  if(pop.contains(e.target) || g.contains(e.target)) return;
+  pop.classList.add('hidden');
+});
 
 fetch('vocab-expression.data.json').then(r=>r.json()).then(d=>{ DATA=d; curMode=(localStorage.getItem(MODE_KEY))||'expression'; renderHome(); })
   .catch(e=>{ home.innerHTML='<h1>데이터 로드 실패</h1><p class="sub">'+escapeHtml(String(e))+'</p>'; });
@@ -248,6 +317,9 @@ function renderHome(){
     r.onclick=()=>{ setPos(curMode,0); startSession(0); };
     list.appendChild(r);
   }
+  const opt=document.createElement('div'); opt.className='opt-box'; opt.id='optHome';
+  list.appendChild(opt);
+  renderChipOptions();
 }
 
 // ── 세션 ────────────────────────────────────────────────────────────────────
@@ -498,6 +570,7 @@ function renderArrange(){
       const b=document.createElement('button');
       b.className='tile'+(t.placed?' placed':'')+(t.isTrig&&!done?' trigger':'');
       b.textContent=t.text;
+      if(t.isTrig) b.dataset.label=chipLabelText(item);
       if(!t.placed && !done) b.onclick=()=>{
         if(ans.length>=tokens.length) return;
         t.placed=true; ans.push(t);
