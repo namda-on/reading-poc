@@ -116,6 +116,9 @@
   /* 카드 내 오답 피드백 박스 */
   .wrong-box { background:#cdd8f2; color:#42527a; border-radius:11px; padding:10px 14px; font-size:15px; font-weight:600; margin:14px 0 2px; }
   .wrong-box .wc { color:#e14b46; font-weight:800; }
+  /* 정답 보기 후 — placeholder는 타이핑하면 가려지므로 문장 아래에 정답을 남겨둔다 */
+  .reveal-note { margin-top:10px; font-size:13.5px; font-weight:700; color:#7d97b8; }
+  .reveal-note b { font-size:16px; font-weight:800; color:#3a6bb0; margin-left:2px; }
 
   /* 어휘 하단 — 풀이 중 */
   .vtools { display:flex; justify-content:space-between; align-items:center; padding:4px 6px; }
@@ -481,6 +484,7 @@ function renderVocab(){
         ${ko}
         <div class="wrong-box hidden" id="wrongBox"></div>
         ${en}
+        <div class="reveal-note hidden" id="revealNote"></div>
       </div>
     </div>
     <div class="stage-bottom" id="bottom">
@@ -500,6 +504,7 @@ function renderVocab(){
     vin.value=answer; vin.readOnly=true; vin.classList.add('correct'); vin.placeholder='';
     card.classList.add('correct');
     wrongBox.classList.add('hidden');
+    el('revealNote').classList.add('hidden');
     if(!card.querySelector('.check-mark')){ const c=document.createElement('div'); c.className='check-mark'; c.textContent='✓'; card.appendChild(c); }
     renderStepBanner(1, item.word);          // 배운 단어를 배너에 올린다
     // 하단: (예고) + 탭 + 3버튼
@@ -550,6 +555,10 @@ function renderVocab(){
       vin.classList.add('revealed');
       // 정답은 placeholder로 보여주므로 입력값이 남아 있으면 가려진다 → 입력한 답을 비운다
       if(vin.value){ vin.value=''; wrongBox.classList.add('hidden'); }
+      // 다시 타이핑하면 placeholder가 가려지므로 문장 아래에 정답을 남겨둔다
+      const rn=el('revealNote');
+      rn.classList.remove('hidden');
+      rn.innerHTML=`정답<b>${escapeHtml(answer)}</b>`;
     }
     applyHint(); vin.focus();
   };
