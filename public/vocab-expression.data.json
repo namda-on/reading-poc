@@ -32,7 +32,8 @@
             "trigger": "gate",
             "pattern_en": "Where's ~?",
             "pattern_kr": "~은 어디인가요?",
-            "patternCount": 11,
+            "coreEn": "Where's gate",
+            "coreKr": "게이트가 어디인가요",
             "siblings": [
               {
                 "word": "restroom",
@@ -68,7 +69,8 @@
             "trigger": "pen",
             "pattern_en": "Do you have ~?",
             "pattern_kr": "~가 있나요?",
-            "patternCount": 6,
+            "coreEn": "Do you have",
+            "coreKr": "있나요",
             "siblings": [
               {
                 "word": "mask",
@@ -104,7 +106,8 @@
             "trigger": "here",
             "pattern_en": "For here.",
             "pattern_kr": "먹고 갈게요.",
-            "patternCount": 8,
+            "coreEn": "For here",
+            "coreKr": "마시고 갈게요",
             "siblings": [
               {
                 "word": "latte",
@@ -141,7 +144,8 @@
             "trigger": "go",
             "pattern_en": "To go.",
             "pattern_kr": "가져갈게요.",
-            "patternCount": 8,
+            "coreEn": "To go",
+            "coreKr": "가져갈게요",
             "siblings": [
               {
                 "word": "latte",
@@ -178,7 +182,8 @@
             "trigger": "much",
             "pattern_en": "How much is it?",
             "pattern_kr": "그거 얼마예요?",
-            "patternCount": 2,
+            "coreEn": "How much is it",
+            "coreKr": "그거 얼마예요",
             "siblings": [
               {
                 "word": "total",
@@ -209,7 +214,8 @@
             "trigger": "how",
             "pattern_en": "How are you?",
             "pattern_kr": "요즘 어때?",
-            "patternCount": 6,
+            "coreEn": "How are you",
+            "coreKr": "요즘 어때",
             "siblings": [
               {
                 "word": "talk",
@@ -245,7 +251,8 @@
             "trigger": "thank",
             "pattern_en": "I'm doing well.",
             "pattern_kr": "잘 지내고 있어.",
-            "patternCount": 2,
+            "coreEn": "I'm doing well",
+            "coreKr": "난 잘 지내고 있어",
             "siblings": [
               {
                 "word": "do",
@@ -276,7 +283,8 @@
             "trigger": "Thursday",
             "pattern_en": "How about you?",
             "pattern_kr": "너는?",
-            "patternCount": 11,
+            "coreEn": "How about you",
+            "coreKr": "너는",
             "siblings": [
               {
                 "word": "how",
@@ -312,7 +320,8 @@
             "trigger": "pillow",
             "pattern_en": "Can I have a/an ~?",
             "pattern_kr": "~를 주실 수 있나요?",
-            "patternCount": 10,
+            "coreEn": "can I have a",
+            "coreKr": "하나 주실 수 있나요",
             "siblings": [
               {
                 "word": "napkin",
@@ -348,7 +357,8 @@
             "trigger": "latte",
             "pattern_en": "Can I have two/three/four ~?",
             "pattern_kr": "~개 주문할 수 있을까요?",
-            "patternCount": 10,
+            "coreEn": "Can I have two",
+            "coreKr": "두 잔 주문할 수 있을까요",
             "siblings": [
               {
                 "word": "bagel",
@@ -386,7 +396,8 @@
             "trigger": "Coke",
             "pattern_en": "I'll have ~.",
             "pattern_kr": "~로 주세요.",
-            "patternCount": 13,
+            "coreEn": "I'll have",
+            "coreKr": "할게요",
             "siblings": [
               {
                 "word": "sprite",
@@ -422,7 +433,8 @@
             "trigger": "check",
             "pattern_en": "Can I get ~?",
             "pattern_kr": "~를 받을 수 있을까요?",
-            "patternCount": 10,
+            "coreEn": "Can I get",
+            "coreKr": "할 수 있을까요",
             "siblings": [
               {
                 "word": "room service",
@@ -458,7 +470,8 @@
             "trigger": "scarf",
             "pattern_en": "How much are these?",
             "pattern_kr": "이것들 얼마인가요?",
-            "patternCount": 3,
+            "coreEn": "how much are these",
+            "coreKr": "이",
             "siblings": [
               {
                 "word": "much",
@@ -494,7 +507,8 @@
             "trigger": "see",
             "pattern_en": "See you later.",
             "pattern_kr": "나중에 봐.",
-            "patternCount": 4,
+            "coreEn": "See you later",
+            "coreKr": "나중에 봐",
             "siblings": [
               {
                 "word": "sound",
@@ -530,7 +544,8 @@
             "trigger": "problem",
             "pattern_en": "See you tomorrow.",
             "pattern_kr": "내일 봐.",
-            "patternCount": 5,
+            "coreEn": "See you tomorrow",
+            "coreKr": "내일 보자",
             "siblings": [
               {
                 "word": "see",
@@ -567,7 +582,8 @@
             "trigger": "flight",
             "pattern_en": "See you soon.",
             "pattern_kr": "곧 만나.",
-            "patternCount": 5,
+            "coreEn": "See you soon",
+            "coreKr": "곧 만나",
             "siblings": [
               {
                 "word": "see",
@@ -603,7 +619,8 @@
             "trigger": "bridge",
             "pattern_en": "Go straight.",
             "pattern_kr": "쭉 가세요.",
-            "patternCount": 11,
+            "coreEn": "Go straight",
+            "coreKr": "쭉 가세요",
             "siblings": [
               {
                 "word": "block",
@@ -639,7 +656,8 @@
             "trigger": "reservation",
             "pattern_en": "Do I have to ~?",
             "pattern_kr": "~해야 하나요?",
-            "patternCount": 13,
+            "coreEn": "Do I have to",
+            "coreKr": "야 하나요",
             "siblings": [
               {
                 "word": "towel",
@@ -675,7 +693,8 @@
             "trigger": "room",
             "pattern_en": "This is room ~.",
             "pattern_kr": "여기 ~호인데요.",
-            "patternCount": 1,
+            "coreEn": "This is room",
+            "coreKr": "여기",
             "siblings": []
           }
         },
@@ -700,7 +719,8 @@
             "trigger": "water",
             "pattern_en": "Can I have some ~?",
             "pattern_kr": "~ 좀 주시겠어요?",
-            "patternCount": 7,
+            "coreEn": "can I have some",
+            "coreKr": "좀 받을 수 있을까요",
             "siblings": [
               {
                 "word": "napkin",
@@ -736,7 +756,8 @@
             "trigger": "take",
             "pattern_en": "I'll take it!",
             "pattern_kr": "이거 살게요!",
-            "patternCount": 6,
+            "coreEn": "I'll take it",
+            "coreKr": "이거 살게요",
             "siblings": [
               {
                 "word": "sale",
@@ -773,7 +794,8 @@
             "trigger": "get",
             "pattern_en": "How do I get ~?",
             "pattern_kr": "~에 어떻게 가나요?",
-            "patternCount": 5,
+            "coreEn": "How do I get",
+            "coreKr": "어떻게 가나요",
             "siblings": [
               {
                 "word": "station",
@@ -809,7 +831,8 @@
             "trigger": "bad",
             "pattern_en": "Not bad.",
             "pattern_kr": "나쁘지 않아.",
-            "patternCount": 8,
+            "coreEn": "Not bad",
+            "coreKr": "나쁘지 않아",
             "siblings": [
               {
                 "word": "bit",
@@ -845,7 +868,8 @@
             "trigger": "next",
             "pattern_en": "How about ~ ?",
             "pattern_kr": "~는 어때?",
-            "patternCount": 9,
+            "coreEn": "How about",
+            "coreKr": "는 어때",
             "siblings": [
               {
                 "word": "restaurant",
@@ -881,7 +905,8 @@
             "trigger": "great",
             "pattern_en": "That was great!",
             "pattern_kr": "진짜 좋았어!",
-            "patternCount": 2,
+            "coreEn": "That was great",
+            "coreKr": "진짜 좋았어",
             "siblings": [
               {
                 "word": "full",
@@ -912,7 +937,8 @@
             "trigger": "care",
             "pattern_en": "Take care.",
             "pattern_kr": "잘 지내.",
-            "patternCount": 1,
+            "coreEn": "Take care",
+            "coreKr": "잘 지내",
             "siblings": []
           }
         },
@@ -937,7 +963,8 @@
             "trigger": "umbrella",
             "pattern_en": "Can I borrow ~?",
             "pattern_kr": "~를 빌릴 수 있을까요?",
-            "patternCount": 6,
+            "coreEn": "Can I borrow",
+            "coreKr": "빌릴 수 있나요",
             "siblings": [
               {
                 "word": "charger",
@@ -973,7 +1000,8 @@
             "trigger": "bike",
             "pattern_en": "Can I rent ~?",
             "pattern_kr": "~를 대여할 수 있나요?",
-            "patternCount": 11,
+            "coreEn": "Can I rent",
+            "coreKr": "대여할 수 있나요",
             "siblings": [
               {
                 "word": "stroller",
@@ -1009,7 +1037,8 @@
             "trigger": "close",
             "pattern_en": "When do you close?",
             "pattern_kr": "언제 닫나요?",
-            "patternCount": 2,
+            "coreEn": "When do you close",
+            "coreKr": "몇 시에 문을 닫나요",
             "siblings": [
               {
                 "word": "wonder",
@@ -1041,7 +1070,8 @@
             "trigger": "free",
             "pattern_en": "Is there free WiFi?",
             "pattern_kr": "무료 와이파이가 있나요?",
-            "patternCount": 3,
+            "coreEn": "is there free WiFi",
+            "coreKr": "무료 와이파이가 있나요",
             "siblings": [
               {
                 "word": "bus",
@@ -1077,7 +1107,8 @@
             "trigger": "password",
             "pattern_en": "What's the WiFi password?",
             "pattern_kr": "와이파이 비밀번호가 무엇인가요?",
-            "patternCount": 1,
+            "coreEn": "What's the WiFi password",
+            "coreKr": "와이파이 비밀번호가 뭔가요",
             "siblings": []
           }
         },
@@ -1102,7 +1133,8 @@
             "trigger": "hike",
             "pattern_en": "I like ~ing.",
             "pattern_kr": "나는 ~하는 거 좋아해.",
-            "patternCount": 10,
+            "coreEn": "I like hiking",
+            "coreKr": "난 등산하는 거 좋아해",
             "siblings": [
               {
                 "word": "read",
@@ -1138,7 +1170,8 @@
             "trigger": "write",
             "pattern_en": "I love ~ing.",
             "pattern_kr": "난 ~하는 걸 진짜 좋아해.",
-            "patternCount": 7,
+            "coreEn": "I love writing",
+            "coreKr": "쓰는 걸 정말 좋아해",
             "siblings": [
               {
                 "word": "go",
@@ -1175,7 +1208,8 @@
             "trigger": "let",
             "pattern_en": "Let's meet at ~.",
             "pattern_kr": "~시에 만나자.",
-            "patternCount": 14,
+            "coreEn": "Let's meet at",
+            "coreKr": "에 만나자",
             "siblings": [
               {
                 "word": "work",
@@ -1211,7 +1245,8 @@
             "trigger": "cash",
             "pattern_en": "Can I pay with ~",
             "pattern_kr": "~로 계산할 수 있을까요?",
-            "patternCount": 5,
+            "coreEn": "Can I pay with",
+            "coreKr": "으로 계산할 수 있을까요",
             "siblings": [
               {
                 "word": "credit card",
@@ -1248,7 +1283,8 @@
             "trigger": "receipt",
             "pattern_en": "Can I have the receipt?",
             "pattern_kr": "영수증 주실 수 있나요?",
-            "patternCount": 1,
+            "coreEn": "can I have the receipt",
+            "coreKr": "영수증 받을 수 있을까요",
             "siblings": []
           }
         },
@@ -1273,7 +1309,8 @@
             "trigger": "gym",
             "pattern_en": "When does the ~ close?",
             "pattern_kr": "~는 언제 문 닫나요?",
-            "patternCount": 6,
+            "coreEn": "When does the gym close",
+            "coreKr": "헬스장은 언제 문 닫나요",
             "siblings": [
               {
                 "word": "spa",
@@ -1310,7 +1347,8 @@
             "trigger": "spa",
             "pattern_en": "When does the ~ open?",
             "pattern_kr": "~는 언제 여나요?",
-            "patternCount": 6,
+            "coreEn": "When does the spa open",
+            "coreKr": "스파는 언제 여나요",
             "siblings": [
               {
                 "word": "gym",
@@ -1346,7 +1384,8 @@
             "trigger": "look",
             "pattern_en": "You look great.",
             "pattern_kr": "너 정말 멋져 보인다.",
-            "patternCount": 4,
+            "coreEn": "You look great",
+            "coreKr": "너 정말 멋져 보인다",
             "siblings": [
               {
                 "word": "occasion",
@@ -1385,7 +1424,8 @@
             "trigger": "yep",
             "pattern_en": "See you then.",
             "pattern_kr": "그때 보자.",
-            "patternCount": 4,
+            "coreEn": "See you then",
+            "coreKr": "그때 보자",
             "siblings": [
               {
                 "word": "see",
@@ -1421,7 +1461,8 @@
             "trigger": "worry",
             "pattern_en": "No worries.",
             "pattern_kr": "걱정 마.",
-            "patternCount": 3,
+            "coreEn": "No worries",
+            "coreKr": "걱정 마",
             "siblings": [
               {
                 "word": "rush",
@@ -1457,7 +1498,8 @@
             "trigger": "lunch",
             "pattern_en": "Where should we go?",
             "pattern_kr": "우리 어디로 갈까?",
-            "patternCount": 4,
+            "coreEn": "Where should we go",
+            "coreKr": "우리 어디로 갈까",
             "siblings": [
               {
                 "word": "go",
@@ -1494,7 +1536,8 @@
             "trigger": "bit",
             "pattern_en": "Can I check in ~?",
             "pattern_kr": "체크인해도 되나요?",
-            "patternCount": 2,
+            "coreEn": "Can I check in",
+            "coreKr": "체크인해도 될까요",
             "siblings": [
               {
                 "word": "check",
@@ -1527,7 +1570,8 @@
             "trigger": "complimentary",
             "pattern_en": "What does that mean?",
             "pattern_kr": "그건 무슨 뜻인가요?",
-            "patternCount": 6,
+            "coreEn": "What does that mean",
+            "coreKr": "그건 무슨 뜻인가요",
             "siblings": [
               {
                 "word": "bump",
@@ -1563,7 +1607,8 @@
             "trigger": "recommend",
             "pattern_en": "What do you recommend?",
             "pattern_kr": "무엇을 추천하시나요?",
-            "patternCount": 4,
+            "coreEn": "What do you recommend",
+            "coreKr": "무엇을 추천하시나요",
             "siblings": [
               {
                 "word": "decide",
@@ -1601,7 +1646,8 @@
             "trigger": "beer",
             "pattern_en": "Can I have another ~?",
             "pattern_kr": "~를 한 잔 더 주시겠어요?",
-            "patternCount": 6,
+            "coreEn": "can I have another",
+            "coreKr": "한 잔 더 주실 수 있나요",
             "siblings": [
               {
                 "word": "sprite",
@@ -1637,7 +1683,8 @@
             "trigger": "song",
             "pattern_en": "Do you like ~, too?",
             "pattern_kr": "너도 ~ 좋아해?",
-            "patternCount": 9,
+            "coreEn": "Do you like this song, too",
+            "coreKr": "너도 이 노래 좋아해",
             "siblings": [
               {
                 "word": "too",
@@ -1673,7 +1720,8 @@
             "trigger": "help",
             "pattern_en": "Do you need any help?",
             "pattern_kr": "도움이 필요하신가요?",
-            "patternCount": 1,
+            "coreEn": "Do you need any help",
+            "coreKr": "도움이 필요하신가요",
             "siblings": []
           }
         },
@@ -1698,7 +1746,8 @@
             "trigger": "line",
             "pattern_en": "You can take ~.",
             "pattern_kr": "~를 타시면 돼요.",
-            "patternCount": 7,
+            "coreEn": "You can take",
+            "coreKr": "타시면 됩니다",
             "siblings": [
               {
                 "word": "train",
@@ -1734,7 +1783,8 @@
             "trigger": "honest",
             "pattern_en": "Are you alright?",
             "pattern_kr": "괜찮아?",
-            "patternCount": 5,
+            "coreEn": "Are you alright",
+            "coreKr": "괜찮아",
             "siblings": [
               {
                 "word": "alright",
@@ -1770,7 +1820,8 @@
             "trigger": "sad",
             "pattern_en": "You look ~.",
             "pattern_kr": "너 ~해 보여. (상태나 기분)",
-            "patternCount": 9,
+            "coreEn": "You look",
+            "coreKr": "너",
             "siblings": [
               {
                 "word": "look",
@@ -1806,7 +1857,8 @@
             "trigger": "blouse",
             "pattern_en": "I'm looking for ~",
             "pattern_kr": "저는 ~를 찾고 있어요.",
-            "patternCount": 9,
+            "coreEn": "I'm looking for",
+            "coreKr": "를 찾고 있어요",
             "siblings": [
               {
                 "word": "pair",
@@ -1843,7 +1895,8 @@
             "trigger": "try",
             "pattern_en": "Can I try it on?",
             "pattern_kr": "그거 입어봐도 되나요?",
-            "patternCount": 4,
+            "coreEn": "Can I try it on",
+            "coreKr": "그거 입어봐도 되나요",
             "siblings": [
               {
                 "word": "sec",
@@ -1879,7 +1932,8 @@
             "trigger": "excuse",
             "pattern_en": "Can I try this on?",
             "pattern_kr": "이거 입어봐도 되나요?",
-            "patternCount": 2,
+            "coreEn": "Can I try this on",
+            "coreKr": "이거",
             "siblings": [
               {
                 "word": "try",
@@ -1910,7 +1964,8 @@
             "trigger": "dress",
             "pattern_en": "Can I try on ~ ?",
             "pattern_kr": "~ 입어봐도 될까요?",
-            "patternCount": 3,
+            "coreEn": "Can I try on",
+            "coreKr": "입어봐도 될까요",
             "siblings": [
               {
                 "word": "tight",
@@ -1946,7 +2001,8 @@
             "trigger": "drugstore",
             "pattern_en": "Where's the nearest ~?",
             "pattern_kr": "가장 가까운 ~이 어디 있나요?",
-            "patternCount": 10,
+            "coreEn": "Where's the nearest",
+            "coreKr": "가장 가까운",
             "siblings": [
               {
                 "word": "convenience store",
@@ -1982,7 +2038,8 @@
             "trigger": "remote",
             "pattern_en": "How do I use ~?",
             "pattern_kr": "~는 어떻게 사용하나요?",
-            "patternCount": 5,
+            "coreEn": "How do I use",
+            "coreKr": "어떻게 사용하나요",
             "siblings": [
               {
                 "word": "chair",
@@ -2018,7 +2075,8 @@
             "trigger": "sunscreen",
             "pattern_en": "Where can I find ~?",
             "pattern_kr": "~는 어디서 찾을 수 있나요?",
-            "patternCount": 5,
+            "coreEn": "where can I find",
+            "coreKr": "를 어디서 찾을 수 있나요",
             "siblings": [
               {
                 "word": "charger",
@@ -2054,7 +2112,8 @@
             "trigger": "shirt",
             "pattern_en": "I love your ~.",
             "pattern_kr": "네 ~ 마음에 든다.",
-            "patternCount": 11,
+            "coreEn": "I love your",
+            "coreKr": "네",
             "siblings": [
               {
                 "word": "style",
@@ -2090,7 +2149,8 @@
             "trigger": "lately",
             "pattern_en": "How have you been?",
             "pattern_kr": "어떻게 지냈어?",
-            "patternCount": 10,
+            "coreEn": "How have you been",
+            "coreKr": "어떻게 지내",
             "siblings": [
               {
                 "word": "how",
@@ -2132,7 +2192,6 @@
             "trigger": "happy",
             "pattern_kr": "be 현재 + 형용사",
             "big": "인칭대명사와 be동사",
-            "patternCount": 10,
             "siblings": [
               {
                 "word": "smart",
@@ -2168,7 +2227,6 @@
             "trigger": "doctor",
             "pattern_kr": "be 현재 + 단수명사",
             "big": "인칭대명사와 be동사",
-            "patternCount": 10,
             "siblings": [
               {
                 "word": "student",
@@ -2204,7 +2262,6 @@
             "trigger": "student",
             "pattern_kr": "be 현재 + 복수명사(regular)",
             "big": "인칭대명사와 be동사\n명사의 규칙 복수형I",
-            "patternCount": 10,
             "siblings": [
               {
                 "word": "friend",
@@ -2240,7 +2297,6 @@
             "trigger": "singer",
             "pattern_kr": "be 과거",
             "big": "인칭대명사와 be동사",
-            "patternCount": 9,
             "siblings": [
               {
                 "word": "incredible",
@@ -2276,7 +2332,6 @@
             "trigger": "teacher",
             "pattern_kr": "소유격",
             "big": "인칭대명사",
-            "patternCount": 10,
             "siblings": [
               {
                 "word": "nice",
@@ -2312,7 +2367,6 @@
             "trigger": "mad",
             "pattern_kr": "비 축약형",
             "big": "be동사의 부정문",
-            "patternCount": 10,
             "siblings": [
               {
                 "word": "nurse",
@@ -2348,7 +2402,6 @@
             "trigger": "nurse",
             "pattern_kr": "축약형",
             "big": "be동사의 부정문",
-            "patternCount": 12,
             "siblings": [
               {
                 "word": "friend",
@@ -2384,7 +2437,6 @@
             "trigger": "like",
             "pattern_kr": "긍정문 (동사원형)",
             "big": "일반동사의 긍정문/부정문",
-            "patternCount": 10,
             "siblings": [
               {
                 "word": "love",
@@ -2420,7 +2472,6 @@
             "trigger": "French",
             "pattern_kr": "긍정문 (동사-s)",
             "big": "일반동사의 긍정문/부정문",
-            "patternCount": 16,
             "siblings": [
               {
                 "word": "like",
@@ -2456,7 +2507,6 @@
             "trigger": "pizza",
             "pattern_kr": "부정문 현재",
             "big": "일반동사의 긍정문/부정문",
-            "patternCount": 6,
             "siblings": [
               {
                 "word": "like",
@@ -2493,7 +2543,6 @@
             "trigger": "go",
             "pattern_kr": "부정문 과거",
             "big": "일반동사의 긍정문/부정문",
-            "patternCount": 9,
             "siblings": [
               {
                 "word": "say",
@@ -2529,7 +2578,6 @@
             "trigger": "door",
             "pattern_kr": "긍정명령(일반동사)",
             "big": "명령문",
-            "patternCount": 9,
             "siblings": [
               {
                 "word": "eye",
@@ -2565,7 +2613,6 @@
             "trigger": "quiet",
             "pattern_kr": "긍정명령(be 동사)",
             "big": "명령문",
-            "patternCount": 7,
             "siblings": [
               {
                 "word": "careful",
@@ -2602,7 +2649,6 @@
             "trigger": "move",
             "pattern_kr": "부정명령",
             "big": "명령문",
-            "patternCount": 12,
             "siblings": [
               {
                 "word": "go",
@@ -2638,7 +2684,6 @@
             "trigger": "hungry",
             "pattern_kr": "be 현재",
             "big": "Yes/No 의문문",
-            "patternCount": 10,
             "siblings": [
               {
                 "word": "tall",
@@ -2675,7 +2720,6 @@
             "trigger": "brother",
             "pattern_kr": "be 현재 대답",
             "big": "Yes/No 의문문",
-            "patternCount": 8,
             "siblings": [
               {
                 "word": "nurse",
@@ -2712,7 +2756,6 @@
             "trigger": "funny",
             "pattern_kr": "be 과거",
             "big": "Yes/No 의문문",
-            "patternCount": 12,
             "siblings": [
               {
                 "word": "mad",
@@ -2748,7 +2791,6 @@
             "trigger": "kind",
             "pattern_kr": "be 과거 대답",
             "big": "Yes/No 의문문",
-            "patternCount": 10,
             "siblings": [
               {
                 "word": "nurse",
@@ -2786,7 +2828,6 @@
             "trigger": "butter",
             "pattern_kr": "질문",
             "big": "선택의문문",
-            "patternCount": 14,
             "siblings": [
               {
                 "word": "real",
@@ -2822,7 +2863,6 @@
             "trigger": "music",
             "pattern_kr": "일반동사 현재",
             "big": "Yes/No 의문문",
-            "patternCount": 10,
             "siblings": [
               {
                 "word": "movie",
@@ -2858,7 +2898,6 @@
             "trigger": "TV",
             "pattern_kr": "일반동사 현재 대답",
             "big": "Yes/No 의문문",
-            "patternCount": 9,
             "siblings": [
               {
                 "word": "music",
@@ -2894,7 +2933,6 @@
             "trigger": "English",
             "pattern_kr": "(과거시제)일반동사의 규칙 변화형I",
             "big": "(과거시제)일반동사의 규칙 변화형I",
-            "patternCount": 10,
             "siblings": [
               {
                 "word": "cry",
@@ -2931,7 +2969,6 @@
             "trigger": "breakfast",
             "pattern_kr": "일반동사 과거",
             "big": "Yes/No 의문문",
-            "patternCount": 11,
             "siblings": [
               {
                 "word": "leave",
@@ -2968,7 +3005,6 @@
             "trigger": "tooth",
             "pattern_kr": "일반동사 과거 대답",
             "big": "Yes/No 의문문",
-            "patternCount": 10,
             "siblings": [
               {
                 "word": "breakfast",
@@ -3004,7 +3040,6 @@
             "trigger": "cute",
             "pattern_kr": "질문",
             "big": "부정의문문",
-            "patternCount": 12,
             "siblings": [
               {
                 "word": "mad",
@@ -3040,7 +3075,6 @@
             "trigger": "angry",
             "pattern_kr": "대답",
             "big": "Yes/No 의문문",
-            "patternCount": 12,
             "siblings": [
               {
                 "word": "there",
@@ -3076,7 +3110,6 @@
             "trigger": "what",
             "pattern_kr": "what, who, where, when, why, how+be",
             "big": "의문사로 시작하는 의문문",
-            "patternCount": 12,
             "siblings": [
               {
                 "word": "who",
@@ -3112,7 +3145,6 @@
             "trigger": "want",
             "pattern_kr": "지시대명사 복수형",
             "big": "지시대명사",
-            "patternCount": 5,
             "siblings": [
               {
                 "word": "bag",
@@ -3149,7 +3181,6 @@
             "trigger": "know",
             "pattern_kr": "what, who, where, when, why, how+do",
             "big": "의문사로 시작하는 의문문",
-            "patternCount": 15,
             "siblings": [
               {
                 "word": "mean",
@@ -3185,7 +3216,6 @@
             "trigger": "size",
             "pattern_kr": "what+명사",
             "big": "what, which",
-            "patternCount": 5,
             "siblings": [
               {
                 "word": "color",
@@ -3221,7 +3251,6 @@
             "trigger": "car",
             "pattern_kr": "whose+명사",
             "big": "who",
-            "patternCount": 11,
             "siblings": [
               {
                 "word": "phone",
@@ -3257,7 +3286,6 @@
             "trigger": "room",
             "pattern_kr": "to",
             "big": "방향을 나타내는 전치사",
-            "patternCount": 6,
             "siblings": [
               {
                 "word": "party",
@@ -3293,7 +3321,6 @@
             "trigger": "California",
             "pattern_kr": "(장소 전치사) at, on, in",
             "big": "(장소 전치사) at, on, in",
-            "patternCount": 17,
             "siblings": [
               {
                 "word": "bed",
@@ -3329,7 +3356,6 @@
             "trigger": "woman",
             "pattern_kr": "한정적 용법",
             "big": "형용사",
-            "patternCount": 10,
             "siblings": [
               {
                 "word": "student",
@@ -3365,7 +3391,6 @@
             "trigger": "delicious",
             "pattern_kr": "지시형용사",
             "big": "지시대명사",
-            "patternCount": 6,
             "siblings": [
               {
                 "word": "spicy",
@@ -3402,7 +3427,6 @@
             "trigger": "let",
             "pattern_kr": "Let's (긍정)",
             "big": "Let's로 시작하는 청유문",
-            "patternCount": 8,
             "siblings": [
               {
                 "word": "dinner",
@@ -3438,7 +3462,6 @@
             "trigger": "panic",
             "pattern_kr": "Let's (부정)",
             "big": "Let's로 시작하는 청유문",
-            "patternCount": 5,
             "siblings": [
               {
                 "word": "let",
@@ -3475,7 +3498,6 @@
             "trigger": "guide",
             "pattern_kr": "Let me",
             "big": "Let's로 시작하는 청유문",
-            "patternCount": 3,
             "siblings": [
               {
                 "word": "let",
@@ -3514,7 +3536,6 @@
             "trigger": "listen",
             "pattern_kr": "동사 수식",
             "big": "부사의 역할과 형용사를 부사로 만드는 법",
-            "patternCount": 11,
             "siblings": [
               {
                 "word": "sing",
@@ -3550,7 +3571,6 @@
             "trigger": "guy",
             "pattern_kr": "형용사 수식",
             "big": "부사의 역할과 형용사를 부사로 만드는 법",
-            "patternCount": 10,
             "siblings": [
               {
                 "word": "kid",
@@ -3586,7 +3606,6 @@
             "trigger": "eat",
             "pattern_kr": "다른 부사 수식",
             "big": "부사의 역할과 형용사를 부사로 만드는 법",
-            "patternCount": 18,
             "siblings": [
               {
                 "word": "talk",
@@ -3622,7 +3641,6 @@
             "trigger": "leave",
             "pattern_kr": "형용사와 형태가 같은 부사 late || hard || fast || high || low || early || long || short || last || near",
             "big": "형용사와 형태가 같은 부사",
-            "patternCount": 9,
             "siblings": [
               {
                 "word": "arrive",
@@ -3658,7 +3676,6 @@
             "trigger": "umbrella",
             "pattern_kr": "s",
             "big": "명사의 소유격",
-            "patternCount": 11,
             "siblings": [
               {
                 "word": "brother",
@@ -3695,7 +3712,6 @@
             "trigger": "Berlin",
             "pattern_kr": "of 이용",
             "big": "명사의 소유격",
-            "patternCount": 9,
             "siblings": [
               {
                 "word": "name",
@@ -3732,7 +3748,6 @@
             "trigger": "money",
             "pattern_kr": "all",
             "big": "all, both, rest",
-            "patternCount": 13,
             "siblings": [
               {
                 "word": "option",
@@ -3768,7 +3783,6 @@
             "trigger": "child",
             "pattern_kr": "명사의 불규칙 복수형",
             "big": "명사의 불규칙 복수형",
-            "patternCount": 8,
             "siblings": [
               {
                 "word": "tooth",
@@ -3804,7 +3818,6 @@
             "trigger": "look",
             "pattern_kr": "감각동사",
             "big": "감각동사 + 주격 보어(형용사)",
-            "patternCount": 7,
             "siblings": [
               {
                 "word": "room",
@@ -3840,7 +3853,6 @@
             "trigger": "father",
             "pattern_kr": "감각동사+like+명사",
             "big": "감각동사 + 주격 보어(형용사)",
-            "patternCount": 7,
             "siblings": [
               {
                 "word": "strawberry",
@@ -3876,7 +3888,6 @@
             "trigger": "dance",
             "pattern_kr": "(진행시제) 동사의 -ing형 I",
             "big": "(진행시제) 동사의 -ing형 I",
-            "patternCount": 13,
             "siblings": [
               {
                 "word": "run",
@@ -3912,7 +3923,6 @@
             "trigger": "homework",
             "pattern_kr": "과거진행시제",
             "big": "과거진행시제",
-            "patternCount": 10,
             "siblings": [
               {
                 "word": "breakfast",
@@ -3948,7 +3958,6 @@
             "trigger": "adorable",
             "pattern_kr": "how + 형용사/부사",
             "big": "감탄문",
-            "patternCount": 8,
             "siblings": [
               {
                 "word": "cute",
@@ -3985,7 +3994,6 @@
             "trigger": "meal",
             "pattern_kr": "what + a/an + 형 + 명",
             "big": "감탄문",
-            "patternCount": 9,
             "siblings": [
               {
                 "word": "flower",
@@ -4021,7 +4029,6 @@
             "trigger": "dress",
             "pattern_kr": "This isn't said all that much",
             "big": "감탄문",
-            "patternCount": 6,
             "siblings": [
               {
                 "word": "scarve",
@@ -4057,7 +4064,6 @@
             "trigger": "exercise",
             "pattern_kr": "횟수를 나타내는 \"a\"",
             "big": "배수사",
-            "patternCount": 11,
             "siblings": [
               {
                 "word": "pray",
@@ -4093,7 +4099,6 @@
             "trigger": "sad",
             "pattern_kr": "be동사",
             "big": "빈도부사의 위치",
-            "patternCount": 11,
             "siblings": [
               {
                 "word": "happy",
@@ -4129,7 +4134,6 @@
             "trigger": "cucumber",
             "pattern_kr": "일반동사",
             "big": "빈도부사의 위치",
-            "patternCount": 13,
             "siblings": [
               {
                 "word": "homework",
@@ -4166,7 +4170,6 @@
             "trigger": "speak",
             "pattern_kr": "(과거시제)일반동사의 불규칙 변화형",
             "big": "(과거시제)일반동사의 불규칙 변화형",
-            "patternCount": 12,
             "siblings": [
               {
                 "word": "go",
@@ -4202,7 +4205,6 @@
             "trigger": "your",
             "pattern_kr": "소유대명사",
             "big": "인칭대명사",
-            "patternCount": 8,
             "siblings": [
               {
                 "word": "book",
@@ -4239,7 +4241,6 @@
             "trigger": "book",
             "pattern_kr": "일반 명사의 소유대명사",
             "big": "명사의 소유격",
-            "patternCount": 9,
             "siblings": [
               {
                 "word": "be",
@@ -4277,7 +4278,6 @@
             "trigger": "time",
             "pattern_kr": "비인칭 주어 it",
             "big": "비인칭 주어 it",
-            "patternCount": 9,
             "siblings": [
               {
                 "word": "warm",

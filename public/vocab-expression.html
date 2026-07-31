@@ -100,9 +100,8 @@
   .learn-box { background:#e2d7f8; border-radius:14px; padding:12px 14px; margin:14px 0 4px; }
   .learn-label { font-size:11.5px; font-weight:800; color:#8878b3; }
   .learn-pat { font-size:18.5px; font-weight:800; color:var(--purple-d); margin-top:3px; line-height:1.35; }
-  .learn-meta { display:flex; flex-wrap:wrap; align-items:center; gap:6px; margin-top:10px; }
-  .use-count { font-size:12.5px; font-weight:700; color:#7a6aa8; }
-  .use-count b { color:var(--purple-d); font-weight:800; }
+  /* 정답 문장의 핵심 표현 구간(형광펜) — 안의 트리거 어휘는 .tgt 초록 유지 */
+  .core { background:#e4d9fb; border-radius:6px; padding:2px 5px; box-decoration-break:clone; -webkit-box-decoration-break:clone; }
 
   /* 배열 정답 후 — 재사용 프레임 공개 + 응용 예문(효용 체감) */
   .payoff { background:#eefaf2; border:1px solid #c6ecd5; border-radius:14px; padding:12px 14px; margin-top:16px; }
@@ -390,14 +389,25 @@ function isTriggerToken(tok, trigger){
   return parts.some(a=> trigs.some(b=> matchStem(a,b)));
 }
 
-// 문장 안에서 해당 단어(굴절형 포함)만 초록 강조 — 문장부호는 강조 밖으로 뺀다
-function hlWord(sent, word){
+// 문장 안에서 해당 단어(굴절형 포함)만 강조 — 문장부호는 강조 밖으로 뺀다
+function hlWord(sent, word, cls){
+  cls=cls||'sw';
   return String(sent).split(/(\s+)/).map(t=>{
     if(/^\s*$/.test(t)) return t;
     if(!isTriggerToken(t, word)) return escapeHtml(t);
     const m=t.match(/^([^A-Za-z0-9']*)(.*?)([^A-Za-z0-9']*)$/);
-    return escapeHtml(m[1])+`<span class="sw">${escapeHtml(m[2])}</span>`+escapeHtml(m[3]);
+    return escapeHtml(m[1])+`<span class="${cls}">${escapeHtml(m[2])}</span>`+escapeHtml(m[3]);
   }).join('');
+}
+// 정답 문장: 데이터의 `[...]` 구간(핵심 표현)에 형광펜 + 그 안의 방금 배운 어휘는 초록
+// 문법 데이터엔 core 구간이 없어 트리거 어휘만 강조하는 폴백으로 동작한다.
+function hlCore(sent, core, trigger){
+  const s=String(sent);
+  const i = core ? s.toLowerCase().indexOf(String(core).toLowerCase()) : -1;
+  if(i<0) return hlWord(s, trigger, 'tgt');
+  return hlWord(s.slice(0,i), trigger, 'tgt')
+    + `<span class="core">${hlWord(s.slice(i,i+core.length), trigger, 'tgt')}</span>`
+    + hlWord(s.slice(i+core.length), trigger, 'tgt');
 }
 
 // 배열 전: 이번에 뭘 배우는지 + 그게 얼마나 쓸모있는지(활용 규모)를 한눈에.
@@ -406,12 +416,9 @@ function learnBoxHtml(item){
   const s=item.sentence, isG=curMode==='grammar';
   const pat=(s.pattern_kr||'').trim();   // 한국어 뜻만 (영어 틀은 정답이 새므로 제외)
   if(!pat) return `<div class="learn-box"><div class="learn-pat">초록색 단어를 넣어 문장을 완성해요</div></div>`;
-  const n=s.patternCount||0;
-  const meta = n>=3
-    ? `<div class="learn-meta"><span class="use-count">${isG?`이 문법으로 <b>${n}개 문장</b>`:`단어만 바꿔 <b>${n}가지</b>`}</span></div>` : '';
   return `<div class="learn-box">
       <div class="learn-label">이번에 배울 ${isG?'문법':'표현'}</div>
-      <div class="learn-pat">${escapeHtml(pat)}</div>${meta}
+      <div class="learn-pat">${escapeHtml(pat)}</div>
     </div>`;
 }
 
@@ -420,7 +427,7 @@ function learnBoxHtml(item){
 function patternPayoffHtml(item){
   const s=item.sentence, isG=curMode==='grammar';
   const patEn=(s.pattern_en||'').trim(), patKr=(s.pattern_kr||'').trim();
-  const sibs=(s.siblings||[]).slice(0,2), n=s.patternCount||0;
+  const sibs=(s.siblings||[]).slice(0,2);
   if(!patEn && !patKr && !sibs.length) return '';
   let frame='';
   if(!isG && patEn){
@@ -430,12 +437,9 @@ function patternPayoffHtml(item){
   }
   const exs=sibs.map(x=>
     `<div class="swap-ex"><div class="swap-en">${hlWord(x.en, x.word)}</div><div class="swap-kr">${escapeHtml(x.kr)}</div></div>`).join('');
-  const label = sibs.length
-    ? `<div class="swap-label">${ n>=3
-        ? (isG ? `이 문법으로 <b>${n}개 문장</b>을 만들 수 있어요` : `단어만 바꾸면 <b>${n}가지</b>로 말할 수 있어요`)
-        : '단어만 바꿔 이렇게도 말해요' }</div>` : '';
+  const label = sibs.length ? `<div class="swap-label">단어만 바꿔 이렇게도 말해요</div>` : '';
   return `<div class="payoff">
-      <div class="payoff-top">🎉 이제 이 ${isG?'문법':'표현'}을 쓸 수 있어요</div>
+      <div class="payoff-top">🎉 새로운 ${isG?'문법':'표현'}을 배웠어요</div>
       ${frame}${label}${exs}
     </div>`;
 }
@@ -524,7 +528,7 @@ function renderArrange(){
     // 완성 문장(트리거 초록) → 그 아래 프레임·응용 예문 순서로 보여준다
     el('patBox').innerHTML='';
     el('micFloat').classList.add('hidden');
-    fillEl.innerHTML=`<div style="font-size:19px;font-weight:800;color:#2f3e52;line-height:1.5">${hlTrigger(s.en, s.trigger)}</div>`;
+    fillEl.innerHTML=`<div style="font-size:19px;font-weight:800;color:#2f3e52;line-height:1.5">${hlCore(s.en, s.coreEn, s.trigger)}</div>`;
     el('payoffBox').innerHTML=patternPayoffHtml(item);
     const last=itemIdx>=sessionItems.length-1;
     el('bottom').innerHTML=`<button class="btn-next" id="nextBtn">${last?'완료하기 🎉':'다음 문제 ▶'}</button>`;

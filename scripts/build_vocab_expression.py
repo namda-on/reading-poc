@@ -95,6 +95,12 @@ def strip_markup(s):
     return s.replace("[", "").replace("]", "").replace("{", "").replace("}", "").strip()
 
 
+def core_text(s):
+    """`[...]`로 표시된 핵심 표현 구간의 평문. 표현 데이터에만 있고 문법엔 없다."""
+    m = re.search(r"\[([^\]]+)\]", s or "")
+    return strip_markup(m.group(1)) if m else ""
+
+
 BRACKET = re.compile(r"\[([^\]]+)\]")
 
 
@@ -205,6 +211,8 @@ def build_mode(csv_path, kind, vocab_by_seq, cefr_by_seq):
         if kind == "expression":
             s["pattern_en"] = ff[C["title_en"]]
             s["pattern_kr"] = ff[C["title_kr"]]
+            s["coreEn"] = core_text(sent)     # 정답 후 하이라이트할 핵심 표현 구간
+            s["coreKr"] = core_text(trans)
         else:
             s["pattern_kr"] = ff[C["sub"]] or ff[C["big"]]
             s["big"] = ff[C["big"]]
@@ -231,7 +239,6 @@ def build_mode(csv_path, kind, vocab_by_seq, cefr_by_seq):
         seen_pk.add(c["pk"]); seen_word.add(w)
         s = c["item"]["sentence"]
         group = pattern_examples.get(c["pk"], [])
-        s["patternCount"] = len(group)   # 원본 데이터의 같은 패턴 예문 수
         s["siblings"] = [x for x in group if x["word"].lower() != s["trigger"].lower()][:2]
         items.append(c["item"])
         if MAX_ITEMS and len(items) >= MAX_ITEMS:
