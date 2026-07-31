@@ -101,6 +101,12 @@ def core_text(s):
     return strip_markup(m.group(1)) if m else ""
 
 
+def lead_in(s):
+    """핵심 표현 앞에 붙은 도입부("Excuse me?", "Yeah," 등). 없으면 빈 문자열."""
+    m = re.search(r"\[([^\]]+)\]", s or "")
+    return strip_markup((s or "")[: m.start()]) if m else ""
+
+
 BRACKET = re.compile(r"\[([^\]]+)\]")
 
 
@@ -194,10 +200,15 @@ def build_mode(csv_path, kind, vocab_by_seq, cefr_by_seq):
         pk = pattern_key()
         if not pk:
             continue
+        # 핵심 표현 앞의 군더더기 도입부("Excuse me?", "Yeah," …)가 있는 문장은 제외 —
+        # 배열 문장이 표현 자체로 시작해야 학습 대상이 선명하다. (문법엔 마크업이 없어 항상 통과)
+        if lead_in(sent):
+            continue
 
         lst = pattern_examples.setdefault(pk, [])
         if not any(x["word"].lower() == cw.lower() for x in lst):
-            lst.append({"word": cw, "en": strip_markup(sent), "kr": strip_markup(trans)})
+            lst.append({"word": cw, "en": strip_markup(sent), "kr": strip_markup(trans),
+                        "coreEn": core_text(sent)})
 
         seq = r[C["seq"]].strip()
         vocab = vocab_by_seq.get(int(seq)) if seq.isdigit() else None
@@ -235,6 +246,9 @@ def build_mode(csv_path, kind, vocab_by_seq, cefr_by_seq):
     for c in sorted(candidates, key=lambda x: x["level"]):
         w = c["item"]["word"].lower()
         if c["pk"] in seen_pk or w in seen_word:
+            continue
+        # 문항 1개 + 응용 예문 2개가 나오는 패턴만 쓴다(보상 카드가 비지 않도록)
+        if len(pattern_examples.get(c["pk"], [])) < 3:
             continue
         seen_pk.add(c["pk"]); seen_word.add(w)
         s = c["item"]["sentence"]

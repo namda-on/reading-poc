@@ -11,45 +11,7 @@
       "desc": "관용 표현 문장 배열",
       "items": [
         {
-          "level": 1,
-          "word": "gate",
-          "meaning": "문, 정문, 대문, 출입구",
-          "pos": "noun",
-          "cefr": "A2",
-          "vocab": {
-            "answer": "gate",
-            "enLines": [
-              "I'll meet you at the front [gate] in an hour."
-            ],
-            "koLines": [
-              "한 시간 후에 정[문]에서 만나.",
-              "(대문을 뜻하는 표현)"
-            ]
-          },
-          "sentence": {
-            "en": "Excuse me? Where's gate 7?",
-            "kr": "실례합니다. 7번 게이트가 어디인가요?",
-            "trigger": "gate",
-            "pattern_en": "Where's ~?",
-            "pattern_kr": "~은 어디인가요?",
-            "coreEn": "Where's gate",
-            "coreKr": "게이트가 어디인가요",
-            "siblings": [
-              {
-                "word": "restroom",
-                "en": "Excuse me? Where's the nearest restroom?",
-                "kr": "실례합니다. 가장 가까운 화장실이 어디인가요?"
-              },
-              {
-                "word": "baggage claim",
-                "en": "Excuse me? Where's baggage claim?",
-                "kr": "실례합니다. 수하물 찾는 곳이 어디인가요?"
-              }
-            ]
-          }
-        },
-        {
-          "level": 1,
+          "level": 2,
           "word": "pen",
           "meaning": "펜",
           "pos": "noun",
@@ -64,274 +26,25 @@
             ]
           },
           "sentence": {
-            "en": "Do you have a pen?",
-            "kr": "펜 하나 있나요?",
+            "en": "Can I have a pen?",
+            "kr": "펜 하나 받을 수 있을까요?",
             "trigger": "pen",
-            "pattern_en": "Do you have ~?",
-            "pattern_kr": "~가 있나요?",
-            "coreEn": "Do you have",
-            "coreKr": "있나요",
-            "siblings": [
-              {
-                "word": "mask",
-                "en": "Yeah, do you have a sleep mask?",
-                "kr": "네, 수면 안대 있나요?"
-              },
-              {
-                "word": "option",
-                "en": "Do you have any vegetarian options?",
-                "kr": "채식 메뉴 있나요?"
-              }
-            ]
-          }
-        },
-        {
-          "level": 1,
-          "word": "here",
-          "meaning": "여기, 여기에, 여기에서, 여기로",
-          "pos": "adverb",
-          "cefr": "A1",
-          "vocab": {
-            "answer": "Here",
-            "enLines": [
-              "[Here], this is my room."
-            ],
-            "koLines": [
-              "[여기], 이게 내 방이야."
-            ]
-          },
-          "sentence": {
-            "en": "For here.",
-            "kr": "마시고 갈게요.",
-            "trigger": "here",
-            "pattern_en": "For here.",
-            "pattern_kr": "먹고 갈게요.",
-            "coreEn": "For here",
-            "coreKr": "마시고 갈게요",
-            "siblings": [
-              {
-                "word": "latte",
-                "en": "Two lattes for here, please.",
-                "kr": "라떼 두 잔 여기서 마시고 갈게요."
-              },
-              {
-                "word": "hot chocolate",
-                "en": "One hot chocolate for here, please.",
-                "kr": "핫초코 한잔 여기서 마시고 갈게요."
-              }
-            ]
-          }
-        },
-        {
-          "level": 1,
-          "word": "go",
-          "meaning": "가다 <go + ~ing로 \"~하러 가다\"로 해석될 때도 이 항목을 선택>",
-          "pos": "verb",
-          "cefr": "A1",
-          "vocab": {
-            "answer": "go",
-            "enLines": [
-              "Don't [go]!"
-            ],
-            "koLines": [
-              "[가]지 마!",
-              "<문법: 주어 없이 don't로 문장을 시작하면 \"~하지 마\"라는 명령문이 돼요.>"
-            ]
-          },
-          "sentence": {
-            "en": "To go.",
-            "kr": "가져갈게요.",
-            "trigger": "go",
-            "pattern_en": "To go.",
-            "pattern_kr": "가져갈게요.",
-            "coreEn": "To go",
-            "coreKr": "가져갈게요",
-            "siblings": [
-              {
-                "word": "latte",
-                "en": "One iced latte to go.",
-                "kr": "아이스라테 하나 포장이요."
-              },
-              {
-                "word": "tea",
-                "en": "Two green tea lattes to go, please.",
-                "kr": "녹차라떼 두 잔 포장해 주세요."
-              }
-            ]
-          }
-        },
-        {
-          "level": 1,
-          "word": "much",
-          "meaning": "많이, 매우, 너무, 정말, 대단히",
-          "pos": "adverb",
-          "cefr": "A1",
-          "vocab": {
-            "answer": "much",
-            "enLines": [
-              "Oh, thank you so [much]."
-            ],
-            "koLines": [
-              "와, 너무 [너무] 고마워요.",
-              "( 와, 너무나도 [많이] 고마워요. )"
-            ]
-          },
-          "sentence": {
-            "en": "How much is it?",
-            "kr": "그거 얼마예요?",
-            "trigger": "much",
-            "pattern_en": "How much is it?",
-            "pattern_kr": "그거 얼마예요?",
-            "coreEn": "How much is it",
-            "coreKr": "그거 얼마예요",
-            "siblings": [
-              {
-                "word": "total",
-                "en": "Oh, right! Then how much is it in total?",
-                "kr": "아, 맞다. 그럼 총 얼마예요?"
-              }
-            ]
-          }
-        },
-        {
-          "level": 1,
-          "word": "how",
-          "meaning": "어떻게 ~하는가, ~하는 방법 <the way in which의 의미>",
-          "pos": "conjunction",
-          "cefr": "A2",
-          "vocab": {
-            "answer": "how",
-            "enLines": [
-              "I know [how] it happened."
-            ],
-            "koLines": [
-              "나는 그게 [어떻게] 된 건[지] 알아."
-            ]
-          },
-          "sentence": {
-            "en": "How are you?",
-            "kr": "요즘 어때?",
-            "trigger": "how",
-            "pattern_en": "How are you?",
-            "pattern_kr": "요즘 어때?",
-            "coreEn": "How are you",
-            "coreKr": "요즘 어때",
-            "siblings": [
-              {
-                "word": "talk",
-                "en": "Hi! How are you? We haven't talked in ages.",
-                "kr": "안녕! 어떻게 지내? 오랜만이야."
-              },
-              {
-                "word": "do",
-                "en": "Hey, how are you? Are you doing okay?",
-                "kr": "안녕, 요즘 어때? 잘 지내고 있어?"
-              }
-            ]
-          }
-        },
-        {
-          "level": 1,
-          "word": "thank",
-          "meaning": "감사하다, 고마워하다, 감사를 표하다",
-          "pos": "verb",
-          "cefr": "A1",
-          "vocab": {
-            "answer": "thank",
-            "enLines": [
-              "You'll [thank] me for this one day."
-            ],
-            "koLines": [
-              "언젠가 나한테 [고마워하]게 될 거야."
-            ]
-          },
-          "sentence": {
-            "en": "I'm doing well, thanks.",
-            "kr": "난 잘 지내고 있어, 고마워.",
-            "trigger": "thank",
-            "pattern_en": "I'm doing well.",
-            "pattern_kr": "잘 지내고 있어.",
-            "coreEn": "I'm doing well",
-            "coreKr": "난 잘 지내고 있어",
-            "siblings": [
-              {
-                "word": "do",
-                "en": "I'm doing well, and you?",
-                "kr": "난 잘 지내고 있어, 너는?"
-              }
-            ]
-          }
-        },
-        {
-          "level": 1,
-          "word": "Thursday",
-          "meaning": "목요일",
-          "pos": "noun",
-          "cefr": "A1",
-          "vocab": {
-            "answer": "Thursday",
-            "enLines": [
-              "Let's watch a movie on [Thursday]."
-            ],
-            "koLines": [
-              "[목요일]에 영화 보자."
-            ]
-          },
-          "sentence": {
-            "en": "Probably Thursday. How about you?",
-            "kr": "아마도 목요일일 거야. 너는?",
-            "trigger": "Thursday",
-            "pattern_en": "How about you?",
-            "pattern_kr": "너는?",
-            "coreEn": "How about you",
-            "coreKr": "너는",
-            "siblings": [
-              {
-                "word": "how",
-                "en": "How about you?",
-                "kr": "너는?"
-              },
-              {
-                "word": "park",
-                "en": "I'm going to the park. How about you?",
-                "kr": "공원에 갈 거야. 너는?"
-              }
-            ]
-          }
-        },
-        {
-          "level": 2,
-          "word": "pillow",
-          "meaning": "베개",
-          "pos": "noun",
-          "cefr": "A2",
-          "vocab": {
-            "answer": "pillow",
-            "enLines": [
-              "Toss me that [pillow]."
-            ],
-            "koLines": [
-              "그 [베개] 나한테 던져 줘."
-            ]
-          },
-          "sentence": {
-            "en": "Yes, can I have a pillow?",
-            "kr": "네, 베개 하나 주실 수 있나요?",
-            "trigger": "pillow",
             "pattern_en": "Can I have a/an ~?",
             "pattern_kr": "~를 주실 수 있나요?",
-            "coreEn": "can I have a",
-            "coreKr": "하나 주실 수 있나요",
+            "coreEn": "Can I have a",
+            "coreKr": "하나 받을 수 있을까요",
             "siblings": [
               {
                 "word": "napkin",
                 "en": "Can I have a napkin?",
-                "kr": "냅킨 한 장 주실 수 있나요?"
+                "kr": "냅킨 한 장 주실 수 있나요?",
+                "coreEn": "Can I have a"
               },
               {
                 "word": "sprite",
                 "en": "Can I have a Sprite?",
-                "kr": "스프라이트 하나 주실 수 있나요?"
+                "kr": "스프라이트 하나 주실 수 있나요?",
+                "coreEn": "Can I have a"
               }
             ]
           }
@@ -363,12 +76,14 @@
               {
                 "word": "bagel",
                 "en": "Can I have three bagels?",
-                "kr": "베이글 세 개 주문할 수 있을까요?"
+                "kr": "베이글 세 개 주문할 수 있을까요?",
+                "coreEn": "Can I have three"
               },
               {
                 "word": "cappuccino",
                 "en": "Can we have two cappuccinos?",
-                "kr": "저희 카푸치노 두 잔 주문할 수 있을까요?"
+                "kr": "저희 카푸치노 두 잔 주문할 수 있을까요?",
+                "coreEn": "Can we have two"
               }
             ]
           }
@@ -402,198 +117,53 @@
               {
                 "word": "sprite",
                 "en": "I'll have a Sprite, please.",
-                "kr": "스프라이트 하나 할게요."
+                "kr": "스프라이트 하나 할게요.",
+                "coreEn": "I'll have"
               },
               {
-                "word": "curry",
-                "en": "Um, I'll have the chicken curry.",
-                "kr": "음, 저는 닭고기 카레로 할게요."
+                "word": "pancake",
+                "en": "I'll have the pancakes, please.",
+                "kr": "팬케이크로 할게요.",
+                "coreEn": "I'll have"
               }
             ]
           }
         },
         {
           "level": 2,
-          "word": "check",
-          "meaning": "<식당의> 계산서",
-          "pos": "noun",
-          "cefr": "B2",
-          "vocab": {
-            "answer": "check",
-            "enLines": [
-              "Can I get the [check], please?"
-            ],
-            "koLines": [
-              "[계산서] 좀 주시겠어요?"
-            ]
-          },
-          "sentence": {
-            "en": "Hi. Can I get a late check-out?",
-            "kr": "안녕하세요. 늦은 체크아웃 할 수 있을까요?",
-            "trigger": "check",
-            "pattern_en": "Can I get ~?",
-            "pattern_kr": "~를 받을 수 있을까요?",
-            "coreEn": "Can I get",
-            "coreKr": "할 수 있을까요",
-            "siblings": [
-              {
-                "word": "room service",
-                "en": "Hi. Can I get room service at this hour?",
-                "kr": "안녕하세요. 이 시간에 룸서비스 받을 수 있을까요?"
-              },
-              {
-                "word": "towel",
-                "en": "Hi. Can I get some more towels?",
-                "kr": "안녕하세요. 수건 몇 개 더 받을 수 있을까요?"
-              }
-            ]
-          }
-        },
-        {
-          "level": 2,
-          "word": "scarf",
-          "meaning": "스카프",
+          "word": "refund",
+          "meaning": "환불, 환불금",
           "pos": "noun",
           "cefr": "B1",
           "vocab": {
-            "answer": "scarf",
+            "answer": "refund",
             "enLines": [
-              "How much is this [scarf]?"
+              "If you return clothes you bought within a month, you can get a [refund]."
             ],
             "koLines": [
-              "이 [스카프] 얼마예요?"
+              "구매하신 옷을 한 달 내에 반납하면 [환불]을 받을 수 있습니다."
             ]
           },
           "sentence": {
-            "en": "Yes, how much are these scarves?",
-            "kr": "네, 이 스카프들 얼마예요?",
-            "trigger": "scarf",
-            "pattern_en": "How much are these?",
-            "pattern_kr": "이것들 얼마인가요?",
-            "coreEn": "how much are these",
-            "coreKr": "이",
+            "en": "Can I get a refund?",
+            "kr": "환불 받을 수 있을까요?",
+            "trigger": "refund",
+            "pattern_en": "Can I get ~?",
+            "pattern_kr": "~를 받을 수 있을까요?",
+            "coreEn": "Can I get",
+            "coreKr": "받을 수 있을까요",
             "siblings": [
               {
-                "word": "much",
-                "en": "How much are these postcards?",
-                "kr": "이 엽서들 얼마인가요?"
+                "word": "check",
+                "en": "Can I get an early check-in?",
+                "kr": "이른 체크인 가능할까요?",
+                "coreEn": "Can I get"
               },
               {
-                "word": "seashell",
-                "en": "Yeah, how much are these seashells?",
-                "kr": "네, 이 조개껍데기들 얼마예요?"
-              }
-            ]
-          }
-        },
-        {
-          "level": 2,
-          "word": "see",
-          "meaning": "<눈으로> 보다, ~이 보이다",
-          "pos": "verb",
-          "cefr": "A1",
-          "vocab": {
-            "answer": "see",
-            "enLines": [
-              "Do you want to [see] my car?"
-            ],
-            "koLines": [
-              "내 차 [볼]래?"
-            ]
-          },
-          "sentence": {
-            "en": "See you later.",
-            "kr": "나중에 봐.",
-            "trigger": "see",
-            "pattern_en": "See you later.",
-            "pattern_kr": "나중에 봐.",
-            "coreEn": "See you later",
-            "coreKr": "나중에 봐",
-            "siblings": [
-              {
-                "word": "sound",
-                "en": "Alright, sounds good. See you later.",
-                "kr": "그래, 좋아. 나중에 봐."
-              },
-              {
-                "word": "thank",
-                "en": "Thanks, man. See you later!",
-                "kr": "고마워. 나중에 봐!"
-              }
-            ]
-          }
-        },
-        {
-          "level": 2,
-          "word": "problem",
-          "meaning": "<다루거나 이해하기 힘든> 문제",
-          "pos": "noun",
-          "cefr": "A1",
-          "vocab": {
-            "answer": "problem",
-            "enLines": [
-              "What's the [problem] here?"
-            ],
-            "koLines": [
-              "여기 [문제]가 뭐야?"
-            ]
-          },
-          "sentence": {
-            "en": "No problem! See you tomorrow.",
-            "kr": "문제없어! 내일 보자.",
-            "trigger": "problem",
-            "pattern_en": "See you tomorrow.",
-            "pattern_kr": "내일 봐.",
-            "coreEn": "See you tomorrow",
-            "coreKr": "내일 보자",
-            "siblings": [
-              {
-                "word": "see",
-                "en": "See you tomorrow.",
-                "kr": "내일 봐."
-              },
-              {
-                "word": "sound",
-                "en": "Sounds good. See you tomorrow!",
-                "kr": "좋아. 내일 봐!"
-              }
-            ]
-          }
-        },
-        {
-          "level": 2,
-          "word": "flight",
-          "meaning": "<특정 지역으로 가는> 항공편, 항공기",
-          "pos": "noun",
-          "cefr": "A2",
-          "vocab": {
-            "answer": "flight",
-            "enLines": [
-              "What time is your [flight]?"
-            ],
-            "koLines": [
-              "몇 시 [비행기]야?",
-              "( 너의 [항공편]은 몇 시야? )"
-            ]
-          },
-          "sentence": {
-            "en": "Very good. Have a safe flight! See you soon!",
-            "kr": "좋아. 안전하게 비행해! 곧 만나!",
-            "trigger": "flight",
-            "pattern_en": "See you soon.",
-            "pattern_kr": "곧 만나.",
-            "coreEn": "See you soon",
-            "coreKr": "곧 만나",
-            "siblings": [
-              {
-                "word": "see",
-                "en": "See you soon.",
-                "kr": "곧 만나."
-              },
-              {
-                "word": "plane",
-                "en": "I just got off the plane. See you soon!",
-                "kr": "방금 비행기 내렸어요. 곧 만나요!"
+                "word": "room",
+                "en": "Can I get a room with a view?",
+                "kr": "전망 좋은 방으로 받을 수 있을까요?",
+                "coreEn": "Can I get"
               }
             ]
           }
@@ -625,149 +195,54 @@
               {
                 "word": "block",
                 "en": "Go straight for three blocks.",
-                "kr": "세 블록 쭉 가세요."
+                "kr": "세 블록 쭉 가세요.",
+                "coreEn": "Go straight"
               },
               {
-                "word": "park",
-                "en": "Just go straight until you get to the park. You can't miss it.",
-                "kr": "공원이 나올 때까지 그냥 쭉 가세요. 지나칠 수 없을 거예요."
+                "word": "mile",
+                "en": "Go straight for about five miles and then merge onto the 10.",
+                "kr": "5마일 정도 쭉 가시다가 10번 도로로 합류하세요.",
+                "coreEn": "Go straight"
               }
             ]
           }
         },
         {
           "level": 3,
-          "word": "reservation",
-          "meaning": "예약",
+          "word": "book",
+          "meaning": "책",
           "pos": "noun",
-          "cefr": "A2",
+          "cefr": "A1",
           "vocab": {
-            "answer": "reservation",
+            "answer": "book",
             "enLines": [
-              "I forgot to make a [reservation]."
+              "This isn't my [book]."
             ],
             "koLines": [
-              "[예약]한다는 걸 깜빡했네."
+              "이건 내 [책]이 아니야.",
+              "<발음: book의 oo 발음은 \"우\"와 \"으\"의 중간쯤에 해당하는 발음입니다.>"
             ]
           },
           "sentence": {
-            "en": "Great. Do I have to make a reservation?",
-            "kr": "좋네요. 예약을 해야 하나요?",
-            "trigger": "reservation",
+            "en": "Do I have to book in advance?",
+            "kr": "미리 예약해야 하나요?",
+            "trigger": "book",
             "pattern_en": "Do I have to ~?",
             "pattern_kr": "~해야 하나요?",
             "coreEn": "Do I have to",
             "coreKr": "야 하나요",
             "siblings": [
               {
-                "word": "towel",
-                "en": "Great. Do I have to bring a towel?",
-                "kr": "좋네요. 수건을 가지고 와야 할까요?"
-              },
-              {
                 "word": "advance",
                 "en": "Do I have to reserve it in advance?",
-                "kr": "미리 예약해야 하나요?"
-              }
-            ]
-          }
-        },
-        {
-          "level": 3,
-          "word": "room",
-          "meaning": "방, ~실",
-          "pos": "noun",
-          "cefr": "A1",
-          "vocab": {
-            "answer": "room",
-            "enLines": [
-              "This is my [room]."
-            ],
-            "koLines": [
-              "이게 내 [방]이야."
-            ]
-          },
-          "sentence": {
-            "en": "Hi! This is room 305.",
-            "kr": "안녕하세요! 여기 305호인데요.",
-            "trigger": "room",
-            "pattern_en": "This is room ~.",
-            "pattern_kr": "여기 ~호인데요.",
-            "coreEn": "This is room",
-            "coreKr": "여기",
-            "siblings": []
-          }
-        },
-        {
-          "level": 3,
-          "word": "water",
-          "meaning": "물 <산소와 수소의 화학적 결합물로 이루어진 액체>",
-          "pos": "noun",
-          "cefr": "A1",
-          "vocab": {
-            "answer": "water",
-            "enLines": [
-              "I need some [water]."
-            ],
-            "koLines": [
-              "[물]이 좀 필요해."
-            ]
-          },
-          "sentence": {
-            "en": "Yes, can I have some water, please?",
-            "kr": "네, 물 좀 받을 수 있을까요?",
-            "trigger": "water",
-            "pattern_en": "Can I have some ~?",
-            "pattern_kr": "~ 좀 주시겠어요?",
-            "coreEn": "can I have some",
-            "coreKr": "좀 받을 수 있을까요",
-            "siblings": [
-              {
-                "word": "napkin",
-                "en": "Yeah, actually, can I have some napkins?",
-                "kr": "네, 실은요. 냅킨 좀 주시겠어요?"
+                "kr": "미리 예약해야 하나요?",
+                "coreEn": "Do I have to"
               },
               {
-                "word": "ketchup",
-                "en": "Good, thanks. Can I have some ketchup, though?",
-                "kr": "네, 감사합니다. 근데 케첩 좀 주시겠어요?"
-              }
-            ]
-          }
-        },
-        {
-          "level": 3,
-          "word": "take",
-          "meaning": "<사람이나 동물을> 데리고 가다, 데려다주다",
-          "pos": "verb",
-          "cefr": "A1",
-          "vocab": {
-            "answer": "take",
-            "enLines": [
-              "I'll [take] you home."
-            ],
-            "koLines": [
-              "집에 [데려다줄]게."
-            ]
-          },
-          "sentence": {
-            "en": "I'll take it!",
-            "kr": "이거 살게요!",
-            "trigger": "take",
-            "pattern_en": "I'll take it!",
-            "pattern_kr": "이거 살게요!",
-            "coreEn": "I'll take it",
-            "coreKr": "이거 살게요",
-            "siblings": [
-              {
-                "word": "sale",
-                "en": "It's on sale? Then I'll take it!",
-                "kr": "세일 중이에요? 그럼 이거 살게요!"
-              },
-              {
-                "word": "color",
-                "en": "It's a beautiful color. I'll take it!",
-                "kr": "예쁜 색상이네요. 이거 살게요!"
+                "word": "ID",
+                "en": "Do I have to bring my ID?",
+                "kr": "신분증을 가져와야 하나요?",
+                "coreEn": "Do I have to"
               }
             ]
           }
@@ -800,12 +275,14 @@
               {
                 "word": "station",
                 "en": "How do I get to the train station?",
-                "kr": "기차역까지는 어떻게 가나요?"
+                "kr": "기차역까지는 어떻게 가나요?",
+                "coreEn": "How do I get"
               },
               {
                 "word": "beach",
                 "en": "How do I get to the beach from here?",
-                "kr": "여기서 해변까지는 어떻게 가나요?"
+                "kr": "여기서 해변까지는 어떻게 가나요?",
+                "coreEn": "How do I get"
               }
             ]
           }
@@ -837,12 +314,14 @@
               {
                 "word": "bit",
                 "en": "Not bad. I've just been a bit tired.",
-                "kr": "나쁘지 않아. 그저 좀 피곤할 뿐이야."
+                "kr": "나쁘지 않아. 그저 좀 피곤할 뿐이야.",
+                "coreEn": "Not bad"
               },
               {
                 "word": "thank",
                 "en": "Not bad, thanks for asking.",
-                "kr": "나쁘지 않아. 물어봐줘서 고마워."
+                "kr": "나쁘지 않아. 물어봐줘서 고마워.",
+                "coreEn": "Not bad"
               }
             ]
           }
@@ -874,72 +353,16 @@
               {
                 "word": "restaurant",
                 "en": "How about that new Chinese restaurant?",
-                "kr": "저 새로 생긴 중국집은 어때?"
+                "kr": "저 새로 생긴 중국집은 어때?",
+                "coreEn": "How about"
               },
               {
-                "word": "hmm",
-                "en": "Hmm... How about Italian?",
-                "kr": "음... 이탈리안은 어때?"
+                "word": "tomorrow",
+                "en": "How about tomorrow morning?",
+                "kr": "내일 아침은 어때?",
+                "coreEn": "How about"
               }
             ]
-          }
-        },
-        {
-          "level": 3,
-          "word": "great",
-          "meaning": "정말 좋은, 정말 멋진, 정말 기쁜 <good 의 강조형으로 쓰임>",
-          "pos": "adjective",
-          "cefr": "A1",
-          "vocab": {
-            "answer": "great",
-            "enLines": [
-              "It's a [great] idea."
-            ],
-            "koLines": [
-              "그건 [정말 좋은] 아이디어예요."
-            ]
-          },
-          "sentence": {
-            "en": "That was great!",
-            "kr": "진짜 좋았어!",
-            "trigger": "great",
-            "pattern_en": "That was great!",
-            "pattern_kr": "진짜 좋았어!",
-            "coreEn": "That was great",
-            "coreKr": "진짜 좋았어",
-            "siblings": [
-              {
-                "word": "full",
-                "en": "That was great, but I'm so full.",
-                "kr": "진짜 좋았어, 근데 너무 배부르다."
-              }
-            ]
-          }
-        },
-        {
-          "level": 3,
-          "word": "care",
-          "meaning": "돌봄, 보살핌",
-          "pos": "noun",
-          "cefr": "A2",
-          "vocab": {
-            "answer": "care",
-            "enLines": [
-              "My mom required 24-hour [care] after her heart attack."
-            ],
-            "koLines": [
-              "우리 엄마는 심장마비가 온 후 24시간 [보살핌]을 받아야 했어."
-            ]
-          },
-          "sentence": {
-            "en": "Take care.",
-            "kr": "잘 지내.",
-            "trigger": "care",
-            "pattern_en": "Take care.",
-            "pattern_kr": "잘 지내.",
-            "coreEn": "Take care",
-            "coreKr": "잘 지내",
-            "siblings": []
           }
         },
         {
@@ -969,147 +392,56 @@
               {
                 "word": "charger",
                 "en": "Can I borrow a phone charger?",
-                "kr": "휴대폰 충전기를 빌릴 수 있을까요?"
+                "kr": "휴대폰 충전기를 빌릴 수 있을까요?",
+                "coreEn": "Can I borrow"
               },
               {
                 "word": "pen",
                 "en": "Can I borrow a pen?",
-                "kr": "펜 하나 빌릴 수 있나요?"
+                "kr": "펜 하나 빌릴 수 있나요?",
+                "coreEn": "Can I borrow"
               }
             ]
           }
         },
         {
           "level": 4,
-          "word": "bike",
-          "meaning": "자전거",
+          "word": "surfboard",
+          "meaning": "서프보드 <파도타기에 쓰는 보드>",
           "pos": "noun",
-          "cefr": "A1",
+          "cefr": "C1",
           "vocab": {
-            "answer": "bike",
+            "answer": "surfboard",
             "enLines": [
-              "Is this your [bike]?"
+              "If you don't have your own [surfboard], you can rent one."
             ],
             "koLines": [
-              "이거 네 [자전거]야?"
+              "(서핑 강사가 하는 말)",
+              "개인 [서핑 보드]가 없으시면, 하나 대여하셔도 됩니다."
             ]
           },
           "sentence": {
-            "en": "Hi! Can I rent a bike somewhere around here?",
-            "kr": "안녕하세요! 여기 근처 어딘가에서 자전거를 대여할 수 있나요?",
-            "trigger": "bike",
+            "en": "Can I rent a surfboard?",
+            "kr": "(해변 물품 대여소에서) 서핑보드를 빌릴 수 있을까요?",
+            "trigger": "surfboard",
             "pattern_en": "Can I rent ~?",
             "pattern_kr": "~를 대여할 수 있나요?",
             "coreEn": "Can I rent",
-            "coreKr": "대여할 수 있나요",
+            "coreKr": "를 빌릴 수 있을까요",
             "siblings": [
               {
-                "word": "stroller",
-                "en": "Hi! Can I rent a stroller for the day?",
-                "kr": "안녕하세요! 하루만 유모차를 대여할 수 있을까요?"
+                "word": "gear",
+                "en": "Can I rent snorkeling gear?",
+                "kr": "(해변 물품 대여소에서) 스노클링 장비를 빌릴 수 있을까요?",
+                "coreEn": "Can I rent"
               },
               {
-                "word": "wheelchair",
-                "en": "Yeah, actually. Can I rent a wheelchair?",
-                "kr": "네, 있어요. 혹시 휠체어를 대여할 수 있을까요?"
+                "word": "ski",
+                "en": "Can I rent skis?",
+                "kr": "(스키 장비 대여소에서) 스키를 빌릴 수 있나요?",
+                "coreEn": "Can I rent"
               }
             ]
-          }
-        },
-        {
-          "level": 4,
-          "word": "close",
-          "meaning": "<문, 창문 등을> 닫다",
-          "pos": "verb",
-          "cefr": "A1",
-          "vocab": {
-            "answer": "Close",
-            "enLines": [
-              "[Close] the door."
-            ],
-            "koLines": [
-              "문 [닫아]."
-            ]
-          },
-          "sentence": {
-            "en": "Hi. When do you close on Fridays?",
-            "kr": "안녕하세요. 금요일에는 몇 시에 문을 닫나요?",
-            "trigger": "close",
-            "pattern_en": "When do you close?",
-            "pattern_kr": "언제 닫나요?",
-            "coreEn": "When do you close",
-            "coreKr": "몇 시에 문을 닫나요",
-            "siblings": [
-              {
-                "word": "wonder",
-                "en": "Hi, I was wondering, when do you close on the weekends?",
-                "kr": "안녕하세요. 궁금했는데 주말에는 언제 문을 닫나요?"
-              }
-            ]
-          }
-        },
-        {
-          "level": 4,
-          "word": "free",
-          "meaning": "<바쁜 일이나 특별한 약속 같은 것 없이> 한가한",
-          "pos": "adjective",
-          "cefr": "A2",
-          "vocab": {
-            "answer": "free",
-            "enLines": [
-              "Are you [free] this weekend?"
-            ],
-            "koLines": [
-              "이번 주말에 [한가하]세요?",
-              "(바쁜 일이나 특별한 약속이 없는 것을 뜻하는 형용사)"
-            ]
-          },
-          "sentence": {
-            "en": "Yes, is there free WiFi?",
-            "kr": "네, 무료 와이파이가 있나요?",
-            "trigger": "free",
-            "pattern_en": "Is there free WiFi?",
-            "pattern_kr": "무료 와이파이가 있나요?",
-            "coreEn": "is there free WiFi",
-            "coreKr": "무료 와이파이가 있나요",
-            "siblings": [
-              {
-                "word": "bus",
-                "en": "Yeah, is there free WiFi on the bus?",
-                "kr": "네, 버스에 무료 와이파이가 있나요?"
-              },
-              {
-                "word": "plane",
-                "en": "Hi. Is there free WiFi on the plane?",
-                "kr": "안녕하세요. 비행기에 무료 와이파이가 있나요?"
-              }
-            ]
-          }
-        },
-        {
-          "level": 4,
-          "word": "password",
-          "meaning": "<컴퓨터의> 비밀번호",
-          "pos": "noun",
-          "cefr": "B1",
-          "vocab": {
-            "answer": "password",
-            "enLines": [
-              "You should change your [password]. It's too easy to guess."
-            ],
-            "koLines": [
-              "너 [비밀번호] 바꿔야겠다. 알아맞히기가 너무 쉽잖아."
-            ]
-          },
-          "sentence": {
-            "en": "What's the WiFi password?",
-            "kr": "와이파이 비밀번호가 뭔가요?",
-            "trigger": "password",
-            "pattern_en": "What's the WiFi password?",
-            "pattern_kr": "와이파이 비밀번호가 무엇인가요?",
-            "coreEn": "What's the WiFi password",
-            "coreKr": "와이파이 비밀번호가 뭔가요",
-            "siblings": []
           }
         },
         {
@@ -1139,12 +471,14 @@
               {
                 "word": "read",
                 "en": "I like reading.",
-                "kr": "난 책 읽는 거 좋아해."
+                "kr": "난 책 읽는 거 좋아해.",
+                "coreEn": "I like reading"
               },
               {
-                "word": "take",
-                "en": "Nah, I'm good. I like taking photos, not being in them.",
-                "kr": "아니야, 괜찮아. 난 사진 찍는 거 좋아하지, 찍히는 건 싫어."
+                "word": "play",
+                "en": "I like playing tennis with my dad because he always lets me win.",
+                "kr": "난 아빠랑 테니스 치는 거 좋아해. 항상 이기게 해주시거든.",
+                "coreEn": "I like playing"
               }
             ]
           }
@@ -1176,12 +510,14 @@
               {
                 "word": "go",
                 "en": "I love going for a walk after work.",
-                "kr": "퇴근 후에 산책하는 걸 진짜 좋아해."
+                "kr": "퇴근 후에 산책하는 걸 진짜 좋아해.",
+                "coreEn": "I love going"
               },
               {
                 "word": "listen",
                 "en": "I love listening to rock music when I clean.",
-                "kr": "청소할 때 락 음악 듣는 걸 대단히 좋아해."
+                "kr": "청소할 때 락 음악 듣는 걸 대단히 좋아해.",
+                "coreEn": "I love listening to"
               }
             ]
           }
@@ -1212,14 +548,16 @@
             "coreKr": "에 만나자",
             "siblings": [
               {
-                "word": "work",
-                "en": "Hmm... I'm off work at five, so let's meet at six.",
-                "kr": "음...나 5시에 퇴근하니까 6시에 만나자."
+                "word": "front",
+                "en": "Let's meet at noon in front of the restaurant.",
+                "kr": "식당 앞에서 정오에 만나자.",
+                "coreEn": "Let's meet at"
               },
               {
-                "word": "table",
-                "en": "Hmm... Let's meet at eleven. That way we'll definitely get a table.",
-                "kr": "음...11시에 만나자. 그러면 자리는 확실히 구할 수 있을 거야."
+                "word": "exit",
+                "en": "Let's meet at one o'clock by exit four.",
+                "kr": "1시에 4번 출구 근처에서 만나자.",
+                "coreEn": "Let's meet at"
               }
             ]
           }
@@ -1251,41 +589,16 @@
               {
                 "word": "credit card",
                 "en": "Can I pay with a credit card?",
-                "kr": "신용카드로 계산할 수 있을까요?"
+                "kr": "신용카드로 계산할 수 있을까요?",
+                "coreEn": "Can I pay with"
               },
               {
                 "word": "debit card",
                 "en": "Can I pay with a debit card?",
-                "kr": "체크카드로 결제할 수 있을까요?"
+                "kr": "체크카드로 결제할 수 있을까요?",
+                "coreEn": "Can I pay with"
               }
             ]
-          }
-        },
-        {
-          "level": 5,
-          "word": "receipt",
-          "meaning": "영수증",
-          "pos": "noun",
-          "cefr": "B1",
-          "vocab": {
-            "answer": "receipt",
-            "enLines": [
-              "Would you like the [receipt], sir?"
-            ],
-            "koLines": [
-              "[영수증] 드릴까요, 손님?",
-              "<발음: receipt에서 p는 발음되지 않는 묵음이어서 \"리앁 /rɪˈsiːt/\"처럼 발음됩니다.>"
-            ]
-          },
-          "sentence": {
-            "en": "Actually, can I have the receipt, please?",
-            "kr": "그런데 영수증 받을 수 있을까요?",
-            "trigger": "receipt",
-            "pattern_en": "Can I have the receipt?",
-            "pattern_kr": "영수증 주실 수 있나요?",
-            "coreEn": "can I have the receipt",
-            "coreKr": "영수증 받을 수 있을까요",
-            "siblings": []
           }
         },
         {
@@ -1315,12 +628,14 @@
               {
                 "word": "spa",
                 "en": "When does the spa close?",
-                "kr": "스파는 언제 문 닫나요?"
+                "kr": "스파는 언제 문 닫나요?",
+                "coreEn": "When does the spa close"
               },
               {
                 "word": "rooftop",
                 "en": "When does the rooftop bar close?",
-                "kr": "루프탑 바는 언제 문 닫나요?"
+                "kr": "루프탑 바는 언제 문 닫나요?",
+                "coreEn": "When does the rooftop bar close"
               }
             ]
           }
@@ -1353,376 +668,96 @@
               {
                 "word": "gym",
                 "en": "When does the gym open?",
-                "kr": "헬스장은 언제 여나요?"
+                "kr": "헬스장은 언제 여나요?",
+                "coreEn": "When does the gym open"
               },
               {
                 "word": "restaurant",
                 "en": "When does the restaurant open?",
-                "kr": "레스토랑은 언제 여나요?"
+                "kr": "레스토랑은 언제 여나요?",
+                "coreEn": "When does the restaurant open"
               }
             ]
           }
         },
         {
           "level": 5,
-          "word": "look",
-          "meaning": "( Phrasal Verb )",
+          "word": "go",
+          "meaning": "가다 <go + ~ing로 \"~하러 가다\"로 해석될 때도 이 항목을 선택>",
           "pos": "verb",
           "cefr": "A1",
           "vocab": {
-            "answer": "look",
+            "answer": "go",
             "enLines": [
-              "You [look] tired."
+              "Don't [go]!"
             ],
             "koLines": [
-              "너 피곤해 [보여]."
+              "[가]지 마!",
+              "<문법: 주어 없이 don't로 문장을 시작하면 \"~하지 마\"라는 명령문이 돼요.>"
             ]
           },
           "sentence": {
-            "en": "You look great.",
-            "kr": "너 정말 멋져 보인다.",
-            "trigger": "look",
-            "pattern_en": "You look great.",
-            "pattern_kr": "너 정말 멋져 보인다.",
-            "coreEn": "You look great",
-            "coreKr": "너 정말 멋져 보인다",
-            "siblings": [
-              {
-                "word": "occasion",
-                "en": "Wow, you look great! What's the special occasion?",
-                "kr": "와우, 진짜 멋져 보이네요! 무슨 특별한 일 있나요?"
-              },
-              {
-                "word": "babe",
-                "en": "You look great, babe. You always do.",
-                "kr": "진짜 멋지다, 자기야. 항상 멋져."
-              }
-            ]
-          }
-        },
-        {
-          "level": 5,
-          "word": "yep",
-          "meaning": "응, 그럼",
-          "pos": "interjection",
-          "cefr": "B1",
-          "vocab": {
-            "answer": "Yep",
-            "enLines": [
-              "Hey, are you ready to go?",
-              "[Yep]!"
-            ],
-            "koLines": [
-              "야, 갈 준비 됐어?",
-              "[응]!",
-              "(비격식적인 표현)"
-            ]
-          },
-          "sentence": {
-            "en": "Yep! See you then.",
-            "kr": "응! 그때 보자.",
-            "trigger": "yep",
-            "pattern_en": "See you then.",
-            "pattern_kr": "그때 보자.",
-            "coreEn": "See you then",
-            "coreKr": "그때 보자",
-            "siblings": [
-              {
-                "word": "see",
-                "en": "See you then.",
-                "kr": "그때 보자."
-              },
-              {
-                "word": "sound",
-                "en": "Alright, sounds good. See you then!",
-                "kr": "좋아, 알겠어. 그때 보자!"
-              }
-            ]
-          }
-        },
-        {
-          "level": 5,
-          "word": "worry",
-          "meaning": "걱정거리, 걱정, 걱정되는 일",
-          "pos": "noun",
-          "cefr": "B1",
-          "vocab": {
-            "answer": "worry",
-            "enLines": [
-              "Falling and breaking a bone is a big [worry] for most old people."
-            ],
-            "koLines": [
-              "대부분의 나이 많은 사람들에게 넘어져서 뼈가 부러지는 상황은 큰 [걱정거리]입니다."
-            ]
-          },
-          "sentence": {
-            "en": "No worries.",
-            "kr": "걱정 마.",
-            "trigger": "worry",
-            "pattern_en": "No worries.",
-            "pattern_kr": "걱정 마.",
-            "coreEn": "No worries",
-            "coreKr": "걱정 마",
-            "siblings": [
-              {
-                "word": "rush",
-                "en": "Oh, yeah, no worries! I'm in no rush.",
-                "kr": "아, 그래, 걱정 마! 난 서두르지 않아."
-              },
-              {
-                "word": "table",
-                "en": "No worries. I'll grab us a table.",
-                "kr": "걱정 마. 내가 자리 잡을게."
-              }
-            ]
-          }
-        },
-        {
-          "level": 5,
-          "word": "lunch",
-          "meaning": "점심",
-          "pos": "noun",
-          "cefr": "A1",
-          "vocab": {
-            "answer": "lunch",
-            "enLines": [
-              "I can't have [lunch] with you."
-            ],
-            "koLines": [
-              "나 너랑 같이 [점심] 못 먹어."
-            ]
-          },
-          "sentence": {
-            "en": "Where should we go for lunch?",
-            "kr": "점심은 우리 어디로 갈까?",
-            "trigger": "lunch",
+            "en": "Where should we go next?",
+            "kr": "다음은 우리 어디로 갈까?",
+            "trigger": "go",
             "pattern_en": "Where should we go?",
             "pattern_kr": "우리 어디로 갈까?",
             "coreEn": "Where should we go",
             "coreKr": "우리 어디로 갈까",
             "siblings": [
               {
-                "word": "go",
-                "en": "Where should we go next?",
-                "kr": "다음은 우리 어디로 갈까?"
+                "word": "lunch",
+                "en": "Where should we go for lunch?",
+                "kr": "점심은 우리 어디로 갈까?",
+                "coreEn": "Where should we go"
               },
               {
                 "word": "dinner",
                 "en": "Where should we go for dinner tonight?",
-                "kr": "오늘 저녁에 우리 어디로 갈까?"
+                "kr": "오늘 저녁에 우리 어디로 갈까?",
+                "coreEn": "Where should we go"
               }
             ]
           }
         },
         {
           "level": 6,
-          "word": "bit",
-          "meaning": "<수, 양의> 조금, 한 조각, 한 가지 <특히 영국식 표현>",
-          "pos": "noun",
+          "word": "zero",
+          "meaning": "0, 영(零)",
+          "pos": "number",
           "cefr": "B1",
           "vocab": {
-            "answer": "bit",
+            "answer": "zero",
             "enLines": [
-              "We're missing a key [bit] of information."
+              "I'm going to give you three seconds. Three, two, one, [zero]."
             ],
             "koLines": [
-              "우리는 중요한 정보 한 [가지]를 놓치고 있어.",
-              "(수나 양적으로 작은 무언가를 가리킴)"
+              "(시킨 일을 하지 않은 아이에게 화가 난 부모가)",
+              "3초 줄게. 3, 2, 1, [0]."
             ]
           },
           "sentence": {
-            "en": "Hi. Can I check in a bit early tomorrow?",
-            "kr": "안녕하세요. 내일 조금 일찍 체크인해도 될까요?",
-            "trigger": "bit",
-            "pattern_en": "Can I check in ~?",
-            "pattern_kr": "체크인해도 되나요?",
-            "coreEn": "Can I check in",
-            "coreKr": "체크인해도 될까요",
-            "siblings": [
-              {
-                "word": "check",
-                "en": "Hi! Can I check in?",
-                "kr": "안녕하세요! 체크인해도 되나요?"
-              }
-            ]
-          }
-        },
-        {
-          "level": 6,
-          "word": "complimentary",
-          "meaning": "무료의",
-          "pos": "adjective",
-          "cefr": "B2",
-          "vocab": {
-            "answer": "complimentary",
-            "enLines": [
-              "Most restaurants give you [complimentary] bread while you wait."
-            ],
-            "koLines": [
-              "(미국의 식당 문화를 설명하면서)",
-              "대부분의 식당에서는 기다리는 동안 [무료] 빵을 줘요.",
-              "(형용사)"
-            ]
-          },
-          "sentence": {
-            "en": "\"Complimentary\"? What does that mean?",
-            "kr": "\"Complimentary\"요? 그건 무슨 뜻인가요?",
-            "trigger": "complimentary",
-            "pattern_en": "What does that mean?",
-            "pattern_kr": "그건 무슨 뜻인가요?",
-            "coreEn": "What does that mean",
-            "coreKr": "그건 무슨 뜻인가요",
-            "siblings": [
-              {
-                "word": "bump",
-                "en": "\"Bumped up\"? What does that mean?",
-                "kr": "\"Bumped up\"이요? 그건 무슨 뜻인가요?"
-              },
-              {
-                "word": "house",
-                "en": "\"On the house\"? What does that mean?",
-                "kr": "\"On the house\"요? 그건 무슨 뜻인가요?"
-              }
-            ]
-          }
-        },
-        {
-          "level": 6,
-          "word": "recommend",
-          "meaning": "추천하다, 천거하다",
-          "pos": "verb",
-          "cefr": "A2",
-          "vocab": {
-            "answer": "recommend",
-            "enLines": [
-              "Are there any romantic restaurants nearby you could [recommend]?"
-            ],
-            "koLines": [
-              "근처에 [추천해] 줄만 한 로맨틱한 레스토랑 있어?"
-            ]
-          },
-          "sentence": {
-            "en": "What do you recommend?",
-            "kr": "무엇을 추천하시나요?",
-            "trigger": "recommend",
-            "pattern_en": "What do you recommend?",
-            "pattern_kr": "무엇을 추천하시나요?",
-            "coreEn": "What do you recommend",
-            "coreKr": "무엇을 추천하시나요",
-            "siblings": [
-              {
-                "word": "decide",
-                "en": "I'm still deciding. What do you recommend?",
-                "kr": "아직 고민 중이에요. 무엇을 추천하시나요?"
-              },
-              {
-                "word": "souvenir",
-                "en": "I'm looking for cool souvenirs. What do you recommend?",
-                "kr": "멋진 기념품을 찾고 있어요. 무엇을 추천하시나요?"
-              }
-            ]
-          }
-        },
-        {
-          "level": 6,
-          "word": "beer",
-          "meaning": "맥주",
-          "pos": "noun",
-          "cefr": "A2",
-          "vocab": {
-            "answer": "beer",
-            "enLines": [
-              "I don't really like wine.",
-              "How about [beer]?"
-            ],
-            "koLines": [
-              "난 포도주는 딱히 좋아하지 않아.",
-              "[맥주]는 어때?"
-            ]
-          },
-          "sentence": {
-            "en": "Thanks. Oh, and can I have another beer, please?",
-            "kr": "고마워요. 아 그리고 맥주 한 잔 더 주실 수 있나요?",
-            "trigger": "beer",
+            "en": "Can I have another Coke Zero, too?",
+            "kr": "저도 제로 콜라 한 잔 더 주실 수 있나요?",
+            "trigger": "zero",
             "pattern_en": "Can I have another ~?",
             "pattern_kr": "~를 한 잔 더 주시겠어요?",
-            "coreEn": "can I have another",
+            "coreEn": "Can I have another",
             "coreKr": "한 잔 더 주실 수 있나요",
             "siblings": [
               {
                 "word": "sprite",
                 "en": "Can I have another Sprite, please?",
-                "kr": "스프라이트 한 잔 더 주실 수 있나요?"
+                "kr": "스프라이트 한 잔 더 주실 수 있나요?",
+                "coreEn": "Can I have another"
               },
               {
-                "word": "zero",
-                "en": "Can I have another Coke Zero, too?",
-                "kr": "저도 제로 콜라 한 잔 더 주실 수 있나요?"
+                "word": "milkshake",
+                "en": "Can I have another milkshake, please?",
+                "kr": "밀크셰이크 한 잔 더 주실 수 있나요?",
+                "coreEn": "Can I have another"
               }
             ]
-          }
-        },
-        {
-          "level": 6,
-          "word": "song",
-          "meaning": "노래",
-          "pos": "noun",
-          "cefr": "A1",
-          "vocab": {
-            "answer": "song",
-            "enLines": [
-              "I love this [song]."
-            ],
-            "koLines": [
-              "나 이 [노래] 되게 좋아해."
-            ]
-          },
-          "sentence": {
-            "en": "Do you like this song, too?",
-            "kr": "너도 이 노래 좋아해?",
-            "trigger": "song",
-            "pattern_en": "Do you like ~, too?",
-            "pattern_kr": "너도 ~ 좋아해?",
-            "coreEn": "Do you like this song, too",
-            "coreKr": "너도 이 노래 좋아해",
-            "siblings": [
-              {
-                "word": "too",
-                "en": "I am! Do you like her, too?",
-                "kr": "응! 너도 그녀를 좋아해?"
-              },
-              {
-                "word": "food",
-                "en": "Do you like spicy food, too?",
-                "kr": "너도 매운 음식 좋아해?"
-              }
-            ]
-          }
-        },
-        {
-          "level": 6,
-          "word": "help",
-          "meaning": "도움 <셀 수 없는 명사>",
-          "pos": "noun",
-          "cefr": "A1",
-          "vocab": {
-            "answer": "help",
-            "enLines": [
-              "I need your [help], Peter."
-            ],
-            "koLines": [
-              "피터, 네 [도움]이 필요해."
-            ]
-          },
-          "sentence": {
-            "en": "Do you need any help?",
-            "kr": "도움이 필요하신가요?",
-            "trigger": "help",
-            "pattern_en": "Do you need any help?",
-            "pattern_kr": "도움이 필요하신가요?",
-            "coreEn": "Do you need any help",
-            "coreKr": "도움이 필요하신가요",
-            "siblings": []
           }
         },
         {
@@ -1750,232 +785,55 @@
             "coreKr": "타시면 됩니다",
             "siblings": [
               {
-                "word": "train",
-                "en": "Yeah, you can take the A train all the way there.",
-                "kr": "A선타고 쭉 가시면 되거든요."
+                "word": "central",
+                "en": "You can take the 4, 5, or 6. They all stop at Grand Central.",
+                "kr": "4, 5, 6호선 타시면 됩니다. 모두 그랜드 센트럴에 정차합니다.",
+                "coreEn": "You can take"
               },
               {
-                "word": "bus",
-                "en": "Oh, you can take bus fourteen! The bus stop is right over there.",
-                "kr": "아, 14번 버스 타시면 됩니다! 버스 정류장이 바로 저기입니다."
+                "word": "subway",
+                "en": "You can take the subway. Hold on, let me show you on a map.",
+                "kr": "지하철 타시면 됩니다. 잠시만요, 지도로 보여드리겠습니다.",
+                "coreEn": "You can take"
               }
             ]
           }
         },
         {
           "level": 6,
-          "word": "honest",
-          "meaning": "<어떤 사실에 대해> 솔직한",
-          "pos": "adjective",
-          "cefr": "A2",
-          "vocab": {
-            "answer": "honest",
-            "enLines": [
-              "Listen, I'll be [honest] with you."
-            ],
-            "koLines": [
-              "들어 봐, 너한테 [솔직하]게 말할게."
-            ]
-          },
-          "sentence": {
-            "en": "Are you alright? Be honest with me.",
-            "kr": "괜찮아? 솔직히 말해봐.",
-            "trigger": "honest",
-            "pattern_en": "Are you alright?",
-            "pattern_kr": "괜찮아?",
-            "coreEn": "Are you alright",
-            "coreKr": "괜찮아",
-            "siblings": [
-              {
-                "word": "alright",
-                "en": "Are you alright?",
-                "kr": "괜찮아?"
-              },
-              {
-                "word": "pale",
-                "en": "Hey, are you alright? You're looking a little pale.",
-                "kr": "야, 괜찮아? 좀 안색이 안 좋아 보여."
-              }
-            ]
-          }
-        },
-        {
-          "level": 6,
-          "word": "sad",
-          "meaning": "<사람이> 슬픈",
-          "pos": "adjective",
+          "word": "look",
+          "meaning": "( Phrasal Verb )",
+          "pos": "verb",
           "cefr": "A1",
           "vocab": {
-            "answer": "sad",
+            "answer": "look",
             "enLines": [
-              "I'm [sad]."
+              "You [look] tired."
             ],
             "koLines": [
-              "나는 [슬프]다."
+              "너 피곤해 [보여]."
             ]
           },
           "sentence": {
-            "en": "You look kind of sad, is all.",
-            "kr": "너 좀 슬퍼 보여서 그래.",
-            "trigger": "sad",
+            "en": "You look upset.",
+            "kr": "너 기분 다운돼 보인다.",
+            "trigger": "look",
             "pattern_en": "You look ~.",
             "pattern_kr": "너 ~해 보여. (상태나 기분)",
             "coreEn": "You look",
             "coreKr": "너",
             "siblings": [
               {
-                "word": "look",
-                "en": "You look upset.",
-                "kr": "너 기분 다운돼 보인다."
+                "word": "sad",
+                "en": "You look kind of sad, is all.",
+                "kr": "너 좀 슬퍼 보여서 그래.",
+                "coreEn": "You look"
               },
               {
-                "word": "okay",
-                "en": "Are you okay? You look kind of upset.",
-                "kr": "괜찮아? 너 뭔가 기분이 가라앉아 보이는데."
-              }
-            ]
-          }
-        },
-        {
-          "level": 7,
-          "word": "blouse",
-          "meaning": "블라우스",
-          "pos": "noun",
-          "cefr": "B1",
-          "vocab": {
-            "answer": "blouse",
-            "enLines": [
-              "Where did you get your [blouse]? I love it!"
-            ],
-            "koLines": [
-              "[블라우스] 어디서 났어? 너무 예쁘다!"
-            ]
-          },
-          "sentence": {
-            "en": "Yes, I'm looking for a blouse.",
-            "kr": "네, 블라우스를 찾고 있어요.",
-            "trigger": "blouse",
-            "pattern_en": "I'm looking for ~",
-            "pattern_kr": "저는 ~를 찾고 있어요.",
-            "coreEn": "I'm looking for",
-            "coreKr": "를 찾고 있어요",
-            "siblings": [
-              {
-                "word": "pair",
-                "en": "Yeah, I'm looking for a pair of running shoes.",
-                "kr": "네, 운동화를 찾고 있어요."
-              },
-              {
-                "word": "souvenir",
-                "en": "Yeah, actually, I'm looking for some souvenirs.",
-                "kr": "네, 실은, 기념품을 찾고 있어요."
-              }
-            ]
-          }
-        },
-        {
-          "level": 7,
-          "word": "try",
-          "meaning": "먹어 보다, 마셔 보다",
-          "pos": "verb",
-          "cefr": "A1",
-          "vocab": {
-            "answer": "Try",
-            "enLines": [
-              "[Try] this."
-            ],
-            "koLines": [
-              "이거 [한 번 먹어봐].",
-              "<참고: try는 원래 시도해 본다는 뜻인데, 음식을 먹어본다는 뜻으로도 try를 씁니다.>"
-            ]
-          },
-          "sentence": {
-            "en": "Can I try it on?",
-            "kr": "그거 입어봐도 되나요?",
-            "trigger": "try",
-            "pattern_en": "Can I try it on?",
-            "pattern_kr": "그거 입어봐도 되나요?",
-            "coreEn": "Can I try it on",
-            "coreKr": "그거 입어봐도 되나요",
-            "siblings": [
-              {
-                "word": "sec",
-                "en": "Can I try it on for a sec?",
-                "kr": "잠깐 그거 입어볼 수 있을까요?"
-              },
-              {
-                "word": "think",
-                "en": "You think? Can I try it on?",
-                "kr": "그런가요? 그거 입어봐도 될까요?"
-              }
-            ]
-          }
-        },
-        {
-          "level": 7,
-          "word": "excuse",
-          "meaning": "<자리를 뜨는 것에 대해> 양해하다, 양해를 구하다",
-          "pos": "verb",
-          "cefr": "B1",
-          "vocab": {
-            "answer": "excuse",
-            "enLines": [
-              "Will you [excuse] us for a minute?"
-            ],
-            "koLines": [
-              "저희 잠깐만 [양해를 구해]도 될까요?"
-            ]
-          },
-          "sentence": {
-            "en": "Excuse me? Can I try this on?",
-            "kr": "실례합니다. 이거 잠깐 입어볼 수 있나요?",
-            "trigger": "excuse",
-            "pattern_en": "Can I try this on?",
-            "pattern_kr": "이거 입어봐도 되나요?",
-            "coreEn": "Can I try this on",
-            "coreKr": "이거",
-            "siblings": [
-              {
-                "word": "try",
-                "en": "Can I try this on?",
-                "kr": "이거 입어봐도 되나요?"
-              }
-            ]
-          }
-        },
-        {
-          "level": 7,
-          "word": "dress",
-          "meaning": "드레스, 원피스",
-          "pos": "noun",
-          "cefr": "A1",
-          "vocab": {
-            "answer": "dress",
-            "enLines": [
-              "How much is that [dress]?"
-            ],
-            "koLines": [
-              "저 [원피스] 얼만가요?"
-            ]
-          },
-          "sentence": {
-            "en": "Excuse me? Can I try on that blue dress?",
-            "kr": "저기요, 저 파란색 드레스를 입어봐도 될까요?",
-            "trigger": "dress",
-            "pattern_en": "Can I try on ~ ?",
-            "pattern_kr": "~ 입어봐도 될까요?",
-            "coreEn": "Can I try on",
-            "coreKr": "입어봐도 될까요",
-            "siblings": [
-              {
-                "word": "tight",
-                "en": "It's a bit tight. Can I try on a large instead?",
-                "kr": "살짝 끼네요. 대신 라지로 입어봐도 될까요?"
-              },
-              {
-                "word": "big",
-                "en": "They're a bit too big. Can I try on a size 7 instead?",
-                "kr": "좀 많이 크네요. 7사이즈로 신어봐도 될까요?"
+                "word": "bit",
+                "en": "You look a bit overwhelmed, to be honest.",
+                "kr": "솔직히 너 좀 벅차 보여.",
+                "coreEn": "You look"
               }
             ]
           }
@@ -2007,86 +865,14 @@
               {
                 "word": "convenience store",
                 "en": "Where's the nearest convenience store?",
-                "kr": "가장 가까운 편의점이 어디인가요?"
+                "kr": "가장 가까운 편의점이 어디인가요?",
+                "coreEn": "Where's the nearest"
               },
               {
                 "word": "hospital",
                 "en": "Where's the nearest hospital?",
-                "kr": "가장 가까운 병원이 어디인가요?"
-              }
-            ]
-          }
-        },
-        {
-          "level": 7,
-          "word": "remote",
-          "meaning": "리모컨",
-          "pos": "noun",
-          "cefr": "B2",
-          "vocab": {
-            "answer": "remote",
-            "enLines": [
-              "Hey, could you hand me the [remote]?"
-            ],
-            "koLines": [
-              "어이, [리모컨] 좀 줄래?"
-            ]
-          },
-          "sentence": {
-            "en": "Just one more. How do I use this remote?",
-            "kr": "하나만 더요. 이 리모컨은 어떻게 사용하나요?",
-            "trigger": "remote",
-            "pattern_en": "How do I use ~?",
-            "pattern_kr": "~는 어떻게 사용하나요?",
-            "coreEn": "How do I use",
-            "coreKr": "어떻게 사용하나요",
-            "siblings": [
-              {
-                "word": "chair",
-                "en": "How do I use this massage chair?",
-                "kr": "이 안마의자는 어떻게 사용하나요?"
-              },
-              {
-                "word": "washing machine",
-                "en": "Um, excuse me? How do I use this washing machine?",
-                "kr": "실례합니다만, 이 세탁기는 어떻게 사용하나요?"
-              }
-            ]
-          }
-        },
-        {
-          "level": 7,
-          "word": "sunscreen",
-          "meaning": "자외선 차단제",
-          "pos": "noun",
-          "cefr": "B1",
-          "vocab": {
-            "answer": "sunscreen",
-            "enLines": [
-              "Don't forget to put on [sunscreen]."
-            ],
-            "koLines": [
-              "[자외선 차단제] 바르는 거 잊지 마."
-            ]
-          },
-          "sentence": {
-            "en": "Yeah, where can I find the sunscreen?",
-            "kr": "네, 자외선 차단제를 어디서 찾을 수 있나요?",
-            "trigger": "sunscreen",
-            "pattern_en": "Where can I find ~?",
-            "pattern_kr": "~는 어디서 찾을 수 있나요?",
-            "coreEn": "where can I find",
-            "coreKr": "를 어디서 찾을 수 있나요",
-            "siblings": [
-              {
-                "word": "charger",
-                "en": "Yeah, I am. Where can I find the chargers?",
-                "kr": "네. 충전기를 어디서 찾을 수 있나요?"
-              },
-              {
-                "word": "section",
-                "en": "Yes, actually. Where can I find the footwear section?",
-                "kr": "네, 그게요. 신발 코너를 어디서 찾을 수 있나요?"
+                "kr": "가장 가까운 병원이 어디인가요?",
+                "coreEn": "Where's the nearest"
               }
             ]
           }
@@ -2118,49 +904,1470 @@
               {
                 "word": "style",
                 "en": "I love your style.",
-                "kr": "네 오늘 스타일 마음에 들어."
+                "kr": "네 오늘 스타일 마음에 들어.",
+                "coreEn": "I love your"
               },
               {
                 "word": "haircut",
                 "en": "I love your new haircut.",
-                "kr": "네 새로운 헤어스타일 멋지다."
+                "kr": "네 새로운 헤어스타일 멋지다.",
+                "coreEn": "I love your"
               }
             ]
           }
         },
         {
           "level": 8,
-          "word": "lately",
-          "meaning": "최근에, 얼마 전에",
-          "pos": "adverb",
-          "cefr": "B1",
+          "word": "how",
+          "meaning": "어떻게 ~하는가, ~하는 방법 <the way in which의 의미>",
+          "pos": "conjunction",
+          "cefr": "A2",
           "vocab": {
-            "answer": "lately",
+            "answer": "how",
             "enLines": [
-              "Jenny and I have been talking a lot [lately]."
+              "I know [how] it happened."
             ],
             "koLines": [
-              "제니와 나는 [최근에] 이야기를 굉장히 많이 하고 있어."
+              "나는 그게 [어떻게] 된 건[지] 알아."
             ]
           },
           "sentence": {
-            "en": "How have you been lately?",
-            "kr": "요즘 어떻게 지내?",
-            "trigger": "lately",
+            "en": "How have you been?",
+            "kr": "어떻게 지냈어?",
+            "trigger": "how",
             "pattern_en": "How have you been?",
             "pattern_kr": "어떻게 지냈어?",
             "coreEn": "How have you been",
-            "coreKr": "어떻게 지내",
+            "coreKr": "어떻게 지냈어",
             "siblings": [
               {
-                "word": "how",
-                "en": "How have you been?",
-                "kr": "어떻게 지냈어?"
+                "word": "lately",
+                "en": "How have you been lately?",
+                "kr": "요즘 어떻게 지내?",
+                "coreEn": "How have you been"
               },
               {
                 "word": "day",
                 "en": "How have you been these days?",
-                "kr": "요즘 어떻게 지내?"
+                "kr": "요즘 어떻게 지내?",
+                "coreEn": "How have you been"
+              }
+            ]
+          }
+        },
+        {
+          "level": 8,
+          "word": "meet",
+          "meaning": "만나다",
+          "pos": "verb",
+          "cefr": "A1",
+          "vocab": {
+            "answer": "meet",
+            "enLines": [
+              "I want to [meet] your sister."
+            ],
+            "koLines": [
+              "난 네 여동생을 [만나]고 싶어."
+            ]
+          },
+          "sentence": {
+            "en": "What time should we meet?",
+            "kr": "몇 시에 만날까?",
+            "trigger": "meet",
+            "pattern_en": "What time should we meet?",
+            "pattern_kr": "몇 시에 만날까?",
+            "coreEn": "What time should we meet",
+            "coreKr": "몇 시에 만날까",
+            "siblings": [
+              {
+                "word": "lunch",
+                "en": "What time should we meet for lunch?",
+                "kr": "점심에 몇 시에 만날까?",
+                "coreEn": "What time should we meet"
+              },
+              {
+                "word": "dinner",
+                "en": "What time should we meet for dinner?",
+                "kr": "저녁에 몇 시에 만날까?",
+                "coreEn": "What time should we meet"
+              }
+            ]
+          }
+        },
+        {
+          "level": 8,
+          "word": "restaurant",
+          "meaning": "식당, 레스토랑",
+          "pos": "noun",
+          "cefr": "A1",
+          "vocab": {
+            "answer": "restaurant",
+            "enLines": [
+              "What's the name of the [restaurant]?"
+            ],
+            "koLines": [
+              "그 [식당] 이름이 뭐지?"
+            ]
+          },
+          "sentence": {
+            "en": "Let's hurry up. The restaurant closes at 9.",
+            "kr": "서두르자. 식당이 9시에 문 닫아.",
+            "trigger": "restaurant",
+            "pattern_en": "Let's hurry up.",
+            "pattern_kr": "서두르자.",
+            "coreEn": "Let's hurry up",
+            "coreKr": "서두르자",
+            "siblings": [
+              {
+                "word": "let",
+                "en": "Let's hurry up.",
+                "kr": "서두르자.",
+                "coreEn": "Let's hurry up"
+              },
+              {
+                "word": "train",
+                "en": "Let's hurry up. The train leaves in 10 minutes.",
+                "kr": "서두르자. 기차가 10분 후에 출발해.",
+                "coreEn": "Let's hurry up"
+              }
+            ]
+          }
+        },
+        {
+          "level": 8,
+          "word": "want",
+          "meaning": "원하다, 바라다",
+          "pos": "verb",
+          "cefr": "A1",
+          "vocab": {
+            "answer": "want",
+            "enLines": [
+              "What do you [want]?"
+            ],
+            "koLines": [
+              "넌 뭘 [원해]?"
+            ]
+          },
+          "sentence": {
+            "en": "What do you want to have?",
+            "kr": "뭐 먹고 싶어?",
+            "trigger": "want",
+            "pattern_en": "What do you want to have?",
+            "pattern_kr": "뭐 먹고 싶어?",
+            "coreEn": "What do you want to have",
+            "coreKr": "뭐 먹고 싶어",
+            "siblings": [
+              {
+                "word": "lunch",
+                "en": "What do you want to have for lunch?",
+                "kr": "점심으로 뭐 드시고 싶으세요?",
+                "coreEn": "What do you want to have"
+              },
+              {
+                "word": "dinner",
+                "en": "What do you want to have for dinner?",
+                "kr": "저녁으로 뭐 먹고 싶어?",
+                "coreEn": "What do you want to have"
+              }
+            ]
+          }
+        },
+        {
+          "level": 8,
+          "word": "bring",
+          "meaning": "가져오다",
+          "pos": "verb",
+          "cefr": "A1",
+          "vocab": {
+            "answer": "bring",
+            "enLines": [
+              "Can you [bring] some apples?"
+            ],
+            "koLines": [
+              "사과 좀 [가져올]래?"
+            ]
+          },
+          "sentence": {
+            "en": "Thanks for bringing me here.",
+            "kr": "날 여기로 데려와줘서 고마워.",
+            "trigger": "bring",
+            "pattern_en": "Thanks for ~ing.",
+            "pattern_kr": "~해줘서 고마워.",
+            "coreEn": "Thanks for bringing",
+            "coreKr": "데려와줘서 고마워",
+            "siblings": [
+              {
+                "word": "understand",
+                "en": "Thanks for understanding. I'll be there as soon as I can.",
+                "kr": "이해해줘서 고마워. 최대한 빨리 갈게.",
+                "coreEn": "Thanks for understanding"
+              },
+              {
+                "word": "invite",
+                "en": "Thanks for inviting me. I really appreciate it.",
+                "kr": "초대해줘서 고마워. 정말 감사해.",
+                "coreEn": "Thanks for inviting"
+              }
+            ]
+          }
+        },
+        {
+          "level": 8,
+          "word": "have",
+          "meaning": "있다, 가지고 있다, 가지다 <진행형으로는 쓰이지 않음>",
+          "pos": "verb",
+          "cefr": "A1",
+          "vocab": {
+            "answer": "have",
+            "enLines": [
+              "I [have] a car."
+            ],
+            "koLines": [
+              "나는 자동차가 [있어].",
+              "(소유하고 있다는 뜻)"
+            ]
+          },
+          "sentence": {
+            "en": "Do you have WhatsApp?",
+            "kr": "왓츠앱 쓰세요?",
+            "trigger": "have",
+            "pattern_en": "Do you have ~ ?",
+            "pattern_kr": "~ 쓰세요?",
+            "coreEn": "Do you have",
+            "coreKr": "쓰세요",
+            "siblings": [
+              {
+                "word": "Facebook",
+                "en": "Do you have Facebook?",
+                "kr": "페이스북 해?",
+                "coreEn": "Do you have"
+              },
+              {
+                "word": "telegram",
+                "en": "Do you have Telegram?",
+                "kr": "텔레그램 쓰니?",
+                "coreEn": "Do you have"
+              }
+            ]
+          }
+        },
+        {
+          "level": 9,
+          "word": "cilantro",
+          "meaning": "고수 잎 <음식에 향신료로 씀>",
+          "pos": "noun",
+          "cefr": "C1",
+          "vocab": {
+            "answer": "Cilantro",
+            "enLines": [
+              "[Cilantro] is always added to the top of Vietnamese rice noodles."
+            ],
+            "koLines": [
+              "베트남 쌀국수 위에는 언제나 [고수 잎]이 올라가요."
+            ]
+          },
+          "sentence": {
+            "en": "Does this have cilantro in it?",
+            "kr": "여기 고수 들어가 있나요?",
+            "trigger": "cilantro",
+            "pattern_en": "Does this have ~?",
+            "pattern_kr": "~ 들어가 있나요?",
+            "coreEn": "Does this have",
+            "coreKr": "들어가 있나요",
+            "siblings": [
+              {
+                "word": "shrimp",
+                "en": "Does this have shrimp in it?",
+                "kr": "여기 새우 들어가 있나요?",
+                "coreEn": "Does this have"
+              },
+              {
+                "word": "peanut",
+                "en": "Does this have peanuts in it?",
+                "kr": "여기 땅콩 들어가 있나요?",
+                "coreEn": "Does this have"
+              }
+            ]
+          }
+        },
+        {
+          "level": 9,
+          "word": "sunscreen",
+          "meaning": "자외선 차단제",
+          "pos": "noun",
+          "cefr": "B1",
+          "vocab": {
+            "answer": "sunscreen",
+            "enLines": [
+              "Don't forget to put on [sunscreen]."
+            ],
+            "koLines": [
+              "[자외선 차단제] 바르는 거 잊지 마."
+            ]
+          },
+          "sentence": {
+            "en": "Did you bring any sunscreen?",
+            "kr": "선크림 가져왔어?",
+            "trigger": "sunscreen",
+            "pattern_en": "Did you bring ~?",
+            "pattern_kr": "~가져왔어?",
+            "coreEn": "Did you bring",
+            "coreKr": "가져왔어",
+            "siblings": [
+              {
+                "word": "umbrella",
+                "en": "Did you bring an umbrella?",
+                "kr": "우산 가져왔어?",
+                "coreEn": "Did you bring"
+              },
+              {
+                "word": "scarf",
+                "en": "Did you bring a scarf?",
+                "kr": "목도리 가져왔어?",
+                "coreEn": "Did you bring"
+              }
+            ]
+          }
+        },
+        {
+          "level": 9,
+          "word": "buy",
+          "meaning": "<사람이 물건을> 사다, 구입하다",
+          "pos": "verb",
+          "cefr": "A1",
+          "vocab": {
+            "answer": "buy",
+            "enLines": [
+              "Let's [buy] some chocolate."
+            ],
+            "koLines": [
+              "초콜릿 좀 [사]자.",
+              "(물건을 구입한다는 뜻)"
+            ]
+          },
+          "sentence": {
+            "en": "Should I buy this?",
+            "kr": "이거 살까?",
+            "trigger": "buy",
+            "pattern_en": "Should I buy this?",
+            "pattern_kr": "이거 살까?",
+            "coreEn": "Should I buy this",
+            "coreKr": "이거 살까",
+            "siblings": [
+              {
+                "word": "%",
+                "en": "Should I buy this? It's 50% off...",
+                "kr": "이거 살까? 50% 할인 중인데...",
+                "coreEn": "Should I buy this"
+              },
+              {
+                "word": "buck",
+                "en": "Should I buy this? It's only 20 bucks.",
+                "kr": "이거 살까? 20불밖에 안 하는데.",
+                "coreEn": "Should I buy this"
+              }
+            ]
+          }
+        },
+        {
+          "level": 9,
+          "word": "ketchup",
+          "meaning": "케첩",
+          "pos": "noun",
+          "cefr": "A2",
+          "vocab": {
+            "answer": "ketchup",
+            "enLines": [
+              "I can't eat my french fries without [ketchup]."
+            ],
+            "koLines": [
+              "[케첩] 없이는 감자튀김을 먹을 수 없어."
+            ]
+          },
+          "sentence": {
+            "en": "Can you pass me the ketchup, please?",
+            "kr": "케첩 좀 건네줄래요?",
+            "trigger": "ketchup",
+            "pattern_en": "Can you pass me ~?",
+            "pattern_kr": "~ 좀 건네줄래?",
+            "coreEn": "Can you pass me the ketchup",
+            "coreKr": "케첩 좀 건네줄래요",
+            "siblings": [
+              {
+                "word": "butter",
+                "en": "Can you pass me the butter?",
+                "kr": "버터 좀 건네줄래?",
+                "coreEn": "Can you pass me the butter"
+              },
+              {
+                "word": "napkin",
+                "en": "Can you pass me a couple of napkins when you get a chance?",
+                "kr": "혹시 가능하면 냅킨 몇 장 좀 건네주시겠어요?",
+                "coreEn": "Can you pass me a couple of napkins"
+              }
+            ]
+          }
+        },
+        {
+          "level": 10,
+          "word": "airport",
+          "meaning": "공항",
+          "pos": "noun",
+          "cefr": "A1",
+          "vocab": {
+            "answer": "airport",
+            "enLines": [
+              "We've got to go pick her up at the [airport]."
+            ],
+            "koLines": [
+              "[공항]에 가서 그녀를 태워 와야 해."
+            ]
+          },
+          "sentence": {
+            "en": "How long does it take to get to the airport on the express train from here?",
+            "kr": "여기서 공항까지 급행열차로 얼마나 걸리나요?",
+            "trigger": "airport",
+            "pattern_en": "How long does it take to get to ~?",
+            "pattern_kr": "~까지 얼마나 걸리나요?",
+            "coreEn": "How long does it take to get to",
+            "coreKr": "까지",
+            "siblings": [
+              {
+                "word": "oxford",
+                "en": "How long does it take to get to Oxford from London by train?",
+                "kr": "런던에서 옥스포드 가는 데 기차로 얼마나 걸리나요?",
+                "coreEn": "How long does it take to get to"
+              },
+              {
+                "word": "Eiffel Tower",
+                "en": "How long does it take to get to the Eiffel Tower from here on foot?",
+                "kr": "여기서 에펠 탑까지 걸어서 얼마나 걸리나요?",
+                "coreEn": "How long does it take to get to"
+              }
+            ]
+          }
+        },
+        {
+          "level": 11,
+          "word": "exercise",
+          "meaning": "<신체적, 정신적 건강을 위한> 운동",
+          "pos": "noun",
+          "cefr": "A1",
+          "vocab": {
+            "answer": "exercise",
+            "enLines": [
+              "It'll be nice to get some [exercise]. I've been sitting for hours."
+            ],
+            "koLines": [
+              "[운동]을 좀 하면 좋을 것 같아. 몇 시간째 앉아만 있었거든."
+            ]
+          },
+          "sentence": {
+            "en": "What kind of exercise do you like?",
+            "kr": "어떤 운동 좋아해?",
+            "trigger": "exercise",
+            "pattern_en": "What kind of ~ do you like?",
+            "pattern_kr": "어떤 ~ 좋아해?",
+            "coreEn": "What kind of exercise do you like",
+            "coreKr": "어떤 운동 좋아해",
+            "siblings": [
+              {
+                "word": "music",
+                "en": "What kind of music do you like?",
+                "kr": "어떤 음악 좋아해?",
+                "coreEn": "What kind of music do you like"
+              },
+              {
+                "word": "food",
+                "en": "What kind of food do you like?",
+                "kr": "어떤 음식 좋아하세요?",
+                "coreEn": "What kind of food do you like"
+              }
+            ]
+          }
+        },
+        {
+          "level": 11,
+          "word": "scarf",
+          "meaning": "스카프",
+          "pos": "noun",
+          "cefr": "B1",
+          "vocab": {
+            "answer": "scarf",
+            "enLines": [
+              "How much is this [scarf]?"
+            ],
+            "koLines": [
+              "이 [스카프] 얼마예요?"
+            ]
+          },
+          "sentence": {
+            "en": "You should bring a scarf. It's going to be cold out there.",
+            "kr": "목도리를 가져가는 게 좋을 거야. 밖이 추울 거야.",
+            "trigger": "scarf",
+            "pattern_en": "You should bring ~.",
+            "pattern_kr": "~을 가져가는 게 좋을 거야.",
+            "coreEn": "You should bring",
+            "coreKr": "가져가는 게 좋을 거야",
+            "siblings": [
+              {
+                "word": "umbrella",
+                "en": "You should bring an umbrella.",
+                "kr": "우산을 가져가는 게 좋을 거야.",
+                "coreEn": "You should bring"
+              },
+              {
+                "word": "hat",
+                "en": "You should bring a hat, too, just in case.",
+                "kr": "모자도 가져가는 게 좋을 거야, 혹시 모르니까.",
+                "coreEn": "You should bring"
+              }
+            ]
+          }
+        },
+        {
+          "level": 12,
+          "word": "vacation",
+          "meaning": "<쉬거나 여행 등을 가는> 휴가 <미국식 표현>",
+          "pos": "noun",
+          "cefr": "B1",
+          "vocab": {
+            "answer": "vacation",
+            "enLines": [
+              "I'm never going on a [vacation] again."
+            ],
+            "koLines": [
+              "나 다시는 [휴가] 안가."
+            ]
+          },
+          "sentence": {
+            "en": "I'm here on vacation.",
+            "kr": "휴가차 왔어요.",
+            "trigger": "vacation",
+            "pattern_en": "I'm here on vacation.",
+            "pattern_kr": "휴가차 왔어요.",
+            "coreEn": "I'm here on vacation",
+            "coreKr": "휴가차 왔어요",
+            "siblings": [
+              {
+                "word": "wife",
+                "en": "I'm here on vacation with my wife.",
+                "kr": "아내랑 휴가차 왔어요.",
+                "coreEn": "I'm here on vacation"
+              },
+              {
+                "word": "couple",
+                "en": "I'm here on vacation with a couple of friends.",
+                "kr": "친구 몇 명과 함께 휴가차 왔어요.",
+                "coreEn": "I'm here on vacation"
+              }
+            ]
+          }
+        },
+        {
+          "level": 12,
+          "word": "stay",
+          "meaning": "<다른 곳에 가지 않고> 머무르다, 남다",
+          "pos": "verb",
+          "cefr": "A2",
+          "vocab": {
+            "answer": "stay",
+            "enLines": [
+              "I'll just [stay] here with Miranda."
+            ],
+            "koLines": [
+              "나는 그냥 미란다랑 여기에 [남을]게.",
+              "(다른 곳에 가지 않고 머무르는 것을 뜻하는 표현)"
+            ]
+          },
+          "sentence": {
+            "en": "I'm staying at the Hilton.",
+            "kr": "힐튼 호텔에서 지낼 겁니다.",
+            "trigger": "stay",
+            "pattern_en": "I'm staying at ~.",
+            "pattern_kr": "~에서 머물 거예요.",
+            "coreEn": "I'm staying at",
+            "coreKr": "에서 지낼 겁니다",
+            "siblings": [
+              {
+                "word": "guesthouse",
+                "en": "I'm staying at a guesthouse near the airport.",
+                "kr": "저는 공항 근처의 게스트하우스에 머물 거예요.",
+                "coreEn": "I'm staying at"
+              },
+              {
+                "word": "hotel",
+                "en": "I'm staying at the Marriott Hotel.",
+                "kr": "저는 메리어트 호텔에 머물 거예요.",
+                "coreEn": "I'm staying at"
+              }
+            ]
+          }
+        },
+        {
+          "level": 12,
+          "word": "dressing",
+          "meaning": "<요리용> 드레싱, 소스",
+          "pos": "noun",
+          "cefr": "B2",
+          "vocab": {
+            "answer": "dressing",
+            "enLines": [
+              "Which [dressing] do you think I should put on my salad?"
+            ],
+            "koLines": [
+              "샐러드에 어떤 [드레싱]을 올리는 게 좋을까?"
+            ]
+          },
+          "sentence": {
+            "en": "Can I get it with sesame dressing?",
+            "kr": "참깨 드레싱이랑 같이 주실 수 있나요?",
+            "trigger": "dressing",
+            "pattern_en": "Can I get it with ~?",
+            "pattern_kr": "~랑 같이 주실 수 있나요?",
+            "coreEn": "Can I get it with",
+            "coreKr": "이랑 같이 주실 수 있나요",
+            "siblings": [
+              {
+                "word": "pump",
+                "en": "Can I get it with an extra pump of vanilla?",
+                "kr": "바닐라 시럽 한 번 더 해서 같이 주실 수 있나요?",
+                "coreEn": "Can I get it with"
+              },
+              {
+                "word": "ice",
+                "en": "Can I get it with light ice?",
+                "kr": "얼음을 좀 적게 넣어 주실 수 있나요?",
+                "coreEn": "Can I get it with"
+              }
+            ]
+          }
+        },
+        {
+          "level": 12,
+          "word": "kind",
+          "meaning": "( Phrasal Verb )",
+          "pos": "noun",
+          "cefr": "A1",
+          "vocab": {
+            "answer": "kind",
+            "enLines": [
+              "That's my favorite [kind] [of] cookie!"
+            ],
+            "koLines": [
+              "그게 내가 제일 좋아하는 [종류의] 쿠키야!"
+            ]
+          },
+          "sentence": {
+            "en": "Which kind should we get? Do you have a preference?",
+            "kr": "어떤 종류로 할까? 선호하는 게 있어?",
+            "trigger": "kind",
+            "pattern_en": "Which ~ should we get?",
+            "pattern_kr": "어떤 ~으로 할까?",
+            "coreEn": "Which kind should we get",
+            "coreKr": "어떤 종류로 할까",
+            "siblings": [
+              {
+                "word": "flavor",
+                "en": "Which flavor should we get?",
+                "kr": "어떤 맛으로 할까?",
+                "coreEn": "Which flavor should we get"
+              },
+              {
+                "word": "dress",
+                "en": "Which dressing should we get? I'm fine with anything but ranch.",
+                "kr": "어떤 드레싱으로 할까? 랜치만 아니면 다 괜찮아.",
+                "coreEn": "Which dressing should we get"
+              }
+            ]
+          }
+        },
+        {
+          "level": 13,
+          "word": "fork",
+          "meaning": "포크",
+          "pos": "noun",
+          "cefr": "A1",
+          "vocab": {
+            "answer": "fork",
+            "enLines": [
+              "Could you give me another [fork]?"
+            ],
+            "koLines": [
+              "[포크] 좀 다시 갖다 주실래요?",
+              "<발음: fork의 f를 잘못 발음해서 pork라고 하면 돼지고기라는 뜻이 되므로 발음에 주의하세요.>"
+            ]
+          },
+          "sentence": {
+            "en": "Could you bring me another fork, please?",
+            "kr": "포크 하나 더 가져다주실 수 있나요?",
+            "trigger": "fork",
+            "pattern_en": "Could you bring me/us ~?",
+            "pattern_kr": "~를 가져다주실 수 있나요?",
+            "coreEn": "Could you bring me",
+            "coreKr": "가져다주실 수 있나요",
+            "siblings": [
+              {
+                "word": "knife",
+                "en": "Could you bring me another knife, please?",
+                "kr": "칼 하나 더 가져다주실 수 있나요?",
+                "coreEn": "Could you bring me"
+              },
+              {
+                "word": "menu",
+                "en": "Could you bring me the dessert menu, please?",
+                "kr": "디저트 메뉴를 가져다주실 수 있나요?",
+                "coreEn": "Could you bring me"
+              }
+            ]
+          }
+        },
+        {
+          "level": 13,
+          "word": "train",
+          "meaning": "기차, 열차",
+          "pos": "noun",
+          "cefr": "A1",
+          "vocab": {
+            "answer": "train",
+            "enLines": [
+              "I love taking the [train] to my parents' house."
+            ],
+            "koLines": [
+              "나는 우리 부모님 집에 [기차] 타고 가는 것을 좋아해."
+            ]
+          },
+          "sentence": {
+            "en": "Where can I get on the express train?",
+            "kr": "급행열차는 어디서 타나요?",
+            "trigger": "train",
+            "pattern_en": "Where can I get on ~?",
+            "pattern_kr": "~는 어디서 타나요?",
+            "coreEn": "Where can I get on",
+            "coreKr": "어디서 타나요",
+            "siblings": [
+              {
+                "word": "bus",
+                "en": "Where can I get on bus 20B?",
+                "kr": "20B번 버스는 어디서 타나요?",
+                "coreEn": "Where can I get on"
+              },
+              {
+                "word": "line",
+                "en": "Where can I get on the blue line?",
+                "kr": "블루라인은 어디서 타나요?",
+                "coreEn": "Where can I get on"
+              }
+            ]
+          }
+        },
+        {
+          "level": 13,
+          "word": "feel",
+          "meaning": "<사람이 촉감, 기분, 감정 등을> 느끼다",
+          "pos": "verb",
+          "cefr": "A1",
+          "vocab": {
+            "answer": "feel",
+            "enLines": [
+              "I know how you [feel]."
+            ],
+            "koLines": [
+              "나도 네 기분 알아.",
+              "( 나는 네가 어떻게 [느끼]는지 알아. )"
+            ]
+          },
+          "sentence": {
+            "en": "I feel dizzy.",
+            "kr": "어지러워요.",
+            "trigger": "feel",
+            "pattern_en": "I feel dizzy.",
+            "pattern_kr": "어지러워요.",
+            "coreEn": "I feel dizzy",
+            "coreKr": "어지러워요",
+            "siblings": [
+              {
+                "word": "bit",
+                "en": "I feel dizzy and a bit nauseous.",
+                "kr": "어지럽고 약간 메스꺼워요.",
+                "coreEn": "I feel dizzy"
+              },
+              {
+                "word": "hotel",
+                "en": "I feel dizzy. I want to go back to the hotel.",
+                "kr": "어지러워요. 호텔로 돌아가고 싶어요.",
+                "coreEn": "I feel dizzy"
+              }
+            ]
+          }
+        },
+        {
+          "level": 13,
+          "word": "medium",
+          "meaning": "<대중 전달용> 매체",
+          "pos": "noun",
+          "cefr": "B1",
+          "vocab": {
+            "answer": "medium",
+            "enLines": [
+              "The internet has replaced TV as the best [medium] for advertising."
+            ],
+            "koLines": [
+              "인터넷이 TV를 제치고 광고하기 가장 좋은 [매체]로 자리매김했습니다."
+            ]
+          },
+          "sentence": {
+            "en": "Do you have this in a medium?",
+            "kr": "이거 미디엄 사이즈로 있나요?",
+            "trigger": "medium",
+            "pattern_en": "Do you have this in ~?",
+            "pattern_kr": "이거 ~로 있나요?",
+            "coreEn": "Do you have this in",
+            "coreKr": "이거",
+            "siblings": [
+              {
+                "word": "grey",
+                "en": "Do you have this in grey?",
+                "kr": "이거 회색으로 있나요?",
+                "coreEn": "Do you have this in"
+              },
+              {
+                "word": "color",
+                "en": "Do you have this in any other colors?",
+                "kr": "이거 다른 색으로도 있나요?",
+                "coreEn": "Do you have this in"
+              }
+            ]
+          }
+        },
+        {
+          "level": 14,
+          "word": "know",
+          "meaning": "( Phrasal Verb )",
+          "pos": "verb",
+          "cefr": "A1",
+          "vocab": {
+            "answer": "know",
+            "enLines": [
+              "I don't [know]."
+            ],
+            "koLines": [
+              "나는 몰라.",
+              "( 나는 [알]지 못해. )"
+            ]
+          },
+          "sentence": {
+            "en": "Do you know how to get there?",
+            "kr": "거기 어떻게 가는지 알아?",
+            "trigger": "know",
+            "pattern_en": "Do you know how to get ~?",
+            "pattern_kr": "~ 어떻게 가는지 알아?",
+            "coreEn": "Do you know how to get",
+            "coreKr": "어떻게 가는지 알아",
+            "siblings": [
+              {
+                "word": "GPS",
+                "en": "Do you know how to get there without GPS?",
+                "kr": "내비 없이 거기 어떻게 가는지 알아?",
+                "coreEn": "Do you know how to get"
+              },
+              {
+                "word": "library",
+                "en": "Do you know how to get to the library?",
+                "kr": "도서관에 어떻게 가는지 알아?",
+                "coreEn": "Do you know how to get"
+              }
+            ]
+          }
+        },
+        {
+          "level": 14,
+          "word": "almost",
+          "meaning": "거의",
+          "pos": "adverb",
+          "cefr": "A2",
+          "vocab": {
+            "answer": "almost",
+            "enLines": [
+              "I'm [almost] ready. Just give me two more minutes."
+            ],
+            "koLines": [
+              "준비 [거의] 다 됐어. 2분만 더 줘."
+            ]
+          },
+          "sentence": {
+            "en": "We're almost there.",
+            "kr": "우리 거의 다 왔어.",
+            "trigger": "almost",
+            "pattern_en": "We're almost there.",
+            "pattern_kr": "우리 거의 다 왔어.",
+            "coreEn": "We're almost there",
+            "coreKr": "우리 거의 다 왔어",
+            "siblings": [
+              {
+                "word": "minute",
+                "en": "We're almost there. Just another five minutes or so.",
+                "kr": "우리 거의 다 왔어. 5분 정도만 더 가면 돼.",
+                "coreEn": "We're almost there"
+              },
+              {
+                "word": "sweetie",
+                "en": "We're almost there, sweetie.",
+                "kr": "우리 거의 다 왔어, 자기야.",
+                "coreEn": "We're almost there"
+              }
+            ]
+          }
+        },
+        {
+          "level": 14,
+          "word": "try",
+          "meaning": "먹어 보다, 마셔 보다",
+          "pos": "verb",
+          "cefr": "A1",
+          "vocab": {
+            "answer": "Try",
+            "enLines": [
+              "[Try] this."
+            ],
+            "koLines": [
+              "이거 [한 번 먹어봐].",
+              "<참고: try는 원래 시도해 본다는 뜻인데, 음식을 먹어본다는 뜻으로도 try를 씁니다.>"
+            ]
+          },
+          "sentence": {
+            "en": "Have you tried this before? It's really good.",
+            "kr": "이거 먹어본 적 있어? 진짜 맛있어.",
+            "trigger": "try",
+            "pattern_en": "Have you tried this before?",
+            "pattern_kr": "이거 먹어본 적 있어?",
+            "coreEn": "Have you tried this before",
+            "coreKr": "이거 먹어본 적 있어",
+            "siblings": [
+              {
+                "word": "specialty",
+                "en": "Have you tried this before? Apparently it's their specialty.",
+                "kr": "이거 먹어본 적 있어? 여기 대표 메뉴래.",
+                "coreEn": "Have you tried this before"
+              },
+              {
+                "word": "favorite",
+                "en": "Have you tried this before? It's my favorite.",
+                "kr": "이거 먹어본 적 있어? 내가 제일 좋아하는 거야.",
+                "coreEn": "Have you tried this before"
+              }
+            ]
+          }
+        },
+        {
+          "level": 14,
+          "word": "soup",
+          "meaning": "수프",
+          "pos": "noun",
+          "cefr": "A1",
+          "vocab": {
+            "answer": "soup",
+            "enLines": [
+              "Do you want some [soup]?"
+            ],
+            "koLines": [
+              "[수프] 좀 먹을래?"
+            ]
+          },
+          "sentence": {
+            "en": "Should we get soup, too?",
+            "kr": "우리 수프도 시킬까?",
+            "trigger": "soup",
+            "pattern_en": "Should we get ~, too?",
+            "pattern_kr": "우리 ~도 시킬까?",
+            "coreEn": "Should we get soup, too",
+            "coreKr": "우리 수프도 시킬까",
+            "siblings": [
+              {
+                "word": "coffee",
+                "en": "Should we get coffee, too?",
+                "kr": "우리 커피도 시킬까?",
+                "coreEn": "Should we get coffee, too"
+              },
+              {
+                "word": "appetizer",
+                "en": "Should we get an appetizer, too?",
+                "kr": "우리 에피타이저도 시킬까?",
+                "coreEn": "Should we get an appetizer, too"
+              }
+            ]
+          }
+        },
+        {
+          "level": 14,
+          "word": "salty",
+          "meaning": "짠, 짭짤한",
+          "pos": "adjective",
+          "cefr": "B1",
+          "vocab": {
+            "answer": "salty",
+            "enLines": [
+              "Oh god, why is this so [salty]?",
+              "Is it? I followed the recipe, though!"
+            ],
+            "koLines": [
+              "맙소사, 이거 왜 이렇게 [짜]?",
+              "그래? 난 레시피대로 했는데!"
+            ]
+          },
+          "sentence": {
+            "en": "It's a bit salty, but it's good.",
+            "kr": "좀 짠데, 맛있어.",
+            "trigger": "salty",
+            "pattern_en": "It's a bit ~.",
+            "pattern_kr": "조금 ~해.",
+            "coreEn": "It's a bit salty",
+            "coreKr": "좀 짠데",
+            "siblings": [
+              {
+                "word": "spicy",
+                "en": "It's a bit spicy, but it's good. Want to try a bite?",
+                "kr": "좀 매운데, 괜찮아. 한 입 먹어볼래?",
+                "coreEn": "It's a bit spicy"
+              },
+              {
+                "word": "sweet",
+                "en": "It's a bit sweet, but it's good. Want to try a sip?",
+                "kr": "좀 단데, 좋아. 한 모금 마셔볼래?",
+                "coreEn": "It's a bit sweet"
+              }
+            ]
+          }
+        },
+        {
+          "level": 14,
+          "word": "think",
+          "meaning": "(~라고) 생각하다, ~일 것 같다 <진행형으로는 쓰이지 않음>",
+          "pos": "verb",
+          "cefr": "A1",
+          "vocab": {
+            "answer": "think",
+            "enLines": [
+              "I [think] she's his girlfriend."
+            ],
+            "koLines": [
+              "걔 쟤 여자친군 것 같아.",
+              "( 나는 그녀가 그의 여자친구라고 [생각해]. )"
+            ]
+          },
+          "sentence": {
+            "en": "Which one should we go to, do you think?",
+            "kr": "어느 곳으로 갈까, 어떻게 생각해?",
+            "trigger": "think",
+            "pattern_en": "Which one should we go to?",
+            "pattern_kr": "어느 곳으로 갈까?",
+            "coreEn": "Which one should we go to",
+            "coreKr": "어느 곳으로 갈까",
+            "siblings": [
+              {
+                "word": "go",
+                "en": "Which one should we go to?",
+                "kr": "어느 곳으로 갈까?",
+                "coreEn": "Which one should we go to"
+              },
+              {
+                "word": "price",
+                "en": "Which one should we go to? Do they have similar prices?",
+                "kr": "어느 곳으로 갈까? 가격대가 비슷해?",
+                "coreEn": "Which one should we go to"
+              }
+            ]
+          }
+        },
+        {
+          "level": 15,
+          "word": "place",
+          "meaning": "장소, 곳",
+          "pos": "noun",
+          "cefr": "A1",
+          "vocab": {
+            "answer": "place",
+            "enLines": [
+              "I love this [place]."
+            ],
+            "koLines": [
+              "(해변에서 하는 말)",
+              "나는 이[곳]이 너무 좋아."
+            ]
+          },
+          "sentence": {
+            "en": "Could you recommend a good place around here to go shopping?",
+            "kr": "이 근처에 쇼핑하기 좋은 곳 추천해 주시겠어요?",
+            "trigger": "place",
+            "pattern_en": "Could you recommend ~?",
+            "pattern_kr": "~를 추천해 주시겠어요?",
+            "coreEn": "Could you recommend",
+            "coreKr": "추천해 주시겠어요",
+            "siblings": [
+              {
+                "word": "spa",
+                "en": "Could you recommend a good massage spa nearby?",
+                "kr": "근처에 잘하는 마사지 스파 추천해 주시겠어요?",
+                "coreEn": "Could you recommend"
+              },
+              {
+                "word": "activity",
+                "en": "Could you recommend some outdoor activities to do around here?",
+                "kr": "이 근처에서 할 수 있는 야외 활동 좀 추천해 주시겠어요?",
+                "coreEn": "Could you recommend"
+              }
+            ]
+          }
+        },
+        {
+          "level": 15,
+          "word": "cucumber",
+          "meaning": "오이",
+          "pos": "noun",
+          "cefr": "B1",
+          "vocab": {
+            "answer": "cucumber",
+            "enLines": [
+              "Does putting [cucumber] slices on your eyes actually do anything?"
+            ],
+            "koLines": [
+              "[오이] 조각을 눈 위에 얹는 것이 실제로 효과가 있긴 한가요?"
+            ]
+          },
+          "sentence": {
+            "en": "Can I get it without cucumbers?",
+            "kr": "오이는 빼주실 수 있나요?",
+            "trigger": "cucumber",
+            "pattern_en": "Can I get it without ~?",
+            "pattern_kr": "~은 빼주실 수 있나요?",
+            "coreEn": "Can I get it without",
+            "coreKr": "는 빼주실 수 있나요",
+            "siblings": [
+              {
+                "word": "peanut",
+                "en": "Can I get it without peanuts, please?",
+                "kr": "땅콩은 빼주실 수 있나요?",
+                "coreEn": "Can I get it without"
+              },
+              {
+                "word": "cilantro",
+                "en": "Can I get it without cilantro, please?",
+                "kr": "고수는 빼주실 수 있나요?",
+                "coreEn": "Can I get it without"
+              }
+            ]
+          }
+        },
+        {
+          "level": 15,
+          "word": "pasta",
+          "meaning": "파스타",
+          "pos": "noun",
+          "cefr": "A1",
+          "vocab": {
+            "answer": "pasta",
+            "enLines": [
+              "I want some [pasta]."
+            ],
+            "koLines": [
+              "[파스타]를 좀 먹고 싶어.",
+              "<발음: pasta는 강세가 앞에 있어서 뒤의 a는 발음이 약해지면서 \"파스터 /ˈpɑːstə/\"에 가깝게 발음됩니다.>"
+            ]
+          },
+          "sentence": {
+            "en": "Do you want to try some of my pasta?",
+            "kr": "내 파스타 좀 먹어볼래?",
+            "trigger": "pasta",
+            "pattern_en": "Do you want to try some of ~?",
+            "pattern_kr": "~ 좀 먹어볼래?",
+            "coreEn": "Do you want to try some of",
+            "coreKr": "좀 먹어볼래",
+            "siblings": [
+              {
+                "word": "sandwich",
+                "en": "Do you want to try some of my sandwich?",
+                "kr": "내 샌드위치 좀 먹어볼래?",
+                "coreEn": "Do you want to try some of"
+              },
+              {
+                "word": "coffee",
+                "en": "Do you want to try some of my coffee?",
+                "kr": "내 커피 좀 마셔볼래?",
+                "coreEn": "Do you want to try some of"
+              }
+            ]
+          }
+        },
+        {
+          "level": 16,
+          "word": "restroom",
+          "meaning": "<공공장소의> 화장실 <미국식 표현. 영국에서는 잘 쓰이지 않음>",
+          "pos": "noun",
+          "cefr": "B1",
+          "vocab": {
+            "answer": "restroom",
+            "enLines": [
+              "Do you know where the [restroom] is?"
+            ],
+            "koLines": [
+              "[화장실]이 어디에 있는지 아세요?",
+              "(공공장소의 화장실을 뜻하는 미국식 표현)"
+            ]
+          },
+          "sentence": {
+            "en": "Excuse me, but do you know where the restrooms are?",
+            "kr": "실례합니다만, 화장실이 어디 있는지 아세요?",
+            "trigger": "restroom",
+            "pattern_en": "Excuse me, but ~.",
+            "pattern_kr": "실례합니다만 ~.",
+            "coreEn": "Excuse me, but",
+            "coreKr": "실례합니다만",
+            "siblings": [
+              {
+                "word": "seat",
+                "en": "Excuse me, but is this seat taken?",
+                "kr": "실례합니다만, 이 자리는 비어 있나요?",
+                "coreEn": "Excuse me, but"
+              },
+              {
+                "word": "excuse",
+                "en": "Excuse me, but could you help me with this?",
+                "kr": "실례합니다만, 이것 좀 도와주시겠어요?",
+                "coreEn": "Excuse me, but"
+              }
+            ]
+          }
+        },
+        {
+          "level": 16,
+          "word": "now",
+          "meaning": "지금, 이제",
+          "pos": "adverb",
+          "cefr": "A1",
+          "vocab": {
+            "answer": "now",
+            "enLines": [
+              "I want to go home [now]."
+            ],
+            "koLines": [
+              "나 [지금] 집에 가고 싶어."
+            ]
+          },
+          "sentence": {
+            "en": "I'm a bit busy right now, but maybe later.",
+            "kr": "지금은 좀 바쁜데, 어쩌면 나중에요.",
+            "trigger": "now",
+            "pattern_en": "I'm a bit busy ~.",
+            "pattern_kr": "나 ~때는 조금 바빠.",
+            "coreEn": "I'm a bit busy right now",
+            "coreKr": "지금은 좀 바쁜데",
+            "siblings": [
+              {
+                "word": "moment",
+                "en": "I'm a bit busy at the moment. Can I call you back?",
+                "kr": "바로 지금은 좀 바빠서 나중에 전화 드려도 될까요?",
+                "coreEn": "I'm a bit busy at the moment"
+              },
+              {
+                "word": "weekend",
+                "en": "I'm a bit busy this weekend. I've got finals coming up.",
+                "kr": "이번 주말에는 좀 바빠. 곧 기말고사가 있어.",
+                "coreEn": "I'm a bit busy this weekend"
+              }
+            ]
+          }
+        },
+        {
+          "level": 16,
+          "word": "side",
+          "meaning": "<둘로 나눠 봤을 때의 한> 쪽, 측 <side of sth에서, sth을 반으로 나눴을 때의 한쪽>",
+          "pos": "noun",
+          "cefr": "A2",
+          "vocab": {
+            "answer": "side",
+            "enLines": [
+              "In most countries, people drive on the right [side] of the road."
+            ],
+            "koLines": [
+              "대부분의 나라에서는, 도로의 오른[쪽]으로 차가 다닙니다."
+            ]
+          },
+          "sentence": {
+            "en": "Why don’t we get a side of fries to split?",
+            "kr": "우리 사이드로 나눠먹을 감자튀김 하나 시키는 거 어때?",
+            "trigger": "side",
+            "pattern_en": "Why don't we get ~ ?",
+            "pattern_kr": "우리 ~ 시키는 거 어때?",
+            "coreEn": "Why don’t we get",
+            "coreKr": "우리",
+            "siblings": [
+              {
+                "word": "appetizer",
+                "en": "Why don't we get some appetizers to share?",
+                "kr": "우리 나눠 먹을 에피타이저 좀 시키는 거 어때?",
+                "coreEn": "Why don't we get"
+              },
+              {
+                "word": "get",
+                "en": "Why don't we get both and just share?",
+                "kr": "우리 둘 다 시켜서 나눠 먹는 거 어때?",
+                "coreEn": "Why don't we get"
+              }
+            ]
+          }
+        },
+        {
+          "level": 17,
+          "word": "business",
+          "meaning": "사업, 장사",
+          "pos": "noun",
+          "cefr": "A1",
+          "vocab": {
+            "answer": "business",
+            "enLines": [
+              "How's [business] going?"
+            ],
+            "koLines": [
+              "[사업]은 어떻게 돼 가?"
+            ]
+          },
+          "sentence": {
+            "en": "I'm studying business at Harvard.",
+            "kr": "저는 하버드에서 경영학을 공부하고 있습니다.",
+            "trigger": "business",
+            "pattern_en": "I'm studying ... at ~ .",
+            "pattern_kr": "저는 지금 ~에서 ~을 공부하고 있어요.",
+            "coreEn": "I'm studying business at",
+            "coreKr": "저는",
+            "siblings": [
+              {
+                "word": "law",
+                "en": "I'm studying law at Yale.",
+                "kr": "저는 예일에서 법학을 공부하고 있습니다.",
+                "coreEn": "I'm studying law at"
+              },
+              {
+                "word": "engineering",
+                "en": "I'm studying engineering at MIT.",
+                "kr": "저는 MIT에서 공학을 공부하고 있습니다.",
+                "coreEn": "I'm studying engineering at"
+              }
+            ]
+          }
+        },
+        {
+          "level": 17,
+          "word": "swim",
+          "meaning": "<사람이> 수영하다, 헤엄치다",
+          "pos": "verb",
+          "cefr": "A1",
+          "vocab": {
+            "answer": "swim",
+            "enLines": [
+              "I don't want to [swim]."
+            ],
+            "koLines": [
+              "나 [수영하]기 싫어."
+            ]
+          },
+          "sentence": {
+            "en": "I go swimming every Saturday at the country club.",
+            "kr": "컨트리클럽에 토요일마다 수영 가.",
+            "trigger": "swim",
+            "pattern_en": "I go ... every ~.",
+            "pattern_kr": "나는 ~마다 ...을 가.",
+            "coreEn": "I go swimming every",
+            "coreKr": "마다 수영 가",
+            "siblings": [
+              {
+                "word": "hike",
+                "en": "I go hiking every weekend.",
+                "kr": "난 주말마다 등산 가.",
+                "coreEn": "I go hiking every"
+              },
+              {
+                "word": "jog",
+                "en": "I go jogging every morning because it helps me start my day right.",
+                "kr": "조깅은 하루를 바르게 시작하는 데 도움이 돼서 난 아침마다 조깅해.",
+                "coreEn": "I go jogging every"
+              }
+            ]
+          }
+        },
+        {
+          "level": 17,
+          "word": "party",
+          "meaning": "<사람들이 먹고 마시고 노는> 파티",
+          "pos": "noun",
+          "cefr": "A1",
+          "vocab": {
+            "answer": "party",
+            "enLines": [
+              "Are you coming to my birthday [party]?"
+            ],
+            "koLines": [
+              "내 생일 [파티]에 올 거니?"
+            ]
+          },
+          "sentence": {
+            "en": "Do you really think so? She seemed to ignore me at the party.",
+            "kr": "정말 그렇게 생각해? 파티에서 날 무시하는 것 같던데.",
+            "trigger": "party",
+            "pattern_en": "Do you really think so?",
+            "pattern_kr": "정말 그렇게 생각해?",
+            "coreEn": "Do you really think so",
+            "coreKr": "정말 그렇게 생각해",
+            "siblings": [
+              {
+                "word": "think",
+                "en": "Do you really think so?",
+                "kr": "정말 그렇게 생각해?",
+                "coreEn": "Do you really think so"
+              },
+              {
+                "word": "job",
+                "en": "Do you really think so? It's a bit different from my current job.",
+                "kr": "정말 그렇게 생각해? 지금 하는 일이랑은 좀 다른데.",
+                "coreEn": "Do you really think so"
+              }
+            ]
+          }
+        },
+        {
+          "level": 18,
+          "word": "bag",
+          "meaning": "<천, 가죽 등으로 만든> 가방, 백, 포대, 자루",
+          "pos": "noun",
+          "cefr": "A1",
+          "vocab": {
+            "answer": "bag",
+            "enLines": [
+              "Where is your [bag]?"
+            ],
+            "koLines": [
+              "네 [가방] 어딨어?"
+            ]
+          },
+          "sentence": {
+            "en": "I left my bag on the train.",
+            "kr": "기차에 제 가방을 두고 내렸어요.",
+            "trigger": "bag",
+            "pattern_en": "I left my ~",
+            "pattern_kr": "~를 두고 왔어요.",
+            "coreEn": "I left my",
+            "coreKr": "제",
+            "siblings": [
+              {
+                "word": "backpack",
+                "en": "I left my backpack at the bus terminal.",
+                "kr": "버스 터미널에 제 백팩을 두고 왔어요.",
+                "coreEn": "I left my"
+              },
+              {
+                "word": "keycard",
+                "en": "I left my keycard in my room.",
+                "kr": "방에 제 키카드를 두고 왔어요.",
+                "coreEn": "I left my"
               }
             ]
           }
@@ -2196,12 +2403,14 @@
               {
                 "word": "smart",
                 "en": "You are smart.",
-                "kr": "너는 똑똑해."
+                "kr": "너는 똑똑해.",
+                "coreEn": ""
               },
               {
                 "word": "cute",
                 "en": "She is cute.",
-                "kr": "그녀는 귀여워."
+                "kr": "그녀는 귀여워.",
+                "coreEn": ""
               }
             ]
           }
@@ -2231,12 +2440,14 @@
               {
                 "word": "student",
                 "en": "You are a student.",
-                "kr": "너는 학생이야."
+                "kr": "너는 학생이야.",
+                "coreEn": ""
               },
               {
                 "word": "pianist",
                 "en": "I am a pianist.",
-                "kr": "나는 피아니스트야."
+                "kr": "나는 피아니스트야.",
+                "coreEn": ""
               }
             ]
           }
@@ -2266,12 +2477,14 @@
               {
                 "word": "friend",
                 "en": "We are friends.",
-                "kr": "우린 친구야."
+                "kr": "우린 친구야.",
+                "coreEn": ""
               },
               {
                 "word": "scientist",
                 "en": "Mom and Dad are scientists.",
-                "kr": "엄마와 아빠는 과학자예요."
+                "kr": "엄마와 아빠는 과학자예요.",
+                "coreEn": ""
               }
             ]
           }
@@ -2301,12 +2514,14 @@
               {
                 "word": "incredible",
                 "en": "You were incredible.",
-                "kr": "당신은 대단했어요."
+                "kr": "당신은 대단했어요.",
+                "coreEn": ""
               },
               {
                 "word": "hungry",
                 "en": "He was hungry.",
-                "kr": "그는 배가 고팠다."
+                "kr": "그는 배가 고팠다.",
+                "coreEn": ""
               }
             ]
           }
@@ -2336,12 +2551,14 @@
               {
                 "word": "nice",
                 "en": "Your boss is nice.",
-                "kr": "너희 사장님은 착해."
+                "kr": "너희 사장님은 착해.",
+                "coreEn": ""
               },
               {
                 "word": "parent",
                 "en": "They are her parents.",
-                "kr": "그들은 그녀의 부모님이에요."
+                "kr": "그들은 그녀의 부모님이에요.",
+                "coreEn": ""
               }
             ]
           }
@@ -2371,12 +2588,14 @@
               {
                 "word": "nurse",
                 "en": "She is not a nurse.",
-                "kr": "그녀는 간호사가 아니야."
+                "kr": "그녀는 간호사가 아니야.",
+                "coreEn": ""
               },
               {
                 "word": "kid",
                 "en": "You are not a kid.",
-                "kr": "넌 애가 아니야."
+                "kr": "넌 애가 아니야.",
+                "coreEn": ""
               }
             ]
           }
@@ -2406,12 +2625,14 @@
               {
                 "word": "friend",
                 "en": "We aren't friends.",
-                "kr": "우리는 친구가 아니야."
+                "kr": "우리는 친구가 아니야.",
+                "coreEn": ""
               },
               {
                 "word": "student",
                 "en": "He wasn't a student.",
-                "kr": "그는 학생이 아니었어."
+                "kr": "그는 학생이 아니었어.",
+                "coreEn": ""
               }
             ]
           }
@@ -2441,12 +2662,14 @@
               {
                 "word": "love",
                 "en": "I love you.",
-                "kr": "나는 너를 사랑해."
+                "kr": "나는 너를 사랑해.",
+                "coreEn": ""
               },
               {
                 "word": "believe",
                 "en": "I believe him.",
-                "kr": "나는 그를 믿어."
+                "kr": "나는 그를 믿어.",
+                "coreEn": ""
               }
             ]
           }
@@ -2476,12 +2699,14 @@
               {
                 "word": "like",
                 "en": "She likes them.",
-                "kr": "그녀는 그들을 좋아해."
+                "kr": "그녀는 그들을 좋아해.",
+                "coreEn": ""
               },
               {
                 "word": "live",
                 "en": "He lives here.",
-                "kr": "그는 여기에 살아."
+                "kr": "그는 여기에 살아.",
+                "coreEn": ""
               }
             ]
           }
@@ -2511,12 +2736,14 @@
               {
                 "word": "like",
                 "en": "I don't like him.",
-                "kr": "나는 그를 좋아하지 않아."
+                "kr": "나는 그를 좋아하지 않아.",
+                "coreEn": ""
               },
               {
                 "word": "cookie",
                 "en": "They don't like cookies.",
-                "kr": "그들은 쿠키를 좋아하지 않아."
+                "kr": "그들은 쿠키를 좋아하지 않아.",
+                "coreEn": ""
               }
             ]
           }
@@ -2547,12 +2774,14 @@
               {
                 "word": "say",
                 "en": "He didn't say.",
-                "kr": "그는 말하지 않았어요."
+                "kr": "그는 말하지 않았어요.",
+                "coreEn": ""
               },
               {
                 "word": "answer",
                 "en": "You didn't answer.",
-                "kr": "넌 대답하지 않았어."
+                "kr": "넌 대답하지 않았어.",
+                "coreEn": ""
               }
             ]
           }
@@ -2582,12 +2811,14 @@
               {
                 "word": "eye",
                 "en": "Open your eyes.",
-                "kr": "눈 떠."
+                "kr": "눈 떠.",
+                "coreEn": ""
               },
               {
                 "word": "go",
                 "en": "Go home.",
-                "kr": "집에 가."
+                "kr": "집에 가.",
+                "coreEn": ""
               }
             ]
           }
@@ -2617,12 +2848,14 @@
               {
                 "word": "careful",
                 "en": "Be careful.",
-                "kr": "조심해."
+                "kr": "조심해.",
+                "coreEn": ""
               },
               {
                 "word": "ready",
                 "en": "Be ready.",
-                "kr": "준비해."
+                "kr": "준비해.",
+                "coreEn": ""
               }
             ]
           }
@@ -2653,12 +2886,14 @@
               {
                 "word": "go",
                 "en": "Don't go.",
-                "kr": "가지 마."
+                "kr": "가지 마.",
+                "coreEn": ""
               },
               {
                 "word": "touch",
                 "en": "Don't touch that.",
-                "kr": "그거 손대지 마."
+                "kr": "그거 손대지 마.",
+                "coreEn": ""
               }
             ]
           }
@@ -2688,12 +2923,14 @@
               {
                 "word": "tall",
                 "en": "Is he tall?",
-                "kr": "그는 키가 커?"
+                "kr": "그는 키가 커?",
+                "coreEn": ""
               },
               {
                 "word": "sister",
                 "en": "Is she your sister?",
-                "kr": "그녀는 너의 여동생이야?"
+                "kr": "그녀는 너의 여동생이야?",
+                "coreEn": ""
               }
             ]
           }
@@ -2724,12 +2961,14 @@
               {
                 "word": "nurse",
                 "en": "Is she a nurse?\nYes, she is.",
-                "kr": "그녀는 간호사예요?\n네, 간호사예요."
+                "kr": "그녀는 간호사예요?\n네, 간호사예요.",
+                "coreEn": ""
               },
               {
                 "word": "doctor",
                 "en": "Is Tom a doctor?\nYes, he is.",
-                "kr": "톰은 의사예요?\n네, 의사예요."
+                "kr": "톰은 의사예요?\n네, 의사예요.",
+                "coreEn": ""
               }
             ]
           }
@@ -2760,12 +2999,14 @@
               {
                 "word": "mad",
                 "en": "Were you mad?",
-                "kr": "너 화났었어?"
+                "kr": "너 화났었어?",
+                "coreEn": ""
               },
               {
                 "word": "nurse",
                 "en": "Was she a nurse?",
-                "kr": "그녀는 간호사였나요?"
+                "kr": "그녀는 간호사였나요?",
+                "coreEn": ""
               }
             ]
           }
@@ -2795,12 +3036,14 @@
               {
                 "word": "nurse",
                 "en": "Was she a nurse?\nYes, she was.",
-                "kr": "그녀는 간호사였나요?\n네, 간호사였어요."
+                "kr": "그녀는 간호사였나요?\n네, 간호사였어요.",
+                "coreEn": ""
               },
               {
                 "word": "expensive",
                 "en": "Was it expensive?\nYes, it was.",
-                "kr": "그것은 비쌌어요?\n네, 비쌌어요."
+                "kr": "그것은 비쌌어요?\n네, 비쌌어요.",
+                "coreEn": ""
               }
             ]
           }
@@ -2832,12 +3075,14 @@
               {
                 "word": "real",
                 "en": "Are these real or fake?",
-                "kr": "이것들은 진짜인가요, 아니면 가짜인가요?"
+                "kr": "이것들은 진짜인가요, 아니면 가짜인가요?",
+                "coreEn": ""
               },
               {
                 "word": "blue",
                 "en": "Is this blue or purple?",
-                "kr": "이것은 파란색입니까, 아니면 보라색입니까?"
+                "kr": "이것은 파란색입니까, 아니면 보라색입니까?",
+                "coreEn": ""
               }
             ]
           }
@@ -2867,12 +3112,14 @@
               {
                 "word": "movie",
                 "en": "Does she like movies?",
-                "kr": "그녀는 영화를 좋아해?"
+                "kr": "그녀는 영화를 좋아해?",
+                "coreEn": ""
               },
               {
                 "word": "soccer",
                 "en": "Do they play soccer?",
-                "kr": "그들은 축구를 하니?"
+                "kr": "그들은 축구를 하니?",
+                "coreEn": ""
               }
             ]
           }
@@ -2902,12 +3149,14 @@
               {
                 "word": "music",
                 "en": "Do you like music?\nYes, I do.",
-                "kr": "너는 음악 좋아해?\n어, 좋아해."
+                "kr": "너는 음악 좋아해?\n어, 좋아해.",
+                "coreEn": ""
               },
               {
                 "word": "news",
                 "en": "Do you watch the news?\nNo, I don't.",
-                "kr": "당신은 뉴스를 보십니까?\n아뇨, 안 봐요."
+                "kr": "당신은 뉴스를 보십니까?\n아뇨, 안 봐요.",
+                "coreEn": ""
               }
             ]
           }
@@ -2937,12 +3186,14 @@
               {
                 "word": "cry",
                 "en": "She cried.",
-                "kr": "그녀가 울었어."
+                "kr": "그녀가 울었어.",
+                "coreEn": ""
               },
               {
                 "word": "soccer",
                 "en": "She played soccer.",
-                "kr": "그녀는 축구를 했어."
+                "kr": "그녀는 축구를 했어.",
+                "coreEn": ""
               }
             ]
           }
@@ -2973,12 +3224,14 @@
               {
                 "word": "leave",
                 "en": "Did they leave?",
-                "kr": "그들은 떠났나요?"
+                "kr": "그들은 떠났나요?",
+                "coreEn": ""
               },
               {
                 "word": "mistake",
                 "en": "Did I make a mistake?",
-                "kr": "제가 실수를 했나요?"
+                "kr": "제가 실수를 했나요?",
+                "coreEn": ""
               }
             ]
           }
@@ -3009,12 +3262,14 @@
               {
                 "word": "breakfast",
                 "en": "Did you have breakfast?\nYes, I did.",
-                "kr": "너 아침 먹었어?\n어, 먹었어."
+                "kr": "너 아침 먹었어?\n어, 먹었어.",
+                "coreEn": ""
               },
               {
                 "word": "medicine",
                 "en": "Did you take your medicine?\nYes, I did.",
-                "kr": "너 약 먹었어?\n네, 먹었어요."
+                "kr": "너 약 먹었어?\n네, 먹었어요.",
+                "coreEn": ""
               }
             ]
           }
@@ -3044,12 +3299,14 @@
               {
                 "word": "mad",
                 "en": "Aren't you mad?",
-                "kr": "너 화 안 났어?"
+                "kr": "너 화 안 났어?",
+                "coreEn": ""
               },
               {
                 "word": "beautiful",
                 "en": "Aren't they beautiful?",
-                "kr": "걔들 아름답지 않아?"
+                "kr": "걔들 아름답지 않아?",
+                "coreEn": ""
               }
             ]
           }
@@ -3079,12 +3336,14 @@
               {
                 "word": "there",
                 "en": "Weren't you there?\nNo, I wasn't.",
-                "kr": "너 거기 없었니?\n네, 없었어요."
+                "kr": "너 거기 없었니?\n네, 없었어요.",
+                "coreEn": ""
               },
               {
                 "word": "friend",
                 "en": "Aren't you friends?\nNo, we aren't.",
-                "kr": "너희들 친구 아니야?\n네, 아니에요."
+                "kr": "너희들 친구 아니야?\n네, 아니에요.",
+                "coreEn": ""
               }
             ]
           }
@@ -3114,12 +3373,14 @@
               {
                 "word": "who",
                 "en": "Who is she?",
-                "kr": "그녀는 누구야?"
+                "kr": "그녀는 누구야?",
+                "coreEn": ""
               },
               {
                 "word": "trip",
                 "en": "How was your trip?",
-                "kr": "여행은 어땠어?"
+                "kr": "여행은 어땠어?",
+                "coreEn": ""
               }
             ]
           }
@@ -3149,12 +3410,14 @@
               {
                 "word": "bag",
                 "en": "These are my bags.",
-                "kr": "이것들은 내 가방들이야."
+                "kr": "이것들은 내 가방들이야.",
+                "coreEn": ""
               },
               {
                 "word": "what",
                 "en": "What are these?",
-                "kr": "이것들은 뭐야?"
+                "kr": "이것들은 뭐야?",
+                "coreEn": ""
               }
             ]
           }
@@ -3185,12 +3448,14 @@
               {
                 "word": "mean",
                 "en": "What do you mean?",
-                "kr": "너는 무엇을 뜻한 거야?"
+                "kr": "너는 무엇을 뜻한 거야?",
+                "coreEn": ""
               },
               {
                 "word": "get",
                 "en": "When did you get here?",
-                "kr": "너 여기에 언제 도착했어?"
+                "kr": "너 여기에 언제 도착했어?",
+                "coreEn": ""
               }
             ]
           }
@@ -3220,12 +3485,14 @@
               {
                 "word": "color",
                 "en": "What color is this?",
-                "kr": "이건 무슨 색이죠?"
+                "kr": "이건 무슨 색이죠?",
+                "coreEn": ""
               },
               {
                 "word": "language",
                 "en": "What languages do you know?",
-                "kr": "당신은 무슨 언어들을 아시나요?"
+                "kr": "당신은 무슨 언어들을 아시나요?",
+                "coreEn": ""
               }
             ]
           }
@@ -3255,12 +3522,14 @@
               {
                 "word": "phone",
                 "en": "Whose phone is that?",
-                "kr": "저건 누구 전화인가요?"
+                "kr": "저건 누구 전화인가요?",
+                "coreEn": ""
               },
               {
                 "word": "headphone",
                 "en": "Whose headphones are these?",
-                "kr": "이건 누구 헤드폰입니까?"
+                "kr": "이건 누구 헤드폰입니까?",
+                "coreEn": ""
               }
             ]
           }
@@ -3290,12 +3559,14 @@
               {
                 "word": "party",
                 "en": "Did she come to your party?",
-                "kr": "그녀가 너의 파티에 왔어?"
+                "kr": "그녀가 너의 파티에 왔어?",
+                "coreEn": ""
               },
               {
                 "word": "school",
                 "en": "Does he drive to school?",
-                "kr": "그는 학교에 운전해서 갑니까?"
+                "kr": "그는 학교에 운전해서 갑니까?",
+                "coreEn": ""
               }
             ]
           }
@@ -3325,12 +3596,14 @@
               {
                 "word": "bed",
                 "en": "Don't jump on the bed.",
-                "kr": "침대 위에서 뛰지 마."
+                "kr": "침대 위에서 뛰지 마.",
+                "coreEn": ""
               },
               {
                 "word": "party",
                 "en": "She's at the party.",
-                "kr": "그녀는 파티장에 있어."
+                "kr": "그녀는 파티장에 있어.",
+                "coreEn": ""
               }
             ]
           }
@@ -3360,12 +3633,14 @@
               {
                 "word": "student",
                 "en": "They're good students.",
-                "kr": "그들은 좋은 학생들이야."
+                "kr": "그들은 좋은 학생들이야.",
+                "coreEn": ""
               },
               {
                 "word": "cook",
                 "en": "I'm a bad cook.",
-                "kr": "나는 서투른 요리사야."
+                "kr": "나는 서투른 요리사야.",
+                "coreEn": ""
               }
             ]
           }
@@ -3395,12 +3670,14 @@
               {
                 "word": "spicy",
                 "en": "Is that soup spicy?",
-                "kr": "저 수프 매워요?"
+                "kr": "저 수프 매워요?",
+                "coreEn": ""
               },
               {
                 "word": "beautiful",
                 "en": "Aren't these paintings beautiful?",
-                "kr": "이 그림들 아름답지 않나요?"
+                "kr": "이 그림들 아름답지 않나요?",
+                "coreEn": ""
               }
             ]
           }
@@ -3431,12 +3708,14 @@
               {
                 "word": "dinner",
                 "en": "Let's have dinner.",
-                "kr": "저녁 먹자."
+                "kr": "저녁 먹자.",
+                "coreEn": ""
               },
               {
                 "word": "order",
                 "en": "Let's order pizza.",
-                "kr": "피자 시키자."
+                "kr": "피자 시키자.",
+                "coreEn": ""
               }
             ]
           }
@@ -3466,12 +3745,14 @@
               {
                 "word": "let",
                 "en": "Let's not go.",
-                "kr": "가지 말자."
+                "kr": "가지 말자.",
+                "coreEn": ""
               },
               {
                 "word": "game",
                 "en": "Let's not play video games.",
-                "kr": "비디오 게임 하지 말자."
+                "kr": "비디오 게임 하지 말자.",
+                "coreEn": ""
               }
             ]
           }
@@ -3502,12 +3783,14 @@
               {
                 "word": "let",
                 "en": "Let me explain.",
-                "kr": "제가 설명해 드릴게요."
+                "kr": "제가 설명해 드릴게요.",
+                "coreEn": ""
               },
               {
                 "word": "door",
                 "en": "Let me close the door.",
-                "kr": "제가 문을 닫을게요."
+                "kr": "제가 문을 닫을게요.",
+                "coreEn": ""
               }
             ]
           }
@@ -3540,12 +3823,14 @@
               {
                 "word": "sing",
                 "en": "Alana sings beautifully.",
-                "kr": "얼래나는 아름답게 노래해."
+                "kr": "얼래나는 아름답게 노래해.",
+                "coreEn": ""
               },
               {
                 "word": "read",
                 "en": "Please read quietly.",
-                "kr": "조용히 읽어주세요."
+                "kr": "조용히 읽어주세요.",
+                "coreEn": ""
               }
             ]
           }
@@ -3575,12 +3860,14 @@
               {
                 "word": "kid",
                 "en": "They're really smart kids.",
-                "kr": "그들은 정말 똑똑한 아이들이야."
+                "kr": "그들은 정말 똑똑한 아이들이야.",
+                "coreEn": ""
               },
               {
                 "word": "woman",
                 "en": "Jill is a very beautiful woman.",
-                "kr": "질은 매우 아름다운 여자야."
+                "kr": "질은 매우 아름다운 여자야.",
+                "coreEn": ""
               }
             ]
           }
@@ -3610,12 +3897,14 @@
               {
                 "word": "talk",
                 "en": "Don't talk so loudly.",
-                "kr": "너무 큰 소리로 말하지 마."
+                "kr": "너무 큰 소리로 말하지 마.",
+                "coreEn": ""
               },
               {
                 "word": "listen",
                 "en": "Please listen very carefully.",
-                "kr": "매우 주의해서 들어주세요."
+                "kr": "매우 주의해서 들어주세요.",
+                "coreEn": ""
               }
             ]
           }
@@ -3645,12 +3934,14 @@
               {
                 "word": "arrive",
                 "en": "He arrived late.",
-                "kr": "그는 늦게 도착했어요."
+                "kr": "그는 늦게 도착했어요.",
+                "coreEn": ""
               },
               {
                 "word": "work",
                 "en": "He works late.",
-                "kr": "그는 늦게까지 일해."
+                "kr": "그는 늦게까지 일해.",
+                "coreEn": ""
               }
             ]
           }
@@ -3680,12 +3971,14 @@
               {
                 "word": "brother",
                 "en": "He's Jane's brother.",
-                "kr": "그는 제인의 동생이야."
+                "kr": "그는 제인의 동생이야.",
+                "coreEn": ""
               },
               {
                 "word": "desk",
                 "en": "Is that Niall's desk?",
-                "kr": "그게 니얼의 책상인가요?"
+                "kr": "그게 니얼의 책상인가요?",
+                "coreEn": ""
               }
             ]
           }
@@ -3716,12 +4009,14 @@
               {
                 "word": "name",
                 "en": "What's the name of this town?",
-                "kr": "이 마을의 이름이 뭐야?"
+                "kr": "이 마을의 이름이 뭐야?",
+                "coreEn": ""
               },
               {
                 "word": "color",
                 "en": "I don't like the color of this shirt.",
-                "kr": "나는 이 셔츠의 색깔이 마음에 들지 않아."
+                "kr": "나는 이 셔츠의 색깔이 마음에 들지 않아.",
+                "coreEn": ""
               }
             ]
           }
@@ -3752,12 +4047,14 @@
               {
                 "word": "option",
                 "en": "Are these all of the options?",
-                "kr": "이것들이 선택지의 전부인가요?"
+                "kr": "이것들이 선택지의 전부인가요?",
+                "coreEn": ""
               },
               {
                 "word": "book",
                 "en": "Did your mom write all of these books?",
-                "kr": "너희 엄마가 이 책들 모두를 썼어?"
+                "kr": "너희 엄마가 이 책들 모두를 썼어?",
+                "coreEn": ""
               }
             ]
           }
@@ -3787,12 +4084,14 @@
               {
                 "word": "tooth",
                 "en": "She has six teeth now.",
-                "kr": "그녀는 지금 6개의 치아가 있어."
+                "kr": "그녀는 지금 6개의 치아가 있어.",
+                "coreEn": ""
               },
               {
                 "word": "man",
                 "en": "Not all of my coworkers are men.",
-                "kr": "내 동료 전부가 남자는 아니야."
+                "kr": "내 동료 전부가 남자는 아니야.",
+                "coreEn": ""
               }
             ]
           }
@@ -3822,12 +4121,14 @@
               {
                 "word": "room",
                 "en": "This room smells bad.",
-                "kr": "이 방은 나쁜 냄새가 나."
+                "kr": "이 방은 나쁜 냄새가 나.",
+                "coreEn": ""
               },
               {
                 "word": "guitar",
                 "en": "This guitar sounds great.",
-                "kr": "이 기타는 정말 좋게 들려."
+                "kr": "이 기타는 정말 좋게 들려.",
+                "coreEn": ""
               }
             ]
           }
@@ -3857,12 +4158,14 @@
               {
                 "word": "strawberry",
                 "en": "This tastes like strawberries.",
-                "kr": "이거 딸기 같은 맛이 나요."
+                "kr": "이거 딸기 같은 맛이 나요.",
+                "coreEn": ""
               },
               {
                 "word": "song",
                 "en": "This song sounds like BTS.",
-                "kr": "이 노래는 BTS처럼 들려."
+                "kr": "이 노래는 BTS처럼 들려.",
+                "coreEn": ""
               }
             ]
           }
@@ -3892,12 +4195,14 @@
               {
                 "word": "run",
                 "en": "He is running.",
-                "kr": "그는 달리고 있어."
+                "kr": "그는 달리고 있어.",
+                "coreEn": ""
               },
               {
                 "word": "laugh",
                 "en": "They aren't laughing.",
-                "kr": "그들은 웃고 있지 않아."
+                "kr": "그들은 웃고 있지 않아.",
+                "coreEn": ""
               }
             ]
           }
@@ -3927,12 +4232,14 @@
               {
                 "word": "breakfast",
                 "en": "He was making breakfast.",
-                "kr": "그는 아침을 만드는 중이었어."
+                "kr": "그는 아침을 만드는 중이었어.",
+                "coreEn": ""
               },
               {
                 "word": "project",
                 "en": "Were you discussing the new project?",
-                "kr": "너희는 새 프로젝트에 대해 논의하는 중이었어?"
+                "kr": "너희는 새 프로젝트에 대해 논의하는 중이었어?",
+                "coreEn": ""
               }
             ]
           }
@@ -3962,12 +4269,14 @@
               {
                 "word": "cute",
                 "en": "How cute she is!",
-                "kr": "그녀는 정말 귀여워!"
+                "kr": "그녀는 정말 귀여워!",
+                "coreEn": ""
               },
               {
                 "word": "handsome",
                 "en": "How handsome he is!",
-                "kr": "그는 정말 잘생겼구나!"
+                "kr": "그는 정말 잘생겼구나!",
+                "coreEn": ""
               }
             ]
           }
@@ -3998,12 +4307,14 @@
               {
                 "word": "flower",
                 "en": "What a beautiful flower!",
-                "kr": "정말 아름다운 꽃이에요!"
+                "kr": "정말 아름다운 꽃이에요!",
+                "coreEn": ""
               },
               {
                 "word": "movie",
                 "en": "What a fantastic movie!",
-                "kr": "정말 환상적인 영화구나!"
+                "kr": "정말 환상적인 영화구나!",
+                "coreEn": ""
               }
             ]
           }
@@ -4033,12 +4344,14 @@
               {
                 "word": "scarve",
                 "en": "What pretty scarves you have!",
-                "kr": "정말 예쁜 스카프들을 가지고 있군요!"
+                "kr": "정말 예쁜 스카프들을 가지고 있군요!",
+                "coreEn": ""
               },
               {
                 "word": "cookie",
                 "en": "What delicious cookies these are!",
-                "kr": "이것들은 정말 맛있는 쿠키들이군요!"
+                "kr": "이것들은 정말 맛있는 쿠키들이군요!",
+                "coreEn": ""
               }
             ]
           }
@@ -4068,12 +4381,14 @@
               {
                 "word": "pray",
                 "en": "He prays six times a day.",
-                "kr": "그는 하루에 6번 기도해."
+                "kr": "그는 하루에 6번 기도해.",
+                "coreEn": ""
               },
               {
                 "word": "face",
                 "en": "I wash my face twice a day.",
-                "kr": "나는 하루에 두 번 얼굴을 씻어."
+                "kr": "나는 하루에 두 번 얼굴을 씻어.",
+                "coreEn": ""
               }
             ]
           }
@@ -4103,12 +4418,14 @@
               {
                 "word": "happy",
                 "en": "Mike is always happy.",
-                "kr": "마이크는 항상 행복해."
+                "kr": "마이크는 항상 행복해.",
+                "coreEn": ""
               },
               {
                 "word": "quiet",
                 "en": "They are usually quiet.",
-                "kr": "그들은 보통 조용해요."
+                "kr": "그들은 보통 조용해요.",
+                "coreEn": ""
               }
             ]
           }
@@ -4138,12 +4455,14 @@
               {
                 "word": "homework",
                 "en": "I always do my homework.",
-                "kr": "저는 항상 숙제를 합니다."
+                "kr": "저는 항상 숙제를 합니다.",
+                "coreEn": ""
               },
               {
                 "word": "dinner",
                 "en": "My sister often cooks dinner.",
-                "kr": "내 여동생은 종종 저녁을 해."
+                "kr": "내 여동생은 종종 저녁을 해.",
+                "coreEn": ""
               }
             ]
           }
@@ -4174,12 +4493,14 @@
               {
                 "word": "go",
                 "en": "He went home.",
-                "kr": "그는 집에 갔어."
+                "kr": "그는 집에 갔어.",
+                "coreEn": ""
               },
               {
                 "word": "lose",
                 "en": "He lost it.",
-                "kr": "그는 그것을 잃어버렸다."
+                "kr": "그는 그것을 잃어버렸다.",
+                "coreEn": ""
               }
             ]
           }
@@ -4209,12 +4530,14 @@
               {
                 "word": "book",
                 "en": "That book is mine.",
-                "kr": "저 책은 내 거야."
+                "kr": "저 책은 내 거야.",
+                "coreEn": ""
               },
               {
                 "word": "computer",
                 "en": "This computer isn't his.",
-                "kr": "이 컴퓨터는 그의 것이 아니야."
+                "kr": "이 컴퓨터는 그의 것이 아니야.",
+                "coreEn": ""
               }
             ]
           }
@@ -4245,12 +4568,14 @@
               {
                 "word": "be",
                 "en": "Is this Margaret's?",
-                "kr": "이거 마가렛 거예요?"
+                "kr": "이거 마가렛 거예요?",
+                "coreEn": ""
               },
               {
                 "word": "mug",
                 "en": "That mug isn't Pat's.",
-                "kr": "그 머그잔은 팻의 것이 아니야."
+                "kr": "그 머그잔은 팻의 것이 아니야.",
+                "coreEn": ""
               }
             ]
           }
@@ -4282,12 +4607,14 @@
               {
                 "word": "warm",
                 "en": "It's warm today.",
-                "kr": "오늘 따뜻하다."
+                "kr": "오늘 따뜻하다.",
+                "coreEn": ""
               },
               {
                 "word": "cold",
                 "en": "Was it cold yesterday?",
-                "kr": "어제 추웠어?"
+                "kr": "어제 추웠어?",
+                "coreEn": ""
               }
             ]
           }
