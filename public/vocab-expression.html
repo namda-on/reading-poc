@@ -52,6 +52,37 @@
     box-shadow:0 8px 24px rgba(30,60,110,.24); padding:13px 14px; }
   .home .note { font-size:12px; color:#3a567d; opacity:.85; margin-top:18px; line-height:1.6; }
 
+  /* 단계 배너 — 어휘·표현이 한 문항의 1·2단계임을 상시 표시하고 배운 단어를 이어간다 */
+  .step-banner { display:flex; align-items:center; gap:8px; padding:2px 18px 8px; flex-shrink:0; }
+  .sb-step { flex:0 0 auto; display:flex; flex-direction:row; align-items:center; gap:5px; font-size:12px; font-weight:800;
+    border-radius:999px; padding:5px 11px; background:#ffffff66; color:#5b7c93; white-space:nowrap; }
+  .sb-step.active { background:#fff; color:#2f6ab0; box-shadow:0 2px 6px rgba(30,60,110,.14); }
+  .sb-step.solved { background:#cdefd8; color:#22794a; }
+  .sb-step .n { width:15px; height:15px; border-radius:50%; background:#c9d8ea; color:#fff; font-size:10px;
+    display:inline-flex; align-items:center; justify-content:center; }
+  .sb-step.active .n { background:#4b83d6; }
+  .sb-step.solved .n { background:#46b366; }
+  .sb-word { font-weight:800; }
+  .sb-arrow { color:#7fa2cc; font-weight:800; font-size:13px; }
+
+  /* 어휘 → 표현으로 단어가 이어지는 이동 연출 */
+  .fly-word { position:fixed; z-index:80; display:flex; align-items:center; justify-content:center;
+    background:#cdefd8; color:var(--green); font-weight:800; font-size:17px; border-radius:9px; pointer-events:none;
+    transition:transform .5s cubic-bezier(.34,.02,.24,1), opacity .5s ease; }
+
+  /* 어휘 정답 후 다음 단계 예고 */
+  .next-hint { display:flex; align-items:center; gap:7px; background:#efe9fb; color:#4a3b73; border-radius:11px;
+    padding:9px 13px; font-size:13px; font-weight:700; margin-bottom:10px; }
+
+  /* 옵션 스위치 */
+  .opt-row { display:flex; align-items:center; justify-content:space-between; gap:10px; padding:7px 0; }
+  .opt-row .rt { font-size:12.5px; font-weight:700; color:#3a567d; }
+  .sw { width:40px; height:23px; border-radius:999px; border:none; background:#cfd8e6; position:relative; cursor:pointer; flex-shrink:0; transition:background .18s; }
+  .sw::after { content:''; position:absolute; top:2.5px; left:2.5px; width:18px; height:18px; border-radius:50%; background:#fff; transition:left .18s; }
+  .sw.on { background:#46b366; }
+  .sw.on::after { left:19px; }
+  .opt-div { height:1px; background:#e4ebf4; margin:9px 0 4px; }
+
   /* 세션 */
   .stage { flex:1; min-height:0; display:flex; flex-direction:column; padding:10px 16px 0; }
   .stage-scroll { flex:1; min-height:0; overflow-y:auto; padding-top:22px; }
@@ -204,6 +235,7 @@
     <div class="note">진입점은 하나예요. 들어가면 문항마다 <b>트리거 어휘가 달라지고, 그에 따라 배우는 표현도 매번 달라져요.</b><br>빈칸은 힌트·정답을 봐도 직접 입력해야 정답 처리돼요.</div>
   </div>
 
+  <div class="step-banner hidden" id="stepBanner"></div>
   <div class="stage hidden" id="stage"></div>
   <div class="setting-pop hidden" id="settingPop"></div>
 </div>
@@ -248,6 +280,53 @@ function applyChipLabels(){
   if(!it) return;
   document.querySelectorAll('.tile.trigger').forEach(t=>{ t.dataset.label=chipLabelText(it); });
 }
+// 연결 강화 옵션 3종 — 각각 켜고 끌 수 있게(기본 ON)
+const OPTS_KEY='ve:opts';
+const OPT_DEF={banner:true, preview:true, fly:true};
+let OPTS=(()=>{ try{ return Object.assign({}, OPT_DEF, JSON.parse(localStorage.getItem(OPTS_KEY)||'{}')); }catch(e){ return {...OPT_DEF}; } })();
+function setOpt(k,v){
+  OPTS[k]=v;
+  try{ localStorage.setItem(OPTS_KEY, JSON.stringify(OPTS)); }catch(e){}
+  renderOptions();
+  // 배너를 끄면 즉시 감추고, 켜면 현재 단계에 맞춰 다시 그린다
+  if(k==='banner') refreshBanner();
+}
+
+// 단계 배너: [① 어휘] → [② 표현]. 어휘를 맞히면 1단계가 `✓ {단어}`로 바뀌어 표현 화면까지 이어진다
+let bannerStep=0, bannerWord='';
+function renderStepBanner(step, word){
+  bannerStep=step; bannerWord=word||'';
+  refreshBanner();
+}
+function refreshBanner(){
+  const el2=el('stepBanner');
+  if(!OPTS.banner || !bannerStep){ el2.classList.add('hidden'); el2.innerHTML=''; return; }
+  const modeWord = curMode==='grammar' ? '문장' : '표현';
+  const s1 = bannerWord
+    ? `<span class="sb-step solved"><span class="n">✓</span><span class="sb-word">${escapeHtml(bannerWord)}</span></span>`
+    : `<span class="sb-step${bannerStep===1?' active':''}"><span class="n">1</span>어휘 익히기</span>`;
+  const s2 = `<span class="sb-step${bannerStep===2?' active':''}"><span class="n">2</span>${modeWord} 만들기</span>`;
+  el2.classList.remove('hidden');
+  el2.innerHTML=`${s1}<span class="sb-arrow">→</span>${s2}`;
+}
+
+// 배운 단어가 어휘 문장 자리에서 다음 화면의 자리로 날아가 앉는 연출
+function flyWord(text, fromRect, toRect){
+  if(!fromRect || !toRect || !fromRect.width || !toRect.width) return;
+  const f=document.createElement('div'); f.className='fly-word'; f.textContent=text;
+  f.style.left=fromRect.left+'px'; f.style.top=fromRect.top+'px';
+  f.style.width=fromRect.width+'px'; f.style.height=fromRect.height+'px';
+  document.body.appendChild(f);
+  const dx=toRect.left-fromRect.left, dy=toRect.top-fromRect.top;
+  const sx=Math.max(.2, toRect.width/fromRect.width), sy=Math.max(.2, toRect.height/fromRect.height);
+  requestAnimationFrame(()=>{
+    f.style.transformOrigin='top left';
+    f.style.transform=`translate(${dx}px,${dy}px) scale(${sx},${sy})`;
+    f.style.opacity='.35';
+  });
+  setTimeout(()=>f.remove(), 560);
+}
+
 function segHtml(){
   return `<div class="seg">
       <button class="seg-b${chipLabelMode==='learned'?' on':''}" data-m="learned">방금 배운</button>
@@ -255,15 +334,24 @@ function segHtml(){
     </div>`;
 }
 // 홈과 설정 팝오버 두 곳의 옵션 UI를 함께 다시 그린다
-function renderChipOptions(){
+const OPT_ROWS=[
+  ['banner','단계 배너 · 배운 단어 이어가기'],
+  ['preview','어휘 정답 후 다음 단계 예고'],
+  ['fly','어휘 → 표현 단어 이동 연출'],
+];
+function renderOptions(){
   ['optHome','settingPop'].forEach(id=>{
     const box=el(id);
     if(!box || box.classList.contains('hidden')) return;
     box.innerHTML=`<div class="opt-label">트리거 어휘 칩 라벨</div>${segHtml()}
-      <div class="opt-hint">배열 단계에서 방금 배운 어휘 칩 위에 무엇을 보여줄지 고릅니다.</div>`;
+      <div class="opt-div"></div>
+      <div class="opt-label">어휘 → 표현 연결</div>
+      ${OPT_ROWS.map(([k,t])=>`<div class="opt-row"><span class="rt">${t}</span><button class="sw${OPTS[k]?' on':''}" data-k="${k}" aria-label="${t}"></button></div>`).join('')}`;
     box.querySelectorAll('.seg-b').forEach(b=> b.onclick=()=>setChipLabelMode(b.dataset.m));
+    box.querySelectorAll('.sw').forEach(b=> b.onclick=()=>setOpt(b.dataset.k, !OPTS[b.dataset.k]));
   });
 }
+const renderChipOptions=renderOptions;   // 기존 호출부 호환
 
 // 채점 정규화 / 배열 토큰
 function norm(s){ return s.toLowerCase().trim().replace(/^[^\w']+|[^\w']+$/g,'').replace(/\s+/g,' '); }
@@ -293,6 +381,7 @@ fetch('vocab-expression.data.json').then(r=>r.json()).then(d=>{ DATA=d; curMode=
 // ── 홈 ──────────────────────────────────────────────────────────────────────
 function renderHome(){
   topbar.classList.add('hidden'); stage.classList.add('hidden'); home.classList.remove('hidden');
+  renderStepBanner(0);
   const tabs=el('tabs'); tabs.innerHTML='';
   Object.entries(DATA.modes).forEach(([key,m])=>{
     const b=document.createElement('button'); b.className='tab'+(key===curMode?' on':'');
@@ -371,6 +460,7 @@ function hlTrigger(sent, trig){
 function renderVocab(){
   const item=sessionItems[itemIdx], v=item.vocab, answer=v.answer;
   setProgress(itemIdx*2);
+  renderStepBanner(1, '');
   let hintLevel=0, done=false;
 
   const ko=v.koLines.map(koHtml).join('');
@@ -404,8 +494,11 @@ function renderVocab(){
     card.classList.add('correct');
     wrongBox.classList.add('hidden');
     if(!card.querySelector('.check-mark')){ const c=document.createElement('div'); c.className='check-mark'; c.textContent='✓'; card.appendChild(c); }
-    // 하단: 탭 + 3버튼
+    renderStepBanner(1, item.word);          // 배운 단어를 배너에 올린다
+    // 하단: (예고) + 탭 + 3버튼
+    const modeWord = curMode==='grammar' ? '문장' : '표현';
     el('bottom').innerHTML=`
+      ${OPTS.preview?`<div class="next-hint">💡 이제 이 단어로 실제 ${modeWord}을 만들어봐요</div>`:''}
       <div class="vtabs">
         <button class="vtab"><span class="ic">💬</span>다른 예문</button>
         <button class="vtab"><span class="ic badge" data-n="1">📝</span>오답 노트</button>
@@ -416,9 +509,18 @@ function renderVocab(){
       <div class="vbtns">
         <button class="vbtn b1" disabled><span class="ic">🎧</span>단어 듣기</button>
         <button class="vbtn b2" disabled><span class="ic">🔊</span>다시 듣기</button>
-        <button class="vbtn b3" id="nextBtn"><span class="ic">▶</span>다음 문제</button>
+        <button class="vbtn b3" id="nextBtn"><span class="ic">▶</span>${OPTS.preview?`${escapeHtml(item.word)} 써보기`:'다음 문제'}</button>
       </div>`;
-    el('nextBtn').onclick=()=>renderArrange();
+    el('nextBtn').onclick=()=>{
+      // 이동 연출: 초록 정답 칸 → 다음 화면에서 그 단어가 놓이는 자리
+      const fromRect = OPTS.fly && vin ? vin.getBoundingClientRect() : null;
+      renderArrange();
+      if(fromRect){
+        const target = (OPTS.banner ? document.querySelector('#stepBanner .sb-step.solved') : null)
+                    || document.querySelector('.tile.trigger');
+        if(target) flyWord(answer, fromRect, target.getBoundingClientRect());
+      }
+    };
   }
   function onInput(){
     if(done) return;
@@ -524,6 +626,7 @@ function patternPayoffHtml(item){
 function renderArrange(){
   const item=sessionItems[itemIdx], s=item.sentence;
   setProgress(itemIdx*2+1);
+  renderStepBanner(2, item.word);
   const tokens=tokenize(s.en), punct=trailPunct(s.en);
   const target=tokens.map(t=>t.toLowerCase()).join(' ');
   // 뱅크(자리 유지): placed 플래그 + 방금 배운 어휘 여부(isTrig)
@@ -630,6 +733,7 @@ function renderArrange(){
 function renderDone(){
   setPos(curMode, sessionItems.length);
   topbar.classList.add('hidden'); stage.classList.remove('hidden'); home.classList.add('hidden');
+  renderStepBanner(0);
   const items=learned.length?learned:sessionItems;
   const modeWord = curMode==='grammar' ? '문법' : '표현';
   stage.innerHTML=`<div class="done">
