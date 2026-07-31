@@ -5,31 +5,35 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 <title>어휘 → 표현 프로토타입</title>
 <style>
-  :root { --bg:#a9ccf2; --card:#fff; --ink:#1f2937; --sub:#6b7c93; --blue:#4b83d6; --green:#2e9e57; --gold:#f0b429; }
+  :root { --bg:#a9ccf2; --ink:#2f3e52; --sub:#6b7c93; --blue:#4b83d6; --green:#2e9e57; --purple:#7b6ef0; --purple-d:#5b3fb0; }
   * { box-sizing:border-box; }
   html, body { margin:0; height:100%; }
   body { font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
     background:var(--bg); color:var(--ink); display:flex; justify-content:center; }
-  .app { width:100%; max-width:460px; height:100dvh; min-height:100vh; display:flex; flex-direction:column; }
+  .app { width:100%; max-width:460px; height:100dvh; min-height:100vh; display:flex; flex-direction:column;
+    background:linear-gradient(#aacdf3,#bfe0ef); }
+  .hidden { display:none !important; }
 
-  .topbar { display:flex; align-items:center; gap:12px; padding:14px 14px; flex-shrink:0; }
-  .icon-btn { width:34px; height:34px; border:none; background:transparent; color:#fff; font-size:24px; cursor:pointer; border-radius:50%; }
-  .progress { flex:1; }
-  .bar-count { font-size:12px; font-weight:700; color:rgba(255,255,255,.9); }
-  .bar-track { height:10px; border-radius:6px; background:rgba(255,255,255,.35); overflow:hidden; margin-top:2px; }
-  .bar-fill { height:100%; background:#6f9bd6; width:0; transition:width .4s ease; }
+  /* 상단바 */
+  .topbar { display:flex; align-items:center; gap:10px; padding:12px 14px 8px; flex-shrink:0; }
+  .icon-btn { width:32px; height:32px; border:none; background:transparent; color:#fff; font-size:22px; cursor:pointer; }
+  .trophy { width:34px; height:34px; border-radius:50%; background:#4b83d6; color:#fff; display:flex; align-items:center; justify-content:center; font-size:17px; box-shadow:0 2px 6px rgba(30,60,110,.25); flex-shrink:0; }
+  .progress { flex:1; position:relative; }
+  .bar-track { height:11px; border-radius:7px; background:rgba(255,255,255,.45); overflow:hidden; }
+  .bar-fill { height:100%; background:#6f9bd6; width:0; transition:width .35s ease; border-radius:7px; }
+  .bar-star { position:absolute; top:50%; transform:translate(-50%,-50%); font-size:15px; transition:left .35s ease; }
+  .bar-count { position:absolute; top:-14px; font-size:11px; font-weight:800; color:#3a6bb0; transform:translateX(-50%); transition:left .35s ease; }
+  .gear { color:#5b83b8; }
 
   /* 홈 */
-  .home { flex:1; padding:22px 18px; overflow-y:auto; }
-  .home h1 { font-size:24px; margin:6px 0 4px; color:#25406a; }
-  .home p.sub { color:#3a567d; margin:0 0 18px; font-size:14px; line-height:1.5; }
+  .home { flex:1; padding:18px 18px 24px; overflow-y:auto; }
+  .home h1 { font-size:23px; margin:6px 0 4px; color:#25406a; }
+  .home p.sub { color:#3a567d; margin:0 0 16px; font-size:14px; line-height:1.5; }
   .tabs { display:flex; gap:8px; margin-bottom:6px; }
-  .tab { flex:1; border:none; border-radius:12px; padding:11px; font-size:15px; font-weight:800; cursor:pointer;
-    background:#ffffff88; color:#3a567d; }
+  .tab { flex:1; border:none; border-radius:12px; padding:11px; font-size:15px; font-weight:800; cursor:pointer; background:#ffffff88; color:#3a567d; }
   .tab.on { background:#fff; color:#25406a; box-shadow:0 2px 8px rgba(30,60,110,.14); }
   .tab .td { display:block; font-size:11px; font-weight:600; opacity:.7; margin-top:2px; }
-  .lv-card { position:relative; display:block; width:100%; text-align:left; background:var(--card); border:none; border-radius:16px;
-    padding:15px 18px; margin-bottom:10px; cursor:pointer; box-shadow:0 3px 12px rgba(30,60,110,.12); }
+  .lv-card { position:relative; display:block; width:100%; text-align:left; background:#fff; border:none; border-radius:16px; padding:15px 18px; margin-bottom:10px; cursor:pointer; box-shadow:0 3px 12px rgba(30,60,110,.12); }
   .lv-card.cleared { background:#f1faf3; box-shadow:0 2px 8px rgba(46,158,87,.12); }
   .lv-card .t { font-size:16px; font-weight:800; color:#2f3e52; }
   .lv-card.cleared .t { color:#3f6b50; }
@@ -41,98 +45,110 @@
   .grp-head .grp-count { font-size:12px; font-weight:700; color:#5b7c93; }
   .home .note { font-size:12px; color:#3a567d; opacity:.85; margin-top:18px; line-height:1.6; }
 
-  /* 세션 공통 */
-  .stage { flex:1; overflow-y:auto; padding:6px 18px 24px; display:flex; flex-direction:column; }
-  .stage-label { display:flex; align-items:center; gap:7px; font-size:13px; font-weight:800; color:#2f6ab0; margin:2px 0 14px; }
-  .stage-label .num { background:#2f6ab0; color:#fff; border-radius:999px; width:20px; height:20px; display:inline-flex; align-items:center; justify-content:center; font-size:12px; }
-  .prompt-ko { font-size:22px; font-weight:800; color:#2f3e52; text-align:center; margin:10px 0 4px; line-height:1.35; }
-  .prompt-meta { text-align:center; font-size:13px; color:var(--sub); margin-bottom:16px; }
-  .prompt-meta .cefr { display:inline-block; background:#e7f0fb; color:#2f6ab0; border-radius:6px; padding:1px 7px; font-weight:800; font-size:11px; margin-left:6px; }
+  /* 세션 */
+  .stage { flex:1; min-height:0; display:flex; flex-direction:column; padding:10px 16px 0; }
+  .stage-scroll { flex:1; min-height:0; overflow-y:auto; padding-top:22px; }
+  .stage-bottom { flex-shrink:0; padding:10px 0 16px; }
 
-  /* 예문 카드(빈칸) — 채팅 말풍선 */
-  .ex-card2 { position:relative; background:#fff; border-radius:16px; box-shadow:0 3px 12px rgba(30,60,110,.12); padding:16px 18px; margin-bottom:14px; }
-  .ex-line { font-size:18px; line-height:1.6; color:#2f3e52; }
-  .ex-line.ko { color:#586b84; font-size:15.5px; }
-  .ex-line.ko.note { color:#9aa8bc; font-size:13px; margin-top:2px; }
-  .ex-line.ko + .ex-line.en { margin-top:12px; }
-  /* 정답 단어 뜻(초록) — 클루 */
+  /* 채팅 말풍선 카드 */
+  .chat-card { position:relative; background:linear-gradient(#e9f1fb 0%, #f4f8fd 42%, #ffffff 42%, #ffffff 100%);
+    border-radius:22px; box-shadow:0 6px 18px rgba(30,60,110,.13); padding:22px 20px 16px; }
+  .chat-card.correct { background:linear-gradient(#dff3e4 0%,#eaf8ee 46%,#fbfffc 46%,#fbfffc 100%); }
+  .chat-tag { position:absolute; top:-13px; left:16px; background:#cfe0f5; color:#3a6bb0; font-size:12px; font-weight:800; border-radius:11px 11px 11px 3px; padding:3px 11px; display:flex; align-items:center; gap:5px; }
+  .chat-tag .q { width:15px; height:15px; border-radius:50%; background:#a9c4e8; color:#fff; font-size:10px; display:inline-flex; align-items:center; justify-content:center; }
+  .chat-badge { position:absolute; top:-11px; right:16px; font-size:12px; font-weight:800; padding:3px 10px; border-radius:9px 9px 3px 9px; }
+  .chat-badge.new { background:#ff6f6f; color:#fff; }
+  .chat-badge.old { background:#5b8fd6; color:#fff; }
+  .check-mark { position:absolute; top:-22px; left:2px; font-size:46px; color:var(--green); text-shadow:0 2px 4px rgba(0,0,0,.12); animation:pop .3s ease; }
+  @keyframes pop { from{opacity:0; transform:scale(.5) rotate(-15deg);} to{opacity:1; transform:none;} }
+
+  .chat-situation { font-size:12.5px; color:#9aa8bc; margin-bottom:4px; }
+  .chat-ko { font-size:18px; line-height:1.55; color:#33465c; font-weight:600; }
+  .chat-ko.note { font-size:13px; color:#9aa8bc; font-weight:400; margin-top:2px; }
   .tgt { color:var(--green); font-weight:800; }
-  /* 빈칸: 고정폭(NoHint) → 길이/글자(힌트) → 정답 */
-  .blank { display:inline-block; min-width:58px; border-bottom:2.5px solid var(--blue); text-align:center; color:var(--blue); font-weight:800; vertical-align:baseline; padding:0 6px; letter-spacing:.04em; }
-  .blank.correct { color:var(--green); border-color:var(--green); }
-  .blank .u { color:#b9c7db; }              /* 미입력 밑줄 자리 */
-  .blank .fc { color:var(--blue); }          /* 공개된 힌트 글자 */
+  .chat-en { font-size:19px; line-height:1.7; color:#2f3e52; font-weight:600; margin-top:18px; }
+  .chat-src { text-align:right; font-size:11px; color:#c0cad8; margin-top:12px; }
 
-  .vin-wrap { margin:2px 0 6px; }
-  .vin { width:100%; font-size:20px; font-weight:700; text-align:center; padding:13px; border-radius:12px; border:2px solid #cddcf1; background:#fff; color:#2f3e52; outline:none; }
-  .vin:focus { border-color:var(--blue); }
-  .vin.wrong { border-color:#e5645a; }
-  .vin.correct { border-color:var(--green); background:#eef9f1; }
-  @keyframes shake { 0%,100%{transform:translateX(0);} 25%{transform:translateX(-6px);} 75%{transform:translateX(6px);} }
-  .vin-msg { text-align:center; font-size:14px; font-weight:700; min-height:20px; margin-top:9px; color:#4b83d6; }
-  .vin-msg.correct { color:var(--green); }
-  .vin-msg .wc { color:#e5645a; }            /* 틀린 글자 */
-  .vin-msg .wc-blank { color:#e5645a; opacity:.6; }
+  /* 인라인 빈칸(입력) */
+  .blank { field-sizing:content; min-width:66px; max-width:100%; background:#dbe8fb; border:none; border-radius:9px; padding:2px 10px;
+    font:inherit; font-weight:800; color:#3a6bb0; text-align:center; outline:none; vertical-align:baseline; }
+  .blank::placeholder { color:#9db8dd; font-weight:700; letter-spacing:.08em; }
+  .blank.correct { background:#cdefd8; color:var(--green); }
+  /* 카드 내 오답 피드백 박스 */
+  .wrong-box { background:#cdd8f2; color:#42527a; border-radius:11px; padding:10px 14px; font-size:15px; font-weight:600; margin:14px 0 2px; }
+  .wrong-box .wc { color:#e14b46; font-weight:800; }
 
-  .aux-row { display:flex; gap:8px; margin-top:12px; }
-  .aux-btn { flex:1; border:1.5px solid #cfe0f5; background:#fff; color:#2f6ab0; border-radius:12px; padding:11px; font-size:14px; font-weight:800; cursor:pointer; }
-  .aux-btn:disabled { opacity:.4; cursor:default; }
-  .answer-reveal { text-align:center; font-size:14px; color:var(--sub); margin-top:10px; }
-  .answer-reveal b { color:var(--green); font-size:16px; }
+  /* 어휘 하단 — 풀이 중 */
+  .vtools { display:flex; justify-content:space-between; align-items:center; padding:4px 6px; }
+  .vtool { display:flex; flex-direction:column; align-items:center; gap:4px; background:none; border:none; cursor:pointer; color:#8a7fc0; font-size:12px; font-weight:700; padding:4px 8px; }
+  .vtool .ic { width:30px; height:30px; border-radius:50%; background:#eae6fb; display:flex; align-items:center; justify-content:center; font-size:15px; color:var(--purple-d); }
+  .vtool.mic .ic { background:#eef1fb; color:#5b83b8; }
+  .vtool:disabled { opacity:.85; cursor:default; }
 
-  /* 트리거 연결 박스 — 패턴 전면 */
-  .trigger-box { background:#efe9fb; border:1px solid #d9ccf3; border-radius:12px; padding:12px 14px; margin:2px 0 16px; font-size:14.5px; color:#4a3b73; line-height:1.5; display:flex; gap:9px; align-items:flex-start; }
-  .trigger-box .ic { font-size:18px; line-height:1.3; flex-shrink:0; }
-  .trigger-box b { color:#5b3fb0; }
-  /* 정답 후 패턴 공개(보상) — 실제 응용 예문 */
-  .payoff { background:#f1faf3; border:1px solid #cdeed7; border-radius:12px; padding:12px 14px; margin:8px 0 2px; }
-  .payoff-head { font-size:14px; color:#3f6b50; line-height:1.5; margin-bottom:6px; }
-  .pat-inline { display:inline-block; background:#efe9fb; border:1px solid #d9ccf3; border-radius:8px; padding:1px 8px; margin:0 1px; }
-  .pat-inline b { color:#5b3fb0; font-size:15px; }
-  .pat-inline .kr { color:#8878b3; font-size:12px; margin-left:5px; }
-  .payoff-ex { text-align:left; background:#fff; border-radius:9px; padding:9px 12px; margin-top:8px; }
-  .pe-en { font-size:15.5px; font-weight:700; color:#2f3e52; line-height:1.4; }
-  .pe-en .tgt { color:var(--green); }
-  .pe-kr { font-size:12.5px; color:#6b7c93; margin-top:3px; }
+  /* 어휘 하단 — 정답 후: 탭 + 3버튼 */
+  .vtabs { display:flex; justify-content:space-between; padding:6px 2px 12px; border-bottom:1px solid #cfdcec; margin-bottom:12px; }
+  .vtab { flex:1; display:flex; flex-direction:column; align-items:center; gap:5px; background:none; border:none; cursor:pointer; color:#9aa8bc; font-size:10.5px; font-weight:700; }
+  .vtab .ic { width:34px; height:34px; border-radius:10px; background:#e7ecf5; display:flex; align-items:center; justify-content:center; font-size:16px; }
+  .vtab .badge { position:relative; }
+  .vtab .badge::after { content:attr(data-n); position:absolute; top:-6px; right:-8px; background:#ff7a45; color:#fff; font-size:9px; font-weight:800; border-radius:50%; width:15px; height:15px; display:flex; align-items:center; justify-content:center; }
+  .vbtns { display:flex; gap:10px; }
+  .vbtn { flex:1; border:none; border-radius:16px; padding:16px 6px; color:#fff; font-weight:800; font-size:14.5px; cursor:pointer; display:flex; flex-direction:column; align-items:center; gap:6px; box-shadow:0 4px 10px rgba(80,70,160,.22); }
+  .vbtn .ic { font-size:20px; }
+  .vbtn.b1 { background:linear-gradient(#b39cf2,#9b7ef0); }
+  .vbtn.b2 { background:linear-gradient(#9b8cf0,#7d6cf0); }
+  .vbtn.b3 { background:linear-gradient(#6f8ef0,#5b6ef0); }
 
-  /* 문장 배열 */
-  .ex-answer { min-height:56px; display:flex; flex-wrap:wrap; gap:8px; align-content:flex-start; padding:12px; border-radius:12px; background:#eef4fb; border:1px dashed #cddcf1; margin-bottom:14px; }
-  .ex-answer.correct{ background:#ddf3e2; border-color:#46b366; border-style:solid; }
-  .ex-answer.wrong{ background:#fbe1e1; border-color:#e5645a; border-style:solid; }
-  .ex-ph { color:#9db0c6; font-size:14px; align-self:center; }
-  .ex-bank { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px; }
-  .ex-chip { border:1px solid #cddcf1; background:#fff; border-radius:10px; padding:11px 15px; font-size:16px; color:#2f3e52; cursor:pointer; box-shadow:0 1px 3px rgba(30,60,110,.1); }
-  .ex-chip.inans { background:#eaf1fb; border-color:#4b83d6; }
-  .ex-chip:disabled { opacity:.35; }
-  .ex-result { font-size:14px; font-weight:800; text-align:center; margin:4px 0 8px; }
-  .ex-sentence { text-align:center; font-size:19px; font-weight:800; color:#2f3e52; margin:2px 0 6px; line-height:1.4; }
-  .ex-sentence-ko { text-align:center; font-size:13.5px; color:var(--sub); margin-bottom:10px; }
+  /* 배열 — 보라 트리거 박스 */
+  .trigger-box { background:#d8ccf7; border-radius:14px; padding:12px 14px; margin:16px 0 4px; font-size:14.5px; color:#4a3b73; line-height:1.55; display:flex; gap:9px; align-items:flex-start; }
+  .trigger-box .ic { font-size:17px; line-height:1.4; flex-shrink:0; }
+  .trigger-box b { color:var(--purple-d); }
+  /* 배열 정답 후 개념 헤더 */
+  .concept-head { background:#d8ccf7; color:var(--purple-d); font-weight:800; font-size:15px; border-radius:12px; padding:9px 14px; margin-bottom:12px; display:flex; align-items:center; gap:7px; }
+  .concept-head .kr { color:#7a6aa8; font-weight:600; font-size:12.5px; }
 
-  .btn-primary { width:100%; border:none; border-radius:14px; padding:14px; background:var(--blue); color:#fff; font-size:16px; font-weight:800; cursor:pointer; margin-top:auto; }
-  .btn-primary:disabled { opacity:.45; cursor:default; }
-  .spacer { flex:1; min-height:8px; }
+  /* 배열 — 인라인 문장 채우기 */
+  .fill { display:flex; flex-wrap:wrap; align-items:center; gap:7px 8px; margin-top:16px; min-height:44px; }
+  .fill-word { background:#eaf1fb; border:1px solid #cdddf3; border-radius:9px; padding:6px 13px; font-size:17px; color:#2f3e52; cursor:pointer; }
+  .fill-word.tgt-w { color:var(--green); font-weight:800; }
+  .fill-blank { min-width:52px; border-bottom:2px solid #b9c7db; height:26px; }
+  .fill-punct { font-size:18px; color:#2f3e52; font-weight:700; }
+  .mic-float { align-self:flex-end; width:52px; height:52px; border-radius:50%; background:#fff; box-shadow:0 3px 10px rgba(30,60,110,.2); display:flex; align-items:center; justify-content:center; font-size:22px; margin:6px 2px 0 auto; color:#5b6ef0; }
+
+  /* 배열 — 단어 뱅크 (자리 유지) */
+  .bank { display:flex; flex-wrap:wrap; gap:9px; margin-bottom:12px; }
+  .tile { border:1px solid #cdddf3; background:#fff; border-radius:11px; padding:12px 16px; font-size:16.5px; color:#2f3e52; cursor:pointer; box-shadow:0 1px 3px rgba(30,60,110,.08); }
+  .tile.placed { background:#e3e9f2; border-color:#dbe2ee; color:transparent; box-shadow:none; cursor:default; pointer-events:none; }
+
+  /* 배열 하단 버튼 */
+  .arr-btns { display:flex; gap:10px; }
+  .btn-ghost2 { flex:0 0 27%; border:none; border-radius:16px; padding:15px 6px; background:linear-gradient(#c9b8f2,#b49cf0); color:#fff; font-weight:800; font-size:13px; cursor:pointer; display:flex; flex-direction:column; align-items:center; gap:4px; }
+  .btn-ghost2 .ic { font-size:16px; }
+  .btn-confirm { flex:1; border:none; border-radius:16px; padding:16px; background:linear-gradient(#8b7cf0,#6f5bf0); color:#fff; font-weight:800; font-size:16px; cursor:pointer; }
+  .btn-confirm:disabled { background:#c2c7d2; cursor:default; }
+  .btn-next { width:100%; border:none; border-radius:16px; padding:16px; background:linear-gradient(#6f8ef0,#5b6ef0); color:#fff; font-weight:800; font-size:16px; cursor:pointer; }
 
   /* 완료 */
   .done { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; padding:30px 22px; text-align:center; overflow-y:auto; }
   .done .emoji { font-size:52px; }
   .done h2 { color:#25406a; margin:0; }
   .done p { color:#3a567d; margin:0; }
-  .learned-list { width:100%; background:#fff6dc; border:1px solid #f2e2a8; border-radius:14px; padding:12px 14px; text-align:left; }
-  .learned-list .h { font-size:13px; font-weight:800; color:#8a6d15; margin-bottom:8px; }
-  .learned-list .it { font-size:14px; color:#6b5410; margin:7px 0; line-height:1.45; }
-  .learned-list .it b { color:#7a5f12; }
-  .learned-list .it .en { color:#3a567d; }
+  .learned-list { width:100%; background:#fff; border-radius:14px; padding:12px 14px; text-align:left; box-shadow:0 3px 12px rgba(30,60,110,.1); }
+  .learned-list .h { font-size:13px; font-weight:800; color:#3a6bb0; margin-bottom:8px; }
+  .learned-list .it { font-size:14px; color:#42527a; margin:7px 0; line-height:1.45; }
+  .learned-list .it b { color:#25406a; }
+  .learned-list .it .en { color:#6b7c93; }
   .btn { border:none; border-radius:26px; padding:14px 30px; background:var(--blue); color:#fff; font-size:16px; font-weight:700; cursor:pointer; box-shadow:0 4px 14px rgba(30,60,110,.25); }
   .btn.ghost { background:#fff; color:#45566b; box-shadow:none; }
   .row { display:flex; gap:10px; }
-  .hidden { display:none !important; }
 </style>
 </head>
 <body>
 <div class="app">
   <div class="topbar hidden" id="topbar">
     <button class="icon-btn" id="backBtn" aria-label="뒤로">‹</button>
-    <div class="progress"><div class="bar-count" id="barCount"></div><div class="bar-track"><div class="bar-fill" id="barFill"></div></div></div>
+    <div class="trophy">🏆</div>
+    <div class="progress"><div class="bar-count" id="barCount">0/0</div><div class="bar-track"><div class="bar-fill" id="barFill"></div></div><span class="bar-star" id="barStar">⭐</span></div>
+    <button class="icon-btn gear" aria-label="설정">⚙</button>
   </div>
 
   <div class="home" id="home">
@@ -140,7 +156,7 @@
     <p class="sub"><b>빈칸으로 어휘를 배우고</b>, 그 어휘가 트리거하는 문장을 <b>단어 배열</b>로 완성해요.</p>
     <div class="tabs" id="tabs"></div>
     <div id="levelList"></div>
-    <div class="note">빈칸은 힌트·정답을 봐도 <b>직접 전체를 입력</b>해야 정답 처리돼요. 데이터: 표현/문법 트리거 어휘 + GSE 학습 예문.</div>
+    <div class="note">말해보카 어휘·문법 학습 UX 기반. 빈칸은 힌트·정답을 봐도 <b>직접 입력</b>해야 정답 처리돼요.</div>
   </div>
 
   <div class="stage hidden" id="stage"></div>
@@ -150,7 +166,7 @@
 const el = id => document.getElementById(id);
 const topbar = el('topbar'), home = el('home'), stage = el('stage');
 function shuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
-function escapeHtml(s){ return s.replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+function escapeHtml(s){ return String(s).replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
 
 // localStorage
 const CLEAR_KEY='ve:cleared', MODE_KEY='ve:mode';
@@ -159,10 +175,10 @@ function isCleared(k){ return clearedSet().has(k); }
 function markCleared(k){ const s=clearedSet(); s.add(k); try{ localStorage.setItem(CLEAR_KEY, JSON.stringify([...s])); }catch(e){} }
 function lvKey(mode,level){ return mode+':'+level; }
 
-// 채점 정규화: 소문자, 앞뒤 공백/문장부호 무시, 내부 공백 단일화
+// 채점 정규화 / 배열 토큰
 function norm(s){ return s.toLowerCase().trim().replace(/^[^\w']+|[^\w']+$/g,'').replace(/\s+/g,' '); }
-// 배열 토큰: 종결부호 제거 후 공백 분리, 표시는 소문자(첫 단어 노출 방지)
 function tokenize(sent){ return sent.trim().replace(/[.?!]+$/,'').split(/\s+/); }
+function trailPunct(sent){ const m=sent.trim().match(/[.?!]+$/); return m?m[0]:''; }
 
 let DATA=null, curMode='expression', curLevel=null, itemIdx=0, learned=[];
 
@@ -204,39 +220,41 @@ function startLesson(level){
   el('backBtn').onclick=()=>{ if(confirm('홈으로 나갈까요? 진행이 사라져요.')) renderHome(); };
   renderVocab();
 }
+// 진행바: 어휘/배열 2단계 × 문항수. 별·카운트는 채워진 위치로 이동
 function setProgress(stepDone){
-  const totalSteps=curLevel.items.length*2;
-  el('barCount').textContent=`${curLevel.label} · ${itemIdx+1}/${curLevel.items.length}문항`;
-  el('barFill').style.width=(stepDone/totalSteps*100)+'%';
+  const total=curLevel.items.length*2, pct=Math.min(100, stepDone/total*100);
+  el('barFill').style.width=pct+'%';
+  el('barStar').style.left=pct+'%';
+  const bc=el('barCount'); bc.textContent=`${itemIdx+1}/${curLevel.items.length}`; bc.style.left=pct+'%';
 }
+function chatTag(){ return `<div class="chat-tag">${escapeHtml(curLevel.label)}<span class="q">?</span></div>`; }
 
-// 한국어 번역 줄: [뜻]을 초록 하이라이트, (설명)줄은 muted
-function renderKoLine(line){
-  const note = /^\s*\(/.test(line);
-  const html = escapeHtml(line).replace(/\[([^\]]+)\]/g, (m,g)=>`<span class="tgt">${g}</span>`);
-  return `<div class="ex-line ko${note?' note':''}">${html}</div>`;
+// 한국어 번역 줄: [뜻]을 초록, (설명)줄은 muted
+function koHtml(line){
+  const note=/^\s*\(/.test(line);
+  const html=escapeHtml(line).replace(/\[([^\]]+)\]/g,(m,g)=>`<span class="tgt">${g}</span>`);
+  return `<div class="chat-ko${note?' note':''}">${html}</div>`;
 }
-// 정답 글자수만큼의 빈칸/힌트 렌더 (hintLevel: 0 고정폭, 1 길이+첫글자, 2 정답)
-function blankHtml(answer, typed, hintLevel){
-  if(typed) return escapeHtml(typed);
-  if(hintLevel>=2) return escapeHtml(answer);
-  if(hintLevel===1){ // 첫 글자 공개 + 나머지 밑줄
-    let s=`<span class="fc">${escapeHtml(answer[0])}</span>`;
-    for(let i=1;i<answer.length;i++) s+= answer[i]===' ' ? ' ' : '<span class="u">_</span>';
-    return s;
-  }
-  return '<span class="u">____</span>'; // 고정폭
+// 힌트 placeholder: level1=첫글자+길이, level2=정답 전체
+function hintPlaceholder(answer, level){
+  if(level>=2) return answer;
+  if(level===1){ let s=answer[0]; for(let i=1;i<answer.length;i++) s+= answer[i]===' ' ? '  ' : '_'; return s; }
+  return '';
 }
-// 오답 글자 비교: 입력을 정답과 인덱스 정렬, 다른 글자 빨강 + 다른 글자 수
+// 오답 글자 비교(빨강 강조) + 다른 글자 수
 function diffSpell(typed, answer){
   let out='', wrong=0;
   for(let i=0;i<Math.max(typed.length,answer.length);i++){
     const t=typed[i];
-    if(i>=typed.length){ out+='<span class="wc-blank">_</span>'; wrong++; }
+    if(i>=typed.length){ out+='<span class="wc">_</span>'; wrong++; }
     else if(t.toLowerCase()===(answer[i]||'').toLowerCase()) out+=escapeHtml(t);
     else { out+=`<span class="wc">${escapeHtml(t)}</span>`; wrong++; }
   }
   return {html:out, wrong};
+}
+function hlTrigger(sent, trig){
+  const re=new RegExp('\\b('+trig.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')\\b','i');
+  return escapeHtml(sent).replace(re, m=>`<span class="tgt">${m}</span>`);
 }
 
 // [1] 어휘 빈칸 ────────────────────────────────────────────────────────────────
@@ -245,151 +263,180 @@ function renderVocab(){
   setProgress(itemIdx*2);
   let hintLevel=0, done=false;
 
-  const ko=v.koLines.map(renderKoLine).join('');
-  const enLines=v.enLines.map((ln,i)=>{
-    const html=escapeHtml(ln).replace(/\[([^\]]+)\]/, '<span class="blank" id="blankSlot"></span>');
-    return `<div class="ex-line en">${html}</div>`;
-  }).join('');
+  const ko=v.koLines.map(koHtml).join('');
+  const en=v.enLines.map(ln=>`<div class="chat-en">${escapeHtml(ln).replace(/\[[^\]]+\]/,
+      `<input class="blank" id="vin" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done" />`)}</div>`).join('');
 
   stage.innerHTML=`
-    <div class="stage-label"><span class="num">1</span> 어휘 배우기</div>
-    <div class="prompt-meta">${escapeHtml(item.pos||'')}<span class="cefr">${escapeHtml(item.cefr||'')}</span></div>
-    <div class="ex-card2">${ko}${enLines}</div>
-    <div class="vin-wrap"><input class="vin" id="vin" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done" placeholder="초록색 뜻에 해당하는 영어 단어" /></div>
-    <div class="vin-msg" id="vinMsg"></div>
-    <div class="answer-reveal hidden" id="ansReveal"></div>
-    <div class="aux-row" id="auxRow">
-      <button class="aux-btn" id="hintBtn">💡 힌트 보기</button>
-      <button class="aux-btn hidden" id="ansBtn">👁 정답 보기</button>
+    <div class="stage-scroll">
+      <div class="chat-card" id="card">
+        ${chatTag()}<div class="chat-badge new">New</div>
+        ${ko}
+        <div class="wrong-box hidden" id="wrongBox"></div>
+        ${en}
+      </div>
     </div>
-    <div class="spacer"></div>
-    <button class="btn-primary hidden" id="nextBtn">다음 ▶</button>`;
+    <div class="stage-bottom" id="bottom">
+      <div class="vtools" id="vtools">
+        <button class="vtool" id="hintBtn"><span class="ic">?</span><span id="hintLabel">힌트 보기</span></button>
+        <button class="vtool mic" disabled><span class="ic">🎤</span><span>음성 모드</span></button>
+      </div>
+    </div>`;
 
-  const vin=el('vin'), msg=el('vinMsg'), slot=el('blankSlot');
-  const paint=()=>{ slot.innerHTML=blankHtml(answer, done?answer:vin.value.trim(), hintLevel); slot.classList.toggle('correct', done); };
-  paint();
-  setTimeout(()=>vin.focus(),50);
+  const vin=el('vin'), wrongBox=el('wrongBox'), card=el('card');
+  const applyHint=()=>{ vin.placeholder=hintPlaceholder(answer, hintLevel); };
+  applyHint();
+  setTimeout(()=>vin.focus(),60);
 
   function markCorrect(){
-    done=true; paint();
-    vin.classList.add('correct'); vin.disabled=true;
-    msg.className='vin-msg correct'; msg.textContent='정답이에요! 🎉';
-    el('auxRow').classList.add('hidden');
-    el('ansReveal').classList.add('hidden');
-    const nb=el('nextBtn'); nb.classList.remove('hidden'); nb.onclick=()=>renderArrange();
+    done=true;
+    vin.value=answer; vin.readOnly=true; vin.classList.add('correct'); vin.placeholder='';
+    card.classList.add('correct');
+    wrongBox.classList.add('hidden');
+    if(!card.querySelector('.check-mark')){ const c=document.createElement('div'); c.className='check-mark'; c.textContent='✓'; card.appendChild(c); }
+    // 하단: 탭 + 3버튼
+    el('bottom').innerHTML=`
+      <div class="vtabs">
+        <button class="vtab"><span class="ic">💬</span>다른 예문</button>
+        <button class="vtab"><span class="ic badge" data-n="1">📝</span>오답 노트</button>
+        <button class="vtab"><span class="ic">🤖</span>AI 질문 답변</button>
+        <button class="vtab"><span class="ic">🔍</span>사전 검색</button>
+        <button class="vtab"><span class="ic">📖</span>단어 정보</button>
+      </div>
+      <div class="vbtns">
+        <button class="vbtn b1" disabled><span class="ic">🎧</span>단어 듣기</button>
+        <button class="vbtn b2" disabled><span class="ic">🔊</span>다시 듣기</button>
+        <button class="vbtn b3" id="nextBtn"><span class="ic">▶</span>다음 문제</button>
+      </div>`;
+    el('nextBtn').onclick=()=>renderArrange();
   }
   function onInput(){
     if(done) return;
-    vin.classList.remove('wrong');
-    // 정답 입력 시 확인 없이 즉시 처리
     if(norm(vin.value)===norm(answer)){ markCorrect(); return; }
-    paint();
-    // 정답 길이만큼 입력했는데 틀리면 글자수 피드백
     const t=vin.value.trim();
     if(t.length>=answer.replace(/ /g,'').length && t.length>0){
       const {html,wrong}=diffSpell(t, answer);
-      msg.className='vin-msg'; msg.innerHTML=`${html} — 정답과 ${wrong}글자 달라요`;
-      vin.classList.add('wrong');
-    } else { msg.className='vin-msg'; msg.textContent=''; }
+      wrongBox.classList.remove('hidden'); wrongBox.innerHTML=`${html} - 정답과 ${wrong}글자 달라요.`;
+    } else wrongBox.classList.add('hidden');
   }
   vin.addEventListener('input', onInput);
 
   el('hintBtn').onclick=()=>{
-    hintLevel=1; paint();
-    el('hintBtn').classList.add('hidden');
-    el('ansBtn').classList.remove('hidden');   // 힌트 본 뒤에야 정답 보기 노출
-    vin.focus();
-  };
-  el('ansBtn').onclick=()=>{
-    hintLevel=2; paint();
-    el('ansReveal').classList.remove('hidden');
-    el('ansReveal').innerHTML=`정답 <b>${escapeHtml(answer)}</b> — 직접 입력해야 넘어가요`;
-    vin.focus();
+    if(hintLevel===0){ hintLevel=1; el('hintLabel').textContent='정답 보기'; el('hintBtn').querySelector('.ic').textContent='✔'; }
+    else if(hintLevel===1){ hintLevel=2; }
+    applyHint(); vin.focus();
   };
 }
 
-// 트리거 박스(배열 전): 방금 배운 단어의 '실제 사용'을 궁금하게만 열어준다.
-// 패턴은 노출하지 않는다(미리 보여주면 배열 정답이 새므로 — 정답 후 공개).
-function triggerBoxHtml(item){
-  const w=escapeHtml(item.word);
-  return `<div class="trigger-box"><span class="ic">💡</span><span>방금 배운 <b>${w}</b>, 실제로 어떻게 쓸까요?</span></div>`;
+// 배열 트리거 문구(배열 전): 앱과 동일 — 방금 배운 단어로 '패턴'을 배운다고 안내(한국어라 영어 정답은 안 샘)
+function triggerText(item){
+  const s=item.sentence, w=escapeHtml(item.word), pat=(s.pattern_kr||'').trim();
+  if(!pat) return `방금 배운 <b>${w}</b>, 실제로 어떻게 쓸까요?`;
+  return curMode==='grammar'
+    ? `방금 배운 <b>${w}</b>로 '${escapeHtml(pat)}' 문법을 배워봐요!`
+    : `방금 배운 <b>${w}</b>로 '${escapeHtml(pat)}'라고 말하는 법을 배워봐요!`;
 }
-// 정답 후 보상: 방금 완성한 문장이 '재사용 가능한 패턴'임을 알려주고,
-// 같은 패턴의 실제 예문(다른 단어)을 보여줘 "이제 이런 말도 할 수 있구나"를 구체적으로 느끼게 한다.
-function patternPayoffHtml(item){
-  const s=item.sentence, sibs=(s.siblings||[]).slice(0,2);
-  const patEn=(s.pattern_en||'').trim(), patKr=(s.pattern_kr||'').trim();
-  const modeWord = curMode==='grammar' ? '문법' : '표현';
-  const patTxt = curMode==='expression' ? (patEn||patKr) : patKr;
-  if(!patTxt && !sibs.length) return '';
-  const patChip = patTxt
-    ? `<span class="pat-inline"><b>${escapeHtml(patTxt)}</b>${(curMode==='expression'&&patEn&&patKr)?`<span class="kr">${escapeHtml(patKr)}</span>`:''}</span>` : '';
-  const head = sibs.length
-    ? `🔑 이 ${modeWord} ${patChip}${patChip?', ':''}이렇게도 말할 수 있어요`
-    : `🔑 핵심 ${modeWord} 패턴 ${patChip}`;
-  const exHtml = sibs.map(x=>
-    `<div class="payoff-ex"><div class="pe-en">${hlTrigger(x.en, x.word)}</div><div class="pe-kr">${escapeHtml(x.kr)}</div></div>`
-  ).join('');
-  return `<div class="payoff"><div class="payoff-head">${head}</div>${exHtml}</div>`;
+function conceptText(item){
+  const s=item.sentence, patKr=(s.pattern_kr||'').trim(), patEn=(s.pattern_en||'').trim();
+  if(!patKr && !patEn) return '';
+  return curMode==='grammar'
+    ? `<span>${escapeHtml(patKr)} 용법</span>`
+    : `<span>${escapeHtml(patEn||patKr)}</span>${patEn&&patKr?`<span class="kr">${escapeHtml(patKr)}</span>`:''}`;
 }
 
 // [2] 문장 배열 ────────────────────────────────────────────────────────────────
 function renderArrange(){
   const item=curLevel.items[itemIdx], s=item.sentence;
   setProgress(itemIdx*2+1);
-  const modeWord = curMode==='grammar' ? '문법 문장' : '표현';
-  stage.innerHTML=`
-    <div class="stage-label"><span class="num">2</span> ${modeWord} 배우기 · 문장 배열</div>
-    ${triggerBoxHtml(item)}
-    <div class="prompt-ko">${escapeHtml(s.kr)}</div>
-    <div class="ex-answer" id="arrAns"></div>
-    <div class="ex-bank" id="arrBank"></div>
-    <div id="arrAfter"></div>
-    <div class="spacer"></div>
-    <button class="btn-primary hidden" id="arrCheck">확인</button>`;
-
-  const tokens=tokenize(s.en);
+  const tokens=tokenize(s.en), punct=trailPunct(s.en);
   const target=tokens.map(t=>t.toLowerCase()).join(' ');
-  let bank=shuffle(tokens.map((t,i)=>({id:i,text:t.toLowerCase()}))), ans=[], checked=false;
-  const ansEl=el('arrAns'), bankEl=el('arrBank'), afterEl=el('arrAfter'), checkBtn=el('arrCheck');
-  const mk=(t,cls,on)=>{ const b=document.createElement('button'); b.type='button'; b.className=cls; b.textContent=t; b.onclick=on; return b; };
+  // 뱅크(자리 유지): 각 타일에 placed 플래그
+  let bank=shuffle(tokens.map((t,i)=>({id:i, text:t.toLowerCase(), placed:false})));
+  let ans=[], done=false, revealed=false;
 
-  function render(){
-    const cur=ans.map(x=>x.text).join(' '), ok=cur===target;
-    ansEl.className='ex-answer'+(checked?(ok?' correct':' wrong'):'');
-    ansEl.innerHTML=''; if(!ans.length) ansEl.innerHTML='<span class="ex-ph">단어를 순서대로 탭하세요</span>';
-    ans.forEach(w=> ansEl.appendChild(mk(w.text,'ex-chip inans',()=>{ if(checked)return; ans=ans.filter(x=>x.id!==w.id); bank.push(w); render(); })));
-    bankEl.innerHTML=''; bank.forEach(w=> bankEl.appendChild(mk(w.text,'ex-chip',()=>{ if(checked)return; bank=bank.filter(x=>x.id!==w.id); ans.push(w); render(); })));
-    checkBtn.classList.toggle('hidden', checked); checkBtn.disabled=bank.length>0;
-    afterEl.innerHTML='';
-    if(checked){
-      const r=document.createElement('div'); r.className='ex-result'; r.style.color=ok?'var(--green)':'#d1584e';
-      r.textContent=ok?'정답이에요! 🎉':'아쉬워요 — 정답을 확인하세요';
-      afterEl.appendChild(r);
-      const sent=document.createElement('div'); sent.className='ex-sentence'; sent.innerHTML=hlTrigger(s.en, s.trigger); afterEl.appendChild(sent);
-      const ko=document.createElement('div'); ko.className='ex-sentence-ko'; ko.textContent=s.kr; afterEl.appendChild(ko);
-      if(ok){ const g=patternPayoffHtml(item); if(g){ const gd=document.createElement('div'); gd.innerHTML=g; afterEl.appendChild(gd.firstChild); } }
-      const next=document.createElement('button'); next.className='btn-primary'; next.style.marginTop='8px';
-      const last=itemIdx>=curLevel.items.length-1;
-      next.textContent= last ? '완료하기 🎉' : '다음 문항 ▶';
-      next.onclick=()=>{ learned.push(item); if(last){ renderDone(); } else { itemIdx++; renderVocab(); } };
-      afterEl.appendChild(next);
+  stage.innerHTML=`
+    <div class="stage-scroll">
+      <div class="chat-card" id="card">
+        ${chatTag()}<div class="chat-badge new">New</div>
+        <div class="concept-head hidden" id="concept"></div>
+        <div class="chat-ko">${escapeHtml(s.kr)}</div>
+        <div class="trigger-box" id="trigger"><span class="ic">💡</span><span>${triggerText(item)}</span></div>
+        <div class="fill" id="fill"></div>
+        <div class="mic-float">🎤</div>
+      </div>
+    </div>
+    <div class="stage-bottom" id="bottom">
+      <div class="bank" id="bank"></div>
+      <div class="arr-btns" id="arrBtns">
+        <button class="btn-ghost2" id="revealBtn"><span class="ic">✔</span>정답 보기</button>
+        <button class="btn-confirm" id="confirmBtn" disabled>확인</button>
+      </div>
+    </div>`;
+
+  const fillEl=el('fill'), bankEl=el('bank');
+
+  function renderFill(){
+    let h='';
+    for(let i=0;i<tokens.length;i++){
+      if(i<ans.length){
+        h+=`<span class="fill-word" data-i="${i}">${escapeHtml(ans[i].text)}</span>`;
+      } else h+=`<span class="fill-blank"></span>`;
     }
+    if(punct) h+=`<span class="fill-punct">${escapeHtml(punct)}</span>`;
+    fillEl.innerHTML=h;
+    if(!done) fillEl.querySelectorAll('.fill-word').forEach(w=> w.onclick=()=>{
+      const i=+w.dataset.i; const t=ans[i]; t.placed=false; ans.splice(i,1); renderAll();
+    });
   }
-  checkBtn.onclick=()=>{ if(bank.length)return; checked=true; render(); };
-  render();
-}
+  function renderBank(){
+    bankEl.innerHTML='';
+    bank.forEach(t=>{
+      const b=document.createElement('button'); b.className='tile'+(t.placed?' placed':''); b.textContent=t.text;
+      if(!t.placed && !done) b.onclick=()=>{ if(ans.length>=tokens.length) return; t.placed=true; ans.push(t); renderAll(); };
+      bankEl.appendChild(b);
+    });
+  }
+  function renderAll(){ renderFill(); renderBank(); el('confirmBtn').disabled = ans.length<tokens.length; }
 
-function hlTrigger(sent, trig){
-  const re=new RegExp('\\b('+trig.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')\\b','i');
-  return escapeHtml(sent).replace(re, m=>`<span class="tgt">${m}</span>`);
+  function finish(ok){
+    done=true;
+    el('card').classList.add('correct');
+    if(!el('card').querySelector('.check-mark')){ const c=document.createElement('div'); c.className='check-mark'; c.textContent='✓'; el('card').appendChild(c); }
+    const concept=conceptText(item);
+    if(concept){ const ch=el('concept'); ch.classList.remove('hidden'); ch.innerHTML=`🔑 ${concept}`; }
+    el('trigger').classList.add('hidden');
+    // 정답 문장을 원문 대소문자로 복원 표시(트리거 초록)
+    fillEl.innerHTML=`<div style="font-size:19px;font-weight:800;color:#2f3e52;line-height:1.5">${hlTrigger(s.en, s.trigger)}</div>`;
+    const last=itemIdx>=curLevel.items.length-1;
+    el('bottom').innerHTML=`<button class="btn-next" id="nextBtn">${last?'완료하기 🎉':'다음 문제 ▶'}</button>`;
+    el('nextBtn').onclick=()=>{ learned.push(item); if(last) renderDone(); else { itemIdx++; renderVocab(); } };
+  }
+
+  el('confirmBtn').onclick=()=>{
+    if(ans.length<tokens.length) return;
+    const ok=ans.map(x=>x.text).join(' ')===target;
+    if(ok) finish(true);
+    else { // 오답: 잠깐 표시 후 정답 공개
+      fillEl.querySelectorAll('.fill-word').forEach(w=>w.style.color='#e14b46');
+      setTimeout(()=>{ // 정답 순서로 채워 보여주고 마무리
+        ans=tokens.map((t,i)=>({id:i,text:t.toLowerCase(),placed:true}));
+        finish(false);
+      }, 700);
+    }
+  };
+  el('revealBtn').onclick=()=>{
+    revealed=true;
+    ans=tokens.map((t,i)=>({id:i,text:t.toLowerCase(),placed:true}));
+    finish(false);
+  };
+
+  renderAll();
 }
 
 // ── 완료 ──────────────────────────────────────────────────────────────────────
 function renderDone(){
   markCleared(lvKey(curMode, curLevel.level));
-  topbar.classList.add('hidden');
-  stage.classList.remove('hidden'); home.classList.add('hidden');
+  topbar.classList.add('hidden'); stage.classList.remove('hidden'); home.classList.add('hidden');
   const items=learned.length?learned:curLevel.items;
   stage.innerHTML=`<div class="done">
     <div class="emoji">🎉</div>
