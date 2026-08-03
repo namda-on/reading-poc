@@ -40,7 +40,19 @@
   .lv-card .f { font-size:12.5px; color:var(--sub); margin-top:4px; line-height:1.4; }
   .lv-card .step { display:inline-block; font-size:11px; font-weight:800; color:#2f6ab0; background:#e7f0fb; border:1px solid #cfe0f5; border-radius:999px; padding:2px 8px; margin-top:8px; }
   .lv-card .clear-badge { position:absolute; top:14px; right:16px; font-size:13px; font-weight:800; color:var(--green); }
-  .restart-btn { display:block; width:100%; background:none; border:none; color:#3a6bb0; font-size:13px; font-weight:700; padding:6px; cursor:pointer; text-decoration:underline; }
+  .restart-btn { display:block; width:100%; background:none; border:none; color:#3a6bb0; font-size:13px; font-weight:700; padding:8px 6px 0; cursor:pointer; text-decoration:underline; }
+  /* 홈 — 진입 CTA를 확실히 드러내는 시작 카드 */
+  .start-card { background:#fff; border-radius:18px; padding:18px 18px 16px; box-shadow:0 4px 14px rgba(30,60,110,.14); }
+  .start-flow { font-size:13.5px; font-weight:800; color:#3a6bb0; }
+  .start-flow .ar { color:#9db8dd; margin:0 3px; }
+  .start-count { font-size:20px; font-weight:800; color:#25406a; margin-top:8px; }
+  .start-count b { color:var(--purple-d); }
+  .start-note { font-size:12.5px; color:var(--sub); margin-top:4px; }
+  .start-btn { width:100%; border:none; border-radius:15px; padding:16px; margin-top:14px; cursor:pointer;
+    background:linear-gradient(#7f8cf2,#5b6ef0); color:#fff; font-size:17px; font-weight:800;
+    box-shadow:0 5px 14px rgba(80,90,220,.32); }
+  .start-btn:active { transform:translateY(1px); }
+  .opt-head { font-size:12.5px; font-weight:800; color:#4a6b95; opacity:.9; margin:20px 4px 6px; }
   /* 옵션 (홈 / 상단 설정 팝오버 공용) */
   .opt-box { background:#ffffffcc; border-radius:14px; padding:12px 14px; margin-top:14px; }
   .opt-label { font-size:12.5px; font-weight:800; color:#3a567d; margin-bottom:8px; }
@@ -267,7 +279,7 @@ function setPos(mode,n){
 
 // 트리거 어휘 칩 라벨 옵션: 'learned'(방금 배운) | 'meaning'(단어 뜻)
 const CHIP_KEY='ve:chipLabel';
-let chipLabelMode=(()=>{ try{ return localStorage.getItem(CHIP_KEY)||'learned'; }catch(e){ return 'learned'; } })();
+let chipLabelMode=(()=>{ try{ return localStorage.getItem(CHIP_KEY)||'meaning'; }catch(e){ return 'meaning'; } })();
 function setChipLabelMode(m){
   chipLabelMode=m;
   try{ localStorage.setItem(CHIP_KEY,m); }catch(e){}
@@ -294,7 +306,7 @@ function applyChipLabels(){
 }
 // 연결 강화 옵션 3종 — 각각 켜고 끌 수 있게(기본 ON)
 const OPTS_KEY='ve:opts';
-const OPT_DEF={banner:true, preview:true, fly:true};
+const OPT_DEF={banner:false, preview:true, fly:false};
 let OPTS=(()=>{ try{ return Object.assign({}, OPT_DEF, JSON.parse(localStorage.getItem(OPTS_KEY)||'{}')); }catch(e){ return {...OPT_DEF}; } })();
 function setOpt(k,v){
   OPTS[k]=v;
@@ -401,23 +413,25 @@ function renderHome(){
     b.onclick=()=>{ curMode=key; try{localStorage.setItem(MODE_KEY,key);}catch(e){} renderHome(); };
     tabs.appendChild(b);
   });
-  // 진입점은 하나 — 들어가면 문항마다 트리거 어휘와 표현/문법이 계속 달라진다
+  // 진입점은 하나 — 큰 CTA 하나로 들어가고, 옵션은 그 아래 보조 영역에 둔다
   const m=DATA.modes[curMode], list=el('levelList'); list.innerHTML='';
   const total=m.items.length, pos=Math.min(getPos(curMode), total);
   const rest=total-pos, resume=pos>0&&rest>0;
-  const c=document.createElement('button'); c.className='lv-card'+(rest===0?' cleared':'');
-  c.innerHTML=`${rest===0?'<span class="clear-badge">✓ 완료</span>':''}
-    <div class="t">${resume?`이어서 풀기`:`${escapeHtml(m.label)} 학습 시작`}</div>
-    <div class="f">${rest===0?`${total}문항을 모두 풀었어요`:`어휘 빈칸 → 문장 배열 · 남은 ${rest}문항`}</div>
-    <span class="step">문항마다 어휘와 ${curMode==='grammar'?'문법':'표현'}이 달라져요 · 총 ${total}문항</span>`;
-  c.onclick=()=>startSession(rest===0?0:pos);
-  list.appendChild(c);
-  if(pos>0){
-    const r=document.createElement('button'); r.className='restart-btn';
-    r.textContent='처음부터 다시 풀기';
-    r.onclick=()=>{ setPos(curMode,0); startSession(0); };
-    list.appendChild(r);
-  }
+  const modeWord = curMode==='grammar' ? '문법' : '표현';
+
+  const card=document.createElement('div'); card.className='start-card';
+  card.innerHTML=`
+    <div class="start-flow">어휘 빈칸 채우기 <span class="ar">→</span> ${modeWord} 문장 배열</div>
+    <div class="start-count">${rest===0?`${total}문항을 모두 풀었어요`:`남은 <b>${rest}</b>문항 · 총 ${total}문항`}</div>
+    <div class="start-note">문항마다 어휘와 ${modeWord}이 매번 달라져요</div>
+    <button class="start-btn" id="startBtn">${rest===0?'다시 처음부터 ▶':(resume?`이어서 풀기 ▶`:`${escapeHtml(m.label)} 학습 시작 ▶`)}</button>
+    ${pos>0&&rest>0?`<button class="restart-btn" id="restartBtn">처음부터 다시 풀기</button>`:''}`;
+  list.appendChild(card);
+  el('startBtn').onclick=()=>{ if(rest===0) setPos(curMode,0); startSession(rest===0?0:pos); };
+  if(el('restartBtn')) el('restartBtn').onclick=()=>{ setPos(curMode,0); startSession(0); };
+
+  const optHead=document.createElement('div'); optHead.className='opt-head'; optHead.textContent='실험 옵션';
+  list.appendChild(optHead);
   const opt=document.createElement('div'); opt.className='opt-box'; opt.id='optHome';
   list.appendChild(opt);
   renderChipOptions();
