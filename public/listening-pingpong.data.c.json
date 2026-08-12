@@ -1,0 +1,341 @@
+{
+  "meta": {
+    "type": "listening-pingpong",
+    "level": "B2-C1",
+    "theme": "long-sentences",
+    "triggerTurn": 3,
+    "note": "긴 문장 실험용(A 대사 8~15단어, 평균 ~10 — 기본 데이터의 약 2배). 수기 저작이라 표현 csv_id 없음. 오답은 문장 속 세부 정보(숫자·방향·부정·조건)를 놓쳤을 때 할 법한 자연스러운 응답. A=상대(트리거 turn3), B=학습자 3지선다, 정답 비-에코, 각 선택지 kr."
+  },
+  "examples": [
+    {
+      "id": 1,
+      "title": "호텔 프런트 (레이트 체크아웃)",
+      "level": "B2",
+      "vocab": { "word": "taxi", "meaning": "택시", "cefr": "A1", "rank": 2954 },
+      "expression": { "csv_id": null, "en": "Would it be possible to ~?", "kr": "~하는 게 가능할까요?" },
+      "dialogue": [
+        {
+          "role": "A",
+          "text": "Hi, we're in room seven twelve, checking out today.",
+          "kr": "안녕하세요, 712호인데요 — 오늘 체크아웃하려고요."
+        },
+        {
+          "role": "B",
+          "prompt": "B가 할 말로 알맞은 것은?",
+          "choices": [
+            {
+              "text": "Of course — I'll pull up your bill right away.",
+              "kr": "네 — 바로 정산 내역을 확인해 드릴게요.",
+              "correct": true,
+              "trap": "정답",
+              "explain": "체크아웃하러 온 투숙객임을 정확히 듣고 정산으로 응대했어요."
+            },
+            {
+              "text": "Welcome! Let me see if your room is ready for check-in.",
+              "kr": "환영합니다! 체크인이 가능한지 확인해 볼게요.",
+              "correct": false,
+              "trap": "내용어 오청",
+              "explain": "'checking out'을 'checking in'으로 들으면 도착한 손님으로 응대하게 돼요."
+            },
+            {
+              "text": "I'm sorry, but room seven twenty is still being cleaned.",
+              "kr": "죄송하지만 720호는 아직 청소 중이에요.",
+              "correct": false,
+              "trap": "숫자 오청",
+              "explain": "'seven twelve(712호)'를 'seven twenty(720호)'로 잘못 들은 답이에요."
+            }
+          ]
+        },
+        {
+          "role": "A",
+          "text": "Our flight's at nine tonight — would it be possible to keep the room until three?",
+          "kr": "비행기가 밤 9시라서요 — 오후 3시까지 방을 쓰는 게 가능할까요?"
+        },
+        {
+          "role": "B",
+          "prompt": "B가 할 말로 알맞은 것은?",
+          "choices": [
+            {
+              "text": "Let me check — we can offer a late checkout for a small fee.",
+              "kr": "확인해 볼게요 — 소정의 요금으로 레이트 체크아웃이 가능해요.",
+              "correct": true,
+              "trap": "정답",
+              "explain": "'오후 3시까지 방을 쓰고 싶다'는 요청을 정확히 듣고 레이트 체크아웃으로 응대했어요."
+            },
+            {
+              "text": "Nine in the morning? Then you'll need to hurry — checkout is at eleven.",
+              "kr": "아침 9시요? 그럼 서두르셔야 해요 — 체크아웃은 11시예요.",
+              "correct": false,
+              "trap": "시간 오청",
+              "explain": "'nine tonight(밤 9시)'을 아침 9시로 들으면 반대로 재촉하게 돼요."
+            },
+            {
+              "text": "Sure, housekeeping will come and clean the room right away.",
+              "kr": "네, 하우스키핑이 바로 객실을 청소해 드릴게요.",
+              "correct": false,
+              "trap": "내용어 오청",
+              "explain": "'keep the room(방을 계속 쓰다)'을 'clean the room(방을 청소하다)'으로 들으면 청소 요청으로 답하게 돼요."
+            }
+          ]
+        },
+        {
+          "role": "A",
+          "text": "And could you call us a taxi for half past six?",
+          "kr": "그리고 6시 반에 택시 한 대 불러 주시겠어요?"
+        },
+        {
+          "role": "B",
+          "prompt": "B가 할 말로 알맞은 것은?",
+          "choices": [
+            {
+              "text": "Of course — I'll have one waiting out front for you.",
+              "kr": "물론이죠 — 정문 앞에 대기시켜 둘게요.",
+              "correct": true,
+              "trap": "정답",
+              "explain": "택시를 불러 달라는 요청을 정확히 듣고 준비를 약속했어요."
+            },
+            {
+              "text": "Alright, I'll give your room a call at six thirty.",
+              "kr": "알겠습니다, 6시 30분에 객실로 전화 드릴게요.",
+              "correct": false,
+              "trap": "내용어 오청",
+              "explain": "'call us a taxi(택시를 불러 달라)'를 'call us(전화해 달라)'로 들으면 모닝콜 요청으로 답하게 돼요."
+            },
+            {
+              "text": "No problem — I'll have your bill ready by half past six.",
+              "kr": "문제없어요 — 6시 반까지 정산서를 준비해 둘게요.",
+              "correct": false,
+              "trap": "부분 청취",
+              "explain": "시간(6시 반)만 잡아 들으면 엉뚱한 준비를 약속하게 돼요."
+            }
+          ]
+        },
+        {
+          "role": "A",
+          "text": "Thanks — you've made our trip much easier.",
+          "kr": "감사해요 — 덕분에 여행이 한결 수월해졌어요."
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "업무 전화 (일정 조율)",
+      "level": "B2",
+      "vocab": { "word": "slide", "meaning": "슬라이드(발표 자료)", "cefr": "B1", "rank": 3120 },
+      "expression": { "csv_id": null, "en": "I was wondering if ~", "kr": "혹시 ~할 수 있을까 해서요" },
+      "dialogue": [
+        {
+          "role": "A",
+          "text": "Hi, this is Sarah — I'm looking for whoever's handling next week's launch.",
+          "kr": "안녕하세요, Sarah인데요 — 다음 주 출시 담당자를 찾고 있어요."
+        },
+        {
+          "role": "B",
+          "prompt": "B가 할 말로 알맞은 것은?",
+          "choices": [
+            {
+              "text": "That would be me — what can I do for you, Sarah?",
+              "kr": "제가 담당자예요 — 무엇을 도와드릴까요, Sarah?",
+              "correct": true,
+              "trap": "정답",
+              "explain": "'출시 담당자를 찾는다'는 용건을 정확히 듣고 자신을 밝혔어요."
+            },
+            {
+              "text": "I'm sorry, the product hasn't launched yet — it comes out next month.",
+              "kr": "죄송하지만 제품은 아직 출시 전이에요 — 다음 달에 나와요.",
+              "correct": false,
+              "trap": "프레임 오청",
+              "explain": "'담당자를 찾는 전화'를 '출시가 언제냐는 질문'으로 들으면 일정 안내로 답하게 돼요."
+            },
+            {
+              "text": "Sorry, there's no one named Sarah working here.",
+              "kr": "죄송하지만 여기 Sarah라는 분은 안 계세요.",
+              "correct": false,
+              "trap": "방향 오청",
+              "explain": "'저는 Sarah인데요(this is Sarah)'를 'Sarah를 바꿔 주세요'로 들으면 이렇게 답하게 돼요."
+            }
+          ]
+        },
+        {
+          "role": "A",
+          "text": "I was wondering if we could push Thursday's call back an hour.",
+          "kr": "혹시 목요일 통화를 한 시간 뒤로 미룰 수 있을까 해서요."
+        },
+        {
+          "role": "B",
+          "prompt": "B가 할 말로 알맞은 것은?",
+          "choices": [
+            {
+              "text": "No problem at all — I'll update the calendar invite.",
+              "kr": "전혀 문제없어요 — 캘린더 초대를 수정해 둘게요.",
+              "correct": true,
+              "trap": "정답",
+              "explain": "'통화를 한 시간 뒤로 미루자'는 요청을 정확히 듣고 수락했어요."
+            },
+            {
+              "text": "Sure, let's move it up an hour then.",
+              "kr": "네, 그럼 한 시간 앞당기죠.",
+              "correct": false,
+              "trap": "방향 오청",
+              "explain": "'push back(뒤로 미루다)'을 앞당기는 것으로 들으면 반대 방향으로 답하게 돼요."
+            },
+            {
+              "text": "Thursday doesn't work for me — can we keep it on Friday?",
+              "kr": "목요일은 제가 어려워요 — 금요일 그대로 하면 안 될까요?",
+              "correct": false,
+              "trap": "프레임 오청",
+              "explain": "'목요일 통화를 미루자'를 '통화를 목요일로 옮기자'로 들으면 이렇게 답하게 돼요."
+            }
+          ]
+        },
+        {
+          "role": "A",
+          "text": "Could you send the updated slides over before the call?",
+          "kr": "통화 전에 수정된 슬라이드를 보내 주실 수 있나요?"
+        },
+        {
+          "role": "B",
+          "prompt": "B가 할 말로 알맞은 것은?",
+          "choices": [
+            {
+              "text": "Sure, I'll send them out first thing tomorrow morning.",
+              "kr": "네, 내일 아침 제일 먼저 보내 드릴게요.",
+              "correct": true,
+              "trap": "정답",
+              "explain": "'통화 전에 슬라이드를 보내 달라'는 요청을 정확히 듣고 약속했어요."
+            },
+            {
+              "text": "Yes, I got the slides you sent — they look great.",
+              "kr": "네, 보내 주신 슬라이드 받았어요 — 아주 좋던데요.",
+              "correct": false,
+              "trap": "방향 오청",
+              "explain": "'보내 달라(send over)'를 '보냈다'로 들으면 받았다고 답하게 돼요."
+            },
+            {
+              "text": "Don't worry, I'll share my screen during the call instead.",
+              "kr": "걱정 마세요, 통화 중에 제 화면을 공유할게요.",
+              "correct": false,
+              "trap": "조건 누락",
+              "explain": "'통화 전에(before the call)'를 놓치면 통화 중 공유로 답하게 돼요."
+            }
+          ]
+        },
+        {
+          "role": "A",
+          "text": "Great, that's everything — talk to you Thursday!",
+          "kr": "좋아요, 이게 다예요 — 목요일에 통화해요!"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "공항 환승 안내",
+      "level": "C1",
+      "vocab": { "word": "connection", "meaning": "환승 연결편", "cefr": "B1", "rank": 1804 },
+      "expression": { "csv_id": null, "en": "as long as ~", "kr": "~하기만 하면" },
+      "dialogue": [
+        {
+          "role": "A",
+          "text": "Your connecting flight to Denver is delayed about forty-five minutes.",
+          "kr": "덴버행 연결편이 45분 정도 지연되었습니다."
+        },
+        {
+          "role": "B",
+          "prompt": "B가 할 말로 알맞은 것은?",
+          "choices": [
+            {
+              "text": "Oh no — will I still make my connection in time?",
+              "kr": "이런 — 그래도 환승 시간 안에 갈 수 있을까요?",
+              "correct": true,
+              "trap": "정답",
+              "explain": "'45분 지연'을 정확히 듣고 환승 가능 여부를 물었어요."
+            },
+            {
+              "text": "Until four forty-five? That's almost three hours from now.",
+              "kr": "4시 45분까지요? 지금부터 거의 세 시간이잖아요.",
+              "correct": false,
+              "trap": "숫자 오청",
+              "explain": "'delayed forty-five minutes(45분 지연)'를 '4시 45분까지 지연'으로 들으면 훨씬 오래 기다린다고 답하게 돼요."
+            },
+            {
+              "text": "Cancelled? Then I need to rebook right away.",
+              "kr": "결항이요? 그럼 당장 다시 예약해야겠네요.",
+              "correct": false,
+              "trap": "내용어 오청",
+              "explain": "'delayed(지연)'를 'cancelled(결항)'로 들으면 재예약부터 서두르게 돼요."
+            }
+          ]
+        },
+        {
+          "role": "A",
+          "text": "You'll make your connection as long as you go straight to gate thirty-two.",
+          "kr": "32번 게이트로 곧장 가시기만 하면 환승은 하실 수 있어요."
+        },
+        {
+          "role": "B",
+          "prompt": "B가 할 말로 알맞은 것은?",
+          "choices": [
+            {
+              "text": "Got it — I'll head there the moment we land.",
+              "kr": "알겠어요 — 내리자마자 바로 갈게요.",
+              "correct": true,
+              "trap": "정답",
+              "explain": "'곧장 가야 한다'는 조건을 정확히 듣고 따르기로 했어요."
+            },
+            {
+              "text": "Gate twenty-three? I thought it was on the other side of the terminal.",
+              "kr": "23번 게이트요? 터미널 반대편인 줄 알았는데요.",
+              "correct": false,
+              "trap": "숫자 오청",
+              "explain": "'thirty-two(32)'를 'twenty-three(23)'로 뒤집어 들은 답이에요."
+            },
+            {
+              "text": "So I have time to grab dinner first, right?",
+              "kr": "그럼 먼저 저녁 먹을 시간은 있겠네요?",
+              "correct": false,
+              "trap": "조건 누락",
+              "explain": "'곧장 가야만(as long as) 환승이 된다'는 조건을 놓치면 여유가 있다고 답하게 돼요."
+            }
+          ]
+        },
+        {
+          "role": "A",
+          "text": "Your bag goes through automatically — no need to pick it up.",
+          "kr": "짐은 자동으로 연결되니 찾으실 필요 없어요."
+        },
+        {
+          "role": "B",
+          "prompt": "B가 할 말로 알맞은 것은?",
+          "choices": [
+            {
+              "text": "That's a relief — one less thing to worry about.",
+              "kr": "다행이네요 — 걱정거리 하나 덜었어요.",
+              "correct": true,
+              "trap": "정답",
+              "explain": "'짐은 자동 연결이라 안 찾아도 된다'는 안내를 정확히 들었어요."
+            },
+            {
+              "text": "Okay, so I'll grab my bag at baggage claim first.",
+              "kr": "알겠어요, 그럼 수하물 찾는 곳에서 짐부터 찾을게요.",
+              "correct": false,
+              "trap": "부정 누락",
+              "explain": "'no need to pick it up(찾을 필요 없다)'의 부정을 놓치면 반대로 행동하게 돼요."
+            },
+            {
+              "text": "Should I check in again for the second flight, then?",
+              "kr": "그럼 두 번째 비행기는 다시 수속해야 하나요?",
+              "correct": false,
+              "trap": "내용어 오청",
+              "explain": "'자동으로 연결된다(goes through automatically)'를 놓치면 수속을 다시 해야 하는지 묻게 돼요."
+            }
+          ]
+        },
+        {
+          "role": "A",
+          "text": "You're all set — enjoy the rest of your trip!",
+          "kr": "다 되셨어요 — 남은 여행 즐겁게 하세요!"
+        }
+      ]
+    }
+  ]
+}
