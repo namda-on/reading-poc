@@ -46,13 +46,14 @@
   .pcard { flex:1; min-height:0; display:flex; flex-direction:column; background:var(--card); border-radius:22px; box-shadow:0 10px 26px rgba(30,60,110,.16); overflow:hidden; }
   .pcard-head { flex-shrink:0; background:#bfdcf7; color:#28517e; font-size:13.5px; font-weight:800; padding:10px 16px; }
 
-  /* 채팅 — column-reverse 스크롤러: 하단 고정(메신저식)이 네이티브로 유지되어
-     패널이 오르내릴 때 대화가 함께 밀리고 내려온다(키보드 효과). scrollTop 0 = 맨 아래. */
-  .chat { position:relative; flex:1; min-height:0; overflow-y:auto; display:flex; flex-direction:column-reverse; padding:10px 14px 12px; scrollbar-width:none; }
+  /* 채팅 — 일반 column 스크롤러(위부터 쌓임) + JS 하단 고정(pinBottom).
+     column-reverse의 네이티브 하단 고정은 iOS Safari에서 시작 방향 overflow에 접근 못 하는
+     WebKit 버그로 깨지므로 쓰지 않는다 — 패널이 오르내리는 동안 rAF로 매 프레임 바닥에 고정해
+     대화가 함께 밀리고 내려오게 한다(키보드 효과). */
+  .chat { position:relative; flex:1; min-height:0; overflow-y:auto; display:flex; flex-direction:column; padding:10px 14px 12px; scrollbar-width:none; }
   .chat::-webkit-scrollbar { display:none; }
-  /* min-height:100% — 대화가 적을 땐 위부터 쌓이고, 넘치면 column-reverse 하단 고정이 동작.
-     flex-shrink:0 필수 — 축소되면 내용이 inner 아래로 넘쳐(스크롤 불가) 패널이 대화를 덮는다. */
-  .chat-inner { display:flex; flex-direction:column; min-height:100%; flex-shrink:0; }
+  /* flex-shrink:0 필수 — 축소되면 내용이 inner 아래로 넘쳐 스크롤 계산이 어긋난다 */
+  .chat-inner { display:flex; flex-direction:column; flex-shrink:0; }
   .msg { display:flex; align-items:flex-start; gap:10px; margin:12px 0; animation:pop .25s ease; }
   .msg.b { flex-direction:row-reverse; }
   @keyframes pop { from{opacity:0;transform:translateY(6px);} to{opacity:1;transform:none;} }
@@ -86,7 +87,7 @@
   .abub.peeked .bub-body { font-size:16px; line-height:1.5; color:#2f3e52; animation:reveal .3s ease; }
 
   /* 선택지 패널 — 카드 하단에서 키보드처럼 올라온다(grid-rows 0fr→1fr로 자연 높이까지 애니메이션).
-     column-reverse 채팅이 하단 고정이라 패널이 커지는 만큼 대화가 위로 밀리고, 내려가면 함께 내려온다. */
+     오르내리는 동안 pinBottom이 채팅을 바닥에 고정해 대화가 함께 밀리고 내려온다. */
   .qpanel { flex-shrink:0; display:grid; grid-template-rows:0fr; transition:grid-template-rows .35s ease; }
   .qpanel.up { grid-template-rows:1fr; }
   .qpanel-in { overflow:hidden; min-height:0; }
@@ -375,15 +376,22 @@ const chatEl=el('chat'), chatInner=el('chatInner'), qpanel=el('qpanel');
 let curExample=null, current=null, lastA='', lastAKr='', correctCount=0, learnedSeen=[], runId=0;
 function show(...ids){ [home,stage,done,script,topbar].forEach(n=>n.classList.add('hidden')); ids.forEach(n=>n.classList.remove('hidden')); }
 function noteLearned(x){ if(x && !learnedSeen.some(y=>y.name===x.name)) learnedSeen.push(x); }
-// column-reverse 스크롤러: scrollTop 0 = 맨 아래(위로 스크롤하면 음수)
-function scrollToBottom(){ requestAnimationFrame(()=>{ chatEl.scrollTo({top:0, behavior:'smooth'}); }); }
+function scrollToBottom(){ requestAnimationFrame(()=>{ chatEl.scrollTo({top:chatEl.scrollHeight, behavior:'smooth'}); }); }
+// 높이가 변하는 동안(ms) 매 프레임 스크롤을 바닥에 고정 — 패널이 오르내릴 때 대화가 함께 밀리고 내려온다
+function pinBottom(ms){
+  const t0=performance.now();
+  (function step(){
+    chatEl.scrollTop=chatEl.scrollHeight;
+    if(performance.now()-t0<ms) requestAnimationFrame(step);
+  })();
+}
 function showProgress(on){ el('progress').style.visibility = on?'visible':'hidden'; }
 function shuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
 
 // 선택지 패널 오르내림(키보드 메타포). 채팅이 하단 고정이라 패널과 함께 대화가 밀리고 내려온다.
 const PANEL_MS=380;
-function raisePanel(){ qpanel.classList.add('up'); scrollToBottom(); }
-async function lowerPanel(){ qpanel.classList.remove('up'); await wait(PANEL_MS); }
+function raisePanel(){ qpanel.classList.add('up'); pinBottom(PANEL_MS+100); }
+async function lowerPanel(){ qpanel.classList.remove('up'); pinBottom(PANEL_MS+100); await wait(PANEL_MS); }
 
 // 완료(클리어) 저장 — 하나씩 깨는 재미
 const CLEAR_KEY='lp:cleared';
@@ -635,6 +643,7 @@ function askQuiz(turn, myRun){
         if(o.correct) unlockAllA(); // 오답이면 배열로 맞춰야 하므로 계속 숨김
         if(co.learned) noteLearned(co.learned);
         if(o.correct) successChime(); else wrongChime();
+        pinBottom(400); // 해설이 펼쳐지며 패널이 커지는 동안에도 대화 하단 고정
         // B 정답 대사는 '다음'을 눌러 패널이 내려간 뒤에 말풍선으로 등장한다. 오답이면 이어서 교정 시트.
         const nx=mkBtn('다음 ▶','next-btn', async ()=>{
           if(myRun!==runId || nx.disabled) return;
