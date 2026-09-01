@@ -189,8 +189,6 @@
   .fill-word.frame-w { background:#e3fbec; border-color:#8ed9ab; color:#22794a; font-weight:800; }
   /* [3] 결과 — 두 문장에서 공통으로 유저가 만든 프레임 */
   .pf-frame-line { font-size:22px; font-weight:800; margin-top:10px; }
-  .pf-note { font-size:13px; color:#8c9aab; line-height:1.6; margin:6px 0 4px; }
-  .pf-note b { color:#5b7c93; }
   .pf-cmp { margin-top:12px; }
   .pf-cmp-en { font-size:16px; font-weight:700; color:#2f3e52; line-height:1.45; }
   .pf-cmp-kr { font-size:13px; color:#9aa8bc; margin-top:2px; }
@@ -943,7 +941,7 @@ function renderApply(round){
     const cb=el('confirmBtn'); if(cb) cb.disabled = ans.length<blanks.length;
   }
 
-  // 정답 후: 완성 문장을 남기고 '같은 틀로 N번' 비교를 붙인다
+  // 정답 후: 완성 문장을 남기고 그 표현으로 만든 문장들을 붙인다
   function finish(){
     done=true;
     el('card').classList.add('correct');
@@ -961,7 +959,7 @@ function renderApply(round){
     // 라운드가 쌓일수록 비교 문장이 늘어난다 — 반복이 체감의 근거다
     const rows=[{en:item.sentence.en, kr:item.sentence.kr, segs:item.baseSegs}]
       .concat(item.apply.slice(0, round+1).map(a=>({en:a.en, kr:a.kr, segs:a.segs})));
-    el('payoffBox').innerHTML=applyPayoffHtml(item, rows, round);
+    el('payoffBox').innerHTML=applyPayoffHtml(item, rows);
 
     const hasNext = !typing;      // 타이핑 라운드는 항상 거친다
     const last = itemIdx>=sessionItems.length-1;
@@ -1038,17 +1036,14 @@ function renderApply(round){
   }
 }
 
-// [3] 정답 후: 지금까지 만든 문장을 나란히 놓고 **유저가 매번 직접 놓은 프레임**만 초록으로 묶는다.
-// 효용 체감의 근거는 코퍼스 수치가 아니라 '내가 만든 것'이어야 하고, 줄 수가 곧 반복 횟수다.
-function applyPayoffHtml(item, rows, round){
-  // 떨어진 두 조각(put … on)은 사이에 슬롯이 들어간다는 게 보이도록 이어 쓴다
-  const frameTxt=(item.frame||[]).join(' … ');
-  const n=rows.length;
-  const cnt=['','한','두','세','네','다섯'][n] || String(n);
-  const novel = round===0;   // 1회차의 핵심은 처음 보는 문장이 만들어졌다는 것
+// [3] 정답 후 '학습 정보' — 프레임과 그 표현으로 만든 문장만 보여준다.
+// 무엇을 느껴야 하는지 문구로 설명하지 않는다(그건 기획 의도지 앱 화면이 아니다).
+// 초록 강조가 같은 틀임을 그대로 보여주므로 해설이 필요 없다.
+function applyPayoffHtml(item, rows){
+  const p=item.pattern||{}, form=(p.form||'').trim(), pmean=(p.meaning||'').trim();
   const line=(r)=>{
     const punct=(String(r.en).match(/[.?!]+$/)||[''])[0];
-    const body = (r.segs && r.segs.length)
+    const body=(r.segs && r.segs.length)
       ? r.segs.map(g=> g.t==='frame'
           ? `<span class="tgt">${escapeHtml(g.s)}</span>`
           : escapeHtml(g.s)).join(' ') + escapeHtml(punct)
@@ -1057,13 +1052,9 @@ function applyPayoffHtml(item, rows, round){
   };
   return `<div class="payoff">
       <div class="pf-label">학습 정보</div>
-      <div class="pf-top"><span class="ic">💡</span>${novel
-        ? '처음 보는 문장에도 같은 틀이 들어갔어요'
-        : `이 틀로 ${cnt} 번 다른 말을 했어요`}</div>
-      <div class="pf-frame-line"><span class="tgt">${escapeHtml(frameTxt)}</span></div>
-      <div class="pf-note">${novel
-        ? '뜻은 전혀 다른데 <b>초록색 틀은 그대로</b>예요. 바뀐 건 회색 부분뿐이에요.'
-        : `${cnt} 문장 모두 <b>직접 놓고 직접 입력한 틀</b>이에요. 이제 이 틀은 쓸 수 있어요.`}</div>
+      ${form?`<div class="pf-form">${escapeHtml(form).replace(/_{2,}|~/g,'<span class="slot"></span>')}</div>`:''}
+      ${pmean?`<div class="pf-mean">${escapeHtml(pmean)}</div>`:''}
+      <div class="pf-sub"><span class="ic">ⓘ</span>이 표현으로 만든 문장</div>
       ${rows.map(line).join('')}
     </div>`;
 }
@@ -1155,16 +1146,16 @@ function renderSituation(target){
     done=true;
     made.push({en:exact?target.en:txt, kr:target.kr});
     inp.readOnly=true; inp.classList.add('ok');
+    if(!exact) inp.value=txt;
     fb.classList.add('hidden');
     el('card').classList.add('correct');
+    const pf=(target.form||'').trim(), pm=(target.meaning||'').trim();
     el('sitDone').innerHTML=`<div class="payoff">
-        <div class="pf-label">상황에서 말했어요</div>
-        <div class="pf-top"><span class="ic">💡</span>${exact?'배운 표현이 바로 나왔어요':'표현을 떠올렸어요'}</div>
-        <div class="pf-note">${exact
-          ? '상황이 주어졌을 때 <b>배운 표현이 먼저 떠올랐어요</b>. 이게 실제로 말이 나오는 순서예요.'
-          : `표현은 맞게 떠올렸어요. 이 상황에선 이렇게 말해요 — <b>${escapeHtml(target.en)}</b>`}</div>
-        <div class="pf-cmp"><div class="pf-cmp-en">A. ${escapeHtml(sit.a_en)}</div></div>
-        <div class="pf-cmp"><div class="pf-cmp-en">B. ${escapeHtml(exact?target.en:txt)}</div><div class="pf-cmp-kr">${escapeHtml(target.kr)}</div></div>
+        <div class="pf-label">쓴 표현</div>
+        ${pf?`<div class="pf-form">${escapeHtml(pf).replace(/_{2,}|~/g,'<span class="slot"></span>')}</div>`:''}
+        ${pm?`<div class="pf-mean">${escapeHtml(pm)}</div>`:''}
+        ${exact?'':`<div class="pf-sub"><span class="ic">ⓘ</span>이 상황에선 이렇게 말해요</div>
+        <div class="pf-cmp"><div class="pf-cmp-en">${escapeHtml(target.en)}</div></div>`}
       </div>`;
     el('bottom').innerHTML=`<button class="btn-next" id="goBtn">계속하기</button>`;
     el('goBtn').onclick=goNext;
@@ -1184,7 +1175,8 @@ function renderReview(){
   const withSit=block.filter(it=>it.situation);
   if(!withSit.length){ itemIdx++; return renderVocab(); }
   const it=withSit[withSit.length-1];
-  renderSituation({en:it.sentence.en, kr:it.sentence.kr, frame:it.frame, situation:it.situation});
+  renderSituation({en:it.sentence.en, kr:it.sentence.kr, frame:it.frame, situation:it.situation,
+                   form:(it.pattern||{}).form, meaning:(it.pattern||{}).meaning});
 }
 
 // ── 완료 ──// ── 완료 ──────────────────────────────────────────────────────────────────────
