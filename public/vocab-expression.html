@@ -464,13 +464,24 @@ function renderHome(){
 // ── 세션 ────────────────────────────────────────────────────────────────────
 function startSession(startIdx){
   sessionItems=DATA.items; itemIdx=Math.min(startIdx||0, sessionItems.length-1); learned=[];
+  buildStepIndex();
   home.classList.add('hidden'); topbar.classList.remove('hidden'); stage.classList.remove('hidden');
   el('backBtn').onclick=()=>{ setPos(itemIdx); renderHome(); };
   renderVocab();
 }
-// 진행바: 어휘/배열 2단계 × 전체 문항. 별·카운트는 채워진 위치로 이동
-function setProgress(stepDone){
-  const total=sessionItems.length*4, pct=Math.min(100, stepDone/total*100);
+// 문항마다 단계 수가 다르다 — [3] 2회차는 프레임을 공유하는 문장이 2개 이상일 때만
+// 돌기 때문이다. 그래서 총 단계 수를 미리 합산해 진행바가 튀지 않게 한다.
+let stepStart=[], stepTotal=0;
+function itemSteps(it){ return 3 + ((it.apply||[]).length>=2 ? 1 : 0); }
+function buildStepIndex(){
+  stepStart=[]; let acc=0;
+  sessionItems.forEach(it=>{ stepStart.push(acc); acc+=itemSteps(it); });
+  stepTotal=acc;
+}
+// 진행바: 문항 내 단계 위치(step)를 전체 누적 위치로 환산한다
+function setProgress(step){
+  const stepDone=(stepStart[itemIdx]||0)+step;
+  const total=stepTotal||sessionItems.length*4, pct=Math.min(100, stepDone/total*100);
   el('barFill').style.width=pct+'%';
   el('barStar').style.left=pct+'%';
   const bc=el('barCount'); bc.textContent=`${itemIdx+1}/${sessionItems.length}`; bc.style.left=pct+'%';
@@ -515,7 +526,7 @@ function hlTrigger(sent, trig){
 // [1] 어휘 빈칸 ────────────────────────────────────────────────────────────────
 function renderVocab(){
   const item=sessionItems[itemIdx], v=item[VERSIONS[curVer].vocabKey], answer=v.answer;
-  setProgress(itemIdx*4);
+  setProgress(0);
   renderStepBanner(1, '');
   let hintLevel=0, done=false;
 
@@ -663,7 +674,7 @@ function fillHintText(punct){ return /\?/.test(punct) ? '의문문으로 만들�
 // [2] 문장 배열 ────────────────────────────────────────────────────────────────
 function renderArrange(){
   const item=sessionItems[itemIdx], s=item.sentence;
-  setProgress(itemIdx*4+1);
+  setProgress(1);
   renderStepBanner(2, item.word);
   const tokens=tokenize(s.en), punct=trailPunct(s.en);
   const target=tokens.map(t=>t.toLowerCase()).join(' ');
@@ -789,7 +800,7 @@ function renderApply(round){
   const item=sessionItems[itemIdx];
   const ap=item.apply[round] || item.apply[0];
   const typing = round===1;      // 2회차는 뱅크 없이 타이핑으로 승급 — '직접 쓴다'를 끝까지 밀어붙인다
-  setProgress(itemIdx*4+2+round);
+  setProgress(2+round);
 
   // 셀 구성: 주어진 슬롯 칩 + 유저가 채울 프레임 자리.
   // 탭 라운드는 단어 단위 빈칸(어순도 과제), 타이핑 라운드는 프레임 조각 단위 입력칸.

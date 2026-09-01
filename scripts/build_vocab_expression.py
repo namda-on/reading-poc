@@ -13,12 +13,19 @@
   - 버전 B: 어휘 학습 문장 = 표현 문장(문장1)에서 트리거 어휘를 빈칸으로
 
 [3] 슬롯 치환 단계(`apply`)도 함께 굽는다. 목적은 **유저가 프레임을 직접 산출**하는 것이라
-슬롯(변하는 부분)은 주어진 채로 고정하고 프레임 자리를 비운다. 그래서 `form`의 리터럴
-프레임이 대표문장과 응용예문 **모두에 실제로** 등장하는 그룹만 쓴다(2단어 이상).
+슬롯(변하는 부분)은 주어진 채로 고정하고 프레임 자리를 비운다.
+
+프레임은 `form`(J열) 표기가 아니라 **학습 문장(D열)에서 직접 추출**한다 — `form`에는
+`주어 + didn't + ______`처럼 한글 자리표시자나 `What / Who / Where`처럼 대안이 박힌
+표기가 많아 문장에 그대로 등장하지 않는다. 문장1과 다른 문장의 **공통 연속 구간**을
+difflib으로 뽑아 프레임 후보로 쓰고, 문장1을 포함해 가장 많은 문장을 커버하는 후보를
+고른다. 1단어 조각 두 개로 된 프레임은 실제 패턴을 잃으므로(`Can/Could you ~?` →
+`you`+`me`) **단일 연속 구간 2단어 이상**만 인정한다.
 
 출력: public/vocab-expression.data.json (커밋되는 생성물). 손으로 편집하지 말 것.
 """
 import csv, json, os, re, sys
+from difflib import SequenceMatcher
 from collections import OrderedDict
 from pathlib import Path
 
@@ -32,8 +39,7 @@ MAX_ITEMS = int(os.environ.get("VE_MAX_ITEMS", "60"))   # 0이면 전체
 VOCAB_FILTER_SKIP = {"sexual", "unnecessary"}
 BRACKET = re.compile(r"\[([^\]]+)\]")
 INFL = re.compile(r"^(?:s|es|ed|d|ing|er|est|ies|ier|iest|'s|')$")
-SLOT = re.compile(r"_{2,}|~")
-KOR = re.compile(r"[가-힣]")
+WORD = re.compile(r"[A-Za-z']+")
 MIN_FRAME_WORDS = int(os.environ.get("VE_MIN_FRAME_WORDS", "2"))
 
 
@@ -109,20 +115,43 @@ def blank_trigger(sent, trigger):
     return sent[:best.start()] + "[" + best.group(0) + "]" + sent[best.end():], best.group(0)
 
 
-def frame_literals(form):
-    """form을 슬롯 기준으로 쪼개 리터럴 프레임 조각을 순서대로 반환. 못 쓰면 None.
+def words(sent):
+    return WORD.findall(re.sub(r"[.?!]+$", "", sent.strip()))
 
-    `주어 + didn't + ______` 처럼 한글 자리표시자가 섞였거나 `Are / Is + ...` 처럼
-    프레임 자체에 대안이 박힌 표기는 문장에 그대로 등장하지 않으므로 제외한다.
+
+def frame_candidates(base, other):
+    """두 문장의 공통 연속 구간을 프레임 후보로 뽑는다(원문 대소문자 유지)."""
+    wb, wo = words(base), words(other)
+    lb, lo = [w.lower() for w in wb], [w.lower() for w in wo]
+    blocks = [x for x in SequenceMatcher(None, lb, lo, autojunk=False).get_matching_blocks() if x.size]
+    out, seen = [], set()
+    for x in blocks:
+        if x.size < MIN_FRAME_WORDS:
+            continue
+        lit = " ".join(wb[x.a : x.a + x.size])
+        if lit.lower() in seen:
+            continue
+        seen.add(lit.lower())
+        out.append([lit])
+    return out
+
+
+def extract_frame(sents):
+    """문장1을 반드시 포함하면서 가장 많은 문장이 공유하는 프레임을 고른다.
+
+    반환 (리터럴 목록, 커버하는 문장 인덱스). 못 찾으면 None.
+    우선순위는 프레임 길이(구체적일수록 좋다) → 커버 문장 수.
     """
-    if not SLOT.search(form) or KOR.search(form) or "/" in form:
-        return None
-    out = []
-    for part in SLOT.split(form):
-        part = re.sub(r"\s+", " ", part.strip().strip("().")).strip()
-        if part and not re.fullmatch(r"[.?!,]*", part):
-            out.append(part)
-    return out or None
+    best = None
+    for j in range(1, len(sents)):
+        for lits in frame_candidates(sents[0], sents[j]):
+            cov = [i for i, s in enumerate(sents) if segment(s, lits) is not None]
+            if not cov or cov[0] != 0 or len(cov) < 2:
+                continue
+            key = (sum(len(x.split()) for x in lits), len(cov))
+            if best is None or key > best[0]:
+                best = (key, lits, cov)
+    return (best[1], best[2]) if best else None
 
 
 def segment(sentence, literals):
@@ -220,7 +249,7 @@ def make_vocab_a(v, trigger):
 def main():
     vocab, gse, groups = load_vocab(), load_gse(), load_groups()
     items, skipped = [], {"조인실패": 0, "버전A불가": 0, "버전B불가": 0, "문장부족": 0,
-                          "프레임불가": 0, "프레임짧음": 0, "세그먼트실패": 0}
+                          "공통프레임없음": 0}
 
     for g in groups.values():
         if not g["seq"].isdigit() or len(g["sents"]) < 1:
@@ -237,18 +266,15 @@ def main():
             skipped["버전A불가"] += 1
             continue
 
-        # [3] 슬롯 치환: 프레임 리터럴이 모든 문장에 실재해야 한다
-        lits = frame_literals(g["form"] or g["pattern"])
-        if not lits:
-            skipped["프레임불가"] += 1
+        # [3] 슬롯 치환: 학습 문장에서 공통 프레임을 추출한다(문장1 포함 필수)
+        sents = [x["en"] for x in g["sents"]]
+        found = extract_frame(sents)
+        if found is None:
+            skipped["공통프레임없음"] += 1
             continue
-        if sum(len(x.split()) for x in lits) < MIN_FRAME_WORDS:
-            skipped["프레임짧음"] += 1
-            continue
-        segd = [segment(x["en"], lits) for x in g["sents"]]
-        if any(x is None for x in segd):
-            skipped["세그먼트실패"] += 1
-            continue
+        lits, cov = found
+        # 프레임이 실제로 들어있는 문장만 [3]에 쓴다. cov[0]은 항상 문장1.
+        segd = {i: segment(sents[i], lits) for i in cov}
 
         s1 = g["sents"][0]
         blanked = blank_trigger(s1["en"], g["trigger"])
@@ -273,11 +299,13 @@ def main():
                        "hint": short_meaning(v["meaning"])},
             "sentence": {"en": s1["en"], "kr": s1["kr"], "trigger": g["trigger"]},
             "pattern": {"form": g["form"] or g["pattern"], "meaning": g["pmean"], "desc": g["pdesc"]},
-            # [3] 처음 보는 문장에 같은 프레임을 직접 써보는 단계 (응용예문 전부)
+            # [3] 처음 보는 문장에 같은 프레임을 직접 써보는 단계.
+            # 프레임을 공유하는 문장만 담으므로 문항에 따라 1개 또는 여러 개다
+            # (2개 이상이면 [3]이 2회차까지 진행된다).
             "frame": lits,
             "baseSegs": segd[0]["segs"],
-            "apply": [{"en": x["en"], "kr": x["kr"], **sd}
-                      for x, sd in zip(g["sents"][1:], segd[1:])],
+            "apply": [{"en": g["sents"][i]["en"], "kr": g["sents"][i]["kr"], **segd[i]}
+                      for i in cov[1:]],
             "siblings": g["sents"][1:3],
         })
 
