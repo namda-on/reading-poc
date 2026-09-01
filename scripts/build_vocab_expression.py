@@ -12,6 +12,10 @@
   - 버전 A: 어휘 학습 문장 = 어휘 CSV의 learnSentence (표현 문장과 다른 문장)
   - 버전 B: 어휘 학습 문장 = 표현 문장(문장1)에서 트리거 어휘를 빈칸으로
 
+[3] 슬롯 치환 단계(`apply`)도 함께 굽는다. 목적은 **유저가 프레임을 직접 산출**하는 것이라
+슬롯(변하는 부분)은 주어진 채로 고정하고 프레임 자리를 비운다. 그래서 `form`의 리터럴
+프레임이 대표문장과 응용예문 **모두에 실제로** 등장하는 그룹만 쓴다(2단어 이상).
+
 출력: public/vocab-expression.data.json (커밋되는 생성물). 손으로 편집하지 말 것.
 """
 import csv, json, os, re, sys
@@ -28,6 +32,9 @@ MAX_ITEMS = int(os.environ.get("VE_MAX_ITEMS", "60"))   # 0이면 전체
 VOCAB_FILTER_SKIP = {"sexual", "unnecessary"}
 BRACKET = re.compile(r"\[([^\]]+)\]")
 INFL = re.compile(r"^(?:s|es|ed|d|ing|er|est|ies|ier|iest|'s|')$")
+SLOT = re.compile(r"_{2,}|~")
+KOR = re.compile(r"[가-힣]")
+MIN_FRAME_WORDS = int(os.environ.get("VE_MIN_FRAME_WORDS", "2"))
 
 
 def die(msg):
@@ -102,6 +109,52 @@ def blank_trigger(sent, trigger):
     return sent[:best.start()] + "[" + best.group(0) + "]" + sent[best.end():], best.group(0)
 
 
+def frame_literals(form):
+    """form을 슬롯 기준으로 쪼개 리터럴 프레임 조각을 순서대로 반환. 못 쓰면 None.
+
+    `주어 + didn't + ______` 처럼 한글 자리표시자가 섞였거나 `Are / Is + ...` 처럼
+    프레임 자체에 대안이 박힌 표기는 문장에 그대로 등장하지 않으므로 제외한다.
+    """
+    if not SLOT.search(form) or KOR.search(form) or "/" in form:
+        return None
+    out = []
+    for part in SLOT.split(form):
+        part = re.sub(r"\s+", " ", part.strip().strip("().")).strip()
+        if part and not re.fullmatch(r"[.?!,]*", part):
+            out.append(part)
+    return out or None
+
+
+def segment(sentence, literals):
+    """문장을 [{t:'frame'|'slot', s:원문}] 으로 분해. 리터럴을 좌→우 순서로 찾는다.
+
+    frame = 유저가 직접 놓아야 하는 부분, slot = 미리 주어지는 부분.
+    슬롯이 하나도 없으면 치환할 게 없으므로 [3]이 성립하지 않는다.
+    """
+    s = sentence.strip()
+    punct = ""
+    m = re.search(r"[.?!]+$", s)
+    if m:
+        punct, s = m.group(0), s[: m.start()]
+    segs, pos = [], 0
+    for lit in literals:
+        pat = re.compile(r"\b" + r"\s+".join(re.escape(w) for w in lit.split()) + r"\b", re.I)
+        mm = pat.search(s, pos)
+        if not mm:
+            return None
+        pre = s[pos : mm.start()].strip()
+        if pre:
+            segs.append({"t": "slot", "s": pre})
+        segs.append({"t": "frame", "s": mm.group(0)})
+        pos = mm.end()
+    tail = s[pos:].strip()
+    if tail:
+        segs.append({"t": "slot", "s": tail})
+    if not any(x["t"] == "slot" for x in segs):
+        return None
+    return {"segs": segs, "punct": punct}
+
+
 def load_vocab():
     if not VOCAB_CSV.exists():
         die(f"어휘 CSV 없음: {VOCAB_CSV} (VE_VOCAB_CSV로 지정)")
@@ -166,7 +219,8 @@ def make_vocab_a(v, trigger):
 
 def main():
     vocab, gse, groups = load_vocab(), load_gse(), load_groups()
-    items, skipped = [], {"조인실패": 0, "버전A불가": 0, "버전B불가": 0, "문장부족": 0}
+    items, skipped = [], {"조인실패": 0, "버전A불가": 0, "버전B불가": 0, "문장부족": 0,
+                          "프레임불가": 0, "프레임짧음": 0, "세그먼트실패": 0}
 
     for g in groups.values():
         if not g["seq"].isdigit() or len(g["sents"]) < 1:
@@ -181,6 +235,19 @@ def main():
         va = make_vocab_a(v, g["trigger"])
         if va is None:
             skipped["버전A불가"] += 1
+            continue
+
+        # [3] 슬롯 치환: 프레임 리터럴이 모든 문장에 실재해야 한다
+        lits = frame_literals(g["form"] or g["pattern"])
+        if not lits:
+            skipped["프레임불가"] += 1
+            continue
+        if sum(len(x.split()) for x in lits) < MIN_FRAME_WORDS:
+            skipped["프레임짧음"] += 1
+            continue
+        segd = [segment(x["en"], lits) for x in g["sents"]]
+        if any(x is None for x in segd):
+            skipped["세그먼트실패"] += 1
             continue
 
         s1 = g["sents"][0]
@@ -206,6 +273,11 @@ def main():
                        "hint": short_meaning(v["meaning"])},
             "sentence": {"en": s1["en"], "kr": s1["kr"], "trigger": g["trigger"]},
             "pattern": {"form": g["form"] or g["pattern"], "meaning": g["pmean"], "desc": g["pdesc"]},
+            # [3] 처음 보는 문장에 같은 프레임을 직접 써보는 단계 (응용예문 전부)
+            "frame": lits,
+            "baseSegs": segd[0]["segs"],
+            "apply": [{"en": x["en"], "kr": x["kr"], **sd}
+                      for x, sd in zip(g["sents"][1:], segd[1:])],
             "siblings": g["sents"][1:3],
         })
 
@@ -219,6 +291,7 @@ def main():
             "note": "한 문항 = 트리거 어휘 + 그 어휘가 트리거한 표현 문장. "
                     "버전 A는 어휘 문장과 표현 문장이 다르고, 버전 B는 표현 문장으로 어휘를 배운다.",
             "versions": {"a": "어휘 문장 ≠ 표현 문장", "b": "표현 문장으로 어휘 학습"},
+            "flow": "[1] 어휘 빈칸 → [2] 같은 문장 배열 → [3] 처음 보는 문장에 프레임 직접 쓰기",
             "maxItems": MAX_ITEMS,
         },
         "items": items,

@@ -183,6 +183,16 @@
   .fill-blank { min-width:52px; border-bottom:2px solid #b9c7db; height:26px; }
   /* 배열 지시문 — 데이터에 지시문 필드가 없어 종결부호로 유도한다 */
   .fill-hint { font-size:13px; color:#b3bfd0; font-weight:600; margin-top:8px; }
+  /* [3] 미리 주어지는 슬롯 — '내가 놓은 것'과 시각적으로 갈려야 프레임 산출이 체감된다 */
+  .fill-given { padding:6px 4px; font-size:17px; color:#9aa8bc; font-weight:600; }
+  .fill-word.frame-w { background:#e3fbec; border-color:#8ed9ab; color:#22794a; font-weight:800; }
+  /* [3] 결과 — 두 문장에서 공통으로 유저가 만든 프레임 */
+  .pf-frame-line { font-size:22px; font-weight:800; margin-top:10px; }
+  .pf-note { font-size:13px; color:#8c9aab; line-height:1.6; margin:6px 0 4px; }
+  .pf-note b { color:#5b7c93; }
+  .pf-cmp { margin-top:12px; }
+  .pf-cmp-en { font-size:16px; font-weight:700; color:#2f3e52; line-height:1.45; }
+  .pf-cmp-kr { font-size:13px; color:#9aa8bc; margin-top:2px; }
   .fill-punct { font-size:18px; color:#2f3e52; font-weight:700; }
   .mic-float { align-self:flex-end; width:52px; height:52px; border-radius:50%; background:#fff; box-shadow:0 3px 10px rgba(30,60,110,.2); display:flex; align-items:center; justify-content:center; font-size:22px; margin:6px 2px 0 auto; color:#5b6ef0; }
 
@@ -460,7 +470,7 @@ function startSession(startIdx){
 }
 // 진행바: 어휘/배열 2단계 × 전체 문항. 별·카운트는 채워진 위치로 이동
 function setProgress(stepDone){
-  const total=sessionItems.length*2, pct=Math.min(100, stepDone/total*100);
+  const total=sessionItems.length*3, pct=Math.min(100, stepDone/total*100);
   el('barFill').style.width=pct+'%';
   el('barStar').style.left=pct+'%';
   const bc=el('barCount'); bc.textContent=`${itemIdx+1}/${sessionItems.length}`; bc.style.left=pct+'%';
@@ -505,7 +515,7 @@ function hlTrigger(sent, trig){
 // [1] 어휘 빈칸 ────────────────────────────────────────────────────────────────
 function renderVocab(){
   const item=sessionItems[itemIdx], v=item[VERSIONS[curVer].vocabKey], answer=v.answer;
-  setProgress(itemIdx*2);
+  setProgress(itemIdx*3);
   renderStepBanner(1, '');
   let hintLevel=0, done=false;
 
@@ -653,7 +663,7 @@ function fillHintText(punct){ return /\?/.test(punct) ? '의문문으로 만들�
 // [2] 문장 배열 ────────────────────────────────────────────────────────────────
 function renderArrange(){
   const item=sessionItems[itemIdx], s=item.sentence;
-  setProgress(itemIdx*2+1);
+  setProgress(itemIdx*3+1);
   renderStepBanner(2, item.word);
   const tokens=tokenize(s.en), punct=trailPunct(s.en);
   const target=tokens.map(t=>t.toLowerCase()).join(' ');
@@ -752,9 +762,9 @@ function renderArrange(){
       <div class="vbtns">
         <button class="vbtn b1" disabled><span class="ic">📘</span>표현 사전</button>
         <button class="vbtn b2" disabled><span class="ic">🔊</span>다시 듣기</button>
-        <button class="vbtn b3" id="nextBtn"><span class="ic">▶</span>${last?'완료하기':'다음 문제'}</button>
+        <button class="vbtn b3" id="nextBtn"><span class="ic">▶</span>다음 단계</button>
       </div>`;
-    el('nextBtn').onclick=()=>{ learned.push(item); if(last) renderDone(); else { itemIdx++; renderVocab(); } };
+    el('nextBtn').onclick=()=>renderApply();
   }
 
   el('confirmBtn').onclick=()=>{
@@ -769,6 +779,137 @@ function renderArrange(){
   el('revealBtn').onclick=()=>{ finish(false); };
 
   renderAll();
+}
+
+// [3] 처음 보는 문장에 프레임 직접 쓰기 ────────────────────────────────────────
+// 목적은 슬롯을 맞히는 게 아니라 **방금 배운 프레임을 유저가 직접 산출**하는 것이다.
+// 그래서 변하는 부분(슬롯)은 회색 칩으로 주어진 채 고정하고, 프레임 자리만 비운다.
+function renderApply(){
+  const item=sessionItems[itemIdx], ap=item.apply[0];
+  setProgress(itemIdx*3+2);
+
+  // 셀 구성: 주어진 슬롯 칩 + 유저가 채울 프레임 빈칸(단어 단위)
+  const cells=[];
+  ap.segs.forEach(sg=>{
+    if(sg.t==='slot') cells.push({kind:'given', text:sg.s});
+    else sg.s.split(/\s+/).forEach(w=> cells.push({kind:'blank', answer:w}));
+  });
+  const blanks=cells.filter(c=>c.kind==='blank');
+  let bank=shuffle(blanks.map((c,i)=>({id:i, text:c.answer.toLowerCase(), placed:false})));
+  let ans=[], done=false;
+
+  stage.innerHTML=`
+    <div class="stage-scroll">
+      <div class="chat-card" id="card">
+        ${chatTag(item)}<div class="chat-badge new">New</div>
+        <div class="chat-ko">${escapeHtml(ap.kr)}</div>
+        <div class="fill" id="fill"></div>
+        <div class="fill-hint" id="fillHint">방금 배운 표현을 넣어 문장을 완성해요</div>
+        <div id="payoffBox"></div>
+      </div>
+    </div>
+    <div class="stage-bottom" id="bottom">
+      <div class="bank" id="bank"></div>
+      <div class="arr-btns" id="arrBtns">
+        <button class="btn-ghost2" id="revealBtn"><span class="ic">✔</span>정답 보기</button>
+        <button class="btn-confirm" id="confirmBtn" disabled>확인</button>
+      </div>
+    </div>`;
+
+  const fillEl=el('fill'), bankEl=el('bank');
+
+  function renderFill(){
+    let bi=0, h='';
+    cells.forEach(c=>{
+      if(c.kind==='given'){ h+=`<span class="fill-given">${escapeHtml(c.text)}</span>`; return; }
+      const i=bi++;
+      h += i<ans.length
+        ? `<span class="fill-word frame-w" data-i="${i}">${escapeHtml(ans[i].text)}</span>`
+        : `<span class="fill-blank"></span>`;
+    });
+    if(ap.punct) h+=`<span class="fill-punct">${escapeHtml(ap.punct)}</span>`;
+    fillEl.innerHTML=h;
+    el('fillHint').classList.toggle('hidden', done || ans.length>0);
+    if(!done) fillEl.querySelectorAll('.fill-word').forEach(w=> w.onclick=()=>{
+      const i=+w.dataset.i; ans[i].placed=false; ans.splice(i,1); renderAll();
+    });
+  }
+  function renderBank(){
+    bankEl.innerHTML='';
+    bank.forEach(t=>{
+      const b=document.createElement('button');
+      b.className='tile'+(t.placed?' placed':'');
+      b.textContent=t.text;
+      if(!t.placed && !done) b.onclick=()=>{
+        if(ans.length>=blanks.length) return;
+        t.placed=true; ans.push(t); renderAll();
+      };
+      bankEl.appendChild(b);
+    });
+  }
+  function renderAll(){ renderFill(); renderBank(); el('confirmBtn').disabled = ans.length<blanks.length; }
+
+  function finish(){
+    done=true;
+    el('card').classList.add('correct');
+    if(!el('card').querySelector('.check-mark')){ const c=document.createElement('div'); c.className='check-mark'; c.textContent='✓'; el('card').appendChild(c); }
+    // 원문 대소문자로 교정해 완성 문장을 타일 그대로 남긴다
+    ans=blanks.map(c=>({text:c.answer, placed:true}));
+    renderFill();
+    el('payoffBox').innerHTML=applyPayoffHtml(item, ap);
+    const last=itemIdx>=sessionItems.length-1;
+    el('bottom').innerHTML=`
+      <div class="vtabs">
+        <button class="vtab"><span class="ic">🔍</span>사전 검색</button>
+        <button class="vtab"><span class="ic badge" data-n="1">📝</span>오답 노트</button>
+        <button class="vtab"><span class="ic">🗣</span>말해보기</button>
+        <button class="vtab"><span class="ic">🔖</span>북마크</button>
+        <button class="vtab"><span class="ic">📊</span>발음 진단</button>
+      </div>
+      <div class="vbtns">
+        <button class="vbtn b1" disabled><span class="ic">📘</span>표현 사전</button>
+        <button class="vbtn b2" disabled><span class="ic">🔊</span>다시 듣기</button>
+        <button class="vbtn b3" id="nextBtn"><span class="ic">▶</span>${last?'완료하기':'다음 문제'}</button>
+      </div>`;
+    el('nextBtn').onclick=()=>{ learned.push(item); if(last) renderDone(); else { itemIdx++; renderVocab(); } };
+  }
+
+  el('confirmBtn').onclick=()=>{
+    if(ans.length<blanks.length) return;
+    const ok=ans.every((t,i)=> t.text===blanks[i].answer.toLowerCase());
+    if(ok) finish();
+    else {
+      fillEl.querySelectorAll('.fill-word').forEach(w=>w.style.color='#e14b46');
+      setTimeout(finish, 700);
+    }
+  };
+  el('revealBtn').onclick=finish;
+
+  renderAll();
+}
+
+// [3] 정답 후: 두 문장을 나란히 놓고 **유저가 두 번 다 직접 놓은 프레임**을 초록으로 묶는다.
+// 효용 체감의 근거는 코퍼스 수치가 아니라 '내가 만든 것'이어야 한다.
+function applyPayoffHtml(item, ap){
+  const frameTxt=(item.frame||[]).join(' ');
+  const row=(en, kr, segs)=>{
+    const punct=(String(en).match(/[.?!]+$/)||[''])[0];
+    const body = (segs && segs.length)
+      ? segs.map(g=> g.t==='frame'
+          ? `<span class="tgt">${escapeHtml(g.s)}</span>`
+          : escapeHtml(g.s)).join(' ') + escapeHtml(punct)
+      : escapeHtml(en);
+    return `<div class="pf-cmp"><div class="pf-cmp-en">${body}</div><div class="pf-cmp-kr">${escapeHtml(kr)}</div></div>`;
+  };
+  const base=item.sentence;
+  return `<div class="payoff">
+      <div class="pf-label">학습 정보</div>
+      <div class="pf-top"><span class="ic">💡</span>같은 틀로 다른 말을 했어요</div>
+      <div class="pf-frame-line"><span class="tgt">${escapeHtml(frameTxt)}</span></div>
+      <div class="pf-note">뜻이 전혀 다른 두 문장인데, 초록색은 <b>두 번 다 직접 만든 부분</b>이에요.</div>
+      ${row(base.en, base.kr, item.baseSegs)}
+      ${row(ap.en, ap.kr, ap.segs)}
+    </div>`;
 }
 
 // ── 완료 ──────────────────────────────────────────────────────────────────────
