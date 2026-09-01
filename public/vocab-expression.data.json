@@ -567,6 +567,84 @@
       ]
     },
     {
+      "trigger": "ice cream",
+      "word": "ice cream",
+      "meaning": "아이스크림",
+      "pos": "noun",
+      "cefr": "A1",
+      "level": 4,
+      "rank": 750,
+      "vocabA": {
+        "answer": "ice cream",
+        "enLines": [
+          "Do you want some [ice cream]?"
+        ],
+        "koLines": [
+          "[아이스크림] 좀 먹을래?"
+        ]
+      },
+      "vocabB": {
+        "answer": "ice cream",
+        "enLines": [
+          "Do you like [ice cream]?"
+        ],
+        "koLines": [
+          "아이스크림 좋아해?"
+        ],
+        "hint": "아이스크림"
+      },
+      "sentence": {
+        "en": "Do you like ice cream?",
+        "kr": "아이스크림 좋아해?",
+        "trigger": "ice cream"
+      },
+      "pattern": {
+        "form": "Do / Does + 주어 + ______ ?",
+        "meaning": "~해?",
+        "desc": "주어가 3인칭 단수면 Does로 시작해요"
+      },
+      "frame": [
+        "Do you like"
+      ],
+      "baseSegs": [
+        {
+          "t": "frame",
+          "s": "Do you like"
+        },
+        {
+          "t": "slot",
+          "s": "ice cream"
+        }
+      ],
+      "apply": [
+        {
+          "en": "Do you like chocolate?",
+          "kr": "초콜릿 좋아해?",
+          "segs": [
+            {
+              "t": "frame",
+              "s": "Do you like"
+            },
+            {
+              "t": "slot",
+              "s": "chocolate"
+            }
+          ],
+          "punct": "?"
+        }
+      ],
+      "siblings": [
+        {
+          "en": "Does she read?",
+          "kr": "걔는 책 읽어?"
+        },
+        {
+          "en": "Do you like chocolate?",
+          "kr": "초콜릿 좋아해?"
+        }
+      ]
+    },
+    {
       "trigger": "late",
       "word": "late",
       "meaning": "<예정보다> 늦은, 지각한, 연착한 <대개 명사 앞에는 안 씀>",
@@ -2529,6 +2607,92 @@
         {
           "en": "You can take off your coat.",
           "kr": "코트 벗어도 돼."
+        }
+      ]
+    },
+    {
+      "trigger": "swimming pool",
+      "word": "swimming pool",
+      "meaning": "수영장",
+      "pos": "noun",
+      "cefr": "A1",
+      "level": 6,
+      "rank": 1713,
+      "vocabA": {
+        "answer": "swimming pool",
+        "enLines": [
+          "My friend has her own [swimming pool]."
+        ],
+        "koLines": [
+          "내 친구는 집에 [수영장]이 있어."
+        ]
+      },
+      "vocabB": {
+        "answer": "swimming pool",
+        "enLines": [
+          "The [swimming pool] opens at ten after two."
+        ],
+        "koLines": [
+          "수영장은 2시 10분에 열어."
+        ],
+        "hint": "수영장"
+      },
+      "sentence": {
+        "en": "The swimming pool opens at ten after two.",
+        "kr": "수영장은 2시 10분에 열어.",
+        "trigger": "swimming pool"
+      },
+      "pattern": {
+        "form": "[분] after [시]",
+        "meaning": "~시 ~분",
+        "desc": "ten after two는 2시에서 10분 지난 2시 10분이에요"
+      },
+      "frame": [
+        "at ten after"
+      ],
+      "baseSegs": [
+        {
+          "t": "slot",
+          "s": "The swimming pool opens"
+        },
+        {
+          "t": "frame",
+          "s": "at ten after"
+        },
+        {
+          "t": "slot",
+          "s": "two"
+        }
+      ],
+      "apply": [
+        {
+          "en": "We arrived at ten after eight.",
+          "kr": "우린 8시 10분에 도착했어.",
+          "segs": [
+            {
+              "t": "slot",
+              "s": "We arrived"
+            },
+            {
+              "t": "frame",
+              "s": "at ten after"
+            },
+            {
+              "t": "slot",
+              "s": "eight"
+            }
+          ],
+          "punct": "."
+        }
+      ],
+      "siblings": [
+        {
+          "en": "It's twenty after three.",
+          "kr": "3시 20분이야."
+        },
+        {
+          "en": "It's five after six.",
+          "kr": "6시 5분이야."
         }
       ]
     },
@@ -5396,192 +5560,6 @@
         {
           "en": "We have lots of food.",
           "kr": "음식 많아."
-        }
-      ]
-    },
-    {
-      "trigger": "sign",
-      "word": "sign",
-      "meaning": "표지판, 간판",
-      "pos": "noun",
-      "cefr": "A2",
-      "level": 7,
-      "rank": 2271,
-      "vocabA": {
-        "answer": "sign",
-        "enLines": [
-          "The [sign] says Manhattan is ten miles away."
-        ],
-        "koLines": [
-          "[표지판]에 맨해튼까지 10마일 남았다고 쓰여있어."
-        ]
-      },
-      "vocabB": {
-        "answer": "sign",
-        "enLines": [
-          "What happened to that [sign]?"
-        ],
-        "koLines": [
-          "저 표지판에 무슨 일이 생긴 거야?"
-        ],
-        "hint": "표지판, 간판"
-      },
-      "sentence": {
-        "en": "What happened to that sign?",
-        "kr": "저 표지판에 무슨 일이 생긴 거야?",
-        "trigger": "sign"
-      },
-      "pattern": {
-        "form": "What happened to ______ ?",
-        "meaning": "~에게 무슨 일이 생겼어?",
-        "desc": ""
-      },
-      "frame": [
-        "What happened to"
-      ],
-      "baseSegs": [
-        {
-          "t": "frame",
-          "s": "What happened to"
-        },
-        {
-          "t": "slot",
-          "s": "that sign"
-        }
-      ],
-      "apply": [
-        {
-          "en": "What happened to him!?",
-          "kr": "무슨 일 있었어!?",
-          "segs": [
-            {
-              "t": "frame",
-              "s": "What happened to"
-            },
-            {
-              "t": "slot",
-              "s": "him"
-            }
-          ],
-          "punct": "!?"
-        },
-        {
-          "en": "What happened to her?",
-          "kr": "걔 무슨 일 있었어?",
-          "segs": [
-            {
-              "t": "frame",
-              "s": "What happened to"
-            },
-            {
-              "t": "slot",
-              "s": "her"
-            }
-          ],
-          "punct": "?"
-        }
-      ],
-      "siblings": [
-        {
-          "en": "What happened to him!?",
-          "kr": "무슨 일 있었어!?"
-        },
-        {
-          "en": "What happened to her?",
-          "kr": "걔 무슨 일 있었어?"
-        }
-      ]
-    },
-    {
-      "trigger": "immediately",
-      "word": "immediately",
-      "meaning": "즉시, 즉각",
-      "pos": "adverb",
-      "cefr": "A2",
-      "level": 7,
-      "rank": 2284,
-      "vocabA": {
-        "answer": "immediately",
-        "enLines": [
-          "We have to take him to the hospital [immediately]."
-        ],
-        "koLines": [
-          "그를 [즉시] 병원에 데려가야 해."
-        ]
-      },
-      "vocabB": {
-        "answer": "immediately",
-        "enLines": [
-          "Go to bed [immediately]!"
-        ],
-        "koLines": [
-          "당장 자러 가!"
-        ],
-        "hint": "즉시, 즉각"
-      },
-      "sentence": {
-        "en": "Go to bed immediately!",
-        "kr": "당장 자러 가!",
-        "trigger": "immediately"
-      },
-      "pattern": {
-        "form": "go to bed",
-        "meaning": "자러 가다",
-        "desc": "the를 붙이지 않아요 (go to the bed ✗)"
-      },
-      "frame": [
-        "Go to bed"
-      ],
-      "baseSegs": [
-        {
-          "t": "frame",
-          "s": "Go to bed"
-        },
-        {
-          "t": "slot",
-          "s": "immediately"
-        }
-      ],
-      "apply": [
-        {
-          "en": "Then go to bed.",
-          "kr": "그럼 자러 가.",
-          "segs": [
-            {
-              "t": "slot",
-              "s": "Then"
-            },
-            {
-              "t": "frame",
-              "s": "go to bed"
-            }
-          ],
-          "punct": "."
-        },
-        {
-          "en": "We should go to bed.",
-          "kr": "이제 자야겠다.",
-          "segs": [
-            {
-              "t": "slot",
-              "s": "We should"
-            },
-            {
-              "t": "frame",
-              "s": "go to bed"
-            }
-          ],
-          "punct": "."
-        }
-      ],
-      "siblings": [
-        {
-          "en": "Then go to bed.",
-          "kr": "그럼 자러 가."
-        },
-        {
-          "en": "We should go to bed.",
-          "kr": "이제 자야겠다."
         }
       ]
     }

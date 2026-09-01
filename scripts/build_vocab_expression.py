@@ -102,9 +102,23 @@ def infl_match(tok, base):
 
 
 def blank_trigger(sent, trigger):
-    """문장에서 트리거 어휘(굴절형 포함) 한 곳을 [..]로 감싼다. 못 찾으면 None."""
+    """문장에서 트리거 어휘 한 곳을 [..]로 감싼다. 못 찾으면 None.
+
+    여러 단어 트리거(`ice cream`)는 구 전체를 찾는다 — 토큰 하나씩 비교하면
+    문장에 그대로 있어도 매칭되지 않는다. 단일 단어는 정확일치 우선, 없으면 규칙 굴절형.
+    """
+    ws = str(trigger).split()
+    if len(ws) > 1:
+        # 마지막 단어의 규칙 복수/3인칭만 허용 (video game → video games)
+        pat = r"\b" + r"\s+".join(re.escape(w) for w in ws[:-1]) + r"\s+" + re.escape(ws[-1]) + r"(?:s|es)?\b"
+        mm = re.search(pat, sent, re.I)
+        if mm:
+            return sent[: mm.start()] + "[" + mm.group(0) + "]" + sent[mm.end() :], mm.group(0)
+        return None
+
     best = None
-    for m in re.finditer(r"[A-Za-z']+", sent):
+    # 앞따옴표를 토큰에 포함시키지 않는다 ('inappropriate' 같은 인용 표기)
+    for m in re.finditer(r"[A-Za-z]+(?:'[A-Za-z]+)*", sent):
         if m.group(0).lower() == trigger.lower():
             best = m
             break
@@ -112,7 +126,7 @@ def blank_trigger(sent, trigger):
             best = m
     if not best:
         return None
-    return sent[:best.start()] + "[" + best.group(0) + "]" + sent[best.end():], best.group(0)
+    return sent[: best.start()] + "[" + best.group(0) + "]" + sent[best.end() :], best.group(0)
 
 
 def words(sent):
@@ -233,16 +247,55 @@ def load_groups():
     return groups
 
 
+def norm_word(s):
+    return re.sub(r"[^a-z0-9]", "", (s or "").lower())
+
+
+def merge_blanks(sent):
+    """인접한 빈칸을 하나로 합친다 — 복합어가 쪼개진 경우.
+
+    `[ice] [cream]` → `[ice cream]`, `[T]-[shirt]` → `[T-shirt]`.
+    빈칸을 하나만 렌더하는 UI와도 맞아야 하므로 문장 문자열 자체를 고친다.
+    """
+    prev = None
+    while prev != sent:
+        prev = sent
+        sent = re.sub(r"\[([^\]]+)\]([ \-]?)\[([^\]]+)\]",
+                      lambda m: f"[{m.group(1)}{m.group(2)}{m.group(3)}]", sent)
+    return sent
+
+
+def same_word(a, b):
+    return norm_word(a) == norm_word(b) or infl_match(a, b) or infl_match(b, a)
+
+
 def make_vocab_a(v, trigger):
-    """버전 A: 어휘 CSV의 learnSentence. 빈칸 정답은 학습 대상 어휘와 같아야 한다."""
-    m = BRACKET.search(v["ls"])
+    """버전 A: 어휘 CSV의 learnSentence. 빈칸이 학습 대상 어휘를 가리켜야 한다.
+
+    막아야 하는 건 **여러 단어짜리 표제어를 일부만 괄호친 예문**이다
+    (`baggage claim`을 배우는데 빈칸이 `[baggage]`). 단일 단어 표제어의 빈칸은
+    굴절형이어도(`child` → `[children]`) 그 어휘를 가리키므로 인정한다.
+    """
+    word = v["spelling"]
+    ls = v["ls"]
+    # 빈칸 병합은 합친 결과가 학습 어휘를 가리킬 때만 한다.
+    # (`[ice] [cream]` → `ice cream` ✓ / `[went] [to]` → `went to` ✗ — 뒤 단어가 어휘가 아니다)
+    merged = merge_blanks(ls)
+    mm = BRACKET.search(merged)
+    if mm and (same_word(mm.group(1).strip(), word) or same_word(mm.group(1).strip(), trigger)):
+        ls = merged
+    m = BRACKET.search(ls)
     if not m:
         return None
     ans = m.group(1).strip()
-    if not infl_match(ans, trigger) and not infl_match(trigger, ans):
-        return None      # 다른 단어를 괄호친 예문(baggage claim→[baggage]) 제외
+    if not (same_word(ans, word) or same_word(ans, trigger)):
+        if len(word.split()) > 1 or len(str(trigger).split()) > 1:
+            return None
+    # 합친 뒤에도 빈칸이 둘 이상이면 UI가 첫 빈칸만 입력칸으로 만들어 나머지가 대괄호로 남는다
+    if len(BRACKET.findall(ls)) > 1:
+        return None
     return {"answer": ans,
-            "enLines": [x.strip() for x in v["ls"].split("\n")],
+            "enLines": [x.strip() for x in ls.split("\n")],
             "koLines": [x.strip() for x in v["lsm"].split("\n")]}
 
 
