@@ -84,6 +84,47 @@ def short_meaning(m, limit=14):
     return out or t[:limit]
 
 
+# 용언 어미 — 뜻(`공부하다`)과 문장(`공부 안 했어`)을 잇기 위해 어간만 남긴다
+KR_SUFFIX = ("하다", "되다", "이다", "시키다", "스럽다", "롭다", "다", "은", "는", "한", "인", "적인", "적")
+
+
+def kr_meaning_spans(meaning):
+    """뜻에서 한국어 문장과 맞춰볼 후보들(긴 것부터)."""
+    t = re.sub(r"<[^>]*>", " ", meaning or "")
+    t = re.sub(r"\([^)]*\)", " ", t)
+    out = set()
+    for part in re.split(r"[,;/]", t):
+        part = part.strip()
+        if not part:
+            continue
+        out.add(part)
+        for suf in KR_SUFFIX:
+            if part.endswith(suf) and len(part) > len(suf):
+                out.add(part[: -len(suf)])
+    return sorted({x for x in out if x}, key=len, reverse=True)
+
+
+def mark_meaning_kr(kr, meaning):
+    """한국어 문장에서 어휘 뜻에 해당하는 구간을 [..]로 감싼다. 못 찾으면 None.
+
+    앱의 어휘 학습은 번역문에서 정답 어휘의 뜻만 초록으로 보여준다. 표현 문장에는
+    그 마크업이 없으므로 뜻 조각(어간 포함)을 문장에서 직접 찾는다. 못 찾는 경우가
+    남으므로(용언이 문맥에 맞게 다른 낱말로 번역된 경우) 그때는 별도 힌트 줄로 대체한다.
+    """
+    for cand in kr_meaning_spans(meaning):
+        if len(cand) >= 2:
+            i = kr.find(cand)
+            if i >= 0:
+                return kr[:i] + "[" + cand + "]" + kr[i + len(cand):]
+        else:
+            # 한 글자 뜻은 낱말 첫머리에서만 인정 (우연 일치 방지)
+            mm = re.search(r"(?:^|\s)(" + re.escape(cand) + r")", kr)
+            if mm:
+                i = mm.start(1)
+                return kr[:i] + "[" + cand + "]" + kr[i + len(cand):]
+    return None
+
+
 def infl_match(tok, base):
     """tok이 base와 같거나 규칙 굴절형인지 (parents←parent, teaches←teach)."""
     t, b = tok.lower(), base.lower()
@@ -133,28 +174,109 @@ def words(sent):
     return WORD.findall(re.sub(r"[.?!]+$", "", sent.strip()))
 
 
+# 기능어만으로 이뤄진 프레임은 실제 패턴이 아니다
+# (`Can/Could you ~?`에서 `you`+`me`가 뽑히면 정작 `Can/Could`가 빠진다).
+FUNCTION_WORDS = {
+    "i", "you", "he", "she", "it", "we", "they", "me", "him", "her", "us", "them",
+    "my", "your", "his", "its", "our", "their", "mine", "yours",
+    "this", "that", "these", "those", "there", "here",
+    "am", "is", "are", "was", "were", "be", "been", "being",
+    "do", "does", "did", "have", "has", "had",
+    "will", "would", "can", "could", "shall", "should", "may", "might", "must",
+    "a", "an", "the", "and", "or", "but", "if", "so", "not", "no", "than", "as",
+    "what", "who", "whom", "whose", "where", "when", "why", "how", "which",
+    "to", "of", "in", "on", "at", "for", "with", "from", "by", "about", "too", "very",
+}
+
+
+# 한정사·소유격은 뒤따르는 슬롯(명사구)에 속하므로 프레임 끝에 남기지 않는다.
+# `Put your` + 슬롯 `coat on` → `Put` … `on` + 슬롯 `your coat`.
+DETERMINERS = {"a", "an", "the", "my", "your", "his", "her", "its", "our", "their",
+               "this", "that", "these", "those", "some", "any"}
+
+
+def trim_determiners(lits):
+    """조각 끝의 한정사를 떼고, 한정사만으로 된 조각은 버린다.
+
+    `Put your` … `on` → `Put` … `on` (슬롯 `your coat`).
+    `The` … `away` 처럼 조각이 한정사 하나뿐이면 프레임 조각이 아니라 슬롯의 일부다.
+    다듬은 결과가 프레임으로 성립하지 않으면 원본을 그대로 돌려준다(`It's a` 등).
+    """
+    out = []
+    for lit in lits:
+        ws = lit.split()
+        while ws and ws[-1].lower() in DETERMINERS:
+            ws.pop()
+        if ws:
+            out.append(" ".join(ws))
+    if out and sum(len(x.split()) for x in out) >= MIN_FRAME_WORDS:
+        return out
+    if len(lits) == 1:
+        return lits      # `It's a` — 한 덩어리는 한정사로 끝나도 프레임이 된다
+    return None          # 조각이 한정사뿐이면 프레임 조각이 아니다
+
+
+def has_content(lits):
+    return any(w.lower().strip("'") not in FUNCTION_WORDS
+               for lit in lits for w in lit.split())
+
+
 def frame_candidates(base, other):
-    """두 문장의 공통 연속 구간을 프레임 후보로 뽑는다(원문 대소문자 유지)."""
+    """두 문장의 공통 구간에서 프레임 후보를 만든다(원문 대소문자 유지).
+
+    한 덩어리(`talk to`)뿐 아니라 **떨어진 두 덩어리**(`put` … `on`)도 후보로 낸다 —
+    분리형 구동사는 슬롯이 프레임 사이에 들어가므로 연속 구간만 보면 particle(`on`)이
+    슬롯으로 새어 들어간다(`put your` + 슬롯 `coat on`).
+    """
     wb, wo = words(base), words(other)
     lb, lo = [w.lower() for w in wb], [w.lower() for w in wo]
     blocks = [x for x in SequenceMatcher(None, lb, lo, autojunk=False).get_matching_blocks() if x.size]
+    lits = [(x, " ".join(wb[x.a : x.a + x.size])) for x in blocks]
+
     out, seen = [], set()
-    for x in blocks:
-        if x.size < MIN_FRAME_WORDS:
-            continue
-        lit = " ".join(wb[x.a : x.a + x.size])
-        if lit.lower() in seen:
-            continue
-        seen.add(lit.lower())
-        out.append([lit])
+
+    def add(cand):
+        cand = trim_determiners(cand)
+        if cand is None or sum(len(x.split()) for x in cand) < MIN_FRAME_WORDS:
+            return
+        if not has_content(cand):
+            return
+        key = tuple(x.lower() for x in cand)
+        if key in seen:
+            return
+        seen.add(key)
+        out.append(cand)
+
+    for _, lit in lits:
+        add([lit])
+    for i in range(len(lits)):
+        for j in range(i + 1, len(lits)):
+            add([lits[i][1], lits[j][1]])
     return out
+
+
+def slots_clean(lits, sents, cov):
+    """커버되는 문장들의 슬롯이 공통 단어를 갖지 않는가.
+
+    슬롯에 모든 문장이 공유하는 단어가 남아 있으면 그건 아직 프레임의 일부라는 뜻이다
+    (`put your` + 슬롯 `clothes on`/`coat on` → `on`이 남아 있으므로 프레임이 미완성).
+    """
+    shared = None
+    for i in cov:
+        sd = segment(sents[i], lits)
+        ws = {w.lower() for x in sd["segs"] if x["t"] == "slot" for w in x["s"].split()}
+        shared = ws if shared is None else (shared & ws)
+        if not shared:
+            return True
+    return not shared
 
 
 def extract_frame(sents):
     """문장1을 반드시 포함하면서 가장 많은 문장이 공유하는 프레임을 고른다.
 
     반환 (리터럴 목록, 커버하는 문장 인덱스). 못 찾으면 None.
-    우선순위는 프레임 길이(구체적일수록 좋다) → 커버 문장 수.
+    우선순위: 커버 문장 수 → 슬롯이 깨끗한지 → 프레임 길이 → 조각 수.
+    커버를 최우선에 두면 한 문장에만 맞는 과적합 프레임(`Don't be late`)을 걸러낸다.
     """
     best = None
     for j in range(1, len(sents)):
@@ -162,7 +284,8 @@ def extract_frame(sents):
             cov = [i for i, s in enumerate(sents) if segment(s, lits) is not None]
             if not cov or cov[0] != 0 or len(cov) < 2:
                 continue
-            key = (sum(len(x.split()) for x in lits), len(cov))
+            key = (len(cov), slots_clean(lits, sents, cov),
+                   sum(len(x.split()) for x in lits), len(lits))
             if best is None or key > best[0]:
                 best = (key, lits, cov)
     return (best[1], best[2]) if best else None
@@ -335,6 +458,7 @@ def main():
             skipped["버전B불가"] += 1
             continue
         b_en, b_ans = blanked
+        b_kr = mark_meaning_kr(s1["kr"], v["meaning"])
 
         meta = gse.get(seq, {})
         items.append({
@@ -348,8 +472,10 @@ def main():
             # 버전 A — 어휘 문장과 표현 문장이 서로 다름
             "vocabA": va,
             # 버전 B — 표현 문장 자체로 어휘를 배움(트리거 자리를 빈칸으로)
-            "vocabB": {"answer": b_ans, "enLines": [b_en], "koLines": [s1["kr"]],
-                       "hint": short_meaning(v["meaning"])},
+            # 번역문에서 정답 뜻을 찾으면 초록 마크업으로, 못 찾으면 별도 힌트 줄로
+            "vocabB": {"answer": b_ans, "enLines": [b_en],
+                       "koLines": [b_kr or s1["kr"]],
+                       "hint": "" if b_kr else short_meaning(v["meaning"])},
             "sentence": {"en": s1["en"], "kr": s1["kr"], "trigger": g["trigger"]},
             "pattern": {"form": g["form"] or g["pattern"], "meaning": g["pmean"], "desc": g["pdesc"]},
             # [3] 처음 보는 문장에 같은 프레임을 직접 써보는 단계.

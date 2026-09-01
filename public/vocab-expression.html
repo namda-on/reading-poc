@@ -978,7 +978,8 @@ function renderApply(round){
 // [3] 정답 후: 지금까지 만든 문장을 나란히 놓고 **유저가 매번 직접 놓은 프레임**만 초록으로 묶는다.
 // 효용 체감의 근거는 코퍼스 수치가 아니라 '내가 만든 것'이어야 하고, 줄 수가 곧 반복 횟수다.
 function applyPayoffHtml(item, rows){
-  const frameTxt=(item.frame||[]).join(' ');
+  // 떨어진 두 조각(put … on)은 사이에 슬롯이 들어간다는 게 보이도록 이어 쓴다
+  const frameTxt=(item.frame||[]).join(' … ');
   const n=rows.length;
   const cnt=['','한','두','세','네','다섯'][n] || String(n);
   const line=(r)=>{
