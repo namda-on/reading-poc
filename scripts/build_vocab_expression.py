@@ -40,6 +40,7 @@ VOCAB_FILTER_SKIP = {"sexual", "unnecessary"}
 BRACKET = re.compile(r"\[([^\]]+)\]")
 INFL = re.compile(r"^(?:s|es|ed|d|ing|er|est|ies|ier|iest|'s|')$")
 WORD = re.compile(r"[A-Za-z']+")
+SLOT_MARK = re.compile(r"_{2,}|~")
 KOR = re.compile(r"[가-힣]")
 # 홑 대명사 조각은 표현의 일부가 아니라 그 자리에 오는 주어·목적어다.
 # `get up`을 배우는데 `You` … `get up`이 프레임으로 잡히면 안 된다.
@@ -209,29 +210,52 @@ def form_words(form):
     return required, optional | required
 
 
-def frame_matches_form(frame, form):
-    """프레임이 `form`의 어휘 내용과 **정확히** 같은가(굴절 허용).
+def form_pieces(form):
+    """`form`의 리터럴 조각들을 순서대로 반환(괄호 안은 선택 취급해 제거).
 
-    프레임이 form에 없는 낱말을 더 물고 오거나(`come from` → `It comes from`)
-    form의 필수 낱말을 빠뜨리면(`What do you think of` → `What` … `you think of`)
-    그건 저작자가 말한 표현이 아니다. 그런 경계는 확실하지 않으므로 버린다.
+    `put ______ on` → ['put', 'on'] · `the ______ of the ______` → ['the', 'of the'] ·
+    `get up` → ['get up'] · `come over (to ______)` → ['come over'].
     """
-    required, allowed = form_words(form)
-    fws = [w.lower() for lit in frame for w in lit.split()]
-    if not fws:
+    f = re.sub(r"\([^)]*\)", " ", form or "")
+    out = []
+    for part in SLOT_MARK.split(f):
+        ws = WORD.findall(part)
+        if ws:
+            out.append(ws)
+    return out
+
+
+def frame_matches_form(frame, form):
+    """프레임이 `form`의 어휘 내용과 **구조까지** 같은가(굴절 허용).
+
+    조각 개수와 순서가 맞아야 한다 — `the ______ of the ______`는 조각이 둘(`the`,`of the`)인데
+    프레임이 `of the` 하나로 잡히면 표현의 일부만 떼어낸 것이고, `What does ______ do ?`도
+    끝의 `do`가 빠지면 표현이 아니다. 괄호 안 낱말은 있어도 없어도 되는 것으로 본다
+    (`all (of) ______`의 `of`).
+    """
+    pieces = form_pieces(form)
+    if not pieces or len(pieces) != len(frame):
         return False
-    for w in fws:
-        if not any(w == a or infl_match(w, a) or infl_match(a, w) for a in allowed):
-            return False
-    for a in required:
-        if not any(w == a or infl_match(w, a) or infl_match(a, w) for w in fws):
-            return False
+    _, optional = form_words(form)
+
+    def same(a, b):
+        return a == b or infl_match(a, b) or infl_match(b, a)
+
+    for want, got in zip(pieces, frame):
+        want_l = [w.lower() for w in want]
+        got_l = [w.lower() for w in got.split()]
+        for g in got_l:
+            if not any(same(g, w) for w in want_l) and g not in optional:
+                return False
+        for w in want_l:
+            if not any(same(g, w) for g in got_l):
+                return False
     return True
 
 
 # 흩어진 기능어 조각들은 실제 패턴이 아니다 — `Can/Could you ~?`에서 `you` … `me`가
 # 뽑히면 정작 `Can/Could`가 빠진다. 반면 **붙어 있는 한 덩어리**는 기능어만이어도
-# 정상 패턴이다(`Was it`, `Did you`, `Do you`)므로 이 검사는 두 조각 이상에만 쓴다.
+# 정상 패턴이다(`How about`, `What if`)므로 이 검사는 두 조각 이상에만 쓴다.
 FUNCTION_WORDS = {
     "i", "you", "he", "she", "it", "we", "they", "me", "him", "her", "us", "them",
     "my", "your", "his", "its", "our", "their", "mine", "yours",
@@ -244,18 +268,20 @@ FUNCTION_WORDS = {
     "to", "of", "in", "on", "at", "for", "with", "from", "by", "about", "too", "very",
 }
 
-
 # 한정사·소유격은 뒤따르는 슬롯(명사구)에 속하므로 프레임 끝에 남기지 않는다.
-# `Put your` + 슬롯 `coat on` → `Put` … `on` + 슬롯 `your coat`.
 DETERMINERS = {"a", "an", "the", "my", "your", "his", "her", "its", "our", "their",
                "this", "that", "these", "those", "some", "any"}
+
+
+def has_content(lits):
+    return any(w.lower().strip("'") not in FUNCTION_WORDS
+               for lit in lits for w in lit.split())
 
 
 def trim_determiners(lits):
     """조각 끝의 한정사를 떼고, 한정사만으로 된 조각은 버린다.
 
     `Put your` … `on` → `Put` … `on` (슬롯 `your coat`).
-    `The` … `away` 처럼 조각이 한정사 하나뿐이면 프레임 조각이 아니라 슬롯의 일부다.
     다듬은 결과가 프레임으로 성립하지 않으면 원본을 그대로 돌려준다(`It's a` 등).
     """
     out = []
@@ -270,11 +296,6 @@ def trim_determiners(lits):
     if len(lits) == 1:
         return lits      # `It's a` — 한 덩어리는 한정사로 끝나도 프레임이 된다
     return None          # 조각이 한정사뿐이면 프레임 조각이 아니다
-
-
-def has_content(lits):
-    return any(w.lower().strip("'") not in FUNCTION_WORDS
-               for lit in lits for w in lit.split())
 
 
 def frame_candidates(base, other):

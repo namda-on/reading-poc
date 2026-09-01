@@ -811,116 +811,6 @@
       ]
     },
     {
-      "trigger": "title",
-      "word": "title",
-      "meaning": "제목, 표제",
-      "pos": "noun",
-      "cefr": "A1",
-      "level": 5,
-      "rank": 1334,
-      "vocabA": {
-        "answer": "title",
-        "enLines": [
-          "Hi. I'm looking for a book.",
-          "Ok. What's the [title]?"
-        ],
-        "koLines": [
-          "안녕하세요. 책 한 권 찾고 있는데요.",
-          "네, [제목]이 어떻게 되나요?"
-        ]
-      },
-      "vocabB": {
-        "answer": "title",
-        "enLines": [
-          "What's the [title] of the book?"
-        ],
-        "koLines": [
-          "그 책 [제목]이 뭐야?"
-        ],
-        "hint": ""
-      },
-      "sentence": {
-        "en": "What's the title of the book?",
-        "kr": "그 책 제목이 뭐야?",
-        "trigger": "title"
-      },
-      "pattern": {
-        "form": "the ______ of the ______",
-        "meaning": "~의 ~",
-        "desc": ""
-      },
-      "frame": [
-        "of the"
-      ],
-      "traps": [
-        "with"
-      ],
-      "baseSegs": [
-        {
-          "t": "slot",
-          "s": "What's the title"
-        },
-        {
-          "t": "frame",
-          "s": "of the"
-        },
-        {
-          "t": "slot",
-          "s": "book"
-        }
-      ],
-      "apply": [
-        {
-          "en": "That's the end of the story.",
-          "kr": "그게 이야기의 끝이야.",
-          "segs": [
-            {
-              "t": "slot",
-              "s": "That's the end"
-            },
-            {
-              "t": "frame",
-              "s": "of the"
-            },
-            {
-              "t": "slot",
-              "s": "story"
-            }
-          ],
-          "punct": "."
-        },
-        {
-          "en": "What happens at the end of the movie?",
-          "kr": "그 영화 마지막에 어떻게 돼?",
-          "segs": [
-            {
-              "t": "slot",
-              "s": "What happens at the end"
-            },
-            {
-              "t": "frame",
-              "s": "of the"
-            },
-            {
-              "t": "slot",
-              "s": "movie"
-            }
-          ],
-          "punct": "?"
-        }
-      ],
-      "siblings": [
-        {
-          "en": "What's the name of that movie?",
-          "kr": "저 영화 제목이 뭐야?"
-        },
-        {
-          "en": "That's the end of the story.",
-          "kr": "그게 이야기의 끝이야."
-        }
-      ]
-    },
-    {
       "trigger": "evening",
       "word": "evening",
       "meaning": "저녁, 밤, 야간 <오후 6시경부터 잠자리에 들 때까지의 시간>",
@@ -1121,127 +1011,6 @@
         {
           "en": "Let's go back home.",
           "kr": "이제 집에 가자."
-        }
-      ]
-    },
-    {
-      "trigger": "light",
-      "word": "light",
-      "meaning": "전등, 불, 등",
-      "pos": "noun",
-      "cefr": "A1",
-      "level": 5,
-      "rank": 1526,
-      "vocabA": {
-        "answer": "lights",
-        "enLines": [
-          "Why do you still have your Christmas [lights] up?"
-        ],
-        "koLines": [
-          "왜 아직도 크리스마스 [전등(들)]을 달아 놓은 거야?"
-        ]
-      },
-      "vocabB": {
-        "answer": "lights",
-        "enLines": [
-          "I'll turn off the [lights]."
-        ],
-        "koLines": [
-          "내가 [불] 끌게."
-        ],
-        "hint": ""
-      },
-      "sentence": {
-        "en": "I'll turn off the lights.",
-        "kr": "내가 불 끌게.",
-        "trigger": "light"
-      },
-      "pattern": {
-        "form": "turn off ______  (= turn ______ off)",
-        "meaning": "~을 끄다",
-        "desc": "목적어가 대명사면 반드시 사이에 넣어요 (turn it off)"
-      },
-      "frame": [
-        "turn",
-        "off"
-      ],
-      "traps": [
-        "through"
-      ],
-      "baseSegs": [
-        {
-          "t": "slot",
-          "s": "I'll"
-        },
-        {
-          "t": "frame",
-          "s": "turn"
-        },
-        {
-          "t": "frame",
-          "s": "off"
-        },
-        {
-          "t": "slot",
-          "s": "the lights"
-        }
-      ],
-      "apply": [
-        {
-          "en": "Can you turn it off?",
-          "kr": "좀 꺼줄래?",
-          "segs": [
-            {
-              "t": "slot",
-              "s": "Can you"
-            },
-            {
-              "t": "frame",
-              "s": "turn"
-            },
-            {
-              "t": "slot",
-              "s": "it"
-            },
-            {
-              "t": "frame",
-              "s": "off"
-            }
-          ],
-          "punct": "?"
-        },
-        {
-          "en": "You can turn it off.",
-          "kr": "꺼도 돼.",
-          "segs": [
-            {
-              "t": "slot",
-              "s": "You can"
-            },
-            {
-              "t": "frame",
-              "s": "turn"
-            },
-            {
-              "t": "slot",
-              "s": "it"
-            },
-            {
-              "t": "frame",
-              "s": "off"
-            }
-          ],
-          "punct": "."
-        }
-      ],
-      "siblings": [
-        {
-          "en": "Can you turn it off?",
-          "kr": "좀 꺼줄래?"
-        },
-        {
-          "en": "You can turn it off.",
-          "kr": "꺼도 돼."
         }
       ]
     },
@@ -1476,7 +1245,7 @@
         "feels like"
       ],
       "traps": [
-        "making"
+        "back"
       ],
       "baseSegs": [
         {
@@ -1521,97 +1290,6 @@
         {
           "en": "I feel like I know him.",
           "kr": "나 그 사람 아는 것 같아."
-        }
-      ]
-    },
-    {
-      "trigger": "Wednesday",
-      "word": "Wednesday",
-      "meaning": "수요일",
-      "pos": "noun",
-      "cefr": "A1",
-      "level": 6,
-      "rank": 1651,
-      "vocabA": {
-        "answer": "Wednesday",
-        "enLines": [
-          "Is it [Wednesday] today?"
-        ],
-        "koLines": [
-          "오늘 [수요일]이야?",
-          "<참고: Wednesday는 발음은 \"웬즈데이\", 철자는 \"웨드-네스-데이(wed-nes-day)\"예요.>"
-        ]
-      },
-      "vocabB": {
-        "answer": "Wednesday",
-        "enLines": [
-          "It's [Wednesday] today."
-        ],
-        "koLines": [
-          "오늘은 [수요일]이야."
-        ],
-        "hint": ""
-      },
-      "sentence": {
-        "en": "It's Wednesday today.",
-        "kr": "오늘은 수요일이야.",
-        "trigger": "Wednesday"
-      },
-      "pattern": {
-        "form": "It's ______ (today) .",
-        "meaning": "오늘은 ~야",
-        "desc": "날짜·요일·날씨를 말할 때 It은 해석하지 않아요"
-      },
-      "frame": [
-        "It's",
-        "today"
-      ],
-      "traps": [
-        "pays"
-      ],
-      "baseSegs": [
-        {
-          "t": "frame",
-          "s": "It's"
-        },
-        {
-          "t": "slot",
-          "s": "Wednesday"
-        },
-        {
-          "t": "frame",
-          "s": "today"
-        }
-      ],
-      "apply": [
-        {
-          "en": "It's pretty cold today.",
-          "kr": "오늘 꽤 춥다.",
-          "segs": [
-            {
-              "t": "frame",
-              "s": "It's"
-            },
-            {
-              "t": "slot",
-              "s": "pretty cold"
-            },
-            {
-              "t": "frame",
-              "s": "today"
-            }
-          ],
-          "punct": "."
-        }
-      ],
-      "siblings": [
-        {
-          "en": "It's Saturday.",
-          "kr": "토요일이야."
-        },
-        {
-          "en": "It's two thirty.",
-          "kr": "2시 30분이야."
         }
       ]
     },
@@ -1857,7 +1535,7 @@
         "too much"
       ],
       "traps": [
-        "bring"
+        "lot"
       ],
       "baseSegs": [
         {
@@ -2158,7 +1836,7 @@
         "Which one"
       ],
       "traps": [
-        "comes"
+        "off"
       ],
       "baseSegs": [
         {
@@ -4311,119 +3989,6 @@
       ]
     },
     {
-      "trigger": "boot",
-      "word": "boot",
-      "meaning": "부츠",
-      "pos": "noun",
-      "cefr": "A2",
-      "level": 8,
-      "rank": 2869,
-      "vocabA": {
-        "answer": "boots",
-        "enLines": [
-          "I wear these [boots] every day."
-        ],
-        "koLines": [
-          "나는 매일 이 [부츠]를 신어."
-        ]
-      },
-      "vocabB": {
-        "answer": "boots",
-        "enLines": [
-          "Check out my new [boots]!"
-        ],
-        "koLines": [
-          "내 새 [부츠] 좀 봐!"
-        ],
-        "hint": ""
-      },
-      "sentence": {
-        "en": "Check out my new boots!",
-        "kr": "내 새 부츠 좀 봐!",
-        "trigger": "boot"
-      },
-      "pattern": {
-        "form": "Check out ______ !",
-        "meaning": "~ 좀 봐!",
-        "desc": "계산한다는 뜻이 아니라 관심 있게 보라고 권하는 표현이에요"
-      },
-      "frame": [
-        "Check",
-        "out"
-      ],
-      "traps": [
-        "on"
-      ],
-      "baseSegs": [
-        {
-          "t": "frame",
-          "s": "Check"
-        },
-        {
-          "t": "frame",
-          "s": "out"
-        },
-        {
-          "t": "slot",
-          "s": "my new boots"
-        }
-      ],
-      "apply": [
-        {
-          "en": "Check this out!",
-          "kr": "이거 봐봐!",
-          "segs": [
-            {
-              "t": "frame",
-              "s": "Check"
-            },
-            {
-              "t": "slot",
-              "s": "this"
-            },
-            {
-              "t": "frame",
-              "s": "out"
-            }
-          ],
-          "punct": "!"
-        },
-        {
-          "en": "I'll check it out.",
-          "kr": "(음악을 추천하는 사람에게) 내가 한번 들어볼게.",
-          "segs": [
-            {
-              "t": "slot",
-              "s": "I'll"
-            },
-            {
-              "t": "frame",
-              "s": "check"
-            },
-            {
-              "t": "slot",
-              "s": "it"
-            },
-            {
-              "t": "frame",
-              "s": "out"
-            }
-          ],
-          "punct": "."
-        }
-      ],
-      "siblings": [
-        {
-          "en": "Check this out!",
-          "kr": "이거 봐봐!"
-        },
-        {
-          "en": "I'll check it out.",
-          "kr": "(음악을 추천하는 사람에게) 내가 한번 들어볼게."
-        }
-      ]
-    },
-    {
       "trigger": "ketchup",
       "word": "ketchup",
       "meaning": "케첩",
@@ -4681,7 +4246,7 @@
         "take a break"
       ],
       "traps": [
-        "check"
+        "plenty"
       ],
       "baseSegs": [
         {
@@ -4995,7 +4560,7 @@
         "one more"
       ],
       "traps": [
-        "try"
+        "good"
       ],
       "baseSegs": [
         {
@@ -5554,7 +5119,7 @@
         "as"
       ],
       "traps": [
-        "reach"
+        "mind"
       ],
       "baseSegs": [
         {
@@ -5767,7 +5332,7 @@
         "Ever since"
       ],
       "traps": [
-        "kind"
+        "free"
       ],
       "baseSegs": [
         {
@@ -5872,7 +5437,7 @@
         "No matter"
       ],
       "traps": [
-        "say"
+        "bit"
       ],
       "baseSegs": [
         {
@@ -6299,7 +5864,7 @@
         "the same"
       ],
       "traps": [
-        "talk"
+        "fit"
       ],
       "baseSegs": [
         {
@@ -6895,7 +6460,7 @@
         "more than"
       ],
       "traps": [
-        "leave"
+        "back"
       ],
       "baseSegs": [
         {
@@ -7221,7 +6786,7 @@
         "such as"
       ],
       "traps": [
-        "alone"
+        "thanks"
       ],
       "baseSegs": [
         {
@@ -7387,7 +6952,7 @@
         "a try"
       ],
       "traps": [
-        "showed"
+        "nor"
       ],
       "baseSegs": [
         {
@@ -8037,7 +7602,7 @@
         "Make a choice"
       ],
       "traps": [
-        "bit"
+        "thanks"
       ],
       "baseSegs": [
         {
@@ -9382,7 +8947,7 @@
         "other than"
       ],
       "traps": [
-        "forward"
+        "either"
       ],
       "baseSegs": [
         {
@@ -9490,7 +9055,7 @@
         "as much as"
       ],
       "traps": [
-        "calm"
+        "kind"
       ],
       "baseSegs": [
         {
@@ -10240,7 +9805,7 @@
         "nothing but"
       ],
       "traps": [
-        "going"
+        "while"
       ],
       "baseSegs": [
         {
@@ -10412,119 +9977,6 @@
         {
           "en": "Let's hang out again some time.",
           "kr": "다음에 또 만나자."
-        }
-      ]
-    },
-    {
-      "trigger": "further",
-      "word": "further",
-      "meaning": "추가의, 더 이상의 <far의 비교급>",
-      "pos": "adjective",
-      "cefr": "A2",
-      "level": 10,
-      "rank": 3944,
-      "vocabA": {
-        "answer": "Further",
-        "enLines": [
-          "There will be a meeting next week. [Further] details to follow."
-        ],
-        "koLines": [
-          "다음 주에 회의가 있겠습니다. [추가적인] 세부사항은 나중에 알려드리겠습니다."
-        ]
-      },
-      "vocabB": {
-        "answer": "further",
-        "enLines": [
-          "You should take [further] action."
-        ],
-        "koLines": [
-          "[추가] 조치를 취해야 해."
-        ],
-        "hint": ""
-      },
-      "sentence": {
-        "en": "You should take further action.",
-        "kr": "추가 조치를 취해야 해.",
-        "trigger": "further"
-      },
-      "pattern": {
-        "form": "take action",
-        "meaning": "조치를 취하다",
-        "desc": ""
-      },
-      "frame": [
-        "take",
-        "action"
-      ],
-      "traps": [
-        "going"
-      ],
-      "baseSegs": [
-        {
-          "t": "slot",
-          "s": "You should"
-        },
-        {
-          "t": "frame",
-          "s": "take"
-        },
-        {
-          "t": "slot",
-          "s": "further"
-        },
-        {
-          "t": "frame",
-          "s": "action"
-        }
-      ],
-      "apply": [
-        {
-          "en": "We have to take action.",
-          "kr": "조치를 취해야 해.",
-          "segs": [
-            {
-              "t": "slot",
-              "s": "We have to"
-            },
-            {
-              "t": "frame",
-              "s": "take"
-            },
-            {
-              "t": "frame",
-              "s": "action"
-            }
-          ],
-          "punct": "."
-        },
-        {
-          "en": "It's only ten dollars, let's not take action.",
-          "kr": "겨우 10달러야, 조치는 취하지 말자.",
-          "segs": [
-            {
-              "t": "slot",
-              "s": "It's only ten dollars, let's not"
-            },
-            {
-              "t": "frame",
-              "s": "take"
-            },
-            {
-              "t": "frame",
-              "s": "action"
-            }
-          ],
-          "punct": "."
-        }
-      ],
-      "siblings": [
-        {
-          "en": "We have to take action.",
-          "kr": "조치를 취해야 해."
-        },
-        {
-          "en": "It's only ten dollars, let's not take action.",
-          "kr": "겨우 10달러야, 조치는 취하지 말자."
         }
       ]
     },
@@ -11728,7 +11180,7 @@
         "than"
       ],
       "traps": [
-        "having"
+        "back"
       ],
       "baseSegs": [
         {
@@ -12010,7 +11462,7 @@
         "the most"
       ],
       "traps": [
-        "wrap"
+        "much"
       ],
       "baseSegs": [
         {
@@ -12349,7 +11801,7 @@
         "take a walk"
       ],
       "traps": [
-        "front"
+        "single"
       ],
       "baseSegs": [
         {
@@ -12454,7 +11906,7 @@
         "alone"
       ],
       "traps": [
-        "bit"
+        "plenty"
       ],
       "baseSegs": [
         {
@@ -12679,7 +12131,7 @@
         "get started"
       ],
       "traps": [
-        "soon"
+        "bring"
       ],
       "baseSegs": [
         {
@@ -13382,7 +12834,7 @@
         "every single"
       ],
       "traps": [
-        "belong"
+        "like"
       ],
       "baseSegs": [
         {
@@ -13486,7 +12938,7 @@
         "I'd say"
       ],
       "traps": [
-        "ever"
+        "soon"
       ],
       "baseSegs": [
         {
@@ -13775,7 +13227,7 @@
         "get home"
       ],
       "traps": [
-        "away"
+        "move"
       ],
       "baseSegs": [
         {
@@ -13861,7 +13313,7 @@
         "look around"
       ],
       "traps": [
-        "since"
+        "matter"
       ],
       "baseSegs": [
         {
@@ -13946,7 +13398,7 @@
         "some more"
       ],
       "traps": [
-        "case"
+        "same"
       ],
       "baseSegs": [
         {
@@ -14689,7 +14141,7 @@
         "say no"
       ],
       "traps": [
-        "both"
+        "heard"
       ],
       "baseSegs": [
         {
@@ -14883,7 +14335,7 @@
         "No more"
       ],
       "traps": [
-        "done"
+        "know"
       ],
       "baseSegs": [
         {
@@ -15072,7 +14524,7 @@
         "pay attention"
       ],
       "traps": [
-        "all"
+        "leave"
       ],
       "baseSegs": [
         {
@@ -15173,7 +14625,7 @@
         "done"
       ],
       "traps": [
-        "late"
+        "time"
       ],
       "baseSegs": [
         {
@@ -15293,7 +14745,7 @@
         "How come"
       ],
       "traps": [
-        "stay"
+        "every"
       ],
       "baseSegs": [
         {
@@ -15801,7 +15253,7 @@
         "more like"
       ],
       "traps": [
-        "into"
+        "turned"
       ],
       "baseSegs": [
         {
@@ -16124,7 +15576,7 @@
         "seriously"
       ],
       "traps": [
-        "well"
+        "nor"
       ],
       "baseSegs": [
         {
@@ -16221,7 +15673,7 @@
         "looking after"
       ],
       "traps": [
-        "alone"
+        "break"
       ],
       "baseSegs": [
         {
@@ -16310,7 +15762,7 @@
         "What if"
       ],
       "traps": [
-        "rely"
+        "figure"
       ],
       "baseSegs": [
         {
@@ -16407,7 +15859,7 @@
         "than"
       ],
       "traps": [
-        "number"
+        "fun"
       ],
       "baseSegs": [
         {
@@ -16747,7 +16199,7 @@
         "What makes"
       ],
       "traps": [
-        "messed"
+        "brings"
       ],
       "baseSegs": [
         {
@@ -17166,123 +16618,6 @@
         {
           "en": "Just because you can doesn't mean you should.",
           "kr": "할 수 있다고 해서 해야 하는 건 아니야."
-        }
-      ]
-    },
-    {
-      "trigger": "specialist",
-      "word": "specialist",
-      "meaning": "전문가, 전공자",
-      "pos": "noun",
-      "cefr": "B1",
-      "level": 15,
-      "rank": 7257,
-      "vocabA": {
-        "answer": "specialist",
-        "enLines": [
-          "You'll need to hire a [specialist] to fix your heating system."
-        ],
-        "koLines": [
-          "난방 장치를 고치려면 [전문가]를 불러야 할 거야."
-        ]
-      },
-      "vocabB": {
-        "answer": "specialist",
-        "enLines": [
-          "He's making progress with the [specialist]."
-        ],
-        "koLines": [
-          "전문의한테 다니면서 좋아지고 있어."
-        ],
-        "hint": "전문가, 전공자"
-      },
-      "sentence": {
-        "en": "He's making progress with the specialist.",
-        "kr": "전문의한테 다니면서 좋아지고 있어.",
-        "trigger": "specialist"
-      },
-      "pattern": {
-        "form": "make progress",
-        "meaning": "나아지다 / 진전이 있다",
-        "desc": ""
-      },
-      "frame": [
-        "making",
-        "progress"
-      ],
-      "traps": [
-        "couple"
-      ],
-      "baseSegs": [
-        {
-          "t": "slot",
-          "s": "He's"
-        },
-        {
-          "t": "frame",
-          "s": "making"
-        },
-        {
-          "t": "frame",
-          "s": "progress"
-        },
-        {
-          "t": "slot",
-          "s": "with the specialist"
-        }
-      ],
-      "apply": [
-        {
-          "en": "We're making progress.",
-          "kr": "진전이 있어.",
-          "segs": [
-            {
-              "t": "slot",
-              "s": "We're"
-            },
-            {
-              "t": "frame",
-              "s": "making"
-            },
-            {
-              "t": "frame",
-              "s": "progress"
-            }
-          ],
-          "punct": "."
-        },
-        {
-          "en": "I'm making slow progress.",
-          "kr": "조금씩 늘고 있어.",
-          "segs": [
-            {
-              "t": "slot",
-              "s": "I'm"
-            },
-            {
-              "t": "frame",
-              "s": "making"
-            },
-            {
-              "t": "slot",
-              "s": "slow"
-            },
-            {
-              "t": "frame",
-              "s": "progress"
-            }
-          ],
-          "punct": "."
-        }
-      ],
-      "siblings": [
-        {
-          "en": "We're making progress.",
-          "kr": "진전이 있어."
-        },
-        {
-          "en": "I'm making slow progress.",
-          "kr": "조금씩 늘고 있어."
         }
       ]
     },
@@ -17709,7 +17044,7 @@
         "Why not"
       ],
       "traps": [
-        "heard"
+        "stick"
       ],
       "baseSegs": [
         {
@@ -17807,7 +17142,7 @@
         "as soon as"
       ],
       "traps": [
-        "hang"
+        "pay"
       ],
       "baseSegs": [
         {
@@ -18337,104 +17672,6 @@
       ]
     },
     {
-      "trigger": "greenhouse gas",
-      "word": "greenhouse gas",
-      "meaning": "온실가스",
-      "pos": "noun",
-      "cefr": "B1",
-      "level": 15,
-      "rank": 7930,
-      "vocabA": {
-        "answer": "greenhouse gas",
-        "enLines": [
-          "Carbon dioxide is the most common [greenhouse gas] on Earth."
-        ],
-        "koLines": [
-          "이산화탄소는 지구 상에서 가장 흔한 [온실가스]예요."
-        ]
-      },
-      "vocabB": {
-        "answer": "greenhouse gas",
-        "enLines": [
-          "Who can give an example of a [greenhouse gas]?"
-        ],
-        "koLines": [
-          "[온실가스]의 예를 들 수 있는 사람?"
-        ],
-        "hint": ""
-      },
-      "sentence": {
-        "en": "Who can give an example of a greenhouse gas?",
-        "kr": "온실가스의 예를 들 수 있는 사람?",
-        "trigger": "greenhouse gas"
-      },
-      "pattern": {
-        "form": "give an example (of ______)",
-        "meaning": "예를 들다",
-        "desc": ""
-      },
-      "frame": [
-        "give",
-        "an example"
-      ],
-      "traps": [
-        "help"
-      ],
-      "baseSegs": [
-        {
-          "t": "slot",
-          "s": "Who can"
-        },
-        {
-          "t": "frame",
-          "s": "give"
-        },
-        {
-          "t": "frame",
-          "s": "an example"
-        },
-        {
-          "t": "slot",
-          "s": "of a greenhouse gas"
-        }
-      ],
-      "apply": [
-        {
-          "en": "I'll give you an example.",
-          "kr": "예를 하나 들어 줄게.",
-          "segs": [
-            {
-              "t": "slot",
-              "s": "I'll"
-            },
-            {
-              "t": "frame",
-              "s": "give"
-            },
-            {
-              "t": "slot",
-              "s": "you"
-            },
-            {
-              "t": "frame",
-              "s": "an example"
-            }
-          ],
-          "punct": "."
-        }
-      ],
-      "siblings": [
-        {
-          "en": "I'll give you an example.",
-          "kr": "예를 하나 들어 줄게."
-        },
-        {
-          "en": "Could you give a few examples?",
-          "kr": "몇 가지 예를 들어 주시겠어요?"
-        }
-      ]
-    },
-    {
       "trigger": "accommodation",
       "word": "accommodation",
       "meaning": "숙박, 숙박 시설",
@@ -18818,87 +18055,6 @@
         {
           "en": "He'll get over it.",
           "kr": "곧 괜찮아질 거야."
-        }
-      ]
-    },
-    {
-      "trigger": "sunrise",
-      "word": "sunrise",
-      "meaning": "동틀녘, 일출, 해돋이",
-      "pos": "noun",
-      "cefr": "B1",
-      "level": 16,
-      "rank": 8209,
-      "vocabA": {
-        "answer": "sunrise",
-        "enLines": [
-          "We got up early to watch the [sunrise]."
-        ],
-        "koLines": [
-          "우리는 [일출]을 보기 위해 일찍 일어났어."
-        ]
-      },
-      "vocabB": {
-        "answer": "sunrise",
-        "enLines": [
-          "Cheer up and look at the [sunrise]."
-        ],
-        "koLines": [
-          "기운 내고 [해돋이] 좀 봐."
-        ],
-        "hint": ""
-      },
-      "sentence": {
-        "en": "Cheer up and look at the sunrise.",
-        "kr": "기운 내고 해돋이 좀 봐.",
-        "trigger": "sunrise"
-      },
-      "pattern": {
-        "form": "cheer ______ up",
-        "meaning": "~을 기운 나게 하다",
-        "desc": ""
-      },
-      "frame": [
-        "Cheer up"
-      ],
-      "traps": [
-        "over"
-      ],
-      "baseSegs": [
-        {
-          "t": "frame",
-          "s": "Cheer up"
-        },
-        {
-          "t": "slot",
-          "s": "and look at the sunrise"
-        }
-      ],
-      "apply": [
-        {
-          "en": "Cheer up, you'll get another chance.",
-          "kr": "기운 내, 또 기회가 있을 거야.",
-          "segs": [
-            {
-              "t": "frame",
-              "s": "Cheer up"
-            },
-            {
-              "t": "slot",
-              "s": ", you'll get another chance"
-            }
-          ],
-          "punct": "."
-        }
-      ],
-      "siblings": [
-        {
-          "en": "Cheer up, you'll get another chance.",
-          "kr": "기운 내, 또 기회가 있을 거야."
-        },
-        {
-          "en": "Ice cream always cheers him up.",
-          "kr": "아이스크림은 항상 그를 기운나게 해."
         }
       ]
     },
@@ -19368,7 +18524,7 @@
         "take responsibility"
       ],
       "traps": [
-        "break"
+        "wrong"
       ],
       "baseSegs": [
         {
@@ -19450,7 +18606,7 @@
         "go"
       ],
       "traps": [
-        "each"
+        "mean"
       ],
       "baseSegs": [
         {
@@ -19571,7 +18727,7 @@
         "and"
       ],
       "traps": [
-        "take"
+        "messed"
       ],
       "baseSegs": [
         {
@@ -20047,7 +19203,7 @@
         "or"
       ],
       "traps": [
-        "passed"
+        "stick"
       ],
       "baseSegs": [
         {
@@ -20457,7 +19613,7 @@
         "feel bad"
       ],
       "traps": [
-        "leave"
+        "fill"
       ],
       "baseSegs": [
         {
@@ -20777,7 +19933,7 @@
         "Say hi"
       ],
       "traps": [
-        "alone"
+        "know"
       ],
       "baseSegs": [
         {
@@ -21255,7 +20411,7 @@
         "as well as"
       ],
       "traps": [
-        "cut"
+        "much"
       ],
       "baseSegs": [
         {
@@ -21420,7 +20576,7 @@
         "get paid"
       ],
       "traps": [
-        "give"
+        "sign"
       ],
       "baseSegs": [
         {
@@ -21634,7 +20790,7 @@
         "a secret"
       ],
       "traps": [
-        "well"
+        "number"
       ],
       "baseSegs": [
         {
@@ -21852,7 +21008,7 @@
         "so that"
       ],
       "traps": [
-        "just"
+        "some"
       ],
       "baseSegs": [
         {
@@ -22018,7 +21174,7 @@
         "a call"
       ],
       "traps": [
-        "soon"
+        "just"
       ],
       "baseSegs": [
         {
@@ -22252,7 +21408,7 @@
         "nor"
       ],
       "traps": [
-        "since"
+        "turned"
       ],
       "baseSegs": [
         {
@@ -22413,127 +21569,6 @@
         {
           "en": "It's neither funny nor clever.",
           "kr": "웃기지도 않고 재치 있지도 않아."
-        }
-      ]
-    },
-    {
-      "trigger": "dull",
-      "word": "dull",
-      "meaning": "따분한, 재미없는",
-      "pos": "adjective",
-      "cefr": "B1",
-      "level": 17,
-      "rank": 9954,
-      "vocabA": {
-        "answer": "dull",
-        "enLines": [
-          "That class is so [dull]. It's no surprise everyone falls asleep."
-        ],
-        "koLines": [
-          "그 수업은 너무 [따분]해. 다들 잠들어 버린 것도 놀랄 일은 아니야."
-        ]
-      },
-      "vocabB": {
-        "answer": "dull",
-        "enLines": [
-          "I wish he'd wrap up this [dull] meeting."
-        ],
-        "koLines": [
-          "이 [재미없는] 회의 좀 마무리해 주면 좋겠네."
-        ],
-        "hint": ""
-      },
-      "sentence": {
-        "en": "I wish he'd wrap up this dull meeting.",
-        "kr": "이 재미없는 회의 좀 마무리해 주면 좋겠네.",
-        "trigger": "dull"
-      },
-      "pattern": {
-        "form": "wrap up ______",
-        "meaning": "~을 마무리하다",
-        "desc": "'포장하다'가 아니라 일을 끝맺는다는 뜻이에요"
-      },
-      "frame": [
-        "wrap",
-        "up"
-      ],
-      "traps": [
-        "back"
-      ],
-      "baseSegs": [
-        {
-          "t": "slot",
-          "s": "I wish he'd"
-        },
-        {
-          "t": "frame",
-          "s": "wrap"
-        },
-        {
-          "t": "frame",
-          "s": "up"
-        },
-        {
-          "t": "slot",
-          "s": "this dull meeting"
-        }
-      ],
-      "apply": [
-        {
-          "en": "Let's wrap it up.",
-          "kr": "이만 마무리하죠.",
-          "segs": [
-            {
-              "t": "slot",
-              "s": "Let's"
-            },
-            {
-              "t": "frame",
-              "s": "wrap"
-            },
-            {
-              "t": "slot",
-              "s": "it"
-            },
-            {
-              "t": "frame",
-              "s": "up"
-            }
-          ],
-          "punct": "."
-        },
-        {
-          "en": "Let's wrap this up.",
-          "kr": "이건 이만 마무리하죠.",
-          "segs": [
-            {
-              "t": "slot",
-              "s": "Let's"
-            },
-            {
-              "t": "frame",
-              "s": "wrap"
-            },
-            {
-              "t": "slot",
-              "s": "this"
-            },
-            {
-              "t": "frame",
-              "s": "up"
-            }
-          ],
-          "punct": "."
-        }
-      ],
-      "siblings": [
-        {
-          "en": "Let's wrap it up.",
-          "kr": "이만 마무리하죠."
-        },
-        {
-          "en": "Let's wrap this up.",
-          "kr": "이건 이만 마무리하죠."
         }
       ]
     },
@@ -22795,7 +21830,7 @@
         "get around"
       ],
       "traps": [
-        "away"
+        "makes"
       ],
       "baseSegs": [
         {
@@ -23104,7 +22139,7 @@
         "more than"
       ],
       "traps": [
-        "passed"
+        "front"
       ],
       "baseSegs": [
         {
@@ -23213,7 +22248,7 @@
         "around"
       ],
       "traps": [
-        "think"
+        "after"
       ],
       "baseSegs": [
         {
@@ -23274,102 +22309,6 @@
         {
           "en": "I showed her around the office.",
           "kr": "사무실을 구경시켜 줬어."
-        }
-      ]
-    },
-    {
-      "trigger": "groom",
-      "word": "groom",
-      "meaning": "신랑",
-      "pos": "noun",
-      "cefr": "B1",
-      "level": 19,
-      "rank": 11065,
-      "vocabA": {
-        "answer": "groom",
-        "enLines": [
-          "Both the bride and [groom] looked absolutely amazing."
-        ],
-        "koLines": [
-          "[신랑]과 신부 둘 다 정말 너무 멋져 보였어."
-        ]
-      },
-      "vocabB": {
-        "answer": "groom",
-        "enLines": [
-          "What does the [groom] do?"
-        ],
-        "koLines": [
-          "[신랑]은 무슨 일을 해?"
-        ],
-        "hint": ""
-      },
-      "sentence": {
-        "en": "What does the groom do?",
-        "kr": "신랑은 무슨 일을 해?",
-        "trigger": "groom"
-      },
-      "pattern": {
-        "form": "What does ______ do ?",
-        "meaning": "~는 무슨 일 해?",
-        "desc": "직업을 묻는 굳어진 표현이에요"
-      },
-      "frame": [
-        "What does"
-      ],
-      "traps": [
-        "will"
-      ],
-      "baseSegs": [
-        {
-          "t": "frame",
-          "s": "What does"
-        },
-        {
-          "t": "slot",
-          "s": "the groom do"
-        }
-      ],
-      "apply": [
-        {
-          "en": "What does he do?",
-          "kr": "무슨 일 하시는데?",
-          "segs": [
-            {
-              "t": "frame",
-              "s": "What does"
-            },
-            {
-              "t": "slot",
-              "s": "he do"
-            }
-          ],
-          "punct": "?"
-        },
-        {
-          "en": "What does she do?",
-          "kr": "그 사람은 무슨 일 해?",
-          "segs": [
-            {
-              "t": "frame",
-              "s": "What does"
-            },
-            {
-              "t": "slot",
-              "s": "she do"
-            }
-          ],
-          "punct": "?"
-        }
-      ],
-      "siblings": [
-        {
-          "en": "What does he do?",
-          "kr": "무슨 일 하시는데?"
-        },
-        {
-          "en": "What does she do?",
-          "kr": "그 사람은 무슨 일 해?"
         }
       ]
     },
@@ -23758,7 +22697,7 @@
         "What if"
       ],
       "traps": [
-        "time"
+        "home"
       ],
       "baseSegs": [
         {
@@ -24495,7 +23434,7 @@
         "take a while"
       ],
       "traps": [
-        "making"
+        "call"
       ],
       "baseSegs": [
         {
@@ -24787,7 +23726,7 @@
         "tell the difference"
       ],
       "traps": [
-        "done"
+        "such"
       ],
       "baseSegs": [
         {
@@ -24989,7 +23928,7 @@
         "make time"
       ],
       "traps": [
-        "heard"
+        "secret"
       ],
       "baseSegs": [
         {
