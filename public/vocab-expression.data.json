@@ -33,9 +33,9 @@
           "You [should] get up."
         ],
         "koLines": [
-          "일어나야 해."
+          "일어나[야 해]."
         ],
-        "hint": "해야 한다"
+        "hint": ""
       },
       "sentence": {
         "en": "You should get up.",
@@ -120,7 +120,7 @@
           "I'll talk to my [parents]."
         ],
         "koLines": [
-          "[부모]님께 말씀드려 볼게."
+          "[부모님]께 말씀드려 볼게."
         ],
         "hint": ""
       },
@@ -3626,9 +3626,9 @@
           "Can you [follow] me?"
         ],
         "koLines": [
-          "따라와 줄래?"
+          "[따라와] 줄래?"
         ],
-        "hint": "따라가다, 따라오다"
+        "hint": ""
       },
       "sentence": {
         "en": "Can you follow me?",
@@ -3982,7 +3982,7 @@
           "Can I [explain]?"
         ],
         "koLines": [
-          "내가 [설명]해도 될까?"
+          "내가 [설명해]도 될까?"
         ],
         "hint": ""
       },
@@ -10182,9 +10182,9 @@
           "You must really like [candy]."
         ],
         "koLines": [
-          "너 사탕 진짜 좋아하나 보다."
+          "너 [사탕] 진짜 좋아하나 보다."
         ],
-        "hint": "사탕과 초콜릿 류, 캔디"
+        "hint": ""
       },
       "sentence": {
         "en": "You must really like candy.",
@@ -10944,9 +10944,9 @@
           "You can take a break [every] thirty minutes."
         ],
         "koLines": [
-          "30분마다 쉬어도 돼요."
+          "30분[마다] 쉬어도 돼요."
         ],
-        "hint": "매 ~ 마다"
+        "hint": ""
       },
       "sentence": {
         "en": "You can take a break every thirty minutes.",
@@ -18557,7 +18557,7 @@
           "There was no one other than the [clients]."
         ],
         "koLines": [
-          "[고객]들 말고는 아무도 없었어."
+          "[고객들] 말고는 아무도 없었어."
         ],
         "hint": ""
       },
@@ -18865,9 +18865,9 @@
           "[Hurry], I'm late for work."
         ],
         "koLines": [
-          "서둘러, 나 회사에 늦었어."
+          "[서둘러], 나 회사에 늦었어."
         ],
-        "hint": "서두르다, 급히 하다"
+        "hint": ""
       },
       "sentence": {
         "en": "Hurry, I'm late for work.",
@@ -20828,9 +20828,9 @@
           "You should take [further] action."
         ],
         "koLines": [
-          "추가 조치를 취해야 해."
+          "[추가] 조치를 취해야 해."
         ],
-        "hint": "추가의, 더 이상의"
+        "hint": ""
       },
       "sentence": {
         "en": "You should take further action.",
@@ -23537,9 +23537,9 @@
           "I fell in love with [Greek] culture."
         ],
         "koLines": [
-          "그리스 문화에 반해버렸어."
+          "[그리스] 문화에 반해버렸어."
         ],
-        "hint": "그리스의, 그리스인의"
+        "hint": ""
       },
       "sentence": {
         "en": "I fell in love with Greek culture.",
@@ -31453,9 +31453,9 @@
           "What [neighbourhood] do you have in mind?"
         ],
         "koLines": [
-          "어느 동네를 생각하고 있어?"
+          "어느 [동네]를 생각하고 있어?"
         ],
-        "hint": "지역, 구역"
+        "hint": ""
       },
       "sentence": {
         "en": "What neighbourhood do you have in mind?",
@@ -39087,9 +39087,9 @@
           "We're looking into cheaper [accommodations]."
         ],
         "koLines": [
-          "더 싼 숙소를 알아보고 있어."
+          "더 싼 [숙소]를 알아보고 있어."
         ],
-        "hint": "숙박, 숙박 시설"
+        "hint": ""
       },
       "sentence": {
         "en": "We're looking into cheaper accommodations.",
@@ -39834,9 +39834,9 @@
           "There's nothing I hate more than [horror] movies."
         ],
         "koLines": [
-          "공포 영화보다 싫은 건 없어."
+          "[공포] 영화보다 싫은 건 없어."
         ],
-        "hint": "공포물"
+        "hint": ""
       },
       "sentence": {
         "en": "There's nothing I hate more than horror movies.",
@@ -41547,9 +41547,9 @@
           "Our process is twice as [costly] as theirs."
         ],
         "koLines": [
-          "우리 공정은 그들보다 비용이 두 배 들어."
+          "우리 공정은 그들보다 [비용이] 두 배 들어."
         ],
-        "hint": "많은 비용이 드는"
+        "hint": ""
       },
       "sentence": {
         "en": "Our process is twice as costly as theirs.",
@@ -44968,7 +44968,7 @@
           "Would you mind [sorting] these?"
         ],
         "koLines": [
-          "이것들 좀 [분류]해 주시겠어요?"
+          "이것들 좀 [분류해] 주시겠어요?"
         ],
         "hint": ""
       },
@@ -49081,7 +49081,7 @@
           "I already gave you a [sip]."
         ],
         "koLines": [
-          "아까 [한 모금] 줬잖아."
+          "아까 한 [모금] 줬잖아."
         ],
         "hint": ""
       },
@@ -49871,9 +49871,9 @@
           "If I were you, I would do the [laundry]."
         ],
         "koLines": [
-          "나라면 빨래를 하겠어."
+          "나라면 [빨래]를 하겠어."
         ],
-        "hint": "세탁, 세탁일"
+        "hint": ""
       },
       "sentence": {
         "en": "If I were you, I would do the laundry.",
@@ -54781,9 +54781,9 @@
           "He's [picky], don't you think?"
         ],
         "koLines": [
-          "까다롭네, 안 그래?"
+          "[까다롭]네, 안 그래?"
         ],
-        "hint": "까다로운, 별스러운"
+        "hint": ""
       },
       "sentence": {
         "en": "He's picky, don't you think?",
@@ -55616,7 +55616,7 @@
           "This [lunch box] brings back memories."
         ],
         "koLines": [
-          "이 [도시락통]을 보면 추억이 떠올라."
+          "이 [도시락]통을 보면 추억이 떠올라."
         ],
         "hint": ""
       },

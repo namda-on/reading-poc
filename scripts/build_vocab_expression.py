@@ -104,14 +104,21 @@ def kr_meaning_spans(meaning):
     return sorted({x for x in out if x}, key=len, reverse=True)
 
 
-def mark_meaning_kr(kr, meaning):
+def mark_meaning_kr(kr, meaning, authored=""):
     """한국어 문장에서 어휘 뜻에 해당하는 구간을 [..]로 감싼다. 못 찾으면 None.
 
     앱의 어휘 학습은 번역문에서 정답 어휘의 뜻만 초록으로 보여준다. 표현 문장에는
-    그 마크업이 없으므로 뜻 조각(어간 포함)을 문장에서 직접 찾는다. 못 찾는 경우가
-    남으므로(용언이 문맥에 맞게 다른 낱말로 번역된 경우) 그때는 별도 힌트 줄로 대체한다.
+    그 마크업이 없으므로 뜻 조각(어간 포함)을 문장에서 직접 찾는다.
+
+    `authored`는 어휘 CSV 예문 번역에 **저작된** `[뜻]`이다. 사전 뜻보다 문맥에 맞는
+    구어체라 먼저 시도한다(`should`의 사전 뜻 `해야 한다`는 `일어나야 해.`에 없지만
+    저작된 `야 해`는 있다). 그래도 못 찾는 경우가 남으므로 그때는 별도 힌트 줄로 대체한다.
     """
-    for cand in kr_meaning_spans(meaning):
+    cands = []
+    for a in sorted(re.findall(r"\[([^\]]+)\]", authored or ""), key=len, reverse=True):
+        cands += kr_meaning_spans(a)
+    cands += kr_meaning_spans(meaning)
+    for cand in cands:
         if len(cand) >= 2:
             i = kr.find(cand)
             if i >= 0:
@@ -459,7 +466,7 @@ def main():
             skipped["버전B불가"] += 1
             continue
         b_en, b_ans = blanked
-        b_kr = mark_meaning_kr(s1["kr"], v["meaning"])
+        b_kr = mark_meaning_kr(s1["kr"], v["meaning"], v["lsm"])
 
         meta = gse.get(seq, {})
         items.append({
