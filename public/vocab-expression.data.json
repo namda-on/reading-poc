@@ -51,6 +51,10 @@
         "You",
         "get up"
       ],
+      "traps": [
+        "they",
+        "down"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -136,6 +140,9 @@
       },
       "frame": [
         "talk to"
+      ],
+      "traps": [
+        "of"
       ],
       "baseSegs": [
         {
@@ -244,6 +251,9 @@
         "Put",
         "on"
       ],
+      "traps": [
+        "up"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -349,6 +359,10 @@
       "frame": [
         "I didn't"
       ],
+      "traps": [
+        "she",
+        "aren't"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -441,6 +455,10 @@
       },
       "frame": [
         "Was it"
+      ],
+      "traps": [
+        "does",
+        "us"
       ],
       "baseSegs": [
         {
@@ -535,6 +553,10 @@
       "frame": [
         "Is it"
       ],
+      "traps": [
+        "had",
+        "they"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -628,6 +650,10 @@
       "frame": [
         "Do you"
       ],
+      "traps": [
+        "had",
+        "us"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -720,6 +746,9 @@
       },
       "frame": [
         "Don't be"
+      ],
+      "traps": [
+        "shouldn't"
       ],
       "baseSegs": [
         {
@@ -861,6 +890,10 @@
       "frame": [
         "Did you"
       ],
+      "traps": [
+        "could",
+        "it"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -955,6 +988,10 @@
         "Don't",
         "you"
       ],
+      "traps": [
+        "weren't",
+        "she"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -1041,6 +1078,10 @@
       },
       "frame": [
         "did you"
+      ],
+      "traps": [
+        "is",
+        "him"
       ],
       "baseSegs": [
         {
@@ -1148,6 +1189,10 @@
         "What",
         "do you like"
       ],
+      "traps": [
+        "will",
+        "her"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -1254,6 +1299,9 @@
       },
       "frame": [
         "Let me"
+      ],
+      "traps": [
+        "he"
       ],
       "baseSegs": [
         {
@@ -1393,6 +1441,9 @@
       "frame": [
         "It's a"
       ],
+      "traps": [
+        "fell"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -1486,6 +1537,9 @@
       "frame": [
         "to the"
       ],
+      "traps": [
+        "at"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -1572,6 +1626,10 @@
       "frame": [
         "What",
         "you think of"
+      ],
+      "traps": [
+        "we",
+        "from"
       ],
       "baseSegs": [
         {
@@ -1690,6 +1748,10 @@
       "frame": [
         "Why don't you"
       ],
+      "traps": [
+        "wasn't",
+        "we"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -1783,6 +1845,9 @@
       },
       "frame": [
         "All of"
+      ],
+      "traps": [
+        "about"
       ],
       "baseSegs": [
         {
@@ -1902,6 +1967,9 @@
       "frame": [
         "of the"
       ],
+      "traps": [
+        "with"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -2008,6 +2076,9 @@
         "It",
         "like"
       ],
+      "traps": [
+        "she"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -2102,6 +2173,10 @@
       "frame": [
         "It comes from"
       ],
+      "traps": [
+        "you",
+        "at"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -2179,6 +2254,9 @@
       },
       "frame": [
         "Come over"
+      ],
+      "traps": [
+        "back"
       ],
       "baseSegs": [
         {
@@ -2272,6 +2350,9 @@
       },
       "frame": [
         "go back"
+      ],
+      "traps": [
+        "down"
       ],
       "baseSegs": [
         {
@@ -2378,6 +2459,9 @@
       "frame": [
         "turn",
         "off"
+      ],
+      "traps": [
+        "through"
       ],
       "baseSegs": [
         {
@@ -2497,6 +2581,10 @@
       "frame": [
         "I can"
       ],
+      "traps": [
+        "them",
+        "was"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -2575,6 +2663,9 @@
       "frame": [
         "What's",
         "like"
+      ],
+      "traps": [
+        "clue"
       ],
       "baseSegs": [
         {
@@ -2682,6 +2773,9 @@
         "I",
         "once a month"
       ],
+      "traps": [
+        "me"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -2768,6 +2862,9 @@
       "frame": [
         "at",
         "o'clock"
+      ],
+      "traps": [
+        "by"
       ],
       "baseSegs": [
         {
@@ -2955,6 +3052,9 @@
       "frame": [
         "feels like"
       ],
+      "traps": [
+        "late"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -3043,6 +3143,9 @@
         "It's",
         "today"
       ],
+      "traps": [
+        "free"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -3129,6 +3232,10 @@
       "frame": [
         "you",
         "on Thursday"
+      ],
+      "traps": [
+        "him",
+        "along"
       ],
       "baseSegs": [
         {
@@ -3225,6 +3332,9 @@
         "at",
         "fifteen"
       ],
+      "traps": [
+        "for"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -3318,6 +3428,9 @@
       },
       "frame": [
         "Take off"
+      ],
+      "traps": [
+        "up"
       ],
       "baseSegs": [
         {
@@ -3420,6 +3533,9 @@
       "frame": [
         "at",
         "after"
+      ],
+      "traps": [
+        "with"
       ],
       "baseSegs": [
         {
@@ -3550,6 +3666,9 @@
       "frame": [
         "How about"
       ],
+      "traps": [
+        "with"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -3642,6 +3761,10 @@
       },
       "frame": [
         "Can you"
+      ],
+      "traps": [
+        "are",
+        "me"
       ],
       "baseSegs": [
         {
@@ -3736,6 +3859,10 @@
       "frame": [
         "Let me look at"
       ],
+      "traps": [
+        "us",
+        "for"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -3814,6 +3941,9 @@
       },
       "frame": [
         "too much"
+      ],
+      "traps": [
+        "more"
       ],
       "baseSegs": [
         {
@@ -3909,6 +4039,10 @@
         "He",
         "up"
       ],
+      "traps": [
+        "me",
+        "off"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -3998,6 +4132,10 @@
       },
       "frame": [
         "Can I"
+      ],
+      "traps": [
+        "would",
+        "we"
       ],
       "baseSegs": [
         {
@@ -4092,6 +4230,9 @@
       "frame": [
         "I'll come back"
       ],
+      "traps": [
+        "over"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -4169,6 +4310,9 @@
       },
       "frame": [
         "Be sure to"
+      ],
+      "traps": [
+        "of"
       ],
       "baseSegs": [
         {
@@ -4263,6 +4407,10 @@
       "frame": [
         "I can't"
       ],
+      "traps": [
+        "me",
+        "aren't"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -4341,6 +4489,10 @@
       },
       "frame": [
         "about to"
+      ],
+      "traps": [
+        "in",
+        "into"
       ],
       "baseSegs": [
         {
@@ -4448,6 +4600,9 @@
       "frame": [
         "most of"
       ],
+      "traps": [
+        "into"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -4553,6 +4708,10 @@
       "frame": [
         "Can you"
       ],
+      "traps": [
+        "does",
+        "she"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -4630,6 +4789,9 @@
       },
       "frame": [
         "Which one"
+      ],
+      "traps": [
+        "wish"
       ],
       "baseSegs": [
         {
@@ -4709,6 +4871,9 @@
       },
       "frame": [
         "could be"
+      ],
+      "traps": [
+        "do"
       ],
       "baseSegs": [
         {
@@ -4816,6 +4981,9 @@
         "of",
         "juice"
       ],
+      "traps": [
+        "with"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -4913,6 +5081,10 @@
       "frame": [
         "can I"
       ],
+      "traps": [
+        "are",
+        "they"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -4998,6 +5170,10 @@
       },
       "frame": [
         "Would you"
+      ],
+      "traps": [
+        "did",
+        "us"
       ],
       "baseSegs": [
         {
@@ -5091,6 +5267,9 @@
       },
       "frame": [
         "What kind of"
+      ],
+      "traps": [
+        "to"
       ],
       "baseSegs": [
         {
@@ -5232,6 +5411,9 @@
       "frame": [
         "have some"
       ],
+      "traps": [
+        "will"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -5318,6 +5500,9 @@
       "frame": [
         "me a"
       ],
+      "traps": [
+        "she"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -5403,6 +5588,9 @@
       },
       "frame": [
         "give up"
+      ],
+      "traps": [
+        "on"
       ],
       "baseSegs": [
         {
@@ -5510,6 +5698,9 @@
       "frame": [
         "move on"
       ],
+      "traps": [
+        "down"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -5606,6 +5797,9 @@
       },
       "frame": [
         "start with"
+      ],
+      "traps": [
+        "at"
       ],
       "baseSegs": [
         {
@@ -5712,6 +5906,9 @@
       "frame": [
         "There isn't"
       ],
+      "traps": [
+        "aren't"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -5793,6 +5990,9 @@
       },
       "frame": [
         "Welcome to"
+      ],
+      "traps": [
+        "into"
       ],
       "baseSegs": [
         {
@@ -5890,6 +6090,9 @@
       },
       "frame": [
         "It's time for"
+      ],
+      "traps": [
+        "from"
       ],
       "baseSegs": [
         {
@@ -5991,6 +6194,9 @@
       "frame": [
         "Isn't there"
       ],
+      "traps": [
+        "hasn't"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -6068,6 +6274,9 @@
       },
       "frame": [
         "there a"
+      ],
+      "traps": [
+        "school"
       ],
       "baseSegs": [
         {
@@ -6174,6 +6383,9 @@
       "frame": [
         "How many"
       ],
+      "traps": [
+        "tired"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -6267,6 +6479,9 @@
       },
       "frame": [
         "a lot of"
+      ],
+      "traps": [
+        "by"
       ],
       "baseSegs": [
         {
@@ -6407,6 +6622,9 @@
       "frame": [
         "care of"
       ],
+      "traps": [
+        "at"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -6512,6 +6730,10 @@
       "frame": [
         "it down"
       ],
+      "traps": [
+        "them",
+        "back"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -6596,6 +6818,10 @@
       },
       "frame": [
         "have lots of"
+      ],
+      "traps": [
+        "has",
+        "at"
       ],
       "baseSegs": [
         {
@@ -6702,6 +6928,9 @@
       "frame": [
         "What happened to"
       ],
+      "traps": [
+        "into"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -6794,6 +7023,9 @@
       },
       "frame": [
         "Go to bed"
+      ],
+      "traps": [
+        "from"
       ],
       "baseSegs": [
         {
@@ -6888,6 +7120,9 @@
       "frame": [
         "Have fun"
       ],
+      "traps": [
+        "was"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -6966,6 +7201,9 @@
       },
       "frame": [
         "Hundreds of"
+      ],
+      "traps": [
+        "by"
       ],
       "baseSegs": [
         {
@@ -7063,6 +7301,9 @@
       },
       "frame": [
         "thanks to"
+      ],
+      "traps": [
+        "of"
       ],
       "baseSegs": [
         {
@@ -7170,6 +7411,10 @@
       "frame": [
         "pick you up"
       ],
+      "traps": [
+        "they",
+        "through"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -7270,6 +7515,9 @@
       },
       "frame": [
         "Each of"
+      ],
+      "traps": [
+        "from"
       ],
       "baseSegs": [
         {
@@ -7418,6 +7666,9 @@
         "Each",
         "has"
       ],
+      "traps": [
+        "should"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -7511,6 +7762,9 @@
       },
       "frame": [
         "Some of"
+      ],
+      "traps": [
+        "by"
       ],
       "baseSegs": [
         {
@@ -7610,6 +7864,9 @@
       "frame": [
         "dollars each"
       ],
+      "traps": [
+        "straight"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -7704,6 +7961,10 @@
       "frame": [
         "You should"
       ],
+      "traps": [
+        "her",
+        "has"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -7781,6 +8042,9 @@
       },
       "frame": [
         "grew up"
+      ],
+      "traps": [
+        "back"
       ],
       "baseSegs": [
         {
@@ -7867,6 +8131,9 @@
       },
       "frame": [
         "Why would"
+      ],
+      "traps": [
+        "did"
       ],
       "baseSegs": [
         {
@@ -7961,6 +8228,9 @@
       "frame": [
         "call",
         "back"
+      ],
+      "traps": [
+        "along"
       ],
       "baseSegs": [
         {
@@ -8082,6 +8352,10 @@
       },
       "frame": [
         "have to"
+      ],
+      "traps": [
+        "could",
+        "from"
       ],
       "baseSegs": [
         {
@@ -8207,6 +8481,9 @@
       "frame": [
         "What's going on"
       ],
+      "traps": [
+        "through"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -8286,6 +8563,10 @@
       "frame": [
         "for you"
       ],
+      "traps": [
+        "of",
+        "us"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -8364,6 +8645,10 @@
       },
       "frame": [
         "get out of"
+      ],
+      "traps": [
+        "on",
+        "with"
       ],
       "baseSegs": [
         {
@@ -8471,6 +8756,9 @@
       "frame": [
         "plenty of"
       ],
+      "traps": [
+        "by"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -8576,6 +8864,9 @@
       "frame": [
         "be a good"
       ],
+      "traps": [
+        "part"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -8662,6 +8953,10 @@
       "frame": [
         "I couldn't"
       ],
+      "traps": [
+        "me",
+        "weren't"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -8743,6 +9038,10 @@
       },
       "frame": [
         "Pick me up at"
+      ],
+      "traps": [
+        "them",
+        "over"
       ],
       "baseSegs": [
         {
@@ -8826,6 +9125,10 @@
       "frame": [
         "It was quite"
       ],
+      "traps": [
+        "i",
+        "have"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -8903,6 +9206,10 @@
       },
       "frame": [
         "I do"
+      ],
+      "traps": [
+        "you",
+        "were"
       ],
       "baseSegs": [
         {
@@ -8998,6 +9305,9 @@
       },
       "frame": [
         "should be"
+      ],
+      "traps": [
+        "has"
       ],
       "baseSegs": [
         {
@@ -9123,6 +9433,9 @@
       "frame": [
         "must not"
       ],
+      "traps": [
+        "try"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -9228,6 +9541,9 @@
       },
       "frame": [
         "heard of"
+      ],
+      "traps": [
+        "to"
       ],
       "baseSegs": [
         {
@@ -9335,6 +9651,10 @@
       "frame": [
         "in charge of"
       ],
+      "traps": [
+        "by",
+        "with"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -9439,6 +9759,9 @@
       },
       "frame": [
         "used to"
+      ],
+      "traps": [
+        "at"
       ],
       "baseSegs": [
         {
@@ -9602,6 +9925,9 @@
       "frame": [
         "use to"
       ],
+      "traps": [
+        "into"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -9764,6 +10090,9 @@
       "frame": [
         "Pay attention to"
       ],
+      "traps": [
+        "from"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -9864,6 +10193,9 @@
       },
       "frame": [
         "used to"
+      ],
+      "traps": [
+        "about"
       ],
       "baseSegs": [
         {
@@ -10028,6 +10360,9 @@
       "frame": [
         "the truth"
       ],
+      "traps": [
+        "laid"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -10121,6 +10456,9 @@
       "frame": [
         "What's wrong with"
       ],
+      "traps": [
+        "from"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -10198,6 +10536,9 @@
       },
       "frame": [
         "You must"
+      ],
+      "traps": [
+        "she"
       ],
       "baseSegs": [
         {
@@ -10292,6 +10633,9 @@
       },
       "frame": [
         "going to"
+      ],
+      "traps": [
+        "with"
       ],
       "baseSegs": [
         {
@@ -10457,6 +10801,9 @@
         "I'll let",
         "know"
       ],
+      "traps": [
+        "talk"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -10563,6 +10910,10 @@
       "frame": [
         "I will"
       ],
+      "traps": [
+        "us",
+        "can"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -10641,6 +10992,9 @@
       "frame": [
         "Check",
         "out"
+      ],
+      "traps": [
+        "on"
       ],
       "baseSegs": [
         {
@@ -10751,6 +11105,10 @@
       "frame": [
         "in front of"
       ],
+      "traps": [
+        "at",
+        "into"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -10855,6 +11213,9 @@
       },
       "frame": [
         "turned out"
+      ],
+      "traps": [
+        "down"
       ],
       "baseSegs": [
         {
@@ -10962,6 +11323,9 @@
         "You",
         "take a break"
       ],
+      "traps": [
+        "it"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -11052,6 +11416,9 @@
       },
       "frame": [
         "friends with"
+      ],
+      "traps": [
+        "in"
       ],
       "baseSegs": [
         {
@@ -11159,6 +11526,10 @@
       "frame": [
         "I won't"
       ],
+      "traps": [
+        "we",
+        "wasn't"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -11236,6 +11607,9 @@
       },
       "frame": [
         "a couple of"
+      ],
+      "traps": [
+        "in"
       ],
       "baseSegs": [
         {
@@ -11341,6 +11715,9 @@
       },
       "frame": [
         "a bit"
+      ],
+      "traps": [
+        "eat"
       ],
       "baseSegs": [
         {
@@ -11448,6 +11825,9 @@
       "frame": [
         "new ones"
       ],
+      "traps": [
+        "ride"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -11529,6 +11909,9 @@
       "frame": [
         "Clean",
         "up"
+      ],
+      "traps": [
+        "over"
       ],
       "baseSegs": [
         {
@@ -11644,6 +12027,9 @@
       "frame": [
         "one more"
       ],
+      "traps": [
+        "reach"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -11748,6 +12134,10 @@
       },
       "frame": [
         "along with"
+      ],
+      "traps": [
+        "over",
+        "by"
       ],
       "baseSegs": [
         {
@@ -11854,6 +12244,9 @@
       "frame": [
         "can always"
       ],
+      "traps": [
+        "am"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -11939,6 +12332,9 @@
       },
       "frame": [
         "fill out"
+      ],
+      "traps": [
+        "over"
       ],
       "baseSegs": [
         {
@@ -12041,6 +12437,9 @@
       "frame": [
         "I'm",
         "I"
+      ],
+      "traps": [
+        "she"
       ],
       "baseSegs": [
         {
@@ -12210,6 +12609,9 @@
         "What",
         "look like"
       ],
+      "traps": [
+        "clean"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -12314,6 +12716,9 @@
       },
       "frame": [
         "rely on"
+      ],
+      "traps": [
+        "up"
       ],
       "baseSegs": [
         {
@@ -12420,6 +12825,9 @@
       "frame": [
         "forward to"
       ],
+      "traps": [
+        "of"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -12525,6 +12933,9 @@
       "frame": [
         "the same",
         "as"
+      ],
+      "traps": [
+        "paid"
       ],
       "baseSegs": [
         {
@@ -12736,6 +13147,9 @@
       "frame": [
         "Ever since"
       ],
+      "traps": [
+        "job"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -12838,6 +13252,9 @@
       "frame": [
         "No matter"
       ],
+      "traps": [
+        "fell"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -12938,6 +13355,10 @@
       },
       "frame": [
         "up to"
+      ],
+      "traps": [
+        "over",
+        "of"
       ],
       "baseSegs": [
         {
@@ -13045,6 +13466,9 @@
       "frame": [
         "fit in"
       ],
+      "traps": [
+        "by"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -13126,6 +13550,9 @@
       },
       "frame": [
         "the same as"
+      ],
+      "traps": [
+        "sign"
       ],
       "baseSegs": [
         {
@@ -13293,6 +13720,9 @@
         "figure",
         "out"
       ],
+      "traps": [
+        "off"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -13413,6 +13843,9 @@
       },
       "frame": [
         "the same"
+      ],
+      "traps": [
+        "fun"
       ],
       "baseSegs": [
         {
@@ -13576,6 +14009,9 @@
       "frame": [
         "A few"
       ],
+      "traps": [
+        "see"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -13677,6 +14113,10 @@
       "frame": [
         "to get out"
       ],
+      "traps": [
+        "into",
+        "along"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -13755,6 +14195,9 @@
       },
       "frame": [
         "Every time"
+      ],
+      "traps": [
+        "take"
       ],
       "baseSegs": [
         {
@@ -13858,6 +14301,10 @@
       "frame": [
         "don't get along"
       ],
+      "traps": [
+        "weren't",
+        "on"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -13956,6 +14403,9 @@
         "I'm",
         "tomorrow"
       ],
+      "traps": [
+        "lots"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -14041,6 +14491,9 @@
       },
       "frame": [
         "going through"
+      ],
+      "traps": [
+        "over"
       ],
       "baseSegs": [
         {
@@ -14147,6 +14600,9 @@
       "frame": [
         "keep",
         "in mind"
+      ],
+      "traps": [
+        "of"
       ],
       "baseSegs": [
         {
@@ -14261,6 +14717,9 @@
       "frame": [
         "ready for"
       ],
+      "traps": [
+        "to"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -14367,6 +14826,10 @@
       "frame": [
         "Will you"
       ],
+      "traps": [
+        "am",
+        "we"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -14460,6 +14923,10 @@
       "frame": [
         "I",
         "well on"
+      ],
+      "traps": [
+        "me",
+        "out"
       ],
       "baseSegs": [
         {
@@ -14578,6 +15045,9 @@
       "frame": [
         "Come by"
       ],
+      "traps": [
+        "from"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -14675,6 +15145,9 @@
       },
       "frame": [
         "A number of"
+      ],
+      "traps": [
+        "in"
       ],
       "baseSegs": [
         {
@@ -14777,6 +15250,9 @@
       "frame": [
         "Such is"
       ],
+      "traps": [
+        "can"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -14869,6 +15345,9 @@
       },
       "frame": [
         "the same"
+      ],
+      "traps": [
+        "bit"
       ],
       "baseSegs": [
         {
@@ -15017,6 +15496,9 @@
       "frame": [
         "more than"
       ],
+      "traps": [
+        "laid"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -15124,6 +15606,10 @@
         "That's",
         "isn't it"
       ],
+      "traps": [
+        "doesn't",
+        "he"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -15211,6 +15697,10 @@
       "frame": [
         "I",
         "get off work"
+      ],
+      "traps": [
+        "she",
+        "through"
       ],
       "baseSegs": [
         {
@@ -15321,6 +15811,10 @@
       "frame": [
         "in the middle of"
       ],
+      "traps": [
+        "to",
+        "about"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -15425,6 +15919,9 @@
       },
       "frame": [
         "such as"
+      ],
+      "traps": [
+        "else"
       ],
       "baseSegs": [
         {
@@ -15589,6 +16086,9 @@
         "Give",
         "a try"
       ],
+      "traps": [
+        "bit"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -15702,6 +16202,10 @@
       "frame": [
         "is getting to me"
       ],
+      "traps": [
+        "has",
+        "of"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -15795,6 +16299,9 @@
       },
       "frame": [
         "look at"
+      ],
+      "traps": [
+        "to"
       ],
       "baseSegs": [
         {
@@ -15901,6 +16408,10 @@
       "frame": [
         "can't wait to"
       ],
+      "traps": [
+        "isn't",
+        "with"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -16005,6 +16516,10 @@
       },
       "frame": [
         "to do with"
+      ],
+      "traps": [
+        "about",
+        "was"
       ],
       "baseSegs": [
         {
@@ -16111,6 +16626,9 @@
       "frame": [
         "I see",
         "as"
+      ],
+      "traps": [
+        "you"
       ],
       "baseSegs": [
         {
@@ -16230,6 +16748,9 @@
       "frame": [
         "except for"
       ],
+      "traps": [
+        "of"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -16337,6 +16858,10 @@
         "You'll",
         "won't you"
       ],
+      "traps": [
+        "aren't",
+        "them"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -16423,6 +16948,9 @@
       },
       "frame": [
         "turn on"
+      ],
+      "traps": [
+        "out"
       ],
       "baseSegs": [
         {
@@ -16530,6 +17058,9 @@
       "frame": [
         "Make a choice"
       ],
+      "traps": [
+        "walk"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -16626,6 +17157,9 @@
       },
       "frame": [
         "did a"
+      ],
+      "traps": [
+        "were"
       ],
       "baseSegs": [
         {
@@ -16733,6 +17267,9 @@
       "frame": [
         "I'm",
         "working on"
+      ],
+      "traps": [
+        "along"
       ],
       "baseSegs": [
         {
@@ -16843,6 +17380,9 @@
       "frame": [
         "If you"
       ],
+      "traps": [
+        "we"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -16936,6 +17476,10 @@
       "frame": [
         "I",
         "into"
+      ],
+      "traps": [
+        "he",
+        "in"
       ],
       "baseSegs": [
         {
@@ -17055,6 +17599,9 @@
       "frame": [
         "go through"
       ],
+      "traps": [
+        "back"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -17160,6 +17707,9 @@
       "frame": [
         "come in"
       ],
+      "traps": [
+        "to"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -17264,6 +17814,9 @@
       },
       "frame": [
         "impact on"
+      ],
+      "traps": [
+        "up"
       ],
       "baseSegs": [
         {
@@ -17371,6 +17924,9 @@
       "frame": [
         "Let's",
         "shall we"
+      ],
+      "traps": [
+        "they"
       ],
       "baseSegs": [
         {
@@ -17534,6 +18090,9 @@
       "frame": [
         "to the"
       ],
+      "traps": [
+        "for"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -17620,6 +18179,9 @@
       "frame": [
         "look",
         "up"
+      ],
+      "traps": [
+        "through"
       ],
       "baseSegs": [
         {
@@ -17745,6 +18307,9 @@
         "pick",
         "up"
       ],
+      "traps": [
+        "down"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -17863,6 +18428,9 @@
       "frame": [
         "looking forward to"
       ],
+      "traps": [
+        "about"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -17968,6 +18536,10 @@
       "frame": [
         "Why would I"
       ],
+      "traps": [
+        "has",
+        "they"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -18060,6 +18632,9 @@
       },
       "frame": [
         "enough to"
+      ],
+      "traps": [
+        "by"
       ],
       "baseSegs": [
         {
@@ -18224,6 +18799,9 @@
         "provide",
         "with"
       ],
+      "traps": [
+        "by"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -18353,6 +18931,9 @@
       "frame": [
         "a bunch of"
       ],
+      "traps": [
+        "to"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -18459,6 +19040,10 @@
       "frame": [
         "I",
         "out"
+      ],
+      "traps": [
+        "us",
+        "back"
       ],
       "baseSegs": [
         {
@@ -18574,6 +19159,9 @@
       "frame": [
         "other than"
       ],
+      "traps": [
+        "mistake"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -18680,6 +19268,9 @@
       "frame": [
         "fell asleep"
       ],
+      "traps": [
+        "last"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -18776,6 +19367,9 @@
       },
       "frame": [
         "as much as"
+      ],
+      "traps": [
+        "pick"
       ],
       "baseSegs": [
         {
@@ -18882,6 +19476,9 @@
       "frame": [
         "late for"
       ],
+      "traps": [
+        "at"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -18986,6 +19583,10 @@
       },
       "frame": [
         "will you"
+      ],
+      "traps": [
+        "does",
+        "him"
       ],
       "baseSegs": [
         {
@@ -19126,6 +19727,10 @@
       "frame": [
         "in terms of"
       ],
+      "traps": [
+        "at",
+        "to"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -19223,6 +19828,9 @@
       },
       "frame": [
         "never to"
+      ],
+      "traps": [
+        "in"
       ],
       "baseSegs": [
         {
@@ -19387,6 +19995,10 @@
         "have",
         "in common"
       ],
+      "traps": [
+        "can",
+        "at"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -19504,6 +20116,9 @@
       "frame": [
         "It's",
         "to"
+      ],
+      "traps": [
+        "at"
       ],
       "baseSegs": [
         {
@@ -19669,6 +20284,9 @@
       "frame": [
         "nothing but"
       ],
+      "traps": [
+        "twice"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -19775,6 +20393,9 @@
         "I",
         "both"
       ],
+      "traps": [
+        "it"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -19870,6 +20491,10 @@
       "frame": [
         "Both of them"
       ],
+      "traps": [
+        "about",
+        "he"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -19962,6 +20587,9 @@
       },
       "frame": [
         "part in"
+      ],
+      "traps": [
+        "about"
       ],
       "baseSegs": [
         {
@@ -20069,6 +20697,10 @@
         "You'll come to",
         "it"
       ],
+      "traps": [
+        "with",
+        "you"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -20155,6 +20787,9 @@
       "frame": [
         "go shopping"
       ],
+      "traps": [
+        "give"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -20237,6 +20872,9 @@
       "frame": [
         "I'm too tired to"
       ],
+      "traps": [
+        "at"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -20314,6 +20952,9 @@
       },
       "frame": [
         "hang out"
+      ],
+      "traps": [
+        "through"
       ],
       "baseSegs": [
         {
@@ -20419,6 +21060,9 @@
       },
       "frame": [
         "not to"
+      ],
+      "traps": [
+        "from"
       ],
       "baseSegs": [
         {
@@ -20582,6 +21226,9 @@
       "frame": [
         "know",
         "to"
+      ],
+      "traps": [
+        "by"
       ],
       "baseSegs": [
         {
@@ -20767,6 +21414,9 @@
       "frame": [
         "I found myself"
       ],
+      "traps": [
+        "him"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -20845,6 +21495,9 @@
       "frame": [
         "take",
         "action"
+      ],
+      "traps": [
+        "both"
       ],
       "baseSegs": [
         {
@@ -20955,6 +21608,9 @@
       "frame": [
         "to school"
       ],
+      "traps": [
+        "into"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -21056,6 +21712,10 @@
       },
       "frame": [
         "when it comes to"
+      ],
+      "traps": [
+        "i",
+        "about"
       ],
       "baseSegs": [
         {
@@ -21162,6 +21822,9 @@
       "frame": [
         "Make sure you're"
       ],
+      "traps": [
+        "feels"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -21258,6 +21921,9 @@
       },
       "frame": [
         "a bit of"
+      ],
+      "traps": [
+        "to"
       ],
       "baseSegs": [
         {
@@ -21364,6 +22030,9 @@
       "frame": [
         "believe in"
       ],
+      "traps": [
+        "about"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -21469,6 +22138,9 @@
       "frame": [
         "believe in"
       ],
+      "traps": [
+        "about"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -21550,6 +22222,9 @@
       },
       "frame": [
         "because of"
+      ],
+      "traps": [
+        "for"
       ],
       "baseSegs": [
         {
@@ -21713,6 +22388,9 @@
         "He's",
         "than"
       ],
+      "traps": [
+        "yet"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -21807,6 +22485,9 @@
       },
       "frame": [
         "Which is"
+      ],
+      "traps": [
+        "will"
       ],
       "baseSegs": [
         {
@@ -21946,6 +22627,9 @@
       "frame": [
         "Compared to"
       ],
+      "traps": [
+        "in"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -22038,6 +22722,9 @@
       },
       "frame": [
         "Let me know"
+      ],
+      "traps": [
+        "they"
       ],
       "baseSegs": [
         {
@@ -22136,6 +22823,9 @@
       "frame": [
         "sign up"
       ],
+      "traps": [
+        "over"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -22221,6 +22911,10 @@
       },
       "frame": [
         "are to"
+      ],
+      "traps": [
+        "am",
+        "for"
       ],
       "baseSegs": [
         {
@@ -22346,6 +23040,10 @@
       "frame": [
         "grew up to"
       ],
+      "traps": [
+        "back",
+        "by"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -22470,6 +23168,9 @@
       "frame": [
         "depending on"
       ],
+      "traps": [
+        "away"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -22571,6 +23272,9 @@
       "frame": [
         "takes up"
       ],
+      "traps": [
+        "out"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -22656,6 +23360,9 @@
       },
       "frame": [
         "one of"
+      ],
+      "traps": [
+        "at"
       ],
       "baseSegs": [
         {
@@ -22821,6 +23528,9 @@
         "need",
         "to"
       ],
+      "traps": [
+        "into"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -22922,6 +23632,9 @@
       },
       "frame": [
         "think of"
+      ],
+      "traps": [
+        "about"
       ],
       "baseSegs": [
         {
@@ -23028,6 +23741,9 @@
       "frame": [
         "more",
         "than"
+      ],
+      "traps": [
+        "passed"
       ],
       "baseSegs": [
         {
@@ -23213,6 +23929,9 @@
       "frame": [
         "on the"
       ],
+      "traps": [
+        "through"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -23318,6 +24037,9 @@
       "frame": [
         "Have a good time"
       ],
+      "traps": [
+        "am"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -23410,6 +24132,9 @@
       },
       "frame": [
         "the most"
+      ],
+      "traps": [
+        "need"
       ],
       "baseSegs": [
         {
@@ -23554,6 +24279,10 @@
       "frame": [
         "I fell in love"
       ],
+      "traps": [
+        "me",
+        "of"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -23648,6 +24377,9 @@
         "I",
         "took"
       ],
+      "traps": [
+        "her"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -23737,6 +24469,9 @@
       },
       "frame": [
         "to mind"
+      ],
+      "traps": [
+        "by"
       ],
       "baseSegs": [
         {
@@ -23833,6 +24568,9 @@
       },
       "frame": [
         "some kind of"
+      ],
+      "traps": [
+        "into"
       ],
       "baseSegs": [
         {
@@ -23939,6 +24677,9 @@
       "frame": [
         "to know"
       ],
+      "traps": [
+        "in"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -24044,6 +24785,10 @@
       "frame": [
         "How do you like"
       ],
+      "traps": [
+        "does",
+        "him"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -24121,6 +24866,9 @@
       },
       "frame": [
         "take a walk"
+      ],
+      "traps": [
+        "stop"
       ],
       "baseSegs": [
         {
@@ -24225,6 +24973,9 @@
         "made",
         "mistake"
       ],
+      "traps": [
+        "part"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -24327,6 +25078,9 @@
       "frame": [
         "I saw"
       ],
+      "traps": [
+        "she"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -24420,6 +25174,9 @@
       "frame": [
         "leave",
         "alone"
+      ],
+      "traps": [
+        "heart"
       ],
       "baseSegs": [
         {
@@ -24534,6 +25291,10 @@
       "frame": [
         "on top of"
       ],
+      "traps": [
+        "down",
+        "about"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -24639,6 +25400,9 @@
       "frame": [
         "It's made from"
       ],
+      "traps": [
+        "in"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -24731,6 +25495,9 @@
       },
       "frame": [
         "get started"
+      ],
+      "traps": [
+        "same"
       ],
       "baseSegs": [
         {
@@ -24829,6 +25596,9 @@
       "frame": [
         "I'm meeting with"
       ],
+      "traps": [
+        "of"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -24907,6 +25677,9 @@
       "frame": [
         "what",
         "to say"
+      ],
+      "traps": [
+        "at"
       ],
       "baseSegs": [
         {
@@ -25029,6 +25802,10 @@
       "frame": [
         "up to you"
       ],
+      "traps": [
+        "out",
+        "at"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -25126,6 +25903,9 @@
       "frame": [
         "What do"
       ],
+      "traps": [
+        "could"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -25219,6 +25999,9 @@
       "frame": [
         "getting",
         "and"
+      ],
+      "traps": [
+        "alone"
       ],
       "baseSegs": [
         {
@@ -25378,6 +26161,9 @@
         "It's",
         "far from"
       ],
+      "traps": [
+        "in"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -25495,6 +26281,9 @@
       "frame": [
         "Calm down"
       ],
+      "traps": [
+        "along"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -25587,6 +26376,10 @@
       },
       "frame": [
         "You might want to"
+      ],
+      "traps": [
+        "i",
+        "for"
       ],
       "baseSegs": [
         {
@@ -25683,6 +26476,10 @@
         "I",
         "make it"
       ],
+      "traps": [
+        "them",
+        "us"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -25773,6 +26570,10 @@
       },
       "frame": [
         "go back to"
+      ],
+      "traps": [
+        "off",
+        "into"
       ],
       "baseSegs": [
         {
@@ -25879,6 +26680,9 @@
       "frame": [
         "by the time"
       ],
+      "traps": [
+        "with"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -25981,6 +26785,10 @@
       "frame": [
         "I",
         "messed up"
+      ],
+      "traps": [
+        "him",
+        "away"
       ],
       "baseSegs": [
         {
@@ -26092,6 +26900,9 @@
         "try",
         "on"
       ],
+      "traps": [
+        "along"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -26187,6 +26998,9 @@
         "It's",
         "by"
       ],
+      "traps": [
+        "for"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -26280,6 +27094,9 @@
       },
       "frame": [
         "every single"
+      ],
+      "traps": [
+        "fifteen"
       ],
       "baseSegs": [
         {
@@ -26383,6 +27200,9 @@
       "frame": [
         "can be"
       ],
+      "traps": [
+        "could"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -26469,6 +27289,10 @@
       "frame": [
         "Was it"
       ],
+      "traps": [
+        "is",
+        "them"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -26551,6 +27375,10 @@
       },
       "frame": [
         "me of"
+      ],
+      "traps": [
+        "you",
+        "into"
       ],
       "baseSegs": [
         {
@@ -26659,6 +27487,9 @@
       "frame": [
         "care of"
       ],
+      "traps": [
+        "about"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -26766,6 +27597,9 @@
       "frame": [
         "broke up"
       ],
+      "traps": [
+        "down"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -26871,6 +27705,9 @@
       "frame": [
         "It's",
         "a matter of"
+      ],
+      "traps": [
+        "about"
       ],
       "baseSegs": [
         {
@@ -26981,6 +27818,9 @@
       "frame": [
         "I'd say"
       ],
+      "traps": [
+        "sure"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -27073,6 +27913,9 @@
       },
       "frame": [
         "What's with"
+      ],
+      "traps": [
+        "from"
       ],
       "baseSegs": [
         {
@@ -27167,6 +28010,9 @@
       "frame": [
         "out a few"
       ],
+      "traps": [
+        "over"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -27253,6 +28099,9 @@
       },
       "frame": [
         "It's all about"
+      ],
+      "traps": [
+        "with"
       ],
       "baseSegs": [
         {
@@ -27348,6 +28197,9 @@
         "I",
         "home"
       ],
+      "traps": [
+        "me"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -27441,6 +28293,9 @@
       },
       "frame": [
         "was given"
+      ],
+      "traps": [
+        "do"
       ],
       "baseSegs": [
         {
@@ -27549,6 +28404,10 @@
       "frame": [
         "from him"
       ],
+      "traps": [
+        "of",
+        "they"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -27636,6 +28495,9 @@
       "frame": [
         "look around"
       ],
+      "traps": [
+        "away"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -27718,6 +28580,9 @@
       "frame": [
         "So do"
       ],
+      "traps": [
+        "are"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -27796,6 +28661,9 @@
       "frame": [
         "They",
         "every"
+      ],
+      "traps": [
+        "i"
       ],
       "baseSegs": [
         {
@@ -27914,6 +28782,9 @@
       "frame": [
         "some more"
       ],
+      "traps": [
+        "count"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -28015,6 +28886,9 @@
       },
       "frame": [
         "work out"
+      ],
+      "traps": [
+        "along"
       ],
       "baseSegs": [
         {
@@ -28118,6 +28992,10 @@
       "frame": [
         "Don't you think"
       ],
+      "traps": [
+        "won't",
+        "it"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -28211,6 +29089,9 @@
       },
       "frame": [
         "get through"
+      ],
+      "traps": [
+        "along"
       ],
       "baseSegs": [
         {
@@ -28318,6 +29199,9 @@
       "frame": [
         "Feel free to"
       ],
+      "traps": [
+        "about"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -28410,6 +29294,9 @@
       },
       "frame": [
         "if you"
+      ],
+      "traps": [
+        "it"
       ],
       "baseSegs": [
         {
@@ -28554,6 +29441,10 @@
       "frame": [
         "out of"
       ],
+      "traps": [
+        "off",
+        "with"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -28660,6 +29551,9 @@
       "frame": [
         "with a lot"
       ],
+      "traps": [
+        "into"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -28747,6 +29641,9 @@
       "frame": [
         "Turn on"
       ],
+      "traps": [
+        "over"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -28828,6 +29725,9 @@
       },
       "frame": [
         "belong to"
+      ],
+      "traps": [
+        "with"
       ],
       "baseSegs": [
         {
@@ -28912,6 +29812,9 @@
       "frame": [
         "It's",
         "to"
+      ],
+      "traps": [
+        "at"
       ],
       "baseSegs": [
         {
@@ -29054,6 +29957,10 @@
         "Do me",
         "favor"
       ],
+      "traps": [
+        "is",
+        "her"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -29171,6 +30078,9 @@
       "frame": [
         "on a"
       ],
+      "traps": [
+        "back"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -29258,6 +30168,9 @@
       "frame": [
         "It's",
         "for"
+      ],
+      "traps": [
+        "into"
       ],
       "baseSegs": [
         {
@@ -29447,6 +30360,9 @@
         "did",
         "good job"
       ],
+      "traps": [
+        "am"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -29564,6 +30480,9 @@
       "frame": [
         "say no"
       ],
+      "traps": [
+        "along"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -29645,6 +30564,9 @@
       },
       "frame": [
         "go over"
+      ],
+      "traps": [
+        "off"
       ],
       "baseSegs": [
         {
@@ -29751,6 +30673,10 @@
       "frame": [
         "of you to"
       ],
+      "traps": [
+        "from",
+        "they"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -29856,6 +30782,10 @@
       },
       "frame": [
         "Would you like"
+      ],
+      "traps": [
+        "does",
+        "him"
       ],
       "baseSegs": [
         {
@@ -29965,6 +30895,9 @@
       },
       "frame": [
         "like a"
+      ],
+      "traps": [
+        "set"
       ],
       "baseSegs": [
         {
@@ -30091,6 +31024,9 @@
       "frame": [
         "No more"
       ],
+      "traps": [
+        "love"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -30192,6 +31128,9 @@
       "frame": [
         "Get off"
       ],
+      "traps": [
+        "out"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -30275,6 +31214,9 @@
       "frame": [
         "Let's get together"
       ],
+      "traps": [
+        "made"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -30352,6 +31294,9 @@
       },
       "frame": [
         "like to"
+      ],
+      "traps": [
+        "about"
       ],
       "baseSegs": [
         {
@@ -30516,6 +31461,10 @@
         "Can I",
         "another"
       ],
+      "traps": [
+        "are",
+        "him"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -30606,6 +31555,9 @@
       "frame": [
         "One",
         "The other"
+      ],
+      "traps": [
+        "wrong"
       ],
       "baseSegs": [
         {
@@ -30793,6 +31745,9 @@
       "frame": [
         "Others don't"
       ],
+      "traps": [
+        "couldn't"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -30870,6 +31825,9 @@
       },
       "frame": [
         "pay attention"
+      ],
+      "traps": [
+        "sorry"
       ],
       "baseSegs": [
         {
@@ -30968,6 +31926,10 @@
       "frame": [
         "I changed my mind about"
       ],
+      "traps": [
+        "him",
+        "by"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -31046,6 +32008,9 @@
       "frame": [
         "get",
         "done"
+      ],
+      "traps": [
+        "well"
       ],
       "baseSegs": [
         {
@@ -31164,6 +32129,9 @@
       "frame": [
         "How come"
       ],
+      "traps": [
+        "got"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -31241,6 +32209,9 @@
       },
       "frame": [
         "a hard time"
+      ],
+      "traps": [
+        "one"
       ],
       "baseSegs": [
         {
@@ -31347,6 +32318,9 @@
       "frame": [
         "mean",
         "by"
+      ],
+      "traps": [
+        "from"
       ],
       "baseSegs": [
         {
@@ -31471,6 +32445,10 @@
         "have",
         "in mind"
       ],
+      "traps": [
+        "am",
+        "of"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -31580,6 +32558,9 @@
       "frame": [
         "came across"
       ],
+      "traps": [
+        "ton"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -31687,6 +32668,9 @@
       },
       "frame": [
         "but the others"
+      ],
+      "traps": [
+        "ready"
       ],
       "baseSegs": [
         {
@@ -31851,6 +32835,10 @@
         "Let me",
         "you"
       ],
+      "traps": [
+        "i",
+        "we"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -31941,6 +32929,9 @@
       "frame": [
         "or you'll"
       ],
+      "traps": [
+        "well"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -32027,6 +33018,9 @@
       "frame": [
         "had",
         "last"
+      ],
+      "traps": [
+        "should"
       ],
       "baseSegs": [
         {
@@ -32130,6 +33124,9 @@
       "frame": [
         "stop by"
       ],
+      "traps": [
+        "at"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -32215,6 +33212,10 @@
       },
       "frame": [
         "Have you ever"
+      ],
+      "traps": [
+        "do",
+        "they"
       ],
       "baseSegs": [
         {
@@ -32309,6 +33310,9 @@
       "frame": [
         "I'm not",
         "fan of"
+      ],
+      "traps": [
+        "by"
       ],
       "baseSegs": [
         {
@@ -32427,6 +33431,9 @@
       "frame": [
         "friend of"
       ],
+      "traps": [
+        "with"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -32532,6 +33539,10 @@
       "frame": [
         "Why don't we"
       ],
+      "traps": [
+        "can't",
+        "them"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -32625,6 +33636,9 @@
       "frame": [
         "Give",
         "back"
+      ],
+      "traps": [
+        "on"
       ],
       "baseSegs": [
         {
@@ -32749,6 +33763,9 @@
         "It",
         "more like"
       ],
+      "traps": [
+        "us"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -32868,6 +33885,9 @@
       "frame": [
         "in case"
       ],
+      "traps": [
+        "by"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -32969,6 +33989,10 @@
       "frame": [
         "I",
         "believe in"
+      ],
+      "traps": [
+        "her",
+        "with"
       ],
       "baseSegs": [
         {
@@ -33079,6 +34103,9 @@
       "frame": [
         "I've got"
       ],
+      "traps": [
+        "couple"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -33171,6 +34198,9 @@
       },
       "frame": [
         "rid of"
+      ],
+      "traps": [
+        "at"
       ],
       "baseSegs": [
         {
@@ -33278,6 +34308,9 @@
         "take",
         "seriously"
       ],
+      "traps": [
+        "help"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -33372,6 +34405,9 @@
       "frame": [
         "you",
         "go"
+      ],
+      "traps": [
+        "me"
       ],
       "baseSegs": [
         {
@@ -33470,6 +34506,9 @@
       },
       "frame": [
         "How about"
+      ],
+      "traps": [
+        "with"
       ],
       "baseSegs": [
         {
@@ -33579,6 +34618,9 @@
       "frame": [
         "looking after"
       ],
+      "traps": [
+        "number"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -33665,6 +34707,9 @@
       "frame": [
         "I'm busy"
       ],
+      "traps": [
+        "top"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -33744,6 +34789,10 @@
       "frame": [
         "I prefer",
         "to"
+      ],
+      "traps": [
+        "him",
+        "with"
       ],
       "baseSegs": [
         {
@@ -33862,6 +34911,10 @@
       "frame": [
         "have to"
       ],
+      "traps": [
+        "should",
+        "with"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -33968,6 +35021,9 @@
       "frame": [
         "made of"
       ],
+      "traps": [
+        "into"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -34073,6 +35129,9 @@
       "frame": [
         "I spent"
       ],
+      "traps": [
+        "it"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -34150,6 +35209,9 @@
       },
       "frame": [
         "What if"
+      ],
+      "traps": [
+        "ones"
       ],
       "baseSegs": [
         {
@@ -34244,6 +35306,9 @@
       },
       "frame": [
         "is that"
+      ],
+      "traps": [
+        "do"
       ],
       "baseSegs": [
         {
@@ -34410,6 +35475,9 @@
         "taken on",
         "work"
       ],
+      "traps": [
+        "back"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -34508,6 +35576,10 @@
       "frame": [
         "want to try out"
       ],
+      "traps": [
+        "about",
+        "down"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -34591,6 +35663,10 @@
       "frame": [
         "Does it come with"
       ],
+      "traps": [
+        "are",
+        "you"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -34669,6 +35745,9 @@
       },
       "frame": [
         "ended up"
+      ],
+      "traps": [
+        "on"
       ],
       "baseSegs": [
         {
@@ -34776,6 +35855,10 @@
       "frame": [
         "me from"
       ],
+      "traps": [
+        "i",
+        "in"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -34881,6 +35964,9 @@
       "frame": [
         "less",
         "than"
+      ],
+      "traps": [
+        "back"
       ],
       "baseSegs": [
         {
@@ -35093,6 +36179,9 @@
       "frame": [
         "love to"
       ],
+      "traps": [
+        "by"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -35197,6 +36286,9 @@
       },
       "frame": [
         "no use"
+      ],
+      "traps": [
+        "let"
       ],
       "baseSegs": [
         {
@@ -35362,6 +36454,9 @@
         "pick",
         "up"
       ],
+      "traps": [
+        "through"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -35484,6 +36579,9 @@
         "much",
         "than"
       ],
+      "traps": [
+        "common"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -35586,6 +36684,9 @@
       "frame": [
         "hurt",
         "feelings"
+      ],
+      "traps": [
+        "break"
       ],
       "baseSegs": [
         {
@@ -35705,6 +36806,9 @@
       "frame": [
         "What makes"
       ],
+      "traps": [
+        "such"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -35798,6 +36902,9 @@
       "frame": [
         "bring",
         "up"
+      ],
+      "traps": [
+        "out"
       ],
       "baseSegs": [
         {
@@ -35920,6 +37027,9 @@
       "frame": [
         "The more"
       ],
+      "traps": [
+        "leave"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -36017,6 +37127,9 @@
       "frame": [
         "turned",
         "down"
+      ],
+      "traps": [
+        "away"
       ],
       "baseSegs": [
         {
@@ -36135,6 +37248,10 @@
       "frame": [
         "I had"
       ],
+      "traps": [
+        "him",
+        "have"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -36229,6 +37346,9 @@
       "frame": [
         "help",
         "at"
+      ],
+      "traps": [
+        "in"
       ],
       "baseSegs": [
         {
@@ -36359,6 +37479,9 @@
       "frame": [
         "with his"
       ],
+      "traps": [
+        "about"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -36445,6 +37568,9 @@
       "frame": [
         "Just because",
         "doesn't mean"
+      ],
+      "traps": [
+        "won't"
       ],
       "baseSegs": [
         {
@@ -36564,6 +37690,9 @@
         "making",
         "progress"
       ],
+      "traps": [
+        "welcome"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -36679,6 +37808,10 @@
         "I could",
         "use"
       ],
+      "traps": [
+        "she",
+        "was"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -36788,6 +37921,9 @@
       "frame": [
         "keep track of"
       ],
+      "traps": [
+        "to"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -36889,6 +38025,10 @@
       "frame": [
         "What brings you to"
       ],
+      "traps": [
+        "them",
+        "of"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -36967,6 +38107,9 @@
       },
       "frame": [
         "take advantage of"
+      ],
+      "traps": [
+        "about"
       ],
       "baseSegs": [
         {
@@ -37072,6 +38215,10 @@
       },
       "frame": [
         "nothing to do with"
+      ],
+      "traps": [
+        "from",
+        "should"
       ],
       "baseSegs": [
         {
@@ -37179,6 +38326,9 @@
       "frame": [
         "take over"
       ],
+      "traps": [
+        "on"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -37262,6 +38412,9 @@
       "frame": [
         "as",
         "as possible"
+      ],
+      "traps": [
+        "feel"
       ],
       "baseSegs": [
         {
@@ -37356,6 +38509,9 @@
       },
       "frame": [
         "fun of"
+      ],
+      "traps": [
+        "with"
       ],
       "baseSegs": [
         {
@@ -37463,6 +38619,9 @@
       "frame": [
         "Why not"
       ],
+      "traps": [
+        "hand"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -37556,6 +38715,9 @@
       "frame": [
         "isn't as",
         "as"
+      ],
+      "traps": [
+        "couldn't"
       ],
       "baseSegs": [
         {
@@ -37688,6 +38850,9 @@
         "Call",
         "when"
       ],
+      "traps": [
+        "start"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -37787,6 +38952,9 @@
       },
       "frame": [
         "as soon as"
+      ],
+      "traps": [
+        "care"
       ],
       "baseSegs": [
         {
@@ -37950,6 +39118,9 @@
       "frame": [
         "I want"
       ],
+      "traps": [
+        "she"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -38028,6 +39199,10 @@
       },
       "frame": [
         "What do you say we"
+      ],
+      "traps": [
+        "would",
+        "they"
       ],
       "baseSegs": [
         {
@@ -38122,6 +39297,9 @@
       "frame": [
         "We take turns"
       ],
+      "traps": [
+        "you"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -38215,6 +39393,9 @@
       },
       "frame": [
         "set up"
+      ],
+      "traps": [
+        "away"
       ],
       "baseSegs": [
         {
@@ -38323,6 +39504,9 @@
         "He's",
         "who"
       ],
+      "traps": [
+        "reason"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -38417,6 +39601,9 @@
       },
       "frame": [
         "meet up"
+      ],
+      "traps": [
+        "along"
       ],
       "baseSegs": [
         {
@@ -38525,6 +39712,9 @@
       "frame": [
         "He's the one whose"
       ],
+      "traps": [
+        "mind"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -38618,6 +39808,10 @@
       },
       "frame": [
         "in the middle of"
+      ],
+      "traps": [
+        "into",
+        "about"
       ],
       "baseSegs": [
         {
@@ -38725,6 +39919,9 @@
       "frame": [
         "count on"
       ],
+      "traps": [
+        "through"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -38810,6 +40007,10 @@
       },
       "frame": [
         "Stay away from"
+      ],
+      "traps": [
+        "down",
+        "at"
       ],
       "baseSegs": [
         {
@@ -38903,6 +40104,9 @@
       },
       "frame": [
         "that I"
+      ],
+      "traps": [
+        "it"
       ],
       "baseSegs": [
         {
@@ -39010,6 +40214,9 @@
         "give",
         "an example"
       ],
+      "traps": [
+        "sense"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -39104,6 +40311,9 @@
       "frame": [
         "looking into"
       ],
+      "traps": [
+        "to"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -39191,6 +40401,9 @@
       "frame": [
         "pays off"
       ],
+      "traps": [
+        "along"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -39268,6 +40481,9 @@
       },
       "frame": [
         "who I"
+      ],
+      "traps": [
+        "they"
       ],
       "baseSegs": [
         {
@@ -39355,6 +40571,9 @@
       },
       "frame": [
         "which he"
+      ],
+      "traps": [
+        "her"
       ],
       "baseSegs": [
         {
@@ -39480,6 +40699,9 @@
       "frame": [
         "feel sorry for"
       ],
+      "traps": [
+        "into"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -39584,6 +40806,9 @@
       },
       "frame": [
         "get over"
+      ],
+      "traps": [
+        "down"
       ],
       "baseSegs": [
         {
@@ -39690,6 +40915,9 @@
       "frame": [
         "Cheer up"
       ],
+      "traps": [
+        "over"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -39768,6 +40996,9 @@
       },
       "frame": [
         "went down"
+      ],
+      "traps": [
+        "on"
       ],
       "baseSegs": [
         {
@@ -39851,6 +41082,9 @@
       "frame": [
         "There's nothing",
         "than"
+      ],
+      "traps": [
+        "along"
       ],
       "baseSegs": [
         {
@@ -40038,6 +41272,9 @@
       "frame": [
         "go for"
       ],
+      "traps": [
+        "at"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -40145,6 +41382,10 @@
       "frame": [
         "up in"
       ],
+      "traps": [
+        "through",
+        "into"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -40231,6 +41472,9 @@
       "frame": [
         "Make up",
         "mind"
+      ],
+      "traps": [
+        "out"
       ],
       "baseSegs": [
         {
@@ -40350,6 +41594,9 @@
       "frame": [
         "get in"
       ],
+      "traps": [
+        "for"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -40447,6 +41694,9 @@
       "frame": [
         "for granted"
       ],
+      "traps": [
+        "in"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -40539,6 +41789,9 @@
       },
       "frame": [
         "reach out"
+      ],
+      "traps": [
+        "away"
       ],
       "baseSegs": [
         {
@@ -40647,6 +41900,9 @@
         "Something",
         "wrong"
       ],
+      "traps": [
+        "straight"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -40741,6 +41997,9 @@
       "frame": [
         "I'll",
         "pass"
+      ],
+      "traps": [
+        "sure"
       ],
       "baseSegs": [
         {
@@ -40851,6 +42110,9 @@
       "frame": [
         "the reason"
       ],
+      "traps": [
+        "stop"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -40937,6 +42199,10 @@
       },
       "frame": [
         "back to"
+      ],
+      "traps": [
+        "through",
+        "in"
       ],
       "baseSegs": [
         {
@@ -41043,6 +42309,9 @@
       "frame": [
         "go with"
       ],
+      "traps": [
+        "by"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -41148,6 +42417,9 @@
       "frame": [
         "This is"
       ],
+      "traps": [
+        "am"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -41242,6 +42514,9 @@
       "frame": [
         "you",
         "a hand"
+      ],
+      "traps": [
+        "it"
       ],
       "baseSegs": [
         {
@@ -41360,6 +42635,9 @@
       "frame": [
         "always",
         "there for"
+      ],
+      "traps": [
+        "with"
       ],
       "baseSegs": [
         {
@@ -41486,6 +42764,9 @@
       "frame": [
         "That's what"
       ],
+      "traps": [
+        "other"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -41564,6 +42845,9 @@
       "frame": [
         "twice as",
         "as"
+      ],
+      "traps": [
+        "single"
       ],
       "baseSegs": [
         {
@@ -41696,6 +42980,9 @@
         "However",
         "it"
       ],
+      "traps": [
+        "they"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -41790,6 +43077,9 @@
       "frame": [
         "times",
         "than"
+      ],
+      "traps": [
+        "favor"
       ],
       "baseSegs": [
         {
@@ -42003,6 +43293,9 @@
       "frame": [
         "That's the"
       ],
+      "traps": [
+        "prefer"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -42080,6 +43373,9 @@
       },
       "frame": [
         "take responsibility"
+      ],
+      "traps": [
+        "took"
       ],
       "baseSegs": [
         {
@@ -42159,6 +43455,9 @@
       "frame": [
         "let",
         "go"
+      ],
+      "traps": [
+        "bunch"
       ],
       "baseSegs": [
         {
@@ -42277,6 +43576,9 @@
       "frame": [
         "This is"
       ],
+      "traps": [
+        "am"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -42369,6 +43671,9 @@
       },
       "frame": [
         "that I"
+      ],
+      "traps": [
+        "us"
       ],
       "baseSegs": [
         {
@@ -42513,6 +43818,9 @@
       "frame": [
         "it happen"
       ],
+      "traps": [
+        "you"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -42609,6 +43917,9 @@
       },
       "frame": [
         "There's no"
+      ],
+      "traps": [
+        "spent"
       ],
       "baseSegs": [
         {
@@ -42748,6 +44059,9 @@
       "frame": [
         "just came out"
       ],
+      "traps": [
+        "along"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -42830,6 +44144,10 @@
       },
       "frame": [
         "Do you know"
+      ],
+      "traps": [
+        "were",
+        "it"
       ],
       "baseSegs": [
         {
@@ -42969,6 +44287,10 @@
       "frame": [
         "out with"
       ],
+      "traps": [
+        "back",
+        "by"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -43055,6 +44377,9 @@
       "frame": [
         "both",
         "and"
+      ],
+      "traps": [
+        "myself"
       ],
       "baseSegs": [
         {
@@ -43262,6 +44587,9 @@
       "frame": [
         "Lie down"
       ],
+      "traps": [
+        "up"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -43339,6 +44667,9 @@
       },
       "frame": [
         "keep up"
+      ],
+      "traps": [
+        "on"
       ],
       "baseSegs": [
         {
@@ -43442,6 +44773,10 @@
         "I had",
         "dream"
       ],
+      "traps": [
+        "me",
+        "should"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -43533,6 +44868,10 @@
         "She",
         "to show off"
       ],
+      "traps": [
+        "we",
+        "with"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -43623,6 +44962,9 @@
       "frame": [
         "Help yourself to"
       ],
+      "traps": [
+        "into"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -43701,6 +45043,9 @@
       "frame": [
         "either",
         "or"
+      ],
+      "traps": [
+        "start"
       ],
       "baseSegs": [
         {
@@ -43909,6 +45254,9 @@
         "I",
         "luck"
       ],
+      "traps": [
+        "them"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -44022,6 +45370,9 @@
       "frame": [
         "Fill up"
       ],
+      "traps": [
+        "back"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -44123,6 +45474,9 @@
       },
       "frame": [
         "as I"
+      ],
+      "traps": [
+        "you"
       ],
       "baseSegs": [
         {
@@ -44229,6 +45583,10 @@
       "frame": [
         "Watch out for"
       ],
+      "traps": [
+        "on",
+        "with"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -44323,6 +45681,10 @@
       },
       "frame": [
         "it was"
+      ],
+      "traps": [
+        "us",
+        "are"
       ],
       "baseSegs": [
         {
@@ -44428,6 +45790,9 @@
       },
       "frame": [
         "feel bad"
+      ],
+      "traps": [
+        "truth"
       ],
       "baseSegs": [
         {
@@ -44536,6 +45901,9 @@
         "think",
         "over"
       ],
+      "traps": [
+        "back"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -44633,6 +46001,9 @@
       },
       "frame": [
         "a ton of"
+      ],
+      "traps": [
+        "in"
       ],
       "baseSegs": [
         {
@@ -44740,6 +46111,9 @@
       "frame": [
         "Say hi"
       ],
+      "traps": [
+        "come"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -44834,6 +46208,10 @@
       },
       "frame": [
         "Do you think"
+      ],
+      "traps": [
+        "has",
+        "they"
       ],
       "baseSegs": [
         {
@@ -44985,6 +46363,10 @@
       "frame": [
         "Would you mind"
       ],
+      "traps": [
+        "do",
+        "her"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -45077,6 +46459,9 @@
       },
       "frame": [
         "have a choice"
+      ],
+      "traps": [
+        "has"
       ],
       "baseSegs": [
         {
@@ -45176,6 +46561,9 @@
       "frame": [
         "pay",
         "back"
+      ],
+      "traps": [
+        "down"
       ],
       "baseSegs": [
         {
@@ -45298,6 +46686,10 @@
       },
       "frame": [
         "do you think"
+      ],
+      "traps": [
+        "could",
+        "they"
       ],
       "baseSegs": [
         {
@@ -45442,6 +46834,9 @@
       "frame": [
         "It seems"
       ],
+      "traps": [
+        "they"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -45534,6 +46929,9 @@
       },
       "frame": [
         "as well as"
+      ],
+      "traps": [
+        "wait"
       ],
       "baseSegs": [
         {
@@ -45698,6 +47096,9 @@
       "frame": [
         "broke down"
       ],
+      "traps": [
+        "along"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -45778,6 +47179,9 @@
       "frame": [
         "It's",
         "that we"
+      ],
+      "traps": [
+        "it"
       ],
       "baseSegs": [
         {
@@ -45872,6 +47276,9 @@
       },
       "frame": [
         "get paid"
+      ],
+      "traps": [
+        "reach"
       ],
       "baseSegs": [
         {
@@ -45978,6 +47385,9 @@
       "frame": [
         "I'm having",
         "with"
+      ],
+      "traps": [
+        "from"
       ],
       "baseSegs": [
         {
@@ -46097,6 +47507,9 @@
       "frame": [
         "Keep an eye on"
       ],
+      "traps": [
+        "down"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -46198,6 +47611,9 @@
       "frame": [
         "keep",
         "a secret"
+      ],
+      "traps": [
+        "hand"
       ],
       "baseSegs": [
         {
@@ -46317,6 +47733,9 @@
         "ask",
         "out"
       ],
+      "traps": [
+        "up"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -46410,6 +47829,9 @@
       },
       "frame": [
         "so that"
+      ],
+      "traps": [
+        "few"
       ],
       "baseSegs": [
         {
@@ -46574,6 +47996,9 @@
         "give",
         "a call"
       ],
+      "traps": [
+        "except"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -46695,6 +48120,9 @@
       },
       "frame": [
         "so you"
+      ],
+      "traps": [
+        "me"
       ],
       "baseSegs": [
         {
@@ -46859,6 +48287,9 @@
       "frame": [
         "I've been"
       ],
+      "traps": [
+        "middle"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -46937,6 +48368,10 @@
       },
       "frame": [
         "I ended up with"
+      ],
+      "traps": [
+        "them",
+        "on"
       ],
       "baseSegs": [
         {
@@ -47034,6 +48469,10 @@
       },
       "frame": [
         "cut down on"
+      ],
+      "traps": [
+        "out",
+        "off"
       ],
       "baseSegs": [
         {
@@ -47140,6 +48579,9 @@
       "frame": [
         "a point"
       ],
+      "traps": [
+        "one"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -47242,6 +48684,9 @@
       "frame": [
         "in next"
       ],
+      "traps": [
+        "of"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -47328,6 +48773,9 @@
       "frame": [
         "neither",
         "nor"
+      ],
+      "traps": [
+        "reason"
       ],
       "baseSegs": [
         {
@@ -47533,6 +48981,9 @@
       "frame": [
         "not only",
         "but"
+      ],
+      "traps": [
+        "meet"
       ],
       "baseSegs": [
         {
@@ -47745,6 +49196,9 @@
         "wrap",
         "up"
       ],
+      "traps": [
+        "back"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -47862,6 +49316,9 @@
       "frame": [
         "find it"
       ],
+      "traps": [
+        "me"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -47968,6 +49425,9 @@
       "frame": [
         "mixed up"
       ],
+      "traps": [
+        "through"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -48073,6 +49533,9 @@
       },
       "frame": [
         "that I"
+      ],
+      "traps": [
+        "us"
       ],
       "baseSegs": [
         {
@@ -48199,6 +49662,10 @@
       "frame": [
         "taking me out"
       ],
+      "traps": [
+        "him",
+        "back"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -48285,6 +49752,9 @@
       "frame": [
         "my heart"
       ],
+      "traps": [
+        "ones"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -48363,6 +49833,9 @@
       "frame": [
         "Who else"
       ],
+      "traps": [
+        "given"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -48440,6 +49913,9 @@
       },
       "frame": [
         "check on"
+      ],
+      "traps": [
+        "down"
       ],
       "baseSegs": [
         {
@@ -48546,6 +50022,9 @@
       "frame": [
         "get around"
       ],
+      "traps": [
+        "leave"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -48628,6 +50107,10 @@
       },
       "frame": [
         "Have you"
+      ],
+      "traps": [
+        "had",
+        "her"
       ],
       "baseSegs": [
         {
@@ -48753,6 +50236,9 @@
       "frame": [
         "stepped out"
       ],
+      "traps": [
+        "down"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -48859,6 +50345,9 @@
         "still",
         "on"
       ],
+      "traps": [
+        "up"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -48957,6 +50446,9 @@
       "frame": [
         "you",
         "yet"
+      ],
+      "traps": [
+        "her"
       ],
       "baseSegs": [
         {
@@ -49098,6 +50590,9 @@
       "frame": [
         "I already"
       ],
+      "traps": [
+        "he"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -49177,6 +50672,9 @@
       "frame": [
         "Call",
         "when"
+      ],
+      "traps": [
+        "start"
       ],
       "baseSegs": [
         {
@@ -49301,6 +50799,10 @@
       "frame": [
         "I don't know if"
       ],
+      "traps": [
+        "us",
+        "couldn't"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -49410,6 +50912,9 @@
       "frame": [
         "more than"
       ],
+      "traps": [
+        "sense"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -49515,6 +51020,9 @@
       "frame": [
         "a ride"
       ],
+      "traps": [
+        "out"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -49616,6 +51124,10 @@
       "frame": [
         "It had already"
       ],
+      "traps": [
+        "her",
+        "have"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -49694,6 +51206,9 @@
       "frame": [
         "You",
         "make a living"
+      ],
+      "traps": [
+        "them"
       ],
       "baseSegs": [
         {
@@ -49785,6 +51300,9 @@
       "frame": [
         "showed",
         "around"
+      ],
+      "traps": [
+        "free"
       ],
       "baseSegs": [
         {
@@ -49888,6 +51406,10 @@
       "frame": [
         "If I were you"
       ],
+      "traps": [
+        "it",
+        "does"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -49980,6 +51502,9 @@
       },
       "frame": [
         "What does"
+      ],
+      "traps": [
+        "will"
       ],
       "baseSegs": [
         {
@@ -50075,6 +51600,10 @@
       "frame": [
         "I",
         "keep up with"
+      ],
+      "traps": [
+        "she",
+        "out"
       ],
       "baseSegs": [
         {
@@ -50194,6 +51723,9 @@
       "frame": [
         "I'd been"
       ],
+      "traps": [
+        "look"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -50275,6 +51807,9 @@
       "frame": [
         "put",
         "on"
+      ],
+      "traps": [
+        "down"
       ],
       "baseSegs": [
         {
@@ -50394,6 +51929,10 @@
       "frame": [
         "get in touch with"
       ],
+      "traps": [
+        "to",
+        "into"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -50499,6 +52038,9 @@
       "frame": [
         "came up"
       ],
+      "traps": [
+        "down"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -50600,6 +52142,9 @@
       "frame": [
         "What if"
       ],
+      "traps": [
+        "last"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -50693,6 +52238,10 @@
       },
       "frame": [
         "put up with"
+      ],
+      "traps": [
+        "along",
+        "to"
       ],
       "baseSegs": [
         {
@@ -50795,6 +52344,9 @@
       },
       "frame": [
         "If I"
+      ],
+      "traps": [
+        "it"
       ],
       "baseSegs": [
         {
@@ -50922,6 +52474,9 @@
       },
       "frame": [
         "I wish"
+      ],
+      "traps": [
+        "they"
       ],
       "baseSegs": [
         {
@@ -51061,6 +52616,9 @@
       "frame": [
         "check with"
       ],
+      "traps": [
+        "at"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -51167,6 +52725,9 @@
       "frame": [
         "Stick with"
       ],
+      "traps": [
+        "of"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -51249,6 +52810,9 @@
       },
       "frame": [
         "no sense"
+      ],
+      "traps": [
+        "ask"
       ],
       "baseSegs": [
         {
@@ -51342,6 +52906,10 @@
       },
       "frame": [
         "If it weren't for"
+      ],
+      "traps": [
+        "us",
+        "isn't"
       ],
       "baseSegs": [
         {
@@ -51481,6 +53049,9 @@
       "frame": [
         "keep in touch"
       ],
+      "traps": [
+        "from"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -51575,6 +53146,9 @@
       "frame": [
         "I got",
         "wrong"
+      ],
+      "traps": [
+        "she"
       ],
       "baseSegs": [
         {
@@ -51693,6 +53267,9 @@
       "frame": [
         "Without",
         "wouldn't"
+      ],
+      "traps": [
+        "number"
       ],
       "baseSegs": [
         {
@@ -51881,6 +53458,10 @@
       "frame": [
         "I can live with"
       ],
+      "traps": [
+        "it",
+        "is"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -51978,6 +53559,9 @@
       },
       "frame": [
         "eat out"
+      ],
+      "traps": [
+        "down"
       ],
       "baseSegs": [
         {
@@ -52077,6 +53661,10 @@
       "frame": [
         "I can",
         "relate to"
+      ],
+      "traps": [
+        "she",
+        "were"
       ],
       "baseSegs": [
         {
@@ -52189,6 +53777,9 @@
       "frame": [
         "take a while"
       ],
+      "traps": [
+        "keep"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -52281,6 +53872,10 @@
       },
       "frame": [
         "Do you happen to"
+      ],
+      "traps": [
+        "had",
+        "i"
       ],
       "baseSegs": [
         {
@@ -52375,6 +53970,9 @@
       },
       "frame": [
         "a note"
+      ],
+      "traps": [
+        "saw"
       ],
       "baseSegs": [
         {
@@ -52476,6 +54074,9 @@
       },
       "frame": [
         "I wish"
+      ],
+      "traps": [
+        "it"
       ],
       "baseSegs": [
         {
@@ -52616,6 +54217,9 @@
       "frame": [
         "gained some weight"
       ],
+      "traps": [
+        "like"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -52713,6 +54317,10 @@
       "frame": [
         "If it hadn't been for",
         "would've"
+      ],
+      "traps": [
+        "us",
+        "in"
       ],
       "baseSegs": [
         {
@@ -52901,6 +54509,9 @@
         "Without",
         "have"
       ],
+      "traps": [
+        "are"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -53087,6 +54698,9 @@
       "frame": [
         "Let me get this straight"
       ],
+      "traps": [
+        "i"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -53164,6 +54778,10 @@
       },
       "frame": [
         "to move on"
+      ],
+      "traps": [
+        "in",
+        "off"
       ],
       "baseSegs": [
         {
@@ -53257,6 +54875,9 @@
       },
       "frame": [
         "laid off"
+      ],
+      "traps": [
+        "up"
       ],
       "baseSegs": [
         {
@@ -53356,6 +54977,10 @@
       "frame": [
         "Why don't I"
       ],
+      "traps": [
+        "couldn't",
+        "me"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -53450,6 +55075,9 @@
       "frame": [
         "I",
         "tell the difference"
+      ],
+      "traps": [
+        "you"
       ],
       "baseSegs": [
         {
@@ -53561,6 +55189,9 @@
         "I",
         "clue"
       ],
+      "traps": [
+        "we"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -53670,6 +55301,9 @@
       "frame": [
         "a bite"
       ],
+      "traps": [
+        "rid"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -53753,6 +55387,9 @@
       },
       "frame": [
         "pull over"
+      ],
+      "traps": [
+        "out"
       ],
       "baseSegs": [
         {
@@ -53850,6 +55487,9 @@
       },
       "frame": [
         "as if"
+      ],
+      "traps": [
+        "done"
       ],
       "baseSegs": [
         {
@@ -54012,6 +55652,9 @@
       },
       "frame": [
         "as if"
+      ],
+      "traps": [
+        "fan"
       ],
       "baseSegs": [
         {
@@ -54176,6 +55819,9 @@
       "frame": [
         "good on"
       ],
+      "traps": [
+        "over"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -54282,6 +55928,9 @@
         "If",
         "I'd be"
       ],
+      "traps": [
+        "try"
+      ],
       "baseSegs": [
         {
           "t": "frame",
@@ -54375,6 +56024,9 @@
       },
       "frame": [
         "make time"
+      ],
+      "traps": [
+        "used"
       ],
       "baseSegs": [
         {
@@ -54477,6 +56129,9 @@
       "frame": [
         "dressed up"
       ],
+      "traps": [
+        "off"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -54578,6 +56233,10 @@
       "frame": [
         "to check in"
       ],
+      "traps": [
+        "at",
+        "for"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -54674,6 +56333,10 @@
       },
       "frame": [
         "Should you"
+      ],
+      "traps": [
+        "has",
+        "we"
       ],
       "baseSegs": [
         {
@@ -54798,6 +56461,10 @@
       "frame": [
         "don't you think"
       ],
+      "traps": [
+        "doesn't",
+        "i"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -54891,6 +56558,9 @@
       },
       "frame": [
         "that you"
+      ],
+      "traps": [
+        "he"
       ],
       "baseSegs": [
         {
@@ -54998,6 +56668,10 @@
       "frame": [
         "off to"
       ],
+      "traps": [
+        "over",
+        "of"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -55084,6 +56758,9 @@
       "frame": [
         "having",
         "over"
+      ],
+      "traps": [
+        "away"
       ],
       "baseSegs": [
         {
@@ -55213,6 +56890,9 @@
       },
       "frame": [
         "as if"
+      ],
+      "traps": [
+        "once"
       ],
       "baseSegs": [
         {
@@ -55376,6 +57056,9 @@
       "frame": [
         "by far"
       ],
+      "traps": [
+        "with"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -55468,6 +57151,9 @@
       },
       "frame": [
         "as if"
+      ],
+      "traps": [
+        "top"
       ],
       "baseSegs": [
         {
@@ -55634,6 +57320,9 @@
         "back",
         "memories"
       ],
+      "traps": [
+        "out"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -55745,6 +57434,9 @@
       "frame": [
         "made up"
       ],
+      "traps": [
+        "through"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -55826,6 +57518,9 @@
       },
       "frame": [
         "used to"
+      ],
+      "traps": [
+        "from"
       ],
       "baseSegs": [
         {
@@ -55931,6 +57626,9 @@
       },
       "frame": [
         "a crush on"
+      ],
+      "traps": [
+        "along"
       ],
       "baseSegs": [
         {
@@ -56038,6 +57736,10 @@
       "frame": [
         "up to"
       ],
+      "traps": [
+        "out",
+        "at"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -56143,6 +57845,10 @@
       "frame": [
         "up with"
       ],
+      "traps": [
+        "over",
+        "of"
+      ],
       "baseSegs": [
         {
           "t": "slot",
@@ -56247,6 +57953,9 @@
       },
       "frame": [
         "passed out"
+      ],
+      "traps": [
+        "off"
       ],
       "baseSegs": [
         {

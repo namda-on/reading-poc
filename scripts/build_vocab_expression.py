@@ -263,6 +263,61 @@ def frame_candidates(base, other):
     return out
 
 
+# [3] 함정 단어 — 같은 자리에 올 수 있는 **같은 부류**의 낱말이어야 고민이 생긴다.
+# 엉뚱한 품사를 섞으면 오히려 정답이 더 뻔해진다. 순서대로 검사하므로 particle을 prep보다 앞에 둔다.
+TRAP_BUCKETS = [
+    ("particle", ["on", "off", "up", "down", "out", "over", "back", "away", "through", "along"]),
+    ("prep", ["to", "for", "with", "about", "from", "at", "of", "by", "into", "in"]),
+    ("auxneg", ["don't", "doesn't", "didn't", "isn't", "aren't", "wasn't", "weren't",
+                "won't", "can't", "couldn't", "shouldn't", "haven't", "hasn't"]),
+    ("aux", ["do", "does", "did", "is", "are", "was", "were", "am",
+             "will", "would", "can", "could", "should", "have", "has", "had"]),
+    ("pron", ["i", "you", "he", "she", "it", "we", "they", "me", "him", "her", "us", "them"]),
+]
+TRAP_LIMIT = int(os.environ.get("VE_TRAPS", "2"))
+
+
+# 내용어(동사·명사)는 부류 목록을 만들 수 없으므로, **다른 표현의 프레임에서 쓰인 낱말**을
+# 빌려 함정으로 쓴다. 실제 표현에 등장하는 낱말이라 엉뚱하지 않고, 길이가 비슷한 것만 고른다.
+CONTENT_TRAP_POOL = []
+
+
+def make_traps(frame, sentence):
+    """프레임의 각 기능어 자리에 같은 부류의 다른 낱말을 함정으로 하나씩 붙인다.
+
+    내용어(동사·명사)는 대체 후보를 데이터에서 만들 수 없으므로 건너뛴다. 문장에 이미
+    쓰인 낱말은 정답으로 보일 수 있어 제외한다. 난수를 쓰지 않고 문장 해시로 고르므로
+    빌드가 재현된다.
+    """
+    used = {w.lower() for w in re.findall(r"[A-Za-z']+", sentence)}
+    seed = sum(ord(c) for c in sentence)
+    traps = []
+    for lit in frame:
+        for w in lit.split():
+            wl = w.lower()
+            for _, pool in TRAP_BUCKETS:
+                if wl not in pool:
+                    continue
+                cands = [x for x in pool if x != wl and x not in used and x not in traps]
+                if cands:
+                    traps.append(cands[(seed + len(traps)) % len(cands)])
+                break
+            if len(traps) >= TRAP_LIMIT:
+                return traps
+    if traps:
+        return traps
+    # 기능어가 없는 프레임 — 다른 표현의 프레임 낱말을 길이가 비슷한 것 중에서 빌려 온다
+    for lit in frame:
+        for w in lit.split():
+            cands = [x for x in CONTENT_TRAP_POOL
+                     if abs(len(x) - len(w)) <= 2 and x != w.lower() and x not in used]
+            if cands:
+                traps.append(cands[(seed + len(traps)) % len(cands)])
+            if len(traps) >= 1:
+                return traps
+    return traps
+
+
 def slots_clean(lits, sents, cov):
     """커버되는 문장들의 슬롯이 공통 단어를 갖지 않는가.
 
@@ -490,6 +545,8 @@ def main():
             # 프레임을 공유하는 문장만 담으므로 문항에 따라 1개 또는 여러 개다
             # (2개 이상이면 [3]이 2회차까지 진행된다).
             "frame": lits,
+            "traps": [],
+            "_trapSent": sents[cov[1]] if len(cov) > 1 else sents[0],
             "baseSegs": segd[0]["segs"],
             "apply": [{"en": g["sents"][i]["en"], "kr": g["sents"][i]["kr"], **segd[i]}
                       for i in cov[1:]],
@@ -499,6 +556,19 @@ def main():
     items.sort(key=lambda x: (x["rank"], x["level"]))
     if MAX_ITEMS:
         items = items[:MAX_ITEMS]
+
+    # 함정 후보 풀 — 채택된 프레임들의 내용어. 전체를 모은 뒤에야 만들 수 있다.
+    seen_pool = set()
+    for it in items:
+        for lit in it["frame"]:
+            for w in lit.split():
+                wl = w.lower()
+                if wl not in FUNCTION_WORDS and wl.isalpha() and len(wl) >= 3 and wl not in seen_pool:
+                    seen_pool.add(wl)
+                    CONTENT_TRAP_POOL.append(wl)
+    CONTENT_TRAP_POOL.sort()
+    for it in items:
+        it["traps"] = make_traps(it["frame"], it.pop("_trapSent"))
 
     data = {
         "meta": {

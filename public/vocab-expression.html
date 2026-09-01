@@ -187,9 +187,6 @@
   /* [3] 미리 주어지는 슬롯 — '내가 놓은 것'과 시각적으로 갈려야 프레임 산출이 체감된다 */
   .fill-given { padding:6px 4px; font-size:17px; color:#9aa8bc; font-weight:600; }
   .fill-word.frame-w { background:#e3fbec; border-color:#8ed9ab; color:#22794a; font-weight:800; }
-  /* [3] 새 단어 — 몰라도 되는 부분임을 색으로 알린다(배운 틀과 구분) */
-  .fill-word.slot-w { background:#f2f5fa; border-color:#dfe7f1; color:#8e9aaa; }
-  .tile.slot-w { border-style:dashed; color:#8e9aaa; }
   /* [3] 결과 — 두 문장에서 공통으로 유저가 만든 프레임 */
   .pf-frame-line { font-size:22px; font-weight:800; margin-top:10px; }
   .pf-note { font-size:13px; color:#8c9aab; line-height:1.6; margin:6px 0 4px; }
@@ -476,10 +473,12 @@ function startSession(startIdx){
 // 문항마다 단계 수가 다르다 — [3] 2회차는 프레임을 공유하는 문장이 2개 이상일 때만
 // 돌기 때문이다. 그래서 총 단계 수를 미리 합산해 진행바가 튀지 않게 한다.
 let stepStart=[], stepTotal=0;
-function itemSteps(it){ return 3 + ((it.apply||[]).length>=2 ? 1 : 0); }
+// 문항마다 4단계 — 어휘 · 배열 · 치환(탭) · 치환(타이핑).
+// 응용예문이 하나뿐이면 타이핑 라운드가 같은 문장을 다시 쓰지만, 조작이 달라 과제도 다르다.
+function itemSteps(){ return 4; }
 function buildStepIndex(){
   stepStart=[]; let acc=0;
-  sessionItems.forEach(it=>{ stepStart.push(acc); acc+=itemSteps(it); });
+  sessionItems.forEach(()=>{ stepStart.push(acc); acc+=itemSteps(); });
   stepTotal=acc;
 }
 // 진행바: 문항 내 단계 위치(step)를 전체 누적 위치로 환산한다
@@ -808,21 +807,21 @@ function renderApply(round){
 
   // 셀 구성: 주어진 슬롯 칩 + 유저가 채울 프레임 자리.
   // 탭 라운드는 단어 단위 빈칸(어순도 과제), 타이핑 라운드는 프레임 조각 단위 입력칸.
+  // 두 라운드 모두 슬롯(변하는 부분)은 회색으로 주어진 채 고정하고 프레임 자리만 비운다.
+  // 1회차는 단어 타일을 탭해서, 2회차는 직접 입력해서 프레임을 산출한다.
   const cells=[];
   ap.segs.forEach(sg=>{
-    if(typing){
-      // 타이핑 라운드는 프레임만 산출한다 — 슬롯은 회색으로 주어진 채 고정
-      if(sg.t==='slot') cells.push({kind:'given', text:sg.s});
-      else cells.push({kind:'input', answer:sg.s});
-      return;
-    }
-    // 탭 라운드는 슬롯 단어까지 뱅크에 올려 **문장 전체**를 배열한다.
-    // 새 단어는 회색 타일로 구분해 "몰라도 되는 부분"임을 알린다.
-    sg.s.split(/\s+/).forEach(w=> cells.push({kind:'blank', answer:w, origin:sg.t}));
+    if(sg.t==='slot'){ cells.push({kind:'given', text:sg.s}); return; }
+    if(typing) cells.push({kind:'input', answer:sg.s});
+    else sg.s.split(/\s+/).forEach(w=> cells.push({kind:'blank', answer:w}));
   });
   const blanks=cells.filter(c=>c.kind==='blank');
   const inputs=cells.filter(c=>c.kind==='input');
-  let bank=shuffle(blanks.map((c,i)=>({id:i, text:c.answer.toLowerCase(), placed:false, origin:c.origin})));
+  // 정답 조각만 있으면 답이 뻔히 보여 맞혀도 쾌감이 없다 — 같은 부류의 함정 단어를 섞는다
+  let bank=shuffle(
+    blanks.map((c,i)=>({id:i, text:c.answer.toLowerCase(), placed:false}))
+      .concat((item.traps||[]).map((t,i)=>({id:900+i, text:t, placed:false, trap:true})))
+  );
   let ans=[], done=false, hintLevel=0;
 
   stage.innerHTML=`
@@ -832,7 +831,7 @@ function renderApply(round){
         <div class="chat-ko">${escapeHtml(ap.kr)}</div>
         <div class="wrong-box hidden" id="wrongBox"></div>
         <div class="fill" id="fill"></div>
-        <div class="fill-hint" id="fillHint">${typing?'방금 배운 표현을 직접 입력해 보세요':'처음 보는 문장이에요. 배운 표현으로 만들어 보세요'}</div>
+        <div class="fill-hint" id="fillHint">${typing?'배운 표현을 직접 입력해 보세요':'처음 보는 문장이에요. 배운 표현을 넣어 완성해 보세요'}</div>
         <div class="reveal-note hidden" id="revealNote"></div>
         <div id="payoffBox"></div>
       </div>
@@ -863,7 +862,7 @@ function renderApply(round){
       }
       const i=bi++;
       h += i<ans.length
-        ? `<span class="fill-word ${ans[i].origin==='slot'?'slot-w':'frame-w'}" data-i="${i}">${escapeHtml(ans[i].text)}</span>`
+        ? `<span class="fill-word frame-w" data-i="${i}">${escapeHtml(ans[i].text)}</span>`
         : `<span class="fill-blank"></span>`;
     });
     if(ap.punct) h+=`<span class="fill-punct">${escapeHtml(ap.punct)}</span>`;
@@ -877,7 +876,7 @@ function renderApply(round){
     bankEl.innerHTML='';
     bank.forEach(t=>{
       const b=document.createElement('button');
-      b.className='tile'+(t.placed?' placed':'')+(t.origin==='slot'?' slot-w':'');
+      b.className='tile'+(t.placed?' placed':'');
       b.textContent=t.text;
       if(!t.placed && !done) b.onclick=()=>{
         if(ans.length>=blanks.length) return;
@@ -903,7 +902,7 @@ function renderApply(round){
       // 입력칸을 초록 확정 칸으로 굳힌다(원문 대소문자)
       inputs.forEach((c,i)=>{ const inp=el('ain'+i); if(inp){ inp.value=c.answer; inp.readOnly=true; inp.classList.add('correct'); inp.placeholder=''; } });
     } else {
-      ans=blanks.map(c=>({text:c.answer, placed:true, origin:c.origin}));
+      ans=blanks.map(c=>({text:c.answer, placed:true}));
       renderFill();
     }
     // 라운드가 쌓일수록 비교 문장이 늘어난다 — 반복이 체감의 근거다
@@ -911,7 +910,7 @@ function renderApply(round){
       .concat(item.apply.slice(0, round+1).map(a=>({en:a.en, kr:a.kr, segs:a.segs})));
     el('payoffBox').innerHTML=applyPayoffHtml(item, rows, round);
 
-    const hasNext = !typing && !!item.apply[1];
+    const hasNext = !typing;      // 타이핑 라운드는 항상 거친다
     const last = itemIdx>=sessionItems.length-1;
     el('bottom').innerHTML=`
       <div class="vtabs">
@@ -1003,11 +1002,13 @@ function applyPayoffHtml(item, rows, round){
   };
   return `<div class="payoff">
       <div class="pf-label">학습 정보</div>
-      <div class="pf-top"><span class="ic">💡</span>${novel?'배운 적 없는 문장을 직접 만들었어요':`같은 틀로 ${cnt} 번 다른 말을 했어요`}</div>
+      <div class="pf-top"><span class="ic">💡</span>${novel
+        ? '처음 보는 문장에도 같은 틀이 들어갔어요'
+        : `이 틀로 ${cnt} 번 다른 말을 했어요`}</div>
       <div class="pf-frame-line"><span class="tgt">${escapeHtml(frameTxt)}</span></div>
       <div class="pf-note">${novel
-        ? '이 틀만 알면 <b>처음 보는 문장도 만들어져요</b>. 초록색이 방금 놓은 틀이에요.'
-        : `뜻이 전혀 다른 ${cnt} 문장인데, 초록색은 <b>매번 직접 만든 부분</b>이에요.`}</div>
+        ? '뜻은 전혀 다른데 <b>초록색 틀은 그대로</b>예요. 바뀐 건 회색 부분뿐이에요.'
+        : `${cnt} 문장 모두 <b>직접 놓고 직접 입력한 틀</b>이에요. 이제 이 틀은 쓸 수 있어요.`}</div>
       ${rows.map(line).join('')}
     </div>`;
 }
