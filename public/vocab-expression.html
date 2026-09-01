@@ -122,6 +122,8 @@
   .chat-situation { font-size:12.5px; color:#9aa8bc; margin-bottom:4px; }
   .chat-ko { font-size:18px; line-height:1.55; color:#33465c; font-weight:600; }
   .chat-ko.note { font-size:13px; color:#9aa8bc; font-weight:400; margin-top:2px; }
+  .chat-ko.b-hint { font-size:13px; color:#9aa8bc; font-weight:600; margin-top:6px; }
+  .frame-desc { font-size:12.5px; color:#3f6b50; line-height:1.5; margin-top:9px; }
   .tgt { color:var(--green); font-weight:800; }
   .chat-en { font-size:19px; line-height:1.7; color:#2f3e52; font-weight:600; margin-top:18px; }
   .chat-src { text-align:right; font-size:11px; color:#c0cad8; margin-top:12px; }
@@ -164,10 +166,6 @@
   .learn-box { background:#e2d7f8; border-radius:14px; padding:12px 14px; margin:14px 0 4px; }
   .learn-label { font-size:11.5px; font-weight:800; color:#8878b3; }
   .learn-pat { font-size:18.5px; font-weight:800; color:var(--purple-d); margin-top:3px; line-height:1.35; }
-  /* 정답 문장의 핵심 표현 구간(형광펜) — 안의 트리거 어휘는 .tgt 초록 유지 */
-  .core { background:#e4d9fb; border-radius:6px; padding:2px 5px; box-decoration-break:clone; -webkit-box-decoration-break:clone; }
-  /* 핵심 표현 뒤 — 단어만 바뀌는 영역 */
-  .rest { text-decoration:underline; text-decoration-color:#a9bdd8; text-decoration-thickness:2px; text-underline-offset:4px; }
 
   /* 배열 정답 후 — 재사용 프레임 공개 + 응용 예문(효용 체감) */
   .payoff { background:#eefaf2; border:1px solid #c6ecd5; border-radius:14px; padding:12px 14px; margin-top:16px; }
@@ -253,10 +251,12 @@
 
   <div class="home" id="home">
     <h1>어휘 → 표현</h1>
-    <p class="sub"><b>빈칸으로 어휘를 배우고</b>, 그 어휘가 트리거하는 문장을 <b>단어 배열</b>로 완성해요.</p>
+    <p class="sub">어휘를 배운 뒤 그 어휘가 트리거한 <b>표현 문장을 배열</b>해요. 두 버전을 바꿔가며 비교할 수 있어요.</p>
     <div class="tabs" id="tabs"></div>
     <div id="levelList"></div>
-    <div class="note">진입점은 하나예요. 들어가면 문항마다 <b>트리거 어휘가 달라지고, 그에 따라 배우는 표현도 매번 달라져요.</b><br>빈칸은 힌트·정답을 봐도 직접 입력해야 정답 처리돼요.</div>
+    <div class="note"><b>버전 A</b> — 어휘는 어휘 예문으로 배우고, 표현은 그와 다른 문장으로 배워요(현재 앱 구조).<br>
+      <b>버전 B</b> — 표현 문장 자체에서 트리거 어휘를 빈칸으로 배우고, 같은 문장을 그대로 배열해요.<br>
+      두 버전은 <b>같은 문항·같은 진행 위치</b>를 공유하니, 버전만 바꿔 같은 문항을 바로 비교할 수 있어요.</div>
   </div>
 
   <div class="step-banner hidden" id="stepBanner"></div>
@@ -270,12 +270,17 @@ const topbar = el('topbar'), home = el('home'), stage = el('stage');
 function shuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
 function escapeHtml(s){ return String(s).replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
 
-// localStorage — 진입점이 하나이므로 '어디까지 풀었는지'만 모드별로 기억한다
-const MODE_KEY='ve:mode', POS_KEY='ve:pos';
-function getPos(mode){ try{ return Number(JSON.parse(localStorage.getItem(POS_KEY)||'{}')[mode])||0; }catch(e){ return 0; } }
-function setPos(mode,n){
-  try{ const o=JSON.parse(localStorage.getItem(POS_KEY)||'{}'); o[mode]=n; localStorage.setItem(POS_KEY, JSON.stringify(o)); }catch(e){}
-}
+// localStorage — 버전(A/B)과 진행 위치. 위치는 두 버전이 공유해서
+// 같은 문항을 버전만 바꿔 바로 비교할 수 있게 한다.
+const VER_KEY='ve:ver', POS_KEY='ve:pos';
+function getPos(){ try{ return Number(localStorage.getItem(POS_KEY))||0; }catch(e){ return 0; } }
+function setPos(n){ try{ localStorage.setItem(POS_KEY, String(n)); }catch(e){} }
+
+// 버전 정의 — A: 어휘 문장과 표현 문장이 서로 다름 / B: 표현 문장으로 어휘까지 배움
+const VERSIONS={
+  a:{label:'버전 A', desc:'어휘 예문 따로', vocabKey:'vocabA'},
+  b:{label:'버전 B', desc:'표현 문장으로', vocabKey:'vocabB'},
+};
 
 // 트리거 어휘 칩 라벨 옵션: 'learned'(방금 배운) | 'meaning'(단어 뜻)
 const CHIP_KEY='ve:chipLabel';
@@ -325,7 +330,7 @@ function renderStepBanner(step, word){
 function refreshBanner(){
   const el2=el('stepBanner');
   if(!OPTS.banner || !bannerStep){ el2.classList.add('hidden'); el2.innerHTML=''; return; }
-  const modeWord = curMode==='grammar' ? '문장' : '표현';
+  const modeWord = '표현';
   const s1 = bannerWord
     ? `<span class="sb-step solved"><span class="n">✓</span><span class="sb-word">${escapeHtml(bannerWord)}</span></span>`
     : `<span class="sb-step${bannerStep===1?' active':''}"><span class="n">1</span>어휘 익히기</span>`;
@@ -382,7 +387,7 @@ function norm(s){ return s.toLowerCase().trim().replace(/^[^\w']+|[^\w']+$/g,'')
 function tokenize(sent){ return sent.trim().replace(/[.?!]+$/,'').split(/\s+/); }
 function trailPunct(sent){ const m=sent.trim().match(/[.?!]+$/); return m?m[0]:''; }
 
-let DATA=null, curMode='expression', sessionItems=[], itemIdx=0, learned=[];
+let DATA=null, curVer='a', sessionItems=[], itemIdx=0, learned=[];
 
 // 상단 설정(기어) — 세션 중에도 라벨 옵션을 바로 바꿔볼 수 있게.
 // 바깥 클릭 닫기는 mousedown에서 처리하고, 기어/팝오버 내부 클릭은 contains로 걸러낸다.
@@ -399,7 +404,7 @@ document.addEventListener('mousedown', e=>{
   pop.classList.add('hidden');
 });
 
-fetch('vocab-expression.data.json').then(r=>r.json()).then(d=>{ DATA=d; curMode=(localStorage.getItem(MODE_KEY))||'expression'; renderHome(); })
+fetch('vocab-expression.data.json').then(r=>r.json()).then(d=>{ DATA=d; curVer=(localStorage.getItem(VER_KEY))||'a'; renderHome(); })
   .catch(e=>{ home.innerHTML='<h1>데이터 로드 실패</h1><p class="sub">'+escapeHtml(String(e))+'</p>'; });
 
 // ── 홈 ──────────────────────────────────────────────────────────────────────
@@ -407,28 +412,34 @@ function renderHome(){
   topbar.classList.add('hidden'); stage.classList.add('hidden'); home.classList.remove('hidden');
   renderStepBanner(0);
   const tabs=el('tabs'); tabs.innerHTML='';
-  Object.entries(DATA.modes).forEach(([key,m])=>{
-    const b=document.createElement('button'); b.className='tab'+(key===curMode?' on':'');
-    b.innerHTML=`${m.label}<span class="td">${m.desc}</span>`;
-    b.onclick=()=>{ curMode=key; try{localStorage.setItem(MODE_KEY,key);}catch(e){} renderHome(); };
+  Object.entries(VERSIONS).forEach(([key,v])=>{
+    const b=document.createElement('button'); b.className='tab'+(key===curVer?' on':'');
+    b.innerHTML=`${v.label}<span class="td">${v.desc}</span>`;
+    b.onclick=()=>{ curVer=key; try{localStorage.setItem(VER_KEY,key);}catch(e){} renderHome(); };
     tabs.appendChild(b);
   });
   // 진입점은 하나 — 큰 CTA 하나로 들어가고, 옵션은 그 아래 보조 영역에 둔다
-  const m=DATA.modes[curMode], list=el('levelList'); list.innerHTML='';
-  const total=m.items.length, pos=Math.min(getPos(curMode), total);
+  const list=el('levelList'); list.innerHTML='';
+  const total=DATA.items.length, pos=Math.min(getPos(), total);
   const rest=total-pos, resume=pos>0&&rest>0;
-  const modeWord = curMode==='grammar' ? '문법' : '표현';
+  const isB=curVer==='b';
+  const flow = isB
+    ? `표현 문장 빈칸 <span class="ar">→</span> 같은 문장 배열`
+    : `어휘 예문 빈칸 <span class="ar">→</span> 표현 문장 배열`;
+  const note = isB
+    ? '표현 문장 자체로 어휘를 배우고, 그 문장을 그대로 만들어봐요'
+    : '어휘는 어휘 예문으로 배우고, 표현은 다른 문장으로 배워요';
 
   const card=document.createElement('div'); card.className='start-card';
   card.innerHTML=`
-    <div class="start-flow">어휘 빈칸 채우기 <span class="ar">→</span> ${modeWord} 문장 배열</div>
+    <div class="start-flow">${flow}</div>
     <div class="start-count">${rest===0?`${total}문항을 모두 풀었어요`:`남은 <b>${rest}</b>문항 · 총 ${total}문항`}</div>
-    <div class="start-note">문항마다 어휘와 ${modeWord}이 매번 달라져요</div>
-    <button class="start-btn" id="startBtn">${rest===0?'다시 처음부터 ▶':(resume?`이어서 풀기 ▶`:`${escapeHtml(m.label)} 학습 시작 ▶`)}</button>
+    <div class="start-note">${note}</div>
+    <button class="start-btn" id="startBtn">${rest===0?'다시 처음부터 ▶':(resume?`이어서 풀기 ▶`:`학습 시작 ▶`)}</button>
     ${pos>0&&rest>0?`<button class="restart-btn" id="restartBtn">처음부터 다시 풀기</button>`:''}`;
   list.appendChild(card);
-  el('startBtn').onclick=()=>{ if(rest===0) setPos(curMode,0); startSession(rest===0?0:pos); };
-  if(el('restartBtn')) el('restartBtn').onclick=()=>{ setPos(curMode,0); startSession(0); };
+  el('startBtn').onclick=()=>{ if(rest===0) setPos(0); startSession(rest===0?0:pos); };
+  if(el('restartBtn')) el('restartBtn').onclick=()=>{ setPos(0); startSession(0); };
 
   const optHead=document.createElement('div'); optHead.className='opt-head'; optHead.textContent='실험 옵션';
   list.appendChild(optHead);
@@ -439,9 +450,9 @@ function renderHome(){
 
 // ── 세션 ────────────────────────────────────────────────────────────────────
 function startSession(startIdx){
-  sessionItems=DATA.modes[curMode].items; itemIdx=Math.min(startIdx||0, sessionItems.length-1); learned=[];
+  sessionItems=DATA.items; itemIdx=Math.min(startIdx||0, sessionItems.length-1); learned=[];
   home.classList.add('hidden'); topbar.classList.remove('hidden'); stage.classList.remove('hidden');
-  el('backBtn').onclick=()=>{ setPos(curMode, itemIdx); renderHome(); };
+  el('backBtn').onclick=()=>{ setPos(itemIdx); renderHome(); };
   renderVocab();
 }
 // 진행바: 어휘/배열 2단계 × 전체 문항. 별·카운트는 채워진 위치로 이동
@@ -490,12 +501,15 @@ function hlTrigger(sent, trig){
 
 // [1] 어휘 빈칸 ────────────────────────────────────────────────────────────────
 function renderVocab(){
-  const item=sessionItems[itemIdx], v=item.vocab, answer=v.answer;
+  const item=sessionItems[itemIdx], v=item[VERSIONS[curVer].vocabKey], answer=v.answer;
   setProgress(itemIdx*2);
   renderStepBanner(1, '');
   let hintLevel=0, done=false;
 
-  const ko=v.koLines.map(koHtml).join('');
+  // 버전 A는 번역 안의 [뜻]이 초록으로 표시되지만, 버전 B(표현 문장)엔 그 마크업이 없어
+  // 어휘의 뜻을 별도 줄로 보여준다 — 두 버전이 같은 만큼의 단서를 주도록.
+  const ko=v.koLines.map(koHtml).join('')
+    + (v.hint ? `<div class="chat-ko b-hint">빈칸 뜻 <span class="tgt">${escapeHtml(v.hint)}</span></div>` : '');
   const en=v.enLines.map(ln=>`<div class="chat-en">${escapeHtml(ln).replace(/\[[^\]]+\]/,
       `<input class="blank" id="vin" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done" />`)}</div>`).join('');
 
@@ -620,27 +634,13 @@ function hlWord(sent, word, cls){
     return escapeHtml(m[1])+`<span class="${cls}">${escapeHtml(m[2])}</span>`+escapeHtml(m[3]);
   }).join('');
 }
-// 표현 문장 렌더: `[...]` 구간(핵심 표현)은 형광펜, 그 뒤(단어가 바뀌는 영역)는 밑줄,
-// 그 안의 해당 어휘는 초록. 문법엔 core 구간이 없어 어휘만 강조하는 폴백으로 동작한다.
-function hlExpr(sent, core, word, cls){
-  cls=cls||'tgt';
-  const s=String(sent);
-  const i = core ? s.toLowerCase().indexOf(String(core).toLowerCase()) : -1;
-  if(i<0) return hlWord(s, word, cls);
-  const head=s.slice(0,i), mid=s.slice(i,i+core.length), tail=s.slice(i+core.length);
-  return hlWord(head, word, cls)
-    + `<span class="core">${hlWord(mid, word, cls)}</span>`
-    + (tail.trim() ? `<span class="rest">${hlWord(tail, word, cls)}</span>` : escapeHtml(tail));
-}
-
 // 배열 전: 이번에 뭘 배우는지 + 그게 얼마나 쓸모있는지(활용 규모)를 한눈에.
-// 영어 프레임(pattern_en)은 정답 순서가 새므로 여기서 노출하지 않는다.
+// 영어 프레임(패턴 형태)은 정답 어순이 새므로 여기서 노출하지 않는다 — 정답 후 보상에서 공개.
 function learnBoxHtml(item){
-  const s=item.sentence, isG=curMode==='grammar';
-  const pat=(s.pattern_kr||'').trim();   // 한국어 뜻만 (영어 틀은 정답이 새므로 제외)
-  if(!pat) return `<div class="learn-box"><div class="learn-pat">초록색 단어를 넣어 문장을 완성해요</div></div>`;
+  const pat=((item.pattern||{}).meaning||'').trim();   // 한국어 뜻만 (영어 틀은 정답이 새므로 제외)
+  if(!pat) return `<div class="learn-box"><div class="learn-pat">단어를 순서대로 놓아 문장을 완성해요</div></div>`;
   return `<div class="learn-box">
-      <div class="learn-label">이번에 배울 ${isG?'문법':'표현'}</div>
+      <div class="learn-label">이번에 배울 표현</div>
       <div class="learn-pat">${escapeHtml(pat)}</div>
     </div>`;
 }
@@ -648,22 +648,21 @@ function learnBoxHtml(item){
 // 정답 후: 숨겨뒀던 '재사용 프레임'을 공개하고, 단어만 바꾼 실제 예문으로
 // "이제 이런 말도 할 수 있다"는 효용을 눈으로 확인시킨다.
 function patternPayoffHtml(item){
-  const s=item.sentence, isG=curMode==='grammar';
-  const patEn=(s.pattern_en||'').trim(), patKr=(s.pattern_kr||'').trim();
-  const sibs=(s.siblings||[]).slice(0,2);
-  if(!patEn && !patKr && !sibs.length) return '';
-  let frame='';
-  if(!isG && patEn){
-    frame=`<div class="frame"><div class="frame-en">${escapeHtml(patEn).replace(/~/g,'<span class="slot"></span>')}</div>${patKr?`<div class="frame-kr">${escapeHtml(patKr)}</div>`:''}</div>`;
-  } else if(patKr){
-    frame=`<div class="frame"><div class="frame-en">${escapeHtml(patKr)}</div></div>`;
-  }
+  const p=item.pattern||{}, form=(p.form||'').trim(), pmean=(p.meaning||'').trim(), pdesc=(p.desc||'').trim();
+  const sibs=(item.siblings||[]).slice(0,2);
+  if(!form && !pmean && !sibs.length) return '';
+  // 재사용 프레임: 데이터의 `카드 초록(형태)`에서 슬롯(______ / ~)을 빈칸으로 그린다
+  const frame = form ? `<div class="frame">
+      <div class="frame-en">${escapeHtml(form).replace(/_{2,}|~/g,'<span class="slot"></span>')}</div>
+      ${pmean?`<div class="frame-kr">${escapeHtml(pmean)}</div>`:''}
+    </div>` : '';
+  const desc = pdesc ? `<div class="frame-desc">💡 ${escapeHtml(pdesc)}</div>` : '';
   const exs=sibs.map(x=>
-    `<div class="swap-ex"><div class="swap-en">${hlExpr(x.en, x.coreEn||(!isG?patEn:''), x.word, 'sw')}</div><div class="swap-kr">${escapeHtml(x.kr)}</div></div>`).join('');
-  const label = sibs.length ? `<div class="swap-label">단어만 바꿔서 이렇게도 말할 수 있어요</div>` : '';
+    `<div class="swap-ex"><div class="swap-en">${escapeHtml(x.en)}</div><div class="swap-kr">${escapeHtml(x.kr)}</div></div>`).join('');
+  const label = sibs.length ? `<div class="swap-label">이 표현으로 이렇게도 말할 수 있어요</div>` : '';
   return `<div class="payoff">
-      <div class="payoff-top">🎉 새로운 ${isG?'문법':'표현'}을 배웠어요</div>
-      ${frame}${label}${exs}
+      <div class="payoff-top">🎉 새로운 표현을 배웠어요</div>
+      ${frame}${desc}${label}${exs}
     </div>`;
 }
 
@@ -753,7 +752,7 @@ function renderArrange(){
     // 완성 문장(트리거 초록) → 그 아래 프레임·응용 예문 순서로 보여준다
     el('patBox').innerHTML='';
     el('micFloat').classList.add('hidden');
-    fillEl.innerHTML=`<div style="font-size:19px;font-weight:800;color:#2f3e52;line-height:1.5">${hlExpr(s.en, s.coreEn, s.trigger)}</div>`;
+    fillEl.innerHTML=`<div style="font-size:19px;font-weight:800;color:#2f3e52;line-height:1.5">${hlWord(s.en, s.trigger, 'tgt')}</div>`;
     el('payoffBox').innerHTML=patternPayoffHtml(item);
     const last=itemIdx>=sessionItems.length-1;
     el('bottom').innerHTML=`<button class="btn-next" id="nextBtn">${last?'완료하기 🎉':'다음 문제 ▶'}</button>`;
@@ -776,11 +775,11 @@ function renderArrange(){
 
 // ── 완료 ──────────────────────────────────────────────────────────────────────
 function renderDone(){
-  setPos(curMode, sessionItems.length);
+  setPos(sessionItems.length);
   topbar.classList.add('hidden'); stage.classList.remove('hidden'); home.classList.add('hidden');
   renderStepBanner(0);
   const items=learned.length?learned:sessionItems;
-  const modeWord = curMode==='grammar' ? '문법' : '표현';
+  const modeWord = '표현';
   stage.innerHTML=`<div class="done">
     <div class="emoji">🎉</div>
     <h2>${items.length}문항 완료!</h2>
@@ -794,7 +793,7 @@ function renderDone(){
       <button class="btn" id="homeBtn">홈으로</button>
     </div>
   </div>`;
-  el('againBtn').onclick=()=>{ setPos(curMode,0); startSession(0); };
+  el('againBtn').onclick=()=>{ setPos(0); startSession(0); };
   el('homeBtn').onclick=()=>renderHome();
 }
 </script>
