@@ -174,8 +174,9 @@ def words(sent):
     return WORD.findall(re.sub(r"[.?!]+$", "", sent.strip()))
 
 
-# 기능어만으로 이뤄진 프레임은 실제 패턴이 아니다
-# (`Can/Could you ~?`에서 `you`+`me`가 뽑히면 정작 `Can/Could`가 빠진다).
+# 흩어진 기능어 조각들은 실제 패턴이 아니다 — `Can/Could you ~?`에서 `you` … `me`가
+# 뽑히면 정작 `Can/Could`가 빠진다. 반면 **붙어 있는 한 덩어리**는 기능어만이어도
+# 정상 패턴이다(`Was it`, `Did you`, `Do you`)므로 이 검사는 두 조각 이상에만 쓴다.
 FUNCTION_WORDS = {
     "i", "you", "he", "she", "it", "we", "they", "me", "him", "her", "us", "them",
     "my", "your", "his", "its", "our", "their", "mine", "yours",
@@ -239,7 +240,7 @@ def frame_candidates(base, other):
         cand = trim_determiners(cand)
         if cand is None or sum(len(x.split()) for x in cand) < MIN_FRAME_WORDS:
             return
-        if not has_content(cand):
+        if len(cand) > 1 and not has_content(cand):
             return
         key = tuple(x.lower() for x in cand)
         if key in seen:

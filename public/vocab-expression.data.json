@@ -403,6 +403,192 @@
       ]
     },
     {
+      "trigger": "bad",
+      "word": "bad",
+      "meaning": "<품질이나 기분에 미치는 영향이> 나쁜, 안 좋은, 형편없는, 불쾌한",
+      "pos": "adjective",
+      "cefr": "A1",
+      "level": 4,
+      "rank": 708,
+      "vocabA": {
+        "answer": "bad",
+        "enLines": [
+          "There's good news and there's [bad] news."
+        ],
+        "koLines": [
+          "좋은 소식과 [나쁜] 소식이 있어."
+        ]
+      },
+      "vocabB": {
+        "answer": "bad",
+        "enLines": [
+          "Was it [bad]?"
+        ],
+        "koLines": [
+          "별로였어?"
+        ],
+        "hint": "나쁜, 안 좋은, 형편없는"
+      },
+      "sentence": {
+        "en": "Was it bad?",
+        "kr": "별로였어?",
+        "trigger": "bad"
+      },
+      "pattern": {
+        "form": "Was / Were + 주어 + ______ ?",
+        "meaning": "~였어? / ~했었어?",
+        "desc": "과거의 상태를 물을 때. 주어가 복수면 were"
+      },
+      "frame": [
+        "Was it"
+      ],
+      "baseSegs": [
+        {
+          "t": "frame",
+          "s": "Was it"
+        },
+        {
+          "t": "slot",
+          "s": "bad"
+        }
+      ],
+      "apply": [
+        {
+          "en": "Was it fun?",
+          "kr": "재밌었어?",
+          "segs": [
+            {
+              "t": "frame",
+              "s": "Was it"
+            },
+            {
+              "t": "slot",
+              "s": "fun"
+            }
+          ],
+          "punct": "?"
+        },
+        {
+          "en": "Was it the same doctor?",
+          "kr": "같은 의사 선생님이었어?",
+          "segs": [
+            {
+              "t": "frame",
+              "s": "Was it"
+            },
+            {
+              "t": "slot",
+              "s": "the same doctor"
+            }
+          ],
+          "punct": "?"
+        }
+      ],
+      "siblings": [
+        {
+          "en": "Was it fun?",
+          "kr": "재밌었어?"
+        },
+        {
+          "en": "Were they busy?",
+          "kr": "그 사람들 바빴어?"
+        }
+      ]
+    },
+    {
+      "trigger": "large",
+      "word": "large",
+      "meaning": "<크기가> 큰, 대형의",
+      "pos": "adjective",
+      "cefr": "A1",
+      "level": 4,
+      "rank": 729,
+      "vocabA": {
+        "answer": "large",
+        "enLines": [
+          "Could you bring me a [large] box, please?"
+        ],
+        "koLines": [
+          "[큰] 치수의 상자 하나 갖다 주실래요?"
+        ]
+      },
+      "vocabB": {
+        "answer": "large",
+        "enLines": [
+          "Is it small or [large]?"
+        ],
+        "koLines": [
+          "작은 거야, [큰] 거야?"
+        ],
+        "hint": ""
+      },
+      "sentence": {
+        "en": "Is it small or large?",
+        "kr": "작은 거야, 큰 거야?",
+        "trigger": "large"
+      },
+      "pattern": {
+        "form": "Is / Are + 주어 + ______ or ______ ?",
+        "meaning": "~야, 아니면 ~야?",
+        "desc": ""
+      },
+      "frame": [
+        "Is it"
+      ],
+      "baseSegs": [
+        {
+          "t": "frame",
+          "s": "Is it"
+        },
+        {
+          "t": "slot",
+          "s": "small or large"
+        }
+      ],
+      "apply": [
+        {
+          "en": "Is it a cat or a dog?",
+          "kr": "고양이야, 강아지야?",
+          "segs": [
+            {
+              "t": "frame",
+              "s": "Is it"
+            },
+            {
+              "t": "slot",
+              "s": "a cat or a dog"
+            }
+          ],
+          "punct": "?"
+        },
+        {
+          "en": "Is it Sunday or Monday today?",
+          "kr": "오늘이 일요일이야, 월요일이야?",
+          "segs": [
+            {
+              "t": "frame",
+              "s": "Is it"
+            },
+            {
+              "t": "slot",
+              "s": "Sunday or Monday today"
+            }
+          ],
+          "punct": "?"
+        }
+      ],
+      "siblings": [
+        {
+          "en": "Are they young or old?",
+          "kr": "그 사람들 젊어, 나이 드셨어?"
+        },
+        {
+          "en": "Is he hungry or sleepy?",
+          "kr": "걔 배고픈 거야, 졸린 거야?"
+        }
+      ]
+    },
+    {
       "trigger": "ice cream",
       "word": "ice cream",
       "meaning": "아이스크림",
@@ -440,16 +626,16 @@
         "desc": "주어가 3인칭 단수면 Does로 시작해요"
       },
       "frame": [
-        "Do you like"
+        "Do you"
       ],
       "baseSegs": [
         {
           "t": "frame",
-          "s": "Do you like"
+          "s": "Do you"
         },
         {
           "t": "slot",
-          "s": "ice cream"
+          "s": "like ice cream"
         }
       ],
       "apply": [
@@ -459,11 +645,26 @@
           "segs": [
             {
               "t": "frame",
-              "s": "Do you like"
+              "s": "Do you"
             },
             {
               "t": "slot",
-              "s": "chocolate"
+              "s": "like chocolate"
+            }
+          ],
+          "punct": "?"
+        },
+        {
+          "en": "Do you play the guitar?",
+          "kr": "기타 칠 줄 알아?",
+          "segs": [
+            {
+              "t": "frame",
+              "s": "Do you"
+            },
+            {
+              "t": "slot",
+              "s": "play the guitar"
             }
           ],
           "punct": "?"
@@ -619,6 +820,101 @@
       ]
     },
     {
+      "trigger": "answer",
+      "word": "answer",
+      "meaning": "대답하다, 응답하다",
+      "pos": "verb",
+      "cefr": "A1",
+      "level": 4,
+      "rank": 792,
+      "vocabA": {
+        "answer": "answer",
+        "enLines": [
+          "You didn't [answer] the question."
+        ],
+        "koLines": [
+          "(토론 중에, 상대방이 질문을 회피하면서 자꾸 딴소리하자 하는 말)",
+          "질문에 대답 안 하셨어요.",
+          "( 당신은 질문에 [대답하]지 않았어요. )"
+        ]
+      },
+      "vocabB": {
+        "answer": "answer",
+        "enLines": [
+          "Did you [answer]?"
+        ],
+        "koLines": [
+          "너 [대답]했어?"
+        ],
+        "hint": ""
+      },
+      "sentence": {
+        "en": "Did you answer?",
+        "kr": "너 대답했어?",
+        "trigger": "answer"
+      },
+      "pattern": {
+        "form": "Did + 주어 + ______ ?",
+        "meaning": "~했어?",
+        "desc": ""
+      },
+      "frame": [
+        "Did you"
+      ],
+      "baseSegs": [
+        {
+          "t": "frame",
+          "s": "Did you"
+        },
+        {
+          "t": "slot",
+          "s": "answer"
+        }
+      ],
+      "apply": [
+        {
+          "en": "Did you hear that?",
+          "kr": "너 그거 들었어?",
+          "segs": [
+            {
+              "t": "frame",
+              "s": "Did you"
+            },
+            {
+              "t": "slot",
+              "s": "hear that"
+            }
+          ],
+          "punct": "?"
+        },
+        {
+          "en": "Did you watch the game?",
+          "kr": "너 그 경기 봤어?",
+          "segs": [
+            {
+              "t": "frame",
+              "s": "Did you"
+            },
+            {
+              "t": "slot",
+              "s": "watch the game"
+            }
+          ],
+          "punct": "?"
+        }
+      ],
+      "siblings": [
+        {
+          "en": "Did they win?",
+          "kr": "걔네 이겼어?"
+        },
+        {
+          "en": "Did you hear that?",
+          "kr": "너 그거 들었어?"
+        }
+      ]
+    },
+    {
       "trigger": "drive",
       "word": "drive",
       "meaning": "<자동차를> 몰다, 운전하다",
@@ -702,6 +998,112 @@
         {
           "en": "Aren't they busy?",
           "kr": "그 사람들 안 바빠?"
+        }
+      ]
+    },
+    {
+      "trigger": "send",
+      "word": "send",
+      "meaning": "<택배, 편지 등을> 보내다, 발송하다",
+      "pos": "verb",
+      "cefr": "A1",
+      "level": 4,
+      "rank": 854,
+      "vocabA": {
+        "answer": "send",
+        "enLines": [
+          "I'll [send] it to you tomorrow."
+        ],
+        "koLines": [
+          "그거 내일 너한테 [보내줄]게.",
+          "(편지, 택배 등을 어딘가로 보낸다는 뜻)"
+        ]
+      },
+      "vocabB": {
+        "answer": "send",
+        "enLines": [
+          "What did you [send]?"
+        ],
+        "koLines": [
+          "뭘 보냈어?"
+        ],
+        "hint": "보내다, 발송하다"
+      },
+      "sentence": {
+        "en": "What did you send?",
+        "kr": "뭘 보냈어?",
+        "trigger": "send"
+      },
+      "pattern": {
+        "form": "의문사 + do / did + 주어 + ______ ?",
+        "meaning": "뭘 / 어떻게 / 어디서 ~했어?",
+        "desc": "What·Who·How·Where·Why가 모두 같은 자리에 와요"
+      },
+      "frame": [
+        "did you"
+      ],
+      "baseSegs": [
+        {
+          "t": "slot",
+          "s": "What"
+        },
+        {
+          "t": "frame",
+          "s": "did you"
+        },
+        {
+          "t": "slot",
+          "s": "send"
+        }
+      ],
+      "apply": [
+        {
+          "en": "When did you go there?",
+          "kr": "거기 언제 갔었어?",
+          "segs": [
+            {
+              "t": "slot",
+              "s": "When"
+            },
+            {
+              "t": "frame",
+              "s": "did you"
+            },
+            {
+              "t": "slot",
+              "s": "go there"
+            }
+          ],
+          "punct": "?"
+        },
+        {
+          "en": "How did you answer that question?",
+          "kr": "그 질문에 어떻게 대답했어?",
+          "segs": [
+            {
+              "t": "slot",
+              "s": "How"
+            },
+            {
+              "t": "frame",
+              "s": "did you"
+            },
+            {
+              "t": "slot",
+              "s": "answer that question"
+            }
+          ],
+          "punct": "?"
+        }
+      ],
+      "siblings": [
+        {
+          "en": "When did you go there?",
+          "kr": "거기 언제 갔었어?"
+        },
+        {
+          "en": "What do you think?",
+          "kr": "어떻게 생각해?"
         }
       ]
     },
@@ -1041,6 +1443,92 @@
         {
           "en": "He's an interesting guy.",
           "kr": "그 사람 흥미로운 사람이야."
+        }
+      ]
+    },
+    {
+      "trigger": "airport",
+      "word": "airport",
+      "meaning": "공항",
+      "pos": "noun",
+      "cefr": "A1",
+      "level": 5,
+      "rank": 1093,
+      "vocabA": {
+        "answer": "airport",
+        "enLines": [
+          "We've got to go pick her up at the [airport]."
+        ],
+        "koLines": [
+          "[공항]에 가서 그녀를 태워 와야 해."
+        ]
+      },
+      "vocabB": {
+        "answer": "airport",
+        "enLines": [
+          "That bus goes to the [airport]."
+        ],
+        "koLines": [
+          "저 버스는 [공항]으로 가."
+        ],
+        "hint": ""
+      },
+      "sentence": {
+        "en": "That bus goes to the airport.",
+        "kr": "저 버스는 공항으로 가.",
+        "trigger": "airport"
+      },
+      "pattern": {
+        "form": "동사 + to + ______",
+        "meaning": "~로 가다 / ~에게 주다",
+        "desc": "to는 '~로'(방향)와 '~에게'(대상)에 모두 써요"
+      },
+      "frame": [
+        "to the"
+      ],
+      "baseSegs": [
+        {
+          "t": "slot",
+          "s": "That bus goes"
+        },
+        {
+          "t": "frame",
+          "s": "to the"
+        },
+        {
+          "t": "slot",
+          "s": "airport"
+        }
+      ],
+      "apply": [
+        {
+          "en": "We went to the park.",
+          "kr": "우리 공원에 갔었어.",
+          "segs": [
+            {
+              "t": "slot",
+              "s": "We went"
+            },
+            {
+              "t": "frame",
+              "s": "to the"
+            },
+            {
+              "t": "slot",
+              "s": "park"
+            }
+          ],
+          "punct": "."
+        }
+      ],
+      "siblings": [
+        {
+          "en": "He drives to school.",
+          "kr": "걔는 학교에 차로 가."
+        },
+        {
+          "en": "Go to your room.",
+          "kr": "방에 들어가."
         }
       ]
     },
@@ -1412,47 +1900,57 @@
         "desc": ""
       },
       "frame": [
-        "What's",
-        "of"
+        "of the"
       ],
       "baseSegs": [
         {
-          "t": "frame",
-          "s": "What's"
-        },
-        {
           "t": "slot",
-          "s": "the title"
+          "s": "What's the title"
         },
         {
           "t": "frame",
-          "s": "of"
+          "s": "of the"
         },
         {
           "t": "slot",
-          "s": "the book"
+          "s": "book"
         }
       ],
       "apply": [
         {
-          "en": "What's the name of that movie?",
-          "kr": "저 영화 제목이 뭐야?",
+          "en": "That's the end of the story.",
+          "kr": "그게 이야기의 끝이야.",
           "segs": [
             {
-              "t": "frame",
-              "s": "What's"
-            },
-            {
               "t": "slot",
-              "s": "the name"
+              "s": "That's the end"
             },
             {
               "t": "frame",
-              "s": "of"
+              "s": "of the"
             },
             {
               "t": "slot",
-              "s": "that movie"
+              "s": "story"
+            }
+          ],
+          "punct": "."
+        },
+        {
+          "en": "What happens at the end of the movie?",
+          "kr": "그 영화 마지막에 어떻게 돼?",
+          "segs": [
+            {
+              "t": "slot",
+              "s": "What happens at the end"
+            },
+            {
+              "t": "frame",
+              "s": "of the"
+            },
+            {
+              "t": "slot",
+              "s": "movie"
             }
           ],
           "punct": "?"
@@ -1955,6 +2453,85 @@
         {
           "en": "You can turn it off.",
           "kr": "꺼도 돼."
+        }
+      ]
+    },
+    {
+      "trigger": "stay",
+      "word": "stay",
+      "meaning": "<다른 곳에 가지 않고> 머무르다, 남다",
+      "pos": "verb",
+      "cefr": "A2",
+      "level": 6,
+      "rank": 1538,
+      "vocabA": {
+        "answer": "stay",
+        "enLines": [
+          "I'll just [stay] here with Miranda."
+        ],
+        "koLines": [
+          "나는 그냥 미란다랑 여기에 [남을]게.",
+          "(다른 곳에 가지 않고 머무르는 것을 뜻하는 표현)"
+        ]
+      },
+      "vocabB": {
+        "answer": "stay",
+        "enLines": [
+          "I can [stay]."
+        ],
+        "koLines": [
+          "나 있어도 돼."
+        ],
+        "hint": "머무르다, 남다"
+      },
+      "sentence": {
+        "en": "I can stay.",
+        "kr": "나 있어도 돼.",
+        "trigger": "stay"
+      },
+      "pattern": {
+        "form": "주어 + can + ______ .",
+        "meaning": "~할 수 있어",
+        "desc": "능력('할 줄 알아')과 허락('해도 돼')에 모두 써요"
+      },
+      "frame": [
+        "I can"
+      ],
+      "baseSegs": [
+        {
+          "t": "frame",
+          "s": "I can"
+        },
+        {
+          "t": "slot",
+          "s": "stay"
+        }
+      ],
+      "apply": [
+        {
+          "en": "I can carry that for you.",
+          "kr": "그거 내가 들어 줄 수 있어.",
+          "segs": [
+            {
+              "t": "frame",
+              "s": "I can"
+            },
+            {
+              "t": "slot",
+              "s": "carry that for you"
+            }
+          ],
+          "punct": "."
+        }
+      ],
+      "siblings": [
+        {
+          "en": "She can swim.",
+          "kr": "걔는 수영할 줄 알아."
+        },
+        {
+          "en": "He can speak English.",
+          "kr": "걔는 영어를 할 줄 알아."
         }
       ]
     },
@@ -2934,6 +3511,192 @@
       ]
     },
     {
+      "trigger": "lemonade",
+      "word": "lemonade",
+      "meaning": "레모네이드",
+      "pos": "noun",
+      "cefr": "A1",
+      "level": 6,
+      "rank": 1726,
+      "vocabA": {
+        "answer": "lemonade",
+        "enLines": [
+          "We used to sit out on the porch, drinking [lemonade] and chatting."
+        ],
+        "koLines": [
+          "우리는 현관에 앉아서 [레모네이드]를 마시고 잡담을 나누곤 했지."
+        ]
+      },
+      "vocabB": {
+        "answer": "lemonade",
+        "enLines": [
+          "How about a [lemonade]?"
+        ],
+        "koLines": [
+          "[레모네이드]는 어때?"
+        ],
+        "hint": ""
+      },
+      "sentence": {
+        "en": "How about a lemonade?",
+        "kr": "레모네이드는 어때?",
+        "trigger": "lemonade"
+      },
+      "pattern": {
+        "form": "How about ______ ?",
+        "meaning": "~는 어때?",
+        "desc": ""
+      },
+      "frame": [
+        "How about"
+      ],
+      "baseSegs": [
+        {
+          "t": "frame",
+          "s": "How about"
+        },
+        {
+          "t": "slot",
+          "s": "a lemonade"
+        }
+      ],
+      "apply": [
+        {
+          "en": "How about a necklace?",
+          "kr": "목걸이는 어때?",
+          "segs": [
+            {
+              "t": "frame",
+              "s": "How about"
+            },
+            {
+              "t": "slot",
+              "s": "a necklace"
+            }
+          ],
+          "punct": "?"
+        },
+        {
+          "en": "How about Thursday?",
+          "kr": "목요일은 어떠세요?",
+          "segs": [
+            {
+              "t": "frame",
+              "s": "How about"
+            },
+            {
+              "t": "slot",
+              "s": "Thursday"
+            }
+          ],
+          "punct": "?"
+        }
+      ],
+      "siblings": [
+        {
+          "en": "How about a necklace?",
+          "kr": "목걸이는 어때?"
+        },
+        {
+          "en": "How about Thursday?",
+          "kr": "목요일은 어떠세요?"
+        }
+      ]
+    },
+    {
+      "trigger": "follow",
+      "word": "follow",
+      "meaning": "<~의 뒤를> 따라가다, 따라오다, 따르다",
+      "pos": "verb",
+      "cefr": "A2",
+      "level": 6,
+      "rank": 1751,
+      "vocabA": {
+        "answer": "Follow",
+        "enLines": [
+          "[Follow] me."
+        ],
+        "koLines": [
+          "날 [따라와]."
+        ]
+      },
+      "vocabB": {
+        "answer": "follow",
+        "enLines": [
+          "Can you [follow] me?"
+        ],
+        "koLines": [
+          "따라와 줄래?"
+        ],
+        "hint": "따라가다, 따라오다"
+      },
+      "sentence": {
+        "en": "Can you follow me?",
+        "kr": "따라와 줄래?",
+        "trigger": "follow"
+      },
+      "pattern": {
+        "form": "Can / Could you ______ ?",
+        "meaning": "~해 줄래?",
+        "desc": "Could가 더 정중해요"
+      },
+      "frame": [
+        "Can you"
+      ],
+      "baseSegs": [
+        {
+          "t": "frame",
+          "s": "Can you"
+        },
+        {
+          "t": "slot",
+          "s": "follow me"
+        }
+      ],
+      "apply": [
+        {
+          "en": "Can you stop?",
+          "kr": "그만해 줄래?",
+          "segs": [
+            {
+              "t": "frame",
+              "s": "Can you"
+            },
+            {
+              "t": "slot",
+              "s": "stop"
+            }
+          ],
+          "punct": "?"
+        },
+        {
+          "en": "Can you get me some water?",
+          "kr": "물 좀 갖다줄래?",
+          "segs": [
+            {
+              "t": "frame",
+              "s": "Can you"
+            },
+            {
+              "t": "slot",
+              "s": "get me some water"
+            }
+          ],
+          "punct": "?"
+        }
+      ],
+      "siblings": [
+        {
+          "en": "Can you stop?",
+          "kr": "그만해 줄래?"
+        },
+        {
+          "en": "Could you help me?",
+          "kr": "좀 도와주시겠어요?"
+        }
+      ]
+    },
+    {
       "trigger": "menu",
       "word": "menu",
       "meaning": "메뉴, 메뉴판 <음식점에서 파는 음식의 종류와 가격을 적은 판>",
@@ -3193,6 +3956,99 @@
         {
           "en": "He never showed up?",
           "kr": "끝까지 안 나타났다고?"
+        }
+      ]
+    },
+    {
+      "trigger": "explain",
+      "word": "explain",
+      "meaning": "설명하다",
+      "pos": "verb",
+      "cefr": "A2",
+      "level": 6,
+      "rank": 1800,
+      "vocabA": {
+        "answer": "explain",
+        "enLines": [
+          "Can someone please [explain] to me what just happened?"
+        ],
+        "koLines": [
+          "지금 무슨 일이 벌어진 건지 누가 저한테 좀 [설명해] 줄래요?"
+        ]
+      },
+      "vocabB": {
+        "answer": "explain",
+        "enLines": [
+          "Can I [explain]?"
+        ],
+        "koLines": [
+          "내가 [설명]해도 될까?"
+        ],
+        "hint": ""
+      },
+      "sentence": {
+        "en": "Can I explain?",
+        "kr": "내가 설명해도 될까?",
+        "trigger": "explain"
+      },
+      "pattern": {
+        "form": "Can / Could I ______ ?",
+        "meaning": "~해도 될까?",
+        "desc": ""
+      },
+      "frame": [
+        "Can I"
+      ],
+      "baseSegs": [
+        {
+          "t": "frame",
+          "s": "Can I"
+        },
+        {
+          "t": "slot",
+          "s": "explain"
+        }
+      ],
+      "apply": [
+        {
+          "en": "Can I come?",
+          "kr": "나도 가도 돼?",
+          "segs": [
+            {
+              "t": "frame",
+              "s": "Can I"
+            },
+            {
+              "t": "slot",
+              "s": "come"
+            }
+          ],
+          "punct": "?"
+        },
+        {
+          "en": "Can I join you?",
+          "kr": "나도 껴도 돼?",
+          "segs": [
+            {
+              "t": "frame",
+              "s": "Can I"
+            },
+            {
+              "t": "slot",
+              "s": "join you"
+            }
+          ],
+          "punct": "?"
+        }
+      ],
+      "siblings": [
+        {
+          "en": "Can I come?",
+          "kr": "나도 가도 돼?"
+        },
+        {
+          "en": "You can try.",
+          "kr": "해봐도 돼."
         }
       ]
     },
@@ -3484,12 +4340,16 @@
         "desc": ""
       },
       "frame": [
-        "I'm about to"
+        "about to"
       ],
       "baseSegs": [
         {
+          "t": "slot",
+          "s": "I'm"
+        },
+        {
           "t": "frame",
-          "s": "I'm about to"
+          "s": "about to"
         },
         {
           "t": "slot",
@@ -3502,12 +4362,35 @@
           "kr": "지금 막 버스에서 내리려고.",
           "segs": [
             {
+              "t": "slot",
+              "s": "I'm"
+            },
+            {
               "t": "frame",
-              "s": "I'm about to"
+              "s": "about to"
             },
             {
               "t": "slot",
               "s": "get off the bus"
+            }
+          ],
+          "punct": "."
+        },
+        {
+          "en": "It's just about to start.",
+          "kr": "이제 막 시작하려는 참이야.",
+          "segs": [
+            {
+              "t": "slot",
+              "s": "It's just"
+            },
+            {
+              "t": "frame",
+              "s": "about to"
+            },
+            {
+              "t": "slot",
+              "s": "start"
             }
           ],
           "punct": "."
@@ -3631,6 +4514,84 @@
       ]
     },
     {
+      "trigger": "handle",
+      "word": "handle",
+      "meaning": "<상황, 사람, 작업, 감정 등을> 다루다, 처리하다",
+      "pos": "verb",
+      "cefr": "A2",
+      "level": 6,
+      "rank": 1875,
+      "vocabA": {
+        "answer": "handling",
+        "enLines": [
+          "He's very good at [handling] stress when he has a lot of work to do."
+        ],
+        "koLines": [
+          "그는 할 일이 많을 때도 스트레스를 아주 잘 [다뤄]."
+        ]
+      },
+      "vocabB": {
+        "answer": "handle",
+        "enLines": [
+          "Can you [handle] it?"
+        ],
+        "koLines": [
+          "감당할 수 있겠어?"
+        ],
+        "hint": "다루다, 처리하다"
+      },
+      "sentence": {
+        "en": "Can you handle it?",
+        "kr": "감당할 수 있겠어?",
+        "trigger": "handle"
+      },
+      "pattern": {
+        "form": "Can + 주어 + ______ ?",
+        "meaning": "~할 수 있어?",
+        "desc": "주어가 you 말고 she·they·he로도 바뀌어요"
+      },
+      "frame": [
+        "Can you"
+      ],
+      "baseSegs": [
+        {
+          "t": "frame",
+          "s": "Can you"
+        },
+        {
+          "t": "slot",
+          "s": "handle it"
+        }
+      ],
+      "apply": [
+        {
+          "en": "Can you finish it today?",
+          "kr": "오늘 안에 끝낼 수 있어?",
+          "segs": [
+            {
+              "t": "frame",
+              "s": "Can you"
+            },
+            {
+              "t": "slot",
+              "s": "finish it today"
+            }
+          ],
+          "punct": "?"
+        }
+      ],
+      "siblings": [
+        {
+          "en": "Can she speak English?",
+          "kr": "걔 영어 할 줄 알아?"
+        },
+        {
+          "en": "Can penguins fly?",
+          "kr": "펭귄은 날 수 있어?"
+        }
+      ]
+    },
+    {
       "trigger": "prefer",
       "word": "prefer",
       "meaning": "<다른 것보다> ~을 더 좋아하다, 선호하다",
@@ -3705,6 +4666,112 @@
         {
           "en": "Which one is yours?",
           "kr": "어느 게 네 거야?"
+        }
+      ]
+    },
+    {
+      "trigger": "similar",
+      "word": "similar",
+      "meaning": "비슷한, 유사한, 닮은",
+      "pos": "adjective",
+      "cefr": "A2",
+      "level": 6,
+      "rank": 1900,
+      "vocabA": {
+        "answer": "similar",
+        "enLines": [
+          "You guys look so [similar]. Are you sisters?"
+        ],
+        "koLines": [
+          "너희 너무 닮았어. 둘이 자매야?",
+          "( ... 너무 [비슷해] 보여. )"
+        ]
+      },
+      "vocabB": {
+        "answer": "similar",
+        "enLines": [
+          "It could be [similar]."
+        ],
+        "koLines": [
+          "[비슷]할 수도 있어."
+        ],
+        "hint": ""
+      },
+      "sentence": {
+        "en": "It could be similar.",
+        "kr": "비슷할 수도 있어.",
+        "trigger": "similar"
+      },
+      "pattern": {
+        "form": "주어 + can / could + be + ______ .",
+        "meaning": "~일 수도 있어",
+        "desc": "can't be는 '못 한다'가 아니라 '~일 리 없다'예요"
+      },
+      "frame": [
+        "could be"
+      ],
+      "baseSegs": [
+        {
+          "t": "slot",
+          "s": "It"
+        },
+        {
+          "t": "frame",
+          "s": "could be"
+        },
+        {
+          "t": "slot",
+          "s": "similar"
+        }
+      ],
+      "apply": [
+        {
+          "en": "That could be true.",
+          "kr": "그게 사실일 수도 있어.",
+          "segs": [
+            {
+              "t": "slot",
+              "s": "That"
+            },
+            {
+              "t": "frame",
+              "s": "could be"
+            },
+            {
+              "t": "slot",
+              "s": "true"
+            }
+          ],
+          "punct": "."
+        },
+        {
+          "en": "There could be another answer.",
+          "kr": "다른 답이 있을 수도 있어.",
+          "segs": [
+            {
+              "t": "slot",
+              "s": "There"
+            },
+            {
+              "t": "frame",
+              "s": "could be"
+            },
+            {
+              "t": "slot",
+              "s": "another answer"
+            }
+          ],
+          "punct": "."
+        }
+      ],
+      "siblings": [
+        {
+          "en": "That could be true.",
+          "kr": "그게 사실일 수도 있어."
+        },
+        {
+          "en": "That can't be real.",
+          "kr": "그게 진짜일 리가 없어."
         }
       ]
     },
@@ -3800,6 +4867,188 @@
         {
           "en": "I need three pieces of paper.",
           "kr": "종이 세 장이 필요해."
+        }
+      ]
+    },
+    {
+      "trigger": "join",
+      "word": "join",
+      "meaning": "<조직, 회사, 단체, 클럽 등에> 가입하다, 참가하다, 입사하다, 입회하다",
+      "pos": "verb",
+      "cefr": "A2",
+      "level": 6,
+      "rank": 1925,
+      "vocabA": {
+        "answer": "join",
+        "enLines": [
+          "Do you think I should [join] the dance team?",
+          "Of course, you should!"
+        ],
+        "koLines": [
+          "내가 댄스팀에 [들어가]야 한다고 생각해?",
+          "당연히 그래야지!",
+          "(단체 등에 가입한다는 뜻)"
+        ]
+      },
+      "vocabB": {
+        "answer": "join",
+        "enLines": [
+          "How can I [join]?"
+        ],
+        "koLines": [
+          "어떻게 하면 참여할 수 있나요?"
+        ],
+        "hint": "가입하다, 참가하다"
+      },
+      "sentence": {
+        "en": "How can I join?",
+        "kr": "어떻게 하면 참여할 수 있나요?",
+        "trigger": "join"
+      },
+      "pattern": {
+        "form": "의문사 + can + 주어 + ______ ?",
+        "meaning": "어떻게 ~할 수 있어?",
+        "desc": ""
+      },
+      "frame": [
+        "can I"
+      ],
+      "baseSegs": [
+        {
+          "t": "slot",
+          "s": "How"
+        },
+        {
+          "t": "frame",
+          "s": "can I"
+        },
+        {
+          "t": "slot",
+          "s": "join"
+        }
+      ],
+      "apply": [
+        {
+          "en": "What can I do for you?",
+          "kr": "무엇을 도와드릴까요?",
+          "segs": [
+            {
+              "t": "slot",
+              "s": "What"
+            },
+            {
+              "t": "frame",
+              "s": "can I"
+            },
+            {
+              "t": "slot",
+              "s": "do for you"
+            }
+          ],
+          "punct": "?"
+        }
+      ],
+      "siblings": [
+        {
+          "en": "When can we meet?",
+          "kr": "우리 언제 만날 수 있어?"
+        },
+        {
+          "en": "What can you see?",
+          "kr": "뭐가 보여?"
+        }
+      ]
+    },
+    {
+      "trigger": "step",
+      "word": "step",
+      "meaning": "단계",
+      "pos": "noun",
+      "cefr": "A2",
+      "level": 6,
+      "rank": 1938,
+      "vocabA": {
+        "answer": "step",
+        "enLines": [
+          "You must finish the first [step] before you move on to the second."
+        ],
+        "koLines": [
+          "두 번째 단계로 넘어가기 전에 첫 번째 [단계]부터 끝내야 해."
+        ]
+      },
+      "vocabB": {
+        "answer": "step",
+        "enLines": [
+          "Would you do the next [step]?"
+        ],
+        "koLines": [
+          "다음 [단계]도 해주시겠어요?"
+        ],
+        "hint": ""
+      },
+      "sentence": {
+        "en": "Would you do the next step?",
+        "kr": "다음 단계도 해주시겠어요?",
+        "trigger": "step"
+      },
+      "pattern": {
+        "form": "Would you ______ ?",
+        "meaning": "~해 주시겠어요?",
+        "desc": ""
+      },
+      "frame": [
+        "Would you"
+      ],
+      "baseSegs": [
+        {
+          "t": "frame",
+          "s": "Would you"
+        },
+        {
+          "t": "slot",
+          "s": "do the next step"
+        }
+      ],
+      "apply": [
+        {
+          "en": "Would you close the window?",
+          "kr": "창문 좀 닫아 주시겠어요?",
+          "segs": [
+            {
+              "t": "frame",
+              "s": "Would you"
+            },
+            {
+              "t": "slot",
+              "s": "close the window"
+            }
+          ],
+          "punct": "?"
+        },
+        {
+          "en": "Would you come with me?",
+          "kr": "같이 가 줄래?",
+          "segs": [
+            {
+              "t": "frame",
+              "s": "Would you"
+            },
+            {
+              "t": "slot",
+              "s": "come with me"
+            }
+          ],
+          "punct": "?"
+        }
+      ],
+      "siblings": [
+        {
+          "en": "Would you close the window?",
+          "kr": "창문 좀 닫아 주시겠어요?"
+        },
+        {
+          "en": "Would you come with me?",
+          "kr": "같이 가 줄래?"
         }
       ]
     },
@@ -4026,6 +5275,92 @@
         {
           "en": "I don't have any milk.",
           "kr": "우유가 하나도 없어."
+        }
+      ]
+    },
+    {
+      "trigger": "magazine",
+      "word": "magazine",
+      "meaning": "잡지",
+      "pos": "noun",
+      "cefr": "A2",
+      "level": 6,
+      "rank": 1975,
+      "vocabA": {
+        "answer": "magazine",
+        "enLines": [
+          "This [magazine] has lots of good information."
+        ],
+        "koLines": [
+          "이 [잡지]에는 좋은 정보가 많이 있어."
+        ]
+      },
+      "vocabB": {
+        "answer": "magazine",
+        "enLines": [
+          "She gave me a [magazine]."
+        ],
+        "koLines": [
+          "걔가 나한테 [잡지]를 줬어."
+        ],
+        "hint": ""
+      },
+      "sentence": {
+        "en": "She gave me a magazine.",
+        "kr": "걔가 나한테 잡지를 줬어.",
+        "trigger": "magazine"
+      },
+      "pattern": {
+        "form": "주어 + 동사 + 사람 + ______ .",
+        "meaning": "~에게 ~를 해주다",
+        "desc": "gave·send·asked·bought·wrote처럼 '~에게 ~를' 두 개를 나란히 쓰는 동사예요"
+      },
+      "frame": [
+        "me a"
+      ],
+      "baseSegs": [
+        {
+          "t": "slot",
+          "s": "She gave"
+        },
+        {
+          "t": "frame",
+          "s": "me a"
+        },
+        {
+          "t": "slot",
+          "s": "magazine"
+        }
+      ],
+      "apply": [
+        {
+          "en": "He asked me a question.",
+          "kr": "걔가 나한테 질문을 했어.",
+          "segs": [
+            {
+              "t": "slot",
+              "s": "He asked"
+            },
+            {
+              "t": "frame",
+              "s": "me a"
+            },
+            {
+              "t": "slot",
+              "s": "question"
+            }
+          ],
+          "punct": "."
+        }
+      ],
+      "siblings": [
+        {
+          "en": "Send her an email.",
+          "kr": "걔한테 이메일 보내."
+        },
+        {
+          "en": "He asked me a question.",
+          "kr": "걔가 나한테 질문을 했어."
         }
       ]
     },
@@ -4610,1425 +5945,6 @@
         {
           "en": "It's time for school.",
           "kr": "학교 갈 시간이야."
-        }
-      ]
-    },
-    {
-      "trigger": "vanilla",
-      "word": "vanilla",
-      "meaning": "바닐라",
-      "pos": "noun",
-      "cefr": "A2",
-      "level": 7,
-      "rank": 2136,
-      "vocabA": {
-        "answer": "Vanilla",
-        "enLines": [
-          "What kind of ice cream do you want?",
-          "[Vanilla], please."
-        ],
-        "koLines": [
-          "어떤 아이스크림으로 드릴까요?",
-          "[바닐라]로 주세요.",
-          "<발음: vanilla의 발음은 \"버닐러 /vəˈnɪlə/\"에 가깝습니다.>"
-        ]
-      },
-      "vocabB": {
-        "answer": "vanilla",
-        "enLines": [
-          "Isn't there [vanilla]?"
-        ],
-        "koLines": [
-          "[바닐라]는 없어?"
-        ],
-        "hint": ""
-      },
-      "sentence": {
-        "en": "Isn't there vanilla?",
-        "kr": "바닐라는 없어?",
-        "trigger": "vanilla"
-      },
-      "pattern": {
-        "form": "Isn't / Wasn't there ______ ?",
-        "meaning": "~ 없어? / ~ 있지 않았어?",
-        "desc": ""
-      },
-      "frame": [
-        "Isn't there"
-      ],
-      "baseSegs": [
-        {
-          "t": "frame",
-          "s": "Isn't there"
-        },
-        {
-          "t": "slot",
-          "s": "vanilla"
-        }
-      ],
-      "apply": [
-        {
-          "en": "Isn't there a better picture?",
-          "kr": "더 나은 사진은 없어?",
-          "segs": [
-            {
-              "t": "frame",
-              "s": "Isn't there"
-            },
-            {
-              "t": "slot",
-              "s": "a better picture"
-            }
-          ],
-          "punct": "?"
-        }
-      ],
-      "siblings": [
-        {
-          "en": "Wasn't there a desk?",
-          "kr": "책상이 있지 않았어?"
-        },
-        {
-          "en": "Weren't there two windows?",
-          "kr": "창문이 두 개 있지 않았어?"
-        }
-      ]
-    },
-    {
-      "trigger": "channel",
-      "word": "channel",
-      "meaning": "<텔레비전, 라디오, 유튜브 등의> 채널",
-      "pos": "noun",
-      "cefr": "A2",
-      "level": 7,
-      "rank": 2163,
-      "vocabA": {
-        "answer": "channel",
-        "enLines": [
-          "Let's watch the sports [channel]."
-        ],
-        "koLines": [
-          "우리 스포츠 [채널] 보자."
-        ]
-      },
-      "vocabB": {
-        "answer": "channels",
-        "enLines": [
-          "How many [channels] do you get?"
-        ],
-        "koLines": [
-          "[채널]이 몇 개나 나와?"
-        ],
-        "hint": ""
-      },
-      "sentence": {
-        "en": "How many channels do you get?",
-        "kr": "채널이 몇 개나 나와?",
-        "trigger": "channel"
-      },
-      "pattern": {
-        "form": "How many / much ______ ?",
-        "meaning": "~가 몇 개야? / 얼마나 돼?",
-        "desc": "셀 수 있으면 many, 셀 수 없으면 much"
-      },
-      "frame": [
-        "How many"
-      ],
-      "baseSegs": [
-        {
-          "t": "frame",
-          "s": "How many"
-        },
-        {
-          "t": "slot",
-          "s": "channels do you get"
-        }
-      ],
-      "apply": [
-        {
-          "en": "How many people came to the party?",
-          "kr": "파티에 몇 명이나 왔어?",
-          "segs": [
-            {
-              "t": "frame",
-              "s": "How many"
-            },
-            {
-              "t": "slot",
-              "s": "people came to the party"
-            }
-          ],
-          "punct": "?"
-        },
-        {
-          "en": "How many languages can you speak?",
-          "kr": "몇 개 국어를 할 줄 알아?",
-          "segs": [
-            {
-              "t": "frame",
-              "s": "How many"
-            },
-            {
-              "t": "slot",
-              "s": "languages can you speak"
-            }
-          ],
-          "punct": "?"
-        }
-      ],
-      "siblings": [
-        {
-          "en": "How much milk is there?",
-          "kr": "우유가 얼마나 있어?"
-        },
-        {
-          "en": "How much time did it take?",
-          "kr": "시간이 얼마나 걸렸어?"
-        }
-      ]
-    },
-    {
-      "trigger": "data",
-      "word": "data",
-      "meaning": "데이터, 자료, 정보",
-      "pos": "noun",
-      "cefr": "A2",
-      "level": 7,
-      "rank": 2203,
-      "vocabA": {
-        "answer": "data",
-        "enLines": [
-          "Can you move the [data] on my computer to yours?"
-        ],
-        "koLines": [
-          "내 컴퓨터에 있는 [데이터]를 네 컴퓨터에 좀 옮겨줄래?",
-          "<data는 원래 datum의 복수형이지만, 현대영어에서는 불가산명사로 취급해서 단수로도 사용합니다.>"
-        ]
-      },
-      "vocabB": {
-        "answer": "data",
-        "enLines": [
-          "We have a lot of [data]."
-        ],
-        "koLines": [
-          "우린 [데이터]가 많아."
-        ],
-        "hint": ""
-      },
-      "sentence": {
-        "en": "We have a lot of data.",
-        "kr": "우린 데이터가 많아.",
-        "trigger": "data"
-      },
-      "pattern": {
-        "form": "a lot of ______",
-        "meaning": "많은 ~",
-        "desc": ""
-      },
-      "frame": [
-        "a lot of"
-      ],
-      "baseSegs": [
-        {
-          "t": "slot",
-          "s": "We have"
-        },
-        {
-          "t": "frame",
-          "s": "a lot of"
-        },
-        {
-          "t": "slot",
-          "s": "data"
-        }
-      ],
-      "apply": [
-        {
-          "en": "You ask a lot of questions.",
-          "kr": "넌 질문이 참 많구나.",
-          "segs": [
-            {
-              "t": "slot",
-              "s": "You ask"
-            },
-            {
-              "t": "frame",
-              "s": "a lot of"
-            },
-            {
-              "t": "slot",
-              "s": "questions"
-            }
-          ],
-          "punct": "."
-        },
-        {
-          "en": "A lot of people live in this city.",
-          "kr": "이 도시엔 많은 사람이 살아.",
-          "segs": [
-            {
-              "t": "frame",
-              "s": "A lot of"
-            },
-            {
-              "t": "slot",
-              "s": "people live in this city"
-            }
-          ],
-          "punct": "."
-        },
-        {
-          "en": "We don't have a lot of time.",
-          "kr": "시간이 많지 않아.",
-          "segs": [
-            {
-              "t": "slot",
-              "s": "We don't have"
-            },
-            {
-              "t": "frame",
-              "s": "a lot of"
-            },
-            {
-              "t": "slot",
-              "s": "time"
-            }
-          ],
-          "punct": "."
-        },
-        {
-          "en": "Do you have a lot of homework?",
-          "kr": "숙제 많아?",
-          "segs": [
-            {
-              "t": "slot",
-              "s": "Do you have"
-            },
-            {
-              "t": "frame",
-              "s": "a lot of"
-            },
-            {
-              "t": "slot",
-              "s": "homework"
-            }
-          ],
-          "punct": "?"
-        }
-      ],
-      "siblings": [
-        {
-          "en": "You ask a lot of questions.",
-          "kr": "넌 질문이 참 많구나."
-        },
-        {
-          "en": "A lot of people live in this city.",
-          "kr": "이 도시엔 많은 사람이 살아."
-        }
-      ]
-    },
-    {
-      "trigger": "uncle",
-      "word": "uncle",
-      "meaning": "삼촌, 외삼촌, 고모부, 이모부",
-      "pos": "noun",
-      "cefr": "A2",
-      "level": 7,
-      "rank": 2217,
-      "vocabA": {
-        "answer": "Uncle",
-        "enLines": [
-          "[Uncle] George is coming to visit tomorrow."
-        ],
-        "koLines": [
-          "내일 조지 [삼촌]이 오실 거야."
-        ]
-      },
-      "vocabB": {
-        "answer": "uncle",
-        "enLines": [
-          "My [uncle] takes care of me."
-        ],
-        "koLines": [
-          "저희 [삼촌]이 절 돌봐주세요."
-        ],
-        "hint": ""
-      },
-      "sentence": {
-        "en": "My uncle takes care of me.",
-        "kr": "저희 삼촌이 절 돌봐주세요.",
-        "trigger": "uncle"
-      },
-      "pattern": {
-        "form": "take care of ______",
-        "meaning": "~을 돌보다",
-        "desc": ""
-      },
-      "frame": [
-        "care of"
-      ],
-      "baseSegs": [
-        {
-          "t": "slot",
-          "s": "My uncle takes"
-        },
-        {
-          "t": "frame",
-          "s": "care of"
-        },
-        {
-          "t": "slot",
-          "s": "me"
-        }
-      ],
-      "apply": [
-        {
-          "en": "I can take care of her.",
-          "kr": "내가 그녀를 돌볼 수 있어.",
-          "segs": [
-            {
-              "t": "slot",
-              "s": "I can take"
-            },
-            {
-              "t": "frame",
-              "s": "care of"
-            },
-            {
-              "t": "slot",
-              "s": "her"
-            }
-          ],
-          "punct": "."
-        },
-        {
-          "en": "I'll take care of him.",
-          "kr": "내가 돌볼게.",
-          "segs": [
-            {
-              "t": "slot",
-              "s": "I'll take"
-            },
-            {
-              "t": "frame",
-              "s": "care of"
-            },
-            {
-              "t": "slot",
-              "s": "him"
-            }
-          ],
-          "punct": "."
-        }
-      ],
-      "siblings": [
-        {
-          "en": "I can take care of her.",
-          "kr": "내가 그녀를 돌볼 수 있어."
-        },
-        {
-          "en": "I'll take care of him.",
-          "kr": "내가 돌볼게."
-        }
-      ]
-    },
-    {
-      "trigger": "somewhere",
-      "word": "somewhere",
-      "meaning": "어딘가에, 어딘가에서, 어딘가에로",
-      "pos": "adverb",
-      "cefr": "A2",
-      "level": 7,
-      "rank": 2244,
-      "vocabA": {
-        "answer": "somewhere",
-        "enLines": [
-          "Haven't we met [somewhere] before?"
-        ],
-        "koLines": [
-          "우리 예전에 [어딘가에서] 만난 적 있지 않아요?"
-        ]
-      },
-      "vocabB": {
-        "answer": "somewhere",
-        "enLines": [
-          "I wrote it down [somewhere]."
-        ],
-        "koLines": [
-          "[어딘가에] 적어놨는데."
-        ],
-        "hint": ""
-      },
-      "sentence": {
-        "en": "I wrote it down somewhere.",
-        "kr": "어딘가에 적어놨는데.",
-        "trigger": "somewhere"
-      },
-      "pattern": {
-        "form": "write ______ down",
-        "meaning": "~을 적어두다",
-        "desc": ""
-      },
-      "frame": [
-        "it down"
-      ],
-      "baseSegs": [
-        {
-          "t": "slot",
-          "s": "I wrote"
-        },
-        {
-          "t": "frame",
-          "s": "it down"
-        },
-        {
-          "t": "slot",
-          "s": "somewhere"
-        }
-      ],
-      "apply": [
-        {
-          "en": "Did you write it down?",
-          "kr": "적어놨어?",
-          "segs": [
-            {
-              "t": "slot",
-              "s": "Did you write"
-            },
-            {
-              "t": "frame",
-              "s": "it down"
-            }
-          ],
-          "punct": "?"
-        }
-      ],
-      "siblings": [
-        {
-          "en": "Let me write this down.",
-          "kr": "잠깐 적을게."
-        },
-        {
-          "en": "Did you write it down?",
-          "kr": "적어놨어?"
-        }
-      ]
-    },
-    {
-      "trigger": "plan",
-      "word": "plan",
-      "meaning": "<친구들과 만나는 등의> 약속 <복수형으로 씀>",
-      "pos": "noun",
-      "cefr": "A2",
-      "level": 7,
-      "rank": 2257,
-      "vocabA": {
-        "answer": "plans",
-        "enLines": [
-          "I'd love to grab dinner with you, but I already have [plans]."
-        ],
-        "koLines": [
-          "너랑 같이 저녁 먹고 싶지만, 선약이 있어.",
-          "(친구랑 만나는 등의 약속을 뜻하는 표현)",
-          "<참고: have a plan이라고 하면 정말 거창한 계획이 있다는 뜻이 되니 주의하세요.>",
-          "( ... 이미 [약속]이 있어. )"
-        ]
-      },
-      "vocabB": {
-        "answer": "plans",
-        "enLines": [
-          "I have lots of [plans]."
-        ],
-        "koLines": [
-          "계획이 아주 많아."
-        ],
-        "hint": "약속"
-      },
-      "sentence": {
-        "en": "I have lots of plans.",
-        "kr": "계획이 아주 많아.",
-        "trigger": "plan"
-      },
-      "pattern": {
-        "form": "lots of ______",
-        "meaning": "아주 많은 ~",
-        "desc": ""
-      },
-      "frame": [
-        "have lots of"
-      ],
-      "baseSegs": [
-        {
-          "t": "slot",
-          "s": "I"
-        },
-        {
-          "t": "frame",
-          "s": "have lots of"
-        },
-        {
-          "t": "slot",
-          "s": "plans"
-        }
-      ],
-      "apply": [
-        {
-          "en": "We have lots of homework tonight.",
-          "kr": "오늘 밤 숙제가 엄청 많아.",
-          "segs": [
-            {
-              "t": "slot",
-              "s": "We"
-            },
-            {
-              "t": "frame",
-              "s": "have lots of"
-            },
-            {
-              "t": "slot",
-              "s": "homework tonight"
-            }
-          ],
-          "punct": "."
-        },
-        {
-          "en": "We have lots of food.",
-          "kr": "음식 많아.",
-          "segs": [
-            {
-              "t": "slot",
-              "s": "We"
-            },
-            {
-              "t": "frame",
-              "s": "have lots of"
-            },
-            {
-              "t": "slot",
-              "s": "food"
-            }
-          ],
-          "punct": "."
-        }
-      ],
-      "siblings": [
-        {
-          "en": "We have lots of homework tonight.",
-          "kr": "오늘 밤 숙제가 엄청 많아."
-        },
-        {
-          "en": "We have lots of food.",
-          "kr": "음식 많아."
-        }
-      ]
-    },
-    {
-      "trigger": "sign",
-      "word": "sign",
-      "meaning": "표지판, 간판",
-      "pos": "noun",
-      "cefr": "A2",
-      "level": 7,
-      "rank": 2271,
-      "vocabA": {
-        "answer": "sign",
-        "enLines": [
-          "The [sign] says Manhattan is ten miles away."
-        ],
-        "koLines": [
-          "[표지판]에 맨해튼까지 10마일 남았다고 쓰여있어."
-        ]
-      },
-      "vocabB": {
-        "answer": "sign",
-        "enLines": [
-          "What happened to that [sign]?"
-        ],
-        "koLines": [
-          "저 [표지판]에 무슨 일이 생긴 거야?"
-        ],
-        "hint": ""
-      },
-      "sentence": {
-        "en": "What happened to that sign?",
-        "kr": "저 표지판에 무슨 일이 생긴 거야?",
-        "trigger": "sign"
-      },
-      "pattern": {
-        "form": "What happened to ______ ?",
-        "meaning": "~에게 무슨 일이 생겼어?",
-        "desc": ""
-      },
-      "frame": [
-        "What happened to"
-      ],
-      "baseSegs": [
-        {
-          "t": "frame",
-          "s": "What happened to"
-        },
-        {
-          "t": "slot",
-          "s": "that sign"
-        }
-      ],
-      "apply": [
-        {
-          "en": "What happened to him!?",
-          "kr": "무슨 일 있었어!?",
-          "segs": [
-            {
-              "t": "frame",
-              "s": "What happened to"
-            },
-            {
-              "t": "slot",
-              "s": "him"
-            }
-          ],
-          "punct": "!?"
-        },
-        {
-          "en": "What happened to her?",
-          "kr": "걔 무슨 일 있었어?",
-          "segs": [
-            {
-              "t": "frame",
-              "s": "What happened to"
-            },
-            {
-              "t": "slot",
-              "s": "her"
-            }
-          ],
-          "punct": "?"
-        }
-      ],
-      "siblings": [
-        {
-          "en": "What happened to him!?",
-          "kr": "무슨 일 있었어!?"
-        },
-        {
-          "en": "What happened to her?",
-          "kr": "걔 무슨 일 있었어?"
-        }
-      ]
-    },
-    {
-      "trigger": "immediately",
-      "word": "immediately",
-      "meaning": "즉시, 즉각",
-      "pos": "adverb",
-      "cefr": "A2",
-      "level": 7,
-      "rank": 2284,
-      "vocabA": {
-        "answer": "immediately",
-        "enLines": [
-          "We have to take him to the hospital [immediately]."
-        ],
-        "koLines": [
-          "그를 [즉시] 병원에 데려가야 해."
-        ]
-      },
-      "vocabB": {
-        "answer": "immediately",
-        "enLines": [
-          "Go to bed [immediately]!"
-        ],
-        "koLines": [
-          "당장 자러 가!"
-        ],
-        "hint": "즉시, 즉각"
-      },
-      "sentence": {
-        "en": "Go to bed immediately!",
-        "kr": "당장 자러 가!",
-        "trigger": "immediately"
-      },
-      "pattern": {
-        "form": "go to bed",
-        "meaning": "자러 가다",
-        "desc": "the를 붙이지 않아요 (go to the bed ✗)"
-      },
-      "frame": [
-        "Go to bed"
-      ],
-      "baseSegs": [
-        {
-          "t": "frame",
-          "s": "Go to bed"
-        },
-        {
-          "t": "slot",
-          "s": "immediately"
-        }
-      ],
-      "apply": [
-        {
-          "en": "Then go to bed.",
-          "kr": "그럼 자러 가.",
-          "segs": [
-            {
-              "t": "slot",
-              "s": "Then"
-            },
-            {
-              "t": "frame",
-              "s": "go to bed"
-            }
-          ],
-          "punct": "."
-        },
-        {
-          "en": "We should go to bed.",
-          "kr": "이제 자야겠다.",
-          "segs": [
-            {
-              "t": "slot",
-              "s": "We should"
-            },
-            {
-              "t": "frame",
-              "s": "go to bed"
-            }
-          ],
-          "punct": "."
-        }
-      ],
-      "siblings": [
-        {
-          "en": "Then go to bed.",
-          "kr": "그럼 자러 가."
-        },
-        {
-          "en": "We should go to bed.",
-          "kr": "이제 자야겠다."
-        }
-      ]
-    },
-    {
-      "trigger": "festival",
-      "word": "festival",
-      "meaning": "축제",
-      "pos": "noun",
-      "cefr": "A2",
-      "level": 7,
-      "rank": 2325,
-      "vocabA": {
-        "answer": "festival",
-        "enLines": [
-          "Every year we go see the Christmas light [festival] downtown."
-        ],
-        "koLines": [
-          "우리는 매년 시내에서 열리는 크리스마스 전등 [축제]를 보러 갑니다."
-        ]
-      },
-      "vocabB": {
-        "answer": "festival",
-        "enLines": [
-          "Have fun at the [festival]!"
-        ],
-        "koLines": [
-          "[축제] 재밌게 놀아!"
-        ],
-        "hint": ""
-      },
-      "sentence": {
-        "en": "Have fun at the festival!",
-        "kr": "축제 재밌게 놀아!",
-        "trigger": "festival"
-      },
-      "pattern": {
-        "form": "have fun",
-        "meaning": "재밌게 놀다",
-        "desc": ""
-      },
-      "frame": [
-        "Have fun"
-      ],
-      "baseSegs": [
-        {
-          "t": "frame",
-          "s": "Have fun"
-        },
-        {
-          "t": "slot",
-          "s": "at the festival"
-        }
-      ],
-      "apply": [
-        {
-          "en": "Did you have fun?",
-          "kr": "재밌었어?",
-          "segs": [
-            {
-              "t": "slot",
-              "s": "Did you"
-            },
-            {
-              "t": "frame",
-              "s": "have fun"
-            }
-          ],
-          "punct": "?"
-        }
-      ],
-      "siblings": [
-        {
-          "en": "Have fun!",
-          "kr": "재밌게 놀아!"
-        },
-        {
-          "en": "Did you have fun?",
-          "kr": "재밌었어?"
-        }
-      ]
-    },
-    {
-      "trigger": "conference",
-      "word": "conference",
-      "meaning": "회의, 학회 <보통 특정 주제에 대해 여러 날에 걸쳐 열리는 회의를 뜻함>",
-      "pos": "noun",
-      "cefr": "A2",
-      "level": 7,
-      "rank": 2352,
-      "vocabA": {
-        "answer": "conference",
-        "enLines": [
-          "She's at a [conference] right now, but she will be back tomorrow."
-        ],
-        "koLines": [
-          "그녀는 지금 [학회]에 가 계시는데, 내일 돌아올 거예요.",
-          "(특정 주제에 대해 여러 날에 걸쳐 열리는 회의)"
-        ]
-      },
-      "vocabB": {
-        "answer": "conference",
-        "enLines": [
-          "Hundreds of people came to the [conference]."
-        ],
-        "koLines": [
-          "수백 명이 [학회]에 왔어."
-        ],
-        "hint": ""
-      },
-      "sentence": {
-        "en": "Hundreds of people came to the conference.",
-        "kr": "수백 명이 학회에 왔어.",
-        "trigger": "conference"
-      },
-      "pattern": {
-        "form": "hundreds / thousands of ______",
-        "meaning": "수백의 / 수천의 ~",
-        "desc": "정확한 수가 아니라 '아주 많다'는 뜻이고, 이때만 -s를 붙여요"
-      },
-      "frame": [
-        "Hundreds of"
-      ],
-      "baseSegs": [
-        {
-          "t": "frame",
-          "s": "Hundreds of"
-        },
-        {
-          "t": "slot",
-          "s": "people came to the conference"
-        }
-      ],
-      "apply": [
-        {
-          "en": "Hundreds of thousands of people showed up.",
-          "kr": "수십만 명이 모였어.",
-          "segs": [
-            {
-              "t": "frame",
-              "s": "Hundreds of"
-            },
-            {
-              "t": "slot",
-              "s": "thousands of people showed up"
-            }
-          ],
-          "punct": "."
-        },
-        {
-          "en": "He made hundreds of millions of dollars.",
-          "kr": "그는 수억 달러를 벌었어.",
-          "segs": [
-            {
-              "t": "slot",
-              "s": "He made"
-            },
-            {
-              "t": "frame",
-              "s": "hundreds of"
-            },
-            {
-              "t": "slot",
-              "s": "millions of dollars"
-            }
-          ],
-          "punct": "."
-        }
-      ],
-      "siblings": [
-        {
-          "en": "Thousands of dollars are missing.",
-          "kr": "수천 달러가 사라졌어."
-        },
-        {
-          "en": "They have millions of fans.",
-          "kr": "그들은 수백만 명의 팬이 있어."
-        }
-      ]
-    },
-    {
-      "trigger": "social media",
-      "word": "social media",
-      "meaning": "소셜 미디어, SNS <사회관계망에 사용되는 웹사이트와 소프트웨어>",
-      "pos": "noun",
-      "cefr": "A2",
-      "level": 7,
-      "rank": 2365,
-      "vocabA": {
-        "answer": "social media",
-        "enLines": [
-          "Marketing is mostly done through [social media] these days."
-        ],
-        "koLines": [
-          "요즘 마케팅은 대부분 [SNS]를 통해 이루어집니다."
-        ]
-      },
-      "vocabB": {
-        "answer": "social media",
-        "enLines": [
-          "It's all thanks to [social media]."
-        ],
-        "koLines": [
-          "다 소셜미디어 덕분이야."
-        ],
-        "hint": "소셜 미디어, SNS"
-      },
-      "sentence": {
-        "en": "It's all thanks to social media.",
-        "kr": "다 소셜미디어 덕분이야.",
-        "trigger": "social media"
-      },
-      "pattern": {
-        "form": "thanks to ______",
-        "meaning": "~ 덕분에",
-        "desc": ""
-      },
-      "frame": [
-        "thanks to"
-      ],
-      "baseSegs": [
-        {
-          "t": "slot",
-          "s": "It's all"
-        },
-        {
-          "t": "frame",
-          "s": "thanks to"
-        },
-        {
-          "t": "slot",
-          "s": "social media"
-        }
-      ],
-      "apply": [
-        {
-          "en": "I'm feeling much better, thanks to you.",
-          "kr": "덕분에 훨씬 나아졌어.",
-          "segs": [
-            {
-              "t": "slot",
-              "s": "I'm feeling much better,"
-            },
-            {
-              "t": "frame",
-              "s": "thanks to"
-            },
-            {
-              "t": "slot",
-              "s": "you"
-            }
-          ],
-          "punct": "."
-        },
-        {
-          "en": "It's all thanks to my wife.",
-          "kr": "다 아내 덕분입니다.",
-          "segs": [
-            {
-              "t": "slot",
-              "s": "It's all"
-            },
-            {
-              "t": "frame",
-              "s": "thanks to"
-            },
-            {
-              "t": "slot",
-              "s": "my wife"
-            }
-          ],
-          "punct": "."
-        }
-      ],
-      "siblings": [
-        {
-          "en": "I'm feeling much better, thanks to you.",
-          "kr": "덕분에 훨씬 나아졌어."
-        },
-        {
-          "en": "It's all thanks to my wife.",
-          "kr": "다 아내 덕분입니다."
-        }
-      ]
-    },
-    {
-      "trigger": "cafe",
-      "word": "cafe",
-      "meaning": "카페",
-      "pos": "noun",
-      "cefr": "A2",
-      "level": 7,
-      "rank": 2379,
-      "vocabA": {
-        "answer": "cafe",
-        "enLines": [
-          "I prefer to study at a [cafe]."
-        ],
-        "koLines": [
-          "나는 [카페]에서 공부하는 걸 더 좋아해.",
-          "<발음: cafe의 발음은 \"케페이 /kæˈfeɪ/\"에 가깝습니다.>"
-        ]
-      },
-      "vocabB": {
-        "answer": "cafe",
-        "enLines": [
-          "I'll pick you up at the [cafe]."
-        ],
-        "koLines": [
-          "[카페]로 데리러 갈게."
-        ],
-        "hint": ""
-      },
-      "sentence": {
-        "en": "I'll pick you up at the cafe.",
-        "kr": "카페로 데리러 갈게.",
-        "trigger": "cafe"
-      },
-      "pattern": {
-        "form": "pick ______ up",
-        "meaning": "~을 데리러 가다",
-        "desc": ""
-      },
-      "frame": [
-        "pick you up"
-      ],
-      "baseSegs": [
-        {
-          "t": "slot",
-          "s": "I'll"
-        },
-        {
-          "t": "frame",
-          "s": "pick you up"
-        },
-        {
-          "t": "slot",
-          "s": "at the cafe"
-        }
-      ],
-      "apply": [
-        {
-          "en": "I can pick you up.",
-          "kr": "내가 데리러 갈 수 있어.",
-          "segs": [
-            {
-              "t": "slot",
-              "s": "I can"
-            },
-            {
-              "t": "frame",
-              "s": "pick you up"
-            }
-          ],
-          "punct": "."
-        },
-        {
-          "en": "I'll pick you up then.",
-          "kr": "그때 데리러 갈게.",
-          "segs": [
-            {
-              "t": "slot",
-              "s": "I'll"
-            },
-            {
-              "t": "frame",
-              "s": "pick you up"
-            },
-            {
-              "t": "slot",
-              "s": "then"
-            }
-          ],
-          "punct": "."
-        }
-      ],
-      "siblings": [
-        {
-          "en": "I can pick you up.",
-          "kr": "내가 데리러 갈 수 있어."
-        },
-        {
-          "en": "I'll pick you up then.",
-          "kr": "그때 데리러 갈게."
-        }
-      ]
-    },
-    {
-      "trigger": "performance",
-      "word": "performance",
-      "meaning": "공연, 연주회",
-      "pos": "noun",
-      "cefr": "A2",
-      "level": 7,
-      "rank": 2406,
-      "vocabA": {
-        "answer": "performance",
-        "enLines": [
-          "The [performance] starts at three."
-        ],
-        "koLines": [
-          "[공연]은 3시에 시작합니다."
-        ]
-      },
-      "vocabB": {
-        "answer": "performance",
-        "enLines": [
-          "Each of us saw one [performance]."
-        ],
-        "koLines": [
-          "우리 각자 [공연]을 하나씩 봤어."
-        ],
-        "hint": ""
-      },
-      "sentence": {
-        "en": "Each of us saw one performance.",
-        "kr": "우리 각자 공연을 하나씩 봤어.",
-        "trigger": "performance"
-      },
-      "pattern": {
-        "form": "each of ______",
-        "meaning": "~ 각자",
-        "desc": ""
-      },
-      "frame": [
-        "Each of"
-      ],
-      "baseSegs": [
-        {
-          "t": "frame",
-          "s": "Each of"
-        },
-        {
-          "t": "slot",
-          "s": "us saw one performance"
-        }
-      ],
-      "apply": [
-        {
-          "en": "We compared each of the paintings.",
-          "kr": "우린 그림을 하나하나 비교했어.",
-          "segs": [
-            {
-              "t": "slot",
-              "s": "We compared"
-            },
-            {
-              "t": "frame",
-              "s": "each of"
-            },
-            {
-              "t": "slot",
-              "s": "the paintings"
-            }
-          ],
-          "punct": "."
-        },
-        {
-          "en": "He gave each of us a hundred dollars.",
-          "kr": "그는 우리에게 각각 100달러씩 줬어.",
-          "segs": [
-            {
-              "t": "slot",
-              "s": "He gave"
-            },
-            {
-              "t": "frame",
-              "s": "each of"
-            },
-            {
-              "t": "slot",
-              "s": "us a hundred dollars"
-            }
-          ],
-          "punct": "."
-        },
-        {
-          "en": "Each of them said the same thing.",
-          "kr": "그들 각자 같은 말을 했어.",
-          "segs": [
-            {
-              "t": "frame",
-              "s": "Each of"
-            },
-            {
-              "t": "slot",
-              "s": "them said the same thing"
-            }
-          ],
-          "punct": "."
-        },
-        {
-          "en": "Each of the students took one pencil.",
-          "kr": "학생들이 각자 연필을 하나씩 가져갔어.",
-          "segs": [
-            {
-              "t": "frame",
-              "s": "Each of"
-            },
-            {
-              "t": "slot",
-              "s": "the students took one pencil"
-            }
-          ],
-          "punct": "."
-        },
-        {
-          "en": "Each of us has our own ideas.",
-          "kr": "우리 각자 자기 생각이 있어.",
-          "segs": [
-            {
-              "t": "frame",
-              "s": "Each of"
-            },
-            {
-              "t": "slot",
-              "s": "us has our own ideas"
-            }
-          ],
-          "punct": "."
-        }
-      ],
-      "siblings": [
-        {
-          "en": "We compared each of the paintings.",
-          "kr": "우린 그림을 하나하나 비교했어."
-        },
-        {
-          "en": "He gave each of us a hundred dollars.",
-          "kr": "그는 우리에게 각각 100달러씩 줬어."
-        }
-      ]
-    },
-    {
-      "trigger": "owner",
-      "word": "owner",
-      "meaning": "주인, 소유주",
-      "pos": "noun",
-      "cefr": "A2",
-      "level": 7,
-      "rank": 2419,
-      "vocabA": {
-        "answer": "owner",
-        "enLines": [
-          "Will the [owner] of a black bag please come to the front desk?"
-        ],
-        "koLines": [
-          "검은색 가방의 [주인]은 안내 데스크로 와 주시겠습니까?"
-        ]
-      },
-      "vocabB": {
-        "answer": "owner",
-        "enLines": [
-          "Each store has a different [owner]."
-        ],
-        "koLines": [
-          "가게마다 [주인]이 달라."
-        ],
-        "hint": ""
-      },
-      "sentence": {
-        "en": "Each store has a different owner.",
-        "kr": "가게마다 주인이 달라.",
-        "trigger": "owner"
-      },
-      "pattern": {
-        "form": "each + 단수명사",
-        "meaning": "~마다",
-        "desc": "each 뒤에는 단수 명사가 와요"
-      },
-      "frame": [
-        "Each",
-        "has"
-      ],
-      "baseSegs": [
-        {
-          "t": "frame",
-          "s": "Each"
-        },
-        {
-          "t": "slot",
-          "s": "store"
-        },
-        {
-          "t": "frame",
-          "s": "has"
-        },
-        {
-          "t": "slot",
-          "s": "a different owner"
-        }
-      ],
-      "apply": [
-        {
-          "en": "Each country has its own unique culture.",
-          "kr": "나라마다 고유한 문화가 있어.",
-          "segs": [
-            {
-              "t": "frame",
-              "s": "Each"
-            },
-            {
-              "t": "slot",
-              "s": "country"
-            },
-            {
-              "t": "frame",
-              "s": "has"
-            },
-            {
-              "t": "slot",
-              "s": "its own unique culture"
-            }
-          ],
-          "punct": "."
-        }
-      ],
-      "siblings": [
-        {
-          "en": "I gave each child a gift.",
-          "kr": "아이들에게 선물을 하나씩 줬어."
-        },
-        {
-          "en": "We stopped at each station.",
-          "kr": "우린 역마다 멈췄어."
         }
       ]
     }
