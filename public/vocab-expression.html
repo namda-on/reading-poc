@@ -470,7 +470,7 @@ function startSession(startIdx){
 }
 // 진행바: 어휘/배열 2단계 × 전체 문항. 별·카운트는 채워진 위치로 이동
 function setProgress(stepDone){
-  const total=sessionItems.length*3, pct=Math.min(100, stepDone/total*100);
+  const total=sessionItems.length*4, pct=Math.min(100, stepDone/total*100);
   el('barFill').style.width=pct+'%';
   el('barStar').style.left=pct+'%';
   const bc=el('barCount'); bc.textContent=`${itemIdx+1}/${sessionItems.length}`; bc.style.left=pct+'%';
@@ -515,7 +515,7 @@ function hlTrigger(sent, trig){
 // [1] 어휘 빈칸 ────────────────────────────────────────────────────────────────
 function renderVocab(){
   const item=sessionItems[itemIdx], v=item[VERSIONS[curVer].vocabKey], answer=v.answer;
-  setProgress(itemIdx*3);
+  setProgress(itemIdx*4);
   renderStepBanner(1, '');
   let hintLevel=0, done=false;
 
@@ -663,7 +663,7 @@ function fillHintText(punct){ return /\?/.test(punct) ? '의문문으로 만들�
 // [2] 문장 배열 ────────────────────────────────────────────────────────────────
 function renderArrange(){
   const item=sessionItems[itemIdx], s=item.sentence;
-  setProgress(itemIdx*3+1);
+  setProgress(itemIdx*4+1);
   renderStepBanner(2, item.word);
   const tokens=tokenize(s.en), punct=trailPunct(s.en);
   const target=tokens.map(t=>t.toLowerCase()).join(' ');
@@ -764,7 +764,7 @@ function renderArrange(){
         <button class="vbtn b2" disabled><span class="ic">🔊</span>다시 듣기</button>
         <button class="vbtn b3" id="nextBtn"><span class="ic">▶</span>다음 단계</button>
       </div>`;
-    el('nextBtn').onclick=()=>renderApply();
+    el('nextBtn').onclick=()=>renderApply(0);
   }
 
   el('confirmBtn').onclick=()=>{
@@ -784,44 +784,62 @@ function renderArrange(){
 // [3] 처음 보는 문장에 프레임 직접 쓰기 ────────────────────────────────────────
 // 목적은 슬롯을 맞히는 게 아니라 **방금 배운 프레임을 유저가 직접 산출**하는 것이다.
 // 그래서 변하는 부분(슬롯)은 회색 칩으로 주어진 채 고정하고, 프레임 자리만 비운다.
-function renderApply(){
-  const item=sessionItems[itemIdx], ap=item.apply[0];
-  setProgress(itemIdx*3+2);
+function renderApply(round){
+  round = round||0;
+  const item=sessionItems[itemIdx];
+  const ap=item.apply[round] || item.apply[0];
+  const typing = round===1;      // 2회차는 뱅크 없이 타이핑으로 승급 — '직접 쓴다'를 끝까지 밀어붙인다
+  setProgress(itemIdx*4+2+round);
 
-  // 셀 구성: 주어진 슬롯 칩 + 유저가 채울 프레임 빈칸(단어 단위)
+  // 셀 구성: 주어진 슬롯 칩 + 유저가 채울 프레임 자리.
+  // 탭 라운드는 단어 단위 빈칸(어순도 과제), 타이핑 라운드는 프레임 조각 단위 입력칸.
   const cells=[];
   ap.segs.forEach(sg=>{
-    if(sg.t==='slot') cells.push({kind:'given', text:sg.s});
+    if(sg.t==='slot'){ cells.push({kind:'given', text:sg.s}); return; }
+    if(typing) cells.push({kind:'input', answer:sg.s});
     else sg.s.split(/\s+/).forEach(w=> cells.push({kind:'blank', answer:w}));
   });
   const blanks=cells.filter(c=>c.kind==='blank');
+  const inputs=cells.filter(c=>c.kind==='input');
   let bank=shuffle(blanks.map((c,i)=>({id:i, text:c.answer.toLowerCase(), placed:false})));
-  let ans=[], done=false;
+  let ans=[], done=false, hintLevel=0;
 
   stage.innerHTML=`
     <div class="stage-scroll">
       <div class="chat-card" id="card">
         ${chatTag(item)}<div class="chat-badge new">New</div>
         <div class="chat-ko">${escapeHtml(ap.kr)}</div>
+        <div class="wrong-box hidden" id="wrongBox"></div>
         <div class="fill" id="fill"></div>
-        <div class="fill-hint" id="fillHint">방금 배운 표현을 넣어 문장을 완성해요</div>
+        <div class="fill-hint" id="fillHint">${typing?'방금 배운 표현을 직접 입력해 보세요':'방금 배운 표현을 넣어 문장을 완성해요'}</div>
+        <div class="reveal-note hidden" id="revealNote"></div>
         <div id="payoffBox"></div>
       </div>
     </div>
     <div class="stage-bottom" id="bottom">
+      ${typing?`
+      <div class="vtools" id="vtools">
+        <button class="vtool" id="hintBtn"><span class="ic">?</span><span id="hintLabel">힌트 보기</span></button>
+        <button class="vtool mic" disabled><span class="ic">🎤</span><span>음성 모드</span></button>
+      </div>`:`
       <div class="bank" id="bank"></div>
       <div class="arr-btns" id="arrBtns">
         <button class="btn-ghost2" id="revealBtn"><span class="ic">✔</span>정답 보기</button>
         <button class="btn-confirm" id="confirmBtn" disabled>확인</button>
-      </div>
+      </div>`}
     </div>`;
 
-  const fillEl=el('fill'), bankEl=el('bank');
+  const fillEl=el('fill'), wrongBox=el('wrongBox');
 
   function renderFill(){
-    let bi=0, h='';
+    let bi=0, ii=0, h='';
     cells.forEach(c=>{
       if(c.kind==='given'){ h+=`<span class="fill-given">${escapeHtml(c.text)}</span>`; return; }
+      if(c.kind==='input'){
+        const i=ii++;
+        h+=`<input class="blank" id="ain${i}" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done" />`;
+        return;
+      }
       const i=bi++;
       h += i<ans.length
         ? `<span class="fill-word frame-w" data-i="${i}">${escapeHtml(ans[i].text)}</span>`
@@ -829,12 +847,12 @@ function renderApply(){
     });
     if(ap.punct) h+=`<span class="fill-punct">${escapeHtml(ap.punct)}</span>`;
     fillEl.innerHTML=h;
-    el('fillHint').classList.toggle('hidden', done || ans.length>0);
     if(!done) fillEl.querySelectorAll('.fill-word').forEach(w=> w.onclick=()=>{
       const i=+w.dataset.i; ans[i].placed=false; ans.splice(i,1); renderAll();
     });
   }
   function renderBank(){
+    const bankEl=el('bank'); if(!bankEl) return;
     bankEl.innerHTML='';
     bank.forEach(t=>{
       const b=document.createElement('button');
@@ -847,17 +865,33 @@ function renderApply(){
       bankEl.appendChild(b);
     });
   }
-  function renderAll(){ renderFill(); renderBank(); el('confirmBtn').disabled = ans.length<blanks.length; }
+  function renderAll(){
+    renderFill(); renderBank();
+    el('fillHint').classList.toggle('hidden', done || ans.length>0);
+    const cb=el('confirmBtn'); if(cb) cb.disabled = ans.length<blanks.length;
+  }
 
+  // 정답 후: 완성 문장을 남기고 '같은 틀로 N번' 비교를 붙인다
   function finish(){
     done=true;
     el('card').classList.add('correct');
     if(!el('card').querySelector('.check-mark')){ const c=document.createElement('div'); c.className='check-mark'; c.textContent='✓'; el('card').appendChild(c); }
-    // 원문 대소문자로 교정해 완성 문장을 타일 그대로 남긴다
-    ans=blanks.map(c=>({text:c.answer, placed:true}));
-    renderFill();
-    el('payoffBox').innerHTML=applyPayoffHtml(item, ap);
-    const last=itemIdx>=sessionItems.length-1;
+    wrongBox.classList.add('hidden'); el('revealNote').classList.add('hidden');
+    el('fillHint').classList.add('hidden');
+    if(typing){
+      // 입력칸을 초록 확정 칸으로 굳힌다(원문 대소문자)
+      inputs.forEach((c,i)=>{ const inp=el('ain'+i); if(inp){ inp.value=c.answer; inp.readOnly=true; inp.classList.add('correct'); inp.placeholder=''; } });
+    } else {
+      ans=blanks.map(c=>({text:c.answer, placed:true}));
+      renderFill();
+    }
+    // 라운드가 쌓일수록 비교 문장이 늘어난다 — 반복이 체감의 근거다
+    const rows=[{en:item.sentence.en, kr:item.sentence.kr, segs:item.baseSegs}]
+      .concat(item.apply.slice(0, round+1).map(a=>({en:a.en, kr:a.kr, segs:a.segs})));
+    el('payoffBox').innerHTML=applyPayoffHtml(item, rows);
+
+    const hasNext = !typing && !!item.apply[1];
+    const last = itemIdx>=sessionItems.length-1;
     el('bottom').innerHTML=`
       <div class="vtabs">
         <button class="vtab"><span class="ic">🔍</span>사전 검색</button>
@@ -869,46 +903,87 @@ function renderApply(){
       <div class="vbtns">
         <button class="vbtn b1" disabled><span class="ic">📘</span>표현 사전</button>
         <button class="vbtn b2" disabled><span class="ic">🔊</span>다시 듣기</button>
-        <button class="vbtn b3" id="nextBtn"><span class="ic">▶</span>${last?'완료하기':'다음 문제'}</button>
+        <button class="vbtn b3" id="nextBtn"><span class="ic">▶</span>${hasNext?'한 번 더':(last?'완료하기':'다음 문제')}</button>
       </div>`;
-    el('nextBtn').onclick=()=>{ learned.push(item); if(last) renderDone(); else { itemIdx++; renderVocab(); } };
+    el('nextBtn').onclick=()=>{
+      if(hasNext) return renderApply(1);
+      learned.push(item);
+      if(last) renderDone(); else { itemIdx++; renderVocab(); }
+    };
   }
 
-  el('confirmBtn').onclick=()=>{
-    if(ans.length<blanks.length) return;
-    const ok=ans.every((t,i)=> t.text===blanks[i].answer.toLowerCase());
-    if(ok) finish();
-    else {
-      fillEl.querySelectorAll('.fill-word').forEach(w=>w.style.color='#e14b46');
-      setTimeout(finish, 700);
-    }
-  };
-  el('revealBtn').onclick=finish;
+  if(typing){
+    renderFill();
+    const applyHint=()=> inputs.forEach((c,i)=>{ const inp=el('ain'+i); if(inp) inp.placeholder=hintPlaceholder(c.answer, hintLevel); });
+    applyHint();
+    setTimeout(()=>{ const f=el('ain0'); if(f) f.focus(); }, 60);
 
-  renderAll();
+    function onInput(){
+      if(done) return;
+      const vals=inputs.map((c,i)=> (el('ain'+i)||{}).value||'');
+      if(inputs.every((c,i)=> norm(vals[i])===norm(c.answer))){ finish(); return; }
+      // 다 채웠을 때만 오답 피드백 — 타이핑 중간에 빨강이 뜨면 방해된다
+      const bad=inputs.findIndex((c,i)=> vals[i].trim().length>=c.answer.replace(/ /g,'').length && norm(vals[i])!==norm(c.answer));
+      if(bad>=0){
+        const {html,wrong}=diffSpell(vals[bad].trim(), inputs[bad].answer);
+        wrongBox.classList.remove('hidden');
+        wrongBox.innerHTML=`${html} - 정답과 ${wrong}글자 달라요.`;
+      } else wrongBox.classList.add('hidden');
+      el('fillHint').classList.toggle('hidden', vals.some(v=>v.length>0));
+    }
+    inputs.forEach((c,i)=>{ const inp=el('ain'+i); if(inp) inp.addEventListener('input', onInput); });
+
+    el('hintBtn').onclick=()=>{
+      if(hintLevel===0){
+        hintLevel=1;
+        el('hintLabel').textContent='정답 보기'; el('hintBtn').querySelector('.ic').textContent='✔';
+      } else {
+        hintLevel=2;
+        // 정답은 placeholder로 보이므로 입력값이 남아 있으면 가려진다 → [1]과 같은 처리
+        inputs.forEach((c,i)=>{ const inp=el('ain'+i); if(inp){ inp.value=''; inp.classList.add('revealed'); } });
+        wrongBox.classList.add('hidden');
+        const rn=el('revealNote'); rn.classList.remove('hidden');
+        rn.innerHTML=`정답<b>${escapeHtml(inputs.map(c=>c.answer).join(' … '))}</b>`;
+      }
+      applyHint();
+      const f=el('ain0'); if(f) f.focus();
+    };
+  } else {
+    el('confirmBtn').onclick=()=>{
+      if(ans.length<blanks.length) return;
+      const ok=ans.every((t,i)=> t.text===blanks[i].answer.toLowerCase());
+      if(ok) finish();
+      else {
+        fillEl.querySelectorAll('.fill-word').forEach(w=>w.style.color='#e14b46');
+        setTimeout(finish, 700);
+      }
+    };
+    el('revealBtn').onclick=finish;
+    renderAll();
+  }
 }
 
-// [3] 정답 후: 두 문장을 나란히 놓고 **유저가 두 번 다 직접 놓은 프레임**을 초록으로 묶는다.
-// 효용 체감의 근거는 코퍼스 수치가 아니라 '내가 만든 것'이어야 한다.
-function applyPayoffHtml(item, ap){
+// [3] 정답 후: 지금까지 만든 문장을 나란히 놓고 **유저가 매번 직접 놓은 프레임**만 초록으로 묶는다.
+// 효용 체감의 근거는 코퍼스 수치가 아니라 '내가 만든 것'이어야 하고, 줄 수가 곧 반복 횟수다.
+function applyPayoffHtml(item, rows){
   const frameTxt=(item.frame||[]).join(' ');
-  const row=(en, kr, segs)=>{
-    const punct=(String(en).match(/[.?!]+$/)||[''])[0];
-    const body = (segs && segs.length)
-      ? segs.map(g=> g.t==='frame'
+  const n=rows.length;
+  const cnt=['','한','두','세','네','다섯'][n] || String(n);
+  const line=(r)=>{
+    const punct=(String(r.en).match(/[.?!]+$/)||[''])[0];
+    const body = (r.segs && r.segs.length)
+      ? r.segs.map(g=> g.t==='frame'
           ? `<span class="tgt">${escapeHtml(g.s)}</span>`
           : escapeHtml(g.s)).join(' ') + escapeHtml(punct)
-      : escapeHtml(en);
-    return `<div class="pf-cmp"><div class="pf-cmp-en">${body}</div><div class="pf-cmp-kr">${escapeHtml(kr)}</div></div>`;
+      : escapeHtml(r.en);
+    return `<div class="pf-cmp"><div class="pf-cmp-en">${body}</div><div class="pf-cmp-kr">${escapeHtml(r.kr)}</div></div>`;
   };
-  const base=item.sentence;
   return `<div class="payoff">
       <div class="pf-label">학습 정보</div>
-      <div class="pf-top"><span class="ic">💡</span>같은 틀로 다른 말을 했어요</div>
+      <div class="pf-top"><span class="ic">💡</span>같은 틀로 ${cnt} 번 다른 말을 했어요</div>
       <div class="pf-frame-line"><span class="tgt">${escapeHtml(frameTxt)}</span></div>
-      <div class="pf-note">뜻이 전혀 다른 두 문장인데, 초록색은 <b>두 번 다 직접 만든 부분</b>이에요.</div>
-      ${row(base.en, base.kr, item.baseSegs)}
-      ${row(ap.en, ap.kr, ap.segs)}
+      <div class="pf-note">뜻이 전혀 다른 ${cnt} 문장인데, 초록색은 <b>매번 직접 만든 부분</b>이에요.</div>
+      ${rows.map(line).join('')}
     </div>`;
 }
 
