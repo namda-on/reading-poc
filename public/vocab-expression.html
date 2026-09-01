@@ -161,11 +161,6 @@
   .vbtn.b2 { background:linear-gradient(#9b8cf0,#7d6cf0); }
   .vbtn.b3 { background:linear-gradient(#6f8ef0,#5b6ef0); }
 
-  /* 배열 전 — 이번에 배울 것(무엇 + 얼마나 쓸모있나) */
-  .learn-box { background:#e2d7f8; border-radius:14px; padding:12px 14px; margin:14px 0 4px; }
-  .learn-label { font-size:11.5px; font-weight:800; color:#8878b3; }
-  .learn-pat { font-size:18.5px; font-weight:800; color:var(--purple-d); margin-top:3px; line-height:1.35; }
-
   /* 배열 정답 후 — 카드 안 '학습 정보' 섹션 (앱 구현 구조와 동일) */
   /* 카드의 두 톤 그라데이션은 높이 비율로 갈리므로, 학습 정보는 카드 폭을 꽉 채운
      흰 블록으로 깔아 정답 카드의 초록 영역과 경계가 또렷하게 갈리도록 한다 */
@@ -632,17 +627,6 @@ function isTriggerToken(tok, trigger){
   return parts.some(a=> trigs.some(b=> matchStem(a,b)));
 }
 
-// 배열 전: 이번에 뭘 배우는지 + 그게 얼마나 쓸모있는지(활용 규모)를 한눈에.
-// 영어 프레임(패턴 형태)은 정답 어순이 새므로 여기서 노출하지 않는다 — 정답 후 보상에서 공개.
-function learnBoxHtml(item){
-  const pat=((item.pattern||{}).meaning||'').trim();   // 한국어 뜻만 (영어 틀은 정답이 새므로 제외)
-  if(!pat) return `<div class="learn-box"><div class="learn-pat">단어를 순서대로 놓아 문장을 완성해요</div></div>`;
-  return `<div class="learn-box">
-      <div class="learn-label">이번에 배울 표현</div>
-      <div class="learn-pat">${escapeHtml(pat)}</div>
-    </div>`;
-}
-
 // 정답 후 '학습 정보': 배열 중엔 숨겨둔 표현 프레임(형태·뜻·설명)을 처음 공개하고,
 // 단어만 바꾼 실제 예문으로 "이제 이런 말도 할 수 있다"를 눈으로 확인시킨다.
 function patternPayoffHtml(item){
@@ -683,7 +667,6 @@ function renderArrange(){
       <div class="chat-card" id="card">
         ${chatTag(item)}<div class="chat-badge new">New</div>
         <div class="chat-ko">${escapeHtml(s.kr)}</div>
-        <div id="patBox">${learnBoxHtml(item)}</div>
         <div class="fill" id="fill"></div>
         <div class="fill-hint" id="fillHint">${fillHintText(punct)}</div>
         <div id="payoffBox"></div>
@@ -753,7 +736,6 @@ function renderArrange(){
     el('card').classList.add('correct');
     if(!el('card').querySelector('.check-mark')){ const c=document.createElement('div'); c.className='check-mark'; c.textContent='✓'; el('card').appendChild(c); }
     // 완성 문장은 타일 그대로 두고(원문 대소문자로 교정) 그 아래 '학습 정보'를 붙인다
-    el('patBox').innerHTML='';
     el('micFloat').classList.add('hidden');
     ans=tokens.map((t,i)=>({id:i, text:t, placed:true, isTrig:OPTS.trigger && isTriggerToken(t, s.trigger)}));
     renderFill();
