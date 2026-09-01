@@ -40,6 +40,11 @@ VOCAB_FILTER_SKIP = {"sexual", "unnecessary"}
 BRACKET = re.compile(r"\[([^\]]+)\]")
 INFL = re.compile(r"^(?:s|es|ed|d|ing|er|est|ies|ier|iest|'s|')$")
 WORD = re.compile(r"[A-Za-z']+")
+KOR = re.compile(r"[가-힣]")
+# 홑 대명사 조각은 표현의 일부가 아니라 그 자리에 오는 주어·목적어다.
+# `get up`을 배우는데 `You` … `get up`이 프레임으로 잡히면 안 된다.
+PRONOUNS = {"i", "you", "he", "she", "it", "we", "they",
+            "me", "him", "her", "us", "them"}
 MIN_FRAME_WORDS = int(os.environ.get("VE_MIN_FRAME_WORDS", "2"))
 
 
@@ -177,8 +182,51 @@ def blank_trigger(sent, trigger):
     return sent[: best.start()] + "[" + best.group(0) + "]" + sent[best.end() :], best.group(0)
 
 
+def lexical_form(form):
+    """`form`이 **어휘 표현**인가 — 한글 자리표시자(`주어`,`명사`)나 대안(`Do / Does`)이 섞이면
+    문법 틀이다. 문법 틀은 문장마다 표현 자체가 변형되므로([3]에서 `Don't you drive?`와
+    `Don't they work with you?`가 같은 프레임으로 잡힌다) 경계가 정해지지 않는다.
+    [3]은 **한 청크를 그대로 다시 쓰는** 과제라 어휘 표현만 확실하다."""
+    f = (form or "").strip()
+    return bool(f) and not KOR.search(f) and "/" not in f
+
+
 def words(sent):
     return WORD.findall(re.sub(r"[.?!]+$", "", sent.strip()))
+
+
+def form_words(form):
+    """`form`의 어휘 내용을 (필수, 선택) 두 묶음으로 나눈다.
+
+    괄호 안은 저작자가 **선택**으로 표시한 것이다 — `come over (to ______)`의 `to`는
+    없어도 같은 표현이다. `(= turn ______ off)` 같은 부기도 괄호 안이라 선택으로 본다.
+    """
+    f = form or ""
+    optional = set()
+    for inner in re.findall(r"\(([^)]*)\)", f):
+        optional |= {w.lower() for w in WORD.findall(inner)}
+    required = {w.lower() for w in WORD.findall(re.sub(r"\([^)]*\)", " ", f))}
+    return required, optional | required
+
+
+def frame_matches_form(frame, form):
+    """프레임이 `form`의 어휘 내용과 **정확히** 같은가(굴절 허용).
+
+    프레임이 form에 없는 낱말을 더 물고 오거나(`come from` → `It comes from`)
+    form의 필수 낱말을 빠뜨리면(`What do you think of` → `What` … `you think of`)
+    그건 저작자가 말한 표현이 아니다. 그런 경계는 확실하지 않으므로 버린다.
+    """
+    required, allowed = form_words(form)
+    fws = [w.lower() for lit in frame for w in lit.split()]
+    if not fws:
+        return False
+    for w in fws:
+        if not any(w == a or infl_match(w, a) or infl_match(a, w) for a in allowed):
+            return False
+    for a in required:
+        if not any(w == a or infl_match(w, a) or infl_match(a, w) for w in fws):
+            return False
+    return True
 
 
 # 흩어진 기능어 조각들은 실제 패턴이 아니다 — `Can/Could you ~?`에서 `you` … `me`가
@@ -249,6 +297,8 @@ def frame_candidates(base, other):
             return
         if len(cand) > 1 and not has_content(cand):
             return
+        if any(x.lower() in PRONOUNS for x in cand):
+            return      # 홑 대명사 조각 — 표현이 아니라 그 자리에 오는 주어·목적어
         key = tuple(x.lower() for x in cand)
         if key in seen:
             return
@@ -488,7 +538,7 @@ def make_vocab_a(v, trigger):
 def main():
     vocab, gse, groups = load_vocab(), load_gse(), load_groups()
     items, skipped = [], {"조인실패": 0, "버전A불가": 0, "버전B불가": 0, "문장부족": 0,
-                          "공통프레임없음": 0}
+                          "공통프레임없음": 0, "문법틀form": 0, "프레임≠form": 0}
 
     for g in groups.values():
         if not g["seq"].isdigit() or len(g["sents"]) < 1:
@@ -505,6 +555,11 @@ def main():
             skipped["버전A불가"] += 1
             continue
 
+        # [3]은 어휘 표현에만 성립한다 — 문법 틀은 표현 경계가 정해지지 않는다
+        if not lexical_form(g["form"] or g["pattern"]):
+            skipped["문법틀form"] += 1
+            continue
+
         # [3] 슬롯 치환: 학습 문장에서 공통 프레임을 추출한다(문장1 포함 필수)
         sents = [x["en"] for x in g["sents"]]
         found = extract_frame(sents)
@@ -512,6 +567,9 @@ def main():
             skipped["공통프레임없음"] += 1
             continue
         lits, cov = found
+        if not frame_matches_form(lits, g["form"] or g["pattern"]):
+            skipped["프레임≠form"] += 1
+            continue
         # 프레임이 실제로 들어있는 문장만 [3]에 쓴다. cov[0]은 항상 문장1.
         segd = {i: segment(sents[i], lits) for i in cov}
 
