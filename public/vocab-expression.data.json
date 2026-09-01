@@ -50,6 +50,10 @@
       "frame": [
         "get up"
       ],
+      "situation": {
+        "a_en": "I'm so sleepy... five more minutes.",
+        "a_kr": "너무 졸려... 5분만 더."
+      },
       "traps": [
         "off"
       ],
@@ -131,6 +135,10 @@
       "frame": [
         "talk to"
       ],
+      "situation": {
+        "a_en": "Can you come on the trip with us?",
+        "a_kr": "우리랑 여행 같이 갈 수 있어?"
+      },
       "traps": [
         "of"
       ],
@@ -241,6 +249,10 @@
         "Put",
         "on"
       ],
+      "situation": {
+        "a_en": "Mom, I'm ready to go outside!",
+        "a_kr": "엄마, 나 나갈 준비 됐어!"
+      },
       "traps": [
         "up"
       ],
@@ -349,6 +361,10 @@
       "frame": [
         "Don't be"
       ],
+      "situation": {
+        "a_en": "See you at the meeting tomorrow.",
+        "a_kr": "내일 회의에서 봐."
+      },
       "traps": [
         "shouldn't"
       ],
@@ -492,6 +508,10 @@
       "frame": [
         "Let me"
       ],
+      "situation": {
+        "a_en": "Ugh, my laptop froze again.",
+        "a_kr": "아, 노트북이 또 멈췄어."
+      },
       "traps": [
         "he"
       ],
@@ -633,6 +653,10 @@
       "frame": [
         "Why don't you"
       ],
+      "situation": {
+        "a_en": "I don't want to go to the party alone.",
+        "a_kr": "파티에 혼자 가고 싶지 않아."
+      },
       "traps": [
         "wasn't",
         "we"
@@ -731,6 +755,10 @@
       "frame": [
         "All of"
       ],
+      "situation": {
+        "a_en": "Wow, the marina looks different.",
+        "a_kr": "와, 항구가 달라 보이네."
+      },
       "traps": [
         "about"
       ],
@@ -850,6 +878,10 @@
       "frame": [
         "Come over"
       ],
+      "situation": {
+        "a_en": "I have nothing to do tonight.",
+        "a_kr": "오늘 밤에 할 일이 없네."
+      },
       "traps": [
         "back"
       ],
@@ -946,6 +978,10 @@
       "frame": [
         "go back"
       ],
+      "situation": {
+        "a_en": "It's getting dark out here.",
+        "a_kr": "여기 점점 어두워지는데."
+      },
       "traps": [
         "down"
       ],
@@ -1055,6 +1091,10 @@
         "at",
         "o'clock"
       ],
+      "situation": {
+        "a_en": "When do we have to hand this in?",
+        "a_kr": "이거 언제까지 내야 해?"
+      },
       "traps": [
         "by"
       ],
@@ -1244,6 +1284,10 @@
       "frame": [
         "feels like"
       ],
+      "situation": {
+        "a_en": "It's so warm outside today.",
+        "a_kr": "오늘 밖이 정말 따뜻하네."
+      },
       "traps": [
         "back"
       ],
@@ -1333,6 +1377,10 @@
       "frame": [
         "Take off"
       ],
+      "situation": {
+        "a_en": "It's boiling in here.",
+        "a_kr": "여기 너무 더워."
+      },
       "traps": [
         "up"
       ],
@@ -1437,6 +1485,10 @@
       "frame": [
         "How about"
       ],
+      "situation": {
+        "a_en": "I'd like something cold to drink.",
+        "a_kr": "뭔가 차가운 걸 마시고 싶어요."
+      },
       "traps": [
         "with"
       ],
@@ -1534,6 +1586,10 @@
       "frame": [
         "too much"
       ],
+      "situation": {
+        "a_en": "What if nobody comes to my show?",
+        "a_kr": "내 공연에 아무도 안 오면 어떡하지?"
+      },
       "traps": [
         "lot"
       ],
@@ -1630,6 +1686,10 @@
       "frame": [
         "Be sure to"
       ],
+      "situation": {
+        "a_en": "I finished the test early!",
+        "a_kr": "시험 일찍 다 풀었어요!"
+      },
       "traps": [
         "of"
       ],
@@ -1727,6 +1787,10 @@
       "frame": [
         "most of"
       ],
+      "situation": {
+        "a_en": "How was the show last night?",
+        "a_kr": "어젯밤 공연 어땠어?"
+      },
       "traps": [
         "into"
       ],
@@ -1835,6 +1899,10 @@
       "frame": [
         "Which one"
       ],
+      "situation": {
+        "a_en": "Both of these look good on me.",
+        "a_kr": "이 둘 다 나한테 잘 맞는 것 같아."
+      },
       "traps": [
         "off"
       ],
@@ -1916,6 +1984,10 @@
       "frame": [
         "Would you"
       ],
+      "situation": {
+        "a_en": "Okay, I've finished my part.",
+        "a_kr": "네, 제 몫은 끝냈어요."
+      },
       "traps": [
         "did",
         "us"
@@ -2013,6 +2085,10 @@
       "frame": [
         "give up"
       ],
+      "situation": {
+        "a_en": "I don't think I can pass this time.",
+        "a_kr": "이번엔 못 붙을 것 같아."
+      },
       "traps": [
         "on"
       ],
@@ -2122,6 +2198,10 @@
       "frame": [
         "move on"
       ],
+      "situation": {
+        "a_en": "I think we've covered enough here.",
+        "a_kr": "이 부분은 충분히 다룬 것 같아요."
+      },
       "traps": [
         "down"
       ],
@@ -2222,6 +2302,10 @@
       "frame": [
         "start with"
       ],
+      "situation": {
+        "a_en": "Where should we begin?",
+        "a_kr": "어디서부터 시작할까요?"
+      },
       "traps": [
         "at"
       ],
@@ -2326,6 +2410,10 @@
       "frame": [
         "Welcome to"
       ],
+      "situation": {
+        "a_en": "Hello, this is my first time here.",
+        "a_kr": "안녕하세요, 여기 처음 왔어요."
+      },
       "traps": [
         "into"
       ],
@@ -2426,6 +2514,10 @@
       "frame": [
         "It's time for"
       ],
+      "situation": {
+        "a_en": "Do you want another cup of coffee?",
+        "a_kr": "커피 한 잔 더 할래?"
+      },
       "traps": [
         "from"
       ],
@@ -2527,6 +2619,10 @@
       "frame": [
         "a lot of"
       ],
+      "situation": {
+        "a_en": "Do we have enough to start the report?",
+        "a_kr": "보고서 시작할 만큼 자료가 있어요?"
+      },
       "traps": [
         "by"
       ],
@@ -2669,6 +2765,10 @@
       "frame": [
         "What happened to"
       ],
+      "situation": {
+        "a_en": "Careful, watch your step there.",
+        "a_kr": "조심해, 거기 발밑 봐."
+      },
       "traps": [
         "into"
       ],
@@ -2765,6 +2865,10 @@
       "frame": [
         "Go to bed"
       ],
+      "situation": {
+        "a_en": "Just one more episode, please!",
+        "a_kr": "딱 한 편만 더 볼게요!"
+      },
       "traps": [
         "from"
       ],
@@ -2861,6 +2965,10 @@
       "frame": [
         "Have fun"
       ],
+      "situation": {
+        "a_en": "I'm heading out to the festival now.",
+        "a_kr": "나 지금 축제 가는 길이야."
+      },
       "traps": [
         "was"
       ],
@@ -2942,6 +3050,10 @@
       "frame": [
         "thanks to"
       ],
+      "situation": {
+        "a_en": "How did your shop get so popular?",
+        "a_kr": "가게가 어떻게 이렇게 유명해졌어요?"
+      },
       "traps": [
         "of"
       ],
@@ -3050,6 +3162,10 @@
       "frame": [
         "Each of"
       ],
+      "situation": {
+        "a_en": "Did you two watch the same show?",
+        "a_kr": "둘이 같은 공연 봤어?"
+      },
       "traps": [
         "from"
       ],
@@ -3200,6 +3316,10 @@
         "call",
         "back"
       ],
+      "situation": {
+        "a_en": "You look like you remembered something.",
+        "a_kr": "뭔가 생각난 표정이네."
+      },
       "traps": [
         "along"
       ],
@@ -3324,6 +3444,7 @@
       "frame": [
         "What's going on"
       ],
+      "situation": null,
       "traps": [
         "through"
       ],
@@ -3406,6 +3527,7 @@
       "frame": [
         "get out of"
       ],
+      "situation": null,
       "traps": [
         "on",
         "with"
@@ -3516,6 +3638,7 @@
       "frame": [
         "plenty of"
       ],
+      "situation": null,
       "traps": [
         "by"
       ],
@@ -3625,6 +3748,7 @@
       "frame": [
         "heard of"
       ],
+      "situation": null,
       "traps": [
         "to"
       ],
@@ -3734,6 +3858,7 @@
       "frame": [
         "in charge of"
       ],
+      "situation": null,
       "traps": [
         "by",
         "with"
@@ -3843,6 +3968,7 @@
       "frame": [
         "Pay attention to"
       ],
+      "situation": null,
       "traps": [
         "from"
       ],
@@ -3947,6 +4073,7 @@
       "frame": [
         "What's wrong with"
       ],
+      "situation": null,
       "traps": [
         "from"
       ],
@@ -4028,6 +4155,7 @@
       "frame": [
         "in front of"
       ],
+      "situation": null,
       "traps": [
         "at",
         "into"
@@ -4137,6 +4265,7 @@
       "frame": [
         "turned out"
       ],
+      "situation": null,
       "traps": [
         "down"
       ],
@@ -4245,6 +4374,7 @@
       "frame": [
         "take a break"
       ],
+      "situation": null,
       "traps": [
         "plenty"
       ],
@@ -4330,6 +4460,7 @@
       "frame": [
         "a couple of"
       ],
+      "situation": null,
       "traps": [
         "in"
       ],
@@ -4442,6 +4573,7 @@
         "Clean",
         "up"
       ],
+      "situation": null,
       "traps": [
         "over"
       ],
@@ -4559,6 +4691,7 @@
       "frame": [
         "one more"
       ],
+      "situation": null,
       "traps": [
         "good"
       ],
@@ -4667,6 +4800,7 @@
       "frame": [
         "along with"
       ],
+      "situation": null,
       "traps": [
         "over",
         "by"
@@ -4776,6 +4910,7 @@
       "frame": [
         "fill out"
       ],
+      "situation": null,
       "traps": [
         "over"
       ],
@@ -4881,6 +5016,7 @@
         "I'm",
         "aren't I"
       ],
+      "situation": null,
       "traps": [
         "don't",
         "it"
@@ -5009,6 +5145,7 @@
       "frame": [
         "rely on"
       ],
+      "situation": null,
       "traps": [
         "up"
       ],
@@ -5118,6 +5255,7 @@
         "the same",
         "as"
       ],
+      "situation": null,
       "traps": [
         "mind"
       ],
@@ -5331,6 +5469,7 @@
       "frame": [
         "Ever since"
       ],
+      "situation": null,
       "traps": [
         "free"
       ],
@@ -5436,6 +5575,7 @@
       "frame": [
         "No matter"
       ],
+      "situation": null,
       "traps": [
         "bit"
       ],
@@ -5540,6 +5680,7 @@
       "frame": [
         "up to"
       ],
+      "situation": null,
       "traps": [
         "over",
         "of"
@@ -5650,6 +5791,7 @@
       "frame": [
         "fit in"
       ],
+      "situation": null,
       "traps": [
         "by"
       ],
@@ -5739,6 +5881,7 @@
         "figure",
         "out"
       ],
+      "situation": null,
       "traps": [
         "off"
       ],
@@ -5863,6 +6006,7 @@
       "frame": [
         "the same"
       ],
+      "situation": null,
       "traps": [
         "fit"
       ],
@@ -6028,6 +6172,7 @@
       "frame": [
         "going through"
       ],
+      "situation": null,
       "traps": [
         "over"
       ],
@@ -6137,6 +6282,7 @@
         "keep",
         "in mind"
       ],
+      "situation": null,
       "traps": [
         "of"
       ],
@@ -6253,6 +6399,7 @@
       "frame": [
         "Come by"
       ],
+      "situation": null,
       "traps": [
         "from"
       ],
@@ -6354,6 +6501,7 @@
       "frame": [
         "A number of"
       ],
+      "situation": null,
       "traps": [
         "in"
       ],
@@ -6459,6 +6607,7 @@
       "frame": [
         "more than"
       ],
+      "situation": null,
       "traps": [
         "back"
       ],
@@ -6568,6 +6717,7 @@
       "frame": [
         "get off work"
       ],
+      "situation": null,
       "traps": [
         "away"
       ],
@@ -6676,6 +6826,7 @@
       "frame": [
         "in the middle of"
       ],
+      "situation": null,
       "traps": [
         "to",
         "about"
@@ -6785,6 +6936,7 @@
       "frame": [
         "such as"
       ],
+      "situation": null,
       "traps": [
         "thanks"
       ],
@@ -6951,6 +7103,7 @@
         "Give",
         "a try"
       ],
+      "situation": null,
       "traps": [
         "nor"
       ],
@@ -7067,6 +7220,7 @@
       "frame": [
         "is getting to me"
       ],
+      "situation": null,
       "traps": [
         "has",
         "of"
@@ -7165,6 +7319,7 @@
       "frame": [
         "look at"
       ],
+      "situation": null,
       "traps": [
         "to"
       ],
@@ -7273,6 +7428,7 @@
       "frame": [
         "can't wait to"
       ],
+      "situation": null,
       "traps": [
         "isn't",
         "with"
@@ -7383,6 +7539,7 @@
       "frame": [
         "except for"
       ],
+      "situation": null,
       "traps": [
         "of"
       ],
@@ -7492,6 +7649,7 @@
       "frame": [
         "turn on"
       ],
+      "situation": null,
       "traps": [
         "out"
       ],
@@ -7601,6 +7759,7 @@
       "frame": [
         "Make a choice"
       ],
+      "situation": null,
       "traps": [
         "thanks"
       ],
@@ -7702,6 +7861,7 @@
       "frame": [
         "go through"
       ],
+      "situation": null,
       "traps": [
         "back"
       ],
@@ -7810,6 +7970,7 @@
       "frame": [
         "come in"
       ],
+      "situation": null,
       "traps": [
         "to"
       ],
@@ -7920,6 +8081,7 @@
         "Let's",
         "shall we"
       ],
+      "situation": null,
       "traps": [
         "they"
       ],
@@ -8086,6 +8248,7 @@
         "look",
         "up"
       ],
+      "situation": null,
       "traps": [
         "through"
       ],
@@ -8213,6 +8376,7 @@
         "pick",
         "up"
       ],
+      "situation": null,
       "traps": [
         "down"
       ],
@@ -8334,6 +8498,7 @@
       "frame": [
         "looking forward to"
       ],
+      "situation": null,
       "traps": [
         "about"
       ],
@@ -8442,6 +8607,7 @@
       "frame": [
         "Why would I"
       ],
+      "situation": null,
       "traps": [
         "has",
         "they"
@@ -8539,6 +8705,7 @@
       "frame": [
         "enough to"
       ],
+      "situation": null,
       "traps": [
         "by"
       ],
@@ -8705,6 +8872,7 @@
         "provide",
         "with"
       ],
+      "situation": null,
       "traps": [
         "by"
       ],
@@ -8837,6 +9005,7 @@
       "frame": [
         "a bunch of"
       ],
+      "situation": null,
       "traps": [
         "to"
       ],
@@ -8946,6 +9115,7 @@
       "frame": [
         "other than"
       ],
+      "situation": null,
       "traps": [
         "either"
       ],
@@ -9054,6 +9224,7 @@
       "frame": [
         "as much as"
       ],
+      "situation": null,
       "traps": [
         "kind"
       ],
@@ -9162,6 +9333,7 @@
       "frame": [
         "late for"
       ],
+      "situation": null,
       "traps": [
         "at"
       ],
@@ -9270,6 +9442,7 @@
       "frame": [
         "will you"
       ],
+      "situation": null,
       "traps": [
         "does",
         "him"
@@ -9413,6 +9586,7 @@
       "frame": [
         "in terms of"
       ],
+      "situation": null,
       "traps": [
         "at",
         "to"
@@ -9515,6 +9689,7 @@
         "have",
         "in common"
       ],
+      "situation": null,
       "traps": [
         "can",
         "at"
@@ -9637,6 +9812,7 @@
         "It's",
         "to"
       ],
+      "situation": null,
       "traps": [
         "at"
       ],
@@ -9804,6 +9980,7 @@
       "frame": [
         "nothing but"
       ],
+      "situation": null,
       "traps": [
         "while"
       ],
@@ -9912,6 +10089,7 @@
       "frame": [
         "hang out"
       ],
+      "situation": null,
       "traps": [
         "through"
       ],
@@ -10021,6 +10199,7 @@
       "frame": [
         "when it comes to"
       ],
+      "situation": null,
       "traps": [
         "i",
         "about"
@@ -10130,6 +10309,7 @@
       "frame": [
         "a bit of"
       ],
+      "situation": null,
       "traps": [
         "to"
       ],
@@ -10238,6 +10418,7 @@
       "frame": [
         "believe in"
       ],
+      "situation": null,
       "traps": [
         "about"
       ],
@@ -10346,6 +10527,7 @@
       "frame": [
         "believe in"
       ],
+      "situation": null,
       "traps": [
         "about"
       ],
@@ -10431,6 +10613,7 @@
       "frame": [
         "because of"
       ],
+      "situation": null,
       "traps": [
         "for"
       ],
@@ -10592,6 +10775,7 @@
       "frame": [
         "Compared to"
       ],
+      "situation": null,
       "traps": [
         "in"
       ],
@@ -10688,6 +10872,7 @@
       "frame": [
         "Let me know"
       ],
+      "situation": null,
       "traps": [
         "they"
       ],
@@ -10788,6 +10973,7 @@
       "frame": [
         "sign up"
       ],
+      "situation": null,
       "traps": [
         "over"
       ],
@@ -10877,6 +11063,7 @@
       "frame": [
         "depending on"
       ],
+      "situation": null,
       "traps": [
         "away"
       ],
@@ -10981,6 +11168,7 @@
       "frame": [
         "takes up"
       ],
+      "situation": null,
       "traps": [
         "out"
       ],
@@ -11070,6 +11258,7 @@
       "frame": [
         "think of"
       ],
+      "situation": null,
       "traps": [
         "about"
       ],
@@ -11179,6 +11368,7 @@
         "more",
         "than"
       ],
+      "situation": null,
       "traps": [
         "back"
       ],
@@ -11365,6 +11555,7 @@
       "frame": [
         "Have a good time"
       ],
+      "situation": null,
       "traps": [
         "am"
       ],
@@ -11461,6 +11652,7 @@
       "frame": [
         "the most"
       ],
+      "situation": null,
       "traps": [
         "much"
       ],
@@ -11610,6 +11802,7 @@
       "frame": [
         "some kind of"
       ],
+      "situation": null,
       "traps": [
         "into"
       ],
@@ -11718,6 +11911,7 @@
       "frame": [
         "How do you like"
       ],
+      "situation": null,
       "traps": [
         "does",
         "him"
@@ -11800,6 +11994,7 @@
       "frame": [
         "take a walk"
       ],
+      "situation": null,
       "traps": [
         "single"
       ],
@@ -11905,6 +12100,7 @@
         "leave",
         "alone"
       ],
+      "situation": null,
       "traps": [
         "plenty"
       ],
@@ -12021,6 +12217,7 @@
       "frame": [
         "on top of"
       ],
+      "situation": null,
       "traps": [
         "down",
         "about"
@@ -12130,6 +12327,7 @@
       "frame": [
         "get started"
       ],
+      "situation": null,
       "traps": [
         "bring"
       ],
@@ -12230,6 +12428,7 @@
       "frame": [
         "Calm down"
       ],
+      "situation": null,
       "traps": [
         "along"
       ],
@@ -12327,6 +12526,7 @@
       "frame": [
         "make it"
       ],
+      "situation": null,
       "traps": [
         "them"
       ],
@@ -12413,6 +12613,7 @@
       "frame": [
         "go back to"
       ],
+      "situation": null,
       "traps": [
         "off",
         "into"
@@ -12522,6 +12723,7 @@
       "frame": [
         "by the time"
       ],
+      "situation": null,
       "traps": [
         "with"
       ],
@@ -12627,6 +12829,7 @@
       "frame": [
         "messed up"
       ],
+      "situation": null,
       "traps": [
         "back"
       ],
@@ -12736,6 +12939,7 @@
         "try",
         "on"
       ],
+      "situation": null,
       "traps": [
         "along"
       ],
@@ -12833,6 +13037,7 @@
       "frame": [
         "every single"
       ],
+      "situation": null,
       "traps": [
         "like"
       ],
@@ -12937,6 +13142,7 @@
       "frame": [
         "I'd say"
       ],
+      "situation": null,
       "traps": [
         "soon"
       ],
@@ -13033,6 +13239,7 @@
       "frame": [
         "What's with"
       ],
+      "situation": null,
       "traps": [
         "from"
       ],
@@ -13130,6 +13337,7 @@
       "frame": [
         "It's all about"
       ],
+      "situation": null,
       "traps": [
         "with"
       ],
@@ -13226,6 +13434,7 @@
       "frame": [
         "get home"
       ],
+      "situation": null,
       "traps": [
         "move"
       ],
@@ -13312,6 +13521,7 @@
       "frame": [
         "look around"
       ],
+      "situation": null,
       "traps": [
         "matter"
       ],
@@ -13397,6 +13607,7 @@
       "frame": [
         "some more"
       ],
+      "situation": null,
       "traps": [
         "same"
       ],
@@ -13502,6 +13713,7 @@
       "frame": [
         "work out"
       ],
+      "situation": null,
       "traps": [
         "along"
       ],
@@ -13607,6 +13819,7 @@
       "frame": [
         "Don't you think"
       ],
+      "situation": null,
       "traps": [
         "won't",
         "it"
@@ -13705,6 +13918,7 @@
       "frame": [
         "get through"
       ],
+      "situation": null,
       "traps": [
         "along"
       ],
@@ -13814,6 +14028,7 @@
       "frame": [
         "Feel free to"
       ],
+      "situation": null,
       "traps": [
         "about"
       ],
@@ -13910,6 +14125,7 @@
       "frame": [
         "belong to"
       ],
+      "situation": null,
       "traps": [
         "with"
       ],
@@ -13997,6 +14213,7 @@
         "It's",
         "to"
       ],
+      "situation": null,
       "traps": [
         "at"
       ],
@@ -14140,6 +14357,7 @@
       "frame": [
         "say no"
       ],
+      "situation": null,
       "traps": [
         "heard"
       ],
@@ -14225,6 +14443,7 @@
       "frame": [
         "go over"
       ],
+      "situation": null,
       "traps": [
         "off"
       ],
@@ -14334,6 +14553,7 @@
       "frame": [
         "No more"
       ],
+      "situation": null,
       "traps": [
         "know"
       ],
@@ -14438,6 +14658,7 @@
       "frame": [
         "Get off"
       ],
+      "situation": null,
       "traps": [
         "out"
       ],
@@ -14523,6 +14744,7 @@
       "frame": [
         "pay attention"
       ],
+      "situation": null,
       "traps": [
         "leave"
       ],
@@ -14624,6 +14846,7 @@
         "get",
         "done"
       ],
+      "situation": null,
       "traps": [
         "time"
       ],
@@ -14744,6 +14967,7 @@
       "frame": [
         "How come"
       ],
+      "situation": null,
       "traps": [
         "every"
       ],
@@ -14827,6 +15051,7 @@
         "have",
         "in mind"
       ],
+      "situation": null,
       "traps": [
         "am",
         "of"
@@ -14940,6 +15165,7 @@
       "frame": [
         "stop by"
       ],
+      "situation": null,
       "traps": [
         "at"
       ],
@@ -15029,6 +15255,7 @@
       "frame": [
         "Why don't we"
       ],
+      "situation": null,
       "traps": [
         "can't",
         "them"
@@ -15127,6 +15354,7 @@
         "Give",
         "back"
       ],
+      "situation": null,
       "traps": [
         "on"
       ],
@@ -15252,6 +15480,7 @@
       "frame": [
         "more like"
       ],
+      "situation": null,
       "traps": [
         "turned"
       ],
@@ -15362,6 +15591,7 @@
       "frame": [
         "in case"
       ],
+      "situation": null,
       "traps": [
         "by"
       ],
@@ -15466,6 +15696,7 @@
       "frame": [
         "believe in"
       ],
+      "situation": null,
       "traps": [
         "for"
       ],
@@ -15575,6 +15806,7 @@
         "take",
         "seriously"
       ],
+      "situation": null,
       "traps": [
         "nor"
       ],
@@ -15672,6 +15904,7 @@
       "frame": [
         "looking after"
       ],
+      "situation": null,
       "traps": [
         "break"
       ],
@@ -15761,6 +15994,7 @@
       "frame": [
         "What if"
       ],
+      "situation": null,
       "traps": [
         "figure"
       ],
@@ -15858,6 +16092,7 @@
         "less",
         "than"
       ],
+      "situation": null,
       "traps": [
         "fun"
       ],
@@ -16073,6 +16308,7 @@
         "pick",
         "up"
       ],
+      "situation": null,
       "traps": [
         "through"
       ],
@@ -16198,6 +16434,7 @@
       "frame": [
         "What makes"
       ],
+      "situation": null,
       "traps": [
         "brings"
       ],
@@ -16295,6 +16532,7 @@
         "bring",
         "up"
       ],
+      "situation": null,
       "traps": [
         "out"
       ],
@@ -16420,6 +16658,7 @@
         "turned",
         "down"
       ],
+      "situation": null,
       "traps": [
         "away"
       ],
@@ -16541,6 +16780,7 @@
         "Just because",
         "doesn't mean"
       ],
+      "situation": null,
       "traps": [
         "won't"
       ],
@@ -16661,6 +16901,7 @@
       "frame": [
         "keep track of"
       ],
+      "situation": null,
       "traps": [
         "to"
       ],
@@ -16765,6 +17006,7 @@
       "frame": [
         "What brings you to"
       ],
+      "situation": null,
       "traps": [
         "them",
         "of"
@@ -16848,6 +17090,7 @@
       "frame": [
         "take advantage of"
       ],
+      "situation": null,
       "traps": [
         "about"
       ],
@@ -16957,6 +17200,7 @@
       "frame": [
         "take over"
       ],
+      "situation": null,
       "traps": [
         "on"
       ],
@@ -17043,6 +17287,7 @@
       "frame": [
         "Why not"
       ],
+      "situation": null,
       "traps": [
         "stick"
       ],
@@ -17141,6 +17386,7 @@
       "frame": [
         "as soon as"
       ],
+      "situation": null,
       "traps": [
         "pay"
       ],
@@ -17307,6 +17553,7 @@
       "frame": [
         "set up"
       ],
+      "situation": null,
       "traps": [
         "away"
       ],
@@ -17416,6 +17663,7 @@
       "frame": [
         "meet up"
       ],
+      "situation": null,
       "traps": [
         "along"
       ],
@@ -17525,6 +17773,7 @@
       "frame": [
         "count on"
       ],
+      "situation": null,
       "traps": [
         "through"
       ],
@@ -17614,6 +17863,7 @@
       "frame": [
         "Stay away from"
       ],
+      "situation": null,
       "traps": [
         "down",
         "at"
@@ -17711,6 +17961,7 @@
       "frame": [
         "looking into"
       ],
+      "situation": null,
       "traps": [
         "to"
       ],
@@ -17801,6 +18052,7 @@
       "frame": [
         "pays off"
       ],
+      "situation": null,
       "traps": [
         "along"
       ],
@@ -17882,6 +18134,7 @@
       "frame": [
         "feel sorry for"
       ],
+      "situation": null,
       "traps": [
         "into"
       ],
@@ -17990,6 +18243,7 @@
       "frame": [
         "get over"
       ],
+      "situation": null,
       "traps": [
         "down"
       ],
@@ -18098,6 +18352,7 @@
       "frame": [
         "go for"
       ],
+      "situation": null,
       "traps": [
         "at"
       ],
@@ -18207,6 +18462,7 @@
       "frame": [
         "get in"
       ],
+      "situation": null,
       "traps": [
         "for"
       ],
@@ -18307,6 +18563,7 @@
       "frame": [
         "reach out"
       ],
+      "situation": null,
       "traps": [
         "away"
       ],
@@ -18415,6 +18672,7 @@
       "frame": [
         "go with"
       ],
+      "situation": null,
       "traps": [
         "by"
       ],
@@ -18523,6 +18781,7 @@
       "frame": [
         "take responsibility"
       ],
+      "situation": null,
       "traps": [
         "wrong"
       ],
@@ -18605,6 +18864,7 @@
         "let",
         "go"
       ],
+      "situation": null,
       "traps": [
         "mean"
       ],
@@ -18726,6 +18986,7 @@
         "both",
         "and"
       ],
+      "situation": null,
       "traps": [
         "messed"
       ],
@@ -18935,6 +19196,7 @@
       "frame": [
         "Lie down"
       ],
+      "situation": null,
       "traps": [
         "up"
       ],
@@ -19016,6 +19278,7 @@
       "frame": [
         "keep up"
       ],
+      "situation": null,
       "traps": [
         "on"
       ],
@@ -19120,6 +19383,7 @@
       "frame": [
         "Help yourself to"
       ],
+      "situation": null,
       "traps": [
         "into"
       ],
@@ -19202,6 +19466,7 @@
         "either",
         "or"
       ],
+      "situation": null,
       "traps": [
         "stick"
       ],
@@ -19411,6 +19676,7 @@
       "frame": [
         "Fill up"
       ],
+      "situation": null,
       "traps": [
         "back"
       ],
@@ -19515,6 +19781,7 @@
       "frame": [
         "Watch out for"
       ],
+      "situation": null,
       "traps": [
         "on",
         "with"
@@ -19612,6 +19879,7 @@
       "frame": [
         "feel bad"
       ],
+      "situation": null,
       "traps": [
         "fill"
       ],
@@ -19722,6 +19990,7 @@
         "think",
         "over"
       ],
+      "situation": null,
       "traps": [
         "back"
       ],
@@ -19823,6 +20092,7 @@
       "frame": [
         "a ton of"
       ],
+      "situation": null,
       "traps": [
         "in"
       ],
@@ -19932,6 +20202,7 @@
       "frame": [
         "Say hi"
       ],
+      "situation": null,
       "traps": [
         "know"
       ],
@@ -20030,6 +20301,7 @@
       "frame": [
         "Do you think"
       ],
+      "situation": null,
       "traps": [
         "has",
         "they"
@@ -20184,6 +20456,7 @@
       "frame": [
         "have a choice"
       ],
+      "situation": null,
       "traps": [
         "has"
       ],
@@ -20286,6 +20559,7 @@
         "pay",
         "back"
       ],
+      "situation": null,
       "traps": [
         "down"
       ],
@@ -20410,6 +20684,7 @@
       "frame": [
         "as well as"
       ],
+      "situation": null,
       "traps": [
         "much"
       ],
@@ -20575,6 +20850,7 @@
       "frame": [
         "get paid"
       ],
+      "situation": null,
       "traps": [
         "sign"
       ],
@@ -20684,6 +20960,7 @@
       "frame": [
         "Keep an eye on"
       ],
+      "situation": null,
       "traps": [
         "down"
       ],
@@ -20789,6 +21066,7 @@
         "keep",
         "a secret"
       ],
+      "situation": null,
       "traps": [
         "number"
       ],
@@ -20910,6 +21188,7 @@
         "ask",
         "out"
       ],
+      "situation": null,
       "traps": [
         "up"
       ],
@@ -21007,6 +21286,7 @@
       "frame": [
         "so that"
       ],
+      "situation": null,
       "traps": [
         "some"
       ],
@@ -21173,6 +21453,7 @@
         "give",
         "a call"
       ],
+      "situation": null,
       "traps": [
         "just"
       ],
@@ -21297,6 +21578,7 @@
       "frame": [
         "cut down on"
       ],
+      "situation": null,
       "traps": [
         "out",
         "off"
@@ -21407,6 +21689,7 @@
         "neither",
         "nor"
       ],
+      "situation": null,
       "traps": [
         "turned"
       ],
@@ -21613,6 +21896,7 @@
       "frame": [
         "mixed up"
       ],
+      "situation": null,
       "traps": [
         "through"
       ],
@@ -21721,6 +22005,7 @@
       "frame": [
         "check on"
       ],
+      "situation": null,
       "traps": [
         "down"
       ],
@@ -21829,6 +22114,7 @@
       "frame": [
         "get around"
       ],
+      "situation": null,
       "traps": [
         "makes"
       ],
@@ -21915,6 +22201,7 @@
       "frame": [
         "stepped out"
       ],
+      "situation": null,
       "traps": [
         "down"
       ],
@@ -22025,6 +22312,7 @@
       "frame": [
         "I don't know if"
       ],
+      "situation": null,
       "traps": [
         "us",
         "couldn't"
@@ -22138,6 +22426,7 @@
       "frame": [
         "more than"
       ],
+      "situation": null,
       "traps": [
         "front"
       ],
@@ -22247,6 +22536,7 @@
         "showed",
         "around"
       ],
+      "situation": null,
       "traps": [
         "after"
       ],
@@ -22353,6 +22643,7 @@
       "frame": [
         "keep up with"
       ],
+      "situation": null,
       "traps": [
         "down",
         "from"
@@ -22466,6 +22757,7 @@
         "put",
         "on"
       ],
+      "situation": null,
       "traps": [
         "down"
       ],
@@ -22587,6 +22879,7 @@
       "frame": [
         "get in touch with"
       ],
+      "situation": null,
       "traps": [
         "to",
         "into"
@@ -22696,6 +22989,7 @@
       "frame": [
         "What if"
       ],
+      "situation": null,
       "traps": [
         "home"
       ],
@@ -22793,6 +23087,7 @@
       "frame": [
         "put up with"
       ],
+      "situation": null,
       "traps": [
         "along",
         "to"
@@ -22898,6 +23193,7 @@
       "frame": [
         "check with"
       ],
+      "situation": null,
       "traps": [
         "at"
       ],
@@ -23007,6 +23303,7 @@
       "frame": [
         "Stick with"
       ],
+      "situation": null,
       "traps": [
         "of"
       ],
@@ -23092,6 +23389,7 @@
       "frame": [
         "If it weren't for"
       ],
+      "situation": null,
       "traps": [
         "us",
         "isn't"
@@ -23234,6 +23532,7 @@
       "frame": [
         "keep in touch"
       ],
+      "situation": null,
       "traps": [
         "from"
       ],
@@ -23331,6 +23630,7 @@
       "frame": [
         "eat out"
       ],
+      "situation": null,
       "traps": [
         "down"
       ],
@@ -23433,6 +23733,7 @@
       "frame": [
         "take a while"
       ],
+      "situation": null,
       "traps": [
         "call"
       ],
@@ -23529,6 +23830,7 @@
       "frame": [
         "Do you happen to"
       ],
+      "situation": null,
       "traps": [
         "had",
         "i"
@@ -23627,6 +23929,7 @@
       "frame": [
         "Why don't I"
       ],
+      "situation": null,
       "traps": [
         "couldn't",
         "me"
@@ -23725,6 +24028,7 @@
       "frame": [
         "tell the difference"
       ],
+      "situation": null,
       "traps": [
         "such"
       ],
@@ -23827,6 +24131,7 @@
       "frame": [
         "pull over"
       ],
+      "situation": null,
       "traps": [
         "out"
       ],
@@ -23927,6 +24232,7 @@
       "frame": [
         "make time"
       ],
+      "situation": null,
       "traps": [
         "secret"
       ],
@@ -24031,6 +24337,7 @@
       "frame": [
         "dressed up"
       ],
+      "situation": null,
       "traps": [
         "off"
       ],
@@ -24135,6 +24442,7 @@
       "frame": [
         "Should you"
       ],
+      "situation": null,
       "traps": [
         "has",
         "we"
@@ -24262,6 +24570,7 @@
       "frame": [
         "don't you think"
       ],
+      "situation": null,
       "traps": [
         "doesn't",
         "i"
@@ -24360,6 +24669,7 @@
         "having",
         "over"
       ],
+      "situation": null,
       "traps": [
         "away"
       ],
@@ -24492,6 +24802,7 @@
       "frame": [
         "by far"
       ],
+      "situation": null,
       "traps": [
         "with"
       ],
@@ -24588,6 +24899,7 @@
       "frame": [
         "passed out"
       ],
+      "situation": null,
       "traps": [
         "off"
       ],

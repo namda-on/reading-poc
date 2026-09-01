@@ -34,6 +34,8 @@ EXPR_CSV  = Path(os.environ.get("VE_EXPR_CSV",  DL / "유기적 통합모드 문
 VOCAB_CSV = Path(os.environ.get("VE_VOCAB_CSV", DL / "All_(2026-09-01_20_14_12).csv"))
 GSE_CSV   = Path(os.environ.get("VE_GSE_CSV",   DL / "gse_corrected_final_0624 - 보정결과_전체.csv"))
 OUT = Path(__file__).resolve().parent.parent / "public" / "vocab-expression.data.json"
+# [5] 상황 단계용 A 대사 — 소스 CSV에 상황 필드가 없어 손으로 적은 프로토타입 문안
+SITUATIONS = Path(__file__).resolve().parent / "vocab_expression_situations.json"
 
 MAX_ITEMS = int(os.environ.get("VE_MAX_ITEMS", "0"))    # 0이면 전체
 VOCAB_FILTER_SKIP = {"sexual", "unnecessary"}
@@ -455,6 +457,14 @@ def segment(sentence, literals):
     return {"segs": segs, "punct": punct}
 
 
+def load_situations():
+    """학습 문장(en) → {a_en, a_kr}. 파일이 없어도 빌드는 진행한다([5]만 비활성)."""
+    if not SITUATIONS.exists():
+        return {}
+    raw = json.loads(SITUATIONS.read_text(encoding="utf-8"))
+    return {k: v for k, v in raw.items() if not k.startswith("_")}
+
+
 def load_vocab():
     if not VOCAB_CSV.exists():
         die(f"어휘 CSV 없음: {VOCAB_CSV} (VE_VOCAB_CSV로 지정)")
@@ -558,6 +568,7 @@ def make_vocab_a(v, trigger):
 
 def main():
     vocab, gse, groups = load_vocab(), load_gse(), load_groups()
+    situations = load_situations()
     items, skipped = [], {"조인실패": 0, "버전A불가": 0, "버전B불가": 0, "문장부족": 0,
                           "공통프레임없음": 0, "문법틀form": 0, "프레임≠form": 0}
 
@@ -624,6 +635,7 @@ def main():
             # 프레임을 공유하는 문장만 담으므로 문항에 따라 1개 또는 여러 개다
             # (2개 이상이면 [3]이 2회차까지 진행된다).
             "frame": lits,
+            "situation": situations.get(s1["en"]),
             "traps": [],
             "_trapSent": sents[cov[1]] if len(cov) > 1 else sents[0],
             "baseSegs": segd[0]["segs"],
@@ -663,6 +675,7 @@ def main():
     OUT.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"[build_vocab_expression] 완료 → {OUT}")
     print(f"  후보 그룹 {len(groups)} → 사용 {len(items)}문항 | 제외: {skipped}")
+    print(f"  [5] 상황 대사가 붙은 문항: {len([x for x in items if x.get('situation')])}")
 
 
 if __name__ == "__main__":

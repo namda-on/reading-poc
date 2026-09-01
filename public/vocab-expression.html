@@ -202,6 +202,28 @@
   .rv-chips { display:flex; flex-wrap:wrap; gap:6px; }
   .rv-chip { font-size:13px; font-weight:600; color:#5b7c93; background:#eef2f8; border-radius:8px; padding:3px 9px; }
   .rv-chip.fr { color:#22794a; background:#e8f8ee; font-weight:800; }
+  /* [5] 상황 — 대화 안에서 말하는 느낌 */
+  .sit-turn { display:flex; gap:10px; align-items:flex-start; margin-top:16px; }
+  .sit-turn.b { margin-top:18px; }
+  .sit-role { flex:none; width:26px; height:26px; border-radius:50%; background:#e7ecf5; color:#7d8fa6;
+    font-size:12.5px; font-weight:800; display:flex; align-items:center; justify-content:center; margin-top:3px; }
+  .sit-turn.b .sit-role { background:#dbe8fb; color:#3a6bb0; }
+  .sit-bubble { flex:1; background:#f2f5fa; border-radius:4px 14px 14px 14px; padding:12px 14px; }
+  .sit-bubble.mine { background:#eaf1fb; border-radius:14px 4px 14px 14px; }
+  .sit-en { font-size:17px; font-weight:700; color:#2f3e52; line-height:1.45; }
+  .sit-kr { font-size:13px; color:#9aa8bc; margin-top:3px; }
+  .sit-goal { font-size:15px; font-weight:700; color:#33465c; }
+  .sit-input { width:100%; margin-top:9px; resize:none; overflow:hidden; background:#fff;
+    border:1.5px solid #cdddf3; border-radius:10px; padding:9px 11px; font:inherit; font-size:17px;
+    font-weight:700; color:#2f3e52; outline:none; }
+  .sit-input:focus { border-color:#8fb0dd; }
+  .sit-input.ok { background:#e3fbec; border-color:#8ed9ab; color:#22794a; }
+  .sit-fb { margin-top:14px; }
+  .sit-wrong { background:#fdeeea; color:#b5533c; border-radius:11px; padding:11px 13px; font-size:14px; font-weight:600; }
+  .sit-hint { display:flex; flex-wrap:wrap; align-items:center; gap:7px; background:#f2f5fa;
+    border-radius:11px; padding:11px 13px; font-size:13px; color:#7d8fa6; }
+  .sit-hint b { color:#5b7c93; margin-right:3px; }
+
   .rv-q { font-size:20px; font-weight:700; color:#33465c; line-height:1.5; margin-top:2px; }
   .rv-sub { font-size:13.5px; color:#8e9aaa; font-weight:600; margin:18px 0 0; }
   .rv-opts { display:flex; flex-direction:column; gap:9px; margin-top:10px; }
@@ -1046,168 +1068,126 @@ function applyPayoffHtml(item, rows, round){
     </div>`;
 }
 
-// [5] 구간 정리 ─────────────────────────────────────────────────────────────────
-// 기획 의도의 [5]는 "내가 배운 단어·표현이 말로 나온다"다. [2]·[3]처럼 또 배열을 시키면
-// 조작만 반복되고 그 감각이 안 생긴다. 실제 회화에서 필요한 첫 능력은
-// **하고 싶은 말이 있을 때 배운 표현 중에서 골라 쓰는 것**이므로 그 결정을 [5]의 과제로 둔다.
-//   ① 한국어로 하고 싶은 말을 준다  ② 구간에서 배운 표현 중 어떤 걸 쓸지 고른다
-//   ③ 고른 표현은 초록으로 박아 두고, 나머지를 구간에서 본 단어로 채운다
-// 후보를 구간 문장으로 한정해 채점이 되고, 타이핑이 없어 저레벨 유저도 부담이 없다.
-function renderReview(){
+// [5] 상황 ──────────────────────────────────────────────────────────────────────
+// 기획 의도: "임의의 상황에서 배운 표현을 가지고 내가 새로 말을 할 수 있다".
+// 그래서 표현을 목록에서 고르게 하지 않는다 — 상황이 먼저 오고, 배운 표현이 떠올라
+// **직접 입력**해야 그 감각이 생긴다. 표현 목록은 막혔을 때만 힌트로 펼친다.
+// A 대사는 소스에 없어 손으로 적은 문안이라(`scripts/vocab_expression_situations.json`)
+// 붙어 있는 문항에서만 이 단계가 열린다.
+function renderSituation(target){
   setProgress(4);
-  const start=Math.max(0, itemIdx-REVIEW_EVERY+1);
-  const block=sessionItems.slice(start, itemIdx+1);
-
-  // 구간에서 배운 표현(프레임) 목록 — 선택지가 되므로 서로 다른 것만
-  const exprs=[];
-  block.forEach(it=>{
-    const key=it.frame.join('|');
-    if(!exprs.some(e=>e.key===key))
-      exprs.push({key, frame:it.frame, meaning:(it.pattern.meaning||'').trim(), item:it});
-  });
-
-  // 목표 문장 — 아직 만들지 않은 것 우선
-  const cands=[];
-  block.forEach(it=>{
-    const key=it.frame.join('|');
-    [{en:it.sentence.en, kr:it.sentence.kr, segs:it.baseSegs}]
-      .concat(it.apply.map(a=>({en:a.en, kr:a.kr, segs:a.segs})))
-      .forEach(sn=>{ if(!made.some(x=>x.en===sn.en)) cands.push({...sn, key}); });
-  });
-  const target=cands.find(c=>!builtSet.has(c.en)) || cands[0];
-  if(!target || exprs.length<2){ itemIdx++; return renderVocab(); }
+  const sit=target.situation;
+  let revealed=false, done=false;
 
   stage.innerHTML=`
     <div class="stage-scroll">
       <div class="chat-card" id="card">
-        <div class="chat-tag rv">구간 정리</div>
-        <div class="rv-h">이 말을 하려면?</div>
-        <div class="rv-q">${escapeHtml(target.kr)}</div>
-        <div id="rvBody"></div>
+        <div class="chat-tag rv">상황</div>
+        <div class="sit-turn a">
+          <div class="sit-role">A</div>
+          <div class="sit-bubble">
+            <div class="sit-en">${escapeHtml(sit.a_en)}</div>
+            <div class="sit-kr">${escapeHtml(sit.a_kr)}</div>
+          </div>
+        </div>
+        <div class="sit-turn b">
+          <div class="sit-role">B</div>
+          <div class="sit-bubble mine">
+            <div class="sit-goal">${escapeHtml(target.kr)}</div>
+            <textarea class="sit-input" id="sitIn" rows="1" autocomplete="off"
+              autocapitalize="off" autocorrect="off" spellcheck="false"
+              placeholder="여기에 영어로 입력"></textarea>
+          </div>
+        </div>
+        <div class="sit-fb hidden" id="sitFb"></div>
+        <div id="sitDone"></div>
       </div>
     </div>
-    <div class="stage-bottom" id="bottom"></div>`;
-  const body=el('rvBody');
+    <div class="stage-bottom" id="bottom">
+      <div class="vtools">
+        <button class="vtool" id="hintBtn2"><span class="ic">?</span><span id="hintLbl2">배운 표현 보기</span></button>
+        <button class="vtool mic" id="skipBtn"><span class="ic">↷</span><span>건너뛰기</span></button>
+      </div>
+      <div class="arr-btns" style="margin-top:12px">
+        <button class="btn-confirm" id="sayBtn" disabled>말하기</button>
+      </div>
+    </div>`;
 
-  // ② 표현 고르기 — 실제로 판단이 필요해야 골랐다는 감각이 생긴다
-  function renderPick(){
-    body.innerHTML=`
-      <div class="rv-sub">배운 표현 중 어떤 걸 쓸까요?</div>
-      <div class="rv-opts">${exprs.map((e,i)=>
-        `<button class="rv-opt" data-i="${i}">
-           <span class="rv-fr">${escapeHtml(e.frame.join(' … '))}</span>
-           ${e.meaning?`<span class="rv-mn">${escapeHtml(e.meaning)}</span>`:''}
-         </button>`).join('')}</div>
-      <div class="rv-miss hidden" id="rvMiss"></div>`;
-    el('bottom').innerHTML=`<button class="btn-next ghost-next" id="skipBtn">건너뛰기</button>`;
-    el('skipBtn').onclick=goNext;
-    body.querySelectorAll('.rv-opt').forEach(b=> b.onclick=()=>{
-      const e=exprs[+b.dataset.i];
-      if(e.key!==target.key){
-        b.classList.add('wrong'); b.disabled=true;
-        const ms=el('rvMiss'); ms.classList.remove('hidden');
-        ms.textContent='이 표현으로는 그 말이 안 돼요';
-        return;
-      }
-      renderFill(e);
+  const inp=el('sitIn'), fb=el('sitFb');
+  setTimeout(()=>inp.focus(), 80);
+  inp.addEventListener('input', ()=>{
+    inp.style.height='auto'; inp.style.height=inp.scrollHeight+'px';
+    el('sayBtn').disabled = !inp.value.trim() || done;
+  });
+
+  // 프레임이 들어갔는지 — 완전히 같지 않아도 "표현은 떠올랐다"를 인정한다
+  function usedFrame(txt){
+    return (target.frame||[]).every(lit=>{
+      const ws=lit.split(/\s+/).map(w=>w.replace(/[^A-Za-z']/g,''));
+      const pat=new RegExp('\\b'+ws.map(w=>escapeRe(w)+"(?:s|es|ed|d|ing)?").join('\\s+')+'\\b','i');
+      return pat.test(txt);
     });
   }
+  function escapeRe(x){ return x.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'); }
 
-  // ③ 고른 표현은 박아 두고 나머지를 구간 단어로 채운다
-  function renderFill(expr){
-    const cells=[];
-    target.segs.forEach(sg=>{
-      if(sg.t==='frame') cells.push({kind:'fixed', text:sg.s});
-      else sg.s.split(/\s+/).forEach(w=> cells.push({kind:'blank', answer:w}));
-    });
-    const punct=trailPunct(target.en);
-    const blanks=cells.filter(c=>c.kind==='blank');
-    // 방해 단어 — 같은 구간의 다른 문장에서 (전부 이 구간에서 본 단어다)
-    const pool=[];
-    block.forEach(it=>{
-      [it.sentence.en].concat(it.apply.map(a=>a.en)).forEach(en=>{
-        if(en!==target.en) tokenize(en).forEach(t=>pool.push(t.toLowerCase()));
-      });
-    });
-    const extra=[...new Set(pool)].filter(w=>!blanks.some(b=>b.answer.toLowerCase()===w)).slice(0,2);
-    let bank=shuffle(blanks.map((c,i)=>({id:i, text:c.answer.toLowerCase(), placed:false}))
-      .concat(extra.map((t,i)=>({id:700+i, text:t, placed:false}))));
-    let ans=[], done=false;
-
-    body.innerHTML=`
-      <div class="rv-sub">고른 표현은 그대로 두고, 나머지를 채워 보세요</div>
-      <div class="fill" id="fill"></div>
-      <div class="fill-hint" id="fillHint">이 구간에서 본 단어로 만들어 보세요</div>
-      <div id="rvDone"></div>`;
-    const fillEl=el('fill');
-
-    function draw(){
-      let bi=0, h='';
-      cells.forEach(c=>{
-        if(c.kind==='fixed'){ h+=`<span class="fill-fixed">${escapeHtml(c.text)}</span>`; return; }
-        const i=bi++;
-        h += i<ans.length
-          ? `<span class="fill-word" data-i="${i}">${escapeHtml(ans[i].text)}</span>`
-          : `<span class="fill-blank"></span>`;
-      });
-      if(punct) h+=`<span class="fill-punct">${escapeHtml(punct)}</span>`;
-      fillEl.innerHTML=h;
-      el('fillHint').classList.toggle('hidden', done || ans.length>0);
-      if(!done) fillEl.querySelectorAll('.fill-word').forEach(w=> w.onclick=()=>{
-        const i=+w.dataset.i; ans[i].placed=false; ans.splice(i,1); all();
-      });
-      const bk=el('bank');
-      if(bk){
-        bk.innerHTML='';
-        bank.forEach(t=>{
-          const b=document.createElement('button');
-          b.className='tile'+(t.placed?' placed':'');
-          b.textContent=t.text;
-          if(!t.placed && !done) b.onclick=()=>{
-            if(ans.length>=blanks.length) return;
-            t.placed=true; ans.push(t); all();
-          };
-          bk.appendChild(b);
-        });
-      }
+  el('hintBtn2').onclick=()=>{
+    if(!revealed){
+      revealed=true;
+      el('hintLbl2').textContent='표현 숨기기';
+      fb.classList.remove('hidden');
+      fb.innerHTML=`<div class="sit-hint"><b>이 구간에서 배운 표현</b>
+        ${blockFrames().map(f=>`<span class="rv-chip fr">${escapeHtml(f)}</span>`).join('')}</div>`;
+    } else {
+      revealed=false; el('hintLbl2').textContent='배운 표현 보기'; fb.classList.add('hidden'); fb.innerHTML='';
     }
-    function all(){ draw(); const c=el('confirmBtn'); if(c) c.disabled=ans.length<blanks.length; }
+  };
+  el('skipBtn').onclick=goNext;
 
-    el('bottom').innerHTML=`
-      <div class="bank" id="bank"></div>
-      <div class="arr-btns">
-        <button class="btn-ghost2" id="backBtn2"><span class="ic">↩</span>다시 고르기</button>
-        <button class="btn-confirm" id="confirmBtn" disabled>확인</button>
+  el('sayBtn').onclick=()=>{
+    const txt=inp.value.trim();
+    if(!txt) return;
+    const exact = norm(txt)===norm(target.en);
+    if(!exact && !usedFrame(txt)){
+      fb.classList.remove('hidden');
+      fb.innerHTML=`<div class="sit-wrong">배운 표현이 아직 안 보여요. 다시 떠올려 볼까요?</div>`;
+      return;
+    }
+    done=true;
+    made.push({en:exact?target.en:txt, kr:target.kr});
+    inp.readOnly=true; inp.classList.add('ok');
+    fb.classList.add('hidden');
+    el('card').classList.add('correct');
+    el('sitDone').innerHTML=`<div class="payoff">
+        <div class="pf-label">상황에서 말했어요</div>
+        <div class="pf-top"><span class="ic">💡</span>${exact?'배운 표현이 바로 나왔어요':'표현을 떠올렸어요'}</div>
+        <div class="pf-note">${exact
+          ? '상황이 주어졌을 때 <b>배운 표현이 먼저 떠올랐어요</b>. 이게 실제로 말이 나오는 순서예요.'
+          : `표현은 맞게 떠올렸어요. 이 상황에선 이렇게 말해요 — <b>${escapeHtml(target.en)}</b>`}</div>
+        <div class="pf-cmp"><div class="pf-cmp-en">A. ${escapeHtml(sit.a_en)}</div></div>
+        <div class="pf-cmp"><div class="pf-cmp-en">B. ${escapeHtml(exact?target.en:txt)}</div><div class="pf-cmp-kr">${escapeHtml(target.kr)}</div></div>
       </div>`;
-    el('backBtn2').onclick=renderPick;
-    el('confirmBtn').onclick=()=>{
-      if(!ans.every((t,i)=> t.text===blanks[i].answer.toLowerCase())){
-        fillEl.querySelectorAll('.fill-word').forEach(w=>w.style.color='#e14b46');
-        setTimeout(()=>{ ans=[]; bank.forEach(t=>t.placed=false); all(); }, 700);
-        return;
-      }
-      done=true;
-      made.push({en:target.en, kr:target.kr});
-      ans=blanks.map(c=>({text:c.answer, placed:true}));
-      draw();
-      el('card').classList.add('correct');
-      el('rvDone').innerHTML=`<div class="payoff">
-          <div class="pf-label">내가 말한 문장</div>
-          <div class="pf-top"><span class="ic">💡</span>배운 표현을 골라 말했어요</div>
-          <div class="pf-note">하고 싶은 말이 있을 때 <b>배운 표현에서 골라 쓸 수 있어요</b>.</div>
-          ${made.map(x=>`<div class="pf-cmp"><div class="pf-cmp-en">${escapeHtml(x.en)}</div><div class="pf-cmp-kr">${escapeHtml(x.kr)}</div></div>`).join('')}
-        </div>`;
-      el('bottom').innerHTML=`<button class="btn-next" id="goBtn">계속하기</button>`;
-      el('goBtn').onclick=goNext;
-    };
-    all();
-  }
+    el('bottom').innerHTML=`<button class="btn-next" id="goBtn">계속하기</button>`;
+    el('goBtn').onclick=goNext;
+  };
 
+  function blockFrames(){
+    const st=Math.max(0, itemIdx-REVIEW_EVERY+1);
+    return [...new Set(sessionItems.slice(st, itemIdx+1).map(it=>it.frame.join(' … ')))];
+  }
   function goNext(){ itemIdx++; renderVocab(); }
-  renderPick();
 }
 
-// ── 완료 ──────────────────────────────────────────────────────────────────────
+// 구간이 끝나면 [5]로 — 상황 대사가 붙은 문항이 구간에 있을 때만 열린다
+function renderReview(){
+  const start=Math.max(0, itemIdx-REVIEW_EVERY+1);
+  const block=sessionItems.slice(start, itemIdx+1);
+  const withSit=block.filter(it=>it.situation);
+  if(!withSit.length){ itemIdx++; return renderVocab(); }
+  const it=withSit[withSit.length-1];
+  renderSituation({en:it.sentence.en, kr:it.sentence.kr, frame:it.frame, situation:it.situation});
+}
+
+// ── 완료 ──// ── 완료 ──────────────────────────────────────────────────────────────────────
 function renderDone(){
   setPos(sessionItems.length);
   topbar.classList.add('hidden'); stage.classList.remove('hidden'); home.classList.add('hidden');
