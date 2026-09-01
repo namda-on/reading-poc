@@ -35,7 +35,7 @@ VOCAB_CSV = Path(os.environ.get("VE_VOCAB_CSV", DL / "All_(2026-09-01_20_14_12).
 GSE_CSV   = Path(os.environ.get("VE_GSE_CSV",   DL / "gse_corrected_final_0624 - 보정결과_전체.csv"))
 OUT = Path(__file__).resolve().parent.parent / "public" / "vocab-expression.data.json"
 
-MAX_ITEMS = int(os.environ.get("VE_MAX_ITEMS", "60"))   # 0이면 전체
+MAX_ITEMS = int(os.environ.get("VE_MAX_ITEMS", "0"))    # 0이면 전체
 VOCAB_FILTER_SKIP = {"sexual", "unnecessary"}
 BRACKET = re.compile(r"\[([^\]]+)\]")
 INFL = re.compile(r"^(?:s|es|ed|d|ing|er|est|ies|ier|iest|'s|')$")
