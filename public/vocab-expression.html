@@ -210,9 +210,24 @@
   .sit-bubble.mine { background:#eaf1fb; border-radius:14px 4px 14px 14px; }
   .sit-en { font-size:17px; font-weight:700; color:#2f3e52; line-height:1.45; }
   .sit-kr { font-size:13px; color:#9aa8bc; margin-top:3px; }
-  /* [5] 간접 지시문 — 정답의 번역이 아니라 '무슨 행동을 하는지'만 알린다 */
-  .sit-cue { font-size:14px; font-weight:600; color:#5b7c93; background:#dbe8fb;
-    border-radius:8px; padding:6px 10px; margin-bottom:9px; display:inline-block; }
+  /* [5] 지시문은 한국어지만 generic — 정답의 번역이 아니다 */
+  .sit-task { font-size:15px; font-weight:700; color:#33465c; margin-bottom:4px; }
+  /* [5] 응답 선택지 — 전부 배운 문장. 답의 범위가 보여야 무엇을 묻는지 알 수 있다 */
+  .sit-opts { display:flex; flex-direction:column; gap:9px; margin-top:18px; }
+  .sit-opt { display:flex; align-items:center; gap:9px; text-align:left; font:inherit; cursor:pointer;
+    background:#fff; border:1.5px solid #cfdcec; border-radius:12px; padding:13px 15px;
+    font-size:16.5px; font-weight:600; color:#2f3e52; }
+  .sit-opt .ic { font-size:14px; opacity:.5; flex:none; }
+  .sit-opt:hover { border-color:#8fb0dd; }
+  .sit-opt:focus-visible { outline:2px solid #3a6bb0; outline-offset:2px; }
+  .sit-opt.on { border-color:#8fb0dd; background:#eef4fc; }
+  .sit-opt.bad { border-color:#e7a79c; background:#fdeeea; color:#b5533c; }
+  .sit-opt.good { border-color:#8ed9ab; background:#e3fbec; color:#22794a; }
+  .sit-opt:disabled { cursor:default; }
+  .pf-ok { display:flex; align-items:center; gap:6px; font-size:16px; font-weight:800; color:var(--green); }
+  .pf-mean.big { font-size:16px; color:#33465c; font-weight:600; margin-top:2px; }
+  .start-btn.ghost { background:#eef2f8; color:#5b7c93; box-shadow:none; }
+  .sit-card { margin-top:12px; }
   .sit-input { width:100%; margin-top:9px; resize:none; overflow:hidden; background:#fff; min-height:44px;
     border:1.5px solid #cdddf3; border-radius:10px; padding:9px 11px; font:inherit; font-size:17px;
     font-weight:700; color:#2f3e52; outline:none; }
@@ -368,7 +383,7 @@ function applyChipLabels(){
 }
 // 연결 강화 옵션 3종 — 각각 켜고 끌 수 있게(기본 ON)
 const OPTS_KEY='ve:opts';
-const OPT_DEF={trigger:false, banner:false, preview:true, fly:false, sitHint:false};
+const OPT_DEF={trigger:false, banner:false, preview:true, fly:false, sitType:false};
 let OPTS=(()=>{ try{ return Object.assign({}, OPT_DEF, JSON.parse(localStorage.getItem(OPTS_KEY)||'{}')); }catch(e){ return {...OPT_DEF}; } })();
 function setOpt(k,v){
   OPTS[k]=v;
@@ -422,7 +437,7 @@ function segHtml(){
 }
 // 홈과 설정 팝오버 두 곳의 옵션 UI를 함께 다시 그린다
 const OPT_ROWS=[
-  ['sitHint','[5] 상황에 영어 지시문 표시'],
+  ['sitType','[5] 상황을 직접 입력으로 (기본: 선택형)'],
   ['trigger','배운 어휘 칩 초록 강조 · 써먹기 연출'],
   ['banner','단계 배너 · 배운 단어 이어가기'],
   ['preview','어휘 정답 후 다음 단계 예고'],
@@ -451,6 +466,7 @@ let DATA=null, curVer='a', sessionItems=[], itemIdx=0, learned=[];
 // [5] 구간 정리 — 세션이 길어 끝에만 두면 볼 수 없으므로 몇 문항마다 끼워 넣는다
 const REVIEW_EVERY=3;
 let made=[];   // [5]에서 유저가 골라 만든 문장
+let sitOnly=false;   // 상황만 모아 푸는 별도 진입점
 // [2]·[3]에서 이미 만든 문장 — [5]는 아직 만들지 않은 문장을 먼저 후보로 낸다
 const builtSet=new Set();
 function isReviewAfter(i){ return (i+1)%REVIEW_EVERY===0 && i<sessionItems.length-1; }
@@ -507,6 +523,19 @@ function renderHome(){
   el('startBtn').onclick=()=>{ if(rest===0) setPos(0); startSession(rest===0?0:pos); };
   if(el('restartBtn')) el('restartBtn').onclick=()=>{ setPos(0); startSession(0); };
 
+  // [5]는 3문항마다 나오므로 한참 풀어야 볼 수 있다 — 바로 확인할 별도 진입점을 둔다
+  const sits=DATA.items.filter(i=>i.situation);
+  if(sits.length){
+    const sc=document.createElement('div'); sc.className='start-card sit-card';
+    sc.innerHTML=`
+      <div class="start-flow">상황 학습만 <span class="ar">→</span> 모아 풀기</div>
+      <div class="start-count">상황 <b>${sits.length}</b>개</div>
+      <div class="start-note">A의 말에 맞는 답을 골라요. 어휘·배열 단계를 건너뜁니다</div>
+      <button class="start-btn ghost" id="sitBtn">상황만 풀기 ▶</button>`;
+    list.appendChild(sc);
+    el('sitBtn').onclick=()=>startSituationOnly();
+  }
+
   const optHead=document.createElement('div'); optHead.className='opt-head'; optHead.textContent='실험 옵션';
   list.appendChild(optHead);
   const opt=document.createElement('div'); opt.className='opt-box'; opt.id='optHome';
@@ -515,7 +544,19 @@ function renderHome(){
 }
 
 // ── 세션 ────────────────────────────────────────────────────────────────────
+// 상황만 연속으로 — [5] 화면을 바로 확인하기 위한 진입점
+function startSituationOnly(){
+  sitOnly=true;
+  sessionItems=DATA.items.filter(i=>i.situation);
+  itemIdx=0; learned=[]; made=[]; builtSet.clear();
+  buildStepIndex();
+  home.classList.add('hidden'); topbar.classList.remove('hidden'); stage.classList.remove('hidden');
+  el('backBtn').onclick=()=>{ sitOnly=false; renderHome(); };
+  showSituation();
+}
+
 function startSession(startIdx){
+  sitOnly=false;
   sessionItems=DATA.items; itemIdx=Math.min(startIdx||0, sessionItems.length-1); learned=[]; made=[]; builtSet.clear();
   buildStepIndex();
   home.classList.add('hidden'); topbar.classList.remove('hidden'); stage.classList.remove('hidden');
@@ -530,6 +571,7 @@ let stepStart=[], stepTotal=0;
 function itemSteps(){ return 4; }
 function buildStepIndex(){
   stepStart=[]; let acc=0;
+  if(sitOnly){ sessionItems.forEach((_,i)=>stepStart.push(i)); stepTotal=sessionItems.length; return; }
   sessionItems.forEach((_,i)=>{ stepStart.push(acc); acc+=itemSteps(); if(isReviewAfter(i)) acc+=1; });
   stepTotal=acc;
 }
@@ -1064,19 +1106,31 @@ function applyPayoffHtml(item, rows){
 
 // [5] 상황 ──────────────────────────────────────────────────────────────────────
 // 기획 의도: "임의의 상황에서 배운 표현을 가지고 내가 새로 말을 할 수 있다".
-// **영어를 보고 영어로 인출**하는 단계이므로 푸는 동안 한국어를 노출하지 않는다 —
-// A 대사 해석은 답한 뒤에만 열리고(리스닝 핑퐁의 A 잠금과 같은 이유: 미리 보면 훈련이 무너진다),
-// 목표도 한국어 번역이 아니라 **간접 영어 지시문**(무슨 행동을 하는지만)으로 준다.
-// 지시문 자체를 없앤 버전과 비교할 수 있게 `ve:opts.sitHint` 로 켜고 끈다(기본 끔).
-function renderSituation(target){
-  setProgress(4);
+// **영어를 보고 영어로 인출**하는 단계이므로 푸는 동안 한국어 해석을 노출하지 않는다.
+//
+// 자유 입력으로 만들었더니 "뭘 써야 할지 감이 안 온다"는 문제가 생겼다 — 답의 범위가
+// 보이지 않기 때문이다. 듀오링고는 이 자리에서 **응답을 2~3개 중에 고르게** 한다:
+// 선택지가 전부 직전에 배운 문장이라 답의 범위가 보이고, 오답은 문법은 맞지만 상황에
+// 안 맞는 문장이라 과제가 **문맥 적합성 판단**이 된다. 그 형태를 따른다.
+//   · 지시문은 한국어지만 generic 하다(`적절히 답변하세요`) — 정답의 번역이 아니다
+//   · 오답 선택지는 같은 구간의 다른 표현 문장에서 뽑는다 → 새 데이터가 필요 없다
+//   · 정답 후에야 `의미:`로 한국어를 열고 A 해석도 함께 공개한다
+// 자유 입력 버전은 `ve:opts.sitType` 으로 비교할 수 있게 남겨둔다(기본 = 선택형).
+function renderSituation(target, pool){
+  setProgress(sitOnly ? 0 : 4);
   const sit=target.situation;
-  let revealed=false, done=false;
+  const typing=OPTS.sitType;      // true = 직접 입력 비교 버전
+  let done=false, picked=null, revealedList=false;
+
+  // 오답 — 같은 구간(또는 인접 문항)의 다른 표현 문장. 문법은 맞고 상황엔 안 맞는다.
+  const wrongs=(pool||[]).filter(x=>x.en!==target.en).slice(0,2);
+  const choices=shuffle([{...target, ok:true}].concat(wrongs.map(x=>({...x, ok:false}))));
 
   stage.innerHTML=`
     <div class="stage-scroll">
       <div class="chat-card" id="card">
         <div class="chat-tag rv">상황</div>
+        <div class="sit-task">A의 말을 보고 적절히 답변하세요</div>
         <div class="sit-turn a">
           <div class="sit-role">A</div>
           <div class="sit-bubble">
@@ -1084,37 +1138,15 @@ function renderSituation(target){
             <div class="sit-kr hidden" id="aKr">${escapeHtml(sit.a_kr)}</div>
           </div>
         </div>
-        <div class="sit-turn b">
-          <div class="sit-role">B</div>
-          <div class="sit-bubble mine">
-            ${(OPTS.sitHint && sit.hint_en) ? `<div class="sit-cue">${escapeHtml(sit.hint_en)}</div>` : ''}
-            <textarea class="sit-input" id="sitIn" rows="1" autocomplete="off"
-              autocapitalize="off" autocorrect="off" spellcheck="false"
-              placeholder="Type in English"></textarea>
-          </div>
-        </div>
+        <div id="sitAnswer"></div>
         <div class="sit-fb hidden" id="sitFb"></div>
         <div id="sitDone"></div>
       </div>
     </div>
-    <div class="stage-bottom" id="bottom">
-      <div class="vtools">
-        <button class="vtool" id="hintBtn2"><span class="ic">?</span><span id="hintLbl2">배운 표현 보기</span></button>
-        <button class="vtool mic" id="skipBtn"><span class="ic">↷</span><span>건너뛰기</span></button>
-      </div>
-      <div class="arr-btns" style="margin-top:12px">
-        <button class="btn-confirm" id="sayBtn" disabled>말하기</button>
-      </div>
-    </div>`;
+    <div class="stage-bottom" id="bottom"></div>`;
 
-  const inp=el('sitIn'), fb=el('sitFb');
-  setTimeout(()=>inp.focus(), 80);
-  inp.addEventListener('input', ()=>{
-    inp.style.height='auto'; inp.style.height=inp.scrollHeight+'px';
-    el('sayBtn').disabled = !inp.value.trim() || done;
-  });
+  const ansBox=el('sitAnswer'), fb=el('sitFb');
 
-  // 정답이 하나로 정해지지 않는 과제(자유 응답)이므로 **프레임이 들어갔는지**로 채점한다
   function escapeRe(x){ return x.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'); }
   function usedFrame(txt){
     return (target.frame||[]).every(lit=>{
@@ -1124,51 +1156,130 @@ function renderSituation(target){
     });
   }
 
-  el('hintBtn2').onclick=()=>{
-    if(!revealed){
-      revealed=true;
-      el('hintLbl2').textContent='표현 숨기기';
-      fb.classList.remove('hidden');
-      fb.innerHTML=`<div class="sit-hint"><b>이 구간에서 배운 표현</b>
-        ${blockFrames().map(f=>`<span class="rv-chip fr">${escapeHtml(f)}</span>`).join('')}</div>`;
-    } else {
-      revealed=false; el('hintLbl2').textContent='배운 표현 보기'; fb.classList.add('hidden'); fb.innerHTML='';
-    }
-  };
-  el('skipBtn').onclick=goNext;
+  // ── 선택형 (기본) ──
+  function renderPick(){
+    ansBox.innerHTML=`<div class="sit-opts">${choices.map((c,i)=>
+      `<button class="sit-opt" data-i="${i}" data-ok="${c.ok?1:0}"><span class="ic">🎤</span>${escapeHtml(c.en)}</button>`).join('')}</div>`;
+    el('bottom').innerHTML=`<div class="arr-btns">
+        <button class="btn-ghost2" id="skipBtn"><span class="ic">↷</span>건너뛰기</button>
+        <button class="btn-confirm" id="okBtn" disabled>확인</button>
+      </div>`;
+    el('skipBtn').onclick=goNext;
+    ansBox.querySelectorAll('.sit-opt').forEach(b=> b.onclick=()=>{
+      if(done) return;
+      ansBox.querySelectorAll('.sit-opt').forEach(x=>x.classList.remove('on'));
+      b.classList.add('on'); picked=choices[+b.dataset.i];
+      el('okBtn').disabled=false;
+    });
+    el('okBtn').onclick=()=>{
+      if(!picked) return;
+      if(!picked.ok){
+        ansBox.querySelector('.sit-opt.on').classList.add('bad');
+        fb.classList.remove('hidden');
+        fb.innerHTML=`<div class="sit-wrong">이 상황에는 맞지 않아요. 다시 골라 볼까요?</div>`;
+        picked=null; el('okBtn').disabled=true;
+        return;
+      }
+      finish(picked.en);
+    };
+  }
 
-  el('sayBtn').onclick=()=>{
-    const txt=inp.value.trim();
-    if(!txt) return;
-    if(!usedFrame(txt)){
-      fb.classList.remove('hidden');
-      fb.innerHTML=`<div class="sit-wrong">배운 표현이 아직 안 보여요. 다시 떠올려 볼까요?</div>`;
-      return;
-    }
+  // ── 직접 입력 (비교 버전) ──
+  function renderType(){
+    ansBox.innerHTML=`
+      <div class="sit-turn b">
+        <div class="sit-role">B</div>
+        <div class="sit-bubble mine">
+          <textarea class="sit-input" id="sitIn" rows="1" autocomplete="off"
+            autocapitalize="off" autocorrect="off" spellcheck="false"
+            placeholder="Type in English"></textarea>
+        </div>
+      </div>`;
+    el('bottom').innerHTML=`
+      <div class="vtools">
+        <button class="vtool" id="hintBtn2"><span class="ic">?</span><span id="hintLbl2">배운 표현 보기</span></button>
+        <button class="vtool mic" id="skipBtn"><span class="ic">↷</span><span>건너뛰기</span></button>
+      </div>
+      <div class="arr-btns" style="margin-top:12px">
+        <button class="btn-confirm" id="okBtn" disabled>말하기</button>
+      </div>`;
+    const inp=el('sitIn');
+    setTimeout(()=>inp.focus(), 80);
+    inp.addEventListener('input', ()=>{
+      inp.style.height='auto'; inp.style.height=inp.scrollHeight+'px';
+      el('okBtn').disabled = !inp.value.trim() || done;
+    });
+    el('skipBtn').onclick=goNext;
+    el('hintBtn2').onclick=()=>{
+      revealedList=!revealedList;
+      el('hintLbl2').textContent=revealedList?'표현 숨기기':'배운 표현 보기';
+      fb.classList.toggle('hidden', !revealedList);
+      fb.innerHTML=revealedList?`<div class="sit-hint"><b>배운 표현</b>
+        ${[...new Set(choices.map(c=>(c.frame||[]).join(' … ')))].map(f=>`<span class="rv-chip fr">${escapeHtml(f)}</span>`).join('')}</div>`:'';
+    };
+    el('okBtn').onclick=()=>{
+      const txt=inp.value.trim();
+      if(!txt) return;
+      if(!usedFrame(txt)){
+        fb.classList.remove('hidden'); revealedList=false;
+        fb.innerHTML=`<div class="sit-wrong">배운 표현이 아직 안 보여요. 다시 떠올려 볼까요?</div>`;
+        return;
+      }
+      inp.readOnly=true; inp.classList.add('ok');
+      finish(txt);
+    };
+  }
+
+  // 정답 후에야 한국어를 연다 — 듀오링고의 `의미:` 자리
+  function finish(said){
     done=true;
-    const exact = norm(txt)===norm(target.en);
-    made.push({en:txt, kr:target.kr});
-    inp.readOnly=true; inp.classList.add('ok');
+    made.push({en:said, kr:target.kr});
     fb.classList.add('hidden');
     el('card').classList.add('correct');
-    el('aKr').classList.remove('hidden');       // 답한 뒤에야 A 해석을 연다
+    el('aKr').classList.remove('hidden');
+    if(!typing){
+      ansBox.querySelectorAll('.sit-opt').forEach(b=>{
+        b.disabled=true;
+        if(b.dataset.ok==='1') b.classList.add('good');
+      });
+    }
     const pf=(target.form||'').trim(), pm=(target.meaning||'').trim();
+    const exact = norm(said)===norm(target.en);
     el('sitDone').innerHTML=`<div class="payoff">
-        <div class="pf-label">쓴 표현</div>
-        ${pf?`<div class="pf-form">${escapeHtml(pf).replace(/_{2,}|~/g,'<span class="slot"></span>')}</div>`:''}
-        ${pm?`<div class="pf-mean">${escapeHtml(pm)}</div>`:''}
-        ${exact?'':`<div class="pf-sub"><span class="ic">ⓘ</span>이 상황에선 이렇게 말해요</div>
-        <div class="pf-cmp"><div class="pf-cmp-en">${escapeHtml(target.en)}</div><div class="pf-cmp-kr">${escapeHtml(target.kr)}</div></div>`}
+        <div class="pf-ok"><span class="ic">✓</span>좋아요!</div>
+        <div class="pf-label">의미</div>
+        <div class="pf-mean big">${escapeHtml(target.kr)}</div>
+        ${pf?`<div class="pf-sub"><span class="ic">ⓘ</span>쓴 표현</div>
+        <div class="pf-form">${escapeHtml(pf).replace(/_{2,}|~/g,'<span class="slot"></span>')}</div>
+        ${pm?`<div class="pf-mean">${escapeHtml(pm)}</div>`:''}`:''}
+        ${exact?'':`<div class="pf-cmp"><div class="pf-cmp-en">${escapeHtml(target.en)}</div></div>`}
       </div>`;
     el('bottom').innerHTML=`<button class="btn-next" id="goBtn">계속하기</button>`;
     el('goBtn').onclick=goNext;
-  };
-
-  function blockFrames(){
-    const st=Math.max(0, itemIdx-REVIEW_EVERY+1);
-    return [...new Set(sessionItems.slice(st, itemIdx+1).map(it=>it.frame.join(' … ')))];
   }
-  function goNext(){ itemIdx++; renderVocab(); }
+
+  function goNext(){
+    if(sitOnly){
+      if(itemIdx>=sessionItems.length-1) return renderDone();
+      itemIdx++; return showSituation();
+    }
+    itemIdx++; renderVocab();
+  }
+
+  typing ? renderType() : renderPick();
+}
+
+// 상황 전용 모드 — 오답 선택지는 인접 문항에서 뽑는다
+function showSituation(){
+  const it=sessionItems[itemIdx];
+  const near=sessionItems.filter((_,i)=>i!==itemIdx)
+    .slice(Math.max(0,itemIdx-2), itemIdx+3)
+    .map(x=>({en:x.sentence.en, kr:x.sentence.kr, frame:x.frame}));
+  renderSituation(sitTarget(it), shuffle(near));
+}
+function sitTarget(it){
+  return {en:it.sentence.en, kr:it.sentence.kr, frame:it.frame, situation:it.situation,
+          form:(it.pattern||{}).form, meaning:(it.pattern||{}).meaning};
 }
 
 // 구간이 끝나면 [5]로 — 상황 대사가 붙은 문항이 구간에 있을 때만 열린다
@@ -1178,8 +1289,8 @@ function renderReview(){
   const withSit=block.filter(it=>it.situation);
   if(!withSit.length){ itemIdx++; return renderVocab(); }
   const it=withSit[withSit.length-1];
-  renderSituation({en:it.sentence.en, kr:it.sentence.kr, frame:it.frame, situation:it.situation,
-                   form:(it.pattern||{}).form, meaning:(it.pattern||{}).meaning});
+  const pool=block.filter(x=>x!==it).map(x=>({en:x.sentence.en, kr:x.sentence.kr, frame:x.frame}));
+  renderSituation(sitTarget(it), shuffle(pool));
 }
 
 // ── 완료 ──// ── 완료 ──────────────────────────────────────────────────────────────────────
