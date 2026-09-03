@@ -25,7 +25,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT_DIR = ROOT / "public"
-DEFAULT_CSV = os.path.expanduser("~/Downloads/리스닝__누적_ - 리스닝 (1).csv")
+DEFAULT_CSV = os.path.expanduser("~/Downloads/리스닝__누적_.xlsx - 리스닝.csv")
 DEFAULT_EXPR_CSV = os.path.expanduser("~/Downloads/유기적 통합모드 문장 (공유용) - 문장 제출(0827).csv")
 PER_LEVEL = int(os.environ.get("LP_REVIEW_N", "15"))
 # 레벨 → 출력 파일(리뷰용). 프로토타입 DATA_GROUPS 가 이 파일명을 참조한다.

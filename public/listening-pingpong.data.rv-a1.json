@@ -46,8 +46,8 @@
         },
         {
           "role": "A",
-          "text": "Come on, get up! Here's your coat.",
-          "kr": "어서 일어나! 코트 여기 있어."
+          "text": "Get up! Here's your coat.",
+          "kr": "일어나! 코트 여기 있어."
         },
         {
           "role": "B",
@@ -77,18 +77,18 @@
         },
         {
           "role": "A",
-          "text": "Good. Do we walk or take the bus?",
-          "kr": "좋아. 걸어갈까, 버스 탈까?"
+          "text": "Walk or take the bus?",
+          "kr": "걸어갈까, 버스 탈까?"
         },
         {
           "role": "B",
           "choices": [
             {
-              "text": "It's too far to walk.",
-              "kr": "걸어가긴 너무 멀어.",
+              "text": "It's too far — let's ride.",
+              "kr": "너무 머니까 타고 가자.",
               "correct": true,
               "trap": "정답",
-              "explain": "걸어갈지 버스 탈지 물었을 때, 걷기엔 멀다며 버스를 고르는 답이에요."
+              "explain": "걸어갈지 버스 탈지 물었을 때, 멀다며 타고 가자고 고르는 답이에요."
             },
             {
               "text": "I don't have work today.",
@@ -108,8 +108,8 @@
         },
         {
           "role": "A",
-          "text": "Okay, let's go!",
-          "kr": "좋아, 가자!"
+          "text": "Let's catch the bus!",
+          "kr": "버스 타러 가자!"
         }
       ],
       "expression": {
@@ -135,18 +135,18 @@
       "dialogue": [
         {
           "role": "A",
-          "text": "It's raining. Lock the door.",
-          "kr": "비 온다. 문 잠가."
+          "text": "It's raining, so lock the door.",
+          "kr": "비 오니까 문 잠가."
         },
         {
           "role": "B",
           "choices": [
             {
-              "text": "It's locked now.",
-              "kr": "잠갔어.",
+              "text": "Done, it's shut tight.",
+              "kr": "다 했어, 꽉 닫혔어.",
               "correct": true,
               "trap": "정답",
-              "explain": "문 잠그라는 말에 잠갔다는, 딱 맞는 답이에요."
+              "explain": "문 잠그라는 말에 잠갔다고 답하는, 딱 맞는 답이에요."
             },
             {
               "text": "The block is far.",
@@ -166,8 +166,8 @@
         },
         {
           "role": "A",
-          "text": "Put on your boots.",
-          "kr": "장화 신어."
+          "text": "Now put on your boots.",
+          "kr": "이제 장화 신어."
         },
         {
           "role": "B",
@@ -228,8 +228,8 @@
         },
         {
           "role": "A",
-          "text": "Good, let's go.",
-          "kr": "좋아, 가자."
+          "text": "I'm coming now.",
+          "kr": "나도 지금 갈게."
         }
       ],
       "expression": {
@@ -307,11 +307,11 @@
               "explain": "'ball(공)'을 'bowl(그릇)'로 잘못 들으면 이렇게 답해요."
             },
             {
-              "text": "Look at the ducks!",
-              "kr": "오리들 봐!",
+              "text": "The water looks warm.",
+              "kr": "물이 따뜻해 보여.",
               "correct": false,
               "trap": "맥락 오답",
-              "explain": "공원엔 그럴듯하지만, 공 달라는 말엔 맞는 답이 아니에요."
+              "explain": "물놀이엔 그럴듯하지만, 공 달라는 말엔 맞는 답이 아니에요."
             }
           ]
         },
@@ -324,11 +324,11 @@
           "role": "B",
           "choices": [
             {
-              "text": "Ooh, I want some!",
-              "kr": "오, 먹을래!",
+              "text": "Ooh, chocolate for me!",
+              "kr": "오, 난 초콜릿!",
               "correct": true,
               "trap": "정답",
-              "explain": "아이스크림 먹겠냐는 말에 먹겠다는, 딱 맞는 답이에요."
+              "explain": "아이스크림 먹겠냐는 말에 원하는 맛을 고르는, 딱 맞는 답이에요."
             },
             {
               "text": "Don't scream at me!",
@@ -342,14 +342,14 @@
               "kr": "해가 뜨겁다.",
               "correct": false,
               "trap": "맥락 오답",
-              "explain": "공원엔 그럴듯하지만, 아이스크림 얘기엔 맞는 답이 아니에요."
+              "explain": "물가엔 그럴듯하지만, 아이스크림 얘기엔 맞는 답이 아니에요."
             }
           ]
         },
         {
           "role": "A",
-          "text": "Let's eat!",
-          "kr": "먹자!"
+          "text": "Let's go get chocolate!",
+          "kr": "초콜릿 사러 가자!"
         }
       ],
       "expression": {
@@ -406,8 +406,8 @@
         },
         {
           "role": "A",
-          "text": "Check the bed for my keys.",
-          "kr": "침대에 내 열쇠 있나 봐줘."
+          "text": "Check the bed for keys.",
+          "kr": "침대에 열쇠 있나 봐."
         },
         {
           "role": "B",
@@ -437,18 +437,18 @@
         },
         {
           "role": "A",
-          "text": "Check near the lamp.",
-          "kr": "전등 근처 봐."
+          "text": "It's on the lamp shelf.",
+          "kr": "전등 있는 선반에 있어."
         },
         {
           "role": "B",
           "choices": [
             {
-              "text": "Found it, thanks!",
-              "kr": "찾았다, 고마워!",
+              "text": "They're right here!",
+              "kr": "여기 있다!",
               "correct": true,
               "trap": "정답",
-              "explain": "전등 근처 보라는 말에 찾았다는, 딱 맞는 답이에요."
+              "explain": "전등 쪽 선반을 짚어준 말에 찾았다고 답하는, 딱 맞는 답이에요."
             },
             {
               "text": "I saw a lamb.",
@@ -468,8 +468,8 @@
         },
         {
           "role": "A",
-          "text": "Great, let's go.",
-          "kr": "좋아, 가자."
+          "text": "My keys! Thanks a lot.",
+          "kr": "내 열쇠! 정말 고마워."
         }
       ],
       "expression": {
@@ -527,7 +527,7 @@
         {
           "role": "A",
           "text": "Don't be sad if you lose.",
-          "kr": "져도 너무 속상해하지 마."
+          "kr": "져도 속상해하지 마."
         },
         {
           "role": "B",
@@ -557,8 +557,8 @@
         },
         {
           "role": "A",
-          "text": "Take a deep breath.",
-          "kr": "심호흡해."
+          "text": "Take a deep breath now.",
+          "kr": "지금 심호흡해."
         },
         {
           "role": "B",
@@ -588,8 +588,8 @@
         },
         {
           "role": "A",
-          "text": "You'll do great!",
-          "kr": "넌 잘할 거야!"
+          "text": "You'll do great today!",
+          "kr": "오늘 잘할 거야!"
         }
       ],
       "expression": {
@@ -677,8 +677,8 @@
         },
         {
           "role": "A",
-          "text": "I'll drop off some soup later.",
-          "kr": "이따 수프 갖다줄게."
+          "text": "I'll bring you warm soup.",
+          "kr": "따뜻한 수프 갖다줄게."
         },
         {
           "role": "B",
@@ -735,18 +735,18 @@
       "dialogue": [
         {
           "role": "A",
-          "text": "Hold the bars. Feet up.",
-          "kr": "손잡이 잡아. 발 올려."
+          "text": "Hold the bars, feet up!",
+          "kr": "손잡이 잡고, 발 올려!"
         },
         {
           "role": "B",
           "choices": [
             {
-              "text": "Both feet are up!",
-              "kr": "두 발 올렸어!",
+              "text": "They're up already!",
+              "kr": "벌써 올렸어!",
               "correct": true,
               "trap": "정답",
-              "explain": "발 올리라는 말에 올렸다는, 딱 맞는 답이에요."
+              "explain": "발 올리라는 말에 올렸다고 답하는, 딱 맞는 답이에요."
             },
             {
               "text": "I see no bears.",
@@ -766,8 +766,8 @@
         },
         {
           "role": "A",
-          "text": "Be calm.",
-          "kr": "침착해."
+          "text": "Be calm and look ahead.",
+          "kr": "침착하게 앞을 봐."
         },
         {
           "role": "B",
@@ -780,8 +780,8 @@
               "explain": "침착하라는 말에 진정하겠다는, 딱 맞는 답이에요."
             },
             {
-              "text": "I'm coming!",
-              "kr": "가!",
+              "text": "I'm coming right now!",
+              "kr": "지금 갈게!",
               "correct": false,
               "trap": "내용어 오청",
               "explain": "'calm(침착한)'을 'come(오다)'으로 잘못 들으면 이렇게 답해요."
@@ -797,8 +797,8 @@
         },
         {
           "role": "A",
-          "text": "Go to that tree.",
-          "kr": "저 나무 쪽으로 가."
+          "text": "Now ride to that tree.",
+          "kr": "이제 저 나무까지 가 봐."
         },
         {
           "role": "B",
@@ -828,8 +828,8 @@
         },
         {
           "role": "A",
-          "text": "You did it!",
-          "kr": "해냈다!"
+          "text": "You made it — great job!",
+          "kr": "도착했다, 잘했어!"
         }
       ],
       "expression": {
@@ -948,7 +948,7 @@
         },
         {
           "role": "A",
-          "text": "Eat lots!",
+          "text": "Eat lots of it!",
           "kr": "많이 먹어!"
         }
       ],
@@ -1007,7 +1007,7 @@
         {
           "role": "A",
           "text": "I didn't break the shade.",
-          "kr": "나 전등갓 안 깼어."
+          "kr": "전등갓은 내가 안 깼어."
         },
         {
           "role": "B",
@@ -1068,8 +1068,8 @@
         },
         {
           "role": "A",
-          "text": "Good, let's hurry.",
-          "kr": "좋아, 서두르자."
+          "text": "I'll hold the bin.",
+          "kr": "난 쓰레기통 들게."
         }
       ],
       "expression": {
@@ -1095,8 +1095,8 @@
       "dialogue": [
         {
           "role": "A",
-          "text": "Wow, your white cat drawing is cute!",
-          "kr": "와, 네 하얀 고양이 그림 귀엽다!"
+          "text": "Your white cat drawing is cute!",
+          "kr": "네 하얀 고양이 그림 귀엽다!"
         },
         {
           "role": "B",
@@ -1188,8 +1188,8 @@
         },
         {
           "role": "A",
-          "text": "Perfect, it looks great.",
-          "kr": "완벽해, 멋지다."
+          "text": "By the door it is!",
+          "kr": "문 옆으로 하자!"
         }
       ],
       "expression": {
@@ -1246,7 +1246,7 @@
         },
         {
           "role": "A",
-          "text": "You crossed the line so fast!",
+          "text": "You crossed the line really fast!",
           "kr": "결승선 진짜 빨리 통과했어!"
         },
         {
@@ -1278,14 +1278,14 @@
         {
           "role": "A",
           "text": "Wipe the mud off your shoes.",
-          "kr": "신발에 진흙 닦아."
+          "kr": "신발 진흙 닦아."
         },
         {
           "role": "B",
           "choices": [
             {
-              "text": "Good, they're filthy.",
-              "kr": "그래, 완전 더러워.",
+              "text": "I'll do it outside.",
+              "kr": "밖에서 할게.",
               "correct": true,
               "trap": "정답",
               "explain": "진흙 닦으라는 말에 응하는, 딱 맞는 답이에요."
@@ -1308,8 +1308,8 @@
         },
         {
           "role": "A",
-          "text": "Let's rest a while.",
-          "kr": "좀 쉬자."
+          "text": "Come sit and rest here.",
+          "kr": "여기 앉아서 쉬어."
         }
       ],
       "expression": {
@@ -1428,8 +1428,8 @@
         },
         {
           "role": "A",
-          "text": "See you up there!",
-          "kr": "위에서 봐!"
+          "text": "I'll meet you up there!",
+          "kr": "위에서 만나자!"
         }
       ],
       "expression": {
@@ -1466,7 +1466,7 @@
               "kr": "우리 소풍 가나 봐.",
               "correct": true,
               "trap": "정답",
-              "explain": "챙기라는 말에 반가워하며 되묻는, 딱 맞는 답이에요."
+              "explain": "챙기라는 말에 무슨 일인지 알아채는, 딱 맞는 답이에요."
             },
             {
               "text": "I can't find the kit.",
@@ -1548,8 +1548,8 @@
         },
         {
           "role": "A",
-          "text": "This is a perfect spot.",
-          "kr": "여기 딱이다."
+          "text": "This is our perfect picnic spot.",
+          "kr": "여기가 딱 좋은 소풍 자리네."
         }
       ],
       "expression": {
@@ -1582,8 +1582,8 @@
           "role": "B",
           "choices": [
             {
-              "text": "I'll hide them in the drawer.",
-              "kr": "서랍에 숨길게.",
+              "text": "I'll put them in the drawer.",
+              "kr": "서랍에 넣을게.",
               "correct": true,
               "trap": "정답",
               "explain": "숨기라는 말에 응하는, 딱 맞는 답이에요."
@@ -1637,15 +1637,15 @@
         },
         {
           "role": "A",
-          "text": "Let's bake her a cake too.",
-          "kr": "케이크도 하나 굽자."
+          "text": "Let's bake her a cake.",
+          "kr": "케이크를 구워주자."
         },
         {
           "role": "B",
           "choices": [
             {
-              "text": "Good, chocolate's her favorite.",
-              "kr": "좋아, 걔 초콜릿 좋아해.",
+              "text": "Chocolate is her favorite.",
+              "kr": "걔는 초콜릿을 제일 좋아해.",
               "correct": true,
               "trap": "정답",
               "explain": "케이크 굽자는 말에 맞장구치는, 딱 맞는 답이에요."
@@ -1668,8 +1668,8 @@
         },
         {
           "role": "A",
-          "text": "Great, this'll be fun.",
-          "kr": "좋아, 재밌겠다."
+          "text": "Chocolate — she'll love it!",
+          "kr": "초콜릿으로! 걔 좋아하겠다."
         }
       ],
       "expression": {

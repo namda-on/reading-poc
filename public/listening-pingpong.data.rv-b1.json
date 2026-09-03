@@ -15,8 +15,8 @@
       "dialogue": [
         {
           "role": "A",
-          "text": "I saw a big crack in the wall.",
-          "kr": "벽에 큰 금이 간 걸 봤어요."
+          "text": "Did you see that wall crack?",
+          "kr": "저 벽에 금 간 거 봤어요?"
         },
         {
           "role": "B",
@@ -26,7 +26,7 @@
               "kr": "그건 몇 주째 그래요.",
               "correct": true,
               "trap": "정답",
-              "explain": "벽에 금이 갔다는 말에 상태를 알려 주는 답이에요."
+              "explain": "벽에 금 간 걸 봤냐는 물음에 상태를 알려 주는 답이에요."
             },
             {
               "text": "The coat rack fell over again.",
@@ -77,8 +77,8 @@
         },
         {
           "role": "A",
-          "text": "What happened to the road? Did work start?",
-          "kr": "도로는 어떻게 됐어요? 공사 시작했어요?"
+          "text": "Did they happen to start the road?",
+          "kr": "도로 공사는 시작했대요?"
         },
         {
           "role": "B",
@@ -135,8 +135,8 @@
       "dialogue": [
         {
           "role": "A",
-          "text": "Lovely fresh air, and laundry on the line.",
-          "kr": "공기가 상쾌하고 빨래도 줄에 널렸네요."
+          "text": "Fresh air, and laundry on the line!",
+          "kr": "공기도 상쾌하고 빨래도 줄에 널렸네요."
         },
         {
           "role": "B",
@@ -166,8 +166,8 @@
         },
         {
           "role": "A",
-          "text": "New chair on the porch, isn't it comfy?",
-          "kr": "현관에 새 의자, 아늑하죠?"
+          "text": "That's a new chair, isn't it?",
+          "kr": "저거 새 의자죠, 그렇죠?"
         },
         {
           "role": "B",
@@ -197,8 +197,8 @@
         },
         {
           "role": "A",
-          "text": "I lost track of time; I'll start lunch.",
-          "kr": "시간 가는 줄 몰랐네요, 점심 준비할게요."
+          "text": "Look at the time — lunch calls.",
+          "kr": "시간 좀 봐요, 점심 시간이네요."
         },
         {
           "role": "B",
@@ -255,8 +255,8 @@
       "dialogue": [
         {
           "role": "A",
-          "text": "My friend won a big race in lucky gray socks.",
-          "kr": "친구가 행운의 회색 양말 신고 경주에서 우승했어."
+          "text": "She won a race in gray socks.",
+          "kr": "걔가 회색 양말 신고 경주에서 우승했어."
         },
         {
           "role": "B",
@@ -286,8 +286,8 @@
         },
         {
           "role": "A",
-          "text": "Honestly, I don't believe in luck; life is hard work.",
-          "kr": "솔직히 난 운을 안 믿어, 인생은 노력이야."
+          "text": "I don't believe in luck; life's hard work.",
+          "kr": "난 운을 안 믿어, 인생은 노력이야."
         },
         {
           "role": "B",
@@ -317,8 +317,8 @@
         },
         {
           "role": "A",
-          "text": "Real success comes from planning, with a bit of fun.",
-          "kr": "진짜 성공은 계획에서 나와, 약간의 재미도 있어야 하고."
+          "text": "Success needs planning and a little fun.",
+          "kr": "성공엔 계획과 약간의 재미가 필요해."
         },
         {
           "role": "B",
@@ -328,7 +328,7 @@
               "kr": "그렇게 균형 잡힌 게 현명하네.",
               "correct": true,
               "trap": "정답",
-              "explain": "계획과 재미의 균형 이야기에 현명하다고 공감하며 자연스럽게 응해요."
+              "explain": "계획과 약간의 재미가 필요하다는 말에 현명하다고 공감하며 응해요."
             },
             {
               "text": "I'm a huge fan of that.",
@@ -342,14 +342,14 @@
               "kr": "그래도 난 행운의 동전을 갖고 다녀.",
               "correct": false,
               "trap": "맥락 오답",
-              "explain": "운 이야기 상황엔 그럴듯하지만, 성공은 계획에서 나온다는 말엔 직접적인 답은 아니에요."
+              "explain": "운 이야기 상황엔 그럴듯하지만, 성공엔 계획이 필요하다는 말엔 직접적인 답은 아니에요."
             }
           ]
         },
         {
           "role": "A",
-          "text": "In the end, we make our own luck.",
-          "kr": "결국 운은 우리가 만드는 거야."
+          "text": "We make our own luck.",
+          "kr": "운은 우리가 만드는 거야."
         }
       ],
       "expression": {
@@ -375,8 +375,8 @@
       "dialogue": [
         {
           "role": "A",
-          "text": "Don't rip notes, you might win a prize.",
-          "kr": "필기 찢지 마, 상 받을 수도 있잖아."
+          "text": "Why rip notes that could win prizes?",
+          "kr": "상 받을 수도 있는 필기를 왜 찢어?"
         },
         {
           "role": "B",
@@ -386,7 +386,7 @@
               "kr": "내가 너무 걱정하는 걸지도 몰라.",
               "correct": true,
               "trap": "정답",
-              "explain": "다독이는 말에 스스로를 돌아보며 반응하는 자연스러운 답이에요."
+              "explain": "필기를 왜 찢냐는 말에 스스로를 돌아보며 반응하는 자연스러운 답이에요."
             },
             {
               "text": "My lip is a little dry.",
@@ -406,8 +406,8 @@
         },
         {
           "role": "A",
-          "text": "There's no use feeling ill over one test.",
-          "kr": "시험 하나 때문에 속 앓아 봤자 소용없어."
+          "text": "There's no use feeling ill over this.",
+          "kr": "이것 때문에 속 앓아 봤자 소용없어."
         },
         {
           "role": "B",
@@ -437,8 +437,8 @@
         },
         {
           "role": "A",
-          "text": "Let's stretch and take a short walk.",
-          "kr": "다리 좀 펴고 잠깐 걷자."
+          "text": "Let's stretch and take a walk.",
+          "kr": "몸 좀 펴고 산책하자."
         },
         {
           "role": "B",
@@ -468,8 +468,8 @@
         },
         {
           "role": "A",
-          "text": "Come on, let's go outside.",
-          "kr": "자, 잠깐 밖에 나가자."
+          "text": "Let's go outside.",
+          "kr": "밖에 나가자."
         }
       ],
       "expression": {
@@ -495,8 +495,8 @@
       "dialogue": [
         {
           "role": "A",
-          "text": "Line each team up behind the white seat.",
-          "kr": "각 팀을 저 흰색 좌석 뒤에 줄 세워요."
+          "text": "Please line each team behind that seat.",
+          "kr": "각 팀을 저 좌석 뒤에 줄 세워 줄래요?"
         },
         {
           "role": "B",
@@ -506,7 +506,7 @@
               "kr": "지금 바로 정리할게요.",
               "correct": true,
               "trap": "정답",
-              "explain": "각 팀을 좌석 뒤에 세우라는 부탁에 응하는 자연스러운 답이에요."
+              "explain": "각 팀을 좌석 뒤에 세워 달라는 부탁에 응하는 자연스러운 답이에요."
             },
             {
               "text": "I'll bring the tea over soon.",
@@ -526,8 +526,8 @@
         },
         {
           "role": "A",
-          "text": "Whoever scores the winning goal gets a prize.",
-          "kr": "결승골을 넣는 사람이 상을 받아요."
+          "text": "Whoever scores the goal gets a prize.",
+          "kr": "골을 넣는 사람이 상을 받아요."
         },
         {
           "role": "B",
@@ -540,8 +540,8 @@
               "explain": "결승골에 상을 준다는 말에 어울리는 자연스러운 반응이에요."
             },
             {
-              "text": "We won't need coal on a warm day.",
-              "kr": "따뜻한 날엔 석탄이 필요 없어요.",
+              "text": "We won't need coal today.",
+              "kr": "오늘은 석탄이 필요 없어요.",
               "correct": false,
               "trap": "내용어 오청",
               "explain": "'goal(골)'을 'coal(석탄)'으로 잘못 들으면 이렇게 답해요."
@@ -557,8 +557,8 @@
         },
         {
           "role": "A",
-          "text": "Everyone should cheer loud at the finish.",
-          "kr": "다들 결승선에서 크게 응원해요."
+          "text": "Can you cheer loud at the finish?",
+          "kr": "결승선에서 크게 응원해 줄래요?"
         },
         {
           "role": "B",
@@ -568,7 +568,7 @@
               "kr": "아이들이 그 열기를 좋아할 거예요.",
               "correct": true,
               "trap": "정답",
-              "explain": "크게 응원하자는 제안에 어울리는 자연스러운 답이에요."
+              "explain": "결승선에서 크게 응원해 달라는 부탁에 어울리는 자연스러운 답이에요."
             },
             {
               "text": "A cloud is coming, but no rain.",
@@ -582,7 +582,7 @@
               "kr": "물병을 나눠 줄게요.",
               "correct": false,
               "trap": "맥락 오답",
-              "explain": "경기장 상황엔 그럴듯하지만, 크게 응원하자는 방금 말엔 직접적인 답은 아니에요."
+              "explain": "경기장 상황엔 그럴듯하지만, 크게 응원해 달라는 부탁엔 직접적인 답은 아니에요."
             }
           ]
         },
@@ -615,8 +615,8 @@
       "dialogue": [
         {
           "role": "A",
-          "text": "I was so tense I ripped my bag and swallowed gum.",
-          "kr": "너무 긴장돼서 봉지를 찢고 껌을 삼켰어."
+          "text": "I ripped my bag and swallowed gum.",
+          "kr": "봉지를 찢고 껌을 삼켰어."
         },
         {
           "role": "B",
@@ -626,11 +626,11 @@
               "kr": "정말 스릴 넘쳤겠다.",
               "correct": true,
               "trap": "정답",
-              "explain": "영화가 긴장됐다는 말에 어울리는 자연스러운 답이에요."
+              "explain": "극장에서 긴장했던 이야기에 어울리는 자연스러운 답이에요."
             },
             {
-              "text": "You had a tight grip on that bag.",
-              "kr": "그 봉지를 꽉 움켜쥐고 있었나 보다.",
+              "text": "You had a tight grip there.",
+              "kr": "거기서 꽉 움켜쥐고 있었나 보다.",
               "correct": false,
               "trap": "내용어 오청",
               "explain": "'rip(찢다)'을 'grip(움켜쥠)'으로 잘못 들으면 이렇게 답해요."
@@ -646,8 +646,8 @@
         },
         {
           "role": "A",
-          "text": "The theater was so dark that I couldn't see.",
-          "kr": "극장이 너무 어두워서 잘 안 보였어."
+          "text": "So dark that I couldn't see.",
+          "kr": "너무 어두워서 잘 안 보였어."
         },
         {
           "role": "B",
@@ -677,18 +677,18 @@
         },
         {
           "role": "A",
-          "text": "After that sad ending my ice cream melted.",
-          "kr": "그 슬픈 결말 뒤에 아이스크림이 다 녹았어."
+          "text": "I never noticed my ice cream melting.",
+          "kr": "아이스크림 녹는 줄도 몰랐어."
         },
         {
           "role": "B",
           "choices": [
             {
-              "text": "You must have been really moved.",
-              "kr": "정말 감동받았나 보다.",
+              "text": "You must have been really absorbed.",
+              "kr": "정말 푹 빠져 있었나 보다.",
               "correct": true,
               "trap": "정답",
-              "explain": "슬픈 결말 이야기에 어울리는 자연스러운 답이에요."
+              "explain": "아이스크림 녹는 줄도 몰랐다는 말에 몰입했겠다고 호응하는 자연스러운 답이에요."
             },
             {
               "text": "I'd be scared if mice ran by.",
@@ -702,14 +702,14 @@
               "kr": "배경 음악은 아마 아름다웠겠지.",
               "correct": false,
               "trap": "맥락 오답",
-              "explain": "영화 이야기를 하는 상황엔 그럴듯하지만, 슬픈 결말 이야기엔 직접적인 답은 아니에요."
+              "explain": "영화 이야기를 하는 상황엔 그럴듯하지만, 아이스크림 녹는 줄 몰랐다는 말엔 직접적인 답은 아니에요."
             }
           ]
         },
         {
           "role": "A",
-          "text": "I'd watch it again in a heartbeat.",
-          "kr": "당장이라도 또 보고 싶어."
+          "text": "I'd watch it again tomorrow.",
+          "kr": "내일이라도 또 보고 싶어."
         }
       ],
       "expression": {
@@ -735,8 +735,8 @@
       "dialogue": [
         {
           "role": "A",
-          "text": "I can't hear Sam, my phone's at eight percent.",
-          "kr": "샘이 잘 안 들리고, 폰이 8퍼센트야."
+          "text": "Can't hear Sam — my battery's at eight.",
+          "kr": "샘이 잘 안 들리고, 배터리가 8이야."
         },
         {
           "role": "B",
@@ -766,8 +766,8 @@
         },
         {
           "role": "A",
-          "text": "Honestly, I haven't tracked him down yet.",
-          "kr": "솔직히 아직 그를 못 찾았어."
+          "text": "I haven't tracked him down yet.",
+          "kr": "아직 그를 못 찾았어."
         },
         {
           "role": "B",
@@ -797,8 +797,8 @@
         },
         {
           "role": "A",
-          "text": "He probably forgot the time at the gym.",
-          "kr": "체육관에서 시간 가는 줄 몰랐나 봐."
+          "text": "He's probably still at the gym.",
+          "kr": "아마 아직 체육관에 있을 거야."
         },
         {
           "role": "B",
@@ -855,8 +855,8 @@
       "dialogue": [
         {
           "role": "A",
-          "text": "I got a lamp and must sort bags.",
-          "kr": "램프를 샀는데 봉투를 정리해야 해."
+          "text": "Got a lamp and bags to sort.",
+          "kr": "램프도 사고 정리할 봉투도 있어."
         },
         {
           "role": "B",
@@ -886,18 +886,18 @@
         },
         {
           "role": "A",
-          "text": "I'd return it if I could; it barely shines.",
-          "kr": "반품하고 싶은데, 거의 안 밝아."
+          "text": "If I could, I'd return it — it barely shines.",
+          "kr": "할 수만 있으면 반품하고 싶어, 거의 안 밝아."
         },
         {
           "role": "B",
           "choices": [
             {
-              "text": "Check your email for a copy.",
-              "kr": "이메일에 영수증 있는지 봐.",
+              "text": "Look for the receipt in your email.",
+              "kr": "이메일에서 영수증을 찾아봐.",
               "correct": true,
               "trap": "정답",
-              "explain": "영수증만 있으면 반품하겠다는 말에 찾는 방법을 제안해서 맞아요."
+              "explain": "반품하고 싶다는 말에 영수증 찾는 방법을 알려줘서 맞아요."
             },
             {
               "text": "There's a no-parking sign outside.",
@@ -917,8 +917,8 @@
         },
         {
           "role": "A",
-          "text": "I got this lamp when the store opened.",
-          "kr": "이 램프는 가게가 문 열 때 샀어."
+          "text": "I bought it when the store opened.",
+          "kr": "가게가 문 열 때 샀어."
         },
         {
           "role": "B",
@@ -948,8 +948,8 @@
         },
         {
           "role": "A",
-          "text": "Okay, I'll find the receipt online.",
-          "kr": "알겠어, 온라인에서 영수증 찾아볼게."
+          "text": "I'll check the receipt online.",
+          "kr": "온라인에서 영수증 찾아볼게."
         }
       ],
       "expression": {
@@ -976,7 +976,7 @@
         {
           "role": "A",
           "text": "I feel bad, I found out way too late.",
-          "kr": "너무 늦게 알아서, 기분이 안 좋아."
+          "kr": "너무 늦게 알아서 기분이 안 좋아."
         },
         {
           "role": "B",
@@ -1037,8 +1037,8 @@
         },
         {
           "role": "A",
-          "text": "I'll buy her that lace scarf.",
-          "kr": "걔가 갖고 싶어 하던 레이스 스카프 사줄래."
+          "text": "Should I buy her that lace scarf?",
+          "kr": "걔한테 그 레이스 스카프 사줄까?"
         },
         {
           "role": "B",
@@ -1048,7 +1048,7 @@
               "kr": "정성스러운 선물이면 사이가 풀릴 거야.",
               "correct": true,
               "trap": "정답",
-              "explain": "선물로 마음을 전하겠다는 말에 이어지는 자연스러운 반응이에요."
+              "explain": "선물을 사줄지 묻는 말에 좋겠다고 답하는 자연스러운 반응이에요."
             },
             {
               "text": "I didn't know she liked racing.",
@@ -1062,14 +1062,14 @@
               "kr": "걔 언니 캐나다로 이사 갔어.",
               "correct": false,
               "trap": "맥락 오답",
-              "explain": "친구 얘기엔 그럴듯하지만, 스카프를 선물하겠다는 말엔 직접적인 답은 아니에요."
+              "explain": "친구 얘기엔 그럴듯하지만, 스카프를 사줄지 묻는 말엔 직접적인 답은 아니에요."
             }
           ]
         },
         {
           "role": "A",
-          "text": "I just hope she forgives me.",
-          "kr": "그냥 걔가 날 용서했으면 좋겠어."
+          "text": "I'll pick it up tomorrow.",
+          "kr": "내일 사러 갈게."
         }
       ],
       "expression": {
@@ -1095,8 +1095,8 @@
       "dialogue": [
         {
           "role": "A",
-          "text": "One boy in my class looked down today.",
-          "kr": "우리 반 한 남자애가 오늘 풀 죽어 보였어."
+          "text": "One boy in my class looked down.",
+          "kr": "우리 반 한 남자애가 풀 죽어 보였어."
         },
         {
           "role": "B",
@@ -1126,7 +1126,7 @@
         },
         {
           "role": "A",
-          "text": "They deal with pressure until they fall ill.",
+          "text": "They deal with pressure until falling ill.",
           "kr": "걔들은 압박에 시달리다 아프기도 해."
         },
         {
@@ -1188,8 +1188,8 @@
         },
         {
           "role": "A",
-          "text": "I just hope they know I care.",
-          "kr": "그저 내가 아낀다는 걸 알아줬으면 해."
+          "text": "I hope they know I care.",
+          "kr": "내가 아낀다는 걸 알아줬으면 해."
         }
       ],
       "expression": {
@@ -1215,7 +1215,7 @@
       "dialogue": [
         {
           "role": "A",
-          "text": "The rent is too high, I'll send a notice.",
+          "text": "Rent is too high, I'll send notice.",
           "kr": "월세가 너무 비싸서 통지서를 보낼 거야."
         },
         {
@@ -1246,15 +1246,15 @@
         },
         {
           "role": "A",
-          "text": "My landlord says move out, and I'm mad.",
-          "kr": "집주인이 나가라고 해서 화가 나."
+          "text": "Landlord says move out, and I'm mad.",
+          "kr": "집주인이 나가래서 화가 나."
         },
         {
           "role": "B",
           "choices": [
             {
-              "text": "You have rights, check your lease.",
-              "kr": "너도 권리가 있어, 계약을 확인해.",
+              "text": "Put it in writing then.",
+              "kr": "그럼 서면으로 남겨.",
               "correct": true,
               "trap": "정답",
               "explain": "나가라는 요구에 권리를 확인하라고 답해요."
@@ -1277,8 +1277,8 @@
         },
         {
           "role": "A",
-          "text": "I have to scrub the white surfaces.",
-          "kr": "흰색 표면을 문질러 닦아야 해."
+          "text": "I must scrub all white surfaces.",
+          "kr": "흰 표면을 전부 닦아야 해."
         },
         {
           "role": "B",
@@ -1308,8 +1308,8 @@
         },
         {
           "role": "A",
-          "text": "Thanks, I'll start packing tonight.",
-          "kr": "고마워, 오늘 밤부터 짐 쌀게."
+          "text": "I'll scrub and pack tonight.",
+          "kr": "오늘 밤 닦고 짐 쌀게."
         }
       ],
       "expression": {
@@ -1335,8 +1335,8 @@
       "dialogue": [
         {
           "role": "A",
-          "text": "We can't afford the main road.",
-          "kr": "큰길 근처는 감당이 안 돼요."
+          "text": "Are homes on the main road affordable?",
+          "kr": "큰길 쪽 집들은 감당할 만한가요?"
         },
         {
           "role": "B",
@@ -1346,7 +1346,7 @@
               "kr": "더 싼 거리는 바깥쪽에 있어요.",
               "correct": true,
               "trap": "정답",
-              "explain": "큰길이 부담된다는 말에 더 싼 위치를 알려 주니 자연스러워요."
+              "explain": "큰길 쪽이 감당되냐는 물음에 더 싼 곳의 위치를 알려 주니 자연스러워요."
             },
             {
               "text": "That load looks heavy.",
@@ -1366,8 +1366,8 @@
         },
         {
           "role": "A",
-          "text": "We're looking into cheaper places to cut costs.",
-          "kr": "비용을 줄이려고 더 싼 집을 알아봐요."
+          "text": "Look into those — we must cut costs.",
+          "kr": "그쪽을 알아봐 주세요, 비용을 줄여야 해요."
         },
         {
           "role": "B",
@@ -1377,7 +1377,7 @@
               "kr": "오늘 밤 저렴한 매물 보낼게요.",
               "correct": true,
               "trap": "정답",
-              "explain": "더 싼 집을 알아본다는 말에 매물을 보내 주니 딱 맞아요."
+              "explain": "더 싼 쪽을 알아봐 달라는 말에 매물을 보내 주겠다니 딱 맞아요."
             },
             {
               "text": "Rest if your gut hurts.",
@@ -1391,14 +1391,14 @@
               "kr": "임대는 보통 12개월이에요.",
               "correct": false,
               "trap": "맥락 오답",
-              "explain": "부동산 상담엔 그럴듯하지만, 더 싼 집을 알아본다는 말엔 직접적인 답은 아니에요."
+              "explain": "부동산 상담엔 그럴듯하지만, 알아봐 달라는 말엔 직접적인 답은 아니에요."
             }
           ]
         },
         {
           "role": "A",
-          "text": "Do you have a low deposit option?",
-          "kr": "보증금 낮은 곳도 있어요?"
+          "text": "Will those listings have low deposits?",
+          "kr": "그 매물들은 보증금이 낮나요?"
         },
         {
           "role": "B",
@@ -1408,7 +1408,7 @@
               "kr": "어떤 원룸은 한 달치만 받아요.",
               "correct": true,
               "trap": "정답",
-              "explain": "보증금 낮은 곳을 묻는 말에 선불이 적은 곳을 알려 주니 맞아요."
+              "explain": "보증금이 낮냐는 물음에 선불이 적은 곳을 알려 주니 맞아요."
             },
             {
               "text": "The load isn't that heavy.",
@@ -1422,14 +1422,14 @@
               "kr": "대부분 주차가 포함돼요.",
               "correct": false,
               "trap": "맥락 오답",
-              "explain": "집을 구하는 상황엔 그럴듯하지만, 보증금 낮은 곳이 있냐는 말엔 직접적인 답은 아니에요."
+              "explain": "집을 구하는 상황엔 그럴듯하지만, 보증금이 낮냐는 물음엔 직접적인 답은 아니에요."
             }
           ]
         },
         {
           "role": "A",
-          "text": "Great, send them over.",
-          "kr": "좋아요, 보내주세요."
+          "text": "Please send the studios too.",
+          "kr": "원룸들도 보내 주세요."
         }
       ],
       "expression": {
@@ -1455,8 +1455,8 @@
       "dialogue": [
         {
           "role": "A",
-          "text": "My boss adds tasks, and the deadline feels short.",
-          "kr": "상사가 일을 자꾸 얹는데, 마감이 촉박해."
+          "text": "My boss adds tasks, deadline feels short.",
+          "kr": "상사가 일을 자꾸 얹는데 마감이 촉박해."
         },
         {
           "role": "B",
@@ -1486,8 +1486,8 @@
         },
         {
           "role": "A",
-          "text": "It's hard to keep up, my back aches.",
-          "kr": "따라가기 벅차, 허리가 쑤셔."
+          "text": "It's hard to keep up.",
+          "kr": "따라가기가 벅차."
         },
         {
           "role": "B",
@@ -1497,7 +1497,7 @@
               "kr": "곧 제대로 쉬어야 해.",
               "correct": true,
               "trap": "정답",
-              "explain": "벅차고 몸이 아프다는 말에 대한 직접적인 반응이라 정답이에요."
+              "explain": "따라가기 벅차다는 하소연에 대한 직접적인 반응이라 정답이에요."
             },
             {
               "text": "My heart was racing all night.",
@@ -1517,8 +1517,8 @@
         },
         {
           "role": "A",
-          "text": "Maybe I'll ask for fewer tasks next month.",
-          "kr": "다음 달엔 일을 좀 덜 달라고 할래."
+          "text": "I'll ask for fewer tasks too.",
+          "kr": "일도 좀 덜 달라고 할래."
         },
         {
           "role": "B",
@@ -1548,8 +1548,8 @@
         },
         {
           "role": "A",
-          "text": "I'll talk to her Monday morning.",
-          "kr": "월요일 아침에 말할게."
+          "text": "I'll talk to her Monday.",
+          "kr": "월요일에 그녀에게 말할게."
         }
       ],
       "expression": {
@@ -1575,8 +1575,8 @@
       "dialogue": [
         {
           "role": "A",
-          "text": "At the flea market I found a silk tie.",
-          "kr": "벼룩시장에서 실크 넥타이를 찾았어."
+          "text": "Found this tie at the flea market.",
+          "kr": "이 넥타이, 벼룩시장에서 찾았어."
         },
         {
           "role": "B",
@@ -1606,8 +1606,8 @@
         },
         {
           "role": "A",
-          "text": "I ended up with a bag of peas too.",
-          "kr": "어쩌다 완두콩 한 봉지까지 딸려 왔어."
+          "text": "I even ended up with some peas.",
+          "kr": "심지어 완두콩까지 딸려 왔어."
         },
         {
           "role": "B",
@@ -1637,8 +1637,8 @@
         },
         {
           "role": "A",
-          "text": "My arms are killing me right now.",
-          "kr": "지금 팔이 너무 아파."
+          "text": "My arms are killing me.",
+          "kr": "팔이 너무 아파."
         },
         {
           "role": "B",
@@ -1695,8 +1695,8 @@
       "dialogue": [
         {
           "role": "A",
-          "text": "The place was cheap. Did they eat much?",
-          "kr": "가게는 쌌어. 많이 먹었어?"
+          "text": "Cheap place — did they eat much?",
+          "kr": "싼 가게였는데, 많이 먹었어?"
         },
         {
           "role": "B",
@@ -1726,8 +1726,8 @@
         },
         {
           "role": "A",
-          "text": "I can't put up with their talk; it drives me mad.",
-          "kr": "그들 잡담을 못 견디겠어, 정말 화가 나."
+          "text": "Can't put up with their mad talk.",
+          "kr": "그들의 짜증 나는 잡담을 못 참겠어."
         },
         {
           "role": "B",
@@ -1737,7 +1737,7 @@
               "kr": "잡담은 짧게 하고 본론으로 가.",
               "correct": true,
               "trap": "정답",
-              "explain": "잡담을 못 견디겠다는 말에 대처법을 제안하니 자연스러워요."
+              "explain": "잡담을 못 참겠다는 말에 대처법을 제안하니 자연스러워요."
             },
             {
               "text": "I'm not talking about medicine.",
@@ -1751,14 +1751,14 @@
               "kr": "그 고객은 늘 구석 자리 예약해.",
               "correct": false,
               "trap": "맥락 오답",
-              "explain": "직장 대화 상황엔 그럴듯하지만, 잡담을 못 견디겠다는 말엔 직접적인 답은 아니에요."
+              "explain": "직장 대화 상황엔 그럴듯하지만, 잡담을 못 참겠다는 말엔 직접적인 답은 아니에요."
             }
           ]
         },
         {
           "role": "A",
-          "text": "Keep nodding, or say how I really feel?",
-          "kr": "계속 끄덕일까, 솔직히 말할까?"
+          "text": "Nod, or say what I really feel?",
+          "kr": "그냥 끄덕일까, 진짜 마음을 말할까?"
         },
         {
           "role": "B",
@@ -1788,7 +1788,7 @@
         },
         {
           "role": "A",
-          "text": "I'll be honest but keep it kind.",
+          "text": "I'll be honest but kind.",
           "kr": "솔직하되 친절하게 말할게."
         }
       ],
