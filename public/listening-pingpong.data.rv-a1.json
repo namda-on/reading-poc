@@ -1,0 +1,1691 @@
+{
+  "meta": {
+    "type": "listening-pingpong",
+    "level": "A1",
+    "source": "review-csv",
+    "triggerTurn": 3,
+    "note": "AI 생성 리스닝 대화 검토용 샘플. 표현 단계는 표현 CSV에서 id 조인."
+  },
+  "examples": [
+    {
+      "id": 10000,
+      "level": "A1",
+      "title": "아침에 친구를 깨우는 상황이에요.",
+      "trigger": "get up",
+      "dialogue": [
+        {
+          "role": "A",
+          "text": "Wake up! Get your cap and bag.",
+          "kr": "일어나! 모자랑 가방 챙겨."
+        },
+        {
+          "role": "B",
+          "choices": [
+            {
+              "text": "Just a minute.",
+              "kr": "조금만 더.",
+              "correct": true,
+              "trap": "정답",
+              "explain": "깨우는 말에 조금만 더 있겠다는, 자연스러운 반응이에요."
+            },
+            {
+              "text": "The cup is empty.",
+              "kr": "컵이 비었어.",
+              "correct": false,
+              "trap": "내용어 오청",
+              "explain": "'cap(모자)'을 'cup(컵)'으로 잘못 들으면 이렇게 답해요."
+            },
+            {
+              "text": "My back hurts.",
+              "kr": "등이 아파.",
+              "correct": false,
+              "trap": "내용어 오청",
+              "explain": "'bag(가방)'을 'back(등)'으로 잘못 들으면 이렇게 답해요."
+            }
+          ]
+        },
+        {
+          "role": "A",
+          "text": "Come on, get up! Here's your coat.",
+          "kr": "어서 일어나! 코트 여기 있어."
+        },
+        {
+          "role": "B",
+          "choices": [
+            {
+              "text": "Thanks, I'll put it on.",
+              "kr": "고마워, 입을게.",
+              "correct": true,
+              "trap": "정답",
+              "explain": "코트 준다는 말에 입겠다는, 딱 맞는 답이에요."
+            },
+            {
+              "text": "We have no goat.",
+              "kr": "우리 염소 없어.",
+              "correct": false,
+              "trap": "내용어 오청",
+              "explain": "'coat(코트)'를 'goat(염소)'로 잘못 들으면 이렇게 답해요."
+            },
+            {
+              "text": "I want to eat first.",
+              "kr": "먼저 먹고 싶어.",
+              "correct": false,
+              "trap": "맥락 오답",
+              "explain": "아침엔 그럴듯하지만, 코트 얘기엔 맞는 답이 아니에요."
+            }
+          ]
+        },
+        {
+          "role": "A",
+          "text": "Good. Do we walk or take the bus?",
+          "kr": "좋아. 걸어갈까, 버스 탈까?"
+        },
+        {
+          "role": "B",
+          "choices": [
+            {
+              "text": "It's too far to walk.",
+              "kr": "걸어가긴 너무 멀어.",
+              "correct": true,
+              "trap": "정답",
+              "explain": "걸어갈지 버스 탈지 물었을 때, 걷기엔 멀다며 버스를 고르는 답이에요."
+            },
+            {
+              "text": "I don't have work today.",
+              "kr": "나 오늘 일 없는데.",
+              "correct": false,
+              "trap": "내용어 오청",
+              "explain": "'walk(걷다)'를 'work(일)'로 잘못 들으면 이렇게 답해요."
+            },
+            {
+              "text": "Yes, let's leave.",
+              "kr": "응, 나가자.",
+              "correct": false,
+              "trap": "프레임 오청",
+              "explain": "선택 질문을 예/아니오로 잘못 들으면 이렇게 답해요."
+            }
+          ]
+        },
+        {
+          "role": "A",
+          "text": "Okay, let's go!",
+          "kr": "좋아, 가자!"
+        }
+      ],
+      "expression": {
+        "en": "get up",
+        "kr": "일어나다 / 기상하다",
+        "form": "get up",
+        "desc": "",
+        "arrange": {
+          "en": "You should get up.",
+          "ko": "일어나야 해."
+        }
+      },
+      "vocab": {
+        "word": "get up",
+        "meaning": "일어나다 / 기상하다"
+      }
+    },
+    {
+      "id": 10002,
+      "level": "A1",
+      "title": "비 오는 날 외출 준비를 하는 상황이에요.",
+      "trigger": "put on",
+      "dialogue": [
+        {
+          "role": "A",
+          "text": "It's raining. Lock the door.",
+          "kr": "비 온다. 문 잠가."
+        },
+        {
+          "role": "B",
+          "choices": [
+            {
+              "text": "It's locked now.",
+              "kr": "잠갔어.",
+              "correct": true,
+              "trap": "정답",
+              "explain": "문 잠그라는 말에 잠갔다는, 딱 맞는 답이에요."
+            },
+            {
+              "text": "The block is far.",
+              "kr": "그 블록은 멀어.",
+              "correct": false,
+              "trap": "내용어 오청",
+              "explain": "'lock(잠그다)'을 'block(블록/구역)'으로 잘못 들으면 이렇게 답해요."
+            },
+            {
+              "text": "We're not taking a train.",
+              "kr": "우리 기차 안 타는데.",
+              "correct": false,
+              "trap": "내용어 오청",
+              "explain": "'rain(비)'을 'train(기차)'으로 잘못 들으면 이렇게 답해요."
+            }
+          ]
+        },
+        {
+          "role": "A",
+          "text": "Put on your boots.",
+          "kr": "장화 신어."
+        },
+        {
+          "role": "B",
+          "choices": [
+            {
+              "text": "I've got them on now.",
+              "kr": "다 신었어.",
+              "correct": true,
+              "trap": "정답",
+              "explain": "장화 신으라는 말에 신었다는, 딱 맞는 답이에요."
+            },
+            {
+              "text": "We have no boat.",
+              "kr": "우리 배 없는데.",
+              "correct": false,
+              "trap": "내용어 오청",
+              "explain": "'boots(장화)'를 'boats(배)'로 잘못 들으면 이렇게 답해요."
+            },
+            {
+              "text": "The rain is loud.",
+              "kr": "빗소리 크다.",
+              "correct": false,
+              "trap": "맥락 오답",
+              "explain": "비 오는 날엔 그럴듯하지만, 장화 신으라는 말엔 맞는 답이 아니에요."
+            }
+          ]
+        },
+        {
+          "role": "A",
+          "text": "Wait by the gate.",
+          "kr": "문 앞에서 기다려."
+        },
+        {
+          "role": "B",
+          "choices": [
+            {
+              "text": "I'll stand right here.",
+              "kr": "여기 서 있을게.",
+              "correct": true,
+              "trap": "정답",
+              "explain": "문 앞에서 기다리라는 말에 여기 있겠다는, 딱 맞는 답이에요."
+            },
+            {
+              "text": "It's not eight yet.",
+              "kr": "아직 8시 아닌데.",
+              "correct": false,
+              "trap": "내용어 오청",
+              "explain": "'gate(문)'를 'eight(8시)'로 잘못 들으면 이렇게 답해요."
+            },
+            {
+              "text": "The rain stopped.",
+              "kr": "비 그쳤다.",
+              "correct": false,
+              "trap": "맥락 오답",
+              "explain": "비 오는 날엔 그럴듯하지만, 문 앞에서 기다리라는 말엔 맞는 답이 아니에요."
+            }
+          ]
+        },
+        {
+          "role": "A",
+          "text": "Good, let's go.",
+          "kr": "좋아, 가자."
+        }
+      ],
+      "expression": {
+        "en": "put on",
+        "kr": "~을 입다",
+        "form": "put ______ on",
+        "desc": "",
+        "arrange": {
+          "en": "Put your clothes on.",
+          "ko": "옷 입어."
+        }
+      },
+      "vocab": {
+        "word": "put on",
+        "meaning": "~을 입다"
+      }
+    },
+    {
+      "id": 10003,
+      "level": "A1",
+      "title": "물가로 놀러 나온 상황이에요.",
+      "trigger": "Please + [verb]",
+      "dialogue": [
+        {
+          "role": "A",
+          "text": "Put the mat near the pool.",
+          "kr": "수영장 옆에 돗자리 깔아."
+        },
+        {
+          "role": "B",
+          "choices": [
+            {
+              "text": "I'll lay it flat.",
+              "kr": "평평하게 깔게.",
+              "correct": true,
+              "trap": "정답",
+              "explain": "돗자리 깔라는 말에 깔겠다는, 딱 맞는 답이에요."
+            },
+            {
+              "text": "My hat is in the bag.",
+              "kr": "내 모자 가방에 있어.",
+              "correct": false,
+              "trap": "내용어 오청",
+              "explain": "'mat(돗자리)'을 'hat(모자)'으로 잘못 들으면 이렇게 답해요."
+            },
+            {
+              "text": "Don't pull me in!",
+              "kr": "나 물에 밀지 마!",
+              "correct": false,
+              "trap": "내용어 오청",
+              "explain": "'pool(수영장)'을 'pull(당기다)'로 잘못 들으면 이렇게 반응해요."
+            }
+          ]
+        },
+        {
+          "role": "A",
+          "text": "Please pass the ball.",
+          "kr": "공 좀 줘."
+        },
+        {
+          "role": "B",
+          "choices": [
+            {
+              "text": "Here, catch it!",
+              "kr": "여기, 받아!",
+              "correct": true,
+              "trap": "정답",
+              "explain": "공 달라는 말에 건네주는, 딱 맞는 답이에요."
+            },
+            {
+              "text": "The bowl is in the bag.",
+              "kr": "그릇은 가방에 있어.",
+              "correct": false,
+              "trap": "내용어 오청",
+              "explain": "'ball(공)'을 'bowl(그릇)'로 잘못 들으면 이렇게 답해요."
+            },
+            {
+              "text": "Look at the ducks!",
+              "kr": "오리들 봐!",
+              "correct": false,
+              "trap": "맥락 오답",
+              "explain": "공원엔 그럴듯하지만, 공 달라는 말엔 맞는 답이 아니에요."
+            }
+          ]
+        },
+        {
+          "role": "A",
+          "text": "Want some ice cream?",
+          "kr": "아이스크림 먹을래?"
+        },
+        {
+          "role": "B",
+          "choices": [
+            {
+              "text": "Ooh, I want some!",
+              "kr": "오, 먹을래!",
+              "correct": true,
+              "trap": "정답",
+              "explain": "아이스크림 먹겠냐는 말에 먹겠다는, 딱 맞는 답이에요."
+            },
+            {
+              "text": "Don't scream at me!",
+              "kr": "나한테 소리 지르지 마!",
+              "correct": false,
+              "trap": "연음 오청",
+              "explain": "'ice cream'을 붙여 말하면 'I scream(나 소리 질러)'처럼 들려 이렇게 반응해요."
+            },
+            {
+              "text": "The sun is hot.",
+              "kr": "해가 뜨겁다.",
+              "correct": false,
+              "trap": "맥락 오답",
+              "explain": "공원엔 그럴듯하지만, 아이스크림 얘기엔 맞는 답이 아니에요."
+            }
+          ]
+        },
+        {
+          "role": "A",
+          "text": "Let's eat!",
+          "kr": "먹자!"
+        }
+      ],
+      "expression": {
+        "en": "Please ~.",
+        "kr": "~해 주세요",
+        "form": "Please ______ .",
+        "desc": "",
+        "arrange": {
+          "en": "Please take one.",
+          "ko": "하나 가져가세요."
+        }
+      },
+      "vocab": {
+        "word": "Please ~.",
+        "meaning": "~해 주세요"
+      }
+    },
+    {
+      "id": 10019,
+      "level": "A1",
+      "title": "집에서 친구와 물건을 찾는 상황이에요.",
+      "trigger": "It's in/on/at ~.",
+      "dialogue": [
+        {
+          "role": "A",
+          "text": "Where's my watch and card?",
+          "kr": "내 시계랑 카드 어딨어?"
+        },
+        {
+          "role": "B",
+          "choices": [
+            {
+              "text": "Both are on the table.",
+              "kr": "둘 다 탁자 위에 있어.",
+              "correct": true,
+              "trap": "정답",
+              "explain": "어디 있냐는 물음에 위치를 알려주는, 딱 맞는 답이에요."
+            },
+            {
+              "text": "I'll wash it now.",
+              "kr": "지금 씻을게.",
+              "correct": false,
+              "trap": "내용어 오청",
+              "explain": "'watch(시계)'를 'wash(씻다)'로 잘못 들으면 이렇게 답해요."
+            },
+            {
+              "text": "The car is outside.",
+              "kr": "차는 밖에 있어.",
+              "correct": false,
+              "trap": "내용어 오청",
+              "explain": "'card(카드)'를 'car(자동차)'로 잘못 들으면 이렇게 답해요."
+            }
+          ]
+        },
+        {
+          "role": "A",
+          "text": "Check the bed for my keys.",
+          "kr": "침대에 내 열쇠 있나 봐줘."
+        },
+        {
+          "role": "B",
+          "choices": [
+            {
+              "text": "I'll go look there.",
+              "kr": "가서 볼게.",
+              "correct": true,
+              "trap": "정답",
+              "explain": "침대에 있다는 말에 보러 가는, 딱 맞는 답이에요."
+            },
+            {
+              "text": "Nothing is bad.",
+              "kr": "안 좋은 일 없어.",
+              "correct": false,
+              "trap": "내용어 오청",
+              "explain": "'bed(침대)'를 'bad(나쁜)'으로 잘못 들으면 이렇게 답해요."
+            },
+            {
+              "text": "The blanket needs a wash.",
+              "kr": "이불 좀 빨아야겠다.",
+              "correct": false,
+              "trap": "맥락 오답",
+              "explain": "침대 주변 상황엔 그럴듯하지만, 열쇠를 찾아보라는 부탁엔 직접적인 답은 아니에요."
+            }
+          ]
+        },
+        {
+          "role": "A",
+          "text": "Check near the lamp.",
+          "kr": "전등 근처 봐."
+        },
+        {
+          "role": "B",
+          "choices": [
+            {
+              "text": "Found it, thanks!",
+              "kr": "찾았다, 고마워!",
+              "correct": true,
+              "trap": "정답",
+              "explain": "전등 근처 보라는 말에 찾았다는, 딱 맞는 답이에요."
+            },
+            {
+              "text": "I saw a lamb.",
+              "kr": "양 봤어.",
+              "correct": false,
+              "trap": "내용어 오청",
+              "explain": "'lamp(전등)'을 'lamb(새끼양)'으로 잘못 들으면 이렇게 답해요."
+            },
+            {
+              "text": "This lamp is really bright.",
+              "kr": "이 램프 정말 밝다.",
+              "correct": false,
+              "trap": "맥락 오답",
+              "explain": "방을 둘러보는 상황엔 그럴듯하지만, 램프 근처를 확인하라는 말엔 직접적인 답은 아니에요."
+            }
+          ]
+        },
+        {
+          "role": "A",
+          "text": "Great, let's go.",
+          "kr": "좋아, 가자."
+        }
+      ],
+      "expression": {
+        "en": "It's in/on/at ~.",
+        "kr": "~ 안에 / 위에 / 에 있어",
+        "form": "주어 + be동사 + in / on / at + ______ .",
+        "desc": "공간 안은 in, 표면 위는 on, 한 지점은 at",
+        "arrange": {
+          "en": "It's in this area.",
+          "ko": "이 근처에 있어."
+        }
+      },
+      "vocab": {
+        "word": "It's in/on/at ~.",
+        "meaning": "~ 안에 / 위에 / 에 있어"
+      }
+    },
+    {
+      "id": 10010,
+      "level": "A1",
+      "title": "시합을 앞둔 친구와 이야기하는 상황이에요.",
+      "trigger": "Don't be ~.",
+      "dialogue": [
+        {
+          "role": "A",
+          "text": "You look worried about the race.",
+          "kr": "경주 때문에 긴장했나 보다."
+        },
+        {
+          "role": "B",
+          "choices": [
+            {
+              "text": "It's my first one.",
+              "kr": "이번이 처음이야.",
+              "correct": true,
+              "trap": "정답",
+              "explain": "긴장돼 보인다는 말에 상황을 말하는, 딱 맞는 답이에요."
+            },
+            {
+              "text": "I'm not in a hurry.",
+              "kr": "나 안 급한데.",
+              "correct": false,
+              "trap": "내용어 오청",
+              "explain": "'worried(걱정하는)'를 'hurried(서두르는)'로 잘못 들으면 이렇게 답해요."
+            },
+            {
+              "text": "I don't want rice.",
+              "kr": "밥 안 먹을래.",
+              "correct": false,
+              "trap": "내용어 오청",
+              "explain": "'race(경주)'를 'rice(밥)'로 잘못 들으면 이렇게 답해요."
+            }
+          ]
+        },
+        {
+          "role": "A",
+          "text": "Don't be sad if you lose.",
+          "kr": "져도 너무 속상해하지 마."
+        },
+        {
+          "role": "B",
+          "choices": [
+            {
+              "text": "Thanks, I'll try my best.",
+              "kr": "고마워, 최선을 다할게.",
+              "correct": true,
+              "trap": "정답",
+              "explain": "다독이는 말에 고마워하는, 딱 맞는 답이에요."
+            },
+            {
+              "text": "I'm not mad at you.",
+              "kr": "너한테 화 안 났어.",
+              "correct": false,
+              "trap": "내용어 오청",
+              "explain": "'sad(슬픈)'를 'mad(화난)'로 잘못 들으면 이렇게 답해요."
+            },
+            {
+              "text": "I trained all week.",
+              "kr": "일주일 내내 연습했어.",
+              "correct": false,
+              "trap": "맥락 오답",
+              "explain": "경주 얘기와 관련은 있지만, 다독이는 말엔 맞는 답이 아니에요."
+            }
+          ]
+        },
+        {
+          "role": "A",
+          "text": "Take a deep breath.",
+          "kr": "심호흡해."
+        },
+        {
+          "role": "B",
+          "choices": [
+            {
+              "text": "That helps a lot.",
+              "kr": "한결 낫다.",
+              "correct": true,
+              "trap": "정답",
+              "explain": "심호흡하라는 말에 도움 된다는, 딱 맞는 답이에요."
+            },
+            {
+              "text": "I want no bread.",
+              "kr": "빵 안 먹을래.",
+              "correct": false,
+              "trap": "내용어 오청",
+              "explain": "'breath(숨)'을 'bread(빵)'로 잘못 들으면 이렇게 답해요."
+            },
+            {
+              "text": "I hope I win.",
+              "kr": "이겼으면 좋겠다.",
+              "correct": false,
+              "trap": "맥락 오답",
+              "explain": "경주엔 그럴듯하지만, 심호흡하라는 말엔 맞는 답이 아니에요."
+            }
+          ]
+        },
+        {
+          "role": "A",
+          "text": "You'll do great!",
+          "kr": "넌 잘할 거야!"
+        }
+      ],
+      "expression": {
+        "en": "Don't be ~.",
+        "kr": "~하지 마",
+        "form": "Don't be ______ .",
+        "desc": "",
+        "arrange": {
+          "en": "Don't be late.",
+          "ko": "늦지 마."
+        }
+      },
+      "vocab": {
+        "word": "Don't be ~.",
+        "meaning": "~하지 마"
+      }
+    },
+    {
+      "id": 10006,
+      "level": "A1",
+      "title": "아픈 친구에게 전화한 상황이에요.",
+      "trigger": "Are you ~?",
+      "dialogue": [
+        {
+          "role": "A",
+          "text": "You weren't in the hall today.",
+          "kr": "오늘 강당에 안 왔더라."
+        },
+        {
+          "role": "B",
+          "choices": [
+            {
+              "text": "I was sick at home.",
+              "kr": "아파서 집에 있었어.",
+              "correct": true,
+              "trap": "정답",
+              "explain": "강당에 없었다는 말에 결석 이유를 대는, 딱 맞는 답이에요."
+            },
+            {
+              "text": "That's all of them.",
+              "kr": "그게 전부야.",
+              "correct": false,
+              "trap": "내용어 오청",
+              "explain": "'hall(강당)'을 'all(전부)'로 잘못 들으면 이렇게 답해요."
+            },
+            {
+              "text": "The next class starts soon.",
+              "kr": "다음 수업이 곧 시작해.",
+              "correct": false,
+              "trap": "맥락 오답",
+              "explain": "학교 일과 얘기엔 그럴듯하지만, 오늘 안 보였다는 지적엔 직접적인 답은 아니에요."
+            }
+          ]
+        },
+        {
+          "role": "A",
+          "text": "Are you drinking water?",
+          "kr": "물은 마시고 있어?"
+        },
+        {
+          "role": "B",
+          "choices": [
+            {
+              "text": "A lot, my throat is dry.",
+              "kr": "많이, 목이 말라.",
+              "correct": true,
+              "trap": "정답",
+              "explain": "물 마시냐는 물음에 상태를 곁들여 답하는, 딱 맞는 답이에요."
+            },
+            {
+              "text": "No waiter came yet.",
+              "kr": "웨이터 아직 안 왔어.",
+              "correct": false,
+              "trap": "내용어 오청",
+              "explain": "'water(물)'를 'waiter(웨이터)'로 잘못 들으면 이렇게 답해요."
+            },
+            {
+              "text": "I slept all day.",
+              "kr": "하루 종일 잤어.",
+              "correct": false,
+              "trap": "맥락 오답",
+              "explain": "아픈 상황엔 그럴듯하지만, 물 마시냐는 물음엔 맞는 답이 아니에요."
+            }
+          ]
+        },
+        {
+          "role": "A",
+          "text": "I'll drop off some soup later.",
+          "kr": "이따 수프 갖다줄게."
+        },
+        {
+          "role": "B",
+          "choices": [
+            {
+              "text": "That's so kind, thanks.",
+              "kr": "진짜 고마워.",
+              "correct": true,
+              "trap": "정답",
+              "explain": "수프 갖다준다는 말에 고마워하는, 딱 맞는 답이에요."
+            },
+            {
+              "text": "I don't need a suit.",
+              "kr": "정장 필요 없는데.",
+              "correct": false,
+              "trap": "내용어 오청",
+              "explain": "'soup(수프)'를 'suit(정장)'으로 잘못 들으면 이렇게 답해요."
+            },
+            {
+              "text": "I took some medicine.",
+              "kr": "약 좀 먹었어.",
+              "correct": false,
+              "trap": "맥락 오답",
+              "explain": "아픈 상황엔 그럴듯하지만, 수프 갖다준다는 말엔 맞는 답이 아니에요."
+            }
+          ]
+        },
+        {
+          "role": "A",
+          "text": "Get well soon!",
+          "kr": "얼른 나아!"
+        }
+      ],
+      "expression": {
+        "en": "Are you ~?",
+        "kr": "~야? / ~해?",
+        "form": "Are / Is + 주어 + ______ ?",
+        "desc": "be동사를 문장 맨 앞으로 보내 상태·정체를 물을 때 (Are you / Is he / Are they)",
+        "arrange": {
+          "en": "Are you sick?",
+          "ko": "너 아파?"
+        }
+      },
+      "vocab": {
+        "word": "Are you ~?",
+        "meaning": "~야? / ~해?"
+      }
+    },
+    {
+      "id": 10018,
+      "level": "A1",
+      "title": "엄마와 아이가 자전거를 타는 상황이에요.",
+      "trigger": "Be ~.",
+      "dialogue": [
+        {
+          "role": "A",
+          "text": "Hold the bars. Feet up.",
+          "kr": "손잡이 잡아. 발 올려."
+        },
+        {
+          "role": "B",
+          "choices": [
+            {
+              "text": "Both feet are up!",
+              "kr": "두 발 올렸어!",
+              "correct": true,
+              "trap": "정답",
+              "explain": "발 올리라는 말에 올렸다는, 딱 맞는 답이에요."
+            },
+            {
+              "text": "I see no bears.",
+              "kr": "곰 안 보여.",
+              "correct": false,
+              "trap": "내용어 오청",
+              "explain": "'bars(손잡이)'를 'bears(곰)'로 잘못 들으면 이렇게 답해요."
+            },
+            {
+              "text": "Watch the hole.",
+              "kr": "구멍 조심해.",
+              "correct": false,
+              "trap": "내용어 오청",
+              "explain": "'hold(잡다)'를 'hole(구멍)'로 잘못 들으면 이렇게 답해요."
+            }
+          ]
+        },
+        {
+          "role": "A",
+          "text": "Be calm.",
+          "kr": "침착해."
+        },
+        {
+          "role": "B",
+          "choices": [
+            {
+              "text": "I'll try to relax.",
+              "kr": "긴장 풀어볼게.",
+              "correct": true,
+              "trap": "정답",
+              "explain": "침착하라는 말에 진정하겠다는, 딱 맞는 답이에요."
+            },
+            {
+              "text": "I'm coming!",
+              "kr": "가!",
+              "correct": false,
+              "trap": "내용어 오청",
+              "explain": "'calm(침착한)'을 'come(오다)'으로 잘못 들으면 이렇게 답해요."
+            },
+            {
+              "text": "My legs hurt.",
+              "kr": "다리 아파.",
+              "correct": false,
+              "trap": "맥락 오답",
+              "explain": "자전거엔 그럴듯하지만, 침착하라는 말엔 맞는 답이 아니에요."
+            }
+          ]
+        },
+        {
+          "role": "A",
+          "text": "Go to that tree.",
+          "kr": "저 나무 쪽으로 가."
+        },
+        {
+          "role": "B",
+          "choices": [
+            {
+              "text": "I see it, here I go!",
+              "kr": "보여, 간다!",
+              "correct": true,
+              "trap": "정답",
+              "explain": "나무 쪽으로 가라는 말에 가겠다는, 딱 맞는 답이에요."
+            },
+            {
+              "text": "I can count to three.",
+              "kr": "셋까지 셀 수 있어.",
+              "correct": false,
+              "trap": "내용어 오청",
+              "explain": "'tree(나무)'를 'three(셋)'으로 잘못 들으면 이렇게 답해요."
+            },
+            {
+              "text": "Don't let go!",
+              "kr": "놓지 마!",
+              "correct": false,
+              "trap": "맥락 오답",
+              "explain": "자전거엔 그럴듯하지만, 나무 쪽으로 가라는 말엔 맞는 답이 아니에요."
+            }
+          ]
+        },
+        {
+          "role": "A",
+          "text": "You did it!",
+          "kr": "해냈다!"
+        }
+      ],
+      "expression": {
+        "en": "Be ~.",
+        "kr": "~하게 굴어",
+        "form": "Be ______ .",
+        "desc": "",
+        "arrange": {
+          "en": "Be nice.",
+          "ko": "착하게 굴어."
+        }
+      },
+      "vocab": {
+        "word": "Be ~.",
+        "meaning": "~하게 굴어"
+      }
+    },
+    {
+      "id": 10009,
+      "level": "A1",
+      "title": "친구 집에서 간식을 먹는 상황이에요.",
+      "trigger": "Do you like ~?",
+      "dialogue": [
+        {
+          "role": "A",
+          "text": "Try my peach and snacks.",
+          "kr": "내 복숭아랑 과자 먹어 봐."
+        },
+        {
+          "role": "B",
+          "choices": [
+            {
+              "text": "Yum, thanks a lot!",
+              "kr": "맛있겠다, 고마워!",
+              "correct": true,
+              "trap": "정답",
+              "explain": "간식을 권하는 말에 반가워하는, 딱 맞는 답이에요."
+            },
+            {
+              "text": "The beach is far.",
+              "kr": "바닷가는 멀어.",
+              "correct": false,
+              "trap": "내용어 오청",
+              "explain": "'peach(복숭아)'를 'beach(바닷가)'로 잘못 들으면 이렇게 답해요."
+            },
+            {
+              "text": "I'm scared of snakes.",
+              "kr": "나 뱀 무서워.",
+              "correct": false,
+              "trap": "내용어 오청",
+              "explain": "'snacks(과자)'를 'snakes(뱀)'로 잘못 들으면 이렇게 답해요."
+            }
+          ]
+        },
+        {
+          "role": "A",
+          "text": "Do you like honey on it?",
+          "kr": "위에 꿀 뿌리는 거 좋아해?"
+        },
+        {
+          "role": "B",
+          "choices": [
+            {
+              "text": "I love it, actually.",
+              "kr": "완전 좋아해.",
+              "correct": true,
+              "trap": "정답",
+              "explain": "꿀 좋아하냐는 물음에 좋아한다고 답하는, 딱 맞는 답이에요."
+            },
+            {
+              "text": "I have no money.",
+              "kr": "나 돈 없는데.",
+              "correct": false,
+              "trap": "내용어 오청",
+              "explain": "'honey(꿀)'를 'money(돈)'로 잘못 들으면 이렇게 답해요."
+            },
+            {
+              "text": "My mom makes jam.",
+              "kr": "엄마가 잼 만들어.",
+              "correct": false,
+              "trap": "맥락 오답",
+              "explain": "단맛 얘기와 관련은 있지만, 꿀 좋아하냐는 물음엔 맞는 답이 아니에요."
+            }
+          ]
+        },
+        {
+          "role": "A",
+          "text": "Have some corn too.",
+          "kr": "옥수수도 좀 먹어."
+        },
+        {
+          "role": "B",
+          "choices": [
+            {
+              "text": "Ooh, my favorite!",
+              "kr": "오, 완전 좋아!",
+              "correct": true,
+              "trap": "정답",
+              "explain": "권하는 말에 반가워하는, 딱 맞는 답이에요."
+            },
+            {
+              "text": "I hear a horn.",
+              "kr": "경적 소리 나.",
+              "correct": false,
+              "trap": "내용어 오청",
+              "explain": "'corn(옥수수)'을 'horn(경적)'으로 잘못 들으면 이렇게 답해요."
+            },
+            {
+              "text": "Your kitchen smells sweet.",
+              "kr": "부엌에서 단내 나.",
+              "correct": false,
+              "trap": "맥락 오답",
+              "explain": "간식 상황엔 그럴듯하지만, 옥수수 권하는 말엔 직접적인 답은 아니에요."
+            }
+          ]
+        },
+        {
+          "role": "A",
+          "text": "Eat lots!",
+          "kr": "많이 먹어!"
+        }
+      ],
+      "expression": {
+        "en": "Do you like ~?",
+        "kr": "~해?",
+        "form": "Do / Does + 주어 + ______ ?",
+        "desc": "주어가 3인칭 단수면 Does로 시작해요",
+        "arrange": {
+          "en": "Do you like ice cream?",
+          "ko": "아이스크림 좋아해?"
+        }
+      },
+      "vocab": {
+        "word": "Do you like ~?",
+        "meaning": "~해?"
+      }
+    },
+    {
+      "id": 10005,
+      "level": "A1",
+      "title": "집에서 형제와 이야기하는 상황이에요.",
+      "trigger": "I didn't ~.",
+      "dialogue": [
+        {
+          "role": "A",
+          "text": "The lamp is on the floor.",
+          "kr": "전등이 바닥에 떨어져 있어."
+        },
+        {
+          "role": "B",
+          "choices": [
+            {
+              "text": "Oh no, is it broken?",
+              "kr": "이런, 깨졌어?",
+              "correct": true,
+              "trap": "정답",
+              "explain": "떨어졌다는 말에 상태를 묻는, 딱 맞는 답이에요."
+            },
+            {
+              "text": "I love summer camp.",
+              "kr": "난 여름 캠프 좋아해.",
+              "correct": false,
+              "trap": "내용어 오청",
+              "explain": "'lamp(전등)'을 'camp(캠프)'로 잘못 들으면 이렇게 답해요."
+            },
+            {
+              "text": "I need four of them.",
+              "kr": "네 개 필요해.",
+              "correct": false,
+              "trap": "내용어 오청",
+              "explain": "'floor(바닥)'를 'four(넷)'로 잘못 들으면 이렇게 답해요."
+            }
+          ]
+        },
+        {
+          "role": "A",
+          "text": "I didn't break the shade.",
+          "kr": "나 전등갓 안 깼어."
+        },
+        {
+          "role": "B",
+          "choices": [
+            {
+              "text": "I believe you.",
+              "kr": "믿어.",
+              "correct": true,
+              "trap": "정답",
+              "explain": "안 깼다는 말에 믿는다는, 딱 맞는 답이에요."
+            },
+            {
+              "text": "It's out in the shed.",
+              "kr": "창고에 있는데.",
+              "correct": false,
+              "trap": "내용어 오청",
+              "explain": "'shade(전등갓)'를 'shed(창고)'로 잘못 들으면 이렇게 답해요."
+            },
+            {
+              "text": "The room is a mess.",
+              "kr": "방이 엉망이야.",
+              "correct": false,
+              "trap": "맥락 오답",
+              "explain": "상황엔 그럴듯하지만, 안 깼다는 말엔 맞는 답이 아니에요."
+            }
+          ]
+        },
+        {
+          "role": "A",
+          "text": "Let's sweep up the glass.",
+          "kr": "깨진 유리 쓸자."
+        },
+        {
+          "role": "B",
+          "choices": [
+            {
+              "text": "I'll get the broom.",
+              "kr": "빗자루 가져올게.",
+              "correct": true,
+              "trap": "정답",
+              "explain": "유리 쓸자는 말에 빗자루 가져오겠다는, 딱 맞는 답이에요."
+            },
+            {
+              "text": "I have no class today.",
+              "kr": "오늘 수업 없는데.",
+              "correct": false,
+              "trap": "내용어 오청",
+              "explain": "'glass(유리)'를 'class(수업)'로 잘못 들으면 이렇게 답해요."
+            },
+            {
+              "text": "Mom will be home soon.",
+              "kr": "엄마 곧 오셔.",
+              "correct": false,
+              "trap": "맥락 오답",
+              "explain": "상황엔 그럴듯하지만, 유리 쓸자는 말엔 맞는 답이 아니에요."
+            }
+          ]
+        },
+        {
+          "role": "A",
+          "text": "Good, let's hurry.",
+          "kr": "좋아, 서두르자."
+        }
+      ],
+      "expression": {
+        "en": "I didn't ~.",
+        "kr": "~ 안 했어",
+        "form": "주어 + didn't + ______ .",
+        "desc": "didn't 뒤에는 과거형이 아니라 동사원형이 와요",
+        "arrange": {
+          "en": "I didn't study.",
+          "ko": "나 공부 안 했어."
+        }
+      },
+      "vocab": {
+        "word": "I didn't ~.",
+        "meaning": "~ 안 했어"
+      }
+    },
+    {
+      "id": 10007,
+      "level": "A1",
+      "title": "친구의 그림을 보는 상황이에요.",
+      "trigger": "Was it ~?",
+      "dialogue": [
+        {
+          "role": "A",
+          "text": "Wow, your white cat drawing is cute!",
+          "kr": "와, 네 하얀 고양이 그림 귀엽다!"
+        },
+        {
+          "role": "B",
+          "choices": [
+            {
+              "text": "Thanks, I worked hard on it.",
+              "kr": "고마워, 공들여 그렸어.",
+              "correct": true,
+              "trap": "정답",
+              "explain": "칭찬에 반응하는, 딱 맞는 답이에요."
+            },
+            {
+              "text": "Too wide? I'll fix it.",
+              "kr": "너무 넓어? 고칠게.",
+              "correct": false,
+              "trap": "내용어 오청",
+              "explain": "'white(하얀)'을 'wide(넓은)'로 잘못 들으면 이렇게 답해요."
+            },
+            {
+              "text": "A cut? No, I'm fine.",
+              "kr": "베였냐고? 아니, 괜찮아.",
+              "correct": false,
+              "trap": "내용어 오청",
+              "explain": "'cat(고양이)'을 'cut(상처)'로 잘못 들으면 이렇게 답해요."
+            }
+          ]
+        },
+        {
+          "role": "A",
+          "text": "Was it for art class?",
+          "kr": "미술 수업 거야?"
+        },
+        {
+          "role": "B",
+          "choices": [
+            {
+              "text": "No, just for fun.",
+              "kr": "아니, 그냥 재미로.",
+              "correct": true,
+              "trap": "정답",
+              "explain": "수업 거냐는 물음에 아니라고 답하는, 딱 맞는 답이에요."
+            },
+            {
+              "text": "I didn't break the glass.",
+              "kr": "나 유리 안 깼는데.",
+              "correct": false,
+              "trap": "내용어 오청",
+              "explain": "'class(수업)'를 'glass(유리)'로 잘못 들으면 이렇게 답해요."
+            },
+            {
+              "text": "I love drawing animals.",
+              "kr": "난 동물 그리기 좋아해.",
+              "correct": false,
+              "trap": "맥락 오답",
+              "explain": "그림 얘기와 관련은 있지만, 수업 거냐는 물음엔 맞는 답이 아니에요."
+            }
+          ]
+        },
+        {
+          "role": "A",
+          "text": "Let's hang it on the wall.",
+          "kr": "벽에 걸자."
+        },
+        {
+          "role": "B",
+          "choices": [
+            {
+              "text": "Let's put it by the door.",
+              "kr": "문 옆에 걸자.",
+              "correct": true,
+              "trap": "정답",
+              "explain": "벽에 걸자는 말에 위치를 대는, 딱 맞는 답이에요."
+            },
+            {
+              "text": "That's all I have.",
+              "kr": "그게 다야.",
+              "correct": false,
+              "trap": "내용어 오청",
+              "explain": "'wall(벽)'을 'all(전부)'로 잘못 들으면 이렇게 답해요."
+            },
+            {
+              "text": "I'll draw another one.",
+              "kr": "하나 더 그릴게.",
+              "correct": false,
+              "trap": "맥락 오답",
+              "explain": "그림 얘기와 관련은 있지만, 벽에 걸자는 말엔 맞는 답이 아니에요."
+            }
+          ]
+        },
+        {
+          "role": "A",
+          "text": "Perfect, it looks great.",
+          "kr": "완벽해, 멋지다."
+        }
+      ],
+      "expression": {
+        "en": "Was it ~?",
+        "kr": "~였어? / ~했었어?",
+        "form": "Was / Were + 주어 + ______ ?",
+        "desc": "과거의 상태를 물을 때. 주어가 복수면 were",
+        "arrange": {
+          "en": "Was it bad?",
+          "ko": "별로였어?"
+        }
+      },
+      "vocab": {
+        "word": "Was it ~?",
+        "meaning": "~였어? / ~했었어?"
+      }
+    },
+    {
+      "id": 10024,
+      "level": "A1",
+      "title": "운동을 마친 친구와 있는 상황이에요.",
+      "trigger": "~ really fast.",
+      "dialogue": [
+        {
+          "role": "A",
+          "text": "You raced around the track!",
+          "kr": "트랙을 막 달렸네!"
+        },
+        {
+          "role": "B",
+          "choices": [
+            {
+              "text": "Thanks, my legs are burning.",
+              "kr": "고마워, 다리 후들거려.",
+              "correct": true,
+              "trap": "정답",
+              "explain": "달렸다는 말에 상태로 반응하는, 딱 맞는 답이에요."
+            },
+            {
+              "text": "I don't want rice.",
+              "kr": "밥 먹기 싫은데.",
+              "correct": false,
+              "trap": "내용어 오청",
+              "explain": "'race(경주)'를 'rice(밥)'로 잘못 들으면 이렇게 답해요."
+            },
+            {
+              "text": "There's a big truck outside.",
+              "kr": "밖에 큰 트럭 있어.",
+              "correct": false,
+              "trap": "내용어 오청",
+              "explain": "'track(트랙)'을 'truck(트럭)'으로 잘못 들으면 이렇게 답해요."
+            }
+          ]
+        },
+        {
+          "role": "A",
+          "text": "You crossed the line so fast!",
+          "kr": "결승선 진짜 빨리 통과했어!"
+        },
+        {
+          "role": "B",
+          "choices": [
+            {
+              "text": "I trained all month.",
+              "kr": "한 달 내내 연습했어.",
+              "correct": true,
+              "trap": "정답",
+              "explain": "빨리 통과했다는 칭찬에 이유를 대는, 딱 맞는 답이에요."
+            },
+            {
+              "text": "I'd love some lime.",
+              "kr": "라임 먹고 싶다.",
+              "correct": false,
+              "trap": "내용어 오청",
+              "explain": "'line(결승선)'을 'lime(라임)'으로 잘못 들으면 이렇게 답해요."
+            },
+            {
+              "text": "The track was tough.",
+              "kr": "트랙 힘들었어.",
+              "correct": false,
+              "trap": "맥락 오답",
+              "explain": "경주 얘기와 관련은 있지만, 빨리 통과했다는 칭찬엔 직접적인 답은 아니에요."
+            }
+          ]
+        },
+        {
+          "role": "A",
+          "text": "Wipe the mud off your shoes.",
+          "kr": "신발에 진흙 닦아."
+        },
+        {
+          "role": "B",
+          "choices": [
+            {
+              "text": "Good, they're filthy.",
+              "kr": "그래, 완전 더러워.",
+              "correct": true,
+              "trap": "정답",
+              "explain": "진흙 닦으라는 말에 응하는, 딱 맞는 답이에요."
+            },
+            {
+              "text": "I'm not mad at all.",
+              "kr": "나 화 안 났는데.",
+              "correct": false,
+              "trap": "내용어 오청",
+              "explain": "'mud(진흙)'를 'mad(화난)'로 잘못 들으면 이렇게 답해요."
+            },
+            {
+              "text": "That was a great run.",
+              "kr": "방금 잘 달렸어.",
+              "correct": false,
+              "trap": "맥락 오답",
+              "explain": "달리기 얘기와 관련은 있지만, 진흙 닦으라는 말엔 맞는 답이 아니에요."
+            }
+          ]
+        },
+        {
+          "role": "A",
+          "text": "Let's rest a while.",
+          "kr": "좀 쉬자."
+        }
+      ],
+      "expression": {
+        "en": "~ really fast.",
+        "kr": "정말 ~하게 ~해",
+        "form": "주어 + 동사 + so / really / too + ______ .",
+        "desc": "동사 뒤 부사 앞에 so·really·too를 붙여 정도를 강조할 때",
+        "arrange": {
+          "en": "She speaks really fast.",
+          "ko": "걔는 말을 정말 빨리 해."
+        }
+      },
+      "vocab": {
+        "word": "~ really fast.",
+        "meaning": "정말 ~하게 ~해"
+      }
+    },
+    {
+      "id": 10025,
+      "level": "A1",
+      "title": "길을 안내하는 상황이에요.",
+      "trigger": "Go to ~.",
+      "dialogue": [
+        {
+          "role": "A",
+          "text": "Take the road past the deer sign.",
+          "kr": "사슴 표지판 지나 그 길로 가."
+        },
+        {
+          "role": "B",
+          "choices": [
+            {
+              "text": "Tell me the next turn then.",
+              "kr": "그럼 다음 방향 알려줘.",
+              "correct": true,
+              "trap": "정답",
+              "explain": "길 안내에 다음을 묻는, 딱 맞는 답이에요."
+            },
+            {
+              "text": "That's a heavy load.",
+              "kr": "그거 무거운 짐이네.",
+              "correct": false,
+              "trap": "내용어 오청",
+              "explain": "'road(길)'를 'load(짐)'로 잘못 들으면 이렇게 답해요."
+            },
+            {
+              "text": "I don't see a door.",
+              "kr": "문이 안 보이는데.",
+              "correct": false,
+              "trap": "내용어 오청",
+              "explain": "'deer(사슴)'를 'door(문)'로 잘못 들으면 이렇게 답해요."
+            }
+          ]
+        },
+        {
+          "role": "A",
+          "text": "Go to the big hall.",
+          "kr": "큰 홀로 가."
+        },
+        {
+          "role": "B",
+          "choices": [
+            {
+              "text": "I see it ahead.",
+              "kr": "저 앞에 보여.",
+              "correct": true,
+              "trap": "정답",
+              "explain": "큰 홀로 가라는 말에 보인다는, 딱 맞는 답이에요."
+            },
+            {
+              "text": "That's all of them.",
+              "kr": "그게 전부야.",
+              "correct": false,
+              "trap": "내용어 오청",
+              "explain": "'hall(홀)'을 'all(전부)'로 잘못 들으면 이렇게 답해요."
+            },
+            {
+              "text": "This street is busy.",
+              "kr": "이 길 붐빈다.",
+              "correct": false,
+              "trap": "맥락 오답",
+              "explain": "길 얘기와 관련은 있지만, 큰 홀로 가라는 말엔 직접적인 답은 아니에요."
+            }
+          ]
+        },
+        {
+          "role": "A",
+          "text": "Take the lift to the top.",
+          "kr": "꼭대기까지 엘리베이터 타."
+        },
+        {
+          "role": "B",
+          "choices": [
+            {
+              "text": "I'll head up now.",
+              "kr": "이제 올라갈게.",
+              "correct": true,
+              "trap": "정답",
+              "explain": "엘리베이터 타라는 말에 응하는, 딱 맞는 답이에요."
+            },
+            {
+              "text": "What a nice gift!",
+              "kr": "선물 좋다!",
+              "correct": false,
+              "trap": "내용어 오청",
+              "explain": "'lift(엘리베이터)'를 'gift(선물)'로 잘못 들으면 이렇게 답해요."
+            },
+            {
+              "text": "This building is huge.",
+              "kr": "이 건물 크다.",
+              "correct": false,
+              "trap": "맥락 오답",
+              "explain": "길 안내엔 그럴듯하지만, 엘리베이터 타라는 말엔 맞는 답이 아니에요."
+            }
+          ]
+        },
+        {
+          "role": "A",
+          "text": "See you up there!",
+          "kr": "위에서 봐!"
+        }
+      ],
+      "expression": {
+        "en": "Go to ~.",
+        "kr": "~로 가다 / ~에게 주다",
+        "form": "동사 + to + ______",
+        "desc": "to는 '~로'(방향)와 '~에게'(대상)에 모두 써요",
+        "arrange": {
+          "en": "That bus goes to the airport.",
+          "ko": "저 버스는 공항으로 가."
+        }
+      },
+      "vocab": {
+        "word": "Go to ~.",
+        "meaning": "~로 가다 / ~에게 주다"
+      }
+    },
+    {
+      "id": 10026,
+      "level": "A1",
+      "title": "친구와 주말 계획을 정하는 상황이에요.",
+      "trigger": "Let's ~. / Let's go -ing.",
+      "dialogue": [
+        {
+          "role": "A",
+          "text": "Grab the kite and some jam.",
+          "kr": "연이랑 잼 챙겨."
+        },
+        {
+          "role": "B",
+          "choices": [
+            {
+              "text": "We must be having a picnic.",
+              "kr": "우리 소풍 가나 봐.",
+              "correct": true,
+              "trap": "정답",
+              "explain": "챙기라는 말에 반가워하며 되묻는, 딱 맞는 답이에요."
+            },
+            {
+              "text": "I can't find the kit.",
+              "kr": "키트를 못 찾겠어.",
+              "correct": false,
+              "trap": "내용어 오청",
+              "explain": "'kite(연)'를 'kit(키트)'로 잘못 들으면 이렇게 답해요."
+            },
+            {
+              "text": "I don't like ham.",
+              "kr": "난 햄 싫어.",
+              "correct": false,
+              "trap": "내용어 오청",
+              "explain": "'jam(잼)'을 'ham(햄)'으로 잘못 들으면 이렇게 답해요."
+            }
+          ]
+        },
+        {
+          "role": "A",
+          "text": "Let's go fishing at noon.",
+          "kr": "정오에 낚시하러 가자."
+        },
+        {
+          "role": "B",
+          "choices": [
+            {
+              "text": "I'll bring the snacks, then.",
+              "kr": "그럼 간식 챙길게.",
+              "correct": true,
+              "trap": "정답",
+              "explain": "낚시 가자는 말에 응하는, 딱 맞는 답이에요."
+            },
+            {
+              "text": "The moon is bright tonight.",
+              "kr": "오늘 밤 달 밝다.",
+              "correct": false,
+              "trap": "내용어 오청",
+              "explain": "'noon(정오)'을 'moon(달)'으로 잘못 들으면 이렇게 답해요."
+            },
+            {
+              "text": "I caught a big fish last week.",
+              "kr": "지난주에 큰 물고기 잡았어.",
+              "correct": false,
+              "trap": "맥락 오답",
+              "explain": "낚시 얘기엔 그럴듯하지만, 정오에 낚시 가자는 제안엔 직접적인 답은 아니에요."
+            }
+          ]
+        },
+        {
+          "role": "A",
+          "text": "Let's sit on this rug.",
+          "kr": "이 깔개에 앉자."
+        },
+        {
+          "role": "B",
+          "choices": [
+            {
+              "text": "It's nice and soft.",
+              "kr": "폭신하고 좋다.",
+              "correct": true,
+              "trap": "정답",
+              "explain": "깔개에 앉자는 말에 반응하는, 딱 맞는 답이에요."
+            },
+            {
+              "text": "That rag is dirty.",
+              "kr": "그 걸레 더러워.",
+              "correct": false,
+              "trap": "내용어 오청",
+              "explain": "'rug(깔개)'를 'rag(걸레)'로 잘못 들으면 이렇게 답해요."
+            },
+            {
+              "text": "The view is lovely.",
+              "kr": "경치 좋다.",
+              "correct": false,
+              "trap": "맥락 오답",
+              "explain": "야외엔 그럴듯하지만, 깔개에 앉자는 말엔 맞는 답이 아니에요."
+            }
+          ]
+        },
+        {
+          "role": "A",
+          "text": "This is a perfect spot.",
+          "kr": "여기 딱이다."
+        }
+      ],
+      "expression": {
+        "en": "Let's ~.Let's go -ing.",
+        "kr": "~하자",
+        "form": "Let's ______ .  /  Let's go ______ -ing .",
+        "desc": "",
+        "arrange": {
+          "en": "Let's cook!",
+          "ko": "우리 요리하자!"
+        }
+      },
+      "vocab": {
+        "word": "Let's ~.Let's go -ing.",
+        "meaning": "~하자"
+      }
+    },
+    {
+      "id": 10027,
+      "level": "A1",
+      "title": "친구와 방에서 뭔가를 준비하는 상황이에요.",
+      "trigger": "Let's not ~.",
+      "dialogue": [
+        {
+          "role": "A",
+          "text": "Hide the note and the gift.",
+          "kr": "쪽지랑 선물 숨겨."
+        },
+        {
+          "role": "B",
+          "choices": [
+            {
+              "text": "I'll hide them in the drawer.",
+              "kr": "서랍에 숨길게.",
+              "correct": true,
+              "trap": "정답",
+              "explain": "숨기라는 말에 응하는, 딱 맞는 답이에요."
+            },
+            {
+              "text": "My nose is itchy.",
+              "kr": "코가 간지러워.",
+              "correct": false,
+              "trap": "내용어 오청",
+              "explain": "'note(쪽지)'를 'nose(코)'로 잘못 들으면 이렇게 답해요."
+            },
+            {
+              "text": "I don't need a lift.",
+              "kr": "태워줄 필요 없는데.",
+              "correct": false,
+              "trap": "내용어 오청",
+              "explain": "'gift(선물)'를 'lift(태워주기)'로 잘못 들으면 이렇게 답해요."
+            }
+          ]
+        },
+        {
+          "role": "A",
+          "text": "Let's not rush this plan.",
+          "kr": "이 계획 서두르지 말자."
+        },
+        {
+          "role": "B",
+          "choices": [
+            {
+              "text": "Let's take our time then.",
+              "kr": "그럼 천천히 하자.",
+              "correct": true,
+              "trap": "정답",
+              "explain": "서두르지 말자는 말에 동의하는, 딱 맞는 답이에요."
+            },
+            {
+              "text": "Don't forget the plant.",
+              "kr": "화분 잊지 마.",
+              "correct": false,
+              "trap": "내용어 오청",
+              "explain": "'plan(계획)'을 'plant(화분)'으로 잘못 들으면 이렇게 답해요."
+            },
+            {
+              "text": "She'll be so surprised.",
+              "kr": "걔 진짜 놀라겠다.",
+              "correct": false,
+              "trap": "맥락 오답",
+              "explain": "선물 얘기와 관련은 있지만, 서두르지 말자는 말엔 직접적인 답은 아니에요."
+            }
+          ]
+        },
+        {
+          "role": "A",
+          "text": "Let's bake her a cake too.",
+          "kr": "케이크도 하나 굽자."
+        },
+        {
+          "role": "B",
+          "choices": [
+            {
+              "text": "Good, chocolate's her favorite.",
+              "kr": "좋아, 걔 초콜릿 좋아해.",
+              "correct": true,
+              "trap": "정답",
+              "explain": "케이크 굽자는 말에 맞장구치는, 딱 맞는 답이에요."
+            },
+            {
+              "text": "Did you ride your bike?",
+              "kr": "자전거 탔어?",
+              "correct": false,
+              "trap": "내용어 오청",
+              "explain": "'bake(굽다)'를 'bike(자전거)'로 잘못 들으면 이렇게 물어봐요."
+            },
+            {
+              "text": "The lake is far.",
+              "kr": "호수는 멀어.",
+              "correct": false,
+              "trap": "내용어 오청",
+              "explain": "'cake(케이크)'를 'lake(호수)'로 잘못 들으면 이렇게 답해요."
+            }
+          ]
+        },
+        {
+          "role": "A",
+          "text": "Great, this'll be fun.",
+          "kr": "좋아, 재밌겠다."
+        }
+      ],
+      "expression": {
+        "en": "Let's not ~.",
+        "kr": "~하지 말자",
+        "form": "Let's not ______ .",
+        "desc": "",
+        "arrange": {
+          "en": "Let's not go.",
+          "ko": "우리 가지 말자."
+        }
+      },
+      "vocab": {
+        "word": "Let's not ~.",
+        "meaning": "~하지 말자"
+      }
+    }
+  ]
+}

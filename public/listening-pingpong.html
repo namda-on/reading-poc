@@ -246,7 +246,9 @@ function buildExample(ex){
   const trigA = aTurns[1] || aTurns[0] || null; // 2번째 A = 표현이 나오는 트리거 대사
   // 표현 배열 문장: 표현에 빈칸(~)이 있으면 트리거 A 대사(구체 문장), 없으면(To go. 등) 표현 자체
   let src = { en:exprEn, ko:exprKr };
-  if (exprEn.includes('~') && trigA) src = { en:trigA.text, ko:trigA.kr||'' };
+  // 표현 문장이 명시되면(표현 CSV 조인) 그걸 배열 문장으로 — 리스닝 대사와 달라 스포일 없음
+  if (ex.expression.arrange && ex.expression.arrange.en) src = { en:ex.expression.arrange.en, ko:ex.expression.arrange.ko||'' };
+  else if (exprEn.includes('~') && trigA) src = { en:trigA.text, ko:trigA.kr||'' };
   const expr = { name:exprEn, note:exprKr, arrange:{ en:src.en, ko:src.ko } };
 
   // '내가 배운 표현' 박스는 트리거 대사(2번째 A) 바로 다음 문제에만 붙인다.
@@ -259,11 +261,12 @@ function buildExample(ex){
       learned: (c.correct && isTrigger && trigA) ? { name:exprEn, note:exprKr, aLine:trigA.text, fixed } : undefined,
     })) };
   });
-  return { id:ex.id, level:ex.level, vocab:{ word:ex.vocab.word, ko:ex.vocab.meaning }, expr, dialogue:{ title:ex.title, turns } };
+  return { id:ex.id, level:ex.level, noArrange:!!ex.noArrange, vocab:{ word:ex.vocab.word, ko:ex.vocab.meaning }, expr, dialogue:{ title:ex.title, turns } };
 }
 const DATA_GROUPS = [
-  { label:'초급', gid:'a', file:'./listening-pingpong.data.json' },
-  { label:'중급', gid:'b', file:'./listening-pingpong.data.b.json' },
+  { label:'A1', gid:'a1', file:'./listening-pingpong.data.rv-a1.json' },
+  { label:'A2', gid:'a2', file:'./listening-pingpong.data.rv-a2.json' },
+  { label:'B1', gid:'b1', file:'./listening-pingpong.data.rv-b1.json' },
 ];
 async function loadData(){
   GROUPS=[];
@@ -395,7 +398,7 @@ function renderHome(){
   });
 }
 
-function startExample(ex){ curExample=ex; showArrange(); }
+function startExample(ex){ curExample=ex; if(ex.noArrange) startDialogue(ex.dialogue); else showArrange(); }
 
 // 정답 배열 완성 시 짧은 상승 아르페지오(외부 파일 없이 WebAudio로 합성)
 function successChime(){
