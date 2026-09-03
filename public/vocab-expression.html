@@ -227,6 +227,20 @@
   .pf-ok { display:flex; align-items:center; gap:6px; font-size:16px; font-weight:800; color:var(--green); }
   .pf-mean.big { font-size:16px; color:#33465c; font-weight:600; margin-top:2px; }
   .start-btn.ghost { background:#eef2f8; color:#5b7c93; box-shadow:none; }
+  .sit-modes { display:flex; gap:9px; }
+  .sit-modes .start-btn { flex:1; font-size:14.5px; padding:13px 8px; }
+  /* 개발 확인용 — 학습 UI 가 아니라는 게 한눈에 보여야 한다 */
+  .devbox { margin-top:20px; padding:11px 12px; border:1px dashed #c3cede; border-radius:10px;
+    background:#f7f9fc; display:flex; flex-direction:column; gap:5px;
+    font-family:ui-monospace,"SF Mono",Menlo,monospace; }
+  .dev-h { font-size:10.5px; font-weight:700; letter-spacing:.08em; color:#9aa8bc; }
+  .dev-row { display:flex; flex-wrap:wrap; align-items:baseline; gap:7px; font-size:11.5px; line-height:1.6; }
+  .dev-tag { flex:none; font-size:9.5px; font-weight:700; color:#8996a6; background:#e7ecf5;
+    border-radius:4px; padding:1px 5px; }
+  .dev-tag.ok { color:#22794a; background:#e3fbec; }
+  .dev-en { color:#4a5a6d; }
+  .dev-fr { color:#9aa8bc; }
+  .sit-hint.answer { background:#e3fbec; color:#22794a; }
   .sit-card { margin-top:12px; }
   .sit-input { width:100%; margin-top:9px; resize:none; overflow:hidden; background:#fff; min-height:44px;
     border:1.5px solid #cdddf3; border-radius:10px; padding:9px 11px; font:inherit; font-size:17px;
@@ -466,7 +480,8 @@ let DATA=null, curVer='a', sessionItems=[], itemIdx=0, learned=[];
 // [5] 구간 정리 — 세션이 길어 끝에만 두면 볼 수 없으므로 몇 문항마다 끼워 넣는다
 const REVIEW_EVERY=3;
 let made=[];   // [5]에서 유저가 골라 만든 문장
-let sitOnly=false;   // 상황만 모아 푸는 별도 진입점
+let sitOnly=false;     // 상황만 모아 푸는 별도 진입점
+let sitTypeMode=false; // 상황 전용 모드에서 고른 방식(true = 직접 입력)
 // [2]·[3]에서 이미 만든 문장 — [5]는 아직 만들지 않은 문장을 먼저 후보로 낸다
 const builtSet=new Set();
 function isReviewAfter(i){ return (i+1)%REVIEW_EVERY===0 && i<sessionItems.length-1; }
@@ -530,10 +545,14 @@ function renderHome(){
     sc.innerHTML=`
       <div class="start-flow">상황 학습만 <span class="ar">→</span> 모아 풀기</div>
       <div class="start-count">상황 <b>${sits.length}</b>개</div>
-      <div class="start-note">A의 말에 맞는 답을 골라요. 어휘·배열 단계를 건너뜁니다</div>
-      <button class="start-btn ghost" id="sitBtn">상황만 풀기 ▶</button>`;
+      <div class="start-note">어휘·배열 단계를 건너뛰고 상황만 이어서 풀어요</div>
+      <div class="sit-modes">
+        <button class="start-btn ghost" id="sitPickBtn">골라 답하기 ▶</button>
+        <button class="start-btn ghost" id="sitTypeBtn">직접 입력 ▶</button>
+      </div>`;
     list.appendChild(sc);
-    el('sitBtn').onclick=()=>startSituationOnly();
+    el('sitPickBtn').onclick=()=>startSituationOnly(false);
+    el('sitTypeBtn').onclick=()=>startSituationOnly(true);
   }
 
   const optHead=document.createElement('div'); optHead.className='opt-head'; optHead.textContent='실험 옵션';
@@ -545,8 +564,8 @@ function renderHome(){
 
 // ── 세션 ────────────────────────────────────────────────────────────────────
 // 상황만 연속으로 — [5] 화면을 바로 확인하기 위한 진입점
-function startSituationOnly(){
-  sitOnly=true;
+function startSituationOnly(typing){
+  sitOnly=true; sitTypeMode=!!typing;
   sessionItems=DATA.items.filter(i=>i.situation);
   itemIdx=0; learned=[]; made=[]; builtSet.clear();
   buildStepIndex();
@@ -1119,7 +1138,7 @@ function applyPayoffHtml(item, rows){
 function renderSituation(target, pool){
   setProgress(sitOnly ? 0 : 4);
   const sit=target.situation;
-  const typing=OPTS.sitType;      // true = 직접 입력 비교 버전
+  const typing = sitOnly ? sitTypeMode : OPTS.sitType;   // true = 직접 입력
   let done=false, picked=null, revealedList=false;
 
   // 오답 — 같은 구간(또는 인접 문항)의 다른 표현 문장. 문법은 맞고 상황엔 안 맞는다.
@@ -1141,6 +1160,7 @@ function renderSituation(target, pool){
         <div id="sitAnswer"></div>
         <div class="sit-fb hidden" id="sitFb"></div>
         <div id="sitDone"></div>
+        ${sitOnly ? devPanel(target, choices, typing) : ''}
       </div>
     </div>
     <div class="stage-bottom" id="bottom"></div>`;
@@ -1210,12 +1230,29 @@ function renderSituation(target, pool){
       el('okBtn').disabled = !inp.value.trim() || done;
     });
     el('skipBtn').onclick=goNext;
+
+    // 아무 단서 없이 쓰게 하면 막히고, 다 주면 인출이 아니다 — 지원을 한 칸씩만 연다.
+    // [1] 어휘의 `힌트 보기 → 정답 보기` 규약을 그대로 쓴다.
+    const STEPS=[
+      { lbl:'표현 좁히기', html:()=>`<div class="sit-hint"><b>배운 표현</b>
+          ${[...new Set(choices.map(c=>(c.frame||[]).join(' … ')))].map(f=>`<span class="rv-chip fr">${escapeHtml(f)}</span>`).join('')}</div>` },
+      { lbl:'첫 단어 보기', html:()=>`<div class="sit-hint"><b>이 상황의 표현</b>
+          <span class="rv-chip fr">${escapeHtml((target.frame||[]).join(' … '))}</span></div>` },
+      { lbl:'정답 보기', html:()=>`<div class="sit-hint"><b>첫 단어</b>
+          <span class="rv-chip fr">${escapeHtml(target.en.split(/\s+/)[0])} …</span></div>` },
+      { lbl:'', html:()=>`<div class="sit-hint answer"><b>정답</b>
+          <span class="rv-chip fr">${escapeHtml(target.en)}</span></div>` },
+    ];
+    let step=0;
     el('hintBtn2').onclick=()=>{
-      revealedList=!revealedList;
-      el('hintLbl2').textContent=revealedList?'표현 숨기기':'배운 표현 보기';
-      fb.classList.toggle('hidden', !revealedList);
-      fb.innerHTML=revealedList?`<div class="sit-hint"><b>배운 표현</b>
-        ${[...new Set(choices.map(c=>(c.frame||[]).join(' … ')))].map(f=>`<span class="rv-chip fr">${escapeHtml(f)}</span>`).join('')}</div>`:'';
+      if(step>=STEPS.length) return;
+      fb.classList.remove('hidden');
+      fb.innerHTML=STEPS[step].html();
+      const next=STEPS[step].lbl;
+      step++;
+      if(next) el('hintLbl2').textContent=next;
+      else { el('hintBtn2').disabled=true; el('hintLbl2').textContent='정답 공개됨'; }
+      inp.focus();
     };
     el('okBtn').onclick=()=>{
       const txt=inp.value.trim();
@@ -1245,14 +1282,17 @@ function renderSituation(target, pool){
     }
     const pf=(target.form||'').trim(), pm=(target.meaning||'').trim();
     const exact = norm(said)===norm(target.en);
+    // `의미`는 **내가 말한 문장**의 뜻이다. 직접 입력에서 모범 답안과 다르면
+    // 모범 답안의 한국어를 내 문장의 뜻으로 붙일 수 없다 — 따로 떼어 보여준다.
     el('sitDone').innerHTML=`<div class="payoff">
         <div class="pf-ok"><span class="ic">✓</span>좋아요!</div>
-        <div class="pf-label">의미</div>
-        <div class="pf-mean big">${escapeHtml(target.kr)}</div>
+        ${exact?`<div class="pf-label">의미</div>
+        <div class="pf-mean big">${escapeHtml(target.kr)}</div>`:''}
         ${pf?`<div class="pf-sub"><span class="ic">ⓘ</span>쓴 표현</div>
         <div class="pf-form">${escapeHtml(pf).replace(/_{2,}|~/g,'<span class="slot"></span>')}</div>
         ${pm?`<div class="pf-mean">${escapeHtml(pm)}</div>`:''}`:''}
-        ${exact?'':`<div class="pf-cmp"><div class="pf-cmp-en">${escapeHtml(target.en)}</div></div>`}
+        ${exact?'':`<div class="pf-sub"><span class="ic">ⓘ</span>이 상황에선 이렇게 말해요</div>
+        <div class="pf-cmp"><div class="pf-cmp-en">${escapeHtml(target.en)}</div><div class="pf-cmp-kr">${escapeHtml(target.kr)}</div></div>`}
       </div>`;
     el('bottom').innerHTML=`<button class="btn-next" id="goBtn">계속하기</button>`;
     el('goBtn').onclick=goNext;
@@ -1267,6 +1307,28 @@ function renderSituation(target, pool){
   }
 
   typing ? renderType() : renderPick();
+}
+
+// 개발 확인용 — 이 상황이 어떤 표현으로 만들어졌고 오답이 어디서 왔는지.
+// 학습 UI 가 아니므로 점선·모노 표기로 확실히 구분한다.
+function devPanel(target, choices, typing){
+  const wrongs=choices.filter(c=>!c.ok);
+  const row=(c,label)=>`<div class="dev-row"><span class="dev-tag ${c.ok?'ok':''}">${label}</span>
+      <span class="dev-en">${escapeHtml(c.en)}</span>
+      <span class="dev-fr">${escapeHtml((c.frame||[]).join(' … ') || '—')}</span></div>`;
+  return `<div class="devbox">
+      <div class="dev-h">DEV · 이 상황의 근거</div>
+      <div class="dev-row"><span class="dev-tag ok">정답</span>
+        <span class="dev-en">${escapeHtml(target.en)}</span>
+        <span class="dev-fr">${escapeHtml((target.frame||[]).join(' … '))}</span></div>
+      <div class="dev-row"><span class="dev-tag">표현</span>
+        <span class="dev-en">${escapeHtml(target.form||'—')}</span>
+        <span class="dev-fr">${escapeHtml(target.meaning||'')}</span></div>
+      ${typing ? '' : wrongs.map(c=>row(c,'오답')).join('')}
+      <div class="dev-row"><span class="dev-tag">A 대사</span>
+        <span class="dev-en">${escapeHtml(target.situation.a_en)}</span>
+        <span class="dev-fr">손저작 (situations.json)</span></div>
+    </div>`;
 }
 
 // 상황 전용 모드 — 오답 선택지는 인접 문항에서 뽑는다
