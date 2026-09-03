@@ -52,7 +52,8 @@
       ],
       "situation": {
         "a_en": "I'm so sleepy... five more minutes.",
-        "a_kr": "너무 졸려... 5분만 더."
+        "a_kr": "너무 졸려... 5분만 더.",
+        "hint_en": "Push them to start the day."
       },
       "traps": [
         "off"
@@ -137,7 +138,8 @@
       ],
       "situation": {
         "a_en": "Can you come on the trip with us?",
-        "a_kr": "우리랑 여행 같이 갈 수 있어?"
+        "a_kr": "우리랑 여행 같이 갈 수 있어?",
+        "hint_en": "Say it is not your decision alone."
       },
       "traps": [
         "of"
@@ -251,7 +253,8 @@
       ],
       "situation": {
         "a_en": "Mom, I'm ready to go outside!",
-        "a_kr": "엄마, 나 나갈 준비 됐어!"
+        "a_kr": "엄마, 나 나갈 준비 됐어!",
+        "hint_en": "Point out they are not dressed."
       },
       "traps": [
         "up"
@@ -363,7 +366,8 @@
       ],
       "situation": {
         "a_en": "See you at the meeting tomorrow.",
-        "a_kr": "내일 회의에서 봐."
+        "a_kr": "내일 회의에서 봐.",
+        "hint_en": "Remind them about the time."
       },
       "traps": [
         "shouldn't"
@@ -510,7 +514,8 @@
       ],
       "situation": {
         "a_en": "Ugh, my laptop froze again.",
-        "a_kr": "아, 노트북이 또 멈췄어."
+        "a_kr": "아, 노트북이 또 멈췄어.",
+        "hint_en": "Offer to take care of it."
       },
       "traps": [
         "he"
@@ -655,7 +660,8 @@
       ],
       "situation": {
         "a_en": "I don't want to go to the party alone.",
-        "a_kr": "파티에 혼자 가고 싶지 않아."
+        "a_kr": "파티에 혼자 가고 싶지 않아.",
+        "hint_en": "Suggest a way out."
       },
       "traps": [
         "wasn't",
@@ -757,7 +763,8 @@
       ],
       "situation": {
         "a_en": "Wow, the marina looks different.",
-        "a_kr": "와, 항구가 달라 보이네."
+        "a_kr": "와, 항구가 달라 보이네.",
+        "hint_en": "Explain what changed."
       },
       "traps": [
         "about"
@@ -880,7 +887,8 @@
       ],
       "situation": {
         "a_en": "I have nothing to do tonight.",
-        "a_kr": "오늘 밤에 할 일이 없네."
+        "a_kr": "오늘 밤에 할 일이 없네.",
+        "hint_en": "Ask them to your place."
       },
       "traps": [
         "back"
@@ -980,7 +988,8 @@
       ],
       "situation": {
         "a_en": "It's getting dark out here.",
-        "a_kr": "여기 점점 어두워지는데."
+        "a_kr": "여기 점점 어두워지는데.",
+        "hint_en": "Propose leaving."
       },
       "traps": [
         "down"
@@ -1093,7 +1102,8 @@
       ],
       "situation": {
         "a_en": "When do we have to hand this in?",
-        "a_kr": "이거 언제까지 내야 해?"
+        "a_kr": "이거 언제까지 내야 해?",
+        "hint_en": "Give them the deadline."
       },
       "traps": [
         "by"
@@ -1286,7 +1296,8 @@
       ],
       "situation": {
         "a_en": "It's so warm outside today.",
-        "a_kr": "오늘 밖이 정말 따뜻하네."
+        "a_kr": "오늘 밖이 정말 따뜻하네.",
+        "hint_en": "React to the weather."
       },
       "traps": [
         "back"
@@ -1379,7 +1390,8 @@
       ],
       "situation": {
         "a_en": "It's boiling in here.",
-        "a_kr": "여기 너무 더워."
+        "a_kr": "여기 너무 더워.",
+        "hint_en": "Tell them what to do about it."
       },
       "traps": [
         "up"
@@ -1487,7 +1499,8 @@
       ],
       "situation": {
         "a_en": "I'd like something cold to drink.",
-        "a_kr": "뭔가 차가운 걸 마시고 싶어요."
+        "a_kr": "뭔가 차가운 걸 마시고 싶어요.",
+        "hint_en": "Suggest a drink."
       },
       "traps": [
         "with"
@@ -1588,7 +1601,8 @@
       ],
       "situation": {
         "a_en": "What if nobody comes to my show?",
-        "a_kr": "내 공연에 아무도 안 오면 어떡하지?"
+        "a_kr": "내 공연에 아무도 안 오면 어떡하지?",
+        "hint_en": "Calm them down."
       },
       "traps": [
         "lot"
@@ -1688,7 +1702,8 @@
       ],
       "situation": {
         "a_en": "I finished the test early!",
-        "a_kr": "시험 일찍 다 풀었어요!"
+        "a_kr": "시험 일찍 다 풀었어요!",
+        "hint_en": "Give one last instruction."
       },
       "traps": [
         "of"
@@ -1789,7 +1804,8 @@
       ],
       "situation": {
         "a_en": "How was the show last night?",
-        "a_kr": "어젯밤 공연 어땠어?"
+        "a_kr": "어젯밤 공연 어땠어?",
+        "hint_en": "Admit you were late."
       },
       "traps": [
         "into"
@@ -1901,7 +1917,8 @@
       ],
       "situation": {
         "a_en": "Both of these look good on me.",
-        "a_kr": "이 둘 다 나한테 잘 맞는 것 같아."
+        "a_kr": "이 둘 다 나한테 잘 맞는 것 같아.",
+        "hint_en": "Ask them to choose."
       },
       "traps": [
         "off"
@@ -1986,7 +2003,8 @@
       ],
       "situation": {
         "a_en": "Okay, I've finished my part.",
-        "a_kr": "네, 제 몫은 끝냈어요."
+        "a_kr": "네, 제 몫은 끝냈어요.",
+        "hint_en": "Politely ask for more work."
       },
       "traps": [
         "did",
@@ -2087,7 +2105,8 @@
       ],
       "situation": {
         "a_en": "I don't think I can pass this time.",
-        "a_kr": "이번엔 못 붙을 것 같아."
+        "a_kr": "이번엔 못 붙을 것 같아.",
+        "hint_en": "Encourage them."
       },
       "traps": [
         "on"
@@ -2200,7 +2219,8 @@
       ],
       "situation": {
         "a_en": "I think we've covered enough here.",
-        "a_kr": "이 부분은 충분히 다룬 것 같아요."
+        "a_kr": "이 부분은 충분히 다룬 것 같아요.",
+        "hint_en": "Propose moving forward."
       },
       "traps": [
         "down"
@@ -2304,7 +2324,8 @@
       ],
       "situation": {
         "a_en": "Where should we begin?",
-        "a_kr": "어디서부터 시작할까요?"
+        "a_kr": "어디서부터 시작할까요?",
+        "hint_en": "Propose a starting point."
       },
       "traps": [
         "at"
@@ -2412,7 +2433,8 @@
       ],
       "situation": {
         "a_en": "Hello, this is my first time here.",
-        "a_kr": "안녕하세요, 여기 처음 왔어요."
+        "a_kr": "안녕하세요, 여기 처음 왔어요.",
+        "hint_en": "Greet a visitor."
       },
       "traps": [
         "into"
@@ -2516,7 +2538,8 @@
       ],
       "situation": {
         "a_en": "Do you want another cup of coffee?",
-        "a_kr": "커피 한 잔 더 할래?"
+        "a_kr": "커피 한 잔 더 할래?",
+        "hint_en": "Explain why you cannot."
       },
       "traps": [
         "from"
@@ -2621,7 +2644,8 @@
       ],
       "situation": {
         "a_en": "Do we have enough to start the report?",
-        "a_kr": "보고서 시작할 만큼 자료가 있어요?"
+        "a_kr": "보고서 시작할 만큼 자료가 있어요?",
+        "hint_en": "Reassure them about the amount."
       },
       "traps": [
         "by"
@@ -2767,7 +2791,8 @@
       ],
       "situation": {
         "a_en": "Careful, watch your step there.",
-        "a_kr": "조심해, 거기 발밑 봐."
+        "a_kr": "조심해, 거기 발밑 봐.",
+        "hint_en": "Ask about something broken."
       },
       "traps": [
         "into"
@@ -2867,7 +2892,8 @@
       ],
       "situation": {
         "a_en": "Just one more episode, please!",
-        "a_kr": "딱 한 편만 더 볼게요!"
+        "a_kr": "딱 한 편만 더 볼게요!",
+        "hint_en": "Refuse and send them off."
       },
       "traps": [
         "from"
@@ -2967,7 +2993,8 @@
       ],
       "situation": {
         "a_en": "I'm heading out to the festival now.",
-        "a_kr": "나 지금 축제 가는 길이야."
+        "a_kr": "나 지금 축제 가는 길이야.",
+        "hint_en": "Wish them a good time."
       },
       "traps": [
         "was"
@@ -3052,7 +3079,8 @@
       ],
       "situation": {
         "a_en": "How did your shop get so popular?",
-        "a_kr": "가게가 어떻게 이렇게 유명해졌어요?"
+        "a_kr": "가게가 어떻게 이렇게 유명해졌어요?",
+        "hint_en": "Credit something for it."
       },
       "traps": [
         "of"
@@ -3164,7 +3192,8 @@
       ],
       "situation": {
         "a_en": "Did you two watch the same show?",
-        "a_kr": "둘이 같은 공연 봤어?"
+        "a_kr": "둘이 같은 공연 봤어?",
+        "hint_en": "Explain you split up."
       },
       "traps": [
         "from"
@@ -3318,7 +3347,8 @@
       ],
       "situation": {
         "a_en": "You look like you remembered something.",
-        "a_kr": "뭔가 생각난 표정이네."
+        "a_kr": "뭔가 생각난 표정이네.",
+        "hint_en": "Say what you missed doing."
       },
       "traps": [
         "along"
