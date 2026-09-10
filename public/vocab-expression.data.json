@@ -55,6 +55,10 @@
         "a_kr": "너무 졸려... 5분만 더.",
         "hint_en": "Push them to start the day."
       },
+      "ask": {
+        "en": "I'm still in bed... five more minutes.",
+        "kr": "아직 침대야... 5분만 더."
+      },
       "traps": [
         "off"
       ],
@@ -140,6 +144,10 @@
         "a_en": "Can you come on the trip with us?",
         "a_kr": "우리랑 여행 같이 갈 수 있어?",
         "hint_en": "Say it is not your decision alone."
+      },
+      "ask": {
+        "en": "Can you come on the school trip?",
+        "kr": "수학여행 갈 수 있어?"
       },
       "traps": [
         "of"
@@ -256,6 +264,10 @@
         "a_kr": "엄마, 나 나갈 준비 됐어!",
         "hint_en": "Point out they are not dressed."
       },
+      "ask": {
+        "en": "Mom, I'm ready to go outside!",
+        "kr": "엄마, 나 나갈 준비 됐어!"
+      },
       "traps": [
         "up"
       ],
@@ -368,6 +380,10 @@
         "a_en": "See you at the meeting tomorrow.",
         "a_kr": "내일 회의에서 봐.",
         "hint_en": "Remind them about the time."
+      },
+      "ask": {
+        "en": "See you at seven tomorrow.",
+        "kr": "내일 7시에 봐."
       },
       "traps": [
         "shouldn't"
@@ -517,6 +533,10 @@
         "a_kr": "아, 노트북이 또 멈췄어.",
         "hint_en": "Offer to take care of it."
       },
+      "ask": {
+        "en": "My laptop keeps freezing.",
+        "kr": "노트북이 계속 멈춰."
+      },
       "traps": [
         "he"
       ],
@@ -663,6 +683,10 @@
         "a_kr": "파티에 혼자 가고 싶지 않아.",
         "hint_en": "Suggest a way out."
       },
+      "ask": {
+        "en": "I don't want to go to the party alone.",
+        "kr": "파티에 혼자 가고 싶지 않아."
+      },
       "traps": [
         "wasn't",
         "we"
@@ -765,6 +789,10 @@
         "a_en": "Wow, the marina looks different.",
         "a_kr": "와, 항구가 달라 보이네.",
         "hint_en": "Explain what changed."
+      },
+      "ask": {
+        "en": "Which boats are new?",
+        "kr": "어느 배가 새 거야?"
       },
       "traps": [
         "about"
@@ -890,6 +918,10 @@
         "a_kr": "오늘 밤에 할 일이 없네.",
         "hint_en": "Ask them to your place."
       },
+      "ask": {
+        "en": "I have nothing to do tonight.",
+        "kr": "오늘 밤에 할 일이 없어."
+      },
       "traps": [
         "back"
       ],
@@ -990,6 +1022,10 @@
         "a_en": "It's getting dark out here.",
         "a_kr": "여기 점점 어두워지는데.",
         "hint_en": "Propose leaving."
+      },
+      "ask": {
+        "en": "There's nothing to do out here.",
+        "kr": "여기선 할 게 없네."
       },
       "traps": [
         "down"
@@ -1104,6 +1140,10 @@
         "a_en": "When do we have to hand this in?",
         "a_kr": "이거 언제까지 내야 해?",
         "hint_en": "Give them the deadline."
+      },
+      "ask": {
+        "en": "When do we have to hand it in?",
+        "kr": "언제까지 내야 해?"
       },
       "traps": [
         "by"
@@ -1299,6 +1339,10 @@
         "a_kr": "오늘 밖이 정말 따뜻하네.",
         "hint_en": "React to the weather."
       },
+      "ask": {
+        "en": "It's so warm today, isn't it?",
+        "kr": "오늘 너무 따뜻하지 않아?"
+      },
       "traps": [
         "back"
       ],
@@ -1392,6 +1436,10 @@
         "a_en": "It's boiling in here.",
         "a_kr": "여기 너무 더워.",
         "hint_en": "Tell them what to do about it."
+      },
+      "ask": {
+        "en": "It's really hot in here.",
+        "kr": "여기 진짜 덥다."
       },
       "traps": [
         "up"
@@ -1502,6 +1550,10 @@
         "a_kr": "뭔가 차가운 걸 마시고 싶어요.",
         "hint_en": "Suggest a drink."
       },
+      "ask": {
+        "en": "I'm so thirsty.",
+        "kr": "너무 목말라."
+      },
       "traps": [
         "with"
       ],
@@ -1604,6 +1656,10 @@
         "a_kr": "내 공연에 아무도 안 오면 어떡하지?",
         "hint_en": "Calm them down."
       },
+      "ask": {
+        "en": "What if I fail the test?",
+        "kr": "시험 떨어지면 어떡하지?"
+      },
       "traps": [
         "lot"
       ],
@@ -1704,6 +1760,10 @@
         "a_en": "I finished the test early!",
         "a_kr": "시험 일찍 다 풀었어요!",
         "hint_en": "Give one last instruction."
+      },
+      "ask": {
+        "en": "I finished the test early.",
+        "kr": "시험 일찍 다 풀었어."
       },
       "traps": [
         "of"
@@ -1806,6 +1866,10 @@
         "a_en": "How was the show last night?",
         "a_kr": "어젯밤 공연 어땠어?",
         "hint_en": "Admit you were late."
+      },
+      "ask": {
+        "en": "How was the concert?",
+        "kr": "공연 어땠어?"
       },
       "traps": [
         "into"
@@ -1920,6 +1984,10 @@
         "a_kr": "이 둘 다 나한테 잘 맞는 것 같아.",
         "hint_en": "Ask them to choose."
       },
+      "ask": {
+        "en": "Both of them look nice.",
+        "kr": "둘 다 괜찮아 보여."
+      },
       "traps": [
         "off"
       ],
@@ -2005,6 +2073,10 @@
         "a_en": "Okay, I've finished my part.",
         "a_kr": "네, 제 몫은 끝냈어요.",
         "hint_en": "Politely ask for more work."
+      },
+      "ask": {
+        "en": "I'm done with my part.",
+        "kr": "내 부분은 끝났어."
       },
       "traps": [
         "did",
@@ -2107,6 +2179,10 @@
         "a_en": "I don't think I can pass this time.",
         "a_kr": "이번엔 못 붙을 것 같아.",
         "hint_en": "Encourage them."
+      },
+      "ask": {
+        "en": "I don't think we can win.",
+        "kr": "우리가 이길 것 같지 않아."
       },
       "traps": [
         "on"
@@ -2222,6 +2298,10 @@
         "a_kr": "이 부분은 충분히 다룬 것 같아요.",
         "hint_en": "Propose moving forward."
       },
+      "ask": {
+        "en": "I think we've covered this.",
+        "kr": "이건 다 다룬 것 같아요."
+      },
       "traps": [
         "down"
       ],
@@ -2326,6 +2406,10 @@
         "a_en": "Where should we begin?",
         "a_kr": "어디서부터 시작할까요?",
         "hint_en": "Propose a starting point."
+      },
+      "ask": {
+        "en": "How should we begin?",
+        "kr": "어떻게 시작할까요?"
       },
       "traps": [
         "at"
@@ -2436,6 +2520,10 @@
         "a_kr": "안녕하세요, 여기 처음 왔어요.",
         "hint_en": "Greet a visitor."
       },
+      "ask": {
+        "en": "Hello, I just landed in Beijing.",
+        "kr": "안녕하세요, 방금 베이징에 도착했어요."
+      },
       "traps": [
         "into"
       ],
@@ -2540,6 +2628,10 @@
         "a_en": "Do you want another cup of coffee?",
         "a_kr": "커피 한 잔 더 할래?",
         "hint_en": "Explain why you cannot."
+      },
+      "ask": {
+        "en": "Why are you looking at the clock?",
+        "kr": "왜 시계를 보고 있어?"
       },
       "traps": [
         "from"
@@ -2646,6 +2738,10 @@
         "a_en": "Do we have enough to start the report?",
         "a_kr": "보고서 시작할 만큼 자료가 있어요?",
         "hint_en": "Reassure them about the amount."
+      },
+      "ask": {
+        "en": "Do we have enough to start?",
+        "kr": "시작할 만큼 자료가 있어요?"
       },
       "traps": [
         "by"
@@ -2794,6 +2890,10 @@
         "a_kr": "조심해, 거기 발밑 봐.",
         "hint_en": "Ask about something broken."
       },
+      "ask": {
+        "en": "The sign is completely bent.",
+        "kr": "저 표지판이 완전히 휘었어."
+      },
       "traps": [
         "into"
       ],
@@ -2894,6 +2994,10 @@
         "a_en": "Just one more episode, please!",
         "a_kr": "딱 한 편만 더 볼게요!",
         "hint_en": "Refuse and send them off."
+      },
+      "ask": {
+        "en": "Can I watch one more show?",
+        "kr": "한 편만 더 봐도 돼요?"
       },
       "traps": [
         "from"
@@ -2996,6 +3100,10 @@
         "a_kr": "나 지금 축제 가는 길이야.",
         "hint_en": "Wish them a good time."
       },
+      "ask": {
+        "en": "I'm heading to the festival now!",
+        "kr": "지금 축제에 가!"
+      },
       "traps": [
         "was"
       ],
@@ -3081,6 +3189,10 @@
         "a_en": "How did your shop get so popular?",
         "a_kr": "가게가 어떻게 이렇게 유명해졌어요?",
         "hint_en": "Credit something for it."
+      },
+      "ask": {
+        "en": "How did your shop get so popular?",
+        "kr": "가게가 어떻게 이렇게 유명해졌어요?"
       },
       "traps": [
         "of"
@@ -3194,6 +3306,10 @@
         "a_en": "Did you two watch the same show?",
         "a_kr": "둘이 같은 공연 봤어?",
         "hint_en": "Explain you split up."
+      },
+      "ask": {
+        "en": "How many shows did you see?",
+        "kr": "공연 몇 개 봤어?"
       },
       "traps": [
         "from"
@@ -3350,6 +3466,10 @@
         "a_kr": "뭔가 생각난 표정이네.",
         "hint_en": "Say what you missed doing."
       },
+      "ask": {
+        "en": "Why do you look so panicked?",
+        "kr": "왜 그렇게 당황한 표정이야?"
+      },
       "traps": [
         "along"
       ],
@@ -3475,6 +3595,10 @@
         "What's going on"
       ],
       "situation": null,
+      "ask": {
+        "en": "The news is all about London today.",
+        "kr": "오늘 뉴스가 온통 런던 얘기야."
+      },
       "traps": [
         "through"
       ],
@@ -3558,6 +3682,10 @@
         "get out of"
       ],
       "situation": null,
+      "ask": {
+        "en": "Excuse me, that's my seat.",
+        "kr": "죄송한데 거기 제 자리예요."
+      },
       "traps": [
         "on",
         "with"
@@ -3669,6 +3797,10 @@
         "plenty of"
       ],
       "situation": null,
+      "ask": {
+        "en": "Where should I put this plant?",
+        "kr": "이 화분 어디에 둘까?"
+      },
       "traps": [
         "by"
       ],
@@ -3779,6 +3911,10 @@
         "heard of"
       ],
       "situation": null,
+      "ask": {
+        "en": "I'm looking for old records.",
+        "kr": "옛날 음반을 찾고 있어."
+      },
       "traps": [
         "to"
       ],
@@ -3889,6 +4025,10 @@
         "in charge of"
       ],
       "situation": null,
+      "ask": {
+        "en": "Who should I ask about the timetable?",
+        "kr": "일정은 누구에게 물어야 하죠?"
+      },
       "traps": [
         "by",
         "with"
@@ -3999,6 +4139,10 @@
         "Pay attention to"
       ],
       "situation": null,
+      "ask": {
+        "en": "Sorry, what did you say?",
+        "kr": "죄송해요, 뭐라고 하셨죠?"
+      },
       "traps": [
         "from"
       ],
@@ -4104,6 +4248,10 @@
         "What's wrong with"
       ],
       "situation": null,
+      "ask": {
+        "en": "I can barely see anything.",
+        "kr": "거의 안 보여."
+      },
       "traps": [
         "from"
       ],
@@ -4186,6 +4334,10 @@
         "in front of"
       ],
       "situation": null,
+      "ask": {
+        "en": "Where's the mustard?",
+        "kr": "머스터드 어디 있어?"
+      },
       "traps": [
         "at",
         "into"
@@ -4296,6 +4448,10 @@
         "turned out"
       ],
       "situation": null,
+      "ask": {
+        "en": "How did the curry come out?",
+        "kr": "카레 어떻게 됐어?"
+      },
       "traps": [
         "down"
       ],
@@ -4405,6 +4561,10 @@
         "take a break"
       ],
       "situation": null,
+      "ask": {
+        "en": "Do I have to work straight through?",
+        "kr": "쉬지 않고 계속 일해야 하나요?"
+      },
       "traps": [
         "plenty"
       ],
@@ -4491,6 +4651,10 @@
         "a couple of"
       ],
       "situation": null,
+      "ask": {
+        "en": "What's left on the shopping list?",
+        "kr": "장바구니에 뭐가 남았어?"
+      },
       "traps": [
         "in"
       ],
@@ -4604,6 +4768,10 @@
         "up"
       ],
       "situation": null,
+      "ask": {
+        "en": "I spilled water on the floor.",
+        "kr": "바닥에 물을 쏟았어."
+      },
       "traps": [
         "over"
       ],
@@ -4722,6 +4890,10 @@
         "one more"
       ],
       "situation": null,
+      "ask": {
+        "en": "It's time to put the crayons away.",
+        "kr": "이제 크레용 치울 시간이야."
+      },
       "traps": [
         "good"
       ],
@@ -4831,6 +5003,10 @@
         "along with"
       ],
       "situation": null,
+      "ask": {
+        "en": "Is the form all you need?",
+        "kr": "신청서만 있으면 되나요?"
+      },
       "traps": [
         "over",
         "by"
@@ -4941,6 +5117,10 @@
         "fill out"
       ],
       "situation": null,
+      "ask": {
+        "en": "What do I have to do to enter?",
+        "kr": "참가하려면 뭘 해야 하죠?"
+      },
       "traps": [
         "over"
       ],
@@ -5047,6 +5227,10 @@
         "aren't I"
       ],
       "situation": null,
+      "ask": {
+        "en": "How do you know so much about me?",
+        "kr": "저에 대해 어떻게 그렇게 잘 아세요?"
+      },
       "traps": [
         "don't",
         "it"
@@ -5176,6 +5360,10 @@
         "rely on"
       ],
       "situation": null,
+      "ask": {
+        "en": "The buses are always late here.",
+        "kr": "여기 버스는 늘 늦어."
+      },
       "traps": [
         "up"
       ],
@@ -5286,6 +5474,10 @@
         "as"
       ],
       "situation": null,
+      "ask": {
+        "en": "How do you know that boy?",
+        "kr": "그 남자애를 어떻게 알아?"
+      },
       "traps": [
         "mind"
       ],
@@ -5500,6 +5692,10 @@
         "Ever since"
       ],
       "situation": null,
+      "ask": {
+        "en": "Why won't you go swimming?",
+        "kr": "왜 수영을 안 하려고 해?"
+      },
       "traps": [
         "free"
       ],
@@ -5606,6 +5802,10 @@
         "No matter"
       ],
       "situation": null,
+      "ask": {
+        "en": "The repair might be expensive.",
+        "kr": "수리비가 비쌀 수도 있어요."
+      },
       "traps": [
         "bit"
       ],
@@ -5711,6 +5911,10 @@
         "up to"
       ],
       "situation": null,
+      "ask": {
+        "en": "How deep is this lake?",
+        "kr": "이 호수는 얼마나 깊어?"
+      },
       "traps": [
         "over",
         "of"
@@ -5822,6 +6026,10 @@
         "fit in"
       ],
       "situation": null,
+      "ask": {
+        "en": "Why do they all dress the same?",
+        "kr": "왜 다들 똑같이 입어?"
+      },
       "traps": [
         "by"
       ],
@@ -5912,6 +6120,10 @@
         "out"
       ],
       "situation": null,
+      "ask": {
+        "en": "How's the project going?",
+        "kr": "프로젝트 어떻게 돼가?"
+      },
       "traps": [
         "off"
       ],
@@ -6037,6 +6249,10 @@
         "the same"
       ],
       "situation": null,
+      "ask": {
+        "en": "Did they move to a new office?",
+        "kr": "새 사무실로 옮겼나요?"
+      },
       "traps": [
         "fit"
       ],
@@ -6203,6 +6419,10 @@
         "going through"
       ],
       "situation": null,
+      "ask": {
+        "en": "Why are prices rising so fast?",
+        "kr": "왜 물가가 이렇게 빨리 올라요?"
+      },
       "traps": [
         "over"
       ],
@@ -6313,6 +6533,10 @@
         "in mind"
       ],
       "situation": null,
+      "ask": {
+        "en": "Should we book the bigger venue?",
+        "kr": "더 큰 장소를 예약할까요?"
+      },
       "traps": [
         "of"
       ],
@@ -6430,6 +6654,10 @@
         "Come by"
       ],
       "situation": null,
+      "ask": {
+        "en": "When should I stop by?",
+        "kr": "언제 들르면 될까?"
+      },
       "traps": [
         "from"
       ],
@@ -6532,6 +6760,10 @@
         "A number of"
       ],
       "situation": null,
+      "ask": {
+        "en": "Why am I in the manager's office?",
+        "kr": "제가 왜 점장실에 불려 왔죠?"
+      },
       "traps": [
         "in"
       ],
@@ -6638,6 +6870,10 @@
         "more than"
       ],
       "situation": null,
+      "ask": {
+        "en": "So nursing is just a career?",
+        "kr": "그럼 간호는 그냥 직업인가요?"
+      },
       "traps": [
         "back"
       ],
@@ -6748,6 +6984,10 @@
         "get off work"
       ],
       "situation": null,
+      "ask": {
+        "en": "Why didn't you answer last night?",
+        "kr": "어젯밤에 왜 전화를 안 받았어?"
+      },
       "traps": [
         "away"
       ],
@@ -6857,6 +7097,10 @@
         "in the middle of"
       ],
       "situation": null,
+      "ask": {
+        "en": "Where are the campers now?",
+        "kr": "캠핑하는 사람들 지금 어디야?"
+      },
       "traps": [
         "to",
         "about"
@@ -6967,6 +7211,10 @@
         "such as"
       ],
       "situation": null,
+      "ask": {
+        "en": "What should the summit focus on?",
+        "kr": "정상회의는 무엇에 집중해야 할까요?"
+      },
       "traps": [
         "thanks"
       ],
@@ -7134,6 +7382,10 @@
         "a try"
       ],
       "situation": null,
+      "ask": {
+        "en": "I need a new shampoo.",
+        "kr": "새 샴푸가 필요해."
+      },
       "traps": [
         "nor"
       ],
@@ -7251,6 +7503,10 @@
         "is getting to me"
       ],
       "situation": null,
+      "ask": {
+        "en": "You look exhausted lately.",
+        "kr": "요즘 많이 지쳐 보여."
+      },
       "traps": [
         "has",
         "of"
@@ -7350,6 +7606,10 @@
         "look at"
       ],
       "situation": null,
+      "ask": {
+        "en": "Everyone agrees with the author.",
+        "kr": "다들 그 작가 말에 동의해."
+      },
       "traps": [
         "to"
       ],
@@ -7459,6 +7719,10 @@
         "can't wait to"
       ],
       "situation": null,
+      "ask": {
+        "en": "Is your son nervous about school?",
+        "kr": "아들이 학교 때문에 긴장했어?"
+      },
       "traps": [
         "isn't",
         "with"
@@ -7570,6 +7834,10 @@
         "except for"
       ],
       "situation": null,
+      "ask": {
+        "en": "How was the amusement park?",
+        "kr": "놀이공원 어땠어?"
+      },
       "traps": [
         "of"
       ],
@@ -7680,6 +7948,10 @@
         "turn on"
       ],
       "situation": null,
+      "ask": {
+        "en": "It's too quiet in the car.",
+        "kr": "차 안이 너무 조용하네."
+      },
       "traps": [
         "out"
       ],
@@ -7790,6 +8062,10 @@
         "Make a choice"
       ],
       "situation": null,
+      "ask": {
+        "en": "I can't decide what to order.",
+        "kr": "뭘 주문할지 못 정했어."
+      },
       "traps": [
         "thanks"
       ],
@@ -7892,6 +8168,10 @@
         "go through"
       ],
       "situation": null,
+      "ask": {
+        "en": "Can we send it to the client?",
+        "kr": "고객에게 보내도 될까요?"
+      },
       "traps": [
         "back"
       ],
@@ -8001,6 +8281,10 @@
         "come in"
       ],
       "situation": null,
+      "ask": {
+        "en": "What time is the shoot tomorrow?",
+        "kr": "내일 촬영 몇 시야?"
+      },
       "traps": [
         "to"
       ],
@@ -8112,6 +8396,10 @@
         "shall we"
       ],
       "situation": null,
+      "ask": {
+        "en": "I have no idea where we are.",
+        "kr": "여기가 어딘지 전혀 모르겠어."
+      },
       "traps": [
         "they"
       ],
@@ -8279,6 +8567,10 @@
         "up"
       ],
       "situation": null,
+      "ask": {
+        "en": "I don't remember my order number.",
+        "kr": "주문 번호가 기억이 안 나요."
+      },
       "traps": [
         "through"
       ],
@@ -8407,6 +8699,10 @@
         "up"
       ],
       "situation": null,
+      "ask": {
+        "en": "The taxi is here!",
+        "kr": "택시 왔어!"
+      },
       "traps": [
         "down"
       ],
@@ -8529,6 +8825,10 @@
         "looking forward to"
       ],
       "situation": null,
+      "ask": {
+        "en": "How does your daughter feel about Friday?",
+        "kr": "딸이 금요일을 어떻게 생각해?"
+      },
       "traps": [
         "about"
       ],
@@ -8638,6 +8938,10 @@
         "Why would I"
       ],
       "situation": null,
+      "ask": {
+        "en": "Is this your umbrella?",
+        "kr": "이거 네 우산이야?"
+      },
       "traps": [
         "has",
         "they"
@@ -8736,6 +9040,10 @@
         "enough to"
       ],
       "situation": null,
+      "ask": {
+        "en": "This box looks way too heavy.",
+        "kr": "이 상자 너무 무거워 보여."
+      },
       "traps": [
         "by"
       ],
@@ -8903,6 +9211,10 @@
         "with"
       ],
       "situation": null,
+      "ask": {
+        "en": "What does your school offer?",
+        "kr": "학교에서 무엇을 제공하나요?"
+      },
       "traps": [
         "by"
       ],
@@ -9036,6 +9348,10 @@
         "a bunch of"
       ],
       "situation": null,
+      "ask": {
+        "en": "Did the report look clean?",
+        "kr": "보고서는 깨끗했어?"
+      },
       "traps": [
         "to"
       ],
@@ -9146,6 +9462,10 @@
         "other than"
       ],
       "situation": null,
+      "ask": {
+        "en": "Who was in the meeting room?",
+        "kr": "회의실에 누가 있었어?"
+      },
       "traps": [
         "either"
       ],
@@ -9255,6 +9575,10 @@
         "as much as"
       ],
       "situation": null,
+      "ask": {
+        "en": "Isn't your brother just a hobby runner?",
+        "kr": "네 형은 취미로 달리는 거 아니야?"
+      },
       "traps": [
         "kind"
       ],
@@ -9364,6 +9688,10 @@
         "late for"
       ],
       "situation": null,
+      "ask": {
+        "en": "Should I take the long way?",
+        "kr": "돌아서 갈까?"
+      },
       "traps": [
         "at"
       ],
@@ -9473,6 +9801,10 @@
         "will you"
       ],
       "situation": null,
+      "ask": {
+        "en": "There are three of us on this bench.",
+        "kr": "이 벤치에 우리 셋이 앉았네."
+      },
       "traps": [
         "does",
         "him"
@@ -9617,6 +9949,10 @@
         "in terms of"
       ],
       "situation": null,
+      "ask": {
+        "en": "How do the two teams compare?",
+        "kr": "두 팀은 어떻게 비교돼?"
+      },
       "traps": [
         "at",
         "to"
@@ -9720,6 +10056,10 @@
         "in common"
       ],
       "situation": null,
+      "ask": {
+        "en": "We have nothing in common.",
+        "kr": "우리 공통점이 하나도 없네."
+      },
       "traps": [
         "can",
         "at"
@@ -9843,6 +10183,10 @@
         "to"
       ],
       "situation": null,
+      "ask": {
+        "en": "Why won't they work with us yet?",
+        "kr": "왜 아직 우리와 일하려 하지 않죠?"
+      },
       "traps": [
         "at"
       ],
@@ -10011,6 +10355,10 @@
         "nothing but"
       ],
       "situation": null,
+      "ask": {
+        "en": "What's out there in the desert?",
+        "kr": "사막에는 뭐가 있어?"
+      },
       "traps": [
         "while"
       ],
@@ -10120,6 +10468,10 @@
         "hang out"
       ],
       "situation": null,
+      "ask": {
+        "en": "What do the kids do all summer?",
+        "kr": "애들은 여름 내내 뭐 해?"
+      },
       "traps": [
         "through"
       ],
@@ -10230,6 +10582,10 @@
         "when it comes to"
       ],
       "situation": null,
+      "ask": {
+        "en": "The doctor gave me some advice.",
+        "kr": "의사가 조언을 해줬어."
+      },
       "traps": [
         "i",
         "about"
@@ -10340,6 +10696,10 @@
         "a bit of"
       ],
       "situation": null,
+      "ask": {
+        "en": "Would you like a full bowl?",
+        "kr": "한 그릇 가득 드릴까요?"
+      },
       "traps": [
         "to"
       ],
@@ -10449,6 +10809,10 @@
         "believe in"
       ],
       "situation": null,
+      "ask": {
+        "en": "Maybe a lucky charm would help.",
+        "kr": "행운의 부적이 도움 될지도."
+      },
       "traps": [
         "about"
       ],
@@ -10558,6 +10922,10 @@
         "believe in"
       ],
       "situation": null,
+      "ask": {
+        "en": "Do you think things will improve?",
+        "kr": "상황이 나아질 거라고 봐?"
+      },
       "traps": [
         "about"
       ],
@@ -10644,6 +11012,10 @@
         "because of"
       ],
       "situation": null,
+      "ask": {
+        "en": "Why are you so angry at me?",
+        "kr": "왜 나한테 그렇게 화가 났어?"
+      },
       "traps": [
         "for"
       ],
@@ -10806,6 +11178,10 @@
         "Compared to"
       ],
       "situation": null,
+      "ask": {
+        "en": "How were the sales this year?",
+        "kr": "올해 매출은 어땠어?"
+      },
       "traps": [
         "in"
       ],
@@ -10903,6 +11279,10 @@
         "Let me know"
       ],
       "situation": null,
+      "ask": {
+        "en": "I'll be at the clinic all morning.",
+        "kr": "오전 내내 병원에 있을 거야."
+      },
       "traps": [
         "they"
       ],
@@ -11004,6 +11384,10 @@
         "sign up"
       ],
       "situation": null,
+      "ask": {
+        "en": "How do I join the class?",
+        "kr": "그 수업 어떻게 등록해?"
+      },
       "traps": [
         "over"
       ],
@@ -11094,6 +11478,10 @@
         "depending on"
       ],
       "situation": null,
+      "ask": {
+        "en": "How long is the drive?",
+        "kr": "운전해서 얼마나 걸려?"
+      },
       "traps": [
         "away"
       ],
@@ -11199,6 +11587,10 @@
         "takes up"
       ],
       "situation": null,
+      "ask": {
+        "en": "Why is the kitchen so cramped?",
+        "kr": "주방이 왜 이렇게 좁아?"
+      },
       "traps": [
         "out"
       ],
@@ -11289,6 +11681,10 @@
         "think of"
       ],
       "situation": null,
+      "ask": {
+        "en": "So what's your guess?",
+        "kr": "그래서 뭐라고 생각해?"
+      },
       "traps": [
         "about"
       ],
@@ -11399,6 +11795,10 @@
         "than"
       ],
       "situation": null,
+      "ask": {
+        "en": "Which dish costs more?",
+        "kr": "어느 음식이 더 비싸?"
+      },
       "traps": [
         "back"
       ],
@@ -11586,6 +11986,10 @@
         "Have a good time"
       ],
       "situation": null,
+      "ask": {
+        "en": "I'm off to the fishing trip!",
+        "kr": "낚시 여행 간다!"
+      },
       "traps": [
         "am"
       ],
@@ -11683,6 +12087,10 @@
         "the most"
       ],
       "situation": null,
+      "ask": {
+        "en": "What should we tackle first?",
+        "kr": "무엇을 먼저 해결해야 할까요?"
+      },
       "traps": [
         "much"
       ],
@@ -11833,6 +12241,10 @@
         "some kind of"
       ],
       "situation": null,
+      "ask": {
+        "en": "What's this on my hands?",
+        "kr": "손에 묻은 이게 뭐지?"
+      },
       "traps": [
         "into"
       ],
@@ -11942,6 +12354,10 @@
         "How do you like"
       ],
       "situation": null,
+      "ask": {
+        "en": "I just checked in.",
+        "kr": "방금 체크인했어요."
+      },
       "traps": [
         "does",
         "him"
@@ -12025,6 +12441,10 @@
         "take a walk"
       ],
       "situation": null,
+      "ask": {
+        "en": "How do you stay active?",
+        "kr": "어떻게 몸을 움직여?"
+      },
       "traps": [
         "single"
       ],
@@ -12131,6 +12551,10 @@
         "alone"
       ],
       "situation": null,
+      "ask": {
+        "en": "Can I ask her a few more questions?",
+        "kr": "몇 가지 더 물어봐도 돼요?"
+      },
       "traps": [
         "plenty"
       ],
@@ -12248,6 +12672,10 @@
         "on top of"
       ],
       "situation": null,
+      "ask": {
+        "en": "Where did you put the cereal?",
+        "kr": "시리얼 어디 뒀어?"
+      },
       "traps": [
         "down",
         "about"
@@ -12358,6 +12786,10 @@
         "get started"
       ],
       "situation": null,
+      "ask": {
+        "en": "Two people are still missing.",
+        "kr": "두 명이 아직 안 왔어요."
+      },
       "traps": [
         "bring"
       ],
@@ -12459,6 +12891,10 @@
         "Calm down"
       ],
       "situation": null,
+      "ask": {
+        "en": "I'm going to text him right now!",
+        "kr": "지금 바로 문자 보낼 거야!"
+      },
       "traps": [
         "along"
       ],
@@ -12557,6 +12993,10 @@
         "make it"
       ],
       "situation": null,
+      "ask": {
+        "en": "We'll see you in Seoul, right?",
+        "kr": "서울에서 뵙는 거죠?"
+      },
       "traps": [
         "them"
       ],
@@ -12644,6 +13084,10 @@
         "go back to"
       ],
       "situation": null,
+      "ask": {
+        "en": "Anything else before we finish?",
+        "kr": "마치기 전에 다른 건 없나요?"
+      },
       "traps": [
         "off",
         "into"
@@ -12754,6 +13198,10 @@
         "by the time"
       ],
       "situation": null,
+      "ask": {
+        "en": "Did you talk to the kids?",
+        "kr": "애들하고 얘기했어?"
+      },
       "traps": [
         "with"
       ],
@@ -12860,6 +13308,10 @@
         "messed up"
       ],
       "situation": null,
+      "ask": {
+        "en": "Why the long face?",
+        "kr": "왜 시무룩해?"
+      },
       "traps": [
         "back"
       ],
@@ -12970,6 +13422,10 @@
         "on"
       ],
       "situation": null,
+      "ask": {
+        "en": "Which shoes would you like to see?",
+        "kr": "어떤 신발을 보시겠어요?"
+      },
       "traps": [
         "along"
       ],
@@ -13068,6 +13524,10 @@
         "every single"
       ],
       "situation": null,
+      "ask": {
+        "en": "Do you know this old cartoon?",
+        "kr": "이 옛날 만화 알아?"
+      },
       "traps": [
         "like"
       ],
@@ -13173,6 +13633,10 @@
         "I'd say"
       ],
       "situation": null,
+      "ask": {
+        "en": "Was the movie any good?",
+        "kr": "영화 괜찮았어?"
+      },
       "traps": [
         "soon"
       ],
@@ -13270,6 +13734,10 @@
         "What's with"
       ],
       "situation": null,
+      "ask": {
+        "en": "Look at the sky!",
+        "kr": "하늘 좀 봐!"
+      },
       "traps": [
         "from"
       ],
@@ -13368,6 +13836,10 @@
         "It's all about"
       ],
       "situation": null,
+      "ask": {
+        "en": "What makes a team succeed?",
+        "kr": "팀이 성공하는 비결이 뭐죠?"
+      },
       "traps": [
         "with"
       ],
@@ -13465,6 +13937,10 @@
         "get home"
       ],
       "situation": null,
+      "ask": {
+        "en": "Why are you leaving so soon?",
+        "kr": "왜 벌써 가?"
+      },
       "traps": [
         "move"
       ],
@@ -13552,6 +14028,10 @@
         "look around"
       ],
       "situation": null,
+      "ask": {
+        "en": "What should we do next?",
+        "kr": "이제 뭐 할까?"
+      },
       "traps": [
         "matter"
       ],
@@ -13638,6 +14118,10 @@
         "some more"
       ],
       "situation": null,
+      "ask": {
+        "en": "This movie is only half over.",
+        "kr": "영화 아직 반밖에 안 봤네."
+      },
       "traps": [
         "same"
       ],
@@ -13744,6 +14228,10 @@
         "work out"
       ],
       "situation": null,
+      "ask": {
+        "en": "How did the plan go?",
+        "kr": "계획은 어떻게 됐어?"
+      },
       "traps": [
         "along"
       ],
@@ -13850,6 +14338,10 @@
         "Don't you think"
       ],
       "situation": null,
+      "ask": {
+        "en": "Should I turn on a lamp?",
+        "kr": "스탠드 켤까?"
+      },
       "traps": [
         "won't",
         "it"
@@ -13949,6 +14441,10 @@
         "get through"
       ],
       "situation": null,
+      "ask": {
+        "en": "This meeting is so boring.",
+        "kr": "이 회의 너무 지루해."
+      },
       "traps": [
         "along"
       ],
@@ -14059,6 +14555,10 @@
         "Feel free to"
       ],
       "situation": null,
+      "ask": {
+        "en": "Is this brochure free?",
+        "kr": "이 안내서 무료인가요?"
+      },
       "traps": [
         "about"
       ],
@@ -14156,6 +14656,10 @@
         "belong to"
       ],
       "situation": null,
+      "ask": {
+        "en": "Whose chairs are these?",
+        "kr": "이 의자들 누구 거야?"
+      },
       "traps": [
         "with"
       ],
@@ -14244,6 +14748,10 @@
         "to"
       ],
       "situation": null,
+      "ask": {
+        "en": "I catch colds so easily.",
+        "kr": "감기에 너무 잘 걸려."
+      },
       "traps": [
         "at"
       ],
@@ -14388,6 +14896,10 @@
         "say no"
       ],
       "situation": null,
+      "ask": {
+        "en": "Aren't you on a diet?",
+        "kr": "다이어트 중 아니야?"
+      },
       "traps": [
         "heard"
       ],
@@ -14474,6 +14986,10 @@
         "go over"
       ],
       "situation": null,
+      "ask": {
+        "en": "Where should we start?",
+        "kr": "어디서부터 시작할까요?"
+      },
       "traps": [
         "off"
       ],
@@ -14584,6 +15100,10 @@
         "No more"
       ],
       "situation": null,
+      "ask": {
+        "en": "I was going to do it, but...",
+        "kr": "하려고 했는데요..."
+      },
       "traps": [
         "know"
       ],
@@ -14689,6 +15209,10 @@
         "Get off"
       ],
       "situation": null,
+      "ask": {
+        "en": "Which stop is the museum?",
+        "kr": "박물관은 어느 역이에요?"
+      },
       "traps": [
         "out"
       ],
@@ -14775,6 +15299,10 @@
         "pay attention"
       ],
       "situation": null,
+      "ask": {
+        "en": "Why are my grades so low?",
+        "kr": "제 성적이 왜 이렇게 낮죠?"
+      },
       "traps": [
         "leave"
       ],
@@ -14877,6 +15405,10 @@
         "done"
       ],
       "situation": null,
+      "ask": {
+        "en": "Come out with us tonight!",
+        "kr": "오늘 밤에 우리랑 놀자!"
+      },
       "traps": [
         "time"
       ],
@@ -14998,6 +15530,10 @@
         "How come"
       ],
       "situation": null,
+      "ask": {
+        "en": "We can't even get in the door.",
+        "kr": "문에도 못 들어가겠어."
+      },
       "traps": [
         "every"
       ],
@@ -15082,6 +15618,10 @@
         "in mind"
       ],
       "situation": null,
+      "ask": {
+        "en": "I'm looking for an apartment.",
+        "kr": "아파트를 찾고 있어요."
+      },
       "traps": [
         "am",
         "of"
@@ -15196,6 +15736,10 @@
         "stop by"
       ],
       "situation": null,
+      "ask": {
+        "en": "We have an hour to kill.",
+        "kr": "한 시간 남았네."
+      },
       "traps": [
         "at"
       ],
@@ -15286,6 +15830,10 @@
         "Why don't we"
       ],
       "situation": null,
+      "ask": {
+        "en": "I'm bored of staying in.",
+        "kr": "집에만 있는 거 지겨워."
+      },
       "traps": [
         "can't",
         "them"
@@ -15385,6 +15933,10 @@
         "back"
       ],
       "situation": null,
+      "ask": {
+        "en": "Can I borrow your scarf?",
+        "kr": "네 스카프 빌려도 돼?"
+      },
       "traps": [
         "on"
       ],
@@ -15511,6 +16063,10 @@
         "more like"
       ],
       "situation": null,
+      "ask": {
+        "en": "Was it a short answer?",
+        "kr": "짧은 답이었어?"
+      },
       "traps": [
         "turned"
       ],
@@ -15622,6 +16178,10 @@
         "in case"
       ],
       "situation": null,
+      "ask": {
+        "en": "What if nobody's there?",
+        "kr": "아무도 없으면 어떡해?"
+      },
       "traps": [
         "by"
       ],
@@ -15727,6 +16287,10 @@
         "believe in"
       ],
       "situation": null,
+      "ask": {
+        "en": "Will you give to the charity?",
+        "kr": "그 단체에 기부할 거야?"
+      },
       "traps": [
         "for"
       ],
@@ -15837,6 +16401,10 @@
         "seriously"
       ],
       "situation": null,
+      "ask": {
+        "en": "Do you trust that restaurant?",
+        "kr": "그 식당 믿을 만해?"
+      },
       "traps": [
         "nor"
       ],
@@ -15935,6 +16503,10 @@
         "looking after"
       ],
       "situation": null,
+      "ask": {
+        "en": "Why hasn't Jane been at work?",
+        "kr": "제인은 왜 계속 출근을 안 해?"
+      },
       "traps": [
         "break"
       ],
@@ -16025,6 +16597,10 @@
         "What if"
       ],
       "situation": null,
+      "ask": {
+        "en": "Let's camp right here on the street.",
+        "kr": "여기 길에서 그냥 야영하자."
+      },
       "traps": [
         "figure"
       ],
@@ -16123,6 +16699,10 @@
         "than"
       ],
       "situation": null,
+      "ask": {
+        "en": "Which one should we hire?",
+        "kr": "둘 중 누구를 채용할까요?"
+      },
       "traps": [
         "fun"
       ],
@@ -16339,6 +16919,10 @@
         "up"
       ],
       "situation": null,
+      "ask": {
+        "en": "Just show up at the counter.",
+        "kr": "카운터에 그냥 가시면 돼요."
+      },
       "traps": [
         "through"
       ],
@@ -16465,6 +17049,10 @@
         "What makes"
       ],
       "situation": null,
+      "ask": {
+        "en": "I'm sure we'll win.",
+        "kr": "우리가 이길 게 확실해."
+      },
       "traps": [
         "brings"
       ],
@@ -16563,6 +17151,10 @@
         "up"
       ],
       "situation": null,
+      "ask": {
+        "en": "I'll ask about the inheritance.",
+        "kr": "유산 얘기를 물어볼게."
+      },
       "traps": [
         "out"
       ],
@@ -16689,6 +17281,10 @@
         "down"
       ],
       "situation": null,
+      "ask": {
+        "en": "Congratulations on the promotion!",
+        "kr": "승진 축하해!"
+      },
       "traps": [
         "away"
       ],
@@ -16811,6 +17407,10 @@
         "doesn't mean"
       ],
       "situation": null,
+      "ask": {
+        "en": "He's been here twenty years.",
+        "kr": "그는 여기 20년 있었어."
+      },
       "traps": [
         "won't"
       ],
@@ -16932,6 +17532,10 @@
         "keep track of"
       ],
       "situation": null,
+      "ask": {
+        "en": "How do you save so much?",
+        "kr": "어떻게 그렇게 많이 모아?"
+      },
       "traps": [
         "to"
       ],
@@ -17037,6 +17641,10 @@
         "What brings you to"
       ],
       "situation": null,
+      "ask": {
+        "en": "I flew in this morning.",
+        "kr": "오늘 아침에 도착했어."
+      },
       "traps": [
         "them",
         "of"
@@ -17121,6 +17729,10 @@
         "take advantage of"
       ],
       "situation": null,
+      "ask": {
+        "en": "Why did your dad bring his ID?",
+        "kr": "아버지가 왜 신분증을 가져오셨어?"
+      },
       "traps": [
         "about"
       ],
@@ -17231,6 +17843,10 @@
         "take over"
       ],
       "situation": null,
+      "ask": {
+        "en": "Who will teach the class now?",
+        "kr": "이제 수업은 누가 하나요?"
+      },
       "traps": [
         "on"
       ],
@@ -17318,6 +17934,10 @@
         "Why not"
       ],
       "situation": null,
+      "ask": {
+        "en": "The schedule is too packed.",
+        "kr": "일정이 너무 빽빽해."
+      },
       "traps": [
         "stick"
       ],
@@ -17417,6 +18037,10 @@
         "as soon as"
       ],
       "situation": null,
+      "ask": {
+        "en": "When can you confirm the date?",
+        "kr": "날짜는 언제 확정해 줄 수 있어?"
+      },
       "traps": [
         "pay"
       ],
@@ -17584,6 +18208,10 @@
         "set up"
       ],
       "situation": null,
+      "ask": {
+        "en": "How can I help you today?",
+        "kr": "무엇을 도와드릴까요?"
+      },
       "traps": [
         "away"
       ],
@@ -17694,6 +18322,10 @@
         "meet up"
       ],
       "situation": null,
+      "ask": {
+        "en": "Where should we meet after the show?",
+        "kr": "공연 끝나고 어디서 만날까?"
+      },
       "traps": [
         "along"
       ],
@@ -17804,6 +18436,10 @@
         "count on"
       ],
       "situation": null,
+      "ask": {
+        "en": "Who helps you when it's tough?",
+        "kr": "힘들 때 누가 도와줘?"
+      },
       "traps": [
         "through"
       ],
@@ -17894,6 +18530,10 @@
         "Stay away from"
       ],
       "situation": null,
+      "ask": {
+        "en": "I want a photo at the edge!",
+        "kr": "끝에서 사진 찍고 싶어!"
+      },
       "traps": [
         "down",
         "at"
@@ -17992,6 +18632,10 @@
         "looking into"
       ],
       "situation": null,
+      "ask": {
+        "en": "The hotel is over budget.",
+        "kr": "호텔이 예산을 넘네요."
+      },
       "traps": [
         "to"
       ],
@@ -18083,6 +18727,10 @@
         "pays off"
       ],
       "situation": null,
+      "ask": {
+        "en": "She finally finished the marathon.",
+        "kr": "걔가 드디어 마라톤을 완주했어."
+      },
       "traps": [
         "along"
       ],
@@ -18165,6 +18813,10 @@
         "feel sorry for"
       ],
       "situation": null,
+      "ask": {
+        "en": "She lost the contest again.",
+        "kr": "동생이 또 대회에서 졌어."
+      },
       "traps": [
         "into"
       ],
@@ -18274,6 +18926,10 @@
         "get over"
       ],
       "situation": null,
+      "ask": {
+        "en": "Do you two fight a lot?",
+        "kr": "너희 많이 싸워?"
+      },
       "traps": [
         "down"
       ],
@@ -18383,6 +19039,10 @@
         "go for"
       ],
       "situation": null,
+      "ask": {
+        "en": "What would you order here?",
+        "kr": "여기서 뭘 주문할래?"
+      },
       "traps": [
         "at"
       ],
@@ -18493,6 +19153,10 @@
         "get in"
       ],
       "situation": null,
+      "ask": {
+        "en": "We're going to be late!",
+        "kr": "우리 늦겠어!"
+      },
       "traps": [
         "for"
       ],
@@ -18594,6 +19258,10 @@
         "reach out"
       ],
       "situation": null,
+      "ask": {
+        "en": "I lost my job last week.",
+        "kr": "지난주에 일자리를 잃었어."
+      },
       "traps": [
         "away"
       ],
@@ -18703,6 +19371,10 @@
         "go with"
       ],
       "situation": null,
+      "ask": {
+        "en": "Which tie suits this shirt?",
+        "kr": "이 셔츠에 어느 넥타이가 맞을까?"
+      },
       "traps": [
         "by"
       ],
@@ -18812,6 +19484,10 @@
         "take responsibility"
       ],
       "situation": null,
+      "ask": {
+        "en": "Do you think he'll apologize?",
+        "kr": "그가 사과할 것 같아?"
+      },
       "traps": [
         "wrong"
       ],
@@ -18895,6 +19571,10 @@
         "go"
       ],
       "situation": null,
+      "ask": {
+        "en": "I still blame myself.",
+        "kr": "아직도 내 탓을 해."
+      },
       "traps": [
         "mean"
       ],
@@ -19017,6 +19697,10 @@
         "and"
       ],
       "situation": null,
+      "ask": {
+        "en": "Where can I get stamps?",
+        "kr": "우표 어디서 살 수 있어?"
+      },
       "traps": [
         "messed"
       ],
@@ -19227,6 +19911,10 @@
         "Lie down"
       ],
       "situation": null,
+      "ask": {
+        "en": "How do we start the stretch?",
+        "kr": "스트레칭 어떻게 시작해요?"
+      },
       "traps": [
         "up"
       ],
@@ -19309,6 +19997,10 @@
         "keep up"
       ],
       "situation": null,
+      "ask": {
+        "en": "Why do you want to quit?",
+        "kr": "왜 그만두고 싶어?"
+      },
       "traps": [
         "on"
       ],
@@ -19414,6 +20106,10 @@
         "Help yourself to"
       ],
       "situation": null,
+      "ask": {
+        "en": "This looks delicious!",
+        "kr": "이거 맛있어 보여요!"
+      },
       "traps": [
         "into"
       ],
@@ -19497,6 +20193,10 @@
         "or"
       ],
       "situation": null,
+      "ask": {
+        "en": "What would you like to drink?",
+        "kr": "무엇을 드시겠어요?"
+      },
       "traps": [
         "stick"
       ],
@@ -19707,6 +20407,10 @@
         "Fill up"
       ],
       "situation": null,
+      "ask": {
+        "en": "Can I have a little more?",
+        "kr": "조금 더 먹어도 돼요?"
+      },
       "traps": [
         "back"
       ],
@@ -19812,6 +20516,10 @@
         "Watch out for"
       ],
       "situation": null,
+      "ask": {
+        "en": "I'll run down this old sidewalk.",
+        "kr": "이 낡은 인도를 달릴 거야."
+      },
       "traps": [
         "on",
         "with"
@@ -19910,6 +20618,10 @@
         "feel bad"
       ],
       "situation": null,
+      "ask": {
+        "en": "You've been quiet all day.",
+        "kr": "하루 종일 조용하네."
+      },
       "traps": [
         "fill"
       ],
@@ -20021,6 +20733,10 @@
         "over"
       ],
       "situation": null,
+      "ask": {
+        "en": "Should we sign today?",
+        "kr": "오늘 계약할까요?"
+      },
       "traps": [
         "back"
       ],
@@ -20123,6 +20839,10 @@
         "a ton of"
       ],
       "situation": null,
+      "ask": {
+        "en": "Why does he need a garage?",
+        "kr": "왜 창고가 필요해?"
+      },
       "traps": [
         "in"
       ],
@@ -20233,6 +20953,10 @@
         "Say hi"
       ],
       "situation": null,
+      "ask": {
+        "en": "Your neighbor is waving at us.",
+        "kr": "이웃분이 우리한테 손 흔드셔."
+      },
       "traps": [
         "know"
       ],
@@ -20332,6 +21056,10 @@
         "Do you think"
       ],
       "situation": null,
+      "ask": {
+        "en": "Let's order from this place.",
+        "kr": "여기서 주문하자."
+      },
       "traps": [
         "has",
         "they"
@@ -20487,6 +21215,10 @@
         "have a choice"
       ],
       "situation": null,
+      "ask": {
+        "en": "Why did you pick this design?",
+        "kr": "왜 이 디자인으로 했어?"
+      },
       "traps": [
         "has"
       ],
@@ -20590,6 +21322,10 @@
         "back"
       ],
       "situation": null,
+      "ask": {
+        "en": "How are your student loans?",
+        "kr": "학자금 대출은 어때?"
+      },
       "traps": [
         "down"
       ],
@@ -20715,6 +21451,10 @@
         "as well as"
       ],
       "situation": null,
+      "ask": {
+        "en": "What did she get for first place?",
+        "kr": "1등으로 뭘 받았어?"
+      },
       "traps": [
         "much"
       ],
@@ -20881,6 +21621,10 @@
         "get paid"
       ],
       "situation": null,
+      "ask": {
+        "en": "Which doctors earn the highest?",
+        "kr": "어떤 의사가 가장 많이 벌어?"
+      },
       "traps": [
         "sign"
       ],
@@ -20991,6 +21735,10 @@
         "Keep an eye on"
       ],
       "situation": null,
+      "ask": {
+        "en": "I'll wait here while you go.",
+        "kr": "네가 가는 동안 여기 있을게."
+      },
       "traps": [
         "down"
       ],
@@ -21097,6 +21845,10 @@
         "a secret"
       ],
       "situation": null,
+      "ask": {
+        "en": "Can I tell my best friend?",
+        "kr": "제일 친한 친구한테 말해도 돼?"
+      },
       "traps": [
         "number"
       ],
@@ -21219,6 +21971,10 @@
         "out"
       ],
       "situation": null,
+      "ask": {
+        "en": "Are you seeing anyone?",
+        "kr": "요즘 만나는 사람 있어?"
+      },
       "traps": [
         "up"
       ],
@@ -21317,6 +22073,10 @@
         "so that"
       ],
       "situation": null,
+      "ask": {
+        "en": "What should I wear to the audition?",
+        "kr": "오디션에 뭘 입어야 할까?"
+      },
       "traps": [
         "some"
       ],
@@ -21484,6 +22244,10 @@
         "a call"
       ],
       "situation": null,
+      "ask": {
+        "en": "I don't understand this tax form.",
+        "kr": "이 세금 서류를 모르겠어."
+      },
       "traps": [
         "just"
       ],
@@ -21609,6 +22373,10 @@
         "cut down on"
       ],
       "situation": null,
+      "ask": {
+        "en": "My dentist wasn't happy.",
+        "kr": "치과의사가 안 좋아하셨어요."
+      },
       "traps": [
         "out",
         "off"
@@ -21720,6 +22488,10 @@
         "nor"
       ],
       "situation": null,
+      "ask": {
+        "en": "Does she work in a kitchen?",
+        "kr": "그 사람 주방에서 일해?"
+      },
       "traps": [
         "turned"
       ],
@@ -21927,6 +22699,10 @@
         "mixed up"
       ],
       "situation": null,
+      "ask": {
+        "en": "Why is my answer wrong?",
+        "kr": "제 답이 왜 틀렸죠?"
+      },
       "traps": [
         "through"
       ],
@@ -22036,6 +22812,10 @@
         "check on"
       ],
       "situation": null,
+      "ask": {
+        "en": "I'm free for a minute.",
+        "kr": "잠깐 시간 있어."
+      },
       "traps": [
         "down"
       ],
@@ -22145,6 +22925,10 @@
         "get around"
       ],
       "situation": null,
+      "ask": {
+        "en": "Do you drive to work?",
+        "kr": "회사에 운전해서 가?"
+      },
       "traps": [
         "makes"
       ],
@@ -22232,6 +23016,10 @@
         "stepped out"
       ],
       "situation": null,
+      "ask": {
+        "en": "Is your sister home?",
+        "kr": "네 언니 집에 있어?"
+      },
       "traps": [
         "down"
       ],
@@ -22343,6 +23131,10 @@
         "I don't know if"
       ],
       "situation": null,
+      "ask": {
+        "en": "Can I touch this mushroom?",
+        "kr": "이 버섯 만져도 돼?"
+      },
       "traps": [
         "us",
         "couldn't"
@@ -22457,6 +23249,10 @@
         "more than"
       ],
       "situation": null,
+      "ask": {
+        "en": "How was the staff?",
+        "kr": "직원들은 어땠어요?"
+      },
       "traps": [
         "front"
       ],
@@ -22567,6 +23363,10 @@
         "around"
       ],
       "situation": null,
+      "ask": {
+        "en": "What did you do with Tom?",
+        "kr": "톰하고 뭐 했어?"
+      },
       "traps": [
         "after"
       ],
@@ -22674,6 +23474,10 @@
         "keep up with"
       ],
       "situation": null,
+      "ask": {
+        "en": "How are you always so stylish?",
+        "kr": "어떻게 항상 스타일이 좋아?"
+      },
       "traps": [
         "down",
         "from"
@@ -22788,6 +23592,10 @@
         "on"
       ],
       "situation": null,
+      "ask": {
+        "en": "The kids are getting restless.",
+        "kr": "애들이 지루해하네."
+      },
       "traps": [
         "down"
       ],
@@ -22910,6 +23718,10 @@
         "get in touch with"
       ],
       "situation": null,
+      "ask": {
+        "en": "Who should I report this to?",
+        "kr": "이걸 누구에게 알려야 하죠?"
+      },
       "traps": [
         "to",
         "into"
@@ -23020,6 +23832,10 @@
         "What if"
       ],
       "situation": null,
+      "ask": {
+        "en": "The party needs something fun.",
+        "kr": "파티에 재밌는 게 필요해."
+      },
       "traps": [
         "home"
       ],
@@ -23118,6 +23934,10 @@
         "put up with"
       ],
       "situation": null,
+      "ask": {
+        "en": "Why do you skip the parties?",
+        "kr": "왜 파티에 안 가?"
+      },
       "traps": [
         "along",
         "to"
@@ -23224,6 +24044,10 @@
         "check with"
       ],
       "situation": null,
+      "ask": {
+        "en": "Is this wording correct?",
+        "kr": "이 표현이 맞나요?"
+      },
       "traps": [
         "at"
       ],
@@ -23334,6 +24158,10 @@
         "Stick with"
       ],
       "situation": null,
+      "ask": {
+        "en": "Should I try the advanced course?",
+        "kr": "고급 과정을 들어볼까요?"
+      },
       "traps": [
         "of"
       ],
@@ -23420,6 +24248,10 @@
         "If it weren't for"
       ],
       "situation": null,
+      "ask": {
+        "en": "Why do you stay at that company?",
+        "kr": "왜 그 회사에 계속 있어?"
+      },
       "traps": [
         "us",
         "isn't"
@@ -23563,6 +24395,10 @@
         "keep in touch"
       ],
       "situation": null,
+      "ask": {
+        "en": "Do you still hear from them?",
+        "kr": "아직 그 사람들 소식 들어?"
+      },
       "traps": [
         "from"
       ],
@@ -23661,6 +24497,10 @@
         "eat out"
       ],
       "situation": null,
+      "ask": {
+        "en": "Do you cook for the holidays?",
+        "kr": "명절에 요리해?"
+      },
       "traps": [
         "down"
       ],
@@ -23764,6 +24604,10 @@
         "take a while"
       ],
       "situation": null,
+      "ask": {
+        "en": "Can I wait in the car?",
+        "kr": "차에서 기다려도 될까요?"
+      },
       "traps": [
         "call"
       ],
@@ -23861,6 +24705,10 @@
         "Do you happen to"
       ],
       "situation": null,
+      "ask": {
+        "en": "My phone is about to die.",
+        "kr": "휴대폰이 곧 꺼질 것 같아."
+      },
       "traps": [
         "had",
         "i"
@@ -23960,6 +24808,10 @@
         "Why don't I"
       ],
       "situation": null,
+      "ask": {
+        "en": "We can't find a sitter.",
+        "kr": "돌봐줄 사람을 못 찾겠어."
+      },
       "traps": [
         "couldn't",
         "me"
@@ -24059,6 +24911,10 @@
         "tell the difference"
       ],
       "situation": null,
+      "ask": {
+        "en": "This one is real leather.",
+        "kr": "이건 진짜 가죽이야."
+      },
       "traps": [
         "such"
       ],
@@ -24162,6 +25018,10 @@
         "pull over"
       ],
       "situation": null,
+      "ask": {
+        "en": "I feel carsick.",
+        "kr": "차멀미가 나."
+      },
       "traps": [
         "out"
       ],
@@ -24263,6 +25123,10 @@
         "make time"
       ],
       "situation": null,
+      "ask": {
+        "en": "You two must be so busy.",
+        "kr": "둘 다 엄청 바쁘겠네."
+      },
       "traps": [
         "secret"
       ],
@@ -24368,6 +25232,10 @@
         "dressed up"
       ],
       "situation": null,
+      "ask": {
+        "en": "Why the suit today?",
+        "kr": "오늘 왜 정장이야?"
+      },
       "traps": [
         "off"
       ],
@@ -24473,6 +25341,10 @@
         "Should you"
       ],
       "situation": null,
+      "ask": {
+        "en": "What if I notice a problem?",
+        "kr": "문제를 발견하면 어떻게 하죠?"
+      },
       "traps": [
         "has",
         "we"
@@ -24601,6 +25473,10 @@
         "don't you think"
       ],
       "situation": null,
+      "ask": {
+        "en": "He sent the food back again.",
+        "kr": "또 음식을 돌려보냈어."
+      },
       "traps": [
         "doesn't",
         "i"
@@ -24700,6 +25576,10 @@
         "over"
       ],
       "situation": null,
+      "ask": {
+        "en": "Why so many plates?",
+        "kr": "접시가 왜 이렇게 많아?"
+      },
       "traps": [
         "away"
       ],
@@ -24833,6 +25713,10 @@
         "by far"
       ],
       "situation": null,
+      "ask": {
+        "en": "Why this cafe again?",
+        "kr": "왜 또 이 카페야?"
+      },
       "traps": [
         "with"
       ],
@@ -24930,6 +25814,10 @@
         "passed out"
       ],
       "situation": null,
+      "ask": {
+        "en": "Are you okay? You look pale.",
+        "kr": "괜찮아? 창백해 보여."
+      },
       "traps": [
         "off"
       ],

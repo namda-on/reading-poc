@@ -36,6 +36,8 @@ GSE_CSV   = Path(os.environ.get("VE_GSE_CSV",   DL / "gse_corrected_final_0624 -
 OUT = Path(__file__).resolve().parent.parent / "public" / "vocab-expression.data.json"
 # [5] 상황 단계용 A 대사 — 소스 CSV에 상황 필드가 없어 손으로 적은 프로토타입 문안
 SITUATIONS = Path(__file__).resolve().parent / "vocab_expression_situations.json"
+# [4] 질문에 답하기 단계용 A 대사 — 학습 문장이 짧은 답이 되는 질문. 손으로 적은 프로토타입 문안
+QUESTIONS = Path(__file__).resolve().parent / "vocab_expression_questions.json"
 
 MAX_ITEMS = int(os.environ.get("VE_MAX_ITEMS", "0"))    # 0이면 전체
 VOCAB_FILTER_SKIP = {"sexual", "unnecessary"}
@@ -457,6 +459,14 @@ def segment(sentence, literals):
     return {"segs": segs, "punct": punct}
 
 
+def load_questions():
+    """학습 문장(en) → {en, kr}. 파일이 없어도 빌드는 진행한다([4]는 해석 없이 뜻만)."""
+    if not QUESTIONS.exists():
+        return {}
+    raw = json.loads(QUESTIONS.read_text(encoding="utf-8"))
+    return {k: {"en": v[0], "kr": v[1]} for k, v in raw.items() if not k.startswith("_")}
+
+
 def load_situations():
     """학습 문장(en) → {a_en, a_kr}. 파일이 없어도 빌드는 진행한다([5]만 비활성)."""
     if not SITUATIONS.exists():
@@ -569,6 +579,7 @@ def make_vocab_a(v, trigger):
 def main():
     vocab, gse, groups = load_vocab(), load_gse(), load_groups()
     situations = load_situations()
+    questions = load_questions()
     items, skipped = [], {"조인실패": 0, "버전A불가": 0, "버전B불가": 0, "문장부족": 0,
                           "공통프레임없음": 0, "문법틀form": 0, "프레임≠form": 0}
 
@@ -636,6 +647,7 @@ def main():
             # (2개 이상이면 [3]이 2회차까지 진행된다).
             "frame": lits,
             "situation": situations.get(s1["en"]),
+            "ask": questions.get(s1["en"]),
             "traps": [],
             "_trapSent": sents[cov[1]] if len(cov) > 1 else sents[0],
             "baseSegs": segd[0]["segs"],
@@ -675,6 +687,7 @@ def main():
     OUT.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"[build_vocab_expression] 완료 → {OUT}")
     print(f"  후보 그룹 {len(groups)} → 사용 {len(items)}문항 | 제외: {skipped}")
+    print(f"  [4] 질문이 붙은 문항: {len([x for x in items if x.get('ask')])}")
     print(f"  [5] 상황 대사가 붙은 문항: {len([x for x in items if x.get('situation')])}")
 
 

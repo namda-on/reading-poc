@@ -1,0 +1,891 @@
+{
+ "_note": "[4] 질문에 답하기 단계용 A 대사. 학습 문장(sentence.en)이 자연스러운 짧은 답이 되는 A의 말을 손으로 적었다. 값은 [영어, 한국어 해석]. 소스 CSV에 질문 필드가 없어 프로토타입용으로 작성한 문안이므로 콘텐츠 검수가 필요하다.",
+ "You should get up.": [
+  "I'm still in bed... five more minutes.",
+  "아직 침대야... 5분만 더."
+ ],
+ "I'll talk to my parents.": [
+  "Can you come on the school trip?",
+  "수학여행 갈 수 있어?"
+ ],
+ "Put your clothes on.": [
+  "Mom, I'm ready to go outside!",
+  "엄마, 나 나갈 준비 됐어!"
+ ],
+ "Don't be late.": [
+  "See you at seven tomorrow.",
+  "내일 7시에 봐."
+ ],
+ "Let me fix your computer.": [
+  "My laptop keeps freezing.",
+  "노트북이 계속 멈춰."
+ ],
+ "Why don't you invite a friend?": [
+  "I don't want to go to the party alone.",
+  "파티에 혼자 가고 싶지 않아."
+ ],
+ "All of these boats are new.": [
+  "Which boats are new?",
+  "어느 배가 새 거야?"
+ ],
+ "Come over this evening!": [
+  "I have nothing to do tonight.",
+  "오늘 밤에 할 일이 없어."
+ ],
+ "Let's go back to town.": [
+  "There's nothing to do out here.",
+  "여기선 할 게 없네."
+ ],
+ "The paper is due at five o'clock.": [
+  "When do we have to hand it in?",
+  "언제까지 내야 해?"
+ ],
+ "It feels like spring!": [
+  "It's so warm today, isn't it?",
+  "오늘 너무 따뜻하지 않아?"
+ ],
+ "Take off your sweater.": [
+  "It's really hot in here.",
+  "여기 진짜 덥다."
+ ],
+ "How about a lemonade?": [
+  "I'm so thirsty.",
+  "너무 목말라."
+ ],
+ "You worry too much.": [
+  "What if I fail the test?",
+  "시험 떨어지면 어떡하지?"
+ ],
+ "Be sure to check your answers.": [
+  "I finished the test early.",
+  "시험 일찍 다 풀었어."
+ ],
+ "We missed most of the concert.": [
+  "How was the concert?",
+  "공연 어땠어?"
+ ],
+ "Which one do you prefer?": [
+  "Both of them look nice.",
+  "둘 다 괜찮아 보여."
+ ],
+ "Would you do the next step?": [
+  "I'm done with my part.",
+  "내 부분은 끝났어."
+ ],
+ "Don't give up hope!": [
+  "I don't think we can win.",
+  "우리가 이길 것 같지 않아."
+ ],
+ "Let's move on to the next topic.": [
+  "I think we've covered this.",
+  "이건 다 다룬 것 같아요."
+ ],
+ "Let's start with an interview.": [
+  "How should we begin?",
+  "어떻게 시작할까요?"
+ ],
+ "Hi! Welcome to China!": [
+  "Hello, I just landed in Beijing.",
+  "안녕하세요, 방금 베이징에 도착했어요."
+ ],
+ "It's time for me to take my medicine.": [
+  "Why are you looking at the clock?",
+  "왜 시계를 보고 있어?"
+ ],
+ "We have a lot of data.": [
+  "Do we have enough to start?",
+  "시작할 만큼 자료가 있어요?"
+ ],
+ "What happened to that sign?": [
+  "The sign is completely bent.",
+  "저 표지판이 완전히 휘었어."
+ ],
+ "Go to bed immediately!": [
+  "Can I watch one more show?",
+  "한 편만 더 봐도 돼요?"
+ ],
+ "Have fun at the festival!": [
+  "I'm heading to the festival now!",
+  "지금 축제에 가!"
+ ],
+ "It's all thanks to social media.": [
+  "How did your shop get so popular?",
+  "가게가 어떻게 이렇게 유명해졌어요?"
+ ],
+ "Each of us saw one performance.": [
+  "How many shows did you see?",
+  "공연 몇 개 봤어?"
+ ],
+ "I forgot to call my lawyer back!": [
+  "Why do you look so panicked?",
+  "왜 그렇게 당황한 표정이야?"
+ ],
+ "What's going on in London?": [
+  "The news is all about London today.",
+  "오늘 뉴스가 온통 런던 얘기야."
+ ],
+ "I'll get out of your seat.": [
+  "Excuse me, that's my seat.",
+  "죄송한데 거기 제 자리예요."
+ ],
+ "It needs plenty of sunlight.": [
+  "Where should I put this plant?",
+  "이 화분 어디에 둘까?"
+ ],
+ "Have you heard of a band called \"The Beatles\"?": [
+  "I'm looking for old records.",
+  "옛날 음반을 찾고 있어."
+ ],
+ "He's in charge of the schedule.": [
+  "Who should I ask about the timetable?",
+  "일정은 누구에게 물어야 하죠?"
+ ],
+ "Pay attention to the screen.": [
+  "Sorry, what did you say?",
+  "죄송해요, 뭐라고 하셨죠?"
+ ],
+ "What's wrong with your glasses?": [
+  "I can barely see anything.",
+  "거의 안 보여."
+ ],
+ "It's in front of the ketchup.": [
+  "Where's the mustard?",
+  "머스터드 어디 있어?"
+ ],
+ "It turned out too spicy.": [
+  "How did the curry come out?",
+  "카레 어떻게 됐어?"
+ ],
+ "You can take a break every thirty minutes.": [
+  "Do I have to work straight through?",
+  "쉬지 않고 계속 일해야 하나요?"
+ ],
+ "We need a couple of potatoes.": [
+  "What's left on the shopping list?",
+  "장바구니에 뭐가 남았어?"
+ ],
+ "Clean it up before someone falls.": [
+  "I spilled water on the floor.",
+  "바닥에 물을 쏟았어."
+ ],
+ "Can I do one more drawing?": [
+  "It's time to put the crayons away.",
+  "이제 크레용 치울 시간이야."
+ ],
+ "We need your ID along with your application form.": [
+  "Is the form all you need?",
+  "신청서만 있으면 되나요?"
+ ],
+ "Just fill out this survey.": [
+  "What do I have to do to enter?",
+  "참가하려면 뭘 해야 하죠?"
+ ],
+ "I'm your grandma, aren't I?": [
+  "How do you know so much about me?",
+  "저에 대해 어떻게 그렇게 잘 아세요?"
+ ],
+ "You shouldn't rely on public transportation.": [
+  "The buses are always late here.",
+  "여기 버스는 늘 늦어."
+ ],
+ "He goes to the same middle school as me.": [
+  "How do you know that boy?",
+  "그 남자애를 어떻게 알아?"
+ ],
+ "Ever since that experience, I hate water.": [
+  "Why won't you go swimming?",
+  "왜 수영을 안 하려고 해?"
+ ],
+ "No matter the cost, I'll pay.": [
+  "The repair might be expensive.",
+  "수리비가 비쌀 수도 있어요."
+ ],
+ "It's up to ten meters deep in some places.": [
+  "How deep is this lake?",
+  "이 호수는 얼마나 깊어?"
+ ],
+ "Teens just want to fit in.": [
+  "Why do they all dress the same?",
+  "왜 다들 똑같이 입어?"
+ ],
+ "I can't figure out the next step.": [
+  "How's the project going?",
+  "프로젝트 어떻게 돼가?"
+ ],
+ "It's the same address.": [
+  "Did they move to a new office?",
+  "새 사무실로 옮겼나요?"
+ ],
+ "We're going through another economic crisis.": [
+  "Why are prices rising so fast?",
+  "왜 물가가 이렇게 빨리 올라요?"
+ ],
+ "Let's keep the budget in mind.": [
+  "Should we book the bigger venue?",
+  "더 큰 장소를 예약할까요?"
+ ],
+ "Come by at lunchtime!": [
+  "When should I stop by?",
+  "언제 들르면 될까?"
+ ],
+ "A number of customers complained about you.": [
+  "Why am I in the manager's office?",
+  "제가 왜 점장실에 불려 왔죠?"
+ ],
+ "It's more than a job, it's a commitment.": [
+  "So nursing is just a career?",
+  "그럼 간호는 그냥 직업인가요?"
+ ],
+ "I didn't get off work until midnight.": [
+  "Why didn't you answer last night?",
+  "어젯밤에 왜 전화를 안 받았어?"
+ ],
+ "They're in the middle of the forest!": [
+  "Where are the campers now?",
+  "캠핑하는 사람들 지금 어디야?"
+ ],
+ "We must address global issues, such as climate change.": [
+  "What should the summit focus on?",
+  "정상회의는 무엇에 집중해야 할까요?"
+ ],
+ "Give this brand a try.": [
+  "I need a new shampoo.",
+  "새 샴푸가 필요해."
+ ],
+ "The pressure is getting to me.": [
+  "You look exhausted lately.",
+  "요즘 많이 지쳐 보여."
+ ],
+ "I look at that quote differently.": [
+  "Everyone agrees with the author.",
+  "다들 그 작가 말에 동의해."
+ ],
+ "He can't wait to start sixth grade.": [
+  "Is your son nervous about school?",
+  "아들이 학교 때문에 긴장했어?"
+ ],
+ "It was great except for the crowds.": [
+  "How was the amusement park?",
+  "놀이공원 어땠어?"
+ ],
+ "I'll turn on the radio.": [
+  "It's too quiet in the car.",
+  "차 안이 너무 조용하네."
+ ],
+ "Make a choice between pizza or spaghetti.": [
+  "I can't decide what to order.",
+  "뭘 주문할지 못 정했어."
+ ],
+ "Let me go through the draft first.": [
+  "Can we send it to the client?",
+  "고객에게 보내도 될까요?"
+ ],
+ "The director said come in early.": [
+  "What time is the shoot tomorrow?",
+  "내일 촬영 몇 시야?"
+ ],
+ "Let's ask the guide, shall we?": [
+  "I have no idea where we are.",
+  "여기가 어딘지 전혀 모르겠어."
+ ],
+ "Can you look that up in your records?": [
+  "I don't remember my order number.",
+  "주문 번호가 기억이 안 나요."
+ ],
+ "Let me pick up my purse.": [
+  "The taxi is here!",
+  "택시 왔어!"
+ ],
+ "She's looking forward to the field trip.": [
+  "How does your daughter feel about Friday?",
+  "딸이 금요일을 어떻게 생각해?"
+ ],
+ "Why would I take someone else's umbrella?": [
+  "Is this your umbrella?",
+  "이거 네 우산이야?"
+ ],
+ "You're strong enough to lift it.": [
+  "This box looks way too heavy.",
+  "이 상자 너무 무거워 보여."
+ ],
+ "We provide students with various online resources.": [
+  "What does your school offer?",
+  "학교에서 무엇을 제공하나요?"
+ ],
+ "There's a bunch of errors.": [
+  "Did the report look clean?",
+  "보고서는 깨끗했어?"
+ ],
+ "There was no one other than the clients.": [
+  "Who was in the meeting room?",
+  "회의실에 누가 있었어?"
+ ],
+ "He trains as much as a real athlete!": [
+  "Isn't your brother just a hobby runner?",
+  "네 형은 취미로 달리는 거 아니야?"
+ ],
+ "Hurry, I'm late for work.": [
+  "Should I take the long way?",
+  "돌아서 갈까?"
+ ],
+ "Make some room, will you?": [
+  "There are three of us on this bench.",
+  "이 벤치에 우리 셋이 앉았네."
+ ],
+ "We're better in terms of strength.": [
+  "How do the two teams compare?",
+  "두 팀은 어떻게 비교돼?"
+ ],
+ "At least we have playing an instrument in common.": [
+  "We have nothing in common.",
+  "우리 공통점이 하나도 없네."
+ ],
+ "It's hard to build trust.": [
+  "Why won't they work with us yet?",
+  "왜 아직 우리와 일하려 하지 않죠?"
+ ],
+ "There's nothing but sand.": [
+  "What's out there in the desert?",
+  "사막에는 뭐가 있어?"
+ ],
+ "They just hang out at the pool.": [
+  "What do the kids do all summer?",
+  "애들은 여름 내내 뭐 해?"
+ ],
+ "Be careful when it comes to your diet.": [
+  "The doctor gave me some advice.",
+  "의사가 조언을 해줬어."
+ ],
+ "I'll have a bit of rice, please.": [
+  "Would you like a full bowl?",
+  "한 그릇 가득 드릴까요?"
+ ],
+ "I don't believe in luck.": [
+  "Maybe a lucky charm would help.",
+  "행운의 부적이 도움 될지도."
+ ],
+ "I believe in our president.": [
+  "Do you think things will improve?",
+  "상황이 나아질 거라고 봐?"
+ ],
+ "I missed the bus because of you!": [
+  "Why are you so angry at me?",
+  "왜 나한테 그렇게 화가 났어?"
+ ],
+ "Compared to last year, it was a disaster.": [
+  "How were the sales this year?",
+  "올해 매출은 어땠어?"
+ ],
+ "Let me know after your appointment!": [
+  "I'll be at the clinic all morning.",
+  "오전 내내 병원에 있을 거야."
+ ],
+ "You have to sign up on their site.": [
+  "How do I join the class?",
+  "그 수업 어떻게 등록해?"
+ ],
+ "About two hours, depending on the route.": [
+  "How long is the drive?",
+  "운전해서 얼마나 걸려?"
+ ],
+ "The refrigerator takes up a lot of space.": [
+  "Why is the kitchen so cramped?",
+  "주방이 왜 이렇게 좁아?"
+ ],
+ "I can't think of an answer.": [
+  "So what's your guess?",
+  "그래서 뭐라고 생각해?"
+ ],
+ "Noodles are more expensive than rice.": [
+  "Which dish costs more?",
+  "어느 음식이 더 비싸?"
+ ],
+ "Have a good time, grandpa!": [
+  "I'm off to the fishing trip!",
+  "낚시 여행 간다!"
+ ],
+ "Poverty is the most serious issue.": [
+  "What should we tackle first?",
+  "무엇을 먼저 해결해야 할까요?"
+ ],
+ "It feels like some kind of oil.": [
+  "What's this on my hands?",
+  "손에 묻은 이게 뭐지?"
+ ],
+ "How do you like your room?": [
+  "I just checked in.",
+  "방금 체크인했어요."
+ ],
+ "I usually take a walk in the afternoon.": [
+  "How do you stay active?",
+  "어떻게 몸을 움직여?"
+ ],
+ "Please leave the guest alone.": [
+  "Can I ask her a few more questions?",
+  "몇 가지 더 물어봐도 돼요?"
+ ],
+ "It's on top of the fridge.": [
+  "Where did you put the cereal?",
+  "시리얼 어디 뒀어?"
+ ],
+ "Let's just get started anyway.": [
+  "Two people are still missing.",
+  "두 명이 아직 안 왔어요."
+ ],
+ "Calm down before you reply.": [
+  "I'm going to text him right now!",
+  "지금 바로 문자 보낼 거야!"
+ ],
+ "I can't make it to the convention.": [
+  "We'll see you in Seoul, right?",
+  "서울에서 뵙는 거죠?"
+ ],
+ "Let's go back to the funding issue.": [
+  "Anything else before we finish?",
+  "마치기 전에 다른 건 없나요?"
+ ],
+ "They were asleep by the time I arrived.": [
+  "Did you talk to the kids?",
+  "애들하고 얘기했어?"
+ ],
+ "I messed up the last question on my quiz.": [
+  "Why the long face?",
+  "왜 시무룩해?"
+ ],
+ "I'll try on this pair first.": [
+  "Which shoes would you like to see?",
+  "어떤 신발을 보시겠어요?"
+ ],
+ "I watched every single episode as a kid.": [
+  "Do you know this old cartoon?",
+  "이 옛날 만화 알아?"
+ ],
+ "I'd say it's pretty average.": [
+  "Was the movie any good?",
+  "영화 괜찮았어?"
+ ],
+ "What's with the rainbow?": [
+  "Look at the sky!",
+  "하늘 좀 봐!"
+ ],
+ "It's all about leadership.": [
+  "What makes a team succeed?",
+  "팀이 성공하는 비결이 뭐죠?"
+ ],
+ "I want to get home before dark.": [
+  "Why are you leaving so soon?",
+  "왜 벌써 가?"
+ ],
+ "Let's look around the fair for a while.": [
+  "What should we do next?",
+  "이제 뭐 할까?"
+ ],
+ "Want some more popcorn?": [
+  "This movie is only half over.",
+  "영화 아직 반밖에 안 봤네."
+ ],
+ "Things didn't work out, obviously.": [
+  "How did the plan go?",
+  "계획은 어떻게 됐어?"
+ ],
+ "Don't you think it's too dark?": [
+  "Should I turn on a lamp?",
+  "스탠드 켤까?"
+ ],
+ "Let's just get through this session.": [
+  "This meeting is so boring.",
+  "이 회의 너무 지루해."
+ ],
+ "Feel free to take a copy.": [
+  "Is this brochure free?",
+  "이 안내서 무료인가요?"
+ ],
+ "They belong to the community center.": [
+  "Whose chairs are these?",
+  "이 의자들 누구 거야?"
+ ],
+ "It's a good idea to take vitamins.": [
+  "I catch colds so easily.",
+  "감기에 너무 잘 걸려."
+ ],
+ "I can't say no to a cheeseburger.": [
+  "Aren't you on a diet?",
+  "다이어트 중 아니야?"
+ ],
+ "Let's go over their requirements.": [
+  "Where should we start?",
+  "어디서부터 시작할까요?"
+ ],
+ "No more excuses.": [
+  "I was going to do it, but...",
+  "하려고 했는데요..."
+ ],
+ "Get off the subway at City Hall.": [
+  "Which stop is the museum?",
+  "박물관은 어느 역이에요?"
+ ],
+ "You don't pay attention during the lectures.": [
+  "Why are my grades so low?",
+  "제 성적이 왜 이렇게 낮죠?"
+ ],
+ "I need to get this assignment done.": [
+  "Come out with us tonight!",
+  "오늘 밤에 우리랑 놀자!"
+ ],
+ "How come it's so crowded?": [
+  "We can't even get in the door.",
+  "문에도 못 들어가겠어."
+ ],
+ "What neighbourhood do you have in mind?": [
+  "I'm looking for an apartment.",
+  "아파트를 찾고 있어요."
+ ],
+ "Let's stop by the bookstore.": [
+  "We have an hour to kill.",
+  "한 시간 남았네."
+ ],
+ "Why don't we go bowling?": [
+  "I'm bored of staying in.",
+  "집에만 있는 거 지겨워."
+ ],
+ "Give my leather jacket back first.": [
+  "Can I borrow your scarf?",
+  "네 스카프 빌려도 돼?"
+ ],
+ "It was more like an essay.": [
+  "Was it a short answer?",
+  "짧은 답이었어?"
+ ],
+ "Take the spare key in case she's not home.": [
+  "What if nobody's there?",
+  "아무도 없으면 어떡해?"
+ ],
+ "I don't believe in donations.": [
+  "Will you give to the charity?",
+  "그 단체에 기부할 거야?"
+ ],
+ "They take my allergies seriously.": [
+  "Do you trust that restaurant?",
+  "그 식당 믿을 만해?"
+ ],
+ "She's looking after a relative.": [
+  "Why hasn't Jane been at work?",
+  "제인은 왜 계속 출근을 안 해?"
+ ],
+ "What if someone robs us?": [
+  "Let's camp right here on the street.",
+  "여기 길에서 그냥 야영하자."
+ ],
+ "He's less reliable than her.": [
+  "Which one should we hire?",
+  "둘 중 누구를 채용할까요?"
+ ],
+ "Don't I need the receipt to pick it up?": [
+  "Just show up at the counter.",
+  "카운터에 그냥 가시면 돼요."
+ ],
+ "What makes you so certain?": [
+  "I'm sure we'll win.",
+  "우리가 이길 게 확실해."
+ ],
+ "Don't bring that up at the funeral!": [
+  "I'll ask about the inheritance.",
+  "유산 얘기를 물어볼게."
+ ],
+ "I turned down the supervisor position.": [
+  "Congratulations on the promotion!",
+  "승진 축하해!"
+ ],
+ "Just because he's experienced doesn't mean he's right.": [
+  "He's been here twenty years.",
+  "그는 여기 20년 있었어."
+ ],
+ "I just keep track of my expenses.": [
+  "How do you save so much?",
+  "어떻게 그렇게 많이 모아?"
+ ],
+ "What brings you to Manhattan?": [
+  "I flew in this morning.",
+  "오늘 아침에 도착했어."
+ ],
+ "So he can take advantage of the senior discount.": [
+  "Why did your dad bring his ID?",
+  "아버지가 왜 신분증을 가져오셨어?"
+ ],
+ "A new trainer will take over.": [
+  "Who will teach the class now?",
+  "이제 수업은 누가 하나요?"
+ ],
+ "Why not drop one?": [
+  "The schedule is too packed.",
+  "일정이 너무 빽빽해."
+ ],
+ "I'll check my calendar as soon as I arrive.": [
+  "When can you confirm the date?",
+  "날짜는 언제 확정해 줄 수 있어?"
+ ],
+ "I'd like to set up an account.": [
+  "How can I help you today?",
+  "무엇을 도와드릴까요?"
+ ],
+ "Let's meet up by the exit.": [
+  "Where should we meet after the show?",
+  "공연 끝나고 어디서 만날까?"
+ ],
+ "I can always count on my crew.": [
+  "Who helps you when it's tough?",
+  "힘들 때 누가 도와줘?"
+ ],
+ "Stay away from the cliff!": [
+  "I want a photo at the edge!",
+  "끝에서 사진 찍고 싶어!"
+ ],
+ "We're looking into cheaper accommodations.": [
+  "The hotel is over budget.",
+  "호텔이 예산을 넘네요."
+ ],
+ "I guess determination pays off.": [
+  "She finally finished the marathon.",
+  "걔가 드디어 마라톤을 완주했어."
+ ],
+ "I feel sorry for your little sister.": [
+  "She lost the contest again.",
+  "동생이 또 대회에서 졌어."
+ ],
+ "We get over disagreements pretty quickly.": [
+  "Do you two fight a lot?",
+  "너희 많이 싸워?"
+ ],
+ "I'd go for the fried chicken.": [
+  "What would you order here?",
+  "여기서 뭘 주문할래?"
+ ],
+ "Grab your bag and get in the car!": [
+  "We're going to be late!",
+  "우리 늦겠어!"
+ ],
+ "You should reach out to the unemployment office.": [
+  "I lost my job last week.",
+  "지난주에 일자리를 잃었어."
+ ],
+ "Let's go with the purple tie.": [
+  "Which tie suits this shirt?",
+  "이 셔츠에 어느 넥타이가 맞을까?"
+ ],
+ "That liar won't take responsibility.": [
+  "Do you think he'll apologize?",
+  "그가 사과할 것 같아?"
+ ],
+ "You need to let go of your guilt.": [
+  "I still blame myself.",
+  "아직도 내 탓을 해."
+ ],
+ "They sell both stamps and envelopes.": [
+  "Where can I get stamps?",
+  "우표 어디서 살 수 있어?"
+ ],
+ "Lie down on the mat.": [
+  "How do we start the stretch?",
+  "스트레칭 어떻게 시작해요?"
+ ],
+ "I just can't keep up with my boss's demands.": [
+  "Why do you want to quit?",
+  "왜 그만두고 싶어?"
+ ],
+ "Help yourself to some ham.": [
+  "This looks delicious!",
+  "이거 맛있어 보여요!"
+ ],
+ "I'll take either green tea or lemonade.": [
+  "What would you like to drink?",
+  "무엇을 드시겠어요?"
+ ],
+ "Fill up your tray!": [
+  "Can I have a little more?",
+  "조금 더 먹어도 돼요?"
+ ],
+ "Watch out for cracks.": [
+  "I'll run down this old sidewalk.",
+  "이 낡은 인도를 달릴 거야."
+ ],
+ "I feel bad about losing your lipstick.": [
+  "You've been quiet all day.",
+  "하루 종일 조용하네."
+ ],
+ "Let's think this over before making a commitment.": [
+  "Should we sign today?",
+  "오늘 계약할까요?"
+ ],
+ "He has a ton of junk to store.": [
+  "Why does he need a garage?",
+  "왜 창고가 필요해?"
+ ],
+ "Say hi to the nice lady.": [
+  "Your neighbor is waving at us.",
+  "이웃분이 우리한테 손 흔드셔."
+ ],
+ "Do you think they have fried rice?": [
+  "Let's order from this place.",
+  "여기서 주문하자."
+ ],
+ "We didn't have a choice regarding the invitations.": [
+  "Why did you pick this design?",
+  "왜 이 디자인으로 했어?"
+ ],
+ "I've got to pay back a fortune.": [
+  "How are your student loans?",
+  "학자금 대출은 어때?"
+ ],
+ "She won fifty dollars as well as a trophy.": [
+  "What did she get for first place?",
+  "1등으로 뭘 받았어?"
+ ],
+ "Surgeons get paid the most.": [
+  "Which doctors earn the highest?",
+  "어떤 의사가 가장 많이 벌어?"
+ ],
+ "Keep an eye on my luggage.": [
+  "I'll wait here while you go.",
+  "네가 가는 동안 여기 있을게."
+ ],
+ "You have to keep your identity a secret.": [
+  "Can I tell my best friend?",
+  "제일 친한 친구한테 말해도 돼?"
+ ],
+ "Maybe I'll ask out my mechanic.": [
+  "Are you seeing anyone?",
+  "요즘 만나는 사람 있어?"
+ ],
+ "Wear something fancy so that you stand out.": [
+  "What should I wear to the audition?",
+  "오디션에 뭘 입어야 할까?"
+ ],
+ "You should give your accountant a call.": [
+  "I don't understand this tax form.",
+  "이 세금 서류를 모르겠어."
+ ],
+ "You should cut down on soft drinks.": [
+  "My dentist wasn't happy.",
+  "치과의사가 안 좋아하셨어요."
+ ],
+ "She's neither a chef nor a baker.": [
+  "Does she work in a kitchen?",
+  "그 사람 주방에서 일해?"
+ ],
+ "You mixed up the formulas.": [
+  "Why is my answer wrong?",
+  "제 답이 왜 틀렸죠?"
+ ],
+ "Can you check on the turkey?": [
+  "I'm free for a minute.",
+  "잠깐 시간 있어."
+ ],
+ "I usually get around by rail.": [
+  "Do you drive to work?",
+  "회사에 운전해서 가?"
+ ],
+ "She just stepped out to go someplace.": [
+  "Is your sister home?",
+  "네 언니 집에 있어?"
+ ],
+ "I don't know if it's poisonous.": [
+  "Can I touch this mushroom?",
+  "이 버섯 만져도 돼?"
+ ],
+ "Everyone was more than helpful.": [
+  "How was the staff?",
+  "직원들은 어땠어요?"
+ ],
+ "He showed me around the art gallery.": [
+  "What did you do with Tom?",
+  "톰하고 뭐 했어?"
+ ],
+ "I try to keep up with the latest looks.": [
+  "How are you always so stylish?",
+  "어떻게 항상 스타일이 좋아?"
+ ],
+ "Let's put on a Disney movie.": [
+  "The kids are getting restless.",
+  "애들이 지루해하네."
+ ],
+ "I'd get in touch with HR.": [
+  "Who should I report this to?",
+  "이걸 누구에게 알려야 하죠?"
+ ],
+ "What if we hire a magician?": [
+  "The party needs something fun.",
+  "파티에 재밌는 게 필요해."
+ ],
+ "I can't put up with small talk.": [
+  "Why do you skip the parties?",
+  "왜 파티에 안 가?"
+ ],
+ "Let me check with the translator.": [
+  "Is this wording correct?",
+  "이 표현이 맞나요?"
+ ],
+ "Stick with the basics for now.": [
+  "Should I try the advanced course?",
+  "고급 과정을 들어볼까요?"
+ ],
+ "If it weren't for the bonus, I would quit.": [
+  "Why do you stay at that company?",
+  "왜 그 회사에 계속 있어?"
+ ],
+ "Some interns like to keep in touch.": [
+  "Do you still hear from them?",
+  "아직 그 사람들 소식 들어?"
+ ],
+ "We usually eat out on Christmas Eve.": [
+  "Do you cook for the holidays?",
+  "명절에 요리해?"
+ ],
+ "The inspection might take a while.": [
+  "Can I wait in the car?",
+  "차에서 기다려도 될까요?"
+ ],
+ "Do you happen to have a charger?": [
+  "My phone is about to die.",
+  "휴대폰이 곧 꺼질 것 같아."
+ ],
+ "Why don't I babysit them?": [
+  "We can't find a sitter.",
+  "돌봐줄 사람을 못 찾겠어."
+ ],
+ "I can't tell the difference from the synthetic one.": [
+  "This one is real leather.",
+  "이건 진짜 가죽이야."
+ ],
+ "I'll pull over to the curb.": [
+  "I feel carsick.",
+  "차멀미가 나."
+ ],
+ "We always make time for a chat.": [
+  "You two must be so busy.",
+  "둘 다 엄청 바쁘겠네."
+ ],
+ "I dressed up for the seminar.": [
+  "Why the suit today?",
+  "오늘 왜 정장이야?"
+ ],
+ "Should you find anything abnormal, please report it.": [
+  "What if I notice a problem?",
+  "문제를 발견하면 어떻게 하죠?"
+ ],
+ "He's picky, don't you think?": [
+  "He sent the food back again.",
+  "또 음식을 돌려보냈어."
+ ],
+ "We're having Linda's pianist friends over for dinner.": [
+  "Why so many plates?",
+  "접시가 왜 이렇게 많아?"
+ ],
+ "Their lattes are the best by far.": [
+  "Why this cafe again?",
+  "왜 또 이 카페야?"
+ ],
+ "I almost passed out while jogging.": [
+  "Are you okay? You look pale.",
+  "괜찮아? 창백해 보여."
+ ]
+}
