@@ -784,6 +784,7 @@ function renderPattern(){
       const b=document.createElement('button');
       b.className='tile'+(t.placed?' placed':'')+(t.fr&&!done?' fr':'');
       b.textContent=t.text;
+      b.dataset.tid=t.id;
       if(!t.placed && !done) b.onclick=()=>{
         if(ans.length>=need()) return;
         t.placed=true; ans.push(t); renderAll();
@@ -796,8 +797,38 @@ function renderPattern(){
     el('confirmBtn').disabled = ans.length<need();
   }
 
+  // 1박자 줄에서 토큰별 화면 위치를 걷어 온다 — 전환 애니메이션의 출발점이다.
+  // `withPunct` 때문에 마지막 칸이 한 겹 감싸여 있으므로 자식 순회가 아니라 셀렉터로 순서를 얻는다.
+  function lineRects(){
+    const nodes=[...fillEl.querySelectorAll('.fill-word, .fill-given, .fill-blank')];
+    const at={}; let n=0;
+    runs.forEach(r=>{
+      const node=nodes[n++]; if(!node) return;
+      const rect=node.getBoundingClientRect();
+      if(r.fr) at[r.i]=rect; else r.idx.forEach(i=>{ at[i]=rect; });
+    });
+    return at;
+  }
+  // 낱말이 그냥 사라지면 전환이 '리셋'으로 읽힌다 — 줄에 있던 자리에서 뱅크로 내려앉게 한다
+  function flipBankFrom(at){
+    bankEl.querySelectorAll('.tile').forEach(b=>{
+      const from=at[+b.dataset.tid]; if(!from) return;
+      const to=b.getBoundingClientRect();
+      const dx=from.left-to.left, dy=from.top-to.top;
+      b.style.transformOrigin='left top';
+      b.style.transform=`translate(${dx}px,${dy}px)`;
+      b.style.opacity='.45';
+      requestAnimationFrame(()=>{
+        b.style.transition='transform .44s cubic-bezier(.32,.02,.24,1), opacity .44s ease';
+        b.style.transform='none'; b.style.opacity='1';
+      });
+      setTimeout(()=>{ b.style.transition=''; b.style.transform=''; b.style.opacity=''; b.style.transformOrigin=''; }, 500);
+    });
+  }
+
   // 1박자 통과 — 같은 카드·같은 문장에서 줄이 다시 열리고 뱅크가 문장 전체로 갈린다
   function toPhase2(){
+    const at=lineRects();                       // 줄을 비우기 전에 위치를 먼저 잡는다
     phase=1; ans=[];
     bank=shuffle(tok.map((w,i)=>({id:i, text:w.toLowerCase(), placed:false, fr:flag[i]})));
     setProgress(2);
@@ -807,6 +838,7 @@ function renderPattern(){
     const m=el('meanLine'); m.classList.remove('hidden');
     m.innerHTML=`<span class="rv-chip fr">${escapeHtml(pmean||'')}</span>`;
     renderAll();
+    flipBankFrom(at);
   }
 
   function finish(){
