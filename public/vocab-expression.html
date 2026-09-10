@@ -147,9 +147,19 @@
   .pf-ex-kr { font-size:13px; color:#9aa8bc; margin-top:2px; }
 
   /* 배열 — 인라인 문장 채우기 */
-  .fill { position:relative; display:flex; flex-wrap:wrap; align-items:center; gap:7px 8px; margin-top:16px; min-height:44px; }
+  .fill { position:relative; display:flex; flex-wrap:wrap; align-items:center; gap:7px 8px; margin-top:16px; min-height:44px;
+    transition:opacity .28s ease; }
+  .fill.fade-out { opacity:0; }
   .fill-word { background:#eaf1fb; border:1px solid #cdddf3; border-radius:9px; padding:6px 13px; font-size:17px; color:#2f3e52; cursor:pointer; }
   .fill-blank { min-width:52px; border-bottom:2px solid #b9c7db; height:26px; }
+  .grow-in { animation:growIn .34s ease both; }
+  @keyframes growIn { from{ opacity:0; transform:translateY(5px);} to{ opacity:1; transform:none;} }
+  /* 1박자 완료를 먼저 인정한다 — 곧바로 줄을 비우면 '회수'로 읽힌다 */
+  .fill-word.ok-pop { animation:okPop .34s ease; }
+  @keyframes okPop { 0%{transform:scale(1);} 42%{transform:scale(1.13);} 100%{transform:scale(1);} }
+  /* 2박자 재료가 도착하는 방향 — 위에서 끌어내리는 게 아니라 아래에서 올라온다 */
+  .bank.bank-in .tile { animation:bankIn .4s cubic-bezier(.32,.02,.24,1) both; animation-delay:calc(var(--i, 0) * 45ms); }
+  @keyframes bankIn { from{ opacity:0; transform:translateY(16px);} to{ opacity:1; transform:none;} }
   /* 2박자에서 타이틀이 문장 뜻으로 바뀔 때 표현 뜻은 초록 칩으로 남아 연결을 잇는다.
      `이 표현 …` 처럼 라벨을 붙이면 화면 문구로 어색하고, 칩은 문장 해석의 일부로 읽히지 않는다. */
   .expand-mean { margin-top:6px; }
@@ -729,19 +739,6 @@ function frameFlags(tokens, segs){
   });
   return flags;
 }
-// 2박자 배열 단위 — **프레임 조각은 한 타일**, 그 밖은 낱말마다 한 타일.
-// 1박자에 세운 표현을 낱말로 쪼개 뱅크에 되돌리면 "애써 넣은 걸 다 뱉어낸다"로 읽힌다.
-// 한 덩어리로 굳어 재료가 되는 쪽이 같은 과제(문장 전체 배열)를 유지하면서도
-// 방금 한 일이 **승급**되는 것으로 읽힌다 — 표현이 하나의 단위라는 사실도 같이 남는다.
-function patternUnits(tokens, flags){
-  const us=[]; let cur=null;
-  tokens.forEach((w,i)=>{
-    if(flags[i] && cur && cur.fr){ cur.ws.push(w); cur.idx.push(i); return; }
-    cur={fr:!!flags[i], ws:[w], idx:[i]};
-    us.push(cur);
-  });
-  return us;
-}
 // 연속한 비프레임 토큰을 한 덩어리로 묶는다 — 1박자에서 회색으로 주어지는 단위다
 function slotRuns(tokens, flags){
   const runs=[]; let cur=null;
@@ -757,10 +754,9 @@ function renderPattern(){
   const pmean=((item.pattern||{}).meaning||'').trim(), punct=trailPunct(s.en);
   const tok=tokenize(s.en), flag=frameFlags(tok, item.baseSegs);
   const runs=slotRuns(tok, flag);
-  const units=patternUnits(tok, flag);
   const frameIdx=tok.map((w,i)=>i).filter(i=>flag[i]);
 
-  let phase=0, done=false;
+  let phase=0, done=false, switching=false, bankIn=false;
   let bank=shuffle(frameIdx.map((ti,i)=>({id:i, text:tok[ti].toLowerCase(), placed:false, fr:true})));
   let ans=[];
 
@@ -786,7 +782,7 @@ function renderPattern(){
     </div>`;
 
   const fillEl=el('fill'), bankEl=el('bank');
-  const need=()=> phase===0 ? frameIdx.length : units.length;
+  const need=()=> phase===0 ? frameIdx.length : tok.length;
 
   function renderFill(){
     const parts=[];
@@ -800,7 +796,7 @@ function renderPattern(){
           : `<span class="fill-blank"></span>`);
       });
     } else {
-      for(let i=0;i<units.length;i++){
+      for(let i=0;i<tok.length;i++){
         parts.push(i<ans.length
           ? `<span class="fill-word${ans[i].fr?' frame-w':''} grow-in" data-i="${i}">${escapeHtml(ans[i].text)}</span>`
           : `<span class="fill-blank grow-in"></span>`);
@@ -817,62 +813,41 @@ function renderPattern(){
       const b=document.createElement('button');
       b.className='tile'+(t.placed?' placed':'')+(t.fr&&!done?' fr':'');
       b.textContent=t.text;
-      b.dataset.tid=t.id;
+      if(bankIn) b.style.setProperty('--i', String(bankEl.childElementCount));
       if(!t.placed && !done) b.onclick=()=>{
         if(ans.length>=need()) return;
         t.placed=true; ans.push(t); renderAll();
       };
       bankEl.appendChild(b);
     });
+    bankEl.classList.toggle('bank-in', bankIn);
+    if(bankIn) setTimeout(()=>bankEl.classList.remove('bank-in'), 700);
   }
   function renderAll(){
     renderFill(); renderBank();
     el('confirmBtn').disabled = ans.length<need();
   }
 
-  // 1박자 줄에서 토큰별 화면 위치를 걷어 온다 — 전환 애니메이션의 출발점이다.
-  // `withPunct` 때문에 마지막 칸이 한 겹 감싸여 있으므로 자식 순회가 아니라 셀렉터로 순서를 얻는다.
-  function lineRects(){
-    const nodes=[...fillEl.querySelectorAll('.fill-word, .fill-given, .fill-blank')];
-    const byTok={}; let n=0;
-    runs.forEach(r=>{
-      const node=nodes[n++]; if(!node) return;
-      const rect=node.getBoundingClientRect();
-      if(r.fr) byTok[r.i]=rect; else r.idx.forEach(i=>{ byTok[i]=rect; });
-    });
-    // 프레임 조각은 2박자에서 한 타일로 합쳐지므로 첫 낱말 자리에서 출발한다(= 합쳐지는 모양)
-    return units.map(u=>byTok[u.idx[0]]);
-  }
-  // 낱말이 그냥 사라지면 전환이 '리셋'으로 읽힌다 — 줄에 있던 자리에서 뱅크로 내려앉게 한다
-  function flipBankFrom(at){
-    bankEl.querySelectorAll('.tile').forEach(b=>{
-      const from=at[+b.dataset.tid]; if(!from) return;
-      const to=b.getBoundingClientRect();
-      const dx=from.left-to.left, dy=from.top-to.top;
-      b.style.transformOrigin='left top';
-      b.style.transform=`translate(${dx}px,${dy}px)`;
-      b.style.opacity='.45';
-      requestAnimationFrame(()=>{
-        b.style.transition='transform .44s cubic-bezier(.32,.02,.24,1), opacity .44s ease';
-        b.style.transform='none'; b.style.opacity='1';
-      });
-      setTimeout(()=>{ b.style.transition=''; b.style.transform=''; b.style.opacity=''; b.style.transformOrigin=''; }, 500);
-    });
-  }
-
-  // 1박자 통과 — 같은 카드·같은 문장에서 줄이 다시 열리고 뱅크가 문장 전체로 갈린다
+  // 1박자 통과 → 2박자. **먼저 1박자 완료를 인정하고**(놓은 프레임이 초록으로 팝) 그
+  // 다음에 줄이 제자리에서 비고, 뱅크가 아래에서 올라온다. 내가 놓은 타일을 뱅크로
+  // 끌어내리면 순서가 '회수'로 읽힌다 — 완료 → 재료 도착으로 읽히게 방향을 바꾼 것이다.
   function toPhase2(){
-    const at=lineRects();                       // 줄을 비우기 전에 위치를 먼저 잡는다
-    phase=1; ans=[];
-    bank=shuffle(units.map((u,i)=>({id:i, text:u.ws.join(' ').toLowerCase(), placed:false, fr:u.fr})));
-    setProgress(2);
-    el('koLine').textContent=s.kr;              // 표현 뜻 → 문장 뜻
-    el('koLine').classList.add('grow-in');
-    el('sentKr').classList.add('hidden');
-    const m=el('meanLine'); m.classList.remove('hidden');
-    m.innerHTML=`<span class="rv-chip fr">${escapeHtml(pmean||'')}</span>`;
-    renderAll();
-    flipBankFrom(at);
+    if(switching) return;
+    switching=true;
+    fillEl.querySelectorAll('.fill-word.frame-w').forEach(w=> w.classList.add('ok-pop'));
+    setTimeout(()=>{ fillEl.classList.add('fade-out'); }, 260);
+    setTimeout(()=>{
+      phase=1; ans=[]; switching=false;
+      bank=shuffle(tok.map((w,i)=>({id:i, text:w.toLowerCase(), placed:false, fr:flag[i]})));
+      setProgress(2);
+      el('koLine').textContent=s.kr;              // 표현 뜻 → 문장 뜻
+      el('koLine').classList.add('grow-in');
+      el('sentKr').classList.add('hidden');
+      const m=el('meanLine'); m.classList.remove('hidden');
+      m.innerHTML=`<span class="rv-chip fr">${escapeHtml(pmean||'')}</span>`;
+      bankIn=true; renderAll(); bankIn=false;
+      fillEl.classList.remove('fade-out');
+    }, 560);
   }
 
   function finish(){
@@ -880,7 +855,7 @@ function renderPattern(){
     el('card').classList.add('correct');
     if(!el('card').querySelector('.check-mark')){ const c=document.createElement('div'); c.className='check-mark'; c.textContent='✓'; el('card').appendChild(c); }
     builtSet.add(s.en);
-    ans=units.map(u=>({text:u.ws.join(' '), placed:true, fr:u.fr}));   // 원문 대소문자로 교정
+    ans=tok.map((w,i)=>({text:w, placed:true, fr:flag[i]}));   // 원문 대소문자로 교정
     renderFill();
     el('micFloat').classList.add('hidden');
     el('payoffBox').innerHTML=patternPayoffHtml(item);
@@ -889,9 +864,8 @@ function renderPattern(){
   }
 
   function grade(){
-    // 단위마다 여러 낱말일 수 있어 구분자를 낱말 공백과 다르게 둔다
-    const target=(phase===0 ? frameIdx.map(i=>tok[i]) : units.map(u=>u.ws.join(' '))).map(w=>w.toLowerCase()).join('|');
-    return ans.map(x=>x.text).join('|')===target;
+    const target=(phase===0 ? frameIdx.map(i=>tok[i]) : tok).map(w=>w.toLowerCase()).join(' ');
+    return ans.map(x=>x.text).join(' ')===target;
   }
   el('confirmBtn').onclick=()=>{
     if(ans.length<need()) return;
@@ -903,7 +877,7 @@ function renderPattern(){
     }, 700);
   };
   el('revealBtn').onclick=()=>{
-    if(phase===0){ ans=frameIdx.map(i=>({text:tok[i].toLowerCase(), placed:true, fr:true})); return toPhase2(); }
+    if(phase===0){ ans=frameIdx.map(i=>({text:tok[i].toLowerCase(), placed:true, fr:true})); renderFill(); return toPhase2(); }
     finish();
   };
 
@@ -1041,7 +1015,7 @@ function renderExpand(){
     }, 700);
   };
   el('revealBtn').onclick=()=>{
-    if(phase===0){ ans=frameIdx.map(i=>({text:tok[i].toLowerCase(), placed:true, fr:true})); return toPhase2(); }
+    if(phase===0){ ans=frameIdx.map(i=>({text:tok[i].toLowerCase(), placed:true, fr:true})); renderFill(); return toPhase2(); }
     finish();
   };
 
@@ -1057,21 +1031,19 @@ function renderExpand(){
 // **표현은 보여주지 않는다** — 여기서 유의미한 액션이 표현을 떠올려 쓰는 것이다.
 //
 // 자극을 무엇으로 줄지는 두 방식을 옵션(`ve:spk`)으로 비교한다:
-//   A `kr` — **한국어 문장**을 주고 영어로 만든다. 대상은 [2]·[3]에서 만든 문장이 아닌
-//            새 문장(같은 프레임을 쓰는 응용 예문 중 가장 짧은 것)이라 전이가 된다.
-//   B `en` — **A의 영어 질문**을 주고 영어로 답한다(푸는 동안 해석 없음, 답한 뒤 공개).
-//            질문(`item.ask`)은 학습 문장이 답이 되도록 저작돼 있어 대상이 학습 문장이다
-//            — 방금 배열한 문장이지만 자극이 영어이고 표현을 손으로 써야 해 과제가 다르다.
+//   A `kr` — **한국어 문장**을 주고 영어로 만든다.
+//   B `en` — **A의 영어 질문**을 주고 영어로 답한다(해석은 함께 보여준다).
+// **대상 문장은 두 방식이 같다** — [2]·[3]에서 만든 문장이 아니라 같은 프레임을 쓰는
+// 응용 예문 중 가장 짧은 것(`speakTarget`)이다. 앞에서 쓴 문장을 다시 쓰면 표현을 내가
+// 써먹는다는 효용이 나오지 않는다. 그래서 두 방식은 **자극 언어만** 다르다.
 function speakTarget(item){
   const aps=(item.apply||[]).filter(a=>a.en!==item.sentence.en);
   const pool=aps.length?aps:(item.apply||[]);
   return pool.reduce((b,a)=> b && b.en.split(/\s+/).length<=a.en.split(/\s+/).length ? b : a, null);
 }
 function renderSpeak(){
-  const item=sessionItems[itemIdx];
-  const byEn = spkMode==='en' && item.ask;
-  const t = byEn ? {en:item.sentence.en, kr:item.sentence.kr, punct:trailPunct(item.sentence.en), segs:item.baseSegs}
-                 : speakTarget(item);
+  const item=sessionItems[itemIdx], t=speakTarget(item);
+  const byEn = spkMode==='en' && t.ask;
   setProgress(3);
 
   const cells=[];
@@ -1086,8 +1058,8 @@ function renderSpeak(){
     ? `<div class="sit-turn a">
           <div class="sit-role">A</div>
           <div class="sit-bubble">
-            <div class="sit-en">${escapeHtml(item.ask.en)}</div>
-            <div class="sit-kr hidden" id="askKr">${escapeHtml(item.ask.kr)}</div>
+            <div class="sit-en">${escapeHtml(t.ask.en)}</div>
+            <div class="sit-kr">${escapeHtml(t.ask.kr)}</div>
           </div>
         </div>
         <div class="sp-q sp-after">배운 표현을 넣어 답해 보세요</div>`
@@ -1136,7 +1108,6 @@ function renderSpeak(){
     builtSet.add(t.en); made.push({en:t.en, kr:t.kr});
     wrongBox.classList.add('hidden'); el('revealNote').classList.add('hidden');
     el('micFloat').classList.add('hidden');
-    if(el('askKr')) el('askKr').classList.remove('hidden');   // 영어 자극 방식은 답한 뒤 해석을 연다
     // 완성된 문장을 한 줄로 다시 보여준다 — 내가 세운 결과물이다
     el('payoffBox').innerHTML=`<div class="payoff">
         <div class="pf-ok"><span class="ic">✓</span>좋아요!</div>

@@ -36,7 +36,7 @@ GSE_CSV   = Path(os.environ.get("VE_GSE_CSV",   DL / "gse_corrected_final_0624 -
 OUT = Path(__file__).resolve().parent.parent / "public" / "vocab-expression.data.json"
 # [5] 상황 단계용 A 대사 — 소스 CSV에 상황 필드가 없어 손으로 적은 프로토타입 문안
 SITUATIONS = Path(__file__).resolve().parent / "vocab_expression_situations.json"
-# [4] 질문에 답하기 단계용 A 대사 — 학습 문장이 짧은 답이 되는 질문. 손으로 적은 프로토타입 문안
+# [4] 말해보기 옵션 B용 A 대사 — 그 문장이 짧은 답이 되는 질문. 손으로 적은 프로토타입 문안
 QUESTIONS = Path(__file__).resolve().parent / "vocab_expression_questions.json"
 
 MAX_ITEMS = int(os.environ.get("VE_MAX_ITEMS", "0"))    # 0이면 전체
@@ -460,7 +460,7 @@ def segment(sentence, literals):
 
 
 def load_questions():
-    """학습 문장(en) → {en, kr}. 파일이 없어도 빌드는 진행한다([4]는 해석 없이 뜻만)."""
+    """영어 문장(en) → {en, kr}. 학습 문장과 말해보기 대상 문장 양쪽 키가 들어 있다."""
     if not QUESTIONS.exists():
         return {}
     raw = json.loads(QUESTIONS.read_text(encoding="utf-8"))
@@ -651,7 +651,9 @@ def main():
             "traps": [],
             "_trapSent": sents[cov[1]] if len(cov) > 1 else sents[0],
             "baseSegs": segd[0]["segs"],
-            "apply": [{"en": g["sents"][i]["en"], "kr": g["sents"][i]["kr"], **segd[i]}
+            # 말해보기 옵션 B는 응용 예문을 대상으로 하므로 그쪽에도 질문을 붙인다
+            "apply": [{"en": g["sents"][i]["en"], "kr": g["sents"][i]["kr"], **segd[i],
+                       "ask": questions.get(g["sents"][i]["en"])}
                       for i in cov[1:]],
             "siblings": g["sents"][1:3],
         })

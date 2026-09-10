@@ -86,7 +86,11 @@
               "s": "get up"
             }
           ],
-          "punct": "!"
+          "punct": "!",
+          "ask": {
+            "en": "Mom, I'm still in bed.",
+            "kr": "엄마, 나 아직 침대야."
+          }
         }
       ],
       "siblings": [
@@ -184,7 +188,11 @@
               "s": "you"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "Do you have a minute?",
+            "kr": "잠깐 시간 있어?"
+          }
         },
         {
           "en": "You should go talk to her.",
@@ -203,7 +211,8 @@
               "s": "her"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -303,7 +312,11 @@
               "s": "on"
             }
           ],
-          "punct": "!"
+          "punct": "!",
+          "ask": {
+            "en": "It's freezing outside!",
+            "kr": "밖이 엄청 추워!"
+          }
         },
         {
           "en": "Put your dress on.",
@@ -322,7 +335,8 @@
               "s": "on"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -412,7 +426,11 @@
               "s": "sad"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "I didn't make the team.",
+            "kr": "팀에 못 들어갔어."
+          }
         },
         {
           "en": "Don't be angry.",
@@ -427,7 +445,8 @@
               "s": "angry"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "Don't be happy about that.",
@@ -442,7 +461,8 @@
               "s": "happy about that"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "Don't be a good friend to her.",
@@ -457,7 +477,8 @@
               "s": "a good friend to her"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "Don't be late again.",
@@ -472,7 +493,8 @@
               "s": "late again"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -564,7 +586,11 @@
               "s": "explain"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "I don't understand at all.",
+            "kr": "전혀 이해가 안 돼요."
+          }
         },
         {
           "en": "Let me try.",
@@ -579,7 +605,8 @@
               "s": "try"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "Let me help you.",
@@ -594,7 +621,8 @@
               "s": "help you"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "Let me ask my mom.",
@@ -609,7 +637,8 @@
               "s": "ask my mom"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "Let me think about it.",
@@ -624,7 +653,8 @@
               "s": "think about it"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -715,7 +745,11 @@
               "s": "sit down"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": {
+            "en": "I've been standing all day.",
+            "kr": "하루 종일 서 있었어."
+          }
         },
         {
           "en": "Why don't you call her?",
@@ -730,7 +764,8 @@
               "s": "call her"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": null
         }
       ],
       "siblings": [
@@ -821,7 +856,11 @@
               "s": "us are here"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "Is anyone missing?",
+            "kr": "빠진 사람 있어?"
+          }
         },
         {
           "en": "Not all of them liked it.",
@@ -840,7 +879,8 @@
               "s": "them liked it"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "She spends all of her money on clothes.",
@@ -859,7 +899,8 @@
               "s": "her money on clothes"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -949,7 +990,8 @@
               "s": "to my place"
             }
           ],
-          "punct": "!"
+          "punct": "!",
+          "ask": null
         },
         {
           "en": "Can I come over?",
@@ -964,7 +1006,11 @@
               "s": "come over"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": {
+            "en": "I'm home alone tonight.",
+            "kr": "오늘 밤 집에 혼자 있어."
+          }
         }
       ],
       "siblings": [
@@ -1062,7 +1108,8 @@
               "s": "there"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "Let's go back home.",
@@ -1081,7 +1128,11 @@
               "s": "home"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "It's getting dark.",
+            "kr": "어두워지네."
+          }
         }
       ],
       "siblings": [
@@ -1188,7 +1239,11 @@
               "s": "o'clock"
             }
           ],
-          "punct": "!"
+          "punct": "!",
+          "ask": {
+            "en": "What time is lunch?",
+            "kr": "점심 몇 시야?"
+          }
         },
         {
           "en": "The class starts at twelve o'clock.",
@@ -1211,7 +1266,8 @@
               "s": "o'clock"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "Let's leave at nine o'clock.",
@@ -1234,7 +1290,8 @@
               "s": "o'clock"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "I have a guitar lesson at six o'clock.",
@@ -1257,7 +1314,8 @@
               "s": "o'clock"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "Let's meet at school at seven o'clock.",
@@ -1280,7 +1338,8 @@
               "s": "o'clock"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -1378,7 +1437,11 @@
               "s": "a dream"
             }
           ],
-          "punct": "!"
+          "punct": "!",
+          "ask": {
+            "en": "You won first place!",
+            "kr": "1등 했어!"
+          }
         }
       ],
       "siblings": [
@@ -1472,7 +1535,11 @@
               "s": "my shoes"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": {
+            "en": "Come on in!",
+            "kr": "어서 들어와!"
+          }
         },
         {
           "en": "You can take off your coat.",
@@ -1491,7 +1558,8 @@
               "s": "your coat"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -1581,7 +1649,8 @@
               "s": "a necklace"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": null
         },
         {
           "en": "How about Thursday?",
@@ -1596,7 +1665,11 @@
               "s": "Thursday"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": {
+            "en": "Wednesday doesn't work for me.",
+            "kr": "수요일은 안 되겠어."
+          }
         }
       ],
       "siblings": [
@@ -1687,7 +1760,8 @@
               "s": "too much"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "You work too much.",
@@ -1702,7 +1776,11 @@
               "s": "too much"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "I was at the office until midnight.",
+            "kr": "자정까지 사무실에 있었어."
+          }
         }
       ],
       "siblings": [
@@ -1792,7 +1870,8 @@
               "s": "tell them I said hi"
             }
           ],
-          "punct": "!"
+          "punct": "!",
+          "ask": null
         },
         {
           "en": "Be sure to wear something nice!",
@@ -1807,7 +1886,11 @@
               "s": "wear something nice"
             }
           ],
-          "punct": "!"
+          "punct": "!",
+          "ask": {
+            "en": "It's a fancy restaurant.",
+            "kr": "고급 레스토랑이야."
+          }
         }
       ],
       "siblings": [
@@ -1906,7 +1989,8 @@
               "s": "the time"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "We finished most of the pizza.",
@@ -1925,7 +2009,11 @@
               "s": "the pizza"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "Is there any left?",
+            "kr": "남은 거 있어?"
+          }
         }
       ],
       "siblings": [
@@ -2015,7 +2103,11 @@
               "s": "is yours"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": {
+            "en": "Someone left a jacket here.",
+            "kr": "누가 재킷을 두고 갔어."
+          }
         }
       ],
       "siblings": [
@@ -2106,7 +2198,11 @@
               "s": "close the window"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": {
+            "en": "It's so noisy in here.",
+            "kr": "여기 너무 시끄럽네."
+          }
         },
         {
           "en": "Would you come with me?",
@@ -2121,7 +2217,8 @@
               "s": "come with me"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": null
         }
       ],
       "siblings": [
@@ -2219,7 +2316,11 @@
               "s": "now"
             }
           ],
-          "punct": "!"
+          "punct": "!",
+          "ask": {
+            "en": "I want to quit.",
+            "kr": "그만두고 싶어."
+          }
         },
         {
           "en": "We can't give up without a fight!",
@@ -2238,7 +2339,8 @@
               "s": "without a fight"
             }
           ],
-          "punct": "!"
+          "punct": "!",
+          "ask": null
         }
       ],
       "siblings": [
@@ -2333,7 +2435,11 @@
               "s": "move on"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "I think that's settled.",
+            "kr": "그건 정리된 것 같네요."
+          }
         },
         {
           "en": "Shall we move on?",
@@ -2348,7 +2454,8 @@
               "s": "move on"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": null
         }
       ],
       "siblings": [
@@ -2442,7 +2549,11 @@
               "s": "the good news"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "I have two things to tell you.",
+            "kr": "말할 게 두 가지 있어."
+          }
         },
         {
           "en": "Let's start with the kitchen.",
@@ -2461,7 +2572,8 @@
               "s": "the kitchen"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -2555,7 +2667,11 @@
               "s": "the team"
             }
           ],
-          "punct": "!"
+          "punct": "!",
+          "ask": {
+            "en": "I'm the new designer.",
+            "kr": "새로 온 디자이너입니다."
+          }
         },
         {
           "en": "Welcome to the United States!",
@@ -2570,7 +2686,8 @@
               "s": "the United States"
             }
           ],
-          "punct": "!"
+          "punct": "!",
+          "ask": null
         }
       ],
       "siblings": [
@@ -2664,7 +2781,8 @@
               "s": "bed"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "It's time for school.",
@@ -2679,7 +2797,11 @@
               "s": "school"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "Why are you waking me up?",
+            "kr": "왜 날 깨우는 거야?"
+          }
         }
       ],
       "siblings": [
@@ -2778,7 +2900,11 @@
               "s": "questions"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "Why? And how? And when?",
+            "kr": "왜? 어떻게? 언제?"
+          }
         },
         {
           "en": "A lot of people live in this city.",
@@ -2793,7 +2919,8 @@
               "s": "people live in this city"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "We don't have a lot of time.",
@@ -2812,7 +2939,8 @@
               "s": "time"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "Do you have a lot of homework?",
@@ -2831,7 +2959,8 @@
               "s": "homework"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": null
         }
       ],
       "siblings": [
@@ -2921,7 +3050,11 @@
               "s": "him"
             }
           ],
-          "punct": "!?"
+          "punct": "!?",
+          "ask": {
+            "en": "He's in the hospital.",
+            "kr": "그 사람 병원에 있어."
+          }
         },
         {
           "en": "What happened to her?",
@@ -2936,7 +3069,8 @@
               "s": "her"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": null
         }
       ],
       "siblings": [
@@ -3026,7 +3160,11 @@
               "s": "go to bed"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "I'm so tired.",
+            "kr": "너무 피곤해."
+          }
         },
         {
           "en": "We should go to bed.",
@@ -3041,7 +3179,8 @@
               "s": "go to bed"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -3131,7 +3270,11 @@
               "s": "have fun"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": {
+            "en": "I just got back from the party.",
+            "kr": "파티에서 막 돌아왔어."
+          }
         }
       ],
       "siblings": [
@@ -3229,7 +3372,8 @@
               "s": "you"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "It's all thanks to my wife.",
@@ -3248,7 +3392,11 @@
               "s": "my wife"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "How did you finish the book?",
+            "kr": "책을 어떻게 다 썼어요?"
+          }
         }
       ],
       "siblings": [
@@ -3342,7 +3490,11 @@
               "s": "the paintings"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "How did you choose?",
+            "kr": "어떻게 골랐어?"
+          }
         },
         {
           "en": "He gave each of us a hundred dollars.",
@@ -3361,7 +3513,8 @@
               "s": "us a hundred dollars"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "Each of them said the same thing.",
@@ -3376,7 +3529,8 @@
               "s": "them said the same thing"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "Each of the students took one pencil.",
@@ -3391,7 +3545,8 @@
               "s": "the students took one pencil"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "Each of us has our own ideas.",
@@ -3406,7 +3561,8 @@
               "s": "us has our own ideas"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -3513,7 +3669,8 @@
               "s": "back"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "I'll call you back later.",
@@ -3540,7 +3697,11 @@
               "s": "later"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "Can we talk right now?",
+            "kr": "지금 통화 가능해?"
+          }
         }
       ],
       "siblings": [
@@ -3626,7 +3787,11 @@
               "s": "what's going on"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "Why is everyone shouting?",
+            "kr": "왜 다들 소리치는 거야?"
+          }
         }
       ],
       "siblings": [
@@ -3722,7 +3887,8 @@
               "s": "bed"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "Let's get out of this place.",
@@ -3741,7 +3907,11 @@
               "s": "this place"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "This bar is awful.",
+            "kr": "이 바 최악이네."
+          }
         }
       ],
       "siblings": [
@@ -3836,7 +4006,11 @@
               "s": "time"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "Should we hurry?",
+            "kr": "서둘러야 할까?"
+          }
         },
         {
           "en": "We have plenty of food at our place.",
@@ -3855,7 +4029,8 @@
               "s": "food at our place"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -3950,7 +4125,11 @@
               "s": "her"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "Do you know this author?",
+            "kr": "이 작가 알아?"
+          }
         },
         {
           "en": "I've never heard of it.",
@@ -3969,7 +4148,8 @@
               "s": "it"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -4065,7 +4245,11 @@
               "s": "dinner tonight"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "Who's cooking?",
+            "kr": "요리는 누가 해?"
+          }
         },
         {
           "en": "I'm in charge of a new project.",
@@ -4084,7 +4268,8 @@
               "s": "a new project"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -4174,7 +4359,11 @@
               "s": "the road"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "Look at that billboard!",
+            "kr": "저 광고판 좀 봐!"
+          }
         },
         {
           "en": "You never pay attention to me!",
@@ -4193,7 +4382,8 @@
               "s": "me"
             }
           ],
-          "punct": "!"
+          "punct": "!",
+          "ask": null
         }
       ],
       "siblings": [
@@ -4279,7 +4469,11 @@
               "s": "it this time"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": {
+            "en": "My car won't start again.",
+            "kr": "차가 또 시동이 안 걸려."
+          }
         }
       ],
       "siblings": [
@@ -4374,7 +4568,8 @@
               "s": "the whole class"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "Don't say that in front of mom.",
@@ -4393,7 +4588,11 @@
               "s": "mom"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "Dad lost his job.",
+            "kr": "아빠 실직했어."
+          }
         }
       ],
       "siblings": [
@@ -4487,7 +4686,8 @@
               "s": "fine"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "Everything turned out great.",
@@ -4506,7 +4706,11 @@
               "s": "great"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "How was the wedding?",
+            "kr": "결혼식 어땠어?"
+          }
         }
       ],
       "siblings": [
@@ -4596,7 +4800,11 @@
               "s": "take a break"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "I've been working for six hours.",
+            "kr": "여섯 시간째 일하고 있어."
+          }
         }
       ],
       "siblings": [
@@ -4690,7 +4898,8 @@
               "s": "minutes"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "I bought a couple of t-shirts.",
@@ -4709,7 +4918,11 @@
               "s": "t-shirts"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "What did you get at the mall?",
+            "kr": "쇼핑몰에서 뭐 샀어?"
+          }
         }
       ],
       "siblings": [
@@ -4811,7 +5024,8 @@
               "s": "up"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "Clean this up first.",
@@ -4834,7 +5048,11 @@
               "s": "first"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "Can I go play now?",
+            "kr": "이제 놀아도 돼요?"
+          }
         }
       ],
       "siblings": [
@@ -4929,7 +5147,11 @@
               "s": "song"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "Is the concert over?",
+            "kr": "공연 끝났어?"
+          }
         },
         {
           "en": "I want to read one more chapter.",
@@ -4948,7 +5170,8 @@
               "s": "chapter"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -5043,7 +5266,11 @@
               "s": "my passport"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "Just your wallet?",
+            "kr": "지갑만?"
+          }
         },
         {
           "en": "My rent has gone up, along with everything else.",
@@ -5062,7 +5289,8 @@
               "s": "everything else"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -5152,7 +5380,11 @@
               "s": "your name here"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "Where do I start?",
+            "kr": "어디부터 하면 되죠?"
+          }
         },
         {
           "en": "Just fill out this application.",
@@ -5171,7 +5403,8 @@
               "s": "this application"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -5267,7 +5500,8 @@
               "s": "aren't I"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": null
         },
         {
           "en": "I'm the leader here, aren't I?",
@@ -5286,7 +5520,8 @@
               "s": "aren't I"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": null
         },
         {
           "en": "I'm tall, too, aren't I?",
@@ -5305,7 +5540,11 @@
               "s": "aren't I"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": {
+            "en": "Your brother is so tall.",
+            "kr": "네 형은 키가 엄청 크네."
+          }
         }
       ],
       "siblings": [
@@ -5399,7 +5638,8 @@
               "s": "others"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "Don't rely on AI for everything.",
@@ -5418,7 +5658,11 @@
               "s": "AI for everything"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "I let the app write it.",
+            "kr": "앱이 써줬어."
+          }
         }
       ],
       "siblings": [
@@ -5529,7 +5773,8 @@
               "s": "my friends"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "You have the same job as my dad.",
@@ -5556,7 +5801,8 @@
               "s": "my dad"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "My parents don't speak the same language as us.",
@@ -5583,7 +5829,8 @@
               "s": "us"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "You have the same name as my brother.",
@@ -5610,7 +5857,8 @@
               "s": "my brother"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "They have the same problems as us.",
@@ -5637,7 +5885,11 @@
               "s": "us"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "Is their team doing better?",
+            "kr": "그쪽 팀은 좀 나아?"
+          }
         }
       ],
       "siblings": [
@@ -5727,7 +5979,8 @@
               "s": "you lied to him"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "I knew it ever since we first met.",
@@ -5746,7 +5999,11 @@
               "s": "we first met"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "When did you realize?",
+            "kr": "언제 알았어?"
+          }
         }
       ],
       "siblings": [
@@ -5837,7 +6094,11 @@
               "s": "what"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "It might snow tomorrow.",
+            "kr": "내일 눈 올지도 몰라."
+          }
         },
         {
           "en": "You can call no matter how late it is.",
@@ -5856,7 +6117,8 @@
               "s": "how late it is"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -5951,7 +6213,11 @@
               "s": "fifty dollars"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "What's my budget?",
+            "kr": "예산이 얼마예요?"
+          }
         },
         {
           "en": "It can hold up to three hundred pounds.",
@@ -5970,7 +6236,8 @@
               "s": "three hundred pounds"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -6061,7 +6328,11 @@
               "s": "here"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "Why do you look so uncomfortable?",
+            "kr": "왜 그렇게 불편해 보여?"
+          }
         }
       ],
       "siblings": [
@@ -6167,7 +6438,11 @@
               "s": "out"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "We have no plan at all.",
+            "kr": "계획이 전혀 없잖아."
+          }
         },
         {
           "en": "I'm busy, figure it out yourself.",
@@ -6194,7 +6469,8 @@
               "s": "yourself"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -6288,7 +6564,11 @@
               "s": "thing"
             }
           ],
-          "punct": "!"
+          "punct": "!",
+          "ask": {
+            "en": "So you lied to her.",
+            "kr": "그러니까 걔한테 거짓말했다는 거네."
+          }
         },
         {
           "en": "Are we the same age?",
@@ -6307,7 +6587,8 @@
               "s": "age"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": null
         },
         {
           "en": "Our shoes are the same size.",
@@ -6326,7 +6607,8 @@
               "s": "size"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "Sandwiches and burgers are not the same thing.",
@@ -6345,7 +6627,8 @@
               "s": "thing"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "Do we go to the same church?",
@@ -6364,7 +6647,8 @@
               "s": "church"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": null
         }
       ],
       "siblings": [
@@ -6458,7 +6742,8 @@
               "s": "a lot right now"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "She's going through a tough time.",
@@ -6477,7 +6762,11 @@
               "s": "a tough time"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "Why has she been so quiet?",
+            "kr": "걔가 왜 그렇게 조용해?"
+          }
         }
       ],
       "siblings": [
@@ -6580,7 +6869,11 @@
               "s": "in mind"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "Don't forget to lock the door.",
+            "kr": "문 잠그는 거 잊지 마."
+          }
         },
         {
           "en": "Keep the weather in mind.",
@@ -6599,7 +6892,8 @@
               "s": "in mind"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -6689,7 +6983,8 @@
               "s": "anytime"
             }
           ],
-          "punct": "!"
+          "punct": "!",
+          "ask": null
         },
         {
           "en": "Come by anytime.",
@@ -6704,7 +6999,11 @@
               "s": "anytime"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "Can I visit your studio?",
+            "kr": "작업실에 가봐도 돼요?"
+          }
         }
       ],
       "siblings": [
@@ -6795,7 +7094,11 @@
               "s": "classes together"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "How do you two know each other?",
+            "kr": "둘이 어떻게 알아?"
+          }
         },
         {
           "en": "We're still waiting for a number of people.",
@@ -6814,7 +7117,8 @@
               "s": "people"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -6909,7 +7213,11 @@
               "s": "a game to me"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "It's just a hobby, right?",
+            "kr": "그냥 취미잖아?"
+          }
         },
         {
           "en": "I think she's more than a friend.",
@@ -6928,7 +7236,8 @@
               "s": "a friend"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -7023,7 +7332,11 @@
               "s": "at five"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "When are you free today?",
+            "kr": "오늘 언제 시간 돼?"
+          }
         },
         {
           "en": "I get off work at six.",
@@ -7042,7 +7355,8 @@
               "s": "at six"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -7137,7 +7451,11 @@
               "s": "the road"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "Where's the dog?",
+            "kr": "강아지 어디 있어?"
+          }
         },
         {
           "en": "Someone called in the middle of the night.",
@@ -7156,7 +7474,8 @@
               "s": "the night"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -7250,7 +7569,11 @@
               "s": "baseball"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "What do you do after school?",
+            "kr": "방과 후엔 뭐 해?"
+          }
         },
         {
           "en": "He likes computer games, such as Minecraft.",
@@ -7269,7 +7592,8 @@
               "s": "Minecraft"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "I recommend warm drinks, such as tea.",
@@ -7288,7 +7612,8 @@
               "s": "tea"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "They offer a variety of food, such as sushi.",
@@ -7307,7 +7632,8 @@
               "s": "sushi"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "Try to avoid sweet food, such as candy.",
@@ -7326,7 +7652,8 @@
               "s": "candy"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -7425,7 +7752,8 @@
               "s": "a try"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "Why not give it a try?",
@@ -7448,7 +7776,11 @@
               "s": "a try"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": {
+            "en": "I've never done yoga.",
+            "kr": "요가는 해본 적 없어."
+          }
         }
       ],
       "siblings": [
@@ -7535,7 +7867,11 @@
               "s": "is getting to me"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "You look pale.",
+            "kr": "안색이 안 좋아 보여."
+          }
         },
         {
           "en": "The stress is getting to me.",
@@ -7550,7 +7886,8 @@
               "s": "is getting to me"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -7645,7 +7982,11 @@
               "s": "it together"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "I can't solve this problem.",
+            "kr": "이 문제를 못 풀겠어."
+          }
         },
         {
           "en": "Let's look at your options.",
@@ -7664,7 +8005,8 @@
               "s": "your options"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -7759,7 +8101,11 @@
               "s": "go home"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "Only one more hour left.",
+            "kr": "한 시간만 남았어."
+          }
         },
         {
           "en": "I can't wait to see you!",
@@ -7778,7 +8124,8 @@
               "s": "see you"
             }
           ],
-          "punct": "!"
+          "punct": "!",
+          "ask": null
         }
       ],
       "siblings": [
@@ -7873,7 +8220,11 @@
               "s": "the soup"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "Was the meal okay?",
+            "kr": "식사는 괜찮았어요?"
+          }
         },
         {
           "en": "It was perfect except for the rain.",
@@ -7892,7 +8243,8 @@
               "s": "the rain"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -7987,7 +8339,11 @@
               "s": "the light"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "It's too dark in here.",
+            "kr": "여기 너무 어둡네."
+          }
         },
         {
           "en": "You can turn on the AC.",
@@ -8006,7 +8362,8 @@
               "s": "the AC"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -8097,7 +8454,8 @@
               "s": "now"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "You need to make a choice.",
@@ -8112,7 +8470,11 @@
               "s": "make a choice"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "I want both of them.",
+            "kr": "둘 다 갖고 싶어."
+          }
         }
       ],
       "siblings": [
@@ -8207,7 +8569,8 @@
               "s": "the list one more time"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "Let's go through it together.",
@@ -8226,7 +8589,11 @@
               "s": "it together"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "This contract is confusing.",
+            "kr": "이 계약서 헷갈려."
+          }
         }
       ],
       "siblings": [
@@ -8320,7 +8687,11 @@
               "s": "at eight"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "What time do you start?",
+            "kr": "몇 시에 시작해?"
+          }
         },
         {
           "en": "You shouldn't come in tomorrow.",
@@ -8339,7 +8710,8 @@
               "s": "tomorrow"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -8435,7 +8807,11 @@
               "s": "shall we"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": {
+            "en": "Everyone is here.",
+            "kr": "다들 모였어요."
+          }
         },
         {
           "en": "Let's go home, shall we?",
@@ -8454,7 +8830,8 @@
               "s": "shall we"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": null
         },
         {
           "en": "Let's move on to the next question, shall we?",
@@ -8473,7 +8850,8 @@
               "s": "shall we"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": null
         },
         {
           "en": "Let's not waste time, shall we?",
@@ -8492,7 +8870,8 @@
               "s": "shall we"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": null
         },
         {
           "en": "Let's try again tomorrow, shall we?",
@@ -8511,7 +8890,8 @@
               "s": "shall we"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": null
         }
       ],
       "siblings": [
@@ -8618,7 +8998,8 @@
               "s": "up"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "I'll look it up.",
@@ -8641,7 +9022,11 @@
               "s": "up"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "What does this word mean?",
+            "kr": "이 단어 무슨 뜻이야?"
+          }
         }
       ],
       "siblings": [
@@ -8746,7 +9131,11 @@
               "s": "up"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "You dropped your pen.",
+            "kr": "펜 떨어뜨렸어."
+          }
         },
         {
           "en": "I'll pick her up.",
@@ -8769,7 +9158,8 @@
               "s": "up"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -8864,7 +9254,11 @@
               "s": "it"
             }
           ],
-          "punct": "!"
+          "punct": "!",
+          "ask": {
+            "en": "The trip is next week.",
+            "kr": "여행이 다음 주야."
+          }
         },
         {
           "en": "I'm looking forward to this weekend.",
@@ -8883,7 +9277,8 @@
               "s": "this weekend"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -8970,7 +9365,11 @@
               "s": "lie to you"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": {
+            "en": "Are you making this up?",
+            "kr": "지어낸 얘기 아니야?"
+          }
         },
         {
           "en": "Why would I want to do that?",
@@ -8985,7 +9384,8 @@
               "s": "want to do that"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": null
         }
       ],
       "siblings": [
@@ -9079,7 +9479,11 @@
               "s": "understand"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "Is the manual difficult?",
+            "kr": "설명서가 어려워?"
+          }
         },
         {
           "en": "I'm not old enough to play.",
@@ -9098,7 +9502,8 @@
               "s": "play"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "The water's not warm enough to swim.",
@@ -9117,7 +9522,8 @@
               "s": "swim"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "We were good but not good enough to win.",
@@ -9136,7 +9542,8 @@
               "s": "win"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "She's smart enough to do it herself.",
@@ -9155,7 +9562,8 @@
               "s": "do it herself"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -9266,7 +9674,11 @@
               "s": "food"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "What's included in the fee?",
+            "kr": "요금에 뭐가 포함돼 있어?"
+          }
         },
         {
           "en": "We provide them with gloves.",
@@ -9293,7 +9705,8 @@
               "s": "gloves"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -9387,7 +9800,11 @@
               "s": "clothes"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "What did you do on your day off?",
+            "kr": "쉬는 날 뭐 했어?"
+          }
         },
         {
           "en": "I have a bunch of homework.",
@@ -9406,7 +9823,8 @@
               "s": "homework"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -9501,7 +9919,11 @@
               "s": "water"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "Do you want a soda?",
+            "kr": "탄산음료 마실래?"
+          }
         },
         {
           "en": "I don't play anything other than soccer.",
@@ -9520,7 +9942,8 @@
               "s": "soccer"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -9614,7 +10037,11 @@
               "s": "you do"
             }
           ],
-          "punct": "!"
+          "punct": "!",
+          "ask": {
+            "en": "You barely touched your food.",
+            "kr": "너 거의 안 먹었잖아."
+          }
         },
         {
           "en": "It was about as much as your car.",
@@ -9633,7 +10060,8 @@
               "s": "your car"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -9727,7 +10155,11 @@
               "s": "class"
             }
           ],
-          "punct": "!"
+          "punct": "!",
+          "ask": {
+            "en": "Why are you running?",
+            "kr": "왜 뛰어가?"
+          }
         },
         {
           "en": "I'll be late for my appointment.",
@@ -9746,7 +10178,8 @@
               "s": "my appointment"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -9833,7 +10266,11 @@
               "s": "will you"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": {
+            "en": "And then he said—",
+            "kr": "그러고 나서 그가 말했는데—"
+          }
         },
         {
           "en": "Close the door, will you?",
@@ -9848,7 +10285,8 @@
               "s": "will you"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": null
         },
         {
           "en": "Don't forget the milk, will you?",
@@ -9863,7 +10301,8 @@
               "s": "will you"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": null
         },
         {
           "en": "Be careful with my phone, will you?",
@@ -9878,7 +10317,8 @@
               "s": "will you"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": null
         },
         {
           "en": "Bring me a pen, will you?",
@@ -9893,7 +10333,8 @@
               "s": "will you"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": null
         }
       ],
       "siblings": [
@@ -9985,7 +10426,8 @@
               "s": "price, it's a great deal"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "In terms of what?",
@@ -10000,7 +10442,11 @@
               "s": "what"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": {
+            "en": "This model is better.",
+            "kr": "이 모델이 더 좋아요."
+          }
         }
       ],
       "siblings": [
@@ -10104,7 +10550,11 @@
               "s": "in common"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "You two get along so well.",
+            "kr": "둘이 참 잘 지내네."
+          }
         },
         {
           "en": "Not really, they have nothing in common.",
@@ -10127,7 +10577,8 @@
               "s": "in common"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -10230,7 +10681,11 @@
               "s": "drive"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "Why did you buy that car?",
+            "kr": "왜 그 차를 샀어?"
+          }
         },
         {
           "en": "It's fun to travel to new places.",
@@ -10253,7 +10708,8 @@
               "s": "travel to new places"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "It's hard to believe we're here.",
@@ -10276,7 +10732,8 @@
               "s": "believe we're here"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "It's easy to see the truth.",
@@ -10299,7 +10756,8 @@
               "s": "see the truth"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -10394,7 +10852,8 @@
               "s": "dust"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "He's nothing but trouble.",
@@ -10413,7 +10872,11 @@
               "s": "trouble"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "Should I hire him?",
+            "kr": "그를 채용해야 할까?"
+          }
         }
       ],
       "siblings": [
@@ -10507,7 +10970,11 @@
               "s": "this weekend"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": {
+            "en": "I have no plans on Saturday.",
+            "kr": "토요일에 계획 없어."
+          }
         },
         {
           "en": "Let's hang out again some time.",
@@ -10526,7 +10993,8 @@
               "s": "again some time"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -10622,7 +11090,8 @@
               "s": "computers"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "He's the best when it comes to travel.",
@@ -10641,7 +11110,11 @@
               "s": "travel"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "Who should I ask about Europe?",
+            "kr": "유럽은 누구한테 물어봐야 해?"
+          }
         }
       ],
       "siblings": [
@@ -10735,7 +11208,11 @@
               "s": "sugar"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "How's the coffee?",
+            "kr": "커피 어때?"
+          }
         },
         {
           "en": "That gives me a bit of hope.",
@@ -10754,7 +11231,8 @@
               "s": "hope"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -10848,7 +11326,11 @@
               "s": "fate"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": {
+            "en": "We met three times by accident.",
+            "kr": "우연히 세 번 만났어."
+          }
         },
         {
           "en": "I don't believe in second chances.",
@@ -10867,7 +11349,8 @@
               "s": "second chances"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -10957,7 +11440,11 @@
               "s": "your children"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "My son keeps failing.",
+            "kr": "아들이 계속 실패해요."
+          }
         }
       ],
       "siblings": [
@@ -11051,7 +11538,11 @@
               "s": "him"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "What went wrong in the game?",
+            "kr": "경기에서 뭐가 잘못됐어?"
+          }
         },
         {
           "en": "It's all because of one mistake.",
@@ -11070,7 +11561,8 @@
               "s": "one mistake"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "I couldn't sleep because of the noise.",
@@ -11089,7 +11581,8 @@
               "s": "the noise"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "He's probably just late because of traffic.",
@@ -11108,7 +11601,8 @@
               "s": "traffic"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "Because of the rain, they stopped the game early.",
@@ -11123,7 +11617,8 @@
               "s": "the rain, they stopped the game early"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -11209,7 +11704,11 @@
               "s": "before, it's much better"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "How's your back?",
+            "kr": "허리는 어때?"
+          }
         },
         {
           "en": "Compared to London, it's really cheap.",
@@ -11224,7 +11723,8 @@
               "s": "London, it's really cheap"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -11310,7 +11810,11 @@
               "s": "let me know"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "I'm moving this weekend.",
+            "kr": "이번 주말에 이사해."
+          }
         },
         {
           "en": "Just let me know when you're here.",
@@ -11329,7 +11833,8 @@
               "s": "when you're here"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -11423,7 +11928,11 @@
               "s": "for a Spanish class"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "Any plans for the new year?",
+            "kr": "새해 계획 있어?"
+          }
         }
       ],
       "siblings": [
@@ -11513,7 +12022,8 @@
               "s": "the weather, we may just stay home"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "Prices change depending on the season.",
@@ -11532,7 +12042,11 @@
               "s": "the season"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "Is it always this expensive?",
+            "kr": "항상 이렇게 비싸요?"
+          }
         }
       ],
       "siblings": [
@@ -11626,7 +12140,11 @@
               "s": "the whole room"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "Why don't you move the piano?",
+            "kr": "피아노를 왜 안 옮겨?"
+          }
         }
       ],
       "siblings": [
@@ -11720,7 +12238,11 @@
               "s": "something"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "We still don't have a gift.",
+            "kr": "아직 선물이 없어."
+          }
         },
         {
           "en": "I can't think of an example.",
@@ -11739,7 +12261,8 @@
               "s": "an example"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -11850,7 +12373,11 @@
               "s": "him"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "He looked so nervous.",
+            "kr": "그 사람 엄청 긴장해 보였어."
+          }
         },
         {
           "en": "He reads more slowly than her.",
@@ -11877,7 +12404,8 @@
               "s": "her"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "His injuries were more severe than hers.",
@@ -11904,7 +12432,8 @@
               "s": "hers"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "This test was more difficult than the last one.",
@@ -11931,7 +12460,8 @@
               "s": "the last one"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -12017,7 +12547,11 @@
               "s": "have a good time"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": {
+            "en": "I just got home from the trip.",
+            "kr": "여행에서 막 집에 왔어."
+          }
         },
         {
           "en": "Have a good time in Busan!",
@@ -12032,7 +12566,8 @@
               "s": "in Busan"
             }
           ],
-          "punct": "!"
+          "punct": "!",
+          "ask": null
         }
       ],
       "siblings": [
@@ -12126,7 +12661,11 @@
               "s": "amazing night"
             }
           ],
-          "punct": "!"
+          "punct": "!",
+          "ask": {
+            "en": "How was the show?",
+            "kr": "공연 어땠어?"
+          }
         },
         {
           "en": "It was the most difficult question on the test.",
@@ -12145,7 +12684,8 @@
               "s": "difficult question on the test"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "This is the most dangerous animal in the world.",
@@ -12164,7 +12704,8 @@
               "s": "dangerous animal in the world"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "It's the most boring class I've ever taken.",
@@ -12183,7 +12724,8 @@
               "s": "boring class I've ever taken"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -12280,7 +12822,11 @@
               "s": "scientist"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "What does your uncle do?",
+            "kr": "삼촌은 무슨 일 하셔?"
+          }
         },
         {
           "en": "It's some kind of vegetable.",
@@ -12299,7 +12845,8 @@
               "s": "vegetable"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -12386,7 +12933,11 @@
               "s": "it"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": {
+            "en": "I bought a new phone.",
+            "kr": "새 휴대폰 샀어."
+          }
         }
       ],
       "siblings": [
@@ -12476,7 +13027,11 @@
               "s": "take a walk"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": {
+            "en": "The weather is perfect today.",
+            "kr": "오늘 날씨 완벽하네."
+          }
         },
         {
           "en": "We could take a walk down to the beach.",
@@ -12495,7 +13050,8 @@
               "s": "down to the beach"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -12594,7 +13150,11 @@
               "s": "alone"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "I want to wake him up!",
+            "kr": "얘 깨우고 싶어!"
+          }
         },
         {
           "en": "Please just leave me alone.",
@@ -12617,7 +13177,8 @@
               "s": "alone"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -12712,7 +13273,11 @@
               "s": "that box"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "Where are my keys?",
+            "kr": "내 열쇠 어디 있어?"
+          }
         },
         {
           "en": "Put them on top of the desk.",
@@ -12731,7 +13296,8 @@
               "s": "the desk"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -12821,7 +13387,11 @@
               "s": "get started"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "Everyone's ready.",
+            "kr": "다들 준비됐어요."
+          }
         },
         {
           "en": "Shall we get started?",
@@ -12836,7 +13406,8 @@
               "s": "get started"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": null
         }
       ],
       "siblings": [
@@ -12922,7 +13493,11 @@
               "s": "calm down"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "I'm so angry right now!",
+            "kr": "지금 너무 화나!"
+          }
         },
         {
           "en": "Calm down, you'll do great!",
@@ -12937,7 +13512,8 @@
               "s": ", you'll do great"
             }
           ],
-          "punct": "!"
+          "punct": "!",
+          "ask": null
         }
       ],
       "siblings": [
@@ -13028,7 +13604,11 @@
               "s": "make it"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "The train leaves in five minutes.",
+            "kr": "기차가 5분 뒤에 떠나."
+          }
         }
       ],
       "siblings": [
@@ -13124,7 +13704,11 @@
               "s": "Marcy's question from earlier"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "Anything else to discuss?",
+            "kr": "더 논의할 게 있나요?"
+          }
         },
         {
           "en": "We should go back to the original plan.",
@@ -13143,7 +13727,8 @@
               "s": "the original plan"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -13233,7 +13818,11 @@
               "s": "we got there, it was closed"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "Did you get the tickets?",
+            "kr": "표 샀어?"
+          }
         },
         {
           "en": "It was gone by the time we got there.",
@@ -13252,7 +13841,8 @@
               "s": "we got there"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -13347,7 +13937,8 @@
               "s": "this time"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "I messed up the ending.",
@@ -13366,7 +13957,11 @@
               "s": "the ending"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "How was your performance?",
+            "kr": "공연 어땠어?"
+          }
         }
       ],
       "siblings": [
@@ -13469,7 +14064,11 @@
               "s": "on"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": {
+            "en": "We have it in your size.",
+            "kr": "손님 사이즈로 있어요."
+          }
         }
       ],
       "siblings": [
@@ -13559,7 +14158,11 @@
               "s": "day"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "How often do you practice?",
+            "kr": "얼마나 자주 연습해?"
+          }
         },
         {
           "en": "She works every single day.",
@@ -13578,7 +14181,8 @@
               "s": "day"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -13664,7 +14268,8 @@
               "s": "she's about thirty"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "I'd say she's improving.",
@@ -13679,7 +14284,11 @@
               "s": "she's improving"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "How is your student doing?",
+            "kr": "학생은 어때요?"
+          }
         }
       ],
       "siblings": [
@@ -13765,7 +14374,11 @@
               "s": "the weird hat"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": {
+            "en": "Do you like my new look?",
+            "kr": "내 새 스타일 어때?"
+          }
         },
         {
           "en": "What's with all the fruit?",
@@ -13780,7 +14393,8 @@
               "s": "all the fruit"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": null
         }
       ],
       "siblings": [
@@ -13867,7 +14481,11 @@
               "s": "practice"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "How did you get so good?",
+            "kr": "어떻게 그렇게 잘하게 됐어?"
+          }
         },
         {
           "en": "It's all about connections.",
@@ -13882,7 +14500,8 @@
               "s": "connections"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -13972,7 +14591,11 @@
               "s": "get home"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "It's really late, I should go.",
+            "kr": "너무 늦었네, 가야겠어."
+          }
         }
       ],
       "siblings": [
@@ -14063,7 +14686,11 @@
               "s": "look around"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "Can I help you find something?",
+            "kr": "찾으시는 거 있으세요?"
+          }
         }
       ],
       "siblings": [
@@ -14157,7 +14784,8 @@
               "s": "water"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": null
         },
         {
           "en": "Have some more!",
@@ -14172,7 +14800,11 @@
               "s": "some more"
             }
           ],
-          "punct": "!"
+          "punct": "!",
+          "ask": {
+            "en": "This is delicious!",
+            "kr": "이거 맛있어요!"
+          }
         }
       ],
       "siblings": [
@@ -14263,7 +14895,11 @@
               "s": "work out"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "I'm worried about the results.",
+            "kr": "결과가 걱정돼."
+          }
         },
         {
           "en": "We'll work out the details later.",
@@ -14282,7 +14918,8 @@
               "s": "the details later"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -14370,7 +15007,11 @@
               "s": "it's cute"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": {
+            "en": "Why did you buy that mug?",
+            "kr": "그 컵을 왜 샀어?"
+          }
         },
         {
           "en": "Don't you think that's kind of extreme?",
@@ -14385,7 +15026,8 @@
               "s": "that's kind of extreme"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": null
         }
       ],
       "siblings": [
@@ -14480,7 +15122,11 @@
               "s": "it"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "This week has been so hard.",
+            "kr": "이번 주 너무 힘들었어."
+          }
         },
         {
           "en": "We'll get through this together.",
@@ -14499,7 +15145,8 @@
               "s": "this together"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -14586,7 +15233,8 @@
               "s": "call me anytime"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "Feel free to ask questions.",
@@ -14601,7 +15249,11 @@
               "s": "ask questions"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "Is it okay to interrupt?",
+            "kr": "중간에 말해도 되나요?"
+          }
         }
       ],
       "siblings": [
@@ -14691,7 +15343,11 @@
               "s": "belong to"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": {
+            "en": "Someone left an umbrella.",
+            "kr": "누가 우산을 두고 갔어."
+          }
         }
       ],
       "siblings": [
@@ -14795,7 +15451,11 @@
               "s": "get lost"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "Should I bring a map?",
+            "kr": "지도 가져가야 할까?"
+          }
         },
         {
           "en": "It's not easy to say goodbye.",
@@ -14818,7 +15478,8 @@
               "s": "say goodbye"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "It's important for students to get enough sleep.",
@@ -14841,7 +15502,8 @@
               "s": "get enough sleep"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -14931,7 +15593,11 @@
               "s": "say no"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "He asked me to work Sunday.",
+            "kr": "일요일에 일하라고 하셨어."
+          }
         }
       ],
       "siblings": [
@@ -15025,7 +15691,11 @@
               "s": "the numbers again"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "The total doesn't match.",
+            "kr": "합계가 안 맞아요."
+          }
         },
         {
           "en": "Can you go over this form for me?",
@@ -15044,7 +15714,8 @@
               "s": "this form for me"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": null
         }
       ],
       "siblings": [
@@ -15135,7 +15806,11 @@
               "s": "left"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "Can I have another cookie?",
+            "kr": "쿠키 하나 더 먹어도 돼?"
+          }
         },
         {
           "en": "There's no more money left.",
@@ -15154,7 +15829,8 @@
               "s": "money left"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -15244,7 +15920,11 @@
               "s": "at the next stop"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "Which station is ours?",
+            "kr": "우리 어느 역이야?"
+          }
         }
       ],
       "siblings": [
@@ -15334,7 +16014,11 @@
               "s": "pay attention"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "Sorry, what was the question?",
+            "kr": "죄송해요, 질문이 뭐였죠?"
+          }
         },
         {
           "en": "Stop complaining and pay attention.",
@@ -15349,7 +16033,8 @@
               "s": "pay attention"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -15452,7 +16137,11 @@
               "s": "done"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "This report is so boring.",
+            "kr": "이 보고서 너무 지루해."
+          }
         },
         {
           "en": "When can you get it done?",
@@ -15475,7 +16164,8 @@
               "s": "done"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": null
         }
       ],
       "siblings": [
@@ -15561,7 +16251,11 @@
               "s": "they broke up"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": {
+            "en": "Sam and Lisa aren't together anymore.",
+            "kr": "샘하고 리사 이제 안 만나."
+          }
         }
       ],
       "siblings": [
@@ -15658,7 +16352,11 @@
               "s": "in mind"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": {
+            "en": "I want to redecorate.",
+            "kr": "인테리어를 바꾸고 싶어."
+          }
         },
         {
           "en": "I have a place in mind.",
@@ -15681,7 +16379,8 @@
               "s": "in mind"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -15775,7 +16474,11 @@
               "s": "after work"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "Can you come see the baby?",
+            "kr": "아기 보러 올 수 있어?"
+          }
         }
       ],
       "siblings": [
@@ -15862,7 +16565,11 @@
               "s": "watch a movie"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": {
+            "en": "There's nothing to do tonight.",
+            "kr": "오늘 밤 할 일이 없네."
+          }
         },
         {
           "en": "Why don't we go for a walk?",
@@ -15877,7 +16584,8 @@
               "s": "go for a walk"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": null
         }
       ],
       "siblings": [
@@ -15984,7 +16692,11 @@
               "s": "soon"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "That's my charger.",
+            "kr": "그거 내 충전기야."
+          }
         },
         {
           "en": "You should give them back.",
@@ -16007,7 +16719,8 @@
               "s": "back"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -16102,7 +16815,11 @@
               "s": "five"
             }
           ],
-          "punct": "!"
+          "punct": "!",
+          "ask": {
+            "en": "It took about two hours, right?",
+            "kr": "두 시간쯤 걸렸지?"
+          }
         },
         {
           "en": "It felt more like work than a vacation.",
@@ -16121,7 +16838,8 @@
               "s": "work than a vacation"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -16213,7 +16931,11 @@
               "s": "in case"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "The sky looks fine to me.",
+            "kr": "하늘은 괜찮아 보이는데."
+          }
         },
         {
           "en": "I have some cash, in case we need it.",
@@ -16232,7 +16954,8 @@
               "s": "we need it"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -16326,7 +17049,11 @@
               "s": "freedom"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "What do you stand for?",
+            "kr": "당신은 무엇을 지지하나요?"
+          }
         },
         {
           "en": "I believe in being honest.",
@@ -16345,7 +17072,8 @@
               "s": "being honest"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -16448,7 +17176,11 @@
               "s": "seriously"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "His comment really hurt.",
+            "kr": "그 사람 말이 너무 상처였어."
+          }
         }
       ],
       "siblings": [
@@ -16542,7 +17274,11 @@
               "s": "my friend's dog"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "Whose puppy is that?",
+            "kr": "저 강아지 누구 거야?"
+          }
         }
       ],
       "siblings": [
@@ -16628,7 +17364,11 @@
               "s": "it starts raining"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": {
+            "en": "Let's have the party outside.",
+            "kr": "파티는 밖에서 하자."
+          }
         },
         {
           "en": "What if he says no?",
@@ -16643,7 +17383,8 @@
               "s": "he says no"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": null
         }
       ],
       "siblings": [
@@ -16754,7 +17495,11 @@
               "s": "those"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "Which should I order?",
+            "kr": "어느 걸 시킬까?"
+          }
         },
         {
           "en": "His story was less interesting than hers.",
@@ -16781,7 +17526,8 @@
               "s": "hers"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "Their newest model is less expensive than ours.",
@@ -16808,7 +17554,8 @@
               "s": "ours"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "This road is less busy than the highway.",
@@ -16835,7 +17582,8 @@
               "s": "the highway"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "Her second album was less popular than her first.",
@@ -16862,7 +17610,8 @@
               "s": "her first"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -16966,7 +17715,11 @@
               "s": "my shirts"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": {
+            "en": "I'm going out anyway.",
+            "kr": "어차피 나가는 길이야."
+          }
         },
         {
           "en": "I'll pick it up on my way home.",
@@ -16993,7 +17746,8 @@
               "s": "on my way home"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -17080,7 +17834,11 @@
               "s": "you say that"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": {
+            "en": "I think he's lying.",
+            "kr": "그 사람 거짓말하는 것 같아."
+          }
         },
         {
           "en": "What makes it so special?",
@@ -17095,7 +17853,8 @@
               "s": "it so special"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": null
         }
       ],
       "siblings": [
@@ -17202,7 +17961,8 @@
               "s": "up"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": null
         },
         {
           "en": "I wouldn't bring it up.",
@@ -17225,7 +17985,11 @@
               "s": "up"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "Should I mention the money?",
+            "kr": "돈 얘기를 꺼내야 할까?"
+          }
         }
       ],
       "siblings": [
@@ -17328,7 +18092,8 @@
               "s": "that other offer"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "She turned it down.",
@@ -17351,7 +18116,11 @@
               "s": "down"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "Did she take the offer?",
+            "kr": "그 제안 받아들였어?"
+          }
         }
       ],
       "siblings": [
@@ -17454,7 +18223,11 @@
               "s": "he's wrong"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "He only started last week.",
+            "kr": "지난주에 입사했는데."
+          }
         },
         {
           "en": "Just because you can doesn't mean you should.",
@@ -17477,7 +18250,8 @@
               "s": "you should"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -17567,7 +18341,11 @@
               "s": "the time"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "I'll take a quick nap.",
+            "kr": "잠깐 낮잠 잘게."
+          }
         },
         {
           "en": "I keep track of everything on my phone.",
@@ -17586,7 +18364,8 @@
               "s": "everything on my phone"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -17673,7 +18452,11 @@
               "s": "LA"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": {
+            "en": "I just landed.",
+            "kr": "방금 도착했어."
+          }
         }
       ],
       "siblings": [
@@ -17768,7 +18551,11 @@
               "s": "their fans"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "Why do you dislike that band?",
+            "kr": "그 밴드를 왜 싫어해?"
+          }
         },
         {
           "en": "You should take advantage of it.",
@@ -17787,7 +18574,8 @@
               "s": "it"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -17878,7 +18666,11 @@
               "s": "soon"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "You've been driving for hours.",
+            "kr": "몇 시간째 운전했잖아."
+          }
         }
       ],
       "siblings": [
@@ -17965,7 +18757,8 @@
               "s": "just ask him"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": null
         },
         {
           "en": "Why not get both?",
@@ -17980,7 +18773,11 @@
               "s": "get both"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": {
+            "en": "I can't decide between them.",
+            "kr": "둘 중에 못 고르겠어."
+          }
         }
       ],
       "siblings": [
@@ -18076,7 +18873,11 @@
               "s": "you land"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "My flight is at nine.",
+            "kr": "비행기가 9시야."
+          }
         },
         {
           "en": "Come home as soon as you can.",
@@ -18095,7 +18896,8 @@
               "s": "you can"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "I'll email you as soon as possible.",
@@ -18114,7 +18916,8 @@
               "s": "possible"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "You should see a doctor as soon as possible.",
@@ -18133,7 +18936,8 @@
               "s": "possible"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "We'll start just as soon as everyone gets here.",
@@ -18152,7 +18956,8 @@
               "s": "everyone gets here"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -18247,7 +19052,11 @@
               "s": "a meeting"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "We should discuss this properly.",
+            "kr": "이건 제대로 논의해야 해요."
+          }
         },
         {
           "en": "We could set up a fund in his name.",
@@ -18266,7 +19075,8 @@
               "s": "a fund in his name"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -18361,7 +19171,8 @@
               "s": "for a bit"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": null
         },
         {
           "en": "Let's meet up after class.",
@@ -18380,7 +19191,11 @@
               "s": "after class"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "I have your book.",
+            "kr": "네 책 내가 갖고 있어."
+          }
         }
       ],
       "siblings": [
@@ -18475,7 +19290,11 @@
               "s": "him"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "He promised to help.",
+            "kr": "그 사람이 돕겠다고 했어."
+          }
         }
       ],
       "siblings": [
@@ -18562,7 +19381,8 @@
               "s": "that guy"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "Stay away from me!",
@@ -18577,7 +19397,11 @@
               "s": "me"
             }
           ],
-          "punct": "!"
+          "punct": "!",
+          "ask": {
+            "en": "I just want to explain!",
+            "kr": "설명만 하려는 거야!"
+          }
         }
       ],
       "siblings": [
@@ -18671,7 +19495,11 @@
               "s": "night classes"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "How will you finish your degree?",
+            "kr": "학위는 어떻게 마칠 거야?"
+          }
         }
       ],
       "siblings": [
@@ -18758,7 +19586,11 @@
               "s": "pays off"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "She finally got the job.",
+            "kr": "걔 드디어 취업했어."
+          }
         }
       ],
       "siblings": [
@@ -18852,7 +19684,11 @@
               "s": "him"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "He lost everything.",
+            "kr": "그 사람 다 잃었어."
+          }
         },
         {
           "en": "Don't feel sorry for me.",
@@ -18871,7 +19707,8 @@
               "s": "me"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -18965,7 +19802,8 @@
               "s": "this"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "He'll get over it.",
@@ -18984,7 +19822,11 @@
               "s": "it"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "He's really upset.",
+            "kr": "그 사람 많이 속상해해."
+          }
         }
       ],
       "siblings": [
@@ -19078,7 +19920,8 @@
               "s": "the coffee"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "We'll go for the large.",
@@ -19097,7 +19940,11 @@
               "s": "the large"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "What size pizza?",
+            "kr": "피자 사이즈는요?"
+          }
         }
       ],
       "siblings": [
@@ -19188,7 +20035,11 @@
               "s": "get in"
             }
           ],
-          "punct": "!"
+          "punct": "!",
+          "ask": {
+            "en": "Should I sit in the back?",
+            "kr": "뒤에 앉을까?"
+          }
         },
         {
           "en": "Get in the back.",
@@ -19203,7 +20054,8 @@
               "s": "the back"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -19297,7 +20149,8 @@
               "s": "if you need help"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "You should reach out to him.",
@@ -19316,7 +20169,11 @@
               "s": "to him"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "We haven't spoken in years.",
+            "kr": "몇 년째 말 안 해봤어."
+          }
         }
       ],
       "siblings": [
@@ -19410,7 +20267,11 @@
               "s": "that"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "The blue one seems fine.",
+            "kr": "파란 게 괜찮아 보이네."
+          }
         },
         {
           "en": "I'll go with the blue.",
@@ -19429,7 +20290,8 @@
               "s": "the blue"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -19515,7 +20377,11 @@
               "s": "for your mistake"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "It wasn't really my fault.",
+            "kr": "제 잘못은 아니었어요."
+          }
         }
       ],
       "siblings": [
@@ -19618,7 +20484,11 @@
               "s": "go"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "I can't stop thinking about it.",
+            "kr": "계속 그 생각이 나."
+          }
         },
         {
           "en": "You need to let it go.",
@@ -19641,7 +20511,8 @@
               "s": "go"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -19748,7 +20619,11 @@
               "s": "dad are doctors"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "Is anyone in your family a doctor?",
+            "kr": "가족 중에 의사 있어?"
+          }
         },
         {
           "en": "I've told both my sister and my mom.",
@@ -19775,7 +20650,8 @@
               "s": "my mom"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "We changed both the format and the content.",
@@ -19802,7 +20678,8 @@
               "s": "the content"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "He can speak both English and Spanish.",
@@ -19829,7 +20706,8 @@
               "s": "Spanish"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "Her design is both simple and elegant.",
@@ -19856,7 +20734,8 @@
               "s": "elegant"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -19942,7 +20821,11 @@
               "s": "lie down"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "My head hurts so much.",
+            "kr": "머리가 너무 아파."
+          }
         }
       ],
       "siblings": [
@@ -20032,7 +20915,11 @@
               "s": "keep up"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "The class moves so fast.",
+            "kr": "수업이 너무 빨라."
+          }
         },
         {
           "en": "I keep up just fine.",
@@ -20051,7 +20938,8 @@
               "s": "just fine"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -20137,7 +21025,11 @@
               "s": "whatever you'd like"
             }
           ],
-          "punct": "!"
+          "punct": "!",
+          "ask": {
+            "en": "Can I have a drink?",
+            "kr": "마실 것 좀 주실래요?"
+          }
         }
       ],
       "siblings": [
@@ -20248,7 +21140,8 @@
               "s": "that one"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "It was either Monday or Tuesday.",
@@ -20275,7 +21168,11 @@
               "s": "Tuesday"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "When did she call?",
+            "kr": "언제 전화했어?"
+          }
         },
         {
           "en": "People either love it or hate it.",
@@ -20302,7 +21199,8 @@
               "s": "hate it"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "You'll either find it funny or offensive.",
@@ -20329,7 +21227,8 @@
               "s": "offensive"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "Either red or blue would look great.",
@@ -20352,7 +21251,8 @@
               "s": "blue would look great"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -20442,7 +21342,11 @@
               "s": "soon"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "The tank is almost empty.",
+            "kr": "기름이 거의 없어."
+          }
         },
         {
           "en": "Let me just fill up my bottle.",
@@ -20461,7 +21365,8 @@
               "s": "my bottle"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -20548,7 +21453,11 @@
               "s": "cars"
             }
           ],
-          "punct": "!"
+          "punct": "!",
+          "ask": {
+            "en": "I'll cross here.",
+            "kr": "여기서 건널게."
+          }
         },
         {
           "en": "Watch out for bears!",
@@ -20563,7 +21472,8 @@
               "s": "bears"
             }
           ],
-          "punct": "!"
+          "punct": "!",
+          "ask": null
         }
       ],
       "siblings": [
@@ -20657,7 +21567,8 @@
               "s": ", you'll pass next time"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "I still feel bad, though.",
@@ -20676,7 +21587,11 @@
               "s": ", though"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "It wasn't your fault.",
+            "kr": "네 잘못이 아니었어."
+          }
         }
       ],
       "siblings": [
@@ -20784,7 +21699,11 @@
               "s": "over"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "Can you decide today?",
+            "kr": "오늘 결정할 수 있어?"
+          }
         }
       ],
       "siblings": [
@@ -20878,7 +21797,11 @@
               "s": "homework"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "Come out with us!",
+            "kr": "우리랑 놀러 가자!"
+          }
         },
         {
           "en": "There were a ton of people there.",
@@ -20897,7 +21820,8 @@
               "s": "people there"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -20984,7 +21908,11 @@
               "s": "say hi"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": {
+            "en": "He walked right past me.",
+            "kr": "그 사람이 날 그냥 지나쳤어."
+          }
         },
         {
           "en": "I just wanted to say hi.",
@@ -20999,7 +21927,8 @@
               "s": "say hi"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -21088,7 +22017,11 @@
               "s": "she knows"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": {
+            "en": "Nobody told her yet.",
+            "kr": "아직 아무도 안 말했어."
+          }
         },
         {
           "en": "Do you think we need more?",
@@ -21103,7 +22036,8 @@
               "s": "we need more"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": null
         },
         {
           "en": "Why do you think that is?",
@@ -21122,7 +22056,8 @@
               "s": "that is"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": null
         },
         {
           "en": "When do you think you'll be done?",
@@ -21141,7 +22076,8 @@
               "s": "you'll be done"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": null
         },
         {
           "en": "What do you think he wanted?",
@@ -21160,7 +22096,8 @@
               "s": "he wanted"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": null
         }
       ],
       "siblings": [
@@ -21250,7 +22187,11 @@
               "s": "have a choice"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "Why did he sell the house?",
+            "kr": "왜 집을 팔았어?"
+          }
         },
         {
           "en": "Do I really have a choice?",
@@ -21265,7 +22206,8 @@
               "s": "have a choice"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": null
         }
       ],
       "siblings": [
@@ -21373,7 +22315,11 @@
               "s": "later"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "I don't have cash on me.",
+            "kr": "현금이 없어."
+          }
         },
         {
           "en": "You don't need to pay me back.",
@@ -21396,7 +22342,8 @@
               "s": "back"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -21490,7 +22437,11 @@
               "s": "Spanish"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "Only Spanish?",
+            "kr": "스페인어만?"
+          }
         },
         {
           "en": "I play golf as well as tennis.",
@@ -21509,7 +22460,8 @@
               "s": "tennis"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "The hotel offers breakfast as well as free parking.",
@@ -21528,7 +22480,8 @@
               "s": "free parking"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "My sister teaches piano as well as guitar.",
@@ -21547,7 +22500,8 @@
               "s": "guitar"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "Drinks, as well as snacks, will be available.",
@@ -21566,7 +22520,8 @@
               "s": "snacks, will be available"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -21660,7 +22615,11 @@
               "s": "on Friday"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "When can you lend me the money?",
+            "kr": "돈은 언제 빌려줄 수 있어?"
+          }
         },
         {
           "en": "I didn't get paid last week.",
@@ -21679,7 +22638,8 @@
               "s": "last week"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -21770,7 +22730,11 @@
               "s": "the kids"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "I need to step out for a minute.",
+            "kr": "잠깐 나가봐야 해."
+          }
         },
         {
           "en": "Can you keep an eye on the soup?",
@@ -21789,7 +22753,8 @@
               "s": "the soup"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": null
         }
       ],
       "siblings": [
@@ -21892,7 +22857,8 @@
               "s": "a secret"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "He won't keep it a secret.",
@@ -21915,7 +22881,11 @@
               "s": "a secret"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "Should we tell him?",
+            "kr": "그 사람한테 말할까?"
+          }
         }
       ],
       "siblings": [
@@ -22018,7 +22988,11 @@
               "s": "out"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "I really like her.",
+            "kr": "나 걔 진짜 좋아해."
+          }
         }
       ],
       "siblings": [
@@ -22112,7 +23086,11 @@
               "s": "you don't fall"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "The floor is wet.",
+            "kr": "바닥이 젖었어."
+          }
         },
         {
           "en": "Close the window so that you aren't cold.",
@@ -22131,7 +23109,8 @@
               "s": "you aren't cold"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "She wrote it down so that you don't forget.",
@@ -22150,7 +23129,8 @@
               "s": "you don't forget"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "Leave early so that you aren't late.",
@@ -22169,7 +23149,8 @@
               "s": "you aren't late"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "Take your phone so that I can call you.",
@@ -22188,7 +23169,8 @@
               "s": "I can call you"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -22295,7 +23277,8 @@
               "s": "later"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": null
         },
         {
           "en": "Give me a call later.",
@@ -22318,7 +23301,11 @@
               "s": "later"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "I want to hear the whole story.",
+            "kr": "자세한 얘기 듣고 싶어."
+          }
         }
       ],
       "siblings": [
@@ -22413,7 +23400,8 @@
               "s": "sugar"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "I'm trying to cut down on coffee.",
@@ -22432,7 +23420,11 @@
               "s": "coffee"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "You only had one cup?",
+            "kr": "한 잔만 마셨어?"
+          }
         }
       ],
       "siblings": [
@@ -22539,7 +23531,8 @@
               "s": "my dad attended"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "It's neither funny nor clever.",
@@ -22566,7 +23559,11 @@
               "s": "clever"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "Isn't that joke great?",
+            "kr": "그 농담 괜찮지 않아?"
+          }
         },
         {
           "en": "I neither know nor care.",
@@ -22593,7 +23590,8 @@
               "s": "care"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "It was neither educational nor interesting.",
@@ -22620,7 +23618,8 @@
               "s": "interesting"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "Neither the book nor the movie was entertaining.",
@@ -22643,7 +23642,8 @@
               "s": "the movie was entertaining"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -22738,7 +23738,11 @@
               "s": "the dates"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "The meeting was yesterday.",
+            "kr": "회의는 어제였어."
+          }
         },
         {
           "en": "They mixed up my order.",
@@ -22757,7 +23761,8 @@
               "s": "my order"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -22851,7 +23856,11 @@
               "s": "her"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "Grandma has been quiet all morning.",
+            "kr": "할머니가 아침부터 조용하시네."
+          }
         },
         {
           "en": "She went to check on the baby.",
@@ -22870,7 +23879,8 @@
               "s": "the baby"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -22960,7 +23970,11 @@
               "s": "get around"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "How do you like the city?",
+            "kr": "그 도시 어때?"
+          }
         }
       ],
       "siblings": [
@@ -23055,7 +24069,11 @@
               "s": "for some air"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "Where did Tom go?",
+            "kr": "톰 어디 갔어?"
+          }
         },
         {
           "en": "She just stepped out for lunch.",
@@ -23074,7 +24092,8 @@
               "s": "for lunch"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -23163,7 +24182,11 @@
               "s": "they're open"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "Let's go to the bakery.",
+            "kr": "빵집에 가자."
+          }
         },
         {
           "en": "I don't know if I should tell you.",
@@ -23178,7 +24201,8 @@
               "s": "I should tell you"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "I don't know if that's a good idea.",
@@ -23193,7 +24217,8 @@
               "s": "that's a good idea"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -23288,7 +24313,11 @@
               "s": "enough time"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "We have two hours.",
+            "kr": "두 시간 있어."
+          }
         },
         {
           "en": "I'd be more than happy to help.",
@@ -23307,7 +24336,8 @@
               "s": "happy to help"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -23418,7 +24448,11 @@
               "s": "the office"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "How did the new hire's day go?",
+            "kr": "신입 첫날 어땠어?"
+          }
         }
       ],
       "siblings": [
@@ -23514,7 +24548,11 @@
               "s": "fashion trends"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "Do you know what's popular now?",
+            "kr": "요즘 뭐가 유행인지 알아?"
+          }
         },
         {
           "en": "I can't keep up with all this technology.",
@@ -23533,7 +24571,8 @@
               "s": "all this technology"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -23639,7 +24678,11 @@
               "s": "on"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "It's too quiet in here.",
+            "kr": "여기 너무 조용하네."
+          }
         },
         {
           "en": "Can you put something funny on?",
@@ -23662,7 +24705,8 @@
               "s": "on"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": null
         }
       ],
       "siblings": [
@@ -23758,7 +24802,11 @@
               "s": "him"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "Did you reach your brother?",
+            "kr": "형하고 연락됐어?"
+          }
         },
         {
           "en": "Can you get in touch with her for me?",
@@ -23777,7 +24825,8 @@
               "s": "her for me"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": null
         }
       ],
       "siblings": [
@@ -23863,7 +24912,8 @@
               "s": "we just glue it"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": null
         },
         {
           "en": "What if I help out?",
@@ -23878,7 +24928,11 @@
               "s": "I help out"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": {
+            "en": "There's too much to do alone.",
+            "kr": "혼자 하기엔 너무 많아."
+          }
         }
       ],
       "siblings": [
@@ -23970,7 +25024,11 @@
               "s": "it"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "My roommate is so loud.",
+            "kr": "룸메이트가 너무 시끄러워."
+          }
         },
         {
           "en": "Why do you put up with it?",
@@ -23989,7 +25047,8 @@
               "s": "it"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": null
         }
       ],
       "siblings": [
@@ -24083,7 +25142,8 @@
               "s": "her, but I don't think so"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "Let me check with my manager.",
@@ -24102,7 +25162,11 @@
               "s": "my manager"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "Can I get a refund?",
+            "kr": "환불 가능한가요?"
+          }
         }
       ],
       "siblings": [
@@ -24193,7 +25257,11 @@
               "s": "water"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "Would you like some wine?",
+            "kr": "와인 드시겠어요?"
+          }
         }
       ],
       "siblings": [
@@ -24280,7 +25348,11 @@
               "s": "you, I'd fail"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "You did all the work yourself.",
+            "kr": "네가 다 알아서 했잖아."
+          }
         },
         {
           "en": "If it weren't for the rain, we would go.",
@@ -24295,7 +25367,8 @@
               "s": "the rain, we would go"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "If it weren't for you, I'd be lost.",
@@ -24310,7 +25383,8 @@
               "s": "you, I'd be lost"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "If it weren't for coffee, I wouldn't survive mornings.",
@@ -24325,7 +25399,8 @@
               "s": "coffee, I wouldn't survive mornings"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "If it weren't for her, I wouldn't be here.",
@@ -24340,7 +25415,8 @@
               "s": "her, I wouldn't be here"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -24426,7 +25502,11 @@
               "s": "keep in touch"
             }
           ],
-          "punct": "!"
+          "punct": "!",
+          "ask": {
+            "en": "I'm moving abroad next month.",
+            "kr": "다음 달에 외국으로 이사 가."
+          }
         },
         {
           "en": "We still keep in touch.",
@@ -24441,7 +25521,8 @@
               "s": "keep in touch"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -24532,7 +25613,8 @@
               "s": "eat out"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": null
         },
         {
           "en": "Let's just eat out.",
@@ -24547,7 +25629,11 @@
               "s": "eat out"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "The fridge is empty.",
+            "kr": "냉장고가 텅 비었어."
+          }
         }
       ],
       "siblings": [
@@ -24635,7 +25721,8 @@
               "s": "take a while"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "It could take a while.",
@@ -24650,7 +25737,11 @@
               "s": "take a while"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "How long is the wait?",
+            "kr": "얼마나 기다려야 해요?"
+          }
         }
       ],
       "siblings": [
@@ -24737,7 +25828,8 @@
               "s": "know a good one"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": null
         },
         {
           "en": "Do you happen to have a pen?",
@@ -24752,7 +25844,11 @@
               "s": "have a pen"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": {
+            "en": "I need to write this down.",
+            "kr": "이걸 적어야 하는데."
+          }
         }
       ],
       "siblings": [
@@ -24840,7 +25936,8 @@
               "s": "do it"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": null
         },
         {
           "en": "Why don't I try?",
@@ -24855,7 +25952,11 @@
               "s": "try"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": {
+            "en": "Nobody can open this jar.",
+            "kr": "이 병을 아무도 못 열어."
+          }
         }
       ],
       "siblings": [
@@ -24946,7 +26047,11 @@
               "s": "tell the difference"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "This one is much better, right?",
+            "kr": "이게 훨씬 낫지?"
+          }
         },
         {
           "en": "I can really tell the difference!",
@@ -24961,7 +26066,8 @@
               "s": "tell the difference"
             }
           ],
-          "punct": "!"
+          "punct": "!",
+          "ask": null
         }
       ],
       "siblings": [
@@ -25053,7 +26159,11 @@
               "s": "pull over"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "I feel sick.",
+            "kr": "속이 안 좋아."
+          }
         },
         {
           "en": "I think we should pull over.",
@@ -25068,7 +26178,8 @@
               "s": "pull over"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -25158,7 +26269,11 @@
               "s": "make time"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "I'm too busy to exercise.",
+            "kr": "운동할 시간이 없어."
+          }
         },
         {
           "en": "You have to make time for exercise.",
@@ -25177,7 +26292,8 @@
               "s": "for exercise"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -25271,7 +26387,8 @@
               "s": "a bit today"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "I'm glad we dressed up.",
@@ -25286,7 +26403,11 @@
               "s": "dressed up"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "Everyone here is in a suit.",
+            "kr": "여기 다들 정장이네."
+          }
         }
       ],
       "siblings": [
@@ -25373,7 +26494,8 @@
               "s": "see him, please give him this message"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "Should you need any assistance, let us know.",
@@ -25388,7 +26510,11 @@
               "s": "need any assistance, let us know"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "What if something goes wrong?",
+            "kr": "문제가 생기면 어떡하죠?"
+          }
         },
         {
           "en": "Should you ever find yourself in trouble, call me.",
@@ -25403,7 +26529,8 @@
               "s": "ever find yourself in trouble, call me"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         },
         {
           "en": "Should you have any questions, feel free to ask.",
@@ -25418,7 +26545,8 @@
               "s": "have any questions, feel free to ask"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -25505,7 +26633,8 @@
               "s": "that's too early"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": null
         },
         {
           "en": "That's expensive, don't you think?",
@@ -25520,7 +26649,11 @@
               "s": "don't you think"
             }
           ],
-          "punct": "?"
+          "punct": "?",
+          "ask": {
+            "en": "This bag is nine hundred dollars.",
+            "kr": "이 가방 900달러야."
+          }
         }
       ],
       "siblings": [
@@ -25631,7 +26764,11 @@
               "s": "later"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "Why is he buying so much food?",
+            "kr": "왜 음식을 그렇게 많이 사?"
+          }
         },
         {
           "en": "My parents are having people over tomorrow.",
@@ -25658,7 +26795,8 @@
               "s": "tomorrow"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -25744,7 +26882,11 @@
               "s": "by far"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "Which movie was best?",
+            "kr": "어느 영화가 최고였어?"
+          }
         },
         {
           "en": "It was the hardest one yet by far.",
@@ -25759,7 +26901,8 @@
               "s": "by far"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
@@ -25849,7 +26992,11 @@
               "s": "passed out"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": {
+            "en": "Why did the ambulance come?",
+            "kr": "왜 구급차가 왔어?"
+          }
         },
         {
           "en": "He passed out at work.",
@@ -25868,7 +27015,8 @@
               "s": "at work"
             }
           ],
-          "punct": "."
+          "punct": ".",
+          "ask": null
         }
       ],
       "siblings": [
