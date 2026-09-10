@@ -182,7 +182,6 @@
   .fill-word { background:#eaf1fb; border:1px solid #cdddf3; border-radius:9px; padding:6px 13px; font-size:17px; color:#2f3e52; cursor:pointer; }
   .fill-word.trigger-w { background:#e3fbec; border-color:#8ed9ab; color:#22794a; font-weight:800; }
   .fill-blank { min-width:52px; border-bottom:2px solid #b9c7db; height:26px; }
-  .fill-blank.wide { min-width:104px; }
   /* 흐름 1 — 표현만 세우는 동안 슬롯이 들어갈 자리(조각당 하나) */
   .fr-slot { padding:5px 11px; border-radius:9px; background:#eef2f8; color:#b6c3d4;
     font-size:16px; font-weight:800; letter-spacing:2px; line-height:1.1; }
@@ -191,9 +190,8 @@
   @keyframes growIn { from{ opacity:0; transform:translateY(5px);} to{ opacity:1; transform:none;} }
   .fill-word.locked { cursor:default; }
   .expand-mean { font-size:12.5px; color:#9aa8bc; font-weight:600; margin-top:4px; }
-  /* 흐름 2 — 프레임 밖 나머지는 조각당 한 덩어리로 다룬다 */
-  .tile.chunk { background:#f4f7fc; border-color:#dde7f4; color:#5c6b80; font-weight:700; }
-  .fill-word.chunk-w { background:#f1f5fa; border-color:#dde7f4; color:#5c6b80; font-weight:700; }
+  /* 흐름 2 [2] — 문장 해석은 타이틀이 아니라 영어 아래에 둔다(타이틀은 표현 뜻) */
+  .sent-kr { font-size:13.5px; color:#9aa8bc; font-weight:600; margin-top:10px; }
   .flow-seg { margin-bottom:12px; }
   /* 배열 지시문 — 데이터에 지시문 필드가 없어 종결부호로 유도한다 */
   .fill-hint { font-size:13px; color:#b3bfd0; font-weight:600; margin-top:8px; }
@@ -236,6 +234,14 @@
   .sit-opt.on { border-color:#8fb0dd; background:#eef4fc; }
   .sit-opt.bad { border-color:#e7a79c; background:#fdeeea; color:#b5533c; }
   .sit-opt.good { border-color:#8ed9ab; background:#e3fbec; color:#22794a; }
+  /* [5] 표현 칩 선택지 — 문장 비교가 아니라 '어떤 표현을 말할까' 가 과제다 */
+  .sit-opts.chips { flex-direction:row; flex-wrap:wrap; gap:9px; }
+  .sit-opt.fr { flex:0 0 auto; justify-content:center; font-size:17px; font-weight:800; padding:12px 18px; }
+  .sit-bubble .fill { margin-top:0; min-height:38px; gap:6px; }
+  .sit-bubble .fill-blank { min-width:44px; }
+  .sit-bubble .fill-word, .sit-bubble .fill-fixed { padding:6px 10px; }
+  .fill-nw { display:inline-flex; align-items:center; gap:6px; }
+  .fill-word.said { cursor:default; }
   .sit-opt:disabled { cursor:default; }
   .pf-ok { display:flex; align-items:center; gap:6px; font-size:16px; font-weight:800; color:var(--green); }
   .pf-mean.big { font-size:16px; color:#33465c; font-weight:600; margin-top:2px; }
@@ -795,7 +801,9 @@ function isTriggerToken(tok, trigger){
 // 단어만 바꾼 실제 예문으로 "이제 이런 말도 할 수 있다"를 눈으로 확인시킨다.
 function patternPayoffHtml(item){
   const p=item.pattern||{}, form=(p.form||'').trim(), pmean=(p.meaning||'').trim(), pdesc=(p.desc||'').trim();
-  const sibs=(item.siblings||[]).slice(0,2);
+  const all=item.siblings||[];
+  const rest=all.filter(x=>!builtSet.has(x.en));
+  const sibs=(rest.length?rest:all).slice(0,2);
   if(!form && !pmean && !sibs.length) return '';
   // 슬롯(______ / ~)은 빈칸으로 그려 '단어만 갈아끼우는 틀'로 읽히게 한다
   const frameEn = form ? `<div class="pf-form">${escapeHtml(form).replace(/_{2,}|~/g,'<span class="slot"></span>')}</div>` : '';
@@ -886,7 +894,7 @@ function renderExpand(){
     <div class="stage-scroll">
       <div class="chat-card" id="card">
         ${chatTag(item)}<div class="chat-badge new">New</div>
-        <div class="chat-ko" id="koLine">${escapeHtml(pmean||s.kr)}</div>
+        <div class="chat-ko" id="koLine">${pmean?`<span class="tgt">${escapeHtml(pmean)}</span>`:escapeHtml(s.kr)}</div>
         <div class="expand-mean hidden" id="meanLine"></div>
         <div class="fill" id="fill"></div>
         <div class="fill-hint" id="fillHint">표현을 먼저 만들어 보세요</div>
@@ -1018,6 +1026,7 @@ function transferApply(item){
 }
 function renderFrameFirst(){
   const item=sessionItems[itemIdx], ap=transferApply(item);
+  const pmean=((item.pattern||{}).meaning||'').trim();
   setProgress(1);
   renderStepBanner(2, item.word);
 
@@ -1036,10 +1045,10 @@ function renderFrameFirst(){
     <div class="stage-scroll">
       <div class="chat-card" id="card">
         ${chatTag(item)}<div class="chat-badge new">New</div>
-        <div class="chat-ko">${escapeHtml(ap.kr)}</div>
+        <div class="chat-ko">${pmean?`<span class="tgt">${escapeHtml(pmean)}</span>`:escapeHtml(ap.kr)}</div>
         <div class="fill" id="fill"></div>
+        <div class="sent-kr">${escapeHtml(ap.kr)}</div>
         <div class="fill-hint" id="fillHint">이 문장의 빈 자리에 들어갈 표현을 만들어 보세요</div>
-        <div id="payoffBox"></div>
       </div>
     </div>
     <div class="stage-bottom" id="bottom">
@@ -1094,7 +1103,6 @@ function renderFrameFirst(){
     ans=blanks.map(c=>({text:c.answer, placed:true}));
     renderFill();
     el('fillHint').classList.add('hidden');
-    el('payoffBox').innerHTML=applyPayoffHtml(item, [{en:ap.en, kr:ap.kr, segs:ap.segs}]);
     el('bottom').innerHTML=arrangeBottomHtml('다음 단계');
     el('nextBtn').onclick=()=>renderFullArrange();
   }
@@ -1109,32 +1117,29 @@ function renderFrameFirst(){
   renderAll();
 }
 
-// [3] 흐름 2 — 방금 산출한 표현으로 어휘가 든 문장을 다시 쓴다 ────────────────────
-// 프레임은 낱개 단어로 흩어 다시 산출하게 하고, 그 밖의 부분은 조각당 한 덩어리
-// 타일로 준다 — "내가 방금 만든 표현을 이렇게 문장으로 쓸 수 있다"가 과제의 초점이고,
-// 프레임을 한 덩어리로 주면 그게 사라진다(가정법처럼 붙지 않는 표현도 많다).
+// [3] 흐름 2 — 방금 표현만 넣은 그 문장을 이번엔 통째로 만든다 ────────────────────
+// [2]는 프레임만 산출하고 나머지는 회색으로 주어졌다. [3]은 **같은 문장**을 낱개 단어로
+// 처음부터 세운다 — 표현이 들어간 문장을 내 손으로 끝까지 만들어봐야 쓸 수 있다는 감각이
+// 남는다. 덩어리로 묶지 않는 이유도 같다(묶으면 놓는 자리만 고르는 과제가 된다).
 function renderFullArrange(){
-  const item=sessionItems[itemIdx], s=item.sentence, punct=trailPunct(s.en);
+  const item=sessionItems[itemIdx], ap=transferApply(item);
+  const pmean=((item.pattern||{}).meaning||'').trim();
   setProgress(2);
   renderStepBanner(2, item.word);
 
-  const units=[];
-  item.baseSegs.forEach(sg=>{
-    if(sg.t==='frame') sg.s.split(/\s+/).forEach(w=> units.push({text:w, chunk:false}));
-    else units.push({text:sg.s, chunk:true});
-  });
-  const target=units.map(u=>u.text.toLowerCase()).join(' ');
-  let bank=shuffle(units.map((u,i)=>({id:i, text:u.text.toLowerCase(), chunk:u.chunk, placed:false,
-    isTrig:OPTS.trigger && u.text.split(/\s+/).some(w=>isTriggerToken(w, s.trigger))})));
-  let ans=[], done=false, usedFired=false;
+  const tokens=tokenize(ap.en);
+  const target=tokens.map(t=>t.toLowerCase()).join(' ');
+  let bank=shuffle(tokens.map((t,i)=>({id:i, text:t.toLowerCase(), placed:false})));
+  let ans=[], done=false;
 
   stage.innerHTML=`
     <div class="stage-scroll">
       <div class="chat-card" id="card">
         ${chatTag(item)}
-        <div class="chat-ko">${escapeHtml(s.kr)}</div>
+        <div class="chat-ko">${escapeHtml(ap.kr)}</div>
+        ${pmean?`<div class="expand-mean">이 표현 <span class="tgt">${escapeHtml(pmean)}</span></div>`:''}
         <div class="fill" id="fill"></div>
-        <div class="fill-hint" id="fillHint">방금 만든 표현으로 이 문장을 만들어 보세요</div>
+        <div class="fill-hint" id="fillHint">${fillHintText(ap.punct)}</div>
         <div id="payoffBox"></div>
         <div class="mic-float" id="micFloat">🎤</div>
       </div>
@@ -1148,19 +1153,20 @@ function renderFullArrange(){
     </div>`;
 
   const fillEl=el('fill'), bankEl=el('bank');
+  // 프레임 단어는 [2]에서 내가 산출한 조각이므로 완성 뒤에도 초록으로 남는다
+  const frameWords=new Set((item.frame||[]).join(' ').toLowerCase().split(/\s+/).filter(Boolean));
+  const isFrame=t=>frameWords.has(t.toLowerCase());
 
-  // 트리거 어휘가 든 덩어리는 초록으로 — 방금 배운 단어가 들어갔다는 표시가 우선한다
-  function cls(t){ return t.chunk ? (t.isTrig?' trigger-w':' chunk-w') : ' frame-w'; }
   function renderFill(){
     let h='';
-    for(let i=0;i<units.length;i++){
+    for(let i=0;i<tokens.length;i++){
       h += i<ans.length
-        ? `<span class="fill-word${cls(ans[i])}" data-i="${i}">${escapeHtml(ans[i].text)}</span>`
-        : `<span class="fill-blank${units[i].chunk?' wide':''}"></span>`;
+        ? `<span class="fill-word${done&&isFrame(ans[i].text)?' frame-w':''}" data-i="${i}">${escapeHtml(ans[i].text)}</span>`
+        : `<span class="fill-blank"></span>`;
     }
-    if(punct) h+=`<span class="fill-punct">${escapeHtml(punct)}</span>`;
+    if(ap.punct) h+=`<span class="fill-punct">${escapeHtml(ap.punct)}</span>`;
     fillEl.innerHTML=h;
-    if(!done) fillEl.querySelectorAll('.fill-word[data-i]').forEach(w=> w.onclick=()=>{
+    if(!done) fillEl.querySelectorAll('.fill-word').forEach(w=> w.onclick=()=>{
       const i=+w.dataset.i; ans[i].placed=false; ans.splice(i,1); renderAll();
     });
   }
@@ -1168,15 +1174,11 @@ function renderFullArrange(){
     bankEl.innerHTML='';
     bank.forEach(t=>{
       const b=document.createElement('button');
-      b.className='tile'+(t.placed?' placed':'')+(t.chunk?' chunk':'')+(t.isTrig&&!done?' trigger':'');
+      b.className='tile'+(t.placed?' placed':'');
       b.textContent=t.text;
-      if(t.isTrig){ const lb=chipLabelText(item); if(lb) b.dataset.label=lb; }
       if(!t.placed && !done) b.onclick=()=>{
-        if(ans.length>=units.length) return;
-        t.placed=true; ans.push(t);
-        const idx=ans.length-1;
-        renderAll();
-        if(t.isTrig && !usedFired){ usedFired=true; fireUsedEffect(fillEl, idx); }
+        if(ans.length>=tokens.length) return;
+        t.placed=true; ans.push(t); renderAll();
       };
       bankEl.appendChild(b);
     });
@@ -1184,31 +1186,25 @@ function renderFullArrange(){
   function renderAll(){
     renderFill(); renderBank();
     el('fillHint').classList.toggle('hidden', done || ans.length>0);
-    el('confirmBtn').disabled = ans.length<units.length;
+    el('confirmBtn').disabled = ans.length<tokens.length;
   }
 
   function finish(){
     done=true;
     el('card').classList.add('correct');
     if(!el('card').querySelector('.check-mark')){ const c=document.createElement('div'); c.className='check-mark'; c.textContent='✓'; el('card').appendChild(c); }
-    builtSet.add(s.en);
+    builtSet.add(ap.en);
     el('micFloat').classList.add('hidden');
-    ans=units.map(u=>({text:u.text, chunk:u.chunk, placed:true,
-      isTrig:OPTS.trigger && u.text.split(/\s+/).some(w=>isTriggerToken(w, s.trigger))}));
+    ans=tokens.map((t,i)=>({id:i, text:t, placed:true}));
     renderFill();
     el('fillHint').classList.add('hidden');
-    // 같은 표현으로 만든 두 문장을 나란히 — 근거가 자기 산출물이다
-    const ap=transferApply(item);
-    el('payoffBox').innerHTML=applyPayoffHtml(item, [
-      {en:ap.en, kr:ap.kr, segs:ap.segs},
-      {en:s.en, kr:s.kr, segs:item.baseSegs},
-    ]);
+    el('payoffBox').innerHTML=patternPayoffHtml(item);
     el('bottom').innerHTML=arrangeBottomHtml(lastItem()?'완료하기':'다음 문제');
     el('nextBtn').onclick=advanceItem;
   }
 
   el('confirmBtn').onclick=()=>{
-    if(ans.length<units.length) return;
+    if(ans.length<tokens.length) return;
     if(ans.map(x=>x.text).join(' ')===target) return finish();
     fillEl.querySelectorAll('.fill-word').forEach(w=>w.style.color='#e14b46');
     setTimeout(finish, 700);
@@ -1217,28 +1213,6 @@ function renderFullArrange(){
   renderAll();
 }
 
-// [3] 정답 후 '학습 정보' — 프레임과 그 표현으로 만든 문장만 보여준다.
-// 무엇을 느껴야 하는지 문구로 설명하지 않는다(그건 기획 의도지 앱 화면이 아니다).
-// 초록 강조가 같은 틀임을 그대로 보여주므로 해설이 필요 없다.
-function applyPayoffHtml(item, rows){
-  const p=item.pattern||{}, form=(p.form||'').trim(), pmean=(p.meaning||'').trim();
-  const line=(r)=>{
-    const punct=(String(r.en).match(/[.?!]+$/)||[''])[0];
-    const body=(r.segs && r.segs.length)
-      ? r.segs.map(g=> g.t==='frame'
-          ? `<span class="tgt">${escapeHtml(g.s)}</span>`
-          : escapeHtml(g.s)).join(' ') + escapeHtml(punct)
-      : escapeHtml(r.en);
-    return `<div class="pf-cmp"><div class="pf-cmp-en">${body}</div><div class="pf-cmp-kr">${escapeHtml(r.kr)}</div></div>`;
-  };
-  return `<div class="payoff">
-      <div class="pf-label">학습 정보</div>
-      ${form?`<div class="pf-form">${escapeHtml(form).replace(/_{2,}|~/g,'<span class="slot"></span>')}</div>`:''}
-      ${pmean?`<div class="pf-mean">${escapeHtml(pmean)}</div>`:''}
-      <div class="pf-sub"><span class="ic">ⓘ</span>이 표현으로 만든 문장</div>
-      ${rows.map(line).join('')}
-    </div>`;
-}
 
 // [5] 상황 ──────────────────────────────────────────────────────────────────────
 // 기획 의도: "임의의 상황에서 배운 표현을 가지고 내가 새로 말을 할 수 있다".
@@ -1259,14 +1233,15 @@ function renderSituation(target, pool){
   let done=false, picked=null, revealedList=false;
 
   // 오답 — 같은 구간(또는 인접 문항)의 다른 표현 문장. 문법은 맞고 상황엔 안 맞는다.
-  const wrongs=(pool||[]).filter(x=>x.en!==target.en).slice(0,2);
+  const frameKey=x=>(x.frame||[]).join(' ').toLowerCase();
+  const wrongs=(pool||[]).filter(x=>x.en!==target.en && frameKey(x)!==frameKey(target)).slice(0,2);
   const choices=shuffle([{...target, ok:true}].concat(wrongs.map(x=>({...x, ok:false}))));
 
   stage.innerHTML=`
     <div class="stage-scroll">
       <div class="chat-card" id="card">
         <div class="chat-tag rv">상황</div>
-        <div class="sit-task">A의 말을 보고 적절히 답변하세요</div>
+        <div class="sit-task" id="sitTask">A의 말을 보고 적절히 답변하세요</div>
         <div class="sit-turn a">
           <div class="sit-role">A</div>
           <div class="sit-bubble">
@@ -1294,9 +1269,17 @@ function renderSituation(target, pool){
   }
 
   // ── 선택형 (기본) ──
+  // 문장 3개를 늘어놓으면 과제가 **A의 영어를 해석하고 긴 문장 셋을 비교하는 일**이 된다.
+  // 이 단계에서 느껴야 하는 건 "방금 배운 표현을 내가 여기서 말한다"이므로 두 박자로 쪼갠다.
+  //   ① 표현 고르기 — 선택지를 **짧은 표현 칩**으로 줄인다(읽는 부담이 크게 줄고,
+  //      고르는 대상이 문장이 아니라 내가 배운 표현이 된다)
+  //   ② 그 표현으로 말하기 — 고른 표현은 내 말풍선에 초록으로 박히고, 남은 자리만
+  //      탭해 문장을 완성한다. 완성된 문장이 내 대사로 나가는 것이 '말해봤다'의 실체다.
+  function frameChip(x){ return (x.frame||[]).join(' ~ ').toLowerCase(); }
   function renderPick(){
-    ansBox.innerHTML=`<div class="sit-opts">${choices.map((c,i)=>
-      `<button class="sit-opt" data-i="${i}" data-ok="${c.ok?1:0}"><span class="ic">🎤</span>${escapeHtml(c.en)}</button>`).join('')}</div>`;
+    el('sitTask').textContent='어떤 표현으로 답할까요?';
+    ansBox.innerHTML=`<div class="sit-opts chips">${choices.map((c,i)=>
+      `<button class="sit-opt fr" data-i="${i}" data-ok="${c.ok?1:0}">${escapeHtml(frameChip(c))}</button>`).join('')}</div>`;
     el('bottom').innerHTML=`<div class="arr-btns">
         <button class="btn-ghost2" id="skipBtn"><span class="ic">↷</span>건너뛰기</button>
         <button class="btn-confirm" id="okBtn" disabled>확인</button>
@@ -1317,8 +1300,85 @@ function renderSituation(target, pool){
         picked=null; el('okBtn').disabled=true;
         return;
       }
-      finish(picked.en);
+      fb.classList.add('hidden');
+      renderSay();
     };
+  }
+
+  // ② 고른 표현으로 문장 완성 — 프레임은 박혀 있고 남은 자리만 내가 채운다
+  function renderSay(){
+    el('sitTask').textContent='그 표현으로 말해 보세요';
+    const punct=trailPunct(target.en);
+    const cells=[];
+    (target.segs||[{t:'frame', s:target.en}]).forEach(sg=>{
+      if(sg.t==='frame'){ sg.s.split(/\s+/).forEach(w=> cells.push({kind:'fixed', text:w})); return; }
+      sg.s.split(/\s+/).forEach(w=> cells.push({kind:'blank', answer:w}));
+    });
+    const blanks=cells.filter(c=>c.kind==='blank');
+    let bank=shuffle(blanks.map((c,i)=>({id:i, text:c.answer.toLowerCase(), placed:false})));
+    let put=[];
+
+    ansBox.innerHTML=`
+      <div class="sit-turn b">
+        <div class="sit-role">B</div>
+        <div class="sit-bubble mine"><div class="fill" id="sfill"></div></div>
+      </div>`;
+    el('bottom').innerHTML=`
+      <div class="bank" id="sbank"></div>
+      <div class="arr-btns">
+        <button class="btn-ghost2" id="skipBtn"><span class="ic">↷</span>건너뛰기</button>
+        <button class="btn-confirm" id="okBtn" disabled>말하기</button>
+      </div>`;
+    el('skipBtn').onclick=goNext;
+
+    const fillEl=el('sfill'), bankEl=el('sbank');
+    function draw(){
+      let bi=0;
+      const parts=cells.map(c=>{
+        if(c.kind==='fixed') return `<span class="fill-fixed">${escapeHtml(c.text)}</span>`;
+        const i=bi++;
+        return i<put.length
+          ? `<span class="fill-word" data-i="${i}">${escapeHtml(put[i].text)}</span>`
+          : `<span class="fill-blank"></span>`;
+      });
+      // 말풍선은 카드보다 좁아 종결부호만 다음 줄로 떨어진다 — 마지막 칸과 묶어 함께 넘긴다
+      if(punct) parts.push(`<span class="fill-punct">${escapeHtml(punct)}</span>`);
+      const h = punct
+        ? parts.slice(0,-2).join('') + `<span class="fill-nw">${parts.slice(-2).join('')}</span>`
+        : parts.join('');
+      fillEl.innerHTML=h;
+      fillEl.querySelectorAll('.fill-word').forEach(w=> w.onclick=()=>{
+        const i=+w.dataset.i; put[i].placed=false; put.splice(i,1); all();
+      });
+      bankEl.innerHTML='';
+      bank.forEach(t=>{
+        const b=document.createElement('button');
+        b.className='tile'+(t.placed?' placed':'');
+        b.textContent=t.text;
+        if(!t.placed) b.onclick=()=>{ if(put.length<blanks.length){ t.placed=true; put.push(t); all(); } };
+        bankEl.appendChild(b);
+      });
+      el('okBtn').disabled = put.length<blanks.length;
+    }
+    const all=draw;
+
+    el('okBtn').onclick=()=>{
+      if(put.length<blanks.length) return;
+      const ok=put.every((t,i)=> t.text===blanks[i].answer.toLowerCase());
+      if(!ok){
+        fillEl.querySelectorAll('.fill-word').forEach(w=>w.style.color='#e14b46');
+        fb.classList.remove('hidden');
+        fb.innerHTML=`<div class="sit-wrong">어순을 다시 볼까요?</div>`;
+        setTimeout(()=>{ fb.classList.add('hidden'); put=[]; bank.forEach(t=>t.placed=false); all(); }, 800);
+        return;
+      }
+      // 원문 대소문자로 굳혀 내 대사로 남긴다
+      put=blanks.map(c=>({text:c.answer, placed:true}));
+      draw();
+      fillEl.querySelectorAll('.fill-word').forEach(w=>{ w.onclick=null; w.classList.add('said'); });
+      finish(target.en);
+    };
+    draw();
   }
 
   // ── 직접 입력 (비교 버전) ──
@@ -1391,12 +1451,6 @@ function renderSituation(target, pool){
     fb.classList.add('hidden');
     el('card').classList.add('correct');
     el('aKr').classList.remove('hidden');
-    if(!typing){
-      ansBox.querySelectorAll('.sit-opt').forEach(b=>{
-        b.disabled=true;
-        if(b.dataset.ok==='1') b.classList.add('good');
-      });
-    }
     const pf=(target.form||'').trim(), pm=(target.meaning||'').trim();
     const exact = norm(said)===norm(target.en);
     // `의미`는 **내가 말한 문장**의 뜻이다. 직접 입력에서 모범 답안과 다르면
@@ -1457,7 +1511,7 @@ function showSituation(){
   renderSituation(sitTarget(it), shuffle(near));
 }
 function sitTarget(it){
-  return {en:it.sentence.en, kr:it.sentence.kr, frame:it.frame, situation:it.situation,
+  return {en:it.sentence.en, kr:it.sentence.kr, frame:it.frame, segs:it.baseSegs, situation:it.situation,
           form:(it.pattern||{}).form, meaning:(it.pattern||{}).meaning};
 }
 
