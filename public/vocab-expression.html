@@ -146,7 +146,9 @@
   .fill { position:relative; display:flex; flex-wrap:wrap; align-items:center; gap:7px 8px; margin-top:16px; min-height:44px; }
   .fill-word { background:#eaf1fb; border:1px solid #cdddf3; border-radius:9px; padding:6px 13px; font-size:17px; color:#2f3e52; cursor:pointer; }
   .fill-blank { min-width:52px; border-bottom:2px solid #b9c7db; height:26px; }
-  .expand-mean { font-size:12.5px; color:#9aa8bc; font-weight:600; margin-top:4px; }
+  /* 2박자에서 타이틀이 문장 뜻으로 바뀔 때 표현 뜻은 초록 칩으로 남아 연결을 잇는다.
+     `이 표현 …` 처럼 라벨을 붙이면 화면 문구로 어색하고, 칩은 문장 해석의 일부로 읽히지 않는다. */
+  .expand-mean { margin-top:6px; }
   /* 흐름 2 [2] — 문장 해석은 타이틀이 아니라 영어 아래에 둔다(타이틀은 표현 뜻) */
   .sent-kr { font-size:13.5px; color:#9aa8bc; font-weight:600; margin-top:10px; }
   /* [4] 답 줄에 박혀 있는 프레임 — 내가 쓰는 도구다 */
@@ -658,7 +660,6 @@ function withPunct(parts, punct){
   if(!parts.length) return tail;
   return parts.slice(0,-1).join('') + `<span class="fill-nw">${parts[parts.length-1]}${tail}</span>`;
 }
-function fillHintText(punct){ return /\?/.test(punct) ? '의문문으로 만들어 주세요' : '문장을 만들어 주세요'; }
 
 // ── 배열 화면 공용 ────────────────────────────────────────────────────────────
 function arrangeBottomHtml(nextLabel){
@@ -739,7 +740,6 @@ function renderPattern(){
         <div class="expand-mean hidden" id="meanLine"></div>
         <div class="fill" id="fill"></div>
         <div class="sent-kr" id="sentKr">${escapeHtml(s.kr)}</div>
-        <div class="fill-hint hidden" id="fillHint"></div>
         <div id="payoffBox"></div>
         <div class="mic-float" id="micFloat">🎤</div>
       </div>
@@ -805,8 +805,7 @@ function renderPattern(){
     el('koLine').classList.add('grow-in');
     el('sentKr').classList.add('hidden');
     const m=el('meanLine'); m.classList.remove('hidden');
-    m.innerHTML=`이 표현 <span class="tgt">${escapeHtml(pmean||'')}</span>`;
-    const fh=el('fillHint'); fh.classList.remove('hidden'); fh.textContent=fillHintText(punct);
+    m.innerHTML=`<span class="rv-chip fr">${escapeHtml(pmean||'')}</span>`;
     renderAll();
   }
 
@@ -817,7 +816,6 @@ function renderPattern(){
     builtSet.add(s.en);
     ans=tok.map((w,i)=>({text:w, placed:true, fr:flag[i]}));   // 원문 대소문자로 교정
     renderFill();
-    el('fillHint').classList.add('hidden');
     el('micFloat').classList.add('hidden');
     el('payoffBox').innerHTML=patternPayoffHtml(item);
     el('bottom').innerHTML=arrangeBottomHtml('다음 단계');
@@ -932,7 +930,7 @@ function renderExpand(){
   }
   function renderAll(){
     renderFill(); renderBank();
-    el('fillHint').classList.toggle('hidden', done || ans.length>0);
+    el('fillHint').classList.toggle('hidden', phase===1 || done || ans.length>0);
     el('confirmBtn').disabled = ans.length<need();
   }
 
@@ -943,8 +941,8 @@ function renderExpand(){
     el('koLine').textContent=s.kr;
     el('koLine').classList.add('grow-in');
     const m=el('meanLine'); m.classList.remove('hidden');
-    m.innerHTML=`이 표현 <span class="tgt">${escapeHtml(pmean||'')}</span>`;
-    el('fillHint').textContent=fillHintText(punct);
+    m.innerHTML=`<span class="rv-chip fr">${escapeHtml(pmean||'')}</span>`;
+    el('fillHint').classList.add('hidden');   // 2박자엔 지시문을 두지 않는다
     renderAll();
   }
 
