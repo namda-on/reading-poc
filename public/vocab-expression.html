@@ -158,11 +158,8 @@
   .fr-slot { display:inline-flex; align-items:flex-end; height:26px; line-height:1; padding:0 3px;
     font-size:16px; font-weight:800; color:#b6c3d4; letter-spacing:2px; }
   /* [4] 말해보기 — 배운 표현으로 새 문장 만들기 */
-  .sp-fr { display:flex; align-items:center; gap:9px; flex-wrap:wrap; }
-  .sp-fr .mn { font-size:13px; color:#9aa8bc; font-weight:600; }
-  .sp-q { font-size:13.5px; font-weight:700; color:#5b7c93; margin-top:18px; }
+  .sp-q { font-size:13.5px; font-weight:700; color:#5b7c93; }
   .sp-kr { font-size:20px; font-weight:800; color:#2f3e52; line-height:1.4; margin-top:5px; }
-  .sp-in { background:#eaf1fb; border-radius:14px; padding:12px 14px; margin-top:16px; }
   .start-card.alt-card { background:#ffffffd9; }
   /* 배열 지시문 — 데이터에 지시문 필드가 없어 종결부호로 유도한다 */
   .fill-hint { font-size:13px; color:#b3bfd0; font-weight:600; margin-top:8px; }
@@ -744,6 +741,7 @@ function renderPattern(){
         <div class="sent-kr" id="sentKr">${escapeHtml(s.kr)}</div>
         <div class="fill-hint hidden" id="fillHint"></div>
         <div id="payoffBox"></div>
+        <div class="mic-float" id="micFloat">🎤</div>
       </div>
     </div>
     <div class="stage-bottom" id="bottom">
@@ -820,6 +818,7 @@ function renderPattern(){
     ans=tok.map((w,i)=>({text:w, placed:true, fr:flag[i]}));   // 원문 대소문자로 교정
     renderFill();
     el('fillHint').classList.add('hidden');
+    el('micFloat').classList.add('hidden');
     el('payoffBox').innerHTML=patternPayoffHtml(item);
     el('bottom').innerHTML=arrangeBottomHtml('다음 단계');
     el('nextBtn').onclick=renderSpeak;
@@ -875,6 +874,7 @@ function renderExpand(){
         <div class="fill" id="fill"></div>
         <div class="fill-hint" id="fillHint">표현을 먼저 만들어 보세요</div>
         <div id="payoffBox"></div>
+        <div class="mic-float" id="micFloat">🎤</div>
       </div>
     </div>
     <div class="stage-bottom" id="bottom">
@@ -956,6 +956,7 @@ function renderExpand(){
     ans=slotIdx.map(i=>({text:tok[i], placed:true}));
     renderFill();
     el('fillHint').classList.add('hidden');
+    el('micFloat').classList.add('hidden');
     el('payoffBox').innerHTML=patternPayoffHtml(item);
     el('bottom').innerHTML=arrangeBottomHtml('다음 단계');
     el('nextBtn').onclick=renderSpeak;
@@ -986,13 +987,13 @@ function renderExpand(){
 // [2]·[3]은 주어진 문장을 만드는 일이라 "이 표현을 내가 쓸 수 있다"까지 가지 않는다.
 // 효용감은 **배운 표현으로 처음 보는 문장을 내가 세웠을 때** 나온다(어학 수업에서
 // "`~의 앞에`를 배웠으니 '내 앞에 다나카상이 있습니다'는?" 하고 묻는 그 자리다).
-// 그래서 이 단계는 **한국어 문장을 던지고 영어로 만들게** 한다:
+// 그 수업에서 답이 되는 이유는 나머지 낱말을 이미 알기 때문이지 자유 영작이라서가 아니다.
+// 그래서 이 단계도 **열어 두지 않는다**:
 //   · 대상은 **[2]·[3]에서 만든 문장이 아닌 새 문장**(같은 프레임을 쓰는 응용 예문 중
 //     가장 짧은 것) — 방금 배열한 문장을 다시 쓰면 받아쓰기가 된다
-//   · 표현은 **칩으로 보여준다** — 여기서 산출해야 하는 건 표현이 아니라 **문장**이고,
-//     표현을 도구로 쥐고 있어야 "이걸로 만들었다"가 된다
-//   · 채점은 모범 답안과 정확히 같으면 통과, **표현을 제대로 쓴 다른 문장도 통과**시킨다
-//     (한국어 한 문장에 영어는 여러 가지다 — 여기서 막으면 효용감이 아니라 좌절이 된다)
+//   · **나머지 낱말은 회색으로 주어지고**(이미 아는 부분) **표현 자리만 직접 입력**한다
+//     — 빈 줄에 문장 전체를 쓰게 하면 마음대로 영작해 버리고 채점도 성립하지 않는다
+//   · **표현은 보여주지 않는다** — 여기서 유의미한 액션이 표현을 떠올려 쓰는 것이다
 function speakTarget(item){
   const aps=(item.apply||[]).filter(a=>a.en!==item.sentence.en);
   const pool=aps.length?aps:(item.apply||[]);
@@ -1000,24 +1001,27 @@ function speakTarget(item){
 }
 function renderSpeak(){
   const item=sessionItems[itemIdx], t=speakTarget(item);
-  const pmean=((item.pattern||{}).meaning||'').trim();
-  const frameChip=(item.frame||[]).join(' ~ ');
   setProgress(3);
 
+  const cells=[];
+  t.segs.forEach(sg=>{
+    if(sg.t==='slot') cells.push({kind:'given', text:sg.s});
+    else cells.push({kind:'input', answer:sg.s});
+  });
+  const inputs=cells.filter(c=>c.kind==='input');
   let done=false, hintLevel=0;
+
   stage.innerHTML=`
     <div class="stage-scroll">
       <div class="chat-card" id="card">
         <div class="chat-tag rv">말해보기</div>
-        <div class="sp-fr"><span class="rv-chip fr">${escapeHtml(frameChip)}</span>
-          <span class="mn">${escapeHtml(pmean)}</span></div>
-        <div class="sp-q">이 표현으로 만들어 보세요</div>
+        <div class="sp-q">배운 표현을 넣어 이 문장을 만들어 보세요</div>
         <div class="sp-kr">${escapeHtml(t.kr)}</div>
-        <div class="sp-in"><textarea class="sit-input" id="spIn" rows="1" autocomplete="off"
-          autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Type in English"></textarea></div>
+        <div class="fill" id="fill"></div>
         <div class="wrong-box hidden" id="wrongBox"></div>
         <div class="reveal-note hidden" id="revealNote"></div>
         <div id="payoffBox"></div>
+        <div class="mic-float" id="micFloat">🎤</div>
       </div>
     </div>
     <div class="stage-bottom" id="bottom">
@@ -1025,74 +1029,68 @@ function renderSpeak(){
         <button class="vtool" id="hintBtn"><span class="ic">?</span><span id="hintLabel">힌트 보기</span></button>
         <button class="vtool mic" disabled><span class="ic">🎤</span><span>음성 모드</span></button>
       </div>
-      <div class="arr-btns" style="margin-top:12px">
-        <button class="btn-confirm" id="okBtn" disabled>말하기</button>
-      </div>
     </div>`;
 
-  const inp=el('spIn'), wrongBox=el('wrongBox');
-  setTimeout(()=>inp.focus(), 80);
-  inp.addEventListener('input', ()=>{
-    inp.style.height='auto'; inp.style.height=inp.scrollHeight+'px';
-    el('okBtn').disabled = !inp.value.trim() || done;
-    if(!done) wrongBox.classList.add('hidden');
+  const wrongBox=el('wrongBox');
+  let ii=0; const parts=[];
+  cells.forEach(c=>{
+    if(c.kind==='given'){ parts.push(`<span class="fill-given">${escapeHtml(c.text)}</span>`); return; }
+    const i=ii++;
+    parts.push(`<input class="blank" id="sin${i}" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done" />`);
   });
+  el('fill').innerHTML=withPunct(parts, t.punct);
 
-  function escapeRe(x){ return x.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'); }
-  // 프레임 조각이 순서대로 들어 있는지 — 굴절형(-s/-ed/-ing)은 인정한다
-  function usedFrame(txt){
-    return (item.frame||[]).every(lit=>{
-      const ws=lit.split(/\s+/).map(w=>w.replace(/[^A-Za-z']/g,''));
-      const pat=new RegExp('\\b'+ws.map(w=>escapeRe(w)+"(?:s|es|ed|d|ing)?").join('\\s+')+'\\b','i');
-      return pat.test(txt);
-    });
-  }
-  const words=x=>x.trim().split(/\s+/).filter(Boolean).length;
-  const frameWords=(item.frame||[]).join(' ').split(/\s+/).filter(Boolean).length;
+  const applyHint=()=> inputs.forEach((c,i)=>{ const inp=el('sin'+i); if(inp) inp.placeholder=hintPlaceholder(c.answer, hintLevel); });
+  applyHint();
+  setTimeout(()=>{ const f=el('sin0'); if(f) f.focus(); }, 80);
 
-  function finish(said, exact){
+  function finish(){
     done=true;
-    inp.value=said; inp.readOnly=true; inp.classList.add('ok');
-    el('okBtn').disabled=true;
+    inputs.forEach((c,i)=>{ const inp=el('sin'+i); if(inp){ inp.value=c.answer; inp.readOnly=true; inp.classList.add('correct'); inp.placeholder=''; } });
     el('card').classList.add('correct');
     if(!el('card').querySelector('.check-mark')){ const c=document.createElement('div'); c.className='check-mark'; c.textContent='✓'; el('card').appendChild(c); }
-    builtSet.add(t.en); made.push({en:said, kr:t.kr});
+    builtSet.add(t.en); made.push({en:t.en, kr:t.kr});
     wrongBox.classList.add('hidden'); el('revealNote').classList.add('hidden');
+    el('micFloat').classList.add('hidden');
+    // 완성된 문장을 한 줄로 다시 보여준다 — 처음 보는 문장을 내가 세웠다는 결과물이다
     el('payoffBox').innerHTML=`<div class="payoff">
-        <div class="pf-ok"><span class="ic">✓</span>${exact?'좋아요!':'표현을 잘 썼어요!'}</div>
-        ${exact?'':`<div class="pf-sub"><span class="ic">ⓘ</span>이렇게도 말해요</div>
-        <div class="pf-cmp"><div class="pf-cmp-en">${escapeHtml(t.en)}</div></div>`}
+        <div class="pf-ok"><span class="ic">✓</span>좋아요!</div>
+        <div class="pf-label">내가 만든 문장</div>
+        <div class="pf-cmp"><div class="pf-cmp-en">${escapeHtml(t.en)}</div>
+          <div class="pf-cmp-kr">${escapeHtml(t.kr)}</div></div>
       </div>`;
     el('bottom').innerHTML=arrangeBottomHtml(lastItem()?'완료하기':'다음 문제');
     el('nextBtn').onclick=advanceItem;
   }
 
-  el('okBtn').onclick=()=>{
-    const txt=inp.value.trim();
-    if(!txt || done) return;
-    const norm=x=>x.toLowerCase().replace(/[^a-z0-9']+/g,' ').trim();
-    if(norm(txt)===norm(t.en)) return finish(t.en, true);
-    // 모범 답안과 달라도 표현을 제대로 쓴 문장이면 통과 — 표현만 적어 넘기는 건 막는다
-    if(usedFrame(txt) && words(txt)>frameWords) return finish(txt, false);
-    wrongBox.classList.remove('hidden');
-    wrongBox.innerHTML=usedFrame(txt)
-      ? `배운 표현만으로는 문장이 안 돼요. 조금 더 붙여 볼까요?`
-      : `<b>${escapeHtml(frameChip)}</b>를 넣어 다시 만들어 볼까요?`;
-  };
+  // [1] 어휘와 같은 규약 — 정답이면 확인 없이 즉시 처리, 오답은 다 채웠을 때만 표시
+  function onInput(){
+    if(done) return;
+    const vals=inputs.map((c,i)=> (el('sin'+i)||{}).value||'');
+    if(inputs.every((c,i)=> norm(vals[i])===norm(c.answer))) return finish();
+    const bad=inputs.findIndex((c,i)=> vals[i].trim().length>=c.answer.replace(/ /g,'').length && norm(vals[i])!==norm(c.answer));
+    if(bad>=0){
+      const {html,wrong}=diffSpell(vals[bad].trim(), inputs[bad].answer);
+      wrongBox.classList.remove('hidden');
+      wrongBox.innerHTML=`${html} - 정답과 ${wrong}글자 달라요.`;
+    } else wrongBox.classList.add('hidden');
+  }
+  inputs.forEach((c,i)=>{ const inp=el('sin'+i); if(inp) inp.addEventListener('input', onInput); });
 
   el('hintBtn').onclick=()=>{
-    const rn=el('revealNote'); rn.classList.remove('hidden');
     if(hintLevel===0){
       hintLevel=1;
-      rn.innerHTML=`첫 단어<b>${escapeHtml(tokenize(t.en)[0])} …</b>`;
       el('hintLabel').textContent='정답 보기'; el('hintBtn').querySelector('.ic').textContent='✔';
     } else {
       hintLevel=2;
-      rn.innerHTML=`정답<b>${escapeHtml(t.en)}</b>`;
-      el('hintBtn').disabled=true; el('hintLabel').textContent='정답 공개됨';
+      // 정답은 placeholder 로 보이므로 입력값이 남아 있으면 가려진다 → [1]과 같은 처리
+      inputs.forEach((c,i)=>{ const inp=el('sin'+i); if(inp){ inp.value=''; inp.classList.add('revealed'); } });
       wrongBox.classList.add('hidden');
+      const rn=el('revealNote'); rn.classList.remove('hidden');
+      rn.innerHTML=`정답<b>${escapeHtml(inputs.map(c=>c.answer).join(' … '))}</b>`;
     }
-    inp.focus();
+    applyHint();
+    const f=el('sin0'); if(f) f.focus();
   };
 }
 
