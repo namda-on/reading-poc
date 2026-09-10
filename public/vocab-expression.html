@@ -184,8 +184,8 @@
   .fill-blank { min-width:52px; border-bottom:2px solid #b9c7db; height:26px; }
   .fill-blank.wide { min-width:104px; }
   /* 흐름 1 — 표현만 세우는 동안 슬롯이 들어갈 자리(조각당 하나) */
-  .fr-gap { display:flex; align-items:flex-end; height:26px; line-height:1; padding:0 3px;
-    font-size:21px; color:#aab7c9; font-weight:800; transform:translateY(5px); }   /* ~ 글리프가 em 박스 가운데라 한 번 더 내린다 */
+  .fr-slot { padding:5px 11px; border-radius:9px; background:#eef2f8; color:#b6c3d4;
+    font-size:16px; font-weight:800; letter-spacing:2px; line-height:1.1; }
   /* 흐름 1 — 표현이 굳은 뒤 그 위로 자라는 부분 */
   .grow-in { animation:growIn .34s ease both; }
   @keyframes growIn { from{ opacity:0; transform:translateY(5px);} to{ opacity:1; transform:none;} }
@@ -869,6 +869,11 @@ function renderExpand(){
   item.baseSegs.forEach((sg,si)=> sg.s.split(/\s+/).forEach(w=> cells.push({t:sg.t, w, seg:si})));
   const frameCells=cells.filter(c=>c.t==='frame');
   const slotCells=cells.filter(c=>c.t==='slot');
+  // 1단계에서 슬롯 자리를 알리는 건 **프레임 조각 사이**에 들어가는 슬롯뿐이다(31문항).
+  // 표현 앞뒤의 슬롯까지 표시하면(앞 156·뒤 195문항) `get up`이 `~ get up`이 되어
+  // 표현 자체가 아닌 걸 배우는 것처럼 보인다 — 앞뒤는 2단계에서 문장이 자랄 때 드러난다.
+  const segT=item.baseSegs.map(sg=>sg.t);
+  const fFirst=segT.indexOf('frame'), fLast=segT.lastIndexOf('frame');
   const pmean=((item.pattern||{}).meaning||'').trim();
 
   let phase=0, done=false;
@@ -912,9 +917,11 @@ function renderExpand(){
         } else h+=`<span class="fill-word frame-w locked">${escapeHtml(frameSet[i])}</span>`;
         return;
       }
-      // 1단계에서 슬롯은 자리만 알린다 — 조각 하나당 ~ 하나
       if(phase===0){
-        if(c.seg!==lastSeg){ lastSeg=c.seg; h+=`<span class="fr-gap">~</span>`; }
+        if(c.seg!==lastSeg){
+          lastSeg=c.seg;
+          if(c.seg>fFirst && c.seg<fLast) h+=`<span class="fr-slot">···</span>`;
+        }
         return;
       }
       const i=si++;
