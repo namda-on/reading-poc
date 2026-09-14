@@ -4148,7 +4148,7 @@
         "en": "Have you heard of a band called \"The Beatles\"?",
         "kr": "비틀즈라는 밴드 들어봤어?",
         "trigger": "band",
-        "krMark": null
+        "krMark": "비틀즈라는 밴드 [들어봤]어?"
       },
       "pattern": {
         "form": "hear of ______",
@@ -5053,7 +5053,7 @@
         "en": "Clean it up before someone falls.",
         "kr": "누가 넘어지기 전에 치워.",
         "trigger": "fall",
-        "krMark": null
+        "krMark": "누가 넘어지기 전에 [치워]."
       },
       "pattern": {
         "form": "clean ______ up",
@@ -6477,7 +6477,7 @@
         "en": "I can't figure out the next step.",
         "kr": "다음 단계를 알아낼 수가 없어.",
         "trigger": "step",
-        "krMark": null
+        "krMark": "다음 단계를 [알아낼] 수가 없어."
       },
       "pattern": {
         "form": "figure ______ out",
@@ -7042,7 +7042,7 @@
         "en": "Come by at lunchtime!",
         "kr": "점심때 들러!",
         "trigger": "lunchtime",
-        "krMark": null
+        "krMark": "점심때 [들러]!"
       },
       "pattern": {
         "form": "come by",
@@ -8414,7 +8414,7 @@
         "en": "I'll turn on the radio.",
         "kr": "라디오 켤게.",
         "trigger": "radio",
-        "krMark": null
+        "krMark": "라디오 [켤]게."
       },
       "pattern": {
         "form": "turn on ______",
@@ -9071,7 +9071,7 @@
         "en": "Can you look that up in your records?",
         "kr": "기록에서 좀 찾아봐 주시겠어요?",
         "trigger": "record",
-        "krMark": null
+        "krMark": "기록에서 좀 [찾아봐] 주시겠어요?"
       },
       "pattern": {
         "form": "look ______ up",
@@ -9209,7 +9209,7 @@
         "en": "Let me pick up my purse.",
         "kr": "가방 좀 챙길게.",
         "trigger": "purse",
-        "krMark": null
+        "krMark": "가방 좀 [챙길]게."
       },
       "pattern": {
         "form": "pick ______ up",
@@ -14203,7 +14203,7 @@
         "en": "I'll try on this pair first.",
         "kr": "이거 먼저 신어 볼게요.",
         "trigger": "pair",
-        "krMark": null
+        "krMark": "이거 먼저 신어 [볼]게요."
       },
       "pattern": {
         "form": "try ______ on",
@@ -15516,7 +15516,7 @@
         "en": "They belong to the community center.",
         "kr": "그거 주민센터 거야.",
         "trigger": "community center",
-        "krMark": null
+        "krMark": "그거 주민센터 [거]야."
       },
       "pattern": {
         "form": "belong to ______",
@@ -16101,7 +16101,7 @@
         "en": "Get off the subway at City Hall.",
         "kr": "시청(역)에서 지하철을 내리세요.",
         "trigger": "subway",
-        "krMark": "시청(역)[에서] 지하철을 내리세요."
+        "krMark": "시청(역)에서 지하철을 [내리]세요."
       },
       "pattern": {
         "form": "get off ______",
@@ -16662,7 +16662,7 @@
         "en": "Let's stop by the bookstore.",
         "kr": "서점에 잠깐 들르자.",
         "trigger": "bookstore",
-        "krMark": "서점에 [잠깐] 들르자."
+        "krMark": "서점에 잠깐 [들르]자."
       },
       "pattern": {
         "form": "stop by (______)",
@@ -16869,7 +16869,7 @@
         "en": "Give my leather jacket back first.",
         "kr": "내 가죽 재킷 먼저 돌려줘.",
         "trigger": "leather",
-        "krMark": null
+        "krMark": "내 가죽 재킷 먼저 [돌려줘]."
       },
       "pattern": {
         "form": "give ______ back",
@@ -21074,7 +21074,7 @@
         "en": "Lie down on the mat.",
         "kr": "매트에 누워 봐.",
         "trigger": "mat",
-        "krMark": null
+        "krMark": "매트에 [누]워 봐."
       },
       "pattern": {
         "form": "lie down",
@@ -24011,7 +24011,7 @@
         "en": "You mixed up the formulas.",
         "kr": "공식을 헷갈렸네.",
         "trigger": "formula",
-        "krMark": null
+        "krMark": "공식을 [헷갈렸]네."
       },
       "pattern": {
         "form": "mix up ______",
@@ -24348,7 +24348,7 @@
         "en": "She just stepped out to go someplace.",
         "kr": "어디 가려고 방금 나갔어.",
         "trigger": "someplace",
-        "krMark": null
+        "krMark": "어디 가려고 방금 [나갔]어."
       },
       "pattern": {
         "form": "step out",
@@ -26478,7 +26478,7 @@
         "en": "I'll pull over to the curb.",
         "kr": "길가에 댈게.",
         "trigger": "curb",
-        "krMark": null
+        "krMark": "길가에 [댈]게."
       },
       "pattern": {
         "form": "pull over",
