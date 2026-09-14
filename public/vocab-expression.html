@@ -1091,29 +1091,30 @@ function frameLine(en, segs, frame){
   });
   return out;
 }
-// 대상 문장 고르기. 두 가지가 과제를 무너뜨린다:
-//   · **학습 문장의 부분/포함 문장** — 새로 세울 것이 없다(`Let's move on to the next topic.`
-//     을 배우고 `Let's move on.`). 그래서 먼저 제외한다.
-//   · **재료가 많은 문장** — 재료로 문장을 조립하는 일이 되고 표현이 그 안에 묻힌다.
-//     `a lot of`를 배우고 `You ask a lot of questions.`(재료 You·ask·questions)가 나오면
-//     표현을 쓴다는 감각이 옅다. 반대로 `What happened to him?`(재료 him)은 표현이 곧
-//     문장의 뼈대라 답이 바로 떠오른다. 그래서 **재료 수를 최소화**한다.
-// 점수는 (학습 문장과 겹치는 재료 수 → 재료 수 → 프레임이 문두가 아니면 감점 → 길이) 순.
-// 프레임이 문두면 A의 말을 받아 그 표현으로 바로 받아치는 모양이 된다.
+// 대상 문장 고르기. **난이도가 튀지 않는 것**이 가장 중요하다 — 방금 배운 표현인데
+// 문장 구조까지 새것이면 표현을 쓰는 과제가 아니라 새 문법을 푸는 과제가 된다.
+// `Take off your sweater.`를 배우고 `Should I take off my shoes?`가 나오면(평서문 →
+// 의문문 도치) 확 어려워지고, `How about a lemonade?` → `How about Thursday?`처럼
+// **틀은 그대로 두고 단어만 바뀌는 것**이 딱 맞는 난이도다. 그래서 순서대로:
+//   ① 학습 문장의 부분/포함 문장 제외 — 새로 세울 것이 없다
+//   ② **조각 구조가 같은 것**(`F,S` ↔ `F,S`) — 난이도를 가르는 가장 큰 축(170/222 가능)
+//   ③ **종결부호가 같은 것** — 평서문/의문문이 갈리면 구조가 멀어진다
+//   ④ 재료가 적은 것 → 짧은 것. 재료가 많으면 재료로 조립하는 일이 되고 표현이 묻힌다.
 function speakTarget(item){
   const bare=w=>String(w).toLowerCase().replace(/[^a-z0-9']/g,'');
   const nz=x=>x.split(/\s+/).map(bare).filter(Boolean).join(' ');
   const mats=a=>a.segs.filter(g=>g.t==='slot').flatMap(g=>g.s.split(/\s+/)).filter(Boolean);
-  const base=nz(item.sentence.en), baseSet=new Set(base.split(' '));
+  const shape=segs=>segs.map(g=>g.t[0]).join(',');
+  const endp=x=>{ const m=String(x).trim().match(/[.?!]+$/); return m?m[0][0]:'.'; };
+  const base=nz(item.sentence.en);
+  const baseShape=shape(item.baseSegs), baseEnd=endp(item.sentence.en);
   const cands=(item.apply||[]).filter(a=>a.en!==item.sentence.en);
   const pool=cands.length?cands:(item.apply||[]);
   const free=pool.filter(a=>{ const x=nz(a.en); return !base.includes(x) && !x.includes(base); });
   const step=free.length?free:pool;
-  const score=a=>{
-    const m=mats(a).map(bare);
-    return [m.filter(w=>baseSet.has(w)).length, m.length,
-            (a.segs[0]&&a.segs[0].t==='frame') ? 0 : 1, a.en.split(/\s+/).length];
-  };
+  const score=a=>[shape(a.segs)===baseShape ? 0 : 1,
+                  endp(a.en)===baseEnd ? 0 : 1,
+                  mats(a).length, a.en.split(/\s+/).length];
   return step.reduce((b,a)=>{
     if(!b) return a;
     const sb=score(b), sa=score(a);

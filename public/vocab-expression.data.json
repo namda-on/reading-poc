@@ -342,7 +342,10 @@
             }
           ],
           "punct": ".",
-          "ask": null
+          "ask": {
+            "en": "I'm ready for the party.",
+            "kr": "파티 갈 준비 됐어."
+          }
         }
       ],
       "siblings": [
@@ -1011,7 +1014,10 @@
             }
           ],
           "punct": "!",
-          "ask": null
+          "ask": {
+            "en": "I have nothing to do tonight.",
+            "kr": "오늘 밤 할 일이 없어."
+          }
         },
         {
           "en": "Can I come over?",
@@ -1316,7 +1322,10 @@
             }
           ],
           "punct": ".",
-          "ask": null
+          "ask": {
+            "en": "What time should we head out?",
+            "kr": "몇 시에 출발할까?"
+          }
         },
         {
           "en": "I have a guitar lesson at six o'clock.",
@@ -1586,7 +1595,10 @@
             }
           ],
           "punct": ".",
-          "ask": null
+          "ask": {
+            "en": "It's warm inside, isn't it?",
+            "kr": "안은 따뜻하네요?"
+          }
         }
       ],
       "siblings": [
@@ -2624,7 +2636,10 @@
             }
           ],
           "punct": ".",
-          "ask": null
+          "ask": {
+            "en": "Where do we begin cleaning?",
+            "kr": "청소 어디부터 할까?"
+          }
         }
       ],
       "siblings": [
@@ -3062,7 +3077,7 @@
         "en": "What happened to that sign?",
         "kr": "저 표지판에 무슨 일이 생긴 거야?",
         "trigger": "sign",
-        "krMark": "저 표지판에 [무슨] 일이 생긴 거야?"
+        "krMark": "저 표지판에 무슨 [일이] 생긴 거야?"
       },
       "pattern": {
         "form": "What happened to ______ ?",
@@ -3128,7 +3143,10 @@
             }
           ],
           "punct": "?",
-          "ask": null
+          "ask": {
+            "en": "She's not coming to school anymore.",
+            "kr": "걔 이제 학교 안 나와."
+          }
         }
       ],
       "siblings": [
@@ -3598,7 +3616,10 @@
             }
           ],
           "punct": ".",
-          "ask": null
+          "ask": {
+            "en": "Did you ask all three?",
+            "kr": "세 명 다 물어봤어?"
+          }
         },
         {
           "en": "Each of the students took one pencil.",
@@ -3739,7 +3760,10 @@
             }
           ],
           "punct": ".",
-          "ask": null
+          "ask": {
+            "en": "Mom left three messages.",
+            "kr": "엄마가 메시지를 세 번 남겼어."
+          }
         },
         {
           "en": "I'll call you back later.",
@@ -5491,7 +5515,10 @@
             }
           ],
           "punct": ".",
-          "ask": null
+          "ask": {
+            "en": "How do I apply?",
+            "kr": "어떻게 지원하나요?"
+          }
         }
       ],
       "siblings": [
@@ -6710,7 +6737,10 @@
             }
           ],
           "punct": ".",
-          "ask": null
+          "ask": {
+            "en": "Can I borrow your sneakers?",
+            "kr": "네 운동화 빌려도 돼?"
+          }
         },
         {
           "en": "Sandwiches and burgers are not the same thing.",
@@ -7873,7 +7903,10 @@
             }
           ],
           "punct": ".",
-          "ask": null
+          "ask": {
+            "en": "Where should we eat tonight?",
+            "kr": "오늘 저녁 어디서 먹을까?"
+          }
         },
         {
           "en": "Why not give it a try?",
@@ -9416,7 +9449,10 @@
             }
           ],
           "punct": ".",
-          "ask": null
+          "ask": {
+            "en": "You seem happy today.",
+            "kr": "오늘 기분 좋아 보이네."
+          }
         }
       ],
       "siblings": [
@@ -9748,7 +9784,7 @@
         "en": "We provide students with various online resources.",
         "kr": "학생들에게 다양한 온라인 자료를 제공합니다.",
         "trigger": "resource",
-        "krMark": "학생들에게 다양한 온라인 자료를 [제공]합니다."
+        "krMark": "학생들[에게] 다양한 온라인 자료를 제공합니다."
       },
       "pattern": {
         "form": "provide ______ with ______",
@@ -11154,7 +11190,10 @@
             }
           ],
           "punct": ".",
-          "ask": null
+          "ask": {
+            "en": "Today was really fun.",
+            "kr": "오늘 진짜 재밌었어."
+          }
         }
       ],
       "siblings": [
@@ -11513,7 +11552,10 @@
             }
           ],
           "punct": ".",
-          "ask": null
+          "ask": {
+            "en": "Won't you forgive him?",
+            "kr": "그를 용서 안 할 거야?"
+          }
         }
       ],
       "siblings": [
@@ -12902,7 +12944,10 @@
             }
           ],
           "punct": ".",
-          "ask": null
+          "ask": {
+            "en": "How's the history course?",
+            "kr": "역사 수업은 어때?"
+          }
         }
       ],
       "siblings": [
@@ -13231,7 +13276,10 @@
             }
           ],
           "punct": ".",
-          "ask": null
+          "ask": {
+            "en": "What should we do after dinner?",
+            "kr": "저녁 먹고 뭐 할까?"
+          }
         }
       ],
       "siblings": [
@@ -13359,7 +13407,10 @@
             }
           ],
           "punct": ".",
-          "ask": null
+          "ask": {
+            "en": "Can we talk about it?",
+            "kr": "우리 그 얘기 좀 할까?"
+          }
         }
       ],
       "siblings": [
@@ -14035,7 +14086,10 @@
             }
           ],
           "punct": ".",
-          "ask": null
+          "ask": {
+            "en": "Did you get a slice of cake?",
+            "kr": "케이크 한 조각 먹었어?"
+          }
         }
       ],
       "siblings": [
@@ -15131,7 +15185,10 @@
             }
           ],
           "punct": ".",
-          "ask": null
+          "ask": {
+            "en": "We haven't decided the schedule.",
+            "kr": "일정도 아직 못 정했잖아."
+          }
         }
       ],
       "siblings": [
@@ -16101,7 +16158,7 @@
         "en": "Get off the subway at City Hall.",
         "kr": "시청(역)에서 지하철을 내리세요.",
         "trigger": "subway",
-        "krMark": "시청(역)에서 지하철을 [내리]세요."
+        "krMark": "시청(역)[에서] 지하철을 내리세요."
       },
       "pattern": {
         "form": "get off ______",
@@ -17080,7 +17137,10 @@
             }
           ],
           "punct": ".",
-          "ask": null
+          "ask": {
+            "en": "How was your trip?",
+            "kr": "여행은 어땠어?"
+          }
         }
       ],
       "siblings": [
@@ -18347,7 +18407,10 @@
             }
           ],
           "punct": ".",
-          "ask": null
+          "ask": {
+            "en": "Why are you still here?",
+            "kr": "왜 아직 여기 있어?"
+          }
         },
         {
           "en": "She turned it down.",
@@ -18624,7 +18687,10 @@
             }
           ],
           "punct": ".",
-          "ask": null
+          "ask": {
+            "en": "How do you remember it all?",
+            "kr": "그걸 어떻게 다 기억해?"
+          }
         }
       ],
       "siblings": [
@@ -21001,7 +21067,10 @@
             }
           ],
           "punct": ".",
-          "ask": null
+          "ask": {
+            "en": "Does he only speak English?",
+            "kr": "그는 영어만 해?"
+          }
         },
         {
           "en": "Her design is both simple and elegant.",
@@ -21235,7 +21304,10 @@
             }
           ],
           "punct": ".",
-          "ask": null
+          "ask": {
+            "en": "Isn't the class too fast for you?",
+            "kr": "수업이 너무 빠르지 않아?"
+          }
         }
       ],
       "siblings": [
@@ -22235,7 +22307,10 @@
             }
           ],
           "punct": ".",
-          "ask": null
+          "ask": {
+            "en": "What brings you here?",
+            "kr": "여긴 어쩐 일이야?"
+          }
         }
       ],
       "siblings": [
@@ -26758,7 +26833,10 @@
             }
           ],
           "punct": ".",
-          "ask": null
+          "ask": {
+            "en": "You look different.",
+            "kr": "평소랑 달라 보이네."
+          }
         },
         {
           "en": "I'm glad we dressed up.",
@@ -27394,7 +27472,10 @@
             }
           ],
           "punct": ".",
-          "ask": null
+          "ask": {
+            "en": "Why is Tom in the hospital?",
+            "kr": "톰이 왜 병원에 있어?"
+          }
         }
       ],
       "siblings": [
