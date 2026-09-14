@@ -3062,7 +3062,7 @@
         "en": "What happened to that sign?",
         "kr": "저 표지판에 무슨 일이 생긴 거야?",
         "trigger": "sign",
-        "krMark": "저 표지판에 무슨 [일이] 생긴 거야?"
+        "krMark": "저 표지판에 [무슨] 일이 생긴 거야?"
       },
       "pattern": {
         "form": "What happened to ______ ?",
@@ -9748,7 +9748,7 @@
         "en": "We provide students with various online resources.",
         "kr": "학생들에게 다양한 온라인 자료를 제공합니다.",
         "trigger": "resource",
-        "krMark": "학생들[에게] 다양한 온라인 자료를 제공합니다."
+        "krMark": "학생들에게 다양한 온라인 자료를 [제공]합니다."
       },
       "pattern": {
         "form": "provide ______ with ______",
@@ -12740,7 +12740,10 @@
             }
           ],
           "punct": "!",
-          "ask": null
+          "ask": {
+            "en": "I'm leaving for my trip tomorrow.",
+            "kr": "내일 여행 떠나."
+          }
         }
       ],
       "siblings": [
@@ -16659,7 +16662,7 @@
         "en": "Let's stop by the bookstore.",
         "kr": "서점에 잠깐 들르자.",
         "trigger": "bookstore",
-        "krMark": "서점에 잠깐 [들르]자."
+        "krMark": "서점에 [잠깐] 들르자."
       },
       "pattern": {
         "form": "stop by (______)",

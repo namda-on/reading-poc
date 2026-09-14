@@ -184,6 +184,8 @@
   .sp-mat .mat { background:#eef2f8; color:#7d8fa6; border-radius:8px; padding:5px 11px; font-size:15px; font-weight:700; }
   .sp-mat .lbl { font-size:12.5px; font-weight:700; color:#b3bfd0; align-self:center; margin-right:2px; }
   .sp-in { background:#eaf1fb; border-radius:14px; padding:12px 14px; margin-top:14px; }
+  /* 정답 후 입력칸을 굳힌 줄 — 프레임만 초록이라 무엇을 썼는지가 글자로 보인다 */
+  .sp-said { font-size:17px; font-weight:700; color:#2f3e52; line-height:1.45; padding:2px 2px; }
   .sp-q.sp-after { margin-top:18px; }
   .sp-kr { font-size:20px; font-weight:800; color:#2f3e52; line-height:1.4; margin-top:5px; }
   .start-card.alt-card { background:#ffffffd9; }
@@ -1072,12 +1074,32 @@ function renderExpand(){
 // 대상은 [2]·[3]에서 만든 문장이 아니라 같은 프레임을 쓰는 응용 예문 중 가장 짧은 것
 // (`speakTarget`). 자극은 옵션(`ve:spk`)으로 갈린다 — A `kr` 한국어 문장 / B `en` A의
 // 영어 질문(해석 함께). 대상 문장은 두 방식이 같고 자극 언어만 다르다.
-// 대상 문장 고르기 — 그냥 '가장 짧은 응용 예문'으로 뽑으면 과제가 무너진다:
-// `move on`을 배우고 `Let's move on.`이 나오면 재료가 `Let's` 하나뿐이고(배운 적 없는 낱말
-// 한 장이 덜렁 놓인다) 학습 문장의 부분 문장이라 새로 세울 것도 없다(그렇게 걸린 문항 27개).
-// 그래서 ① 학습 문장의 부분/포함 관계인 것을 뺀 뒤 ② **재료가 2낱말 이상**인 것만 남기고
-// ③ 재료가 학습 문장에 이미 나온 낱말과 겹치지 않는 것 → 짧은 것 순으로 고른다.
-// 조건을 만족하는 후보가 없으면 한 단계씩 완화한다(재료 1낱말짜리는 6문항).
+// 문장에서 프레임만 초록으로 — 같은 초록 조각이 두 문장에 반복되는 것이 근거다.
+function frameLine(en, segs, frame){
+  if(segs && segs.length){
+    const punct=(String(en).match(/[.?!]+$/)||[''])[0];
+    return (segs.map(g=> g.t==='frame'
+      ? `<span class="tgt">${escapeHtml(g.s)}</span>`
+      : escapeHtml(g.s)).join(' ') + escapeHtml(punct)).replace(/\s+([,.!?;:])/g, '$1');
+  }
+  // 유저가 직접 쓴 문장은 조각 정보가 없다 — 프레임 조각을 순서대로 찾아 감싼다
+  let out=escapeHtml(en);
+  (frame||[]).forEach(lit=>{
+    const ws=lit.split(/\s+/).map(w=>w.replace(/[^A-Za-z']/g,'')).map(w=>w.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'));
+    const re=new RegExp('\\b('+ws.join("(?:s|es|ed|d|ing)?\\s+")+"(?:s|es|ed|d|ing)?)\\b", 'i');
+    out=out.replace(re, m=>`<span class="tgt">${m}</span>`);
+  });
+  return out;
+}
+// 대상 문장 고르기. 두 가지가 과제를 무너뜨린다:
+//   · **학습 문장의 부분/포함 문장** — 새로 세울 것이 없다(`Let's move on to the next topic.`
+//     을 배우고 `Let's move on.`). 그래서 먼저 제외한다.
+//   · **재료가 많은 문장** — 재료로 문장을 조립하는 일이 되고 표현이 그 안에 묻힌다.
+//     `a lot of`를 배우고 `You ask a lot of questions.`(재료 You·ask·questions)가 나오면
+//     표현을 쓴다는 감각이 옅다. 반대로 `What happened to him?`(재료 him)은 표현이 곧
+//     문장의 뼈대라 답이 바로 떠오른다. 그래서 **재료 수를 최소화**한다.
+// 점수는 (학습 문장과 겹치는 재료 수 → 재료 수 → 프레임이 문두가 아니면 감점 → 길이) 순.
+// 프레임이 문두면 A의 말을 받아 그 표현으로 바로 받아치는 모양이 된다.
 function speakTarget(item){
   const bare=w=>String(w).toLowerCase().replace(/[^a-z0-9']/g,'');
   const nz=x=>x.split(/\s+/).map(bare).filter(Boolean).join(' ');
@@ -1086,17 +1108,17 @@ function speakTarget(item){
   const cands=(item.apply||[]).filter(a=>a.en!==item.sentence.en);
   const pool=cands.length?cands:(item.apply||[]);
   const free=pool.filter(a=>{ const x=nz(a.en); return !base.includes(x) && !x.includes(base); });
-  const step1=free.length?free:pool;
-  const rich=step1.filter(a=>mats(a).length>=2);
-  const step2=rich.length?rich:step1;
+  const step=free.length?free:pool;
   const score=a=>{
     const m=mats(a).map(bare);
-    return [m.filter(w=>baseSet.has(w)).length, a.en.split(/\s+/).length];
+    return [m.filter(w=>baseSet.has(w)).length, m.length,
+            (a.segs[0]&&a.segs[0].t==='frame') ? 0 : 1, a.en.split(/\s+/).length];
   };
-  return step2.reduce((b,a)=>{
+  return step.reduce((b,a)=>{
     if(!b) return a;
     const sb=score(b), sa=score(a);
-    return (sa[0]<sb[0] || (sa[0]===sb[0] && sa[1]<sb[1])) ? a : b;
+    for(let i=0;i<sa.length;i++){ if(sa[i]!==sb[i]) return sa[i]<sb[i] ? a : b; }
+    return b;
   }, null);
 }
 function renderSpeak(){
@@ -1157,19 +1179,29 @@ function renderSpeak(){
   function finish(exact){
     done=true;
     if(exact) inp.value=t.en;
-    inp.readOnly=true; inp.classList.add('ok'); el('okBtn').disabled=true;
+    inp.readOnly=true; el('okBtn').disabled=true;
     el('card').classList.add('correct');
     if(!el('card').querySelector('.check-mark')){ const c=document.createElement('div'); c.className='check-mark'; c.textContent='✓'; el('card').appendChild(c); }
     const said=inp.value.trim();
     builtSet.add(t.en); made.push({en:said, kr:t.kr});
     wrongBox.classList.add('hidden'); el('revealNote').classList.add('hidden');
+    // 입력칸을 완성 문장으로 굳힌다 — 프레임만 초록이라 무엇을 썼는지가 글자로 보인다
+    const inBox=el('spIn').parentElement;
+    inBox.innerHTML=`<div class="sp-said">${frameLine(said, exact?t.segs:null, item.frame)}</div>`;
+    const p=item.pattern||{}, form=(p.form||'').trim(), pmean=(p.meaning||'').trim();
+    // 효용감의 근거는 문구가 아니라 **같은 초록 조각이 두 문장에 반복되는 것**이다.
+    // 학습 문장([2]·[3]에서 만든 것)과 방금 만든 문장을 나란히 둔다.
     el('payoffBox').innerHTML=`<div class="payoff">
-        <div class="pf-ok"><span class="ic">✓</span>좋아요!</div>
-        <div class="pf-label">내가 만든 문장</div>
-        <div class="pf-cmp"><div class="pf-cmp-en">${escapeHtml(said)}</div>
+        <div class="pf-label">학습 정보</div>
+        ${form?`<div class="pf-form">${escapeHtml(form).replace(/_{2,}|~/g,'<span class="slot"></span>')}</div>`:''}
+        ${pmean?`<div class="pf-mean">${escapeHtml(pmean)}</div>`:''}
+        <div class="pf-sub"><span class="ic">ⓘ</span>이 표현으로 만든 문장</div>
+        <div class="pf-cmp"><div class="pf-cmp-en">${frameLine(item.sentence.en, item.baseSegs, item.frame)}</div>
+          <div class="pf-cmp-kr">${escapeHtml(item.sentence.kr)}</div></div>
+        <div class="pf-cmp"><div class="pf-cmp-en">${frameLine(said, exact?t.segs:null, item.frame)}</div>
           <div class="pf-cmp-kr">${escapeHtml(t.kr)}</div></div>
         ${exact?'':`<div class="pf-sub"><span class="ic">ⓘ</span>이렇게도 말해요</div>
-        <div class="pf-cmp"><div class="pf-cmp-en">${escapeHtml(t.en)}</div></div>`}
+        <div class="pf-cmp"><div class="pf-cmp-en">${frameLine(t.en, t.segs, item.frame)}</div></div>`}
       </div>`;
     el('bottom').innerHTML=arrangeBottomHtml(lastItem()?'완료하기':'다음 문제');
     el('nextBtn').onclick=advanceItem;
