@@ -142,6 +142,59 @@ def mark_meaning_kr(kr, meaning, authored=""):
     return None
 
 
+# 표현 뜻(`~을 입다`)을 문장 뜻(`옷 입어.`)에서 찾기 위한 후보들.
+# 어휘 뜻과 달리 `~`로 슬롯이 표시돼 있고 종결형이 문장마다 달라(`입다`→`입어`)
+# 조각·어간을 더 넓게 펼친다. 222문항 중 160개(72%)에서 구간을 찾는다.
+EXPR_PARTICLE = ("을", "를", "이", "가", "에", "와", "과", "의", "로", "으로", "은", "는")
+EXPR_TAIL = ("에서", "에게", "까지", "으로", "부터", "에", "께", "로")
+
+
+def expr_meaning_spans(meaning):
+    t = re.sub(r"<[^>]*>", " ", meaning or "")
+    t = re.sub(r"\([^)]*\)", " ", t)
+    out = set()
+
+    def add(x):
+        x = x.strip(" ?!.·")
+        if x:
+            out.add(x)
+
+    for part in re.split(r"[,;/~]", t):
+        part = part.strip(" ?!.")
+        if not part:
+            continue
+        add(part)
+        if part.startswith("하"):          # `~하지 마` → `지 마`, `~하는 건 어때` → `는 건 어때`
+            add(part[1:])
+        ws = part.split()
+        if ws and ws[0] in EXPR_PARTICLE:  # `을 입다` → `입다`
+            add(" ".join(ws[1:]))
+        for w in ws:
+            add(w)
+            for suf in KR_SUFFIX + ("해", "하", "지"):
+                if w.endswith(suf) and len(w) > len(suf):
+                    add(w[: -len(suf)])
+            for suf in EXPR_TAIL:          # `덕분에` → `덕분`, `앞에서` → `앞`
+                if w.endswith(suf) and len(w) - len(suf) >= 1:
+                    add(w[: -len(suf)])
+    return sorted(out, key=len, reverse=True)
+
+
+def mark_expr_kr(kr, meaning):
+    """문장 뜻에서 표현 뜻에 해당하는 구간을 [..]로 감싼다. 못 찾으면 None."""
+    for cand in expr_meaning_spans(meaning):
+        if len(cand) >= 2:
+            i = kr.find(cand)
+            if i >= 0:
+                return kr[:i] + "[" + cand + "]" + kr[i + len(cand):]
+        else:
+            mm = re.search(r"(?:^|\s)(" + re.escape(cand) + r")", kr)
+            if mm:
+                i = mm.start(1)
+                return kr[:i] + "[" + cand + "]" + kr[i + len(cand):]
+    return None
+
+
 def infl_match(tok, base):
     """tok이 base와 같거나 규칙 굴절형인지 (parents←parent, teaches←teach)."""
     t, b = tok.lower(), base.lower()
@@ -640,7 +693,8 @@ def main():
             "vocabB": {"answer": b_ans, "enLines": [b_en],
                        "koLines": [b_kr or s1["kr"]],
                        "hint": "" if b_kr else short_meaning(v["meaning"])},
-            "sentence": {"en": s1["en"], "kr": s1["kr"], "trigger": g["trigger"]},
+            "sentence": {"en": s1["en"], "kr": s1["kr"], "trigger": g["trigger"],
+                         "krMark": mark_expr_kr(s1["kr"], g["pmean"])},
             "pattern": {"form": g["form"] or g["pattern"], "meaning": g["pmean"], "desc": g["pdesc"]},
             # [3] 처음 보는 문장에 같은 프레임을 직접 써보는 단계.
             # 프레임을 공유하는 문장만 담으므로 문항에 따라 1개 또는 여러 개다

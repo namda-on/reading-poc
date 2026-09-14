@@ -40,7 +40,8 @@
       "sentence": {
         "en": "You should get up.",
         "kr": "일어나야 해.",
-        "trigger": "should"
+        "trigger": "should",
+        "krMark": "[일어나]야 해."
       },
       "pattern": {
         "form": "get up",
@@ -134,7 +135,8 @@
       "sentence": {
         "en": "I'll talk to my parents.",
         "kr": "부모님께 말씀드려 볼게.",
-        "trigger": "parent"
+        "trigger": "parent",
+        "krMark": null
       },
       "pattern": {
         "form": "talk to ______",
@@ -260,7 +262,8 @@
       "sentence": {
         "en": "Put your clothes on.",
         "kr": "옷 입어.",
-        "trigger": "clothes"
+        "trigger": "clothes",
+        "krMark": "옷 [입]어."
       },
       "pattern": {
         "form": "put ______ on",
@@ -383,7 +386,8 @@
       "sentence": {
         "en": "Don't be late.",
         "kr": "늦지 마.",
-        "trigger": "late"
+        "trigger": "late",
+        "krMark": "늦[지 마]."
       },
       "pattern": {
         "form": "Don't be ______ .",
@@ -546,7 +550,8 @@
       "sentence": {
         "en": "Let me fix your computer.",
         "kr": "내가 컴퓨터 고쳐 줄게.",
-        "trigger": "fix"
+        "trigger": "fix",
+        "krMark": "[내가] 컴퓨터 고쳐 줄게."
       },
       "pattern": {
         "form": "Let me ______ .",
@@ -707,7 +712,8 @@
       "sentence": {
         "en": "Why don't you invite a friend?",
         "kr": "친구를 부르는 건 어때?",
-        "trigger": "invite"
+        "trigger": "invite",
+        "krMark": "친구를 부르[는 건 어때]?"
       },
       "pattern": {
         "form": "Why don't you ______ ?",
@@ -819,7 +825,8 @@
       "sentence": {
         "en": "All of these boats are new.",
         "kr": "이 배들은 전부 새 거야.",
-        "trigger": "boat"
+        "trigger": "boat",
+        "krMark": "이 배들은 [전부] 새 거야."
       },
       "pattern": {
         "form": "all (of) ______",
@@ -956,7 +963,8 @@
       "sentence": {
         "en": "Come over this evening!",
         "kr": "오늘 저녁에 놀러 와!",
-        "trigger": "evening"
+        "trigger": "evening",
+        "krMark": "오늘 저녁에 [놀러] 와!"
       },
       "pattern": {
         "form": "come over (to ______)",
@@ -1066,7 +1074,8 @@
       "sentence": {
         "en": "Let's go back to town.",
         "kr": "시내로 돌아가자.",
-        "trigger": "town"
+        "trigger": "town",
+        "krMark": "시내로 [돌아가]자."
       },
       "pattern": {
         "form": "go back (to ______)",
@@ -1191,7 +1200,8 @@
       "sentence": {
         "en": "The paper is due at five o'clock.",
         "kr": "보고서는 5시까지야.",
-        "trigger": "paper"
+        "trigger": "paper",
+        "krMark": null
       },
       "pattern": {
         "form": "at ______ o'clock",
@@ -1398,7 +1408,8 @@
       "sentence": {
         "en": "It feels like spring!",
         "kr": "봄 같아!",
-        "trigger": "spring"
+        "trigger": "spring",
+        "krMark": "봄 [같아]!"
       },
       "pattern": {
         "form": "feel like ______",
@@ -1500,7 +1511,8 @@
       "sentence": {
         "en": "Take off your sweater.",
         "kr": "스웨터 벗어.",
-        "trigger": "sweater"
+        "trigger": "sweater",
+        "krMark": "스웨터 [벗]어."
       },
       "pattern": {
         "form": "take off ______",
@@ -1618,7 +1630,8 @@
       "sentence": {
         "en": "How about a lemonade?",
         "kr": "레모네이드는 어때?",
-        "trigger": "lemonade"
+        "trigger": "lemonade",
+        "krMark": "레모네이드[는 어때]?"
       },
       "pattern": {
         "form": "How about ______ ?",
@@ -1732,7 +1745,8 @@
       "sentence": {
         "en": "You worry too much.",
         "kr": "넌 걱정이 너무 많아.",
-        "trigger": "worry"
+        "trigger": "worry",
+        "krMark": "넌 걱정이 [너무] 많아."
       },
       "pattern": {
         "form": "______ too much",
@@ -1845,7 +1859,8 @@
       "sentence": {
         "en": "Be sure to check your answers.",
         "kr": "답 꼭 다시 확인해.",
-        "trigger": "check"
+        "trigger": "check",
+        "krMark": "답 [꼭] 다시 확인해."
       },
       "pattern": {
         "form": "Be sure to ______ .",
@@ -1956,7 +1971,8 @@
       "sentence": {
         "en": "We missed most of the concert.",
         "kr": "공연을 거의 다 놓쳤어.",
-        "trigger": "concert"
+        "trigger": "concert",
+        "krMark": null
       },
       "pattern": {
         "form": "most of ______",
@@ -2081,7 +2097,8 @@
       "sentence": {
         "en": "Which one do you prefer?",
         "kr": "어느 쪽이 더 좋아?",
-        "trigger": "prefer"
+        "trigger": "prefer",
+        "krMark": "[어느] 쪽이 더 좋아?"
       },
       "pattern": {
         "form": "Which one ______ ?",
@@ -2175,7 +2192,8 @@
       "sentence": {
         "en": "Would you do the next step?",
         "kr": "다음 단계도 해주시겠어요?",
-        "trigger": "step"
+        "trigger": "step",
+        "krMark": "다음 단계도 해[주시겠어요]?"
       },
       "pattern": {
         "form": "Would you ______ ?",
@@ -2289,7 +2307,8 @@
       "sentence": {
         "en": "Don't give up hope!",
         "kr": "희망을 버리지 마!",
-        "trigger": "hope"
+        "trigger": "hope",
+        "krMark": null
       },
       "pattern": {
         "form": "give up (______)",
@@ -2412,7 +2431,8 @@
       "sentence": {
         "en": "Let's move on to the next topic.",
         "kr": "다음 주제로 넘어가죠.",
-        "trigger": "topic"
+        "trigger": "topic",
+        "krMark": "다음 주제로 [넘어가]죠."
       },
       "pattern": {
         "form": "move on (to ______)",
@@ -2529,7 +2549,8 @@
       "sentence": {
         "en": "Let's start with an interview.",
         "kr": "인터뷰부터 시작하죠.",
-        "trigger": "interview"
+        "trigger": "interview",
+        "krMark": "인터뷰부터 [시작하]죠."
       },
       "pattern": {
         "form": "start with ______",
@@ -2647,7 +2668,8 @@
       "sentence": {
         "en": "Hi! Welcome to China!",
         "kr": "안녕하세요! 중국에 오신 걸 환영합니다!",
-        "trigger": "China"
+        "trigger": "China",
+        "krMark": "안녕하세요! 중국에 [오신] 걸 환영합니다!"
       },
       "pattern": {
         "form": "Welcome to ______ !",
@@ -2761,7 +2783,8 @@
       "sentence": {
         "en": "It's time for me to take my medicine.",
         "kr": "나 약 먹을 시간이야.",
-        "trigger": "medicine"
+        "trigger": "medicine",
+        "krMark": "나 약 먹을 [시간이야]."
       },
       "pattern": {
         "form": "It's time for ______ .",
@@ -2879,7 +2902,8 @@
       "sentence": {
         "en": "We have a lot of data.",
         "kr": "우린 데이터가 많아.",
-        "trigger": "data"
+        "trigger": "data",
+        "krMark": "우린 데이터가 [많]아."
       },
       "pattern": {
         "form": "a lot of ______",
@@ -3037,7 +3061,8 @@
       "sentence": {
         "en": "What happened to that sign?",
         "kr": "저 표지판에 무슨 일이 생긴 거야?",
-        "trigger": "sign"
+        "trigger": "sign",
+        "krMark": "저 표지판에 무슨 [일이] 생긴 거야?"
       },
       "pattern": {
         "form": "What happened to ______ ?",
@@ -3147,7 +3172,8 @@
       "sentence": {
         "en": "Go to bed immediately!",
         "kr": "당장 자러 가!",
-        "trigger": "immediately"
+        "trigger": "immediately",
+        "krMark": "당장 [자러] 가!"
       },
       "pattern": {
         "form": "go to bed",
@@ -3260,7 +3286,8 @@
       "sentence": {
         "en": "Have fun at the festival!",
         "kr": "축제 재밌게 놀아!",
-        "trigger": "festival"
+        "trigger": "festival",
+        "krMark": "축제 [재밌게] 놀아!"
       },
       "pattern": {
         "form": "have fun",
@@ -3354,7 +3381,8 @@
       "sentence": {
         "en": "It's all thanks to social media.",
         "kr": "다 소셜미디어 덕분이야.",
-        "trigger": "social media"
+        "trigger": "social media",
+        "krMark": "다 소셜미디어 [덕분]이야."
       },
       "pattern": {
         "form": "thanks to ______",
@@ -3479,7 +3507,8 @@
       "sentence": {
         "en": "Each of us saw one performance.",
         "kr": "우리 각자 공연을 하나씩 봤어.",
-        "trigger": "performance"
+        "trigger": "performance",
+        "krMark": "우리 [각자] 공연을 하나씩 봤어."
       },
       "pattern": {
         "form": "each of ______",
@@ -3645,7 +3674,8 @@
       "sentence": {
         "en": "I forgot to call my lawyer back!",
         "kr": "변호사한테 다시 전화하는 걸 깜빡했어!",
-        "trigger": "lawyer"
+        "trigger": "lawyer",
+        "krMark": "변호사한테 다시 [전화하]는 걸 깜빡했어!"
       },
       "pattern": {
         "form": "call ______ back",
@@ -3784,7 +3814,8 @@
       "sentence": {
         "en": "What's going on in London?",
         "kr": "런던은 무슨 일이야?",
-        "trigger": "London"
+        "trigger": "London",
+        "krMark": "런던은 [무슨 일이야]?"
       },
       "pattern": {
         "form": "What's going on (in ______) ?",
@@ -3875,7 +3906,8 @@
       "sentence": {
         "en": "I'll get out of your seat.",
         "kr": "자리 비켜드릴게요.",
-        "trigger": "seat"
+        "trigger": "seat",
+        "krMark": null
       },
       "pattern": {
         "form": "get out of ______",
@@ -3995,7 +4027,8 @@
       "sentence": {
         "en": "It needs plenty of sunlight.",
         "kr": "햇빛이 많이 필요해.",
-        "trigger": "sunlight"
+        "trigger": "sunlight",
+        "krMark": null
       },
       "pattern": {
         "form": "plenty of ______",
@@ -4114,7 +4147,8 @@
       "sentence": {
         "en": "Have you heard of a band called \"The Beatles\"?",
         "kr": "비틀즈라는 밴드 들어봤어?",
-        "trigger": "band"
+        "trigger": "band",
+        "krMark": null
       },
       "pattern": {
         "form": "hear of ______",
@@ -4233,7 +4267,8 @@
       "sentence": {
         "en": "He's in charge of the schedule.",
         "kr": "일정은 그가 맡고 있어.",
-        "trigger": "schedule"
+        "trigger": "schedule",
+        "krMark": "일정은 그가 [맡고] 있어."
       },
       "pattern": {
         "form": "in charge of ______",
@@ -4352,7 +4387,8 @@
       "sentence": {
         "en": "Pay attention to the screen.",
         "kr": "화면에 집중해.",
-        "trigger": "screen"
+        "trigger": "screen",
+        "krMark": "화면에 [집중]해."
       },
       "pattern": {
         "form": "pay attention to ______",
@@ -4469,7 +4505,8 @@
       "sentence": {
         "en": "What's wrong with your glasses?",
         "kr": "안경이 왜 그래?",
-        "trigger": "glass"
+        "trigger": "glass",
+        "krMark": "안경이 [왜 그래]?"
       },
       "pattern": {
         "form": "What's wrong (with ______) ?",
@@ -4559,7 +4596,8 @@
       "sentence": {
         "en": "It's in front of the ketchup.",
         "kr": "케첩 앞에 있어.",
-        "trigger": "ketchup"
+        "trigger": "ketchup",
+        "krMark": "케첩 [앞]에 있어."
       },
       "pattern": {
         "form": "in front of ______",
@@ -4678,7 +4716,8 @@
       "sentence": {
         "en": "It turned out too spicy.",
         "kr": "너무 맵게 됐어.",
-        "trigger": "spicy"
+        "trigger": "spicy",
+        "krMark": null
       },
       "pattern": {
         "form": "turn out ______",
@@ -4796,7 +4835,8 @@
       "sentence": {
         "en": "You can take a break every thirty minutes.",
         "kr": "30분마다 쉬어도 돼요.",
-        "trigger": "every"
+        "trigger": "every",
+        "krMark": "30분마다 [쉬]어도 돼요."
       },
       "pattern": {
         "form": "take a break",
@@ -4890,7 +4930,8 @@
       "sentence": {
         "en": "We need a couple of potatoes.",
         "kr": "감자 두어 개 사야 해.",
-        "trigger": "potato"
+        "trigger": "potato",
+        "krMark": "감자 [두어] 개 사야 해."
       },
       "pattern": {
         "form": "a couple of ______",
@@ -5011,7 +5052,8 @@
       "sentence": {
         "en": "Clean it up before someone falls.",
         "kr": "누가 넘어지기 전에 치워.",
-        "trigger": "fall"
+        "trigger": "fall",
+        "krMark": null
       },
       "pattern": {
         "form": "clean ______ up",
@@ -5139,7 +5181,8 @@
       "sentence": {
         "en": "Can I do one more drawing?",
         "kr": "그림 하나만 더 그려도 돼요?",
-        "trigger": "drawing"
+        "trigger": "drawing",
+        "krMark": "그림 [하나]만 더 그려도 돼요?"
       },
       "pattern": {
         "form": "one more ______",
@@ -5257,7 +5300,8 @@
       "sentence": {
         "en": "We need your ID along with your application form.",
         "kr": "신청서와 함께 신분증이 필요합니다.",
-        "trigger": "form"
+        "trigger": "form",
+        "krMark": "신청서[와 함께] 신분증이 필요합니다."
       },
       "pattern": {
         "form": "along with ______",
@@ -5376,7 +5420,8 @@
       "sentence": {
         "en": "Just fill out this survey.",
         "kr": "이 설문만 작성하시면 돼요.",
-        "trigger": "survey"
+        "trigger": "survey",
+        "krMark": "이 설문만 [작성하]시면 돼요."
       },
       "pattern": {
         "form": "fill out ______",
@@ -5490,7 +5535,8 @@
       "sentence": {
         "en": "I'm your grandma, aren't I?",
         "kr": "내가 네 할머니잖니, 안 그러니?",
-        "trigger": "grandma"
+        "trigger": "grandma",
+        "krMark": "내가 네 할머니잖니, [안] 그러니?"
       },
       "pattern": {
         "form": "I'm ______ , aren't I ?",
@@ -5630,7 +5676,8 @@
       "sentence": {
         "en": "You shouldn't rely on public transportation.",
         "kr": "대중교통에만 의존하면 안 돼.",
-        "trigger": "public transportation"
+        "trigger": "public transportation",
+        "krMark": "대중교통에만 [의존하]면 안 돼."
       },
       "pattern": {
         "form": "rely on ______",
@@ -5748,7 +5795,8 @@
       "sentence": {
         "en": "He goes to the same middle school as me.",
         "kr": "걔는 나랑 같은 중학교에 다녀.",
-        "trigger": "middle school"
+        "trigger": "middle school",
+        "krMark": "걔는 나랑 [같은] 중학교에 다녀."
       },
       "pattern": {
         "form": "the same ______ as ______",
@@ -5975,7 +6023,8 @@
       "sentence": {
         "en": "Ever since that experience, I hate water.",
         "kr": "그 일을 겪은 뒤로 물이 싫어.",
-        "trigger": "experience"
+        "trigger": "experience",
+        "krMark": "그 일을 겪은 [뒤로] 물이 싫어."
       },
       "pattern": {
         "form": "ever since ______",
@@ -6093,7 +6142,8 @@
       "sentence": {
         "en": "No matter the cost, I'll pay.",
         "kr": "비용이 얼마든 내가 낼게.",
-        "trigger": "cost"
+        "trigger": "cost",
+        "krMark": null
       },
       "pattern": {
         "form": "no matter ______",
@@ -6207,7 +6257,8 @@
       "sentence": {
         "en": "It's up to ten meters deep in some places.",
         "kr": "깊은 데는 10미터까지 돼.",
-        "trigger": "deep"
+        "trigger": "deep",
+        "krMark": "깊은 데는 10미터[까지] 돼."
       },
       "pattern": {
         "form": "up to ______",
@@ -6327,7 +6378,8 @@
       "sentence": {
         "en": "Teens just want to fit in.",
         "kr": "십 대들은 그저 어울리고 싶어 해.",
-        "trigger": "teen"
+        "trigger": "teen",
+        "krMark": "십 대들은 그저 [어울리]고 싶어 해."
       },
       "pattern": {
         "form": "fit in",
@@ -6424,7 +6476,8 @@
       "sentence": {
         "en": "I can't figure out the next step.",
         "kr": "다음 단계를 알아낼 수가 없어.",
-        "trigger": "step"
+        "trigger": "step",
+        "krMark": null
       },
       "pattern": {
         "form": "figure ______ out",
@@ -6559,7 +6612,8 @@
       "sentence": {
         "en": "It's the same address.",
         "kr": "같은 주소야.",
-        "trigger": "address"
+        "trigger": "address",
+        "krMark": "[같은] 주소야."
       },
       "pattern": {
         "form": "the same ______",
@@ -6740,7 +6794,8 @@
       "sentence": {
         "en": "We're going through another economic crisis.",
         "kr": "우리는 다시 경제 위기를 겪고 있습니다.",
-        "trigger": "crisis"
+        "trigger": "crisis",
+        "krMark": "우리는 다시 경제 위기를 [겪]고 있습니다."
       },
       "pattern": {
         "form": "go through ______",
@@ -6858,7 +6913,8 @@
       "sentence": {
         "en": "Let's keep the budget in mind.",
         "kr": "예산을 염두에 두자.",
-        "trigger": "budget"
+        "trigger": "budget",
+        "krMark": "예산을 [염두에] 두자."
       },
       "pattern": {
         "form": "keep ______ in mind",
@@ -6985,7 +7041,8 @@
       "sentence": {
         "en": "Come by at lunchtime!",
         "kr": "점심때 들러!",
-        "trigger": "lunchtime"
+        "trigger": "lunchtime",
+        "krMark": null
       },
       "pattern": {
         "form": "come by",
@@ -7099,7 +7156,8 @@
       "sentence": {
         "en": "A number of customers complained about you.",
         "kr": "여러 고객이 당신에 대해 불만을 제기했어요.",
-        "trigger": "customer"
+        "trigger": "customer",
+        "krMark": "[여러] 고객이 당신에 대해 불만을 제기했어요."
       },
       "pattern": {
         "form": "a number of ______",
@@ -7214,7 +7272,8 @@
       "sentence": {
         "en": "It's more than a job, it's a commitment.",
         "kr": "단순한 직업이 아니라 사명이죠.",
-        "trigger": "commitment"
+        "trigger": "commitment",
+        "krMark": "[단순한] 직업이 아니라 사명이죠."
       },
       "pattern": {
         "form": "more than ______",
@@ -7336,7 +7395,8 @@
       "sentence": {
         "en": "I didn't get off work until midnight.",
         "kr": "자정까지 퇴근을 못 했어.",
-        "trigger": "midnight"
+        "trigger": "midnight",
+        "krMark": "자정까지 [퇴근]을 못 했어."
       },
       "pattern": {
         "form": "get off work",
@@ -7454,7 +7514,8 @@
       "sentence": {
         "en": "They're in the middle of the forest!",
         "kr": "숲 한가운데에 있어!",
-        "trigger": "forest"
+        "trigger": "forest",
+        "krMark": "숲 [한가운데]에 있어!"
       },
       "pattern": {
         "form": "in the middle of ______",
@@ -7573,7 +7634,8 @@
       "sentence": {
         "en": "We must address global issues, such as climate change.",
         "kr": "우린 기후 변화 같은 세계적 문제를 다뤄야 해요.",
-        "trigger": "climate change"
+        "trigger": "climate change",
+        "krMark": "우린 기후 변화 [같은] 세계적 문제를 다뤄야 해요."
       },
       "pattern": {
         "form": "______ , such as ______",
@@ -7754,7 +7816,8 @@
       "sentence": {
         "en": "Give this brand a try.",
         "kr": "이 브랜드 한번 써봐.",
-        "trigger": "brand"
+        "trigger": "brand",
+        "krMark": "이 브랜드 [한번] 써봐."
       },
       "pattern": {
         "form": "give ______ a try",
@@ -7881,7 +7944,8 @@
       "sentence": {
         "en": "The pressure is getting to me.",
         "kr": "부담감 때문에 힘들어.",
-        "trigger": "pressure"
+        "trigger": "pressure",
+        "krMark": "부담감 [때문에 힘들어]."
       },
       "pattern": {
         "form": "______ is getting to me",
@@ -7989,7 +8053,8 @@
       "sentence": {
         "en": "I look at that quote differently.",
         "kr": "난 그 구절을 다르게 봐.",
-        "trigger": "quote"
+        "trigger": "quote",
+        "krMark": null
       },
       "pattern": {
         "form": "look at ______",
@@ -8107,7 +8172,8 @@
       "sentence": {
         "en": "He can't wait to start sixth grade.",
         "kr": "6학년 되는 걸 엄청 기다리고 있어.",
-        "trigger": "grade"
+        "trigger": "grade",
+        "krMark": null
       },
       "pattern": {
         "form": "can't wait to ______",
@@ -8227,7 +8293,8 @@
       "sentence": {
         "en": "It was great except for the crowds.",
         "kr": "사람 많은 것만 빼면 좋았어.",
-        "trigger": "crowd"
+        "trigger": "crowd",
+        "krMark": null
       },
       "pattern": {
         "form": "except for ______",
@@ -8346,7 +8413,8 @@
       "sentence": {
         "en": "I'll turn on the radio.",
         "kr": "라디오 켤게.",
-        "trigger": "radio"
+        "trigger": "radio",
+        "krMark": null
       },
       "pattern": {
         "form": "turn on ______",
@@ -8468,7 +8536,8 @@
       "sentence": {
         "en": "Make a choice between pizza or spaghetti.",
         "kr": "피자랑 스파게티 중에 골라.",
-        "trigger": "spaghetti"
+        "trigger": "spaghetti",
+        "krMark": null
       },
       "pattern": {
         "form": "make a choice",
@@ -8579,7 +8648,8 @@
       "sentence": {
         "en": "Let me go through the draft first.",
         "kr": "초안부터 검토해 볼게요.",
-        "trigger": "draft"
+        "trigger": "draft",
+        "krMark": null
       },
       "pattern": {
         "form": "go through ______",
@@ -8697,7 +8767,8 @@
       "sentence": {
         "en": "The director said come in early.",
         "kr": "감독님이 일찍 나오라고 했어.",
-        "trigger": "director"
+        "trigger": "director",
+        "krMark": null
       },
       "pattern": {
         "form": "come in",
@@ -8816,7 +8887,8 @@
       "sentence": {
         "en": "Let's ask the guide, shall we?",
         "kr": "가이드한테 물어볼까?",
-        "trigger": "guide"
+        "trigger": "guide",
+        "krMark": null
       },
       "pattern": {
         "form": "Let's ______ , shall we ?",
@@ -8998,7 +9070,8 @@
       "sentence": {
         "en": "Can you look that up in your records?",
         "kr": "기록에서 좀 찾아봐 주시겠어요?",
-        "trigger": "record"
+        "trigger": "record",
+        "krMark": null
       },
       "pattern": {
         "form": "look ______ up",
@@ -9135,7 +9208,8 @@
       "sentence": {
         "en": "Let me pick up my purse.",
         "kr": "가방 좀 챙길게.",
-        "trigger": "purse"
+        "trigger": "purse",
+        "krMark": null
       },
       "pattern": {
         "form": "pick ______ up",
@@ -9267,7 +9341,8 @@
       "sentence": {
         "en": "She's looking forward to the field trip.",
         "kr": "소풍을 기대하고 있어.",
-        "trigger": "field trip"
+        "trigger": "field trip",
+        "krMark": null
       },
       "pattern": {
         "form": "look forward to ______",
@@ -9385,7 +9460,8 @@
       "sentence": {
         "en": "Why would I take someone else's umbrella?",
         "kr": "내가 뭐하러 남의 우산을 가져가?",
-        "trigger": "take"
+        "trigger": "take",
+        "krMark": "[내가 뭐하러] 남의 우산을 가져가?"
       },
       "pattern": {
         "form": "Why would I ______ ?",
@@ -9492,7 +9568,8 @@
       "sentence": {
         "en": "You're strong enough to lift it.",
         "kr": "너 그거 들 수 있을 만큼 힘세.",
-        "trigger": "lift"
+        "trigger": "lift",
+        "krMark": "너 그거 들 수 있을 [만큼] 힘세."
       },
       "pattern": {
         "form": "______ enough to ______",
@@ -9670,7 +9747,8 @@
       "sentence": {
         "en": "We provide students with various online resources.",
         "kr": "학생들에게 다양한 온라인 자료를 제공합니다.",
-        "trigger": "resource"
+        "trigger": "resource",
+        "krMark": "학생들[에게] 다양한 온라인 자료를 제공합니다."
       },
       "pattern": {
         "form": "provide ______ with ______",
@@ -9813,7 +9891,8 @@
       "sentence": {
         "en": "There's a bunch of errors.",
         "kr": "오류가 잔뜩 있어.",
-        "trigger": "error"
+        "trigger": "error",
+        "krMark": null
       },
       "pattern": {
         "form": "a bunch of ______",
@@ -9932,7 +10011,8 @@
       "sentence": {
         "en": "There was no one other than the clients.",
         "kr": "고객들 말고는 아무도 없었어.",
-        "trigger": "client"
+        "trigger": "client",
+        "krMark": "고객들 [말고는] 아무도 없었어."
       },
       "pattern": {
         "form": "other than ______",
@@ -10050,7 +10130,8 @@
       "sentence": {
         "en": "He trains as much as a real athlete!",
         "kr": "진짜 운동선수만큼 훈련해!",
-        "trigger": "athlete"
+        "trigger": "athlete",
+        "krMark": "진짜 운동선수[만큼] 훈련해!"
       },
       "pattern": {
         "form": "as much as ______",
@@ -10168,7 +10249,8 @@
       "sentence": {
         "en": "Hurry, I'm late for work.",
         "kr": "서둘러, 나 회사에 늦었어.",
-        "trigger": "hurry"
+        "trigger": "hurry",
+        "krMark": "서둘러, 나 회사에 [늦]었어."
       },
       "pattern": {
         "form": "late for ______",
@@ -10289,7 +10371,8 @@
       "sentence": {
         "en": "Make some room, will you?",
         "kr": "자리 좀 만들어 줄래?",
-        "trigger": "room"
+        "trigger": "room",
+        "krMark": "자리 좀 만들어 [줄래]?"
       },
       "pattern": {
         "form": "______ , will you ?",
@@ -10445,7 +10528,8 @@
       "sentence": {
         "en": "We're better in terms of strength.",
         "kr": "힘에서는 우리가 나아.",
-        "trigger": "strength"
+        "trigger": "strength",
+        "krMark": null
       },
       "pattern": {
         "form": "in terms of ______",
@@ -10559,7 +10643,8 @@
       "sentence": {
         "en": "At least we have playing an instrument in common.",
         "kr": "적어도 악기 연주한다는 공통점은 있잖아.",
-        "trigger": "instrument"
+        "trigger": "instrument",
+        "krMark": "적어도 악기 연주한다는 공통점은 [있]잖아."
       },
       "pattern": {
         "form": "have ______ in common",
@@ -10694,7 +10779,8 @@
       "sentence": {
         "en": "It's hard to build trust.",
         "kr": "신뢰를 쌓기는 어려워.",
-        "trigger": "trust"
+        "trigger": "trust",
+        "krMark": null
       },
       "pattern": {
         "form": "It's ______ to ______ .",
@@ -10874,7 +10960,8 @@
       "sentence": {
         "en": "There's nothing but sand.",
         "kr": "온통 모래뿐이야.",
-        "trigger": "sand"
+        "trigger": "sand",
+        "krMark": "온통 모래[뿐이야]."
       },
       "pattern": {
         "form": "nothing but ______",
@@ -10992,7 +11079,8 @@
       "sentence": {
         "en": "They just hang out at the pool.",
         "kr": "걔네는 그냥 수영장에서 놀아.",
-        "trigger": "pool"
+        "trigger": "pool",
+        "krMark": "걔네는 그냥 수영장에서 [놀]아."
       },
       "pattern": {
         "form": "hang out (with ______)",
@@ -11111,7 +11199,8 @@
       "sentence": {
         "en": "Be careful when it comes to your diet.",
         "kr": "식단에 관해서는 조심해야 해.",
-        "trigger": "diet"
+        "trigger": "diet",
+        "krMark": "식단[에 관해서는] 조심해야 해."
       },
       "pattern": {
         "form": "when it comes to ______",
@@ -11230,7 +11319,8 @@
       "sentence": {
         "en": "I'll have a bit of rice, please.",
         "kr": "밥 조금만 주세요.",
-        "trigger": "rice"
+        "trigger": "rice",
+        "krMark": null
       },
       "pattern": {
         "form": "a bit of ______",
@@ -11348,7 +11438,8 @@
       "sentence": {
         "en": "I don't believe in luck.",
         "kr": "난 운 같은 거 안 믿어.",
-        "trigger": "luck"
+        "trigger": "luck",
+        "krMark": "난 운 같은 거 안 [믿]어."
       },
       "pattern": {
         "form": "believe in ______",
@@ -11466,7 +11557,8 @@
       "sentence": {
         "en": "I believe in our president.",
         "kr": "난 우리 대통령을 믿어.",
-        "trigger": "president"
+        "trigger": "president",
+        "krMark": null
       },
       "pattern": {
         "form": "believe in ______",
@@ -11560,7 +11652,8 @@
       "sentence": {
         "en": "I missed the bus because of you!",
         "kr": "너 때문에 버스 놓쳤잖아!",
-        "trigger": "miss"
+        "trigger": "miss",
+        "krMark": "너 [때문에] 버스 놓쳤잖아!"
       },
       "pattern": {
         "form": "because of ______",
@@ -11734,7 +11827,8 @@
       "sentence": {
         "en": "Compared to last year, it was a disaster.",
         "kr": "작년에 비하면 최악이었어.",
-        "trigger": "disaster"
+        "trigger": "disaster",
+        "krMark": "작년[에 비하면] 최악이었어."
       },
       "pattern": {
         "form": "compared to ______",
@@ -11840,7 +11934,8 @@
       "sentence": {
         "en": "Let me know after your appointment!",
         "kr": "약속 끝나면 알려줘!",
-        "trigger": "appointment"
+        "trigger": "appointment",
+        "krMark": "약속 끝나면 [알려줘]!"
       },
       "pattern": {
         "form": "Let me know ______ .",
@@ -11950,7 +12045,8 @@
       "sentence": {
         "en": "You have to sign up on their site.",
         "kr": "그쪽 사이트에서 등록해야 해.",
-        "trigger": "site"
+        "trigger": "site",
+        "krMark": "그쪽 사이트에서 [등록]해야 해."
       },
       "pattern": {
         "form": "sign up (for ______)",
@@ -12048,7 +12144,8 @@
       "sentence": {
         "en": "About two hours, depending on the route.",
         "kr": "경로에 따라 두 시간쯤 걸려.",
-        "trigger": "route"
+        "trigger": "route",
+        "krMark": "경로[에 따라] 두 시간쯤 걸려."
       },
       "pattern": {
         "form": "depending on ______",
@@ -12162,7 +12259,8 @@
       "sentence": {
         "en": "The refrigerator takes up a lot of space.",
         "kr": "냉장고가 자리를 많이 차지해.",
-        "trigger": "refrigerator"
+        "trigger": "refrigerator",
+        "krMark": "냉장고가 자리를 많이 [차지]해."
       },
       "pattern": {
         "form": "take up ______",
@@ -12260,7 +12358,8 @@
       "sentence": {
         "en": "I can't think of an answer.",
         "kr": "답이 떠오르질 않아.",
-        "trigger": "answer"
+        "trigger": "answer",
+        "krMark": "답이 [떠오르]질 않아."
       },
       "pattern": {
         "form": "think of ______",
@@ -12378,7 +12477,8 @@
       "sentence": {
         "en": "Noodles are more expensive than rice.",
         "kr": "국수가 밥보다 비싸.",
-        "trigger": "rice"
+        "trigger": "rice",
+        "krMark": "국수가 밥[보다] 비싸."
       },
       "pattern": {
         "form": "more ______ than ______",
@@ -12577,7 +12677,8 @@
       "sentence": {
         "en": "Have a good time, grandpa!",
         "kr": "즐겁게 보내세요, 할아버지!",
-        "trigger": "grandpa"
+        "trigger": "grandpa",
+        "krMark": "[즐겁게] 보내세요, 할아버지!"
       },
       "pattern": {
         "form": "have a good time",
@@ -12683,7 +12784,8 @@
       "sentence": {
         "en": "Poverty is the most serious issue.",
         "kr": "빈곤이 가장 심각한 문제야.",
-        "trigger": "poverty"
+        "trigger": "poverty",
+        "krMark": "빈곤이 [가장] 심각한 문제야."
       },
       "pattern": {
         "form": "the most ______",
@@ -12844,7 +12946,8 @@
       "sentence": {
         "en": "It feels like some kind of oil.",
         "kr": "뭔가 기름 같은 느낌이야.",
-        "trigger": "oil"
+        "trigger": "oil",
+        "krMark": null
       },
       "pattern": {
         "form": "some kind of ______",
@@ -12962,7 +13065,8 @@
       "sentence": {
         "en": "How do you like your room?",
         "kr": "방은 마음에 드세요?",
-        "trigger": "room"
+        "trigger": "room",
+        "krMark": "방은 [마음에] 드세요?"
       },
       "pattern": {
         "form": "How do you like ______ ?",
@@ -13053,7 +13157,8 @@
       "sentence": {
         "en": "I usually take a walk in the afternoon.",
         "kr": "난 보통 오후에 산책해.",
-        "trigger": "in the afternoon"
+        "trigger": "in the afternoon",
+        "krMark": "난 보통 오후에 [산책]해."
       },
       "pattern": {
         "form": "take a walk",
@@ -13167,7 +13272,8 @@
       "sentence": {
         "en": "Please leave the guest alone.",
         "kr": "손님 좀 가만히 두세요.",
-        "trigger": "guest"
+        "trigger": "guest",
+        "krMark": "손님 좀 가만히 [두]세요."
       },
       "pattern": {
         "form": "leave ______ alone",
@@ -13294,7 +13400,8 @@
       "sentence": {
         "en": "It's on top of the fridge.",
         "kr": "냉장고 위에 있어.",
-        "trigger": "fridge"
+        "trigger": "fridge",
+        "krMark": "냉장고 [위에] 있어."
       },
       "pattern": {
         "form": "on top of ______",
@@ -13413,7 +13520,8 @@
       "sentence": {
         "en": "Let's just get started anyway.",
         "kr": "그냥 시작하죠.",
-        "trigger": "anyway"
+        "trigger": "anyway",
+        "krMark": "그냥 [시작하]죠."
       },
       "pattern": {
         "form": "get started",
@@ -13526,7 +13634,8 @@
       "sentence": {
         "en": "Calm down before you reply.",
         "kr": "답장은 진정하고 나서 해.",
-        "trigger": "reply"
+        "trigger": "reply",
+        "krMark": "답장은 [진정하]고 나서 해."
       },
       "pattern": {
         "form": "calm down",
@@ -13636,7 +13745,8 @@
       "sentence": {
         "en": "I can't make it to the convention.",
         "kr": "그 컨벤션에 못 가게 됐어요.",
-        "trigger": "convention"
+        "trigger": "convention",
+        "krMark": "그 컨벤션에 못 [가]게 됐어요."
       },
       "pattern": {
         "form": "make it",
@@ -13731,7 +13841,8 @@
       "sentence": {
         "en": "Let's go back to the funding issue.",
         "kr": "자금 문제로 돌아가죠.",
-        "trigger": "funding"
+        "trigger": "funding",
+        "krMark": "자금 문제로 [돌아가]죠."
       },
       "pattern": {
         "form": "go back to ______",
@@ -13850,7 +13961,8 @@
       "sentence": {
         "en": "They were asleep by the time I arrived.",
         "kr": "내가 도착했을 땐 이미 자고 있었어.",
-        "trigger": "asleep"
+        "trigger": "asleep",
+        "krMark": null
       },
       "pattern": {
         "form": "by the time ______",
@@ -13965,7 +14077,8 @@
       "sentence": {
         "en": "I messed up the last question on my quiz.",
         "kr": "시험 마지막 문제를 틀렸어.",
-        "trigger": "quiz"
+        "trigger": "quiz",
+        "krMark": null
       },
       "pattern": {
         "form": "mess up ______",
@@ -14086,7 +14199,8 @@
       "sentence": {
         "en": "I'll try on this pair first.",
         "kr": "이거 먼저 신어 볼게요.",
-        "trigger": "pair"
+        "trigger": "pair",
+        "krMark": null
       },
       "pattern": {
         "form": "try ______ on",
@@ -14193,7 +14307,8 @@
       "sentence": {
         "en": "I watched every single episode as a kid.",
         "kr": "어릴 때 한 편도 안 빼놓고 다 봤어.",
-        "trigger": "episode"
+        "trigger": "episode",
+        "krMark": "어릴 때 한 편도 안 빼놓고 [다] 봤어."
       },
       "pattern": {
         "form": "every single ______",
@@ -14310,7 +14425,8 @@
       "sentence": {
         "en": "I'd say it's pretty average.",
         "kr": "꽤 평범한 것 같아.",
-        "trigger": "average"
+        "trigger": "average",
+        "krMark": "꽤 평범한 것 [같아]."
       },
       "pattern": {
         "form": "I'd say ______",
@@ -14416,7 +14532,8 @@
       "sentence": {
         "en": "What's with the rainbow?",
         "kr": "이 무지개는 뭐야?",
-        "trigger": "rainbow"
+        "trigger": "rainbow",
+        "krMark": null
       },
       "pattern": {
         "form": "What's with ______ ?",
@@ -14523,7 +14640,8 @@
       "sentence": {
         "en": "It's all about leadership.",
         "kr": "리더십이 전부죠.",
-        "trigger": "leadership"
+        "trigger": "leadership",
+        "krMark": null
       },
       "pattern": {
         "form": "It's all about ______ .",
@@ -14629,7 +14747,8 @@
       "sentence": {
         "en": "I want to get home before dark.",
         "kr": "어두워지기 전에 집에 도착하고 싶어.",
-        "trigger": "dark"
+        "trigger": "dark",
+        "krMark": "어두워지기 전에 집에 [도착하]고 싶어."
       },
       "pattern": {
         "form": "get home",
@@ -14724,7 +14843,8 @@
       "sentence": {
         "en": "Let's look around the fair for a while.",
         "kr": "박람회를 좀 둘러보자.",
-        "trigger": "fair"
+        "trigger": "fair",
+        "krMark": "박람회를 좀 [둘러보]자."
       },
       "pattern": {
         "form": "look around",
@@ -14818,7 +14938,8 @@
       "sentence": {
         "en": "Want some more popcorn?",
         "kr": "팝콘 좀 더 먹을래?",
-        "trigger": "popcorn"
+        "trigger": "popcorn",
+        "krMark": "팝콘 [좀 더] 먹을래?"
       },
       "pattern": {
         "form": "some more ______",
@@ -14936,7 +15057,8 @@
       "sentence": {
         "en": "Things didn't work out, obviously.",
         "kr": "보다시피 잘 안 풀렸어.",
-        "trigger": "obviously"
+        "trigger": "obviously",
+        "krMark": "보다시피 [잘] 안 풀렸어."
       },
       "pattern": {
         "form": "work out",
@@ -15051,7 +15173,8 @@
       "sentence": {
         "en": "Don't you think it's too dark?",
         "kr": "너무 어둡지 않아?",
-        "trigger": "dark"
+        "trigger": "dark",
+        "krMark": "너무 어둡[지 않아]?"
       },
       "pattern": {
         "form": "Don't you think ______ ?",
@@ -15162,7 +15285,8 @@
       "sentence": {
         "en": "Let's just get through this session.",
         "kr": "이 시간만 어떻게든 버티자.",
-        "trigger": "session"
+        "trigger": "session",
+        "krMark": null
       },
       "pattern": {
         "form": "get through ______",
@@ -15281,7 +15405,8 @@
       "sentence": {
         "en": "Feel free to take a copy.",
         "kr": "편하게 한 부 가져가세요.",
-        "trigger": "copy"
+        "trigger": "copy",
+        "krMark": "[편하게] 한 부 가져가세요."
       },
       "pattern": {
         "form": "Feel free to ______ .",
@@ -15387,7 +15512,8 @@
       "sentence": {
         "en": "They belong to the community center.",
         "kr": "그거 주민센터 거야.",
-        "trigger": "community center"
+        "trigger": "community center",
+        "krMark": null
       },
       "pattern": {
         "form": "belong to ______",
@@ -15482,7 +15608,8 @@
       "sentence": {
         "en": "It's a good idea to take vitamins.",
         "kr": "비타민을 챙겨 먹는 건 좋은 생각이야.",
-        "trigger": "vitamin"
+        "trigger": "vitamin",
+        "krMark": "비타민을 챙겨 먹[는 건] 좋은 생각이야."
       },
       "pattern": {
         "form": "It's ______ to ______ .",
@@ -15637,7 +15764,8 @@
       "sentence": {
         "en": "I can't say no to a cheeseburger.",
         "kr": "치즈버거는 못 참지.",
-        "trigger": "cheeseburger"
+        "trigger": "cheeseburger",
+        "krMark": null
       },
       "pattern": {
         "form": "say no (to ______)",
@@ -15731,7 +15859,8 @@
       "sentence": {
         "en": "Let's go over their requirements.",
         "kr": "그쪽 요건을 같이 살펴보자.",
-        "trigger": "requirement"
+        "trigger": "requirement",
+        "krMark": "그쪽 요건을 같이 [살펴보]자."
       },
       "pattern": {
         "form": "go over ______",
@@ -15853,7 +15982,8 @@
       "sentence": {
         "en": "No more excuses.",
         "kr": "더 이상 변명하지 마.",
-        "trigger": "excuse"
+        "trigger": "excuse",
+        "krMark": "[더 이상] 변명하지 마."
       },
       "pattern": {
         "form": "no more ______",
@@ -15967,7 +16097,8 @@
       "sentence": {
         "en": "Get off the subway at City Hall.",
         "kr": "시청(역)에서 지하철을 내리세요.",
-        "trigger": "subway"
+        "trigger": "subway",
+        "krMark": "시청(역)[에서] 지하철을 내리세요."
       },
       "pattern": {
         "form": "get off ______",
@@ -16061,7 +16192,8 @@
       "sentence": {
         "en": "You don't pay attention during the lectures.",
         "kr": "넌 수업 시간에 집중을 안 하잖아.",
-        "trigger": "lecture"
+        "trigger": "lecture",
+        "krMark": "넌 수업 시간에 [집중]을 안 하잖아."
       },
       "pattern": {
         "form": "pay attention",
@@ -16174,7 +16306,8 @@
       "sentence": {
         "en": "I need to get this assignment done.",
         "kr": "이 과제를 끝내야 해.",
-        "trigger": "assignment"
+        "trigger": "assignment",
+        "krMark": "이 과제를 [끝내]야 해."
       },
       "pattern": {
         "form": "get ______ done",
@@ -16305,7 +16438,8 @@
       "sentence": {
         "en": "How come it's so crowded?",
         "kr": "왜 이렇게 붐비지?",
-        "trigger": "crowded"
+        "trigger": "crowded",
+        "krMark": "[왜] 이렇게 붐비지?"
       },
       "pattern": {
         "form": "How come ______ ?",
@@ -16396,7 +16530,8 @@
       "sentence": {
         "en": "What neighbourhood do you have in mind?",
         "kr": "어느 동네를 생각하고 있어?",
-        "trigger": "neighbourhood"
+        "trigger": "neighbourhood",
+        "krMark": "어느 동네를 [생각]하고 있어?"
       },
       "pattern": {
         "form": "have ______ in mind",
@@ -16523,7 +16658,8 @@
       "sentence": {
         "en": "Let's stop by the bookstore.",
         "kr": "서점에 잠깐 들르자.",
-        "trigger": "bookstore"
+        "trigger": "bookstore",
+        "krMark": "서점에 잠깐 [들르]자."
       },
       "pattern": {
         "form": "stop by (______)",
@@ -16621,7 +16757,8 @@
       "sentence": {
         "en": "Why don't we go bowling?",
         "kr": "우리 볼링 치러 갈까?",
-        "trigger": "bowling"
+        "trigger": "bowling",
+        "krMark": "[우리] 볼링 치러 갈까?"
       },
       "pattern": {
         "form": "Why don't we ______ ?",
@@ -16728,7 +16865,8 @@
       "sentence": {
         "en": "Give my leather jacket back first.",
         "kr": "내 가죽 재킷 먼저 돌려줘.",
-        "trigger": "leather"
+        "trigger": "leather",
+        "krMark": null
       },
       "pattern": {
         "form": "give ______ back",
@@ -16864,7 +17002,8 @@
       "sentence": {
         "en": "It was more like an essay.",
         "kr": "그건 거의 에세이 수준이더라.",
-        "trigger": "essay"
+        "trigger": "essay",
+        "krMark": "그건 거의 [에]세이 수준이더라."
       },
       "pattern": {
         "form": "more like ______",
@@ -16984,7 +17123,8 @@
       "sentence": {
         "en": "Take the spare key in case she's not home.",
         "kr": "혹시 걔가 집에 없을지 모르니 여분 열쇠 가져가.",
-        "trigger": "spare"
+        "trigger": "spare",
+        "krMark": "혹시 걔가 집에 없을지 [모르니] 여분 열쇠 가져가."
       },
       "pattern": {
         "form": "in case ______",
@@ -17101,7 +17241,8 @@
       "sentence": {
         "en": "I don't believe in donations.",
         "kr": "나는 기부라는 걸 좋게 보지 않아.",
-        "trigger": "donation"
+        "trigger": "donation",
+        "krMark": null
       },
       "pattern": {
         "form": "believe in ______",
@@ -17219,7 +17360,8 @@
       "sentence": {
         "en": "They take my allergies seriously.",
         "kr": "그 사람들은 내 알레르기를 진지하게 봐 줘.",
-        "trigger": "allergy"
+        "trigger": "allergy",
+        "krMark": "그 사람들은 내 알레르기를 [진지하게] 봐 줘."
       },
       "pattern": {
         "form": "take ______ seriously",
@@ -17326,7 +17468,8 @@
       "sentence": {
         "en": "She's looking after a relative.",
         "kr": "친척을 돌보고 있어.",
-        "trigger": "relative"
+        "trigger": "relative",
+        "krMark": "친척을 [돌보]고 있어."
       },
       "pattern": {
         "form": "look after ______",
@@ -17424,7 +17567,8 @@
       "sentence": {
         "en": "What if someone robs us?",
         "kr": "누가 우릴 털면 어쩌지?",
-        "trigger": "rob"
+        "trigger": "rob",
+        "krMark": "누가 우릴 털[면 어쩌지]?"
       },
       "pattern": {
         "form": "What if ______ ?",
@@ -17530,7 +17674,8 @@
       "sentence": {
         "en": "He's less reliable than her.",
         "kr": "그는 그녀보다 덜 믿음직해.",
-        "trigger": "reliable"
+        "trigger": "reliable",
+        "krMark": "그는 그녀[보다 덜] 믿음직해."
       },
       "pattern": {
         "form": "less ______ than ______",
@@ -17758,7 +17903,8 @@
       "sentence": {
         "en": "Don't I need the receipt to pick it up?",
         "kr": "그거 찾으려면 영수증 있어야 하지 않아?",
-        "trigger": "receipt"
+        "trigger": "receipt",
+        "krMark": null
       },
       "pattern": {
         "form": "pick ______ up",
@@ -17894,7 +18040,8 @@
       "sentence": {
         "en": "What makes you so certain?",
         "kr": "왜 그렇게 확신해?",
-        "trigger": "certain"
+        "trigger": "certain",
+        "krMark": "[왜] 그렇게 확신해?"
       },
       "pattern": {
         "form": "What makes ______ ?",
@@ -18000,7 +18147,8 @@
       "sentence": {
         "en": "Don't bring that up at the funeral!",
         "kr": "장례식에서 그런 얘기 꺼내지 마!",
-        "trigger": "funeral"
+        "trigger": "funeral",
+        "krMark": "장례식에서 그런 얘기 [꺼내]지 마!"
       },
       "pattern": {
         "form": "bring ______ up",
@@ -18135,7 +18283,8 @@
       "sentence": {
         "en": "I turned down the supervisor position.",
         "kr": "그 관리자 자리는 거절했어.",
-        "trigger": "supervisor"
+        "trigger": "supervisor",
+        "krMark": "그 관리자 자리는 [거절]했어."
       },
       "pattern": {
         "form": "turn ______ down",
@@ -18266,7 +18415,8 @@
       "sentence": {
         "en": "Just because he's experienced doesn't mean he's right.",
         "kr": "경력이 많다고 해서 그 말이 맞는 건 아니지.",
-        "trigger": "experienced"
+        "trigger": "experienced",
+        "krMark": "경력이 많다고 [해서] 그 말이 맞는 건 아니지."
       },
       "pattern": {
         "form": "Just because ______ doesn't mean ______",
@@ -18400,7 +18550,8 @@
       "sentence": {
         "en": "I just keep track of my expenses.",
         "kr": "그냥 쓰는 돈을 계속 기록해.",
-        "trigger": "expense"
+        "trigger": "expense",
+        "krMark": "그냥 쓰는 돈을 [계속] 기록해."
       },
       "pattern": {
         "form": "keep track of ______",
@@ -18514,7 +18665,8 @@
       "sentence": {
         "en": "What brings you to Manhattan?",
         "kr": "맨해튼엔 어쩐 일이야?",
-        "trigger": "Manhattan"
+        "trigger": "Manhattan",
+        "krMark": "맨해튼[엔 어쩐 일이야]?"
       },
       "pattern": {
         "form": "What brings you to ______ ?",
@@ -18606,7 +18758,8 @@
       "sentence": {
         "en": "So he can take advantage of the senior discount.",
         "kr": "경로 할인을 받으려고 그러시는 거야.",
-        "trigger": "senior"
+        "trigger": "senior",
+        "krMark": null
       },
       "pattern": {
         "form": "take advantage of ______",
@@ -18725,7 +18878,8 @@
       "sentence": {
         "en": "A new trainer will take over.",
         "kr": "새 강사가 맡을 거예요.",
-        "trigger": "trainer"
+        "trigger": "trainer",
+        "krMark": null
       },
       "pattern": {
         "form": "take over",
@@ -18820,7 +18974,8 @@
       "sentence": {
         "en": "Why not drop one?",
         "kr": "하나 빼는 게 어때?",
-        "trigger": "drop"
+        "trigger": "drop",
+        "krMark": "하나 빼[는 게 어때]?"
       },
       "pattern": {
         "form": "Why not ______ ?",
@@ -18928,7 +19083,8 @@
       "sentence": {
         "en": "I'll check my calendar as soon as I arrive.",
         "kr": "도착하자마자 일정을 확인할게.",
-        "trigger": "calendar"
+        "trigger": "calendar",
+        "krMark": "도착[하자마자] 일정을 확인할게."
       },
       "pattern": {
         "form": "as soon as ______",
@@ -19107,7 +19263,8 @@
       "sentence": {
         "en": "I'd like to set up an account.",
         "kr": "계좌를 만들려고요.",
-        "trigger": "account"
+        "trigger": "account",
+        "krMark": null
       },
       "pattern": {
         "form": "set up ______",
@@ -19226,7 +19383,8 @@
       "sentence": {
         "en": "Let's meet up by the exit.",
         "kr": "출구 쪽에서 만나자.",
-        "trigger": "exit"
+        "trigger": "exit",
+        "krMark": "출구 쪽에서 [만나]자."
       },
       "pattern": {
         "form": "meet up (with ______)",
@@ -19348,7 +19506,8 @@
       "sentence": {
         "en": "I can always count on my crew.",
         "kr": "우리 팀은 언제든 믿을 수 있어.",
-        "trigger": "crew"
+        "trigger": "crew",
+        "krMark": "우리 팀은 언제든 [믿]을 수 있어."
       },
       "pattern": {
         "form": "count on ______",
@@ -19446,7 +19605,8 @@
       "sentence": {
         "en": "Stay away from the cliff!",
         "kr": "절벽에 가까이 가지 마!",
-        "trigger": "cliff"
+        "trigger": "cliff",
+        "krMark": null
       },
       "pattern": {
         "form": "stay away (from ______)",
@@ -19556,7 +19716,8 @@
       "sentence": {
         "en": "We're looking into cheaper accommodations.",
         "kr": "더 싼 숙소를 알아보고 있어.",
-        "trigger": "accommodation"
+        "trigger": "accommodation",
+        "krMark": "더 싼 숙소를 [알아보]고 있어."
       },
       "pattern": {
         "form": "look into ______",
@@ -19655,7 +19816,8 @@
       "sentence": {
         "en": "I guess determination pays off.",
         "kr": "끈기가 결실을 보는 거지.",
-        "trigger": "determination"
+        "trigger": "determination",
+        "krMark": "끈기가 [결실을] 보는 거지."
       },
       "pattern": {
         "form": "pay off",
@@ -19745,7 +19907,8 @@
       "sentence": {
         "en": "I feel sorry for your little sister.",
         "kr": "네 여동생이 안됐다.",
-        "trigger": "little sister"
+        "trigger": "little sister",
+        "krMark": null
       },
       "pattern": {
         "form": "feel sorry for ______",
@@ -19866,7 +20029,8 @@
       "sentence": {
         "en": "We get over disagreements pretty quickly.",
         "kr": "우린 다툰 것도 금방 풀려.",
-        "trigger": "disagreement"
+        "trigger": "disagreement",
+        "krMark": null
       },
       "pattern": {
         "form": "get over ______",
@@ -19984,7 +20148,8 @@
       "sentence": {
         "en": "I'd go for the fried chicken.",
         "kr": "나라면 프라이드치킨으로 하겠어.",
-        "trigger": "fried"
+        "trigger": "fried",
+        "krMark": "나라면 프라이드치킨[으로] 하겠어."
       },
       "pattern": {
         "form": "go for ______",
@@ -20103,7 +20268,8 @@
       "sentence": {
         "en": "Grab your bag and get in the car!",
         "kr": "가방 챙겨서 차에 타!",
-        "trigger": "grab"
+        "trigger": "grab",
+        "krMark": "가방 챙겨서 차에 [타]!"
       },
       "pattern": {
         "form": "get in ______",
@@ -20216,7 +20382,8 @@
       "sentence": {
         "en": "You should reach out to the unemployment office.",
         "kr": "고용지원센터에 연락해 보는 게 좋겠어.",
-        "trigger": "unemployment"
+        "trigger": "unemployment",
+        "krMark": "고용지원센터에 [연락]해 보는 게 좋겠어."
       },
       "pattern": {
         "form": "reach out (to ______)",
@@ -20337,7 +20504,8 @@
       "sentence": {
         "en": "Let's go with the purple tie.",
         "kr": "보라색 넥타이로 하자.",
-        "trigger": "tie"
+        "trigger": "tie",
+        "krMark": "보라색 넥타이로 [하]자."
       },
       "pattern": {
         "form": "go with ______",
@@ -20455,7 +20623,8 @@
       "sentence": {
         "en": "That liar won't take responsibility.",
         "kr": "그 거짓말쟁이는 책임을 안 질 거야.",
-        "trigger": "liar"
+        "trigger": "liar",
+        "krMark": "그 거짓말쟁이는 [책임을] 안 질 거야."
       },
       "pattern": {
         "form": "take responsibility (for ______)",
@@ -20545,7 +20714,8 @@
       "sentence": {
         "en": "You need to let go of your guilt.",
         "kr": "죄책감은 좀 내려놓아야 해.",
-        "trigger": "guilt"
+        "trigger": "guilt",
+        "krMark": null
       },
       "pattern": {
         "form": "let ______ go",
@@ -20676,7 +20846,8 @@
       "sentence": {
         "en": "They sell both stamps and envelopes.",
         "kr": "거긴 우표랑 봉투를 다 팔아.",
-        "trigger": "envelope"
+        "trigger": "envelope",
+        "krMark": "거긴 우표랑 봉투를 [다] 팔아."
       },
       "pattern": {
         "form": "both ______ and ______",
@@ -20899,7 +21070,8 @@
       "sentence": {
         "en": "Lie down on the mat.",
         "kr": "매트에 누워 봐.",
-        "trigger": "mat"
+        "trigger": "mat",
+        "krMark": null
       },
       "pattern": {
         "form": "lie down",
@@ -20989,7 +21161,8 @@
       "sentence": {
         "en": "I just can't keep up with my boss's demands.",
         "kr": "상사가 요구하는 걸 도저히 못 따라가겠어.",
-        "trigger": "demand"
+        "trigger": "demand",
+        "krMark": "상사가 요구하는 걸 도저히 못 [따라가]겠어."
       },
       "pattern": {
         "form": "keep up",
@@ -21103,7 +21276,8 @@
       "sentence": {
         "en": "Help yourself to some ham.",
         "kr": "햄 좀 마음껏 드세요.",
-        "trigger": "ham"
+        "trigger": "ham",
+        "krMark": "햄 좀 [마음껏 드세요]."
       },
       "pattern": {
         "form": "Help yourself (to ______) .",
@@ -21193,7 +21367,8 @@
       "sentence": {
         "en": "I'll take either green tea or lemonade.",
         "kr": "녹차나 레모네이드 중 아무거나 주세요.",
-        "trigger": "green tea"
+        "trigger": "green tea",
+        "krMark": null
       },
       "pattern": {
         "form": "either ______ or ______",
@@ -21416,7 +21591,8 @@
       "sentence": {
         "en": "Fill up your tray!",
         "kr": "접시 가득 담아!",
-        "trigger": "tray"
+        "trigger": "tray",
+        "krMark": "접시 [가득] 담아!"
       },
       "pattern": {
         "form": "fill up ______",
@@ -21530,7 +21706,8 @@
       "sentence": {
         "en": "Watch out for cracks.",
         "kr": "갈라진 데 조심해.",
-        "trigger": "crack"
+        "trigger": "crack",
+        "krMark": "갈라진 데 [조심]해."
       },
       "pattern": {
         "form": "watch out for ______",
@@ -21637,7 +21814,8 @@
       "sentence": {
         "en": "I feel bad about losing your lipstick.",
         "kr": "네 립스틱을 잃어버려서 마음이 안 좋아.",
-        "trigger": "lipstick"
+        "trigger": "lipstick",
+        "krMark": "네 립스틱을 잃어버려서 [마음이] 안 좋아."
       },
       "pattern": {
         "form": "feel bad (about ______)",
@@ -21759,7 +21937,8 @@
       "sentence": {
         "en": "Let's think this over before making a commitment.",
         "kr": "확정하기 전에 좀 더 생각해 보자.",
-        "trigger": "commitment"
+        "trigger": "commitment",
+        "krMark": "확정하기 전에 좀 더 [생각해] 보자."
       },
       "pattern": {
         "form": "think ______ over",
@@ -21870,7 +22049,8 @@
       "sentence": {
         "en": "He has a ton of junk to store.",
         "kr": "쌓아둘 잡동사니가 엄청 많아.",
-        "trigger": "junk"
+        "trigger": "junk",
+        "krMark": "쌓아둘 잡동사니가 [엄청] 많아."
       },
       "pattern": {
         "form": "a ton of ______",
@@ -21989,7 +22169,8 @@
       "sentence": {
         "en": "Say hi to the nice lady.",
         "kr": "아주머니께 인사해.",
-        "trigger": "lady"
+        "trigger": "lady",
+        "krMark": "아주머니께 [인사]해."
       },
       "pattern": {
         "form": "say hi (to ______)",
@@ -22097,7 +22278,8 @@
       "sentence": {
         "en": "Do you think they have fried rice?",
         "kr": "거기 볶음밥 있을까?",
-        "trigger": "fried rice"
+        "trigger": "fried rice",
+        "krMark": null
       },
       "pattern": {
         "form": "Do you think ______ ?",
@@ -22264,7 +22446,8 @@
       "sentence": {
         "en": "We didn't have a choice regarding the invitations.",
         "kr": "초대장은 우리가 고를 수가 없었어.",
-        "trigger": "invitation"
+        "trigger": "invitation",
+        "krMark": null
       },
       "pattern": {
         "form": "have a choice",
@@ -22378,7 +22561,8 @@
       "sentence": {
         "en": "I've got to pay back a fortune.",
         "kr": "갚아야 할 돈이 엄청나.",
-        "trigger": "fortune"
+        "trigger": "fortune",
+        "krMark": "[갚]아야 할 돈이 엄청나."
       },
       "pattern": {
         "form": "pay ______ back",
@@ -22513,7 +22697,8 @@
       "sentence": {
         "en": "She won fifty dollars as well as a trophy.",
         "kr": "걔는 트로피뿐 아니라 50달러도 받았어.",
-        "trigger": "trophy"
+        "trigger": "trophy",
+        "krMark": "걔는 트로피[뿐 아니라] 50달러도 받았어."
       },
       "pattern": {
         "form": "______ as well as ______",
@@ -22691,7 +22876,8 @@
       "sentence": {
         "en": "Surgeons get paid the most.",
         "kr": "외과 의사가 제일 많이 받아.",
-        "trigger": "surgeon"
+        "trigger": "surgeon",
+        "krMark": "외과 의사가 제일 많이 [받]아."
       },
       "pattern": {
         "form": "get paid",
@@ -22810,7 +22996,8 @@
       "sentence": {
         "en": "Keep an eye on my luggage.",
         "kr": "내 짐 좀 봐 줘.",
-        "trigger": "luggage"
+        "trigger": "luggage",
+        "krMark": null
       },
       "pattern": {
         "form": "keep an eye on ______",
@@ -22924,7 +23111,8 @@
       "sentence": {
         "en": "You have to keep your identity a secret.",
         "kr": "자기 정체를 비밀로 해야 해.",
-        "trigger": "identity"
+        "trigger": "identity",
+        "krMark": "자기 정체를 [비밀로] 해야 해."
       },
       "pattern": {
         "form": "keep ______ a secret",
@@ -23055,7 +23243,8 @@
       "sentence": {
         "en": "Maybe I'll ask out my mechanic.",
         "kr": "정비사한테 데이트 신청이나 해 볼까.",
-        "trigger": "mechanic"
+        "trigger": "mechanic",
+        "krMark": "정비사한테 [데이트] 신청이나 해 볼까."
       },
       "pattern": {
         "form": "ask ______ out",
@@ -23162,7 +23351,8 @@
       "sentence": {
         "en": "Wear something fancy so that you stand out.",
         "kr": "눈에 띄게 좀 화려하게 입어.",
-        "trigger": "fancy"
+        "trigger": "fancy",
+        "krMark": null
       },
       "pattern": {
         "form": "______ so that ______",
@@ -23340,7 +23530,8 @@
       "sentence": {
         "en": "You should give your accountant a call.",
         "kr": "회계사한테 전화해 보는 게 좋겠어.",
-        "trigger": "accountant"
+        "trigger": "accountant",
+        "krMark": "회계사한테 [전화]해 보는 게 좋겠어."
       },
       "pattern": {
         "form": "give ______ a call",
@@ -23475,7 +23666,8 @@
       "sentence": {
         "en": "You should cut down on soft drinks.",
         "kr": "탄산음료를 줄이시는 게 좋겠어요.",
-        "trigger": "soft drink"
+        "trigger": "soft drink",
+        "krMark": "탄산음료를 [줄이]시는 게 좋겠어요."
       },
       "pattern": {
         "form": "cut down on ______",
@@ -23594,7 +23786,8 @@
       "sentence": {
         "en": "She's neither a chef nor a baker.",
         "kr": "걔는 요리사도 제빵사도 아니야.",
-        "trigger": "baker"
+        "trigger": "baker",
+        "krMark": "걔는 요리사도 제빵사[도 아니야]."
       },
       "pattern": {
         "form": "neither ______ nor ______",
@@ -23814,7 +24007,8 @@
       "sentence": {
         "en": "You mixed up the formulas.",
         "kr": "공식을 헷갈렸네.",
-        "trigger": "formula"
+        "trigger": "formula",
+        "krMark": null
       },
       "pattern": {
         "form": "mix up ______",
@@ -23935,7 +24129,8 @@
       "sentence": {
         "en": "Can you check on the turkey?",
         "kr": "칠면조 좀 봐 줄래?",
-        "trigger": "turkey"
+        "trigger": "turkey",
+        "krMark": null
       },
       "pattern": {
         "form": "check on ______",
@@ -24053,7 +24248,8 @@
       "sentence": {
         "en": "I usually get around by rail.",
         "kr": "보통 기차로 다녀.",
-        "trigger": "rail"
+        "trigger": "rail",
+        "krMark": null
       },
       "pattern": {
         "form": "get around",
@@ -24148,7 +24344,8 @@
       "sentence": {
         "en": "She just stepped out to go someplace.",
         "kr": "어디 가려고 방금 나갔어.",
-        "trigger": "someplace"
+        "trigger": "someplace",
+        "krMark": null
       },
       "pattern": {
         "form": "step out",
@@ -24268,7 +24465,8 @@
       "sentence": {
         "en": "I don't know if it's poisonous.",
         "kr": "독이 있는지 모르겠어.",
-        "trigger": "poisonous"
+        "trigger": "poisonous",
+        "krMark": "독이 있는지 [모르겠어]."
       },
       "pattern": {
         "form": "I don't know if ______ .",
@@ -24392,7 +24590,8 @@
       "sentence": {
         "en": "Everyone was more than helpful.",
         "kr": "다들 정말 친절하게 도와주셨어.",
-        "trigger": "helpful"
+        "trigger": "helpful",
+        "krMark": null
       },
       "pattern": {
         "form": "more than ______",
@@ -24510,7 +24709,8 @@
       "sentence": {
         "en": "He showed me around the art gallery.",
         "kr": "미술관을 구경시켜 줬어.",
-        "trigger": "art gallery"
+        "trigger": "art gallery",
+        "krMark": "미술관을 [구경시켜] 줬어."
       },
       "pattern": {
         "form": "show ______ around",
@@ -24626,7 +24826,8 @@
       "sentence": {
         "en": "I try to keep up with the latest looks.",
         "kr": "요즘 유행하는 스타일을 따라가려고 해.",
-        "trigger": "look"
+        "trigger": "look",
+        "krMark": "요즘 유행하는 스타일을 [따라가]려고 해."
       },
       "pattern": {
         "form": "keep up with ______",
@@ -24748,7 +24949,8 @@
       "sentence": {
         "en": "Let's put on a Disney movie.",
         "kr": "디즈니 영화 틀자.",
-        "trigger": "Disney"
+        "trigger": "Disney",
+        "krMark": "디즈니 영화 [틀]자."
       },
       "pattern": {
         "form": "put ______ on",
@@ -24880,7 +25082,8 @@
       "sentence": {
         "en": "I'd get in touch with HR.",
         "kr": "나라면 인사팀에 연락하겠어.",
-        "trigger": "HR"
+        "trigger": "HR",
+        "krMark": "나라면 인사팀에 [연락하]겠어."
       },
       "pattern": {
         "form": "get in touch with ______",
@@ -24999,7 +25202,8 @@
       "sentence": {
         "en": "What if we hire a magician?",
         "kr": "마술사를 부르면 어떨까?",
-        "trigger": "magician"
+        "trigger": "magician",
+        "krMark": "마술사를 부르[면 어떨까]?"
       },
       "pattern": {
         "form": "What if ______ ?",
@@ -25106,7 +25310,8 @@
       "sentence": {
         "en": "I can't put up with small talk.",
         "kr": "형식적인 잡담을 못 참아.",
-        "trigger": "small talk"
+        "trigger": "small talk",
+        "krMark": null
       },
       "pattern": {
         "form": "put up with ______",
@@ -25224,7 +25429,8 @@
       "sentence": {
         "en": "Let me check with the translator.",
         "kr": "번역가한테 확인해 볼게.",
-        "trigger": "translator"
+        "trigger": "translator",
+        "krMark": "번역가한테 [확인해] 볼게."
       },
       "pattern": {
         "form": "check with ______",
@@ -25346,7 +25552,8 @@
       "sentence": {
         "en": "Stick with the basics for now.",
         "kr": "지금은 기본에 충실해.",
-        "trigger": "basics"
+        "trigger": "basics",
+        "krMark": null
       },
       "pattern": {
         "form": "stick with ______",
@@ -25440,7 +25647,8 @@
       "sentence": {
         "en": "If it weren't for the bonus, I would quit.",
         "kr": "보너스가 아니었으면 그만뒀을 거야.",
-        "trigger": "bonus"
+        "trigger": "bonus",
+        "krMark": null
       },
       "pattern": {
         "form": "If it weren't for ______ , ______",
@@ -25595,7 +25803,8 @@
       "sentence": {
         "en": "Some interns like to keep in touch.",
         "kr": "인턴들끼리 연락하고 지내는 경우도 있어.",
-        "trigger": "intern"
+        "trigger": "intern",
+        "krMark": "인턴들끼리 [연락하고] 지내는 경우도 있어."
       },
       "pattern": {
         "form": "keep in touch",
@@ -25705,7 +25914,8 @@
       "sentence": {
         "en": "We usually eat out on Christmas Eve.",
         "kr": "우린 보통 크리스마스이브에 외식해.",
-        "trigger": "eve"
+        "trigger": "eve",
+        "krMark": "우린 보통 크리스마스이브에 [외식]해."
       },
       "pattern": {
         "form": "eat out",
@@ -25817,7 +26027,8 @@
       "sentence": {
         "en": "The inspection might take a while.",
         "kr": "점검이 시간이 좀 걸릴 수도 있어.",
-        "trigger": "inspection"
+        "trigger": "inspection",
+        "krMark": "점검이 [시간이] 좀 걸릴 수도 있어."
       },
       "pattern": {
         "form": "take a while",
@@ -25923,7 +26134,8 @@
       "sentence": {
         "en": "Do you happen to have a charger?",
         "kr": "혹시 충전기 있으세요?",
-        "trigger": "charger"
+        "trigger": "charger",
+        "krMark": "[혹시] 충전기 있으세요?"
       },
       "pattern": {
         "form": "Do you happen to ______ ?",
@@ -26034,7 +26246,8 @@
       "sentence": {
         "en": "Why don't I babysit them?",
         "kr": "내가 봐줄까?",
-        "trigger": "babysit"
+        "trigger": "babysit",
+        "krMark": "[내가] 봐줄까?"
       },
       "pattern": {
         "form": "Why don't I ______ ?",
@@ -26145,7 +26358,8 @@
       "sentence": {
         "en": "I can't tell the difference from the synthetic one.",
         "kr": "인조 제품하고 구별이 안 되는데.",
-        "trigger": "synthetic"
+        "trigger": "synthetic",
+        "krMark": "인조 제품하고 [구별]이 안 되는데."
       },
       "pattern": {
         "form": "tell the difference",
@@ -26260,7 +26474,8 @@
       "sentence": {
         "en": "I'll pull over to the curb.",
         "kr": "길가에 댈게.",
-        "trigger": "curb"
+        "trigger": "curb",
+        "krMark": null
       },
       "pattern": {
         "form": "pull over",
@@ -26370,7 +26585,8 @@
       "sentence": {
         "en": "We always make time for a chat.",
         "kr": "우린 늘 수다 떨 시간을 내.",
-        "trigger": "chat"
+        "trigger": "chat",
+        "krMark": "우린 늘 수다 떨 [시간을] 내."
       },
       "pattern": {
         "form": "make time (for ______)",
@@ -26487,7 +26703,8 @@
       "sentence": {
         "en": "I dressed up for the seminar.",
         "kr": "세미나가 있어서 차려입었어.",
-        "trigger": "seminar"
+        "trigger": "seminar",
+        "krMark": "세미나가 있어서 [차려입]었어."
       },
       "pattern": {
         "form": "dress up",
@@ -26601,7 +26818,8 @@
       "sentence": {
         "en": "Should you find anything abnormal, please report it.",
         "kr": "이상한 점을 발견하시면 알려주세요.",
-        "trigger": "abnormal"
+        "trigger": "abnormal",
+        "krMark": "이상한 점을 발견[하시면] 알려주세요."
       },
       "pattern": {
         "form": "Should you ______ , ______",
@@ -26740,7 +26958,8 @@
       "sentence": {
         "en": "He's picky, don't you think?",
         "kr": "까다롭네, 안 그래?",
-        "trigger": "picky"
+        "trigger": "picky",
+        "krMark": "까다롭네, [안 그래]?"
       },
       "pattern": {
         "form": "______ , don't you think ?",
@@ -26847,7 +27066,8 @@
       "sentence": {
         "en": "We're having Linda's pianist friends over for dinner.",
         "kr": "린다의 피아니스트 친구들을 저녁에 초대했어.",
-        "trigger": "pianist"
+        "trigger": "pianist",
+        "krMark": "린다의 피아니스트 친구들을 저녁에 [초대]했어."
       },
       "pattern": {
         "form": "have ______ over",
@@ -26993,7 +27213,8 @@
       "sentence": {
         "en": "Their lattes are the best by far.",
         "kr": "여기 라테가 단연 최고야.",
-        "trigger": "latte"
+        "trigger": "latte",
+        "krMark": "여기 라테가 [단연] 최고야."
       },
       "pattern": {
         "form": "by far",
@@ -27099,7 +27320,8 @@
       "sentence": {
         "en": "I almost passed out while jogging.",
         "kr": "조깅하다가 기절할 뻔했어.",
-        "trigger": "jogging"
+        "trigger": "jogging",
+        "krMark": "조깅하다가 [기절]할 뻔했어."
       },
       "pattern": {
         "form": "pass out",

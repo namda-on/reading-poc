@@ -521,6 +521,13 @@ function setProgress(step){
 // 카드 좌상단 태그 — 문항마다 레벨이 다르므로 해당 문항의 레벨을 쓴다
 function chatTag(item){ return `<div class="chat-tag">레벨 ${item.level}<span class="q">?</span></div>`; }
 
+// 2박자 타이틀 — 문장 뜻 안에서 표현 뜻만 초록으로(`[1]` 어휘와 같은 표기).
+// 못 찾은 문항(222 중 62)은 뜻을 초록 칩으로 따로 보여준다.
+function sentTitleHtml(s){
+  return s.krMark
+    ? escapeHtml(s.krMark).replace(/\[([^\]]+)\]/g, (m,g)=>`<span class="tgt">${g}</span>`)
+    : escapeHtml(s.kr);
+}
 // 한국어 번역 줄: [뜻]을 초록, (설명)줄은 muted
 function koHtml(line){
   const note=/^\s*\(/.test(line);
@@ -844,16 +851,19 @@ function renderPattern(){
     if(switching) return;
     switching=true;
     fillEl.querySelectorAll('.fill-word.frame-w').forEach(w=> w.classList.add('ok-pop'));
-    setTimeout(()=>{ fillEl.classList.add('fade-out'); bankEl.classList.add('fade-out'); }, 190);
+    setTimeout(()=>{ if(!fillEl.isConnected) return;
+      fillEl.classList.add('fade-out'); bankEl.classList.add('fade-out'); }, 190);
     setTimeout(()=>{
+      if(!fillEl.isConnected) return;          // 전환 중 화면이 바뀌면 새 화면을 건드리지 않는다
       phase=1; ans=[]; switching=false;
       bank=shuffle(tok.map((w,i)=>({id:i, text:w.toLowerCase(), placed:false, fr:flag[i]})));
       setProgress(2);
-      el('koLine').textContent=s.kr;              // 표현 뜻 → 문장 뜻
+      el('koLine').innerHTML=sentTitleHtml(s);    // 표현 뜻 → 문장 뜻(표현 부분만 초록)
       el('koLine').classList.add('grow-in');
       el('sentKr').classList.add('hidden');
-      const m=el('meanLine'); m.classList.remove('hidden');
-      m.innerHTML=`<span class="rv-chip fr">${escapeHtml(pmean||'')}</span>`;
+      // 문장 뜻에서 표현 구간을 못 찾은 문항만 뜻을 칩으로 따로 보여준다
+      if(!s.krMark){ const m=el('meanLine'); m.classList.remove('hidden');
+        m.innerHTML=`<span class="rv-chip fr">${escapeHtml(pmean||'')}</span>`; }
       bankIn=true; renderAll(); bankIn=false;
       // 나간 방향과 겹치지 않게 pre-in 으로 한 프레임 눌러 두고 놓아 준다
       fillEl.classList.remove('fade-out'); fillEl.classList.add('pre-in');
@@ -998,13 +1008,14 @@ function renderExpand(){
     // 1박자 완료를 먼저 인정하고(놓은 프레임이 팝) 나서 나머지가 그 위로 자란다
     fillEl.querySelectorAll('.fill-word.frame-w').forEach(w=> w.classList.add('ok-pop'));
     setTimeout(()=>{
+      if(!fillEl.isConnected) return;          // 전환 중 화면이 바뀌면 새 화면을 건드리지 않는다
       phase=1; ans=[]; switching=false;
       bank=shuffle(slotIdx.map((ti,i)=>({id:i, text:tok[ti].toLowerCase(), placed:false})));
       setProgress(2);
-      el('koLine').textContent=s.kr;
+      el('koLine').innerHTML=sentTitleHtml(s);  // 표현 뜻 → 문장 뜻(표현 부분만 초록)
       el('koLine').classList.add('grow-in');
-      const m=el('meanLine'); m.classList.remove('hidden');
-      m.innerHTML=`<span class="rv-chip fr">${escapeHtml(pmean||'')}</span>`;
+      if(!s.krMark){ const m=el('meanLine'); m.classList.remove('hidden');
+        m.innerHTML=`<span class="rv-chip fr">${escapeHtml(pmean||'')}</span>`; }
       el('fillHint').classList.add('hidden');   // 2박자엔 지시문을 두지 않는다
       bankIn=true; renderAll(); bankIn=false;
     }, 300);
