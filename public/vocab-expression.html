@@ -240,6 +240,15 @@
   .start-card.alt-card { background:#ffffffd9; }
   /* 배열 지시문 — 데이터에 지시문 필드가 없어 종결부호로 유도한다 */
   .fill-hint { font-size:13px; color:#b3bfd0; font-weight:600; margin-top:8px; }
+  /* A 화면 오답노트 팁 — 표현을 못 떠올렸을 때(오답/표현 보기) 열리고, 이어지는
+     B 화면까지 남아 문장을 배열하는 동안 계속 보인다. 뱅크와 버튼 사이라 확인 버튼
+     바로 위에서 뜬다. */
+  .nb-tip { display:flex; align-items:center; gap:9px; background:#fdf3d8; border-radius:11px;
+    padding:9px 13px; margin-bottom:11px; font-size:13px; color:#8a6a1f; line-height:1.45;
+    animation:tipIn .26s ease both; }
+  .nb-tip::before { content:''; flex-shrink:0; width:6px; height:6px; border-radius:2px; background:#e0b64a; }
+  .nb-tip b { color:#6f5312; font-weight:800; margin-right:2px; }
+  @keyframes tipIn { from{ opacity:0; transform:translateY(5px);} to{ opacity:1; transform:none;} }
   /* [3] 미리 주어지는 슬롯 — '내가 놓은 것'과 시각적으로 갈려야 프레임 산출이 체감된다 */
   .fill-given { padding:6px 4px; font-size:17px; color:#9aa8bc; font-weight:600; }
   .fill-word.frame-w { background:#e3fbec; border-color:#8ed9ab; color:#22794a; font-weight:800; }
@@ -771,6 +780,23 @@ function patternPayoffHtml(item){
     </div>`;
 }
 
+// 오답노트 팁에 쓸 표현 표기 — `pattern.form`의 자리표시자를 걷어내 **인용 라벨**로 줄인다.
+// `feel like ______` → `feel like`, `put ______ on` → `put … on`(사이에 낀 자리는 남긴다).
+// 자리표시자를 품은 괄호는 통째로 뺀다(`come over (to ______)` → `come over`).
+function exprLabel(form){
+  const M='\u0001';
+  let x=String(form||'').replace(/_{2,}/g, M).replace(/~/g, M);
+  x=x.replace(new RegExp('\\s*\\([^)]*'+M+'[^)]*\\)','g'), '');
+  x=x.replace(new RegExp('^\\s*'+M+'\\s*'), '');
+  x=x.replace(new RegExp(M+'[\\s.?!,]*$'), '');
+  return x.split(M).join('…').replace(/\s+/g,' ').trim();
+}
+// A 화면에서 표현을 못 떠올렸을 때 여는 줄 — 표현과 그 뜻을 한 줄로 짚어 준다
+function nbTipHtml(item){
+  const p=item.pattern||{}, label=exprLabel(p.form)||(item.frame||[]).join(' … ');
+  const mean=(p.meaning||'').trim();
+  return `<b>${escapeHtml(label)}</b> : ${escapeHtml(mean)}`;
+}
 // 배열 지시문: 데이터에 해당 필드가 없어 종결부호로 유도한다
 // 종결부호는 flex 항목이라 그냥 두면 **부호만** 다음 줄로 떨어진다 — 마지막 칸과 묶어 함께 넘긴다
 function withPunct(parts, punct){
@@ -869,8 +895,9 @@ function renderPattern(){
     </div>
     <div class="stage-bottom" id="bottom">
       <div class="bank" id="bank"></div>
+      <div class="nb-tip hidden" id="nbTip"></div>
       <div class="arr-btns" id="arrBtns">
-        <button class="btn-ghost2" id="revealBtn"><span class="ic">✔</span>정답 보기</button>
+        <button class="btn-ghost2" id="revealBtn"><span class="ic">✔</span><span id="revealLabel">표현 보기</span></button>
         <button class="btn-confirm" id="confirmBtn" disabled>확인</button>
       </div>
     </div>`;
@@ -938,6 +965,7 @@ function renderPattern(){
       setProgress(2);
       el('koLine').innerHTML=sentTitleHtml(s);    // 표현 뜻 → 문장 뜻(표현 부분만 초록)
       el('koLine').classList.add('grow-in');
+      el('revealLabel').textContent='정답 보기'; el('revealBtn').disabled=false;
       el('sentKr').classList.add('hidden');
       // 문장 뜻에서 표현 구간을 못 찾은 문항만 뜻을 칩으로 따로 보여준다
       if(!s.krMark){ const m=el('meanLine'); m.classList.remove('hidden');
@@ -970,18 +998,30 @@ function renderPattern(){
     const target=(phase===0 ? frameIdx.map(i=>tok[i]) : tok).map(w=>w.toLowerCase()).join(' ');
     return ans.map(x=>x.text).join(' ')===target;
   }
+  // 1박자에서 표현을 못 떠올린 경우(오답 · 표현 보기) — 오답노트 팁을 열고 정답으로
+  // 교정한 뒤 2박자로 넘긴다. 팁은 2박자 내내 남아 문장을 배열하는 동안 계속 보인다.
+  function showTip(){
+    const tip=el('nbTip');
+    tip.innerHTML=nbTipHtml(item);
+    tip.classList.remove('hidden');
+  }
+  function fillFrame(){ ans=frameIdx.map(i=>({text:tok[i].toLowerCase(), placed:true, fr:true})); }
   el('confirmBtn').onclick=()=>{
     if(ans.length<need()) return;
     if(grade()) return phase===0 ? toPhase2() : finish();
     fillEl.querySelectorAll('.fill-word').forEach(w=>w.style.color='#e14b46');
+    if(phase===0) showTip();
     setTimeout(()=>{
-      if(phase===0){ ans=frameIdx.map(i=>({text:tok[i].toLowerCase(), placed:true, fr:true})); toPhase2(); }
+      if(phase===0){ fillFrame(); toPhase2(); }
       else finish();
     }, 700);
   };
   el('revealBtn').onclick=()=>{
-    if(phase===0){ ans=frameIdx.map(i=>({text:tok[i].toLowerCase(), placed:true, fr:true})); renderFill(); return toPhase2(); }
-    finish();
+    if(phase===1) return finish();
+    if(switching) return;
+    showTip(); fillFrame(); renderFill();     // 오답과 같은 리듬 — 교정해 보여준 뒤 넘긴다
+    el('revealBtn').disabled=true;
+    setTimeout(()=>toPhase2(), 700);
   };
 
   renderAll();
@@ -1022,8 +1062,9 @@ function renderExpand(){
     </div>
     <div class="stage-bottom" id="bottom">
       <div class="bank" id="bank"></div>
+      <div class="nb-tip hidden" id="nbTip"></div>
       <div class="arr-btns" id="arrBtns">
-        <button class="btn-ghost2" id="revealBtn"><span class="ic">✔</span>정답 보기</button>
+        <button class="btn-ghost2" id="revealBtn"><span class="ic">✔</span><span id="revealLabel">표현 보기</span></button>
         <button class="btn-confirm" id="confirmBtn" disabled>확인</button>
       </div>
     </div>`;
@@ -1094,6 +1135,7 @@ function renderExpand(){
       setProgress(2);
       el('koLine').innerHTML=sentTitleHtml(s);  // 표현 뜻 → 문장 뜻(표현 부분만 초록)
       el('koLine').classList.add('grow-in');
+      el('revealLabel').textContent='정답 보기'; el('revealBtn').disabled=false;
       if(!s.krMark){ const m=el('meanLine'); m.classList.remove('hidden');
         m.innerHTML=`<span class="rv-chip fr">${escapeHtml(pmean||'')}</span>`; }
       el('fillHint').classList.add('hidden');   // 2박자엔 지시문을 두지 않는다
@@ -1120,18 +1162,30 @@ function renderExpand(){
     const target=(phase===0 ? frameIdx : slotIdx).map(i=>tok[i].toLowerCase()).join(' ');
     return ans.map(x=>x.text).join(' ')===target;
   }
+  // 1박자에서 표현을 못 떠올린 경우(오답 · 표현 보기) — 오답노트 팁을 열고 정답으로
+  // 교정한 뒤 2박자로 넘긴다. 팁은 2박자 내내 남아 문장을 배열하는 동안 계속 보인다.
+  function showTip(){
+    const tip=el('nbTip');
+    tip.innerHTML=nbTipHtml(item);
+    tip.classList.remove('hidden');
+  }
+  function fillFrame(){ ans=frameIdx.map(i=>({text:tok[i].toLowerCase(), placed:true, fr:true})); }
   el('confirmBtn').onclick=()=>{
     if(ans.length<need()) return;
     if(grade()) return phase===0 ? toPhase2() : finish();
     fillEl.querySelectorAll('.fill-word').forEach(w=>w.style.color='#e14b46');
+    if(phase===0) showTip();
     setTimeout(()=>{
-      if(phase===0){ ans=frameIdx.map(i=>({text:tok[i].toLowerCase(), placed:true, fr:true})); toPhase2(); }
+      if(phase===0){ fillFrame(); toPhase2(); }
       else finish();
     }, 700);
   };
   el('revealBtn').onclick=()=>{
-    if(phase===0){ ans=frameIdx.map(i=>({text:tok[i].toLowerCase(), placed:true, fr:true})); renderFill(); return toPhase2(); }
-    finish();
+    if(phase===1) return finish();
+    if(switching) return;
+    showTip(); fillFrame(); renderFill();     // 오답과 같은 리듬 — 교정해 보여준 뒤 넘긴다
+    el('revealBtn').disabled=true;
+    setTimeout(()=>toPhase2(), 700);
   };
 
   renderAll();
