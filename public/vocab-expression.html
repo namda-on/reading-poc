@@ -966,6 +966,7 @@ function renderPattern(){
       el('koLine').innerHTML=sentTitleHtml(s);    // 표현 뜻 → 문장 뜻(표현 부분만 초록)
       el('koLine').classList.add('grow-in');
       el('revealLabel').textContent='정답 보기'; el('revealBtn').disabled=false;
+      el('nbTip').classList.add('hidden');       // 팁은 1박자의 것이다 — 함께 닫는다
       el('sentKr').classList.add('hidden');
       // 문장 뜻에서 표현 구간을 못 찾은 문항만 뜻을 칩으로 따로 보여준다
       if(!s.krMark){ const m=el('meanLine'); m.classList.remove('hidden');
@@ -1005,23 +1006,20 @@ function renderPattern(){
     tip.innerHTML=nbTipHtml(item);
     tip.classList.remove('hidden');
   }
-  function fillFrame(){ ans=frameIdx.map(i=>({text:tok[i].toLowerCase(), placed:true, fr:true})); }
+  function clearLine(){ ans.forEach(x=>{ x.placed=false; }); ans=[]; renderAll(); }
   el('confirmBtn').onclick=()=>{
     if(ans.length<need()) return;
     if(grade()) return phase===0 ? toPhase2() : finish();
     fillEl.querySelectorAll('.fill-word').forEach(w=>w.style.color='#e14b46');
-    if(phase===0) showTip();
-    setTimeout(()=>{
-      if(phase===0){ fillFrame(); toPhase2(); }
-      else finish();
-    }, 700);
+    if(phase===1) return void setTimeout(finish, 700);
+    // 1박자는 대신 채워 주지 않는다 — 팁을 열고 줄을 비워 **직접 다시 배열**하게 한다.
+    // 표현을 스스로 놓아야 넘어가므로, 못 떠올린 경우에도 결국 손으로 한 번은 만든다.
+    showTip();
+    setTimeout(()=>{ if(fillEl.isConnected) clearLine(); }, 700);
   };
   el('revealBtn').onclick=()=>{
     if(phase===1) return finish();
-    if(switching) return;
-    showTip(); fillFrame(); renderFill();     // 오답과 같은 리듬 — 교정해 보여준 뒤 넘긴다
-    el('revealBtn').disabled=true;
-    setTimeout(()=>toPhase2(), 700);
+    showTip(); clearLine();                   // 오답을 확인했을 때와 같다 — 팁을 열고 다시 배열
   };
 
   renderAll();
@@ -1136,6 +1134,7 @@ function renderExpand(){
       el('koLine').innerHTML=sentTitleHtml(s);  // 표현 뜻 → 문장 뜻(표현 부분만 초록)
       el('koLine').classList.add('grow-in');
       el('revealLabel').textContent='정답 보기'; el('revealBtn').disabled=false;
+      el('nbTip').classList.add('hidden');       // 팁은 1박자의 것이다 — 함께 닫는다
       if(!s.krMark){ const m=el('meanLine'); m.classList.remove('hidden');
         m.innerHTML=`<span class="rv-chip fr">${escapeHtml(pmean||'')}</span>`; }
       el('fillHint').classList.add('hidden');   // 2박자엔 지시문을 두지 않는다
@@ -1169,23 +1168,20 @@ function renderExpand(){
     tip.innerHTML=nbTipHtml(item);
     tip.classList.remove('hidden');
   }
-  function fillFrame(){ ans=frameIdx.map(i=>({text:tok[i].toLowerCase(), placed:true, fr:true})); }
+  function clearLine(){ ans.forEach(x=>{ x.placed=false; }); ans=[]; renderAll(); }
   el('confirmBtn').onclick=()=>{
     if(ans.length<need()) return;
     if(grade()) return phase===0 ? toPhase2() : finish();
     fillEl.querySelectorAll('.fill-word').forEach(w=>w.style.color='#e14b46');
-    if(phase===0) showTip();
-    setTimeout(()=>{
-      if(phase===0){ fillFrame(); toPhase2(); }
-      else finish();
-    }, 700);
+    if(phase===1) return void setTimeout(finish, 700);
+    // 1박자는 대신 채워 주지 않는다 — 팁을 열고 줄을 비워 **직접 다시 배열**하게 한다.
+    // 표현을 스스로 놓아야 넘어가므로, 못 떠올린 경우에도 결국 손으로 한 번은 만든다.
+    showTip();
+    setTimeout(()=>{ if(fillEl.isConnected) clearLine(); }, 700);
   };
   el('revealBtn').onclick=()=>{
     if(phase===1) return finish();
-    if(switching) return;
-    showTip(); fillFrame(); renderFill();     // 오답과 같은 리듬 — 교정해 보여준 뒤 넘긴다
-    el('revealBtn').disabled=true;
-    setTimeout(()=>toPhase2(), 700);
+    showTip(); clearLine();                   // 오답을 확인했을 때와 같다 — 팁을 열고 다시 배열
   };
 
   renderAll();
