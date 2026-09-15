@@ -179,10 +179,17 @@
     font-size:16px; font-weight:800; color:#b6c3d4; letter-spacing:2px; }
   /* [4] 말해보기 — 배운 표현으로 새 문장 만들기 */
   .sp-q { font-size:13.5px; font-weight:700; color:#5b7c93; }
-  /* [4] 재료 — 표현은 여기 없다. 답의 범위만 닫아 두고 조합은 유저가 한다 */
-  .sp-mat { display:flex; flex-wrap:wrap; gap:7px; margin-top:14px; }
-  .sp-mat .mat { background:#eef2f8; color:#7d8fa6; border-radius:8px; padding:5px 11px; font-size:15px; font-weight:700; }
-  .sp-mat .lbl { font-size:12.5px; font-weight:700; color:#b3bfd0; align-self:center; margin-right:2px; }
+  /* [4] 재료 — 표현은 여기 없다. 답의 범위만 닫아 두고 조합은 유저가 한다.
+     입력칸 **아래**에 둔다: 읽는 순서가 `뜻 → 입력 → 재료`가 되고, 타이핑 중
+     시선이 머무는 곳 바로 옆에서 남은 낱말을 볼 수 있다(위에 있으면 눈이 오간다). */
+  .sp-mat { display:flex; flex-wrap:wrap; align-items:center; gap:7px; margin-top:12px; }
+  .sp-mat .mat { background:#eef2f8; color:#7d8fa6; border-radius:8px; padding:5px 11px; font-size:15px; font-weight:700;
+    transition:opacity .18s ease, background .18s ease; }
+  /* 쓴 낱말은 죽인다 — 배열 화면의 `.tile.placed` 와 같은 규약. 이 줄의 용도는
+     '무엇을 썼나'가 아니라 **'아직 뭐가 남았나'**이므로 남은 것만 진하게 둔다. */
+  .sp-mat .mat.used { background:#f4f6fa; color:#c3cede; opacity:.6; }
+  .sp-mat .mat.used::after { content:'✓'; margin-left:5px; font-size:11px; color:#9ec7ad; }
+  .sp-mat .lbl { font-size:12.5px; font-weight:700; color:#b3bfd0; margin-right:2px; }
   .sp-in { background:#eaf1fb; border-radius:14px; padding:12px 14px; margin-top:14px; }
   /* 정답 후 입력칸을 굳힌 줄 — 프레임만 초록이라 무엇을 썼는지가 글자로 보인다 */
   .sp-said { font-size:17px; font-weight:700; color:#2f3e52; line-height:1.45; padding:2px 2px; }
@@ -1151,9 +1158,9 @@ function renderSpeak(){
       <div class="chat-card" id="card">
         <div class="chat-tag rv">말해보기</div>
         ${head}
-        <div class="sp-mat"><span class="lbl">함께 쓸 낱말</span>${mats.map(w=>`<span class="mat">${escapeHtml(w)}</span>`).join('')}</div>
         <div class="sp-in"><textarea class="sit-input" id="spIn" rows="1" autocomplete="off"
           autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Type in English"></textarea></div>
+        <div class="sp-mat" id="spMat"><span class="lbl">함께 쓸 낱말</span>${mats.map(w=>`<span class="mat" data-w="${escapeHtml(w.toLowerCase().replace(/[^a-z0-9']/g,''))}">${escapeHtml(w)}</span>`).join('')}</div>
         <div class="wrong-box hidden" id="wrongBox"></div>
         <div class="reveal-note hidden" id="revealNote"></div>
         <div id="payoffBox"></div>
@@ -1171,10 +1178,25 @@ function renderSpeak(){
 
   const inp=el('spIn'), wrongBox=el('wrongBox');
   setTimeout(()=>inp.focus(), 80);
+  // 입력에 쓴 낱말만큼 칩을 소진시킨다. 같은 낱말이 둘이면 둘 다 써야 둘 다 꺼진다.
+  function syncMats(){
+    const left=new Map();
+    inp.value.split(/\s+/).forEach(w=>{
+      const k=w.toLowerCase().replace(/[^a-z0-9']/g,'');
+      if(k) left.set(k, (left.get(k)||0)+1);
+    });
+    el('spMat').querySelectorAll('.mat').forEach(m=>{
+      const k=m.dataset.w, n=left.get(k)||0;
+      const use = n>0;
+      if(use) left.set(k, n-1);
+      m.classList.toggle('used', use);
+    });
+  }
   inp.addEventListener('input', ()=>{
     inp.style.height='auto'; inp.style.height=inp.scrollHeight+'px';
     el('okBtn').disabled = !inp.value.trim() || done;
     if(!done) wrongBox.classList.add('hidden');
+    syncMats();
   });
 
   function finish(exact){
@@ -1189,6 +1211,7 @@ function renderSpeak(){
     // 입력칸을 완성 문장으로 굳힌다 — 프레임만 초록이라 무엇을 썼는지가 글자로 보인다
     const inBox=el('spIn').parentElement;
     inBox.innerHTML=`<div class="sp-said">${frameLine(said, exact?t.segs:null, item.frame)}</div>`;
+    el('spMat').classList.add('hidden');
     const p=item.pattern||{}, form=(p.form||'').trim(), pmean=(p.meaning||'').trim();
     // 효용감의 근거는 문구가 아니라 **같은 초록 조각이 두 문장에 반복되는 것**이다.
     // 학습 문장([2]·[3]에서 만든 것)과 방금 만든 문장을 나란히 둔다.
