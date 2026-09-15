@@ -18,11 +18,12 @@
   .topbar { display:flex; align-items:center; gap:10px; padding:12px 14px 8px; flex-shrink:0; }
   .icon-btn { width:32px; height:32px; border:none; background:transparent; color:#fff; font-size:22px; cursor:pointer; }
   .trophy { width:34px; height:34px; border-radius:50%; background:#4b83d6; color:#fff; display:flex; align-items:center; justify-content:center; font-size:17px; box-shadow:0 2px 6px rgba(30,60,110,.25); flex-shrink:0; }
-  .progress { flex:1; position:relative; }
+  .progress { flex:1; display:flex; align-items:center; gap:10px; }
+  .bar-wrap { flex:1; position:relative; }
   .bar-track { height:11px; border-radius:7px; background:rgba(255,255,255,.45); overflow:hidden; }
   .bar-fill { height:100%; background:#6f9bd6; width:0; transition:width .35s ease; border-radius:7px; }
   .bar-star { position:absolute; top:50%; transform:translate(-50%,-50%); font-size:15px; transition:left .35s ease; }
-  .bar-count { position:absolute; top:-14px; font-size:11px; font-weight:800; color:#3a6bb0; transform:translateX(-50%); transition:left .35s ease; }
+  .bar-count { font-size:12px; font-weight:800; color:#3a6bb0; flex-shrink:0; }
   .gear { color:#5b83b8; }
 
   /* 홈 */
@@ -118,6 +119,15 @@
   .vtool.mic .ic { background:#eef1fb; color:#5b83b8; }
   .vtool:disabled { opacity:.85; cursor:default; }
 
+  /* 정답 후 카드 안 액션 줄 — 다시 듣기·다시 말하기처럼 **방금 푼 문장에 거는**
+     동작이므로 하단이 아니라 그 문장이 있는 카드 안에 둔다(전부 비작동 표시). */
+  .pf-actions { display:flex; align-items:flex-start; gap:4px; border-top:1px dashed #dde5f0; margin-top:16px; padding-top:14px; }
+  .pf-act { flex:1; display:flex; flex-direction:column; align-items:center; gap:6px; background:none; border:none;
+    color:#9aa8bc; font-size:10.5px; font-weight:700; line-height:1.3; text-align:center; }
+  .pf-act .ic { width:34px; height:34px; border-radius:11px; background:#f0f3f9; display:flex; align-items:center; justify-content:center; font-size:16px; }
+  .pf-more { display:flex; justify-content:center; align-items:center; gap:3px; width:100%; background:none; border:none;
+    margin-top:12px; color:#b3bfd0; font-size:12px; font-weight:700; }
+
   /* 어휘 하단 — 정답 후: 탭 + 3버튼 */
   .vtabs { display:flex; justify-content:space-between; padding:6px 2px 12px; border-bottom:1px solid #cfdcec; margin-bottom:12px; }
   .vtab { flex:1; display:flex; flex-direction:column; align-items:center; gap:5px; background:none; border:none; cursor:pointer; color:#9aa8bc; font-size:10.5px; font-weight:700; }
@@ -130,11 +140,15 @@
   .vbtn.b1 { background:linear-gradient(#b39cf2,#9b7ef0); }
   .vbtn.b2 { background:linear-gradient(#9b8cf0,#7d6cf0); }
   .vbtn.b3 { background:linear-gradient(#6f8ef0,#5b6ef0); }
+  /* 다음으로 가는 길은 하나다 — 부가 동작은 카드 안 액션 줄이 맡는다 */
+  .vbtn.wide { flex-direction:row; gap:8px; padding:17px 6px; font-size:16px; }
 
-  /* 배열 정답 후 — 카드 안 '학습 정보' 섹션 (앱 구현 구조와 동일) */
-  /* 카드의 두 톤 그라데이션은 높이 비율로 갈리므로, 학습 정보는 카드 폭을 꽉 채운
-     흰 블록으로 깔아 정답 카드의 초록 영역과 경계가 또렷하게 갈리도록 한다 */
-  .payoff { background:#fff; margin:20px -20px -16px; padding:16px 20px 22px; border-radius:0 0 22px 22px; }
+  /* 정답 후 '학습 정보' — 문제 카드 **밖의 별도 카드**다. 문제 카드는 방금 푼
+     문장의 것이고, 학습 정보는 그 문장이 아니라 **표현**의 것이라 소유가 다르다.
+     좌상단 탭이 그 소유를 이름으로 밝힌다. */
+  .payoff { position:relative; background:#fff; border-radius:22px; box-shadow:0 6px 18px rgba(30,60,110,.13);
+    margin:32px 0 6px; padding:20px 20px 22px; }
+  .pf-div { height:1px; background:#eaeff6; margin:16px 0 0; }
   .pf-label { font-size:11.5px; font-weight:800; color:#9aa8bc; letter-spacing:-.02em; }
   .pf-top { display:flex; align-items:center; gap:5px; font-size:14px; font-weight:800; color:#2f3e52; margin-top:8px; }
   .pf-form { font-size:20px; font-weight:800; color:var(--green); line-height:1.4; margin-top:10px; }
@@ -180,9 +194,9 @@
   /* [4] 말해보기 — 배운 표현으로 새 문장 만들기 */
   .sp-q { font-size:13.5px; font-weight:700; color:#5b7c93; }
   /* [4] 재료 — 표현은 여기 없다. 답의 범위만 닫아 두고 조합은 유저가 한다.
-     입력칸 **아래**에 둔다: 읽는 순서가 `뜻 → 입력 → 재료`가 되고, 타이핑 중
-     시선이 머무는 곳 바로 옆에서 남은 낱말을 볼 수 있다(위에 있으면 눈이 오간다). */
-  .sp-mat { display:flex; flex-wrap:wrap; align-items:center; gap:7px; margin-top:12px; }
+     답 자리(슬롯) **위**에 둔다 — 아래는 키보드가 올라오는 자리이고, 읽는 순서가
+     `뜻 → 재료 → 그 재료를 놓을 자리`가 되어야 조립하는 화면으로 읽힌다. */
+  .sp-mat { display:flex; flex-wrap:wrap; align-items:center; gap:7px; margin-top:14px; }
   .sp-mat .mat { background:#eef2f8; color:#7d8fa6; border-radius:8px; padding:5px 11px; font-size:15px; font-weight:700;
     transition:opacity .18s ease, background .18s ease; }
   /* 쓴 낱말은 죽인다 — 배열 화면의 `.tile.placed` 와 같은 규약. 이 줄의 용도는
@@ -190,9 +204,25 @@
   .sp-mat .mat.used { background:#f4f6fa; color:#c3cede; opacity:.6; }
   .sp-mat .mat.used::after { content:'✓'; margin-left:5px; font-size:11px; color:#9ec7ad; }
   .sp-mat .lbl { font-size:12.5px; font-weight:700; color:#b3bfd0; margin-right:2px; }
-  .sp-in { background:#eaf1fb; border-radius:14px; padding:12px 14px; margin-top:14px; }
-  /* 정답 후 입력칸을 굳힌 줄 — 프레임만 초록이라 무엇을 썼는지가 글자로 보인다 */
-  .sp-said { font-size:17px; font-weight:700; color:#2f3e52; line-height:1.45; padding:2px 2px; }
+  /* [4] 답 자리 — 한 줄 입력칸이 아니라 **낱말 한 칸씩**이다. 답의 낱말 수는
+     재료+표현으로 이미 정해져 있으므로 칸을 그려도 새로 새는 정보가 없고,
+     대신 '몇 낱말을 어디까지 놓았나'가 눈에 보인다. 실제 타이핑은 칸 위에 깔린
+     투명 입력이 받는다(모바일 키보드·데스크톱 타이핑 모두 그대로 동작). */
+  .sp-in { position:relative; margin-top:12px; min-height:42px; }
+  .sp-slots { display:flex; flex-wrap:wrap; gap:8px; }
+  .sp-slot { min-width:56px; min-height:42px; background:#eaf1fb; border:1.5px solid #dce7f6; border-radius:10px;
+    display:inline-flex; align-items:center; justify-content:center; padding:0 11px; font-size:17px; font-weight:700; color:#2f3e52; }
+  .sp-slot.cur { border-color:#7ea9e0; background:#fff; }
+  .sp-slot.cur::after { content:''; width:2px; height:20px; background:#5b8fd6; margin-left:2px; animation:caret 1.05s steps(1) infinite; }
+  @keyframes caret { 50% { opacity:0; } }
+  /* 칸보다 많이 쓰면 넘친 칸을 따로 표시한다 — 재료를 더 쓴 것이 바로 보인다 */
+  .sp-slot.extra { background:#fdeff0; border-color:#f3cdd0; }
+  .sp-catch { position:absolute; inset:0; width:100%; height:100%; opacity:0; border:none; padding:0; background:none; font-size:16px; }
+  /* 정답 후 — 완성 문장을 낱말 타일로 굳힌다(프레임만 초록) */
+  .sp-tiles { display:flex; flex-wrap:wrap; gap:8px; }
+  .sp-tile { background:#eaf1fb; border:1.5px solid #dce7f6; border-radius:10px; padding:9px 12px;
+    font-size:17px; font-weight:700; color:#2f3e52; }
+  .sp-tile.fr { background:#e3fbec; border-color:#8ed9ab; color:#22794a; font-weight:800; }
   .sp-q.sp-after { margin-top:18px; }
   .sp-kr { font-size:20px; font-weight:800; color:#2f3e52; line-height:1.4; margin-top:5px; }
   .start-card.alt-card { background:#ffffffd9; }
@@ -319,7 +349,7 @@
   <div class="topbar hidden" id="topbar">
     <button class="icon-btn" id="backBtn" aria-label="뒤로">‹</button>
     <div class="trophy">🏆</div>
-    <div class="progress"><div class="bar-count" id="barCount">0/0</div><div class="bar-track"><div class="bar-fill" id="barFill"></div></div><span class="bar-star" id="barStar">⭐</span></div>
+    <div class="progress"><div class="bar-wrap"><div class="bar-track"><div class="bar-fill" id="barFill"></div></div><span class="bar-star" id="barStar">⭐</span></div><div class="bar-count" id="barCount">0 / 0</div></div>
     <button class="icon-btn gear" id="gearBtn" aria-label="설정">⚙</button>
   </div>
 
@@ -525,7 +555,7 @@ function setProgress(step){
   const total=stepTotal||sessionItems.length*itemSteps(), pct=Math.min(100, stepDone/total*100);
   el('barFill').style.width=pct+'%';
   el('barStar').style.left=pct+'%';
-  const bc=el('barCount'); bc.textContent=`${itemIdx+1}/${sessionItems.length}`; bc.style.left=pct+'%';
+  el('barCount').textContent=`${itemIdx+1} / ${sessionItems.length}`;
 }
 // 카드 좌상단 태그 — 문항마다 레벨이 다르므로 해당 문항의 레벨을 쓴다
 function chatTag(item){ return `<div class="chat-tag">레벨 ${item.level}<span class="q">?</span></div>`; }
@@ -587,7 +617,7 @@ function renderVocab(){
   stage.innerHTML=`
     <div class="stage-scroll">
       <div class="chat-card" id="card">
-        ${chatTag(item)}<div class="chat-badge new">New</div>
+        ${chatTag(item)}<div class="chat-badge new">NEW</div>
         ${ko}
         <div class="wrong-box hidden" id="wrongBox"></div>
         ${en}
@@ -613,20 +643,8 @@ function renderVocab(){
     wrongBox.classList.add('hidden');
     el('revealNote').classList.add('hidden');
     if(!card.querySelector('.check-mark')){ const c=document.createElement('div'); c.className='check-mark'; c.textContent='✓'; card.appendChild(c); }
-    // 하단: (예고) + 탭 + 3버튼
-    el('bottom').innerHTML=`
-      <div class="vtabs">
-        <button class="vtab"><span class="ic">💬</span>다른 예문</button>
-        <button class="vtab"><span class="ic badge" data-n="1">📝</span>오답 노트</button>
-        <button class="vtab"><span class="ic">🗣</span>말해보기</button>
-        <button class="vtab"><span class="ic">🔖</span>북마크</button>
-        <button class="vtab"><span class="ic">📊</span>발음 진단</button>
-      </div>
-      <div class="vbtns">
-        <button class="vbtn b1" disabled><span class="ic">🐢</span>듣기평가 속도</button>
-        <button class="vbtn b2" disabled><span class="ic">🔊</span>다시 듣기</button>
-        <button class="vbtn b3" id="nextBtn"><span class="ic">▶</span>다음 문제</button>
-      </div>`;
+    card.insertAdjacentHTML('beforeend', resultActionsHtml());
+    el('bottom').innerHTML=arrangeBottomHtml('다음 문제');
     el('nextBtn').onclick=patternStep;
   }
   function onInput(){
@@ -697,10 +715,10 @@ function patternPayoffHtml(item){
   const frameKr = pmean ? `<div class="pf-mean">${escapeHtml(pmean)}</div>` : '';
   const desc = pdesc ? `<div class="pf-desc">${escapeHtml(pdesc)}</div>` : '';
   // 응용 예문은 구분 없이 전부 초록 — 내부자 테스트 기준
-  const exs = sibs.length ? `<div class="pf-sub"><span class="ic">ⓘ</span>단어만 바꿔서 이렇게도 말할 수 있어요</div>`
+  const exs = sibs.length ? `<div class="pf-div"></div><div class="pf-sub"><span class="ic">ⓘ</span>단어만 바꿔서 이렇게도 말할 수 있어요</div>`
     + sibs.map(x=>`<div class="pf-ex"><div class="pf-ex-en">${escapeHtml(x.en)}</div><div class="pf-ex-kr">${escapeHtml(x.kr)}</div></div>`).join('') : '';
   return `<div class="payoff">
-      <div class="pf-label">학습 정보</div>
+      <div class="chat-tag rv">학습 정보</div>
       <div class="pf-top"><span class="ic">💡</span>새로운 표현을 배웠어요</div>
       ${frameEn}${frameKr}${desc}${exs}
     </div>`;
@@ -716,20 +734,23 @@ function withPunct(parts, punct){
 }
 
 // ── 배열 화면 공용 ────────────────────────────────────────────────────────────
+// 정답 후 하단은 **다음으로 가는 버튼 하나**다. 여러 버튼을 늘어놓으면 무엇이
+// 다음 단계인지가 흐려진다 — 부가 동작은 카드 안 액션 줄로 내린다.
 function arrangeBottomHtml(nextLabel){
   return `
-      <div class="vtabs">
-        <button class="vtab"><span class="ic">🔍</span>사전 검색</button>
-        <button class="vtab"><span class="ic badge" data-n="1">📝</span>오답 노트</button>
-        <button class="vtab"><span class="ic">🗣</span>말해보기</button>
-        <button class="vtab"><span class="ic">🔖</span>북마크</button>
-        <button class="vtab"><span class="ic">📊</span>발음 진단</button>
-      </div>
       <div class="vbtns">
-        <button class="vbtn b1" disabled><span class="ic">📘</span>표현 사전</button>
-        <button class="vbtn b2" disabled><span class="ic">🔊</span>다시 듣기</button>
-        <button class="vbtn b3" id="nextBtn"><span class="ic">▶</span>${nextLabel}</button>
+        <button class="vbtn b3 wide" id="nextBtn"><span class="ic">▶</span>${nextLabel}</button>
       </div>`;
+}
+// 방금 푼 문장에 거는 동작들 — 카드 안, 점선 아래에 붙는다(비작동)
+function resultActionsHtml(){
+  return `<div class="pf-actions">
+      <button class="pf-act" disabled><span class="ic">🔊</span>다시 듣기</button>
+      <button class="pf-act" disabled><span class="ic">🐢</span>듣기 평가 속도</button>
+      <button class="pf-act" disabled><span class="ic">🎤</span>다시 말하기</button>
+      <button class="pf-act" disabled><span class="ic">📊</span>발음 진단</button>
+    </div>
+    <button class="pf-more" disabled>더보기<span>⌄</span></button>`;
 }
 // 문항의 마지막 단계에서 다음 문항([5] 구간)으로 넘긴다
 function advanceItem(){
@@ -789,14 +810,14 @@ function renderPattern(){
   stage.innerHTML=`
     <div class="stage-scroll">
       <div class="chat-card" id="card">
-        ${chatTag(item)}<div class="chat-badge new">New</div>
+        ${chatTag(item)}<div class="chat-badge new">NEW</div>
         <div class="chat-ko" id="koLine"><span class="tgt">${escapeHtml(pmean||s.kr)}</span></div>
         <div class="expand-mean hidden" id="meanLine"></div>
         <div class="fill" id="fill"></div>
         <div class="sent-kr" id="sentKr">${escapeHtml(s.kr)}</div>
-        <div id="payoffBox"></div>
         <div class="mic-float" id="micFloat">🎤</div>
       </div>
+      <div id="payoffBox"></div>
     </div>
     <div class="stage-bottom" id="bottom">
       <div class="bank" id="bank"></div>
@@ -891,6 +912,7 @@ function renderPattern(){
     ans=tok.map((w,i)=>({text:w, placed:true, fr:flag[i]}));   // 원문 대소문자로 교정
     renderFill();
     el('micFloat').classList.add('hidden');
+    el('card').insertAdjacentHTML('beforeend', resultActionsHtml());
     el('payoffBox').innerHTML=patternPayoffHtml(item);
     el('bottom').innerHTML=arrangeBottomHtml('다음 단계');
     el('nextBtn').onclick=renderSpeak;
@@ -940,14 +962,14 @@ function renderExpand(){
   stage.innerHTML=`
     <div class="stage-scroll">
       <div class="chat-card" id="card">
-        ${chatTag(item)}<div class="chat-badge new">New</div>
+        ${chatTag(item)}<div class="chat-badge new">NEW</div>
         <div class="chat-ko" id="koLine"><span class="tgt">${escapeHtml(pmean||s.kr)}</span></div>
         <div class="expand-mean hidden" id="meanLine"></div>
         <div class="fill" id="fill"></div>
         <div class="fill-hint" id="fillHint">표현을 먼저 만들어 보세요</div>
-        <div id="payoffBox"></div>
         <div class="mic-float" id="micFloat">🎤</div>
       </div>
+      <div id="payoffBox"></div>
     </div>
     <div class="stage-bottom" id="bottom">
       <div class="bank" id="bank"></div>
@@ -1039,6 +1061,7 @@ function renderExpand(){
     renderFill();
     el('fillHint').classList.add('hidden');
     el('micFloat').classList.add('hidden');
+    el('card').insertAdjacentHTML('beforeend', resultActionsHtml());
     el('payoffBox').innerHTML=patternPayoffHtml(item);
     el('bottom').innerHTML=arrangeBottomHtml('다음 단계');
     el('nextBtn').onclick=renderSpeak;
@@ -1097,6 +1120,21 @@ function frameLine(en, segs, frame){
     out=out.replace(re, m=>`<span class="tgt">${m}</span>`);
   });
   return out;
+}
+// 유저가 쓴 문장에서 어느 낱말이 프레임인지 — 조각을 순서대로 찾아 표시한다(굴절 허용)
+function frameWordFlags(words, frame){
+  const flags=words.map(()=>false);
+  const bare=w=>String(w).toLowerCase().replace(/[^a-z0-9']/g,'');
+  let from=0;
+  (frame||[]).forEach(lit=>{
+    const ws=lit.split(/\s+/).map(w=>bare(w)).filter(Boolean);
+    for(let i=from;i+ws.length<=words.length;i++){
+      const hit=ws.every((w,k)=>{ const c=bare(words[i+k]);
+        return c===w || ['s','es','ed','d','ing'].some(sfx=>c===w+sfx); });
+      if(hit){ ws.forEach((_,k)=>flags[i+k]=true); from=i+ws.length; break; }
+    }
+  });
+  return flags;
 }
 // 대상 문장 고르기. **난이도가 튀지 않는 것**이 가장 중요하다 — 방금 배운 표현인데
 // 문장 구조까지 새것이면 표현을 쓰는 과제가 아니라 새 문법을 푸는 과제가 된다.
@@ -1158,13 +1196,13 @@ function renderSpeak(){
       <div class="chat-card" id="card">
         <div class="chat-tag rv">말해보기</div>
         ${head}
-        <div class="sp-in"><textarea class="sit-input" id="spIn" rows="1" autocomplete="off"
-          autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Type in English"></textarea></div>
         <div class="sp-mat" id="spMat"><span class="lbl">함께 쓸 낱말</span>${mats.map(w=>`<span class="mat" data-w="${escapeHtml(w.toLowerCase().replace(/[^a-z0-9']/g,''))}">${escapeHtml(w)}</span>`).join('')}</div>
+        <div class="sp-in" id="spIn"><div class="sp-slots" id="spSlots"></div><input class="sp-catch" id="spCatch" type="text"
+          autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done" /></div>
         <div class="wrong-box hidden" id="wrongBox"></div>
         <div class="reveal-note hidden" id="revealNote"></div>
-        <div id="payoffBox"></div>
       </div>
+      <div id="payoffBox"></div>
     </div>
     <div class="stage-bottom" id="bottom">
       <div class="vtools" id="vtools">
@@ -1172,12 +1210,25 @@ function renderSpeak(){
         <button class="vtool mic" disabled><span class="ic">🎤</span><span>음성 모드</span></button>
       </div>
       <div class="arr-btns" style="margin-top:12px">
-        <button class="btn-confirm" id="okBtn" disabled>말하기</button>
+        <button class="btn-confirm" id="okBtn" disabled>확인</button>
       </div>
     </div>`;
 
-  const inp=el('spIn'), wrongBox=el('wrongBox');
+  const inp=el('spCatch'), wrongBox=el('wrongBox');
   setTimeout(()=>inp.focus(), 80);
+  // 답 자리를 낱말 칸으로 그린다. 칸 수는 대상 문장의 낱말 수(= 재료 + 표현)이고,
+  // 그보다 많이 쓰면 넘친 칸을 덧붙여 표시한다.
+  function renderSlots(){
+    const ws=inp.value.split(' ');
+    const n=Math.max(tok.length, ws.length);
+    let h='';
+    for(let i=0;i<n;i++){
+      const cur=(i===ws.length-1 && !done) ? ' cur' : '';
+      h+=`<span class="sp-slot${cur}${i>=tok.length?' extra':''}">${escapeHtml(ws[i]||'')}</span>`;
+    }
+    el('spSlots').innerHTML=h;
+  }
+  renderSlots();
   // 입력에 쓴 낱말만큼 칩을 소진시킨다. 같은 낱말이 둘이면 둘 다 써야 둘 다 꺼진다.
   function syncMats(){
     const left=new Map();
@@ -1193,32 +1244,35 @@ function renderSpeak(){
     });
   }
   inp.addEventListener('input', ()=>{
-    inp.style.height='auto'; inp.style.height=inp.scrollHeight+'px';
     el('okBtn').disabled = !inp.value.trim() || done;
     if(!done) wrongBox.classList.add('hidden');
-    syncMats();
+    renderSlots(); syncMats();
   });
 
   function finish(exact){
     done=true;
     if(exact) inp.value=t.en;
-    inp.readOnly=true; el('okBtn').disabled=true;
+    inp.readOnly=true; inp.blur(); el('okBtn').disabled=true;
     el('card').classList.add('correct');
     if(!el('card').querySelector('.check-mark')){ const c=document.createElement('div'); c.className='check-mark'; c.textContent='✓'; el('card').appendChild(c); }
     const said=inp.value.trim();
     builtSet.add(t.en); made.push({en:said, kr:t.kr});
     wrongBox.classList.add('hidden'); el('revealNote').classList.add('hidden');
-    // 입력칸을 완성 문장으로 굳힌다 — 프레임만 초록이라 무엇을 썼는지가 글자로 보인다
-    const inBox=el('spIn').parentElement;
-    inBox.innerHTML=`<div class="sp-said">${frameLine(said, exact?t.segs:null, item.frame)}</div>`;
+    // 답 자리를 완성 문장으로 굳힌다 — 칸이 그대로 낱말 타일이 되고 프레임만 초록이라
+    // 내가 놓은 것 중 무엇이 방금 배운 표현인지가 눈에 남는다
+    const sw=said.split(/\s+/), sf=frameWordFlags(sw, item.frame);
+    el('spIn').innerHTML=`<div class="sp-tiles">${sw.map((w,i)=>
+      `<span class="sp-tile${sf[i]?' fr':''}">${escapeHtml(w)}</span>`).join('')}</div>`;
     el('spMat').classList.add('hidden');
+    el('card').insertAdjacentHTML('beforeend', resultActionsHtml());
     const p=item.pattern||{}, form=(p.form||'').trim(), pmean=(p.meaning||'').trim();
     // 효용감의 근거는 문구가 아니라 **같은 초록 조각이 두 문장에 반복되는 것**이다.
     // 학습 문장([2]·[3]에서 만든 것)과 방금 만든 문장을 나란히 둔다.
     el('payoffBox').innerHTML=`<div class="payoff">
-        <div class="pf-label">학습 정보</div>
+        <div class="chat-tag rv">학습 정보</div>
         ${form?`<div class="pf-form">${escapeHtml(form).replace(/_{2,}|~/g,'<span class="slot"></span>')}</div>`:''}
         ${pmean?`<div class="pf-mean">${escapeHtml(pmean)}</div>`:''}
+        <div class="pf-div"></div>
         <div class="pf-sub"><span class="ic">ⓘ</span>이 표현으로 만든 문장</div>
         <div class="pf-cmp"><div class="pf-cmp-en">${frameLine(item.sentence.en, item.baseSegs, item.frame)}</div>
           <div class="pf-cmp-kr">${escapeHtml(item.sentence.kr)}</div></div>
@@ -1320,9 +1374,9 @@ function renderSituation(target, pool){
         </div>
         <div id="sitAnswer"></div>
         <div class="sit-fb hidden" id="sitFb"></div>
-        <div id="sitDone"></div>
         ${sitOnly ? devPanel(target, choices, typing) : ''}
       </div>
+      <div id="sitDone"></div>
     </div>
     <div class="stage-bottom" id="bottom"></div>`;
 
@@ -1448,7 +1502,9 @@ function renderSituation(target, pool){
     const exact = norm(said)===norm(target.en);
     // `의미`는 **내가 말한 문장**의 뜻이다. 직접 입력에서 모범 답안과 다르면
     // 모범 답안의 한국어를 내 문장의 뜻으로 붙일 수 없다 — 따로 떼어 보여준다.
+    el('card').insertAdjacentHTML('beforeend', resultActionsHtml());
     el('sitDone').innerHTML=`<div class="payoff">
+        <div class="chat-tag rv">학습 정보</div>
         <div class="pf-ok"><span class="ic">✓</span>좋아요!</div>
         ${exact?`<div class="pf-label">의미</div>
         <div class="pf-mean big">${escapeHtml(target.kr)}</div>`:''}
