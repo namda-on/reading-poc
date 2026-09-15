@@ -409,7 +409,7 @@ let spkMode=(()=>{ try{ return localStorage.getItem(SPK_KEY)==='en'?'en':'kr'; }
 function setSpkMode(m){
   spkMode = m==='en' ? 'en' : 'kr';
   try{ localStorage.setItem(SPK_KEY, spkMode); }catch(e){}
-  renderSitOption();
+  renderSitOption(); applyStepOption();
 }
 // [4] 말해보기의 **방식**(자극 언어와는 직교하는 축). 모두 단계 수가 같고 채점 규칙이
 // 같으며 새 데이터를 쓰지 않는다 — 다른 것은 **지원을 어떤 종류로 언제 주는가**뿐이다.
@@ -425,14 +425,20 @@ function setSpk4(m){
   if(!SPK4[m]) return;
   spk4=m;
   try{ localStorage.setItem(SPK4_KEY, spk4); }catch(e){}
-  renderSitOption();
+  renderSitOption(); applyStepOption();
 }
 let sitOn=(()=>{ try{ return localStorage.getItem(SIT_KEY)!=='0'; }catch(e){ return true; } })();
 function setSitOn(v){
   sitOn=!!v;
   try{ localStorage.setItem(SIT_KEY, sitOn?'1':'0'); }catch(e){}
   buildStepIndex();          // 단계 수가 달라지므로 진행바 기준을 다시 잡는다
-  renderSitOption();
+  renderSitOption(); applyStepOption();
+}
+// 바꾼 옵션을 지금 화면에 바로 적용한다. [4]의 방식·자극은 그 단계를 다시 그려야
+// 보이고, 그 밖의 단계는 진행바 기준만 달라지므로 **다시 그리지 않는다** — 배열
+// 도중에 화면을 갈아엎으면 풀던 것이 날아간다.
+function applyStepOption(){
+  if(curStep===renderSpeak) renderSpeak();
 }
 function renderSitOption(){
   ['optHome','settingPop'].forEach(id=>{
@@ -468,6 +474,9 @@ let DATA=null, curVer='a', sessionItems=[], itemIdx=0, learned=[];
 //  expand         — 1박자에 놓은 프레임이 굳고 나머지만 그 위로 자란다
 let curFlow='transfer';
 function patternStep(){ return curFlow==='expand' ? renderExpand() : renderPattern(); }
+// 지금 보고 있는 단계 — 옵션은 **그 자리에서 바로** 적용돼야 비교가 된다(설정 → 홈 →
+// 다시 풀기로 돌아가면 무엇이 달라졌는지 감각이 끊긴다). 각 단계 렌더가 자기를 적는다.
+let curStep=null;
 // [5] 구간 정리 — 세션이 길어 끝에만 두면 볼 수 없으므로 몇 문항마다 끼워 넣는다
 const REVIEW_EVERY=3;
 let made=[];   // [5]에서 유저가 만든 문장
@@ -497,6 +506,7 @@ fetch('vocab-expression.data.json').then(r=>r.json()).then(d=>{ DATA=d; curVer=(
 
 // ── 홈 ──────────────────────────────────────────────────────────────────────
 function renderHome(){
+  curStep=null;
   topbar.classList.add('hidden'); stage.classList.add('hidden'); home.classList.remove('hidden');
   const tabs=el('tabs'); tabs.innerHTML='';
   Object.entries(VERSIONS).forEach(([key,v])=>{
@@ -642,6 +652,7 @@ function hlTrigger(sent, trig){
 
 // [1] 어휘 빈칸 ────────────────────────────────────────────────────────────────
 function renderVocab(){
+  curStep=renderVocab;
   const item=sessionItems[itemIdx], v=item[VERSIONS[curVer].vocabKey], answer=v.answer;
   setProgress(0);
   let hintLevel=0, done=false;
@@ -835,6 +846,7 @@ function slotRuns(tokens, flags){
   return runs;
 }
 function renderPattern(){
+  curStep=patternStep;
   const item=sessionItems[itemIdx], s=item.sentence;
   const pmean=((item.pattern||{}).meaning||'').trim(), punct=trailPunct(s.en);
   const tok=tokenize(s.en), flag=frameFlags(tok, item.baseSegs);
@@ -985,6 +997,7 @@ function renderPattern(){
 // (표현 앞뒤의 슬롯까지 표시하면 `get up`이 `~ get up`처럼 보여 표현이 아닌 걸 배우는
 // 것처럼 읽힌다). 두 흐름의 차이는 2박자의 조작뿐이므로 진입점만 갈라 비교한다.
 function renderExpand(){
+  curStep=patternStep;
   const item=sessionItems[itemIdx], s=item.sentence;
   const pmean=((item.pattern||{}).meaning||'').trim(), punct=trailPunct(s.en);
   const tok=tokenize(s.en), flag=frameFlags(tok, item.baseSegs);
@@ -1221,6 +1234,7 @@ function speakTraps(item, t, n){
   return out.slice(0, n);
 }
 function renderSpeak(){
+  curStep=renderSpeak;
   const item=sessionItems[itemIdx], t=speakTarget(item);
   const byEn = spkMode==='en' && t.ask;
   const mode = SPK4[spk4] ? spk4 : 'a';
@@ -1371,7 +1385,8 @@ function renderSpeak(){
     el('okBtn').disabled=true;
     el('card').classList.add('correct');
     if(!el('card').querySelector('.check-mark')){ const c=document.createElement('div'); c.className='check-mark'; c.textContent='✓'; el('card').appendChild(c); }
-    builtSet.add(t.en); made.push({en:said, kr:t.kr});
+    builtSet.add(t.en);
+    if(!made.some(x=>x.en===said)) made.push({en:said, kr:t.kr});
     wrongBox.classList.add('hidden'); el('revealNote').classList.add('hidden');
     el('spUsed').classList.add('hidden');
     // 답 자리를 완성 문장으로 굳힌다 — 칸이 그대로 낱말 타일이 되고 프레임만 초록이라
@@ -1682,6 +1697,7 @@ function devPanel(target, choices, typing){
 
 // 상황 전용 모드 — 오답 선택지는 인접 문항에서 뽑는다
 function showSituation(){
+  curStep=showSituation;
   const it=sessionItems[itemIdx];
   const near=sessionItems.filter((_,i)=>i!==itemIdx)
     .slice(Math.max(0,itemIdx-2), itemIdx+3)
