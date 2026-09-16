@@ -210,14 +210,6 @@
   .sp-mat .lbl { font-size:12.5px; font-weight:700; color:#b3bfd0; margin-right:2px; }
   /* 놓은 카드는 눌러서 되가져온다(C·D) */
   .sp-slot.on { cursor:pointer; }
-  /* D의 빈 카드 — 그 자리가 곧 입력칸이다. 답 자리 안에서 타이핑하므로 조작이
-     `카드를 놓는다` 하나로 유지되고, 낱말은 언제나 아래 뱅크에서 나온다. */
-  .sp-slot.w { padding:0 8px; border-color:#b8cdea; background:#fff; }
-  .sp-w { field-sizing:content; min-width:44px; max-width:150px; border:none; background:none;
-    font:inherit; color:#2f3e52; text-align:center; padding:0; outline:none; }
-  .tile.blank { border-style:dashed; border-color:#b8cdea; color:#5f7fa8; font-weight:700;
-    display:inline-flex; align-items:center; gap:5px; }
-  .tile.blank .ic { font-size:13px; }
   /* [4] 답 자리 — 한 줄 입력칸이 아니라 **낱말 한 칸씩**이다. 답의 낱말 수는
      재료+표현으로 이미 정해져 있으므로 칸을 그려도 새로 새는 정보가 없고,
      대신 '몇 낱말을 어디까지 놓았나'가 눈에 보인다. 실제 타이핑은 칸 위에 깔린
@@ -429,7 +421,7 @@ const SPK_VARS={
   a:{label:'A 재료 상시', desc:'함께 쓸 낱말을 처음부터 보여주고 문장 전체를 타이핑'},
   b:{label:'B 칸 채우기', desc:'재료를 감추고, 힌트는 지금 막힌 칸을 하나씩 채운다'},
   c:{label:'C 트랩 배열', desc:'낱말을 탭해 배열한다 — 뱅크에 함정이 섞여 있다'},
-  d:{label:'D 카드 놓기 + 직접 쓰기', desc:'재료는 카드로 놓고, 표현은 빈 카드에 직접 쓴다'},
+  e:{label:'E 고르고 직접 쓰기', desc:'이 표현으로 할 말을 내가 고르고, 재료 없이 직접 쓴다'},
 };
 let spkVar=(()=>{ try{ const v=localStorage.getItem(SPKV_KEY); return SPK_VARS[v]?v:'a'; }catch(e){ return 'a'; } })();
 function setSpkVar(v){
@@ -1342,19 +1334,62 @@ function speakTarget(item){
     return b;
   }, null);
 }
-function renderSpeak(){
+// 방식 E — 이 표현으로 **할 수 있는 말들**을 한국어로 늘어놓고 하나를 고르게 한다.
+// 고르는 대상이 표현이 아니라 **내가 말하고 싶은 것**이라 `어떤 표현을 쓸까요?`처럼
+// 진행자의 말이 되지 않고, 늘어놓는 것 자체가 `이 표현이 이런 데도 쓰이는구나`를
+// 전한다(결과창의 `단어만 바꿔서 이렇게도 말할 수 있어요`를 푸는 행위 안으로 옮긴 것).
+// 후보는 형제 문장의 한국어를 그대로 쓰므로 새 데이터가 필요 없다 — 짧은 것부터 셋.
+function sayOptions(item){
+  const wl=x=>x.trim().split(/\s+/).length, pool=[];
+  (item.apply||[]).forEach(a=>{ if(a.en!==item.sentence.en && a.kr) pool.push({en:a.en, kr:a.kr, segs:a.segs, ask:a.ask}); });
+  (item.siblings||[]).forEach(a=>{ if(a.en!==item.sentence.en && a.kr && !pool.some(p=>p.en===a.en)) pool.push({en:a.en, kr:a.kr}); });
+  // 표현이 곧 문장 전체인 후보(`Have fun!`)는 뺀다 — 그러면 새로 세울 것이 없어
+  // 표현을 그대로 옮겨 적는 일이 된다. 전부 그런 문항은 어쩔 수 없이 그대로 쓴다.
+  const frN=(item.frame||[]).join(' ').split(/\s+/).filter(Boolean).length;
+  const list=pool.filter(a=>wl(a.en)<=7), rich=list.filter(a=>wl(a.en)>frN);
+  return (rich.length?rich:list).sort((x,y)=>wl(x.en)-wl(y.en)).slice(0,3);
+}
+function renderSpeak(preset){
   curStep=renderSpeak;
-  const item=sessionItems[itemIdx], t=speakTarget(item);
-  const byEn = spkMode==='en' && t.ask;
-  // 방식(`ve:spkv`) — 대상 문장·채점 규칙·단계 수는 넷 다 같다. 다른 것은 **과제를 어떤
-  // 조작으로 세우고 지원을 어떤 형태로 주는가**뿐이다.
-  //   a/b 는 문장을 타이핑하고, c/d 는 **아래 뱅크에서 카드를 놓아** 만든다(`place`).
-  const V=spkVar, arrange=(V==='c'), pick=(V==='d'), place=(arrange||pick), hideMats=(V==='b');
+  const item=sessionItems[itemIdx];
+  // 방식(`ve:spkv`) — 대상 문장·단계 수는 넷 다 같다. 다른 것은 **과제를 어떤 조작으로
+  // 세우고 지원을 어떤 형태로 주는가**뿐이다. a/b/e 는 타이핑하고, c 는 아래 뱅크에서
+  // 카드를 놓아 만든다(`place`). e 만 채점이 열려 있다(아래).
+  const V=spkVar, arrange=(V==='c'), place=arrange, choose=(V==='e');
+  const noMats=(V==='b'||choose);
   setProgress(3);
+
+  // E 의 첫 박자 — 무슨 말을 할지 고른다. 후보가 둘 미만이면 고를 것이 없으므로
+  // 건너뛰고 기존 규칙(`speakTarget`)으로 대상을 정한다.
+  const sayOpts = choose ? sayOptions(item) : [];
+  if(choose && !preset && sayOpts.length>=2){
+    stage.innerHTML=`
+    <div class="stage-scroll">
+      <div class="chat-card" id="card">
+        <div class="chat-tag rv">말해보기</div>
+        <div class="sp-q">이 표현으로 무슨 말을 해 볼까요?</div>
+        <div class="sit-opts" id="sayOpts">
+          ${sayOpts.map((a,i)=>`<button class="sit-opt" data-i="${i}"><span class="ic">🎤</span>${escapeHtml(a.kr)}</button>`).join('')}
+        </div>
+      </div>
+    </div>
+    <div class="stage-bottom">
+      <div class="vtools">
+        <button class="vtool" disabled><span class="ic">?</span><span>표현 보기</span></button>
+        <button class="vtool mic" disabled><span class="ic">🎤</span><span>음성 모드</span></button>
+      </div>
+      <div class="arr-btns" style="margin-top:12px"><button class="btn-confirm" disabled>확인</button></div>
+    </div>`;
+    el('sayOpts').querySelectorAll('.sit-opt').forEach(b=> b.onclick=()=>renderSpeak(sayOpts[+b.dataset.i]));
+    return;
+  }
+  const t = preset || speakTarget(item);
+  const byEn = spkMode==='en' && t.ask;
 
   const bare=w=>String(w).toLowerCase().replace(/[^a-z0-9']/g,'');
   // 재료 = 프레임이 아닌 낱말들(섞어서). 표현은 넣지 않는다 — 그게 이 단계의 과제다.
-  const tok=tokenize(t.en), flag=frameFlags(tok, t.segs);
+  // 형제 문장에는 조각 정보(`segs`)가 없으므로 프레임 낱말을 굴절 허용으로 찾는다
+  const tok=tokenize(t.en), flag = t.segs ? frameFlags(tok, t.segs) : frameWordFlags(tok, item.frame);
   const matWords=tok.filter((w,i)=>!flag[i]);
   const frWords=tok.filter((w,i)=>flag[i]);
   const mats=shuffle(matWords);
@@ -1368,12 +1403,6 @@ function renderSpeak(){
   if(arrange){
     bankArr=shuffle(tok.map((w,i)=>({id:i, text:w.toLowerCase(), placed:false}))
       .concat(traps.map((w,i)=>({id:900+i, text:String(w).toLowerCase(), placed:false, trap:true}))));
-  } else if(pick){
-    // D — 재료 타일 **+ 내가 직접 쓰는 빈 카드**(프레임 낱말 수만큼)를 한 뱅크에 둔다.
-    // 조작이 하나로 통일된다: 무엇이든 아래에서 카드를 꺼내 놓고, 빈 카드만 내가 채운다.
-    // 빈 카드는 섞지 않고 뒤에 모아 둔다 — `여기부터는 내가 쓴다`가 한 덩어리로 보인다.
-    bankArr=shuffle(matWords.map((w,i)=>({id:i, text:w.toLowerCase(), placed:false})))
-      .concat(frWords.map((w,i)=>({id:500+i, text:'', placed:false, blank:true})));
   }
 
   const ask = byEn ? '배운 표현을 넣어 답해 보세요' : '배운 표현을 넣어 이 문장을 만들어 보세요';
@@ -1391,7 +1420,7 @@ function renderSpeak(){
 
   // 카드를 놓는 방식(C·D)에는 재료 줄을 두지 않는다 — 낱말은 **언제나 아래 뱅크**에
   // 있어야 누르는 것으로 읽힌다([2]·[3]과 같은 자리·같은 규약).
-  const matRow = (place||hideMats) ? '' :
+  const matRow = (place||noMats) ? '' :
     `<div class="sp-mat" id="spMat"><span class="lbl">함께 쓸 낱말</span>${mats.map(w=>`<span class="mat" data-w="${escapeHtml(bare(w))}">${escapeHtml(w)}</span>`).join('')}</div>`;
 
   stage.innerHTML=`
@@ -1434,12 +1463,7 @@ function renderSpeak(){
     if(place){
       for(let i=0;i<n;i++){
         const a=ansArr[i], ex=i>=tok.length?' extra':'';
-        if(a && a.blank && !done){
-          h+=`<span class="sp-slot w${ex}"><input class="sp-w" data-i="${i}" value="${escapeHtml(a.text)}"
-            autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done" /></span>`;
-        } else {
-          h+=`<span class="sp-slot${a&&!done?' on':''}${ex}"${a&&!done?` data-i="${i}"`:''}>${escapeHtml(a?a.text:'')}</span>`;
-        }
+        h+=`<span class="sp-slot${a&&!done?' on':''}${ex}"${a&&!done?` data-i="${i}"`:''}>${escapeHtml(a?a.text:'')}</span>`;
       }
     } else {
       const ws=inp.value.split(' ');
@@ -1453,40 +1477,24 @@ function renderSpeak(){
     if(!place || done) return;
     // 놓은 카드를 눌러 되가져온다 — 배열 화면과 같은 규약
     el('spSlots').querySelectorAll('.sp-slot[data-i]').forEach(x=> x.onclick=()=>takeBack(+x.dataset.i));
-    // 빈 카드는 그 자리가 곧 입력칸이다. 타이핑 중에는 줄을 다시 그리지 않으므로
-    // (다시 그리면 캐럿이 날아간다) 값만 모델에 적고 버튼 상태만 갱신한다.
-    el('spSlots').querySelectorAll('.sp-w').forEach(x=>{
-      const i=+x.dataset.i;
-      x.oninput=()=>{ ansArr[i].text=x.value; wrongBox.classList.add('hidden'); updateOk(); };
-      x.onkeydown=e=>{
-        if(e.key==='Enter'){ e.preventDefault(); x.blur(); return; }
-        // 빈 칸에서 지우면 카드째로 되돌린다(칩 입력의 관습)
-        if(e.key==='Backspace' && !x.value){ e.preventDefault(); takeBack(i); }
-      };
-    });
   }
   function takeBack(i){
     const a=ansArr[i]; if(!a) return;
-    a.placed=false; if(a.blank) a.text='';
-    ansArr.splice(i,1);
+    a.placed=false; ansArr.splice(i,1);
     wrongBox.classList.add('hidden'); renderAll();
-    const last=[...el('spSlots').querySelectorAll('.sp-w')].pop();
-    if(last) last.focus();
   }
-  // 뱅크 — **프레임 타일을 초록으로 칠하지 않는다**(C). 어느 것이 방금 배운 표현인지
-  // 알아보는 것이 과제라 표시해 주면 과제가 사라진다. D의 빈 카드는 점선으로 구분한다.
+  // 뱅크(C) — **프레임 타일을 초록으로 칠하지 않는다**. 어느 것이 방금 배운 표현인지
+  // 알아보는 것이 과제라, 표시해 주면 과제가 사라진다.
   function renderBank(){
     const bankEl=el('bank'); if(!bankEl) return;
     bankEl.innerHTML='';
     bankArr.forEach(tl=>{
       const b=document.createElement('button');
-      b.className='tile'+(tl.placed?' placed':'')+(tl.blank?' blank':'');
-      if(tl.blank) b.innerHTML='<span class="ic">✎</span>직접 쓰기';
-      else b.textContent=tl.text;
+      b.className='tile'+(tl.placed?' placed':'');
+      b.textContent=tl.text;
       if(!tl.placed && !done) b.onclick=()=>{
         if(ansArr.length>=tok.length) return;
         tl.placed=true; ansArr.push(tl); renderAll();
-        if(tl.blank){ const x=el('spSlots').querySelector(`.sp-w[data-i="${ansArr.length-1}"]`); if(x) x.focus(); }
       };
       bankEl.appendChild(b);
     });
@@ -1503,9 +1511,7 @@ function renderSpeak(){
     });
   }
   function updateOk(){
-    el('okBtn').disabled = done || (place
-      ? (ansArr.length<tok.length || ansArr.some(a=>!String(a.text).trim()))
-      : !inp.value.trim());
+    el('okBtn').disabled = done || (place ? ansArr.length<tok.length : !inp.value.trim());
   }
   function renderAll(){
     renderSlots();
@@ -1621,18 +1627,39 @@ function renderSpeak(){
       if(ni>=0){ usedN[ni]=true; usedG[gi]=true; fixes.push({i:gi, from:typedArr[gi], to:allowedWords[ni]}); } });
     return { extra:got.filter((_,i)=>!usedG[i]), missing:need.filter((_,i)=>!usedN[i]), fixes };
   }
-  function usedFrame(words){                  // 프레임 조각이 순서대로 들어 있는지(굴절·오타 허용)
-    let from=0;
-    return (item.frame||[]).every(lit=>{
+  // 프레임 조각이 순서대로 들어 있는지(굴절·오타 허용) — 들어 있으면 **그 낱말들의
+  // 자리**를 돌려준다. 채점이 인정한 자리를 그대로 오타 교정·길이 검사에 쓰므로
+  // 무엇을 프레임으로 봤는지와 무엇을 고칠지가 어긋나지 않는다.
+  const SFX=['s','es','ed','d','ing'];
+  function framePositions(words){
+    let from=0; const hit=[];
+    const ok=(item.frame||[]).every(lit=>{
       const ws=lit.split(/\s+/).map(bare).filter(Boolean);
       for(let i=from;i+ws.length<=words.length;i++){
         if(ws.every((w,k)=>{ const c=words[i+k];
-          return nearWord(c,w) || ['s','es','ed','d','ing'].some(sfx=>nearWord(c,w+sfx)); })){
+          return nearWord(c,w) || SFX.some(sfx=>nearWord(c,w+sfx)); })){
+          ws.forEach((w,k)=>hit.push({at:i+k, want:w}));
           from=i+ws.length; return true;
         }
       }
       return false;
     });
+    return ok ? hit : null;
+  }
+  function usedFrame(words){ return !!framePositions(words); }
+  // E 는 재료를 주지 않으므로 **표현만 맞으면 통과**시킨다 — 같은 한국어를 옮기는 영어는
+  // 여러 가지라, 재료로 답을 닫아 두지 않으면서 정확일치만 받으면 `다른 낱말이 생각나는`
+  // 맞는 답이 전부 막힌다. 대신 프레임뿐인 답(`Don't be.`)은 문장이 아니므로 막는다.
+  // 그때 프레임 낱말의 오타만 정답 철자로 굳힌다(굴절형은 건드리지 않는다).
+  function frameFixes(words, pos){
+    const frAll=(item.frame||[]).join(' ').split(/\s+/).filter(Boolean), fixes=[];
+    pos.forEach(p=>{
+      const w=words[p.at], b=bare(w);
+      if(b===p.want) return;
+      if(SFX.some(sfx=>p.want+sfx===b)) return;
+      fixes.push({i:p.at, from:w, to:(frAll.find(f=>bare(f)===p.want) || p.want)});
+    });
+    return fixes;
   }
   el('okBtn').onclick=()=>{
     if(done) return;
@@ -1644,7 +1671,12 @@ function renderSpeak(){
     wrongBox.classList.remove('hidden');
     if(nz(txt)===nz(t.en)) return finish(true, []);
     // 표현을 아직 안 썼으면 지적하는 대신 **오답노트 팁을 연다** — [2] 화면과 같은 규약
-    if(!usedFrame(words.map(bare))){ wrongBox.classList.add('hidden'); tipByFail(); return; }
+    const pos=framePositions(words.map(bare));
+    if(!pos){ wrongBox.classList.add('hidden'); tipByFail(); return; }
+    if(choose){
+      if(words.length-pos.length<1){ wrongBox.innerHTML='표현만으로는 문장이 되지 않아요. 하고 싶은 말을 이어서 써 보세요.'; return; }
+      return finish(false, frameFixes(words, pos));
+    }
     if(extra.length){ wrongBox.innerHTML=`<b>${escapeHtml(extra.join(', '))}</b> 는 이 문장에 필요하지 않아요.`; return; }
     if(missing.length){ wrongBox.innerHTML=`<b>${escapeHtml(missing.join(', '))}</b> 를 아직 안 썼어요.`; return; }
     finish(false, fixes);                      // 표현 + 재료를 모두 썼으면 통과(오타는 교정해 준다)
