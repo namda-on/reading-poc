@@ -226,6 +226,7 @@
   .sp-q.sp-after { margin-top:18px; }
   .sp-kr { font-size:20px; font-weight:800; color:#2f3e52; line-height:1.4; margin-top:5px; }
   .start-card.alt-card { background:#ffffffd9; }
+  .twin-eg { display:inline-block; margin-top:5px; font-weight:700; color:#22794a; }
   /* 배열 지시문 — 데이터에 지시문 필드가 없어 종결부호로 유도한다 */
   .fill-hint { font-size:13px; color:#b3bfd0; font-weight:600; margin-top:8px; }
   /* A 화면 오답노트 팁 — 표현을 못 떠올렸을 때(오답/표현 보기) 열리고, 이어지는
@@ -454,6 +455,9 @@ let curStep=null;
 const REVIEW_EVERY=3;
 let made=[];   // [5]에서 유저가 만든 문장
 let sitOnly=false;     // 상황만 모아 푸는 별도 진입점
+// 홈의 보조 진입점(상황만 / 짝 문장만)은 **표본을 보는 모드**다 — 본 세션의 진행
+// 위치(`ve:pos`)를 건드리면 안 된다. 끝까지 풀어도 저장하지 않고 그 모드로 다시 시작한다.
+let sampleMode=false, sampleRestart=null;
 let sitTypeMode=false; // 상황 전용 모드에서 고른 방식(true = 직접 입력)
 // [2]·[3]에서 이미 만든 문장 — [5]는 아직 만들지 않은 문장을 먼저 후보로 낸다
 const builtSet=new Set();
@@ -516,6 +520,21 @@ function renderHome(){
   list.appendChild(fc);
   el('flow1Btn').onclick=()=>{ startSession(Math.min(getPos(), total-1), 'expand'); };
 
+  // [4]가 노리는 크기를 바로 확인할 진입점 — 짝 문장이 붙은 문항만 모아 푼다
+  const twins=DATA.items.filter(hasTwin);
+  if(twins.length){
+    const t0=twins[0], tt=speakTarget(t0);
+    const tc=document.createElement('div'); tc.className='start-card alt-card';
+    tc.innerHTML=`
+      <div class="start-flow">짝 문장 문항만 <span class="ar">→</span> 모아 풀기</div>
+      <div class="start-count">짝 문장 <b>${twins.length}</b>문항</div>
+      <div class="start-note">말해보기 대상이 <b>틀은 그대로 두고 낱말만 바뀌는 문장</b>인 문항만 풀어요<br>
+        <span class="twin-eg">${escapeHtml(t0.sentence.en)} <span class="ar">→</span> ${escapeHtml(tt.en)}</span></div>
+      <button class="start-btn ghost" id="twinBtn">짝 문장 문항 풀기 ▶</button>`;
+    list.appendChild(tc);
+    el('twinBtn').onclick=startTwinOnly;
+  }
+
   // [5]는 3문항마다 나오므로 한참 풀어야 볼 수 있다 — 바로 확인할 별도 진입점을 둔다
   const sits=DATA.items.filter(i=>i.situation);
   if(sits.length){
@@ -541,9 +560,22 @@ function renderHome(){
 }
 
 // ── 세션 ────────────────────────────────────────────────────────────────────
+// 짝 문장 문항만 연속으로 — [4]가 노리는 크기(`Don't be late.` → `Don't be sad.`)를
+// 바로 확인하기 위한 진입점. **단계를 건너뛰지 않는다** — 효용감은 [2]·[3]에서 그
+// 표현을 방금 만들어 본 뒤에 오는 것이라, [4]만 떼어 보면 판단이 어긋난다.
+function startTwinOnly(){
+  sitOnly=false; sampleMode=true; sampleRestart=startTwinOnly;
+  sessionItems=DATA.items.filter(hasTwin);
+  itemIdx=0; learned=[]; made=[]; builtSet.clear();
+  buildStepIndex();
+  home.classList.add('hidden'); topbar.classList.remove('hidden'); stage.classList.remove('hidden');
+  el('backBtn').onclick=()=>renderHome();
+  renderVocab();
+}
 // 상황만 연속으로 — [5] 화면을 바로 확인하기 위한 진입점
 function startSituationOnly(typing){
   sitOnly=true; sitTypeMode=!!typing;
+  sampleMode=true; sampleRestart=()=>startSituationOnly(typing);
   sessionItems=DATA.items.filter(i=>i.situation);
   itemIdx=0; learned=[]; made=[]; builtSet.clear();
   buildStepIndex();
@@ -553,7 +585,7 @@ function startSituationOnly(typing){
 }
 
 function startSession(startIdx, flow){
-  sitOnly=false;
+  sitOnly=false; sampleMode=false; sampleRestart=null;
   if(flow){ curFlow=flow; try{localStorage.setItem(FLOW_KEY,flow);}catch(e){} }
   sessionItems=DATA.items; itemIdx=Math.min(startIdx||0, sessionItems.length-1); learned=[]; made=[]; builtSet.clear();
   buildStepIndex();
@@ -1234,12 +1266,21 @@ function frameWordFlags(words, frame){
 //   ② **조각 구조가 같은 것**(`F,S` ↔ `F,S`) — 난이도를 가르는 가장 큰 축(170/222 가능)
 //   ③ **종결부호가 같은 것** — 평서문/의문문이 갈리면 구조가 멀어진다
 //   ④ 재료가 적은 것 → 짧은 것. 재료가 많으면 재료로 조립하는 일이 되고 표현이 묻힌다.
+const spkMats=a=>(a.segs||[]).filter(g=>g.t==='slot').flatMap(g=>g.s.split(/\s+/)).filter(Boolean);
+const spkShape=segs=>(segs||[]).map(g=>g.t[0]).join(',');
+const spkEnd=x=>{ const m=String(x).trim().match(/[.?!]+$/); return m?m[0][0]:'.'; };
+// **틀은 그대로 두고 낱말만 바뀌는 짝**인가 — `Don't be late.` → `Don't be sad.`
+// 넷을 모두 만족할 때만 인정한다. 하나라도 어긋나면 난이도가 튄다.
+function isTwin(item, a){
+  return spkMats(a).length<=2 && a.en.split(/\s+/).length<=5
+      && spkShape(a.segs)===spkShape(item.baseSegs)
+      && spkEnd(a.en)===spkEnd(item.sentence.en);
+}
+function hasTwin(item){ const t=speakTarget(item); return !!t && isTwin(item, t); }
 function speakTarget(item){
   const bare=w=>String(w).toLowerCase().replace(/[^a-z0-9']/g,'');
   const nz=x=>x.split(/\s+/).map(bare).filter(Boolean).join(' ');
-  const mats=a=>a.segs.filter(g=>g.t==='slot').flatMap(g=>g.s.split(/\s+/)).filter(Boolean);
-  const shape=segs=>segs.map(g=>g.t[0]).join(',');
-  const endp=x=>{ const m=String(x).trim().match(/[.?!]+$/); return m?m[0][0]:'.'; };
+  const mats=spkMats, shape=spkShape, endp=spkEnd;
   const base=nz(item.sentence.en);
   const baseShape=shape(item.baseSegs), baseEnd=endp(item.sentence.en);
   const cands=(item.apply||[]).filter(a=>a.en!==item.sentence.en);
@@ -1251,8 +1292,7 @@ function speakTarget(item){
   // 4낱말이라 부담이 없다. 조건은 넷을 모두 만족할 때뿐이다(하나라도 어긋나면 난이도가 튄다):
   // 재료 2낱말 이하 · 문장 5낱말 이하 · 조각 구조 일치 · 종결부호 일치.
   // 데이터에 그런 짝이 있는 문항은 38/222뿐이라, 나머지는 기존 규칙으로 고른다.
-  const twin=step.filter(a=> mats(a).length<=2 && a.en.split(/\s+/).length<=5
-                          && shape(a.segs)===baseShape && endp(a.en)===baseEnd);
+  const twin=step.filter(a=>isTwin(item, a));
   if(twin.length) step=twin;
   const score=a=>[shape(a.segs)===baseShape ? 0 : 1,
                   endp(a.en)===baseEnd ? 0 : 1,
@@ -1716,7 +1756,7 @@ function renderReview(){
 
 // ── 완료 ──// ── 완료 ──────────────────────────────────────────────────────────────────────
 function renderDone(){
-  setPos(sessionItems.length);
+  if(!sampleMode) setPos(sessionItems.length);
   topbar.classList.add('hidden'); stage.classList.remove('hidden'); home.classList.add('hidden');
   const items=learned.length?learned:sessionItems;
   const modeWord = '표현';
@@ -1737,7 +1777,7 @@ function renderDone(){
       <button class="btn" id="homeBtn">홈으로</button>
     </div>
   </div>`;
-  el('againBtn').onclick=()=>{ setPos(0); startSession(0); };
+  el('againBtn').onclick=()=> sampleMode && sampleRestart ? sampleRestart() : (setPos(0), startSession(0));
   el('homeBtn').onclick=()=>renderHome();
 }
 </script>
