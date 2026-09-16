@@ -208,9 +208,22 @@
   .sp-mat .mat.used { background:#f4f6fa; color:#c3cede; opacity:.6; }
   .sp-mat .mat.used::after { content:'✓'; margin-left:5px; font-size:11px; color:#9ec7ad; }
   .sp-mat .lbl { font-size:12.5px; font-weight:700; color:#b3bfd0; margin-right:2px; }
-  /* 방식 D — 재료를 탭해 넣는다. 누를 수 있다는 것이 보여야 하므로 칩을 살려 둔다. */
-  .sp-mat.tap .mat { cursor:pointer; background:#e8f0fb; color:#4b6c92; border:1.5px solid #d5e4f6; padding:4px 10px; }
-  .sp-mat.tap .mat.used { background:#f4f6fa; color:#c3cede; border-color:#e7edf5; cursor:default; }
+  /* 방식 D — 이 줄은 **읽는 목록이 아니라 누르는 것**이라, 배열 화면의 뱅크 타일과
+     같은 모양·같은 규약을 쓴다(`.tile`/`.tile.placed`). 놓인 낱말은 자리를 지킨 채
+     비워져 줄이 흔들리지 않는다. A의 `✓`는 '이미 썼다'는 알림이라 여기선 빼고, 대신
+     놓은 낱말을 **답 자리에서 눌러 되가져온다**(배열 화면과 같다). */
+  .sp-mat.tap { gap:9px; }
+  .sp-mat.tap .mat { cursor:pointer; background:#fff; color:#2f3e52; border:1px solid #cdddf3;
+    border-radius:11px; padding:9px 14px; font-size:16px; box-shadow:0 1px 3px rgba(30,60,110,.08); }
+  /* 쓴 낱말은 **줄에서 뺀다**. 배열 뱅크처럼 흐린 유령으로 남기면 바로 아래 답 자리와
+     똑같이 옅은 박스 두 줄이 되어 어느 쪽이 답인지 한눈에 안 읽힌다. 여기 남는 것은
+     '아직 안 쓴 낱말'이고, 되가져오면 다시 돌아온다. */
+  .sp-mat.tap .mat.used { display:none; }
+  .sp-mat.tap.empty { display:none; }
+  /* 투명 입력이 칸 전체를 덮고 있으므로, 채워진 칸만 위로 올려 클릭을 받게 한다.
+     빈 자리를 누르면 그대로 입력으로 떨어져 키보드가 올라온다. */
+  .sp-in.pick .sp-slots { position:relative; z-index:2; pointer-events:none; }
+  .sp-in.pick .sp-slot.on { pointer-events:auto; cursor:pointer; }
   /* [4] 답 자리 — 한 줄 입력칸이 아니라 **낱말 한 칸씩**이다. 답의 낱말 수는
      재료+표현으로 이미 정해져 있으므로 칸을 그려도 새로 새는 정보가 없고,
      대신 '몇 낱말을 어디까지 놓았나'가 눈에 보인다. 실제 타이핑은 칸 위에 깔린
@@ -1377,7 +1390,7 @@ function renderSpeak(){
   // C는 재료 줄 대신 뱅크를 쓴다 — 뱅크는 애초에 "이 중에서 고르라"는 약속이라
   // 함정이 섞여도 화면이 거짓말을 하지 않는다(`함께 쓸 낱말`이라는 라벨과 다르다).
   const matRow = (arrange||hideMats) ? '' :
-    `<div class="sp-mat${tapMats?' tap':''}" id="spMat"><span class="lbl">${tapMats?'탭해서 넣기':'함께 쓸 낱말'}</span>${mats.map(w=>`<span class="mat" data-w="${escapeHtml(bare(w))}">${escapeHtml(w)}</span>`).join('')}</div>`;
+    `<div class="sp-mat${tapMats?' tap':''}" id="spMat"><span class="lbl">함께 쓸 낱말</span>${mats.map(w=>`<span class="mat" data-w="${escapeHtml(bare(w))}">${escapeHtml(w)}</span>`).join('')}</div>`;
 
   stage.innerHTML=`
     <div class="stage-scroll">
@@ -1386,7 +1399,7 @@ function renderSpeak(){
         ${head}
         <div class="nb-tip hidden" id="nbTip"></div>
         ${matRow}
-        <div class="sp-in" id="spIn"><div class="sp-slots" id="spSlots"></div>${arrange?'':`<input class="sp-catch" id="spCatch" type="text"
+        <div class="sp-in${tapMats?' pick':''}" id="spIn"><div class="sp-slots" id="spSlots"></div>${arrange?'':`<input class="sp-catch" id="spCatch" type="text"
           autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done" />`}</div>
         <div class="wrong-box hidden" id="wrongBox"></div>
         <div class="reveal-note hidden" id="revealNote"></div>
@@ -1426,13 +1439,29 @@ function renderSpeak(){
       for(let i=0;i<n;i++){
         const cur=(i===ws.length-1 && !done) ? ' cur' : '';
         const g=(gift.has(i) && bare(ws[i]||'')===bare(tok[i]||'')) ? ' gift' : '';
-        h+=`<span class="sp-slot${cur}${g}${i>=tok.length?' extra':''}">${escapeHtml(ws[i]||'')}</span>`;
+        // 끝난 낱말만 눌러서 뺀다 — 지금 치고 있는 낱말(마지막 칸)까지 빠지면
+        // 자리를 확인하려고 누른 것이 지워지는 것으로 읽힌다
+        const on=(!done && i<ws.length-1 && (ws[i]||'').trim()) ? ' on' : '';
+        h+=`<span class="sp-slot${cur}${g}${on}${i>=tok.length?' extra':''}"${on?` data-w="${i}"`:''}>${escapeHtml(ws[i]||'')}</span>`;
       }
     }
     el('spSlots').innerHTML=h;
     if(arrange && !done) el('spSlots').querySelectorAll('.sp-slot[data-i]').forEach(x=> x.onclick=()=>{
       const i=+x.dataset.i; ansArr[i].placed=false; ansArr.splice(i,1); renderAll();
     });
+    // D — 놓은 낱말을 눌러 되가져온다. 탭으로 넣은 것만 뺄 수 있게 하면 규칙이 둘이
+    // 되므로 **친 낱말도 똑같이** 빠진다(백스페이스로 한 글자씩 지우는 것보다 빠르다).
+    if(tapMats && !done) el('spSlots').querySelectorAll('.sp-slot[data-w]').forEach(x=>{
+      x.onmousedown=e=>e.preventDefault();           // 키보드가 내려가지 않게
+      x.onclick=()=>{ removeWord(+x.dataset.w); };
+    });
+  }
+  function removeWord(i){
+    const ws=inp.value.trim().split(/\s+/).filter(Boolean);
+    if(i>=ws.length) return;
+    ws.splice(i,1);
+    inp.value=ws.join(' ')+(ws.length?' ':'');
+    wrongBox.classList.add('hidden'); renderAll(); inp.focus();
   }
   // C의 뱅크 — **프레임 타일을 초록으로 칠하지 않는다**. 어느 것이 방금 배운 표현인지
   // 알아보는 것이 이 단계의 과제라, 표시해 주면 과제가 사라진다.
@@ -1455,11 +1484,14 @@ function renderSpeak(){
     if(!matEl) return;
     const left=new Map();
     typedWords().forEach(w=>{ const k=bare(w); if(k) left.set(k, (left.get(k)||0)+1); });
+    let rest=0;
     matEl.querySelectorAll('.mat').forEach(m=>{
       const k=m.dataset.w, n=left.get(k)||0, use=n>0;
-      if(use) left.set(k, n-1);
+      if(use) left.set(k, n-1); else rest++;
       m.classList.toggle('used', use);
     });
+    // 남은 것이 없으면 줄째로 접는다 — 빈 라벨만 남기지 않는다
+    if(tapMats) matEl.classList.toggle('empty', rest===0);
   }
   function renderAll(){
     renderSlots();
@@ -1469,11 +1501,26 @@ function renderSpeak(){
   renderAll();
   // 방식 D — 재료를 탭해 넣는다. 표현은 뱅크에 없으니 여전히 손으로 쳐야 하고,
   // 타이핑 부담만 2~3낱말로 줄어든다(어순은 그대로 유저가 세운다).
-  if(tapMats && matEl) matEl.querySelectorAll('.mat').forEach(m=> m.onclick=()=>{
-    if(done || m.classList.contains('used')) return;
-    const v=inp.value.replace(/\s+$/,'');
-    inp.value=(v?v+' ':'')+m.textContent+' ';
-    wrongBox.classList.add('hidden'); renderAll(); inp.focus();
+  if(tapMats && matEl) matEl.querySelectorAll('.mat').forEach(m=>{
+    // 타일을 누를 때 입력이 포커스를 잃으면 모바일 키보드가 내려갔다 올라온다
+    m.onmousedown=e=>e.preventDefault();
+    m.onclick=()=>{
+      if(done || m.classList.contains('used')) return;
+      const v=inp.value.replace(/\s+$/,'');
+      inp.value=(v?v+' ':'')+m.textContent+' ';
+      wrongBox.classList.add('hidden'); renderAll(); inp.focus();
+    };
+  });
+  // 끝난 낱말(뒤에 공백이 있는 것) 중 **재료에서 온 것**은 백스페이스로 통째로 지운다 —
+  // 탭 한 번에 들어온 낱말을 글자 수만큼 지우게 하면 넣고 빼는 비용이 어긋난다.
+  // 내가 친 표현은 오타를 고쳐야 하므로 한 글자씩 그대로 둔다.
+  if(tapMats) inp.addEventListener('keydown', e=>{
+    if(e.key!=='Backspace' || done) return;
+    if(!/\s$/.test(inp.value)) return;
+    const ws=inp.value.trim().split(/\s+/).filter(Boolean);
+    const last=ws[ws.length-1];
+    if(!last || !matWords.some(w=>bare(w)===bare(last))) return;
+    e.preventDefault(); removeWord(ws.length-1);
   });
 
   // 표현을 아직 안 썼을 때 여는 줄. [2] 화면과 같은 규약이라 새 표기가 아니다.
