@@ -1245,7 +1245,15 @@ function speakTarget(item){
   const cands=(item.apply||[]).filter(a=>a.en!==item.sentence.en);
   const pool=cands.length?cands:(item.apply||[]);
   const free=pool.filter(a=>{ const x=nz(a.en); return !base.includes(x) && !x.includes(base); });
-  const step=free.length?free:pool;
+  let step=free.length?free:pool;
+  // **틀은 그대로 두고 낱말만 바뀌는 짝**이 있으면 무조건 그것을 쓴다 — `Don't be late.`
+  // → `Don't be sad.` 가 이 단계가 노리는 크기다. 표현은 내 손에서 나오면서도 문장이
+  // 4낱말이라 부담이 없다. 조건은 넷을 모두 만족할 때뿐이다(하나라도 어긋나면 난이도가 튄다):
+  // 재료 2낱말 이하 · 문장 5낱말 이하 · 조각 구조 일치 · 종결부호 일치.
+  // 데이터에 그런 짝이 있는 문항은 38/222뿐이라, 나머지는 기존 규칙으로 고른다.
+  const twin=step.filter(a=> mats(a).length<=2 && a.en.split(/\s+/).length<=5
+                          && shape(a.segs)===baseShape && endp(a.en)===baseEnd);
+  if(twin.length) step=twin;
   const score=a=>[shape(a.segs)===baseShape ? 0 : 1,
                   endp(a.en)===baseEnd ? 0 : 1,
                   mats(a).length, a.en.split(/\s+/).length];
