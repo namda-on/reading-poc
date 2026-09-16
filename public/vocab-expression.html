@@ -200,6 +200,10 @@
   /* [4] 방식 F — 방금 만든 문장을 **옆에 둔다**. 효용감의 근거는 문구가 아니라
      같은 초록 조각이 두 문장에 반복되는 것이고(결과창과 같은 원리), 두 번째 줄을
      내가 채우는 것이 곧 `이 표현을 내가 쓴다`이다. 그래서 참조는 감추지 않는다. */
+  /* [4] 방식 G — 라운드 표시와 내 차례의 한국어 */
+  .sp-round { float:right; font-size:12px; font-weight:800; color:#a6b6c9; }
+  .sp-mykr { font-size:19px; font-weight:800; color:#2f3e52; margin-top:20px; text-align:right; }
+  .sit-turn.b .sit-role { font-size:11px; font-weight:800; }
   .sp-ref { background:#f4f8fd; border:1px solid #e2ebf7; border-radius:12px; padding:11px 13px 12px; margin-top:14px; }
   .sp-ref .lbl { font-size:11.5px; font-weight:800; color:#a6b6c9; letter-spacing:.02em; }
   .sp-ref-en { font-size:17px; font-weight:700; color:#8c9bb0; margin-top:4px; }
@@ -430,6 +434,7 @@ const SPK_VARS={
   b:{label:'B 칸 채우기', desc:'재료를 감추고, 힌트는 지금 막힌 칸을 하나씩 채운다'},
   c:{label:'C 트랩 배열', desc:'낱말을 탭해 배열한다 — 뱅크에 함정이 섞여 있다'},
   f:{label:'F 한 문장 더', desc:'방금 만든 문장을 옆에 두고, 낱말만 바꿔 한 문장 더 쓴다'},
+  g:{label:'G 대화로 이어 쓰기', desc:'상대가 말을 걸면 그 표현으로 답한다 — 같은 표현으로 2~3번'},
 };
 let spkVar=(()=>{ try{ const v=localStorage.getItem(SPKV_KEY); return SPK_VARS[v]?v:'a'; }catch(e){ return 'a'; } })();
 function setSpkVar(v){
@@ -1257,6 +1262,36 @@ function frameLine(en, segs, frame){
   });
   return out;
 }
+// 프레임 조각이 순서대로 들어 있는지(굴절·오타 허용) — 들어 있으면 **그 낱말들의
+// 자리**를 돌려준다. 채점이 인정한 자리를 그대로 오타 교정·길이 검사에 쓰므로
+// 무엇을 프레임으로 봤는지와 무엇을 고칠지가 어긋나지 않는다.
+const SFX=['s','es','ed','d','ing'];
+const bareW=w=>String(w).toLowerCase().replace(/[^a-z0-9']/g,'');
+function framePos(words, frame){
+  let from=0; const hit=[];
+  const ok=(frame||[]).every(lit=>{
+    const ws=lit.split(/\s+/).map(bareW).filter(Boolean);
+    for(let i=from;i+ws.length<=words.length;i++){
+      if(ws.every((w,k)=>{ const c=words[i+k];
+        return nearWord(c,w) || SFX.some(sfx=>nearWord(c,w+sfx)); })){
+        ws.forEach((w,k)=>hit.push({at:i+k, want:w}));
+        from=i+ws.length; return true;
+      }
+    }
+    return false;
+  });
+  return ok ? hit : null;
+}
+function frameFix(words, pos, frame){
+  const frAll=(frame||[]).join(' ').split(/\s+/).filter(Boolean), fixes=[];
+  pos.forEach(p=>{
+    const w=words[p.at], b=bareW(w);
+    if(b===p.want) return;
+    if(SFX.some(sfx=>p.want+sfx===b)) return;
+    fixes.push({i:p.at, from:w, to:(frAll.find(f=>bareW(f)===p.want) || p.want)});
+  });
+  return fixes;
+}
 // 오타 한 글자는 같은 낱말로 본다 — 이 단계의 과제는 **표현을 쓸 수 있느냐**지
 // 철자를 정확히 치느냐가 아니다. 화면에 `This`가 보이는데 `Thsi`로 쳤다고
 // "이 낱말은 필요하지 않아요"라고 하면 아는 답이 막힌다.
@@ -1342,6 +1377,169 @@ function speakTarget(item){
     return b;
   }, null);
 }
+// 방식 G — **대화로 이어 쓰기**. 어학 수업의 그 연습이다: 같은 문형 하나를 놓고
+// 상대가 말을 걸면 내가 그 문형으로 답하는 것을 **여러 번 반복**한다.
+//   · 자극이 한국어 번역문이 아니라 **상대의 말**이라 답이 번역이 아니라 **반응**이 된다
+//   · 같은 표현으로 **2~4번** 반복한다 — 첫 번째는 더듬거리고 마지막엔 손이 기억한다.
+//     효용감은 "한 번 잘 만들었다"가 아니라 **그 반복**에서 온다
+//   · 답한 말이 사라지지 않고 **대화로 쌓인다** — 결과창이 사후에 보여주던
+//     `단어만 바꿔서 이렇게도 말할 수 있어요`를, 내가 세 번 써서 만든다
+//   · 첫 라운드는 `[2]`·`[3]`에서 배열한 그 문장이다(워밍업). 배열은 탭이었고
+//     여기서는 처음으로 손으로 친다.
+// 데이터는 이미 있다 — `ask`(학습 문장용)와 `apply[].ask`. 222문항 전부 2쌍 이상.
+function speakRounds(item){
+  const r=[];
+  if(item.ask && item.ask.en) r.push({q:item.ask, a:{en:item.sentence.en, kr:item.sentence.kr, segs:item.baseSegs}});
+  (item.apply||[]).forEach(a=>{
+    if(a.ask && a.ask.en && a.en!==item.sentence.en && !r.some(x=>x.a.en===a.en)) r.push({q:a.ask, a});
+  });
+  return r.slice(0,3);
+}
+function renderSpeakConv(){
+  curStep=renderSpeak;
+  const item=sessionItems[itemIdx];
+  const rounds=speakRounds(item);
+  setProgress(3);
+  const said=[];              // 내가 쓴 말들 — 대화로 쌓인다
+  let ri=0;
+
+  function turnsHtml(){
+    let h='';
+    rounds.forEach((r,i)=>{
+      if(i>ri) return;
+      h+=`<div class="sit-turn a"><div class="sit-role">A</div>
+            <div class="sit-bubble"><div class="sit-en">${escapeHtml(r.q.en)}</div>
+              <div class="sit-kr">${escapeHtml(r.q.kr)}</div></div></div>`;
+      if(i<ri) h+=`<div class="sit-turn b"><div class="sit-role">나</div>
+            <div class="sit-bubble mine"><div class="sit-en">${frameLine(said[i], null, item.frame)}</div>
+              <div class="sit-kr">${escapeHtml(rounds[i].a.kr)}</div></div></div>`;
+    });
+    return h;
+  }
+
+  function renderRound(){
+    const r=rounds[ri];
+    const tok=tokenize(r.a.en);
+    stage.innerHTML=`
+      <div class="stage-scroll">
+        <div class="chat-card" id="card">
+          <div class="chat-tag rv">말해보기</div>
+          <div class="sp-q">배운 표현으로 대답해 보세요<span class="sp-round">${ri+1} / ${rounds.length}</span></div>
+          ${turnsHtml()}
+          <div class="sp-mykr">${escapeHtml(r.a.kr)}</div>
+          <div class="sp-in" id="spIn"><div class="sp-slots" id="spSlots"></div><input class="sp-catch" id="spCatch" type="text"
+            autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done" /></div>
+          <div class="wrong-box hidden" id="wrongBox"></div>
+          <div class="reveal-note hidden" id="revealNote"></div>
+        </div>
+        <div id="payoffBox"></div>
+      </div>
+      <div class="stage-bottom" id="bottom">
+        <div class="vtools" id="vtools">
+          <button class="vtool" id="hintBtn"><span class="ic">?</span><span id="hintLabel">표현 보기</span></button>
+          <button class="vtool mic" disabled><span class="ic">🎤</span><span>음성 모드</span></button>
+        </div>
+        <div class="arr-btns" style="margin-top:12px">
+          <button class="btn-confirm" id="okBtn" disabled>확인</button>
+        </div>
+      </div>`;
+    const inp=el('spCatch'), wrongBox=el('wrongBox');
+    let hintLevel=0, done=false;
+    setTimeout(()=>{ inp.focus(); el('card').scrollIntoView({block:'end'}); }, 60);
+
+    function renderSlots(){
+      const ws=inp.value.split(' ');
+      let h='';
+      for(let i=0;i<Math.max(tok.length, ws.length);i++){
+        const cur=(i===ws.length-1 && !done) ? ' cur' : '';
+        h+=`<span class="sp-slot${cur}${i>=tok.length?' extra':''}">${escapeHtml(ws[i]||'')}</span>`;
+      }
+      el('spSlots').innerHTML=h;
+    }
+    renderSlots();
+    inp.addEventListener('input', ()=>{
+      if(!done) wrongBox.classList.add('hidden');
+      renderSlots();
+      el('okBtn').disabled = done || !inp.value.trim();
+    });
+
+    function openTip(){ const t=el('nbTip'); if(t){ t.innerHTML=nbTipHtml(item); t.classList.remove('hidden'); } }
+    const ladder=[
+      {label:'표현 보기', run:()=>{ const rn=el('revealNote'); rn.classList.remove('hidden'); rn.innerHTML=nbTipHtml(item); }},
+      {label:'첫 단어 보기', run:()=>{ const rn=el('revealNote'); rn.classList.remove('hidden'); rn.innerHTML=`첫 단어<b>${escapeHtml(tok[0])} …</b>`; }},
+      {label:'정답 보기', run:()=>{ const rn=el('revealNote'); rn.classList.remove('hidden'); rn.innerHTML=`정답<b>${escapeHtml(r.a.en)}</b>`; }},
+    ];
+    el('hintLabel').textContent=ladder[0].label;
+    function advanceHint(){
+      const d=ladder[hintLevel]; if(!d) return;
+      d.run(); hintLevel++;
+      const nx=ladder[hintLevel];
+      if(nx){ el('hintLabel').textContent=nx.label; el('hintBtn').querySelector('.ic').textContent='✔'; }
+      else { el('hintBtn').disabled=true; el('hintLabel').textContent='정답 공개됨'; wrongBox.classList.add('hidden'); }
+    }
+    el('hintBtn').onclick=()=>{ advanceHint(); inp.focus(); };
+
+    // 채점은 F 와 같다 — **표현을 썼는가** 하나. 상대의 말이 재료를 쥐고 있으므로
+    // 답이 크게 벌어지지 않고, 그렇다고 다른 낱말이 생각났다고 막히지도 않는다.
+    el('okBtn').onclick=()=>{
+      if(done) return;
+      const words=inp.value.trim().split(/\s+/).filter(Boolean);
+      if(!words.length) return;
+      const nz=x=>x.toLowerCase().replace(/[^a-z0-9']+/g,' ').trim();
+      const exact = nz(words.join(' '))===nz(r.a.en);
+      wrongBox.classList.remove('hidden');
+      const pos=framePos(words.map(bareW), item.frame);
+      if(!pos){ wrongBox.classList.add('hidden'); if(hintLevel===0) advanceHint(); else openTip(); return; }
+      if(words.length-pos.length<1){ wrongBox.innerHTML='표현만으로는 문장이 되지 않아요. 하고 싶은 말을 이어서 써 보세요.'; return; }
+      // 앞 라운드에서 한 말을 그대로 되풀이하면 새로 만든 것이 아니다
+      if(said.some(x=>nz(x)===nz(words.join(' ')))){
+        wrongBox.innerHTML='아까 한 말이에요. 이번 상황에 맞게 <b>낱말을 바꿔</b> 말해 보세요.'; return;
+      }
+      done=true;
+      const fixes=frameFix(words, pos, item.frame);
+      fixes.forEach(f=>{ words[f.i]=f.to; });
+      const my = exact ? r.a.en : words.join(' ');
+      said.push(my);
+      wrongBox.classList.add('hidden');
+      inp.readOnly=true; inp.blur(); el('okBtn').disabled=true;
+      ri++;
+      if(ri<rounds.length){ renderRound(); return; }
+      finishConv();
+    };
+  }
+
+  // 마지막 라운드까지 끝나면 **내가 쓴 말들이 그대로 남은 대화**가 결과가 된다.
+  // 같은 초록 조각이 여러 줄에 반복되는 것이 "이 표현을 내가 쓴다"의 근거다.
+  function finishConv(){
+    ri=rounds.length;
+    const p=item.pattern||{}, form=(p.form||'').trim(), pmean=(p.meaning||'').trim();
+    stage.innerHTML=`
+      <div class="stage-scroll">
+        <div class="chat-card correct" id="card">
+          <div class="chat-tag rv">말해보기</div>
+          ${turnsHtml()}
+          <div class="check-mark">✓</div>
+          ${resultActionsHtml()}
+        </div>
+        <div class="payoff">
+          <div class="chat-tag rv">학습 정보</div>
+          ${form?`<div class="pf-form">${escapeHtml(form).replace(/_{2,}|~/g,'<span class="slot"></span>')}</div>`:''}
+          ${pmean?`<div class="pf-mean">${escapeHtml(pmean)}</div>`:''}
+          <div class="pf-div"></div>
+          <div class="pf-sub"><span class="ic">ⓘ</span>이 표현으로 만든 문장 ${said.length}개</div>
+          ${said.map((x,i)=>`<div class="pf-cmp"><div class="pf-cmp-en">${frameLine(x, null, item.frame)}</div>
+            <div class="pf-cmp-kr">${escapeHtml(rounds[i].a.kr)}</div></div>`).join('')}
+        </div>
+      </div>
+      <div class="stage-bottom" id="bottom">${arrangeBottomHtml(lastItem()?'완료하기':'다음 문제')}</div>`;
+    said.forEach(x=>builtSet.add(x));
+    said.forEach((x,i)=>{ if(!made.some(m=>m.en===x)) made.push({en:x, kr:rounds[i].a.kr}); });
+    el('nextBtn').onclick=advanceItem;
+  }
+
+  renderRound();
+}
+
 function renderSpeak(preset){
   curStep=renderSpeak;
   if(preset && !preset.en) preset=null;        // 이벤트 등이 새어 들어오면 무시한다
@@ -1351,6 +1549,7 @@ function renderSpeak(preset){
   // 카드를 놓아 만든다(`place`). f 만 채점이 열려 있다(아래).
   const V=spkVar, arrange=(V==='c'), place=arrange, pair=(V==='f');
   const noMats=(V==='b'||pair);
+  if(V==='g' && speakRounds(item).length>=2) return renderSpeakConv();
   setProgress(3);
 
   const t = preset || speakTarget(item);
@@ -1607,41 +1806,14 @@ function renderSpeak(preset){
       if(ni>=0){ usedN[ni]=true; usedG[gi]=true; fixes.push({i:gi, from:typedArr[gi], to:allowedWords[ni]}); } });
     return { extra:got.filter((_,i)=>!usedG[i]), missing:need.filter((_,i)=>!usedN[i]), fixes };
   }
-  // 프레임 조각이 순서대로 들어 있는지(굴절·오타 허용) — 들어 있으면 **그 낱말들의
-  // 자리**를 돌려준다. 채점이 인정한 자리를 그대로 오타 교정·길이 검사에 쓰므로
-  // 무엇을 프레임으로 봤는지와 무엇을 고칠지가 어긋나지 않는다.
-  const SFX=['s','es','ed','d','ing'];
-  function framePositions(words){
-    let from=0; const hit=[];
-    const ok=(item.frame||[]).every(lit=>{
-      const ws=lit.split(/\s+/).map(bare).filter(Boolean);
-      for(let i=from;i+ws.length<=words.length;i++){
-        if(ws.every((w,k)=>{ const c=words[i+k];
-          return nearWord(c,w) || SFX.some(sfx=>nearWord(c,w+sfx)); })){
-          ws.forEach((w,k)=>hit.push({at:i+k, want:w}));
-          from=i+ws.length; return true;
-        }
-      }
-      return false;
-    });
-    return ok ? hit : null;
-  }
+  const framePositions=w=>framePos(w, item.frame);
   function usedFrame(words){ return !!framePositions(words); }
   // F 는 재료를 주지 않으므로 **표현만 맞으면 통과**시킨다 — 같은 한국어를 옮기는 영어는
   // 여러 가지라, 재료로 답을 닫아 두지 않으면서 정확일치만 받으면 `다른 낱말이 생각나는`
   // 맞는 답이 전부 막힌다. 대신 프레임뿐인 답(`Don't be.`)과 **위 문장을 그대로 옮겨 적은
   // 답**은 막는다 — 이 단계의 과제는 낱말을 갈아 끼워 **새 문장**을 만드는 것이다.
   // 통과하면 프레임 낱말의 오타만 정답 철자로 굳힌다(굴절형은 건드리지 않는다).
-  function frameFixes(words, pos){
-    const frAll=(item.frame||[]).join(' ').split(/\s+/).filter(Boolean), fixes=[];
-    pos.forEach(p=>{
-      const w=words[p.at], b=bare(w);
-      if(b===p.want) return;
-      if(SFX.some(sfx=>p.want+sfx===b)) return;
-      fixes.push({i:p.at, from:w, to:(frAll.find(f=>bare(f)===p.want) || p.want)});
-    });
-    return fixes;
-  }
+  const frameFixes=(words,pos)=>frameFix(words, pos, item.frame);
   el('okBtn').onclick=()=>{
     if(done) return;
     const words=typedWords();
