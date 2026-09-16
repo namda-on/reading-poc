@@ -197,6 +197,14 @@
     font-size:16px; font-weight:800; color:#b6c3d4; letter-spacing:2px; }
   /* [4] 말해보기 — 배운 표현으로 새 문장 만들기 */
   .sp-q { font-size:13.5px; font-weight:700; color:#5b7c93; }
+  /* [4] 방식 F — 방금 만든 문장을 **옆에 둔다**. 효용감의 근거는 문구가 아니라
+     같은 초록 조각이 두 문장에 반복되는 것이고(결과창과 같은 원리), 두 번째 줄을
+     내가 채우는 것이 곧 `이 표현을 내가 쓴다`이다. 그래서 참조는 감추지 않는다. */
+  .sp-ref { background:#f4f8fd; border:1px solid #e2ebf7; border-radius:12px; padding:11px 13px 12px; margin-top:14px; }
+  .sp-ref .lbl { font-size:11.5px; font-weight:800; color:#a6b6c9; letter-spacing:.02em; }
+  .sp-ref-en { font-size:17px; font-weight:700; color:#8c9bb0; margin-top:4px; }
+  .sp-ref-en .tgt { color:#22794a; font-weight:800; }
+  .sp-ref-kr { font-size:12.5px; color:#a6b6c9; margin-top:2px; }
   /* [4] 재료 — 표현은 여기 없다. 답의 범위만 닫아 두고 조합은 유저가 한다.
      답 자리(슬롯) **위**에 둔다 — 아래는 키보드가 올라오는 자리이고, 읽는 순서가
      `뜻 → 재료 → 그 재료를 놓을 자리`가 되어야 조립하는 화면으로 읽힌다. */
@@ -421,7 +429,7 @@ const SPK_VARS={
   a:{label:'A 재료 상시', desc:'함께 쓸 낱말을 처음부터 보여주고 문장 전체를 타이핑'},
   b:{label:'B 칸 채우기', desc:'재료를 감추고, 힌트는 지금 막힌 칸을 하나씩 채운다'},
   c:{label:'C 트랩 배열', desc:'낱말을 탭해 배열한다 — 뱅크에 함정이 섞여 있다'},
-  e:{label:'E 고르고 직접 쓰기', desc:'이 표현으로 할 말을 내가 고르고, 재료 없이 직접 쓴다'},
+  f:{label:'F 한 문장 더', desc:'방금 만든 문장을 옆에 두고, 낱말만 바꿔 한 문장 더 쓴다'},
 };
 let spkVar=(()=>{ try{ const v=localStorage.getItem(SPKV_KEY); return SPK_VARS[v]?v:'a'; }catch(e){ return 'a'; } })();
 function setSpkVar(v){
@@ -1021,7 +1029,7 @@ function renderPattern(){
     el('card').insertAdjacentHTML('beforeend', resultActionsHtml());
     el('payoffBox').innerHTML=patternPayoffHtml(item);
     el('bottom').innerHTML=arrangeBottomHtml('다음 단계');
-    el('nextBtn').onclick=renderSpeak;
+    el('nextBtn').onclick=()=>renderSpeak();   // 인자 없이 — 핸들러로 넘기면 이벤트가 대상으로 들어온다
   }
 
   function grade(){
@@ -1183,7 +1191,7 @@ function renderExpand(){
     el('card').insertAdjacentHTML('beforeend', resultActionsHtml());
     el('payoffBox').innerHTML=patternPayoffHtml(item);
     el('bottom').innerHTML=arrangeBottomHtml('다음 단계');
-    el('nextBtn').onclick=renderSpeak;
+    el('nextBtn').onclick=()=>renderSpeak();   // 인자 없이 — 핸들러로 넘기면 이벤트가 대상으로 들어온다
   }
 
   function grade(){
@@ -1334,57 +1342,21 @@ function speakTarget(item){
     return b;
   }, null);
 }
-// 방식 E — 이 표현으로 **할 수 있는 말들**을 한국어로 늘어놓고 하나를 고르게 한다.
-// 고르는 대상이 표현이 아니라 **내가 말하고 싶은 것**이라 `어떤 표현을 쓸까요?`처럼
-// 진행자의 말이 되지 않고, 늘어놓는 것 자체가 `이 표현이 이런 데도 쓰이는구나`를
-// 전한다(결과창의 `단어만 바꿔서 이렇게도 말할 수 있어요`를 푸는 행위 안으로 옮긴 것).
-// 후보는 형제 문장의 한국어를 그대로 쓰므로 새 데이터가 필요 없다 — 짧은 것부터 셋.
-function sayOptions(item){
-  const wl=x=>x.trim().split(/\s+/).length, pool=[];
-  (item.apply||[]).forEach(a=>{ if(a.en!==item.sentence.en && a.kr) pool.push({en:a.en, kr:a.kr, segs:a.segs, ask:a.ask}); });
-  (item.siblings||[]).forEach(a=>{ if(a.en!==item.sentence.en && a.kr && !pool.some(p=>p.en===a.en)) pool.push({en:a.en, kr:a.kr}); });
-  // 표현이 곧 문장 전체인 후보(`Have fun!`)는 뺀다 — 그러면 새로 세울 것이 없어
-  // 표현을 그대로 옮겨 적는 일이 된다. 전부 그런 문항은 어쩔 수 없이 그대로 쓴다.
-  const frN=(item.frame||[]).join(' ').split(/\s+/).filter(Boolean).length;
-  const list=pool.filter(a=>wl(a.en)<=7), rich=list.filter(a=>wl(a.en)>frN);
-  return (rich.length?rich:list).sort((x,y)=>wl(x.en)-wl(y.en)).slice(0,3);
-}
 function renderSpeak(preset){
   curStep=renderSpeak;
+  if(preset && !preset.en) preset=null;        // 이벤트 등이 새어 들어오면 무시한다
   const item=sessionItems[itemIdx];
   // 방식(`ve:spkv`) — 대상 문장·단계 수는 넷 다 같다. 다른 것은 **과제를 어떤 조작으로
-  // 세우고 지원을 어떤 형태로 주는가**뿐이다. a/b/e 는 타이핑하고, c 는 아래 뱅크에서
-  // 카드를 놓아 만든다(`place`). e 만 채점이 열려 있다(아래).
-  const V=spkVar, arrange=(V==='c'), place=arrange, choose=(V==='e');
-  const noMats=(V==='b'||choose);
+  // 세우고 지원을 어떤 형태로 주는가**뿐이다. a/b/f 는 타이핑하고, c 는 아래 뱅크에서
+  // 카드를 놓아 만든다(`place`). f 만 채점이 열려 있다(아래).
+  const V=spkVar, arrange=(V==='c'), place=arrange, pair=(V==='f');
+  const noMats=(V==='b'||pair);
   setProgress(3);
 
-  // E 의 첫 박자 — 무슨 말을 할지 고른다. 후보가 둘 미만이면 고를 것이 없으므로
-  // 건너뛰고 기존 규칙(`speakTarget`)으로 대상을 정한다.
-  const sayOpts = choose ? sayOptions(item) : [];
-  if(choose && !preset && sayOpts.length>=2){
-    stage.innerHTML=`
-    <div class="stage-scroll">
-      <div class="chat-card" id="card">
-        <div class="chat-tag rv">말해보기</div>
-        <div class="sp-q">이 표현으로 무슨 말을 해 볼까요?</div>
-        <div class="sit-opts" id="sayOpts">
-          ${sayOpts.map((a,i)=>`<button class="sit-opt" data-i="${i}"><span class="ic">🎤</span>${escapeHtml(a.kr)}</button>`).join('')}
-        </div>
-      </div>
-    </div>
-    <div class="stage-bottom">
-      <div class="vtools">
-        <button class="vtool" disabled><span class="ic">?</span><span>표현 보기</span></button>
-        <button class="vtool mic" disabled><span class="ic">🎤</span><span>음성 모드</span></button>
-      </div>
-      <div class="arr-btns" style="margin-top:12px"><button class="btn-confirm" disabled>확인</button></div>
-    </div>`;
-    el('sayOpts').querySelectorAll('.sit-opt').forEach(b=> b.onclick=()=>renderSpeak(sayOpts[+b.dataset.i]));
-    return;
-  }
   const t = preset || speakTarget(item);
-  const byEn = spkMode==='en' && t.ask;
+  // F 는 **문장 대 문장**의 대비가 과제라 자극이 한국어여야 한다(A 질문으로 바뀌면
+  // 무엇을 갈아 끼우는지가 흐려진다)
+  const byEn = spkMode==='en' && t.ask && !pair;
 
   const bare=w=>String(w).toLowerCase().replace(/[^a-z0-9']/g,'');
   // 재료 = 프레임이 아닌 낱말들(섞어서). 표현은 넣지 않는다 — 그게 이 단계의 과제다.
@@ -1415,6 +1387,14 @@ function renderSpeak(preset){
           </div>
         </div>
         <div class="sp-q sp-after">${escapeHtml(ask)}</div>`
+    : pair
+    ? `<div class="sp-ref">
+          <div class="lbl">방금 만든 문장</div>
+          <div class="sp-ref-en">${frameLine(item.sentence.en, item.baseSegs, item.frame)}</div>
+          <div class="sp-ref-kr">${escapeHtml(item.sentence.kr)}</div>
+        </div>
+        <div class="sp-q sp-after">낱말만 바꿔서 한 문장 더 만들어 보세요</div>
+        <div class="sp-kr">${escapeHtml(t.kr)}</div>`
     : `<div class="sp-q">${escapeHtml(ask)}</div>
         <div class="sp-kr">${escapeHtml(t.kr)}</div>`;
 
@@ -1647,10 +1627,11 @@ function renderSpeak(preset){
     return ok ? hit : null;
   }
   function usedFrame(words){ return !!framePositions(words); }
-  // E 는 재료를 주지 않으므로 **표현만 맞으면 통과**시킨다 — 같은 한국어를 옮기는 영어는
+  // F 는 재료를 주지 않으므로 **표현만 맞으면 통과**시킨다 — 같은 한국어를 옮기는 영어는
   // 여러 가지라, 재료로 답을 닫아 두지 않으면서 정확일치만 받으면 `다른 낱말이 생각나는`
-  // 맞는 답이 전부 막힌다. 대신 프레임뿐인 답(`Don't be.`)은 문장이 아니므로 막는다.
-  // 그때 프레임 낱말의 오타만 정답 철자로 굳힌다(굴절형은 건드리지 않는다).
+  // 맞는 답이 전부 막힌다. 대신 프레임뿐인 답(`Don't be.`)과 **위 문장을 그대로 옮겨 적은
+  // 답**은 막는다 — 이 단계의 과제는 낱말을 갈아 끼워 **새 문장**을 만드는 것이다.
+  // 통과하면 프레임 낱말의 오타만 정답 철자로 굳힌다(굴절형은 건드리지 않는다).
   function frameFixes(words, pos){
     const frAll=(item.frame||[]).join(' ').split(/\s+/).filter(Boolean), fixes=[];
     pos.forEach(p=>{
@@ -1672,8 +1653,13 @@ function renderSpeak(preset){
     if(nz(txt)===nz(t.en)) return finish(true, []);
     // 표현을 아직 안 썼으면 지적하는 대신 **오답노트 팁을 연다** — [2] 화면과 같은 규약
     const pos=framePositions(words.map(bare));
-    if(!pos){ wrongBox.classList.add('hidden'); tipByFail(); return; }
-    if(choose){
+    if(!pos){
+      // F 는 표현이 위 문장에 초록으로 있으므로 팁을 여는 대신 그쪽을 가리킨다
+      if(pair){ wrongBox.innerHTML='위 문장의 <b>초록 부분</b>을 그대로 써야 해요.'; return; }
+      wrongBox.classList.add('hidden'); tipByFail(); return;
+    }
+    if(pair){
+      if(nz(txt)===nz(item.sentence.en)){ wrongBox.innerHTML='그건 방금 만든 문장이에요. <b>낱말을 바꿔</b> 새 문장을 만들어 보세요.'; return; }
       if(words.length-pos.length<1){ wrongBox.innerHTML='표현만으로는 문장이 되지 않아요. 하고 싶은 말을 이어서 써 보세요.'; return; }
       return finish(false, frameFixes(words, pos));
     }
@@ -1689,12 +1675,17 @@ function renderSpeak(preset){
   const ladder = place
     ? [ {label:'표현 보기', run:openTip},
         {label:'정답 보기', note:()=>`정답<b>${escapeHtml(t.en)}</b>`} ]
+    : pair
+    // 표현은 위 문장에 초록으로 이미 보인다 — `표현 보기`를 또 두면 같은 것을 두 번 준다
+    ? [ {label:'첫 단어 보기', note:()=>`첫 단어<b>${escapeHtml(tok[0])} …</b>`},
+        {label:'정답 보기', note:()=>`정답<b>${escapeHtml(t.en)}</b>`} ]
     : V==='b'
     ? [ {label:'표현 보기', run:openTip},
         {label:'한 칸 채우기', run:fillGap, repeat:true, left:()=>gapIndex()>=0} ]
     : [ {label:'표현 보기', run:openTip},
         {label:'첫 단어 보기', note:()=>`첫 단어<b>${escapeHtml(tok[0])} …</b>`},
         {label:'정답 보기', note:()=>`정답<b>${escapeHtml(t.en)}</b>`} ];
+  el('hintLabel').textContent=ladder[0].label;   // 사다리 첫 칸이 방식마다 다르다
   function advanceHint(){
     const d=ladder[hintLevel]; if(!d) return;
     if(d.run) d.run();
