@@ -66,9 +66,6 @@
   .opt-row { display:flex; align-items:center; justify-content:space-between; gap:10px; padding:7px 0; }
   .opt-row .rt { font-size:12.5px; font-weight:700; color:#3a567d; }
   .seg { display:flex; gap:6px; }
-  .seg.wrap { flex-wrap:wrap; }
-  .seg.wrap .seg-b { flex:1 1 46%; text-align:left; }
-  .seg-b .sd { display:block; font-size:10.5px; font-weight:600; opacity:.75; margin-top:2px; }
   .seg-b { flex:1; border:1.5px solid #cfe0f5; background:#fff; color:#5b7c93; border-radius:10px; padding:9px 6px; font-size:12.5px; font-weight:800; cursor:pointer; }
   .seg-b.on { background:#46b366; border-color:#46b366; color:#fff; }
   .opt-div { height:1px; background:#e4ebf4; margin:11px 0 9px; }
@@ -221,15 +218,6 @@
   /* 칸보다 많이 쓰면 넘친 칸을 따로 표시한다 — 재료를 더 쓴 것이 바로 보인다 */
   .sp-slot.extra { background:#fdeff0; border-color:#f3cdd0; }
   .sp-catch { position:absolute; inset:0; width:100%; height:100%; opacity:0; border:none; padding:0; background:none; font-size:16px; }
-  /* `방금 만든 문장` — 교실에서 선생이 "`~노 마에니`를 배웠죠, 그럼—" 하고 짚는 자리.
-     지원이 아니라 **직전에 내가 한 일**이라 화면에 있어도 답을 주는 느낌이 없다. */
-  .sp-model { background:#f2f6fc; border-radius:13px; padding:11px 14px 12px; margin-top:14px; }
-  .sp-model .lbl { font-size:11.5px; font-weight:800; color:#a9b6c8; letter-spacing:-.02em; }
-  .sp-model .en { font-size:16px; font-weight:700; color:#5b6c80; line-height:1.4; margin-top:5px; }
-  .sp-model .kr { font-size:12.5px; color:#a3b0c1; margin-top:2px; }
-  /* 재료가 힌트로 열릴 때 — 아래에서 올라온다([2]·[3] 전환과 같은 방향) */
-  .sp-rise { animation:spRise .3s cubic-bezier(.32,.02,.24,1) both; }
-  @keyframes spRise { from{ opacity:0; transform:translateY(8px);} to{ opacity:1; transform:none;} }
   /* 정답 후 — 완성 문장을 낱말 타일로 굳힌다(프레임만 초록) */
   .sp-tiles { display:flex; flex-wrap:wrap; gap:8px; }
   .sp-tile { background:#eaf1fb; border:1.5px solid #dce7f6; border-radius:10px; padding:9px 12px;
@@ -396,7 +384,7 @@ function escapeHtml(s){ return String(s).replace(/[&<>"]/g, c=>({'&':'&amp;','<'
 
 // localStorage — 버전(A/B)과 진행 위치. 위치는 두 버전이 공유해서
 // 같은 문항을 버전만 바꿔 바로 비교할 수 있게 한다.
-const VER_KEY='ve:ver', POS_KEY='ve:pos', SIT_KEY='ve:sit', FLOW_KEY='ve:flow', SPK_KEY='ve:spk', SPK4_KEY='ve:spk4';
+const VER_KEY='ve:ver', POS_KEY='ve:pos', SIT_KEY='ve:sit', FLOW_KEY='ve:flow', SPK_KEY='ve:spk';
 function getPos(){ try{ return Number(localStorage.getItem(POS_KEY))||0; }catch(e){ return 0; } }
 function setPos(n){ try{ localStorage.setItem(POS_KEY, String(n)); }catch(e){} }
 
@@ -417,22 +405,6 @@ function setSpkMode(m){
 }
 // [4] 말해보기의 **방식**(자극 언어와는 직교하는 축). 모두 단계 수가 같고 채점 규칙이
 // 같으며 새 데이터를 쓰지 않는다 — 다른 것은 **지원을 어떤 종류로 언제 주는가**뿐이다.
-// `mat` — 재료를 언제 주는가('start' 상시 / 'hint' 막혔을 때 힌트로)
-// `model` — [2]·[3]에서 방금 만든 문장을 위에 남기는가
-// `trap`  — 쓸 수 있는 낱말에 안 쓰는 낱말을 섞는가
-const SPK4={
-  a:{label:'재료 상시',     desc:'재료를 처음부터 모두 보여준다', mat:'start'},
-  g:{label:'재료는 힌트로', desc:'막히면 힌트로 재료를 연다',     mat:'hint'},
-  f:{label:'방금 만든 문장', desc:'직전 문장을 남기고 재료는 힌트로', mat:'hint', model:true},
-  c:{label:'함정 섞기',     desc:'쓸 수 있는 낱말에 함정이 섞인다', mat:'start', trap:true},
-};
-let spk4=(()=>{ try{ const v=localStorage.getItem(SPK4_KEY); return SPK4[v]?v:'a'; }catch(e){ return 'a'; } })();
-function setSpk4(m){
-  if(!SPK4[m]) return;
-  spk4=m;
-  try{ localStorage.setItem(SPK4_KEY, spk4); }catch(e){}
-  renderSitOption(); applyStepOption();
-}
 let sitOn=(()=>{ try{ return localStorage.getItem(SIT_KEY)!=='0'; }catch(e){ return true; } })();
 function setSitOn(v){
   sitOn=!!v;
@@ -453,10 +425,6 @@ function renderSitOption(){
     box.innerHTML=`<div class="opt-row"><span class="rt">${SIT_ROW}</span>
         <button class="opt-sw${sitOn?' on':''}" data-k="sit" aria-label="${SIT_ROW}"></button></div>
       <div class="opt-div"></div>
-      <div class="opt-label">[4] 말해보기 방식</div>
-      <div class="seg wrap">${Object.entries(SPK4).map(([k,v])=>
-        `<button class="seg-b s4${spk4===k?' on':''}" data-s4="${k}">${escapeHtml(v.label)}<span class="sd">${escapeHtml(v.desc)}</span></button>`).join('')}</div>
-      <div class="opt-div"></div>
       <div class="opt-label">[4] 말해보기 자극</div>
       <div class="seg">
         <button class="seg-b" data-m="kr">${spkMode==='kr'?'✓ ':''}한국어 → 영어</button>
@@ -465,7 +433,6 @@ function renderSitOption(){
     box.querySelectorAll('.seg-b[data-m]').forEach(b=> b.classList.toggle('on', b.dataset.m===spkMode));
     box.querySelector('.opt-sw').onclick=()=>setSitOn(!sitOn);
     box.querySelectorAll('.seg-b[data-m]').forEach(b=> b.onclick=()=>setSpkMode(b.dataset.m));
-    box.querySelectorAll('.seg-b[data-s4]').forEach(b=> b.onclick=()=>setSpk4(b.dataset.s4));
   });
 }
 
@@ -1289,47 +1256,22 @@ function speakTarget(item){
     return b;
   }, null);
 }
-// 함정 낱말 — **같은 표현의 형제 문장 슬롯**에서 뽑는다(새 데이터 0). 모자라면
-// 빌드가 구워 둔 `traps`(프레임 낱말을 갈아끼운 오답)로 채운다.
-function speakTraps(item, t, n){
-  const bare=w=>String(w).toLowerCase().replace(/[^a-z0-9']/g,'');
-  const used=new Set(tokenize(t.en).map(bare));
-  const out=[];
-  const add=w=>{ const k=bare(w);
-    if(!k || used.has(k) || out.some(x=>bare(x)===k)) return;
-    out.push(w.replace(/[.?!,]+$/,'')); };
-  (item.apply||[]).forEach(a=>{ if(a.en===t.en) return;
-    (a.segs||[]).filter(g=>g.t==='slot').forEach(g=> g.s.split(/\s+/).forEach(add)); });
-  (item.traps||[]).forEach(add);
-  return out.slice(0, n);
-}
 function renderSpeak(){
   curStep=renderSpeak;
   const item=sessionItems[itemIdx], t=speakTarget(item);
   const byEn = spkMode==='en' && t.ask;
-  const opt = SPK4[spk4] || SPK4.a;
   setProgress(3);
 
   // 재료 = 프레임이 아닌 낱말들(섞어서). 표현은 넣지 않는다 — 그게 이 단계의 과제다.
   const tok=tokenize(t.en), flag=frameFlags(tok, t.segs);
   const matWords=tok.filter((w,i)=>!flag[i]);
   const frWords=tok.filter((w,i)=>flag[i]);
-  const trapWords=opt.trap ? speakTraps(item, t, 2) : [];
-  const mats=shuffle(matWords.concat(trapWords));
-  const byHint = opt.mat==='hint';
+  const mats=shuffle(matWords);
   let done=false, hintLevel=0;
 
-  const ask = byEn ? '배운 표현을 넣어 답해 보세요'
-            : (opt.model ? '이번엔 이렇게 말해 보세요' : '배운 표현을 넣어 이 문장을 만들어 보세요');
-  // `방금 만든 문장` — 지원이 아니라 직전에 내가 한 일이다. 교실에서 선생이
-  // "`~노 마에니`를 배웠죠, 그럼—" 하고 짚는 자리와 같다.
-  const model = opt.model ? `<div class="sp-model">
-        <div class="lbl">방금 이렇게 만들었죠</div>
-        <div class="en">${frameLine(item.sentence.en, item.baseSegs, item.frame)}</div>
-        <div class="kr">${escapeHtml(item.sentence.kr)}</div>
-      </div>` : '';
+  const ask = byEn ? '배운 표현을 넣어 답해 보세요' : '배운 표현을 넣어 이 문장을 만들어 보세요';
   const head = byEn
-    ? `${model}<div class="sit-turn a">
+    ? `<div class="sit-turn a">
           <div class="sit-role">A</div>
           <div class="sit-bubble">
             <div class="sit-en">${escapeHtml(t.ask.en)}</div>
@@ -1337,12 +1279,8 @@ function renderSpeak(){
           </div>
         </div>
         <div class="sp-q sp-after">${escapeHtml(ask)}</div>`
-    : `${model}<div class="sp-q${opt.model?' sp-after':''}">${escapeHtml(ask)}</div>
+    : `<div class="sp-q">${escapeHtml(ask)}</div>
         <div class="sp-kr">${escapeHtml(t.kr)}</div>`;
-
-  // 재료 줄의 라벨은 내용과 맞아야 한다 — 안 쓰는 낱말이 섞여 있는데 `함께 쓸 낱말`이면
-  // 화면이 거짓말을 한다. 함정을 넣는 방식만 `쓸 수 있는 낱말`로 부른다.
-  const matLabel = opt.trap ? '쓸 수 있는 낱말' : '함께 쓸 낱말';
 
   stage.innerHTML=`
     <div class="stage-scroll">
@@ -1350,7 +1288,7 @@ function renderSpeak(){
         <div class="chat-tag rv">말해보기</div>
         ${head}
         <div class="nb-tip hidden" id="nbTip"></div>
-        <div class="sp-mat${byHint?' hidden':''}" id="spMat"><span class="lbl">${matLabel}</span>${mats.map(w=>`<span class="mat" data-w="${escapeHtml(w.toLowerCase().replace(/[^a-z0-9']/g,''))}">${escapeHtml(w)}</span>`).join('')}</div>
+        <div class="sp-mat" id="spMat"><span class="lbl">함께 쓸 낱말</span>${mats.map(w=>`<span class="mat" data-w="${escapeHtml(w.toLowerCase().replace(/[^a-z0-9']/g,''))}">${escapeHtml(w)}</span>`).join('')}</div>
         <div class="sp-in" id="spIn"><div class="sp-slots" id="spSlots"></div><input class="sp-catch" id="spCatch" type="text"
           autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done" /></div>
         <div class="wrong-box hidden" id="wrongBox"></div>
@@ -1514,9 +1452,7 @@ function renderSpeak(){
   // 그다음 칸만 방식에 따라 갈린다(재료를 감췄으면 `재료 보기`, 이미 보이면 `첫 단어`).
   const ladder = [
     {label:'표현 보기', run:openTip},
-    byHint
-      ? {label:'재료 보기', run:()=>{ const m=el('spMat'); m.classList.remove('hidden'); m.classList.add('sp-rise'); syncMats(); }}
-      : {label:'첫 단어 보기', note:()=>`첫 단어<b>${escapeHtml(tok[0])} …</b>`},
+    {label:'첫 단어 보기', note:()=>`첫 단어<b>${escapeHtml(tok[0])} …</b>`},
     {label:'정답 보기', note:()=>`정답<b>${escapeHtml(t.en)}</b>`},
   ];
   function advanceHint(){
