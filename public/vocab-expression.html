@@ -205,7 +205,8 @@
      같은 표현으로 문장을 연달아 쓴다. 표현이 상시 보이므로 과제는 '떠올리기'가 아니라
      **자리마다 다른 모양으로 끼워 보기**다(`put the TV on` / `put something funny on`). */
   .sh-head { margin-top:2px; padding-bottom:11px; border-bottom:1.5px solid #e8eef7; }
-  .sh-form { font-size:23px; font-weight:800; color:#22794a; letter-spacing:-.01em; }
+  .sh-lbl { font-size:11.5px; font-weight:800; color:#a6b6c9; letter-spacing:.02em; }
+  .sh-form { font-size:22px; font-weight:800; color:#22794a; letter-spacing:-.01em; margin-top:2px; }
   .sh-mean { font-size:13.5px; font-weight:700; color:#8c9bb0; margin-top:3px; }
   .sh-q { font-size:13px; font-weight:700; color:#a6b6c9; margin-top:12px; }
   .sh-rows { margin-top:4px; }
@@ -1409,11 +1410,12 @@ function renderSpeakSheet(){
       <div class="chat-card sheet" id="card">
         <div class="chat-tag rv">말해보기</div>
         <div class="sh-head">
-          <div class="sh-form">${escapeHtml(exprLabel(p.form)||(item.frame||[]).join(' … '))}</div>
-          ${p.meaning?`<div class="sh-mean">${escapeHtml(p.meaning)}</div>`:''}
+          <div class="sh-lbl">이번에 배운 표현</div>
+          <div class="sh-form">${escapeHtml(p.meaning||'')}</div>
         </div>
         <div class="sh-q">이 표현으로 아래 문장들을 만들어 보세요</div>
         <div class="sh-rows" id="shRows"></div>
+        <div class="nb-tip hidden" id="nbTip"></div>
         <div class="wrong-box hidden" id="wrongBox"></div>
         <div class="reveal-note hidden" id="revealNote"></div>
       </div>
@@ -1421,7 +1423,7 @@ function renderSpeakSheet(){
     </div>
     <div class="stage-bottom" id="bottom">
       <div class="vtools" id="vtools">
-        <button class="vtool" id="hintBtn"><span class="ic">?</span><span id="hintLabel">첫 단어 보기</span></button>
+        <button class="vtool" id="hintBtn"><span class="ic">?</span><span id="hintLabel">표현 보기</span></button>
         <button class="vtool mic" disabled><span class="ic">🎤</span><span>음성 모드</span></button>
       </div>
       <div class="arr-btns" style="margin-top:12px">
@@ -1429,19 +1431,18 @@ function renderSpeakSheet(){
       </div>
     </div>`;
   const wrongBox=el('wrongBox');
+  // 표현을 못 떠올렸을 때 여는 줄 — [2] 화면과 같은 규약이라 새 표기가 아니다
+  function openTip(){ const tip=el('nbTip'); tip.innerHTML=nbTipHtml(item); tip.classList.remove('hidden'); }
 
-  // 첫 줄은 [2]·[3]에서 방금 만든 학습 문장이 **채워진 채로** 놓인다 — 연습지 1번이
-  // 예시로 적혀 있는 자리다. 표현이 실제 문장에서 어떤 모양인지 여기서 먼저 보인다.
+  // 채워진 답을 미리 두지 않는다 — 모범 답안이 위에 있으면 그걸 보고 옮겨 적는 일이 된다.
+  // 위에 쌓이는 것은 **내가 쓴 줄**뿐이다.
   function rowHtml(n, kr, enHtml, cls){
     return `<div class="sh-row${cls?' '+cls:''}"><span class="sh-n">${n}</span>
       <div class="sh-body"><div class="sh-kr">${escapeHtml(kr)}</div>${enHtml}</div></div>`;
   }
   function doneHtml(){
-    let h=rowHtml(1, item.sentence.kr,
-      `<div class="sh-en">${frameLine(item.sentence.en, item.baseSegs, item.frame)}</div>`, 'ex');
-    wrote.forEach((m,i)=>{ h+=rowHtml(i+2, m.kr,
-      `<div class="sh-en">${frameLine(m.en, m.segs, item.frame)}</div>`, 'mine'); });
-    return h;
+    return wrote.map((m,i)=>rowHtml(i+1, m.kr,
+      `<div class="sh-en">${frameLine(m.en, m.segs, item.frame)}</div>`, 'mine')).join('');
   }
 
   function startRow(){
@@ -1455,7 +1456,7 @@ function renderSpeakSheet(){
     let hintLevel=0;
 
     el('shRows').innerHTML = doneHtml() + `
-      <div class="sh-row cur grow-in"><span class="sh-n">${wrote.length+2}</span>
+      <div class="sh-row cur grow-in"><span class="sh-n">${wrote.length+1}</span>
         <div class="sh-body">
           <div class="sh-kr">${escapeHtml(t.kr)}</div>
           ${gives.length?`<div class="sh-give">${gives.map(g=>`<span class="give">${escapeHtml(g)}</span>`).join('')}</div>`:''}
@@ -1464,6 +1465,7 @@ function renderSpeakSheet(){
         </div></div>`;
     const inp=el('spCatch');
     wrongBox.classList.add('hidden');
+    el('nbTip').classList.add('hidden');
     el('revealNote').classList.add('hidden');
     setTimeout(()=>inp.focus(), 80);
 
@@ -1517,9 +1519,11 @@ function renderSpeakSheet(){
       const nz=x=>x.join(' ').toLowerCase().replace(/[^a-z0-9']+/g,' ').trim();
       if(nz(words)===nz(tokenize(t.en).concat(trailPunct(t.en)))) return pass(true, []);
       wrongBox.classList.remove('hidden');
-      // 표현을 아직 안 썼으면 **표제를 가리킨다** — 표현은 이미 맨 위에 떠 있다
+      // 표현을 아직 안 썼으면 지적하는 대신 **오답노트 팁을 연다**([2]·A와 같은 규약).
+      // 그때 사다리 첫 칸을 쓴 것으로 친다 — 같은 지원을 두 번 세지 않는다.
       if(!framePos(words.map(bare), item.frame)){
-        wrongBox.innerHTML=`위의 <b>${escapeHtml(exprLabel(p.form)||(item.frame||[]).join(' … '))}</b> 를 넣어야 해요.`;
+        wrongBox.classList.add('hidden');
+        if(hintLevel===0 && ladder[0].run) hb.click(); else openTip();
         return;
       }
       const { extra, missing, fixes } = matchWords(words);
@@ -1528,15 +1532,18 @@ function renderSpeakSheet(){
       pass(false, fixes);
     };
 
-    // 표현은 표제에 상시 떠 있으므로 사다리에 `표현 보기`를 두지 않는다 — 같은 것을
-    // 두 번 주게 된다. 남은 칸은 문장을 여는 실마리와 정답뿐이다.
-    const ladder=[ {label:'첫 단어 보기', note:()=>`첫 단어<b>${escapeHtml(tok[0])} …</b>`},
+    // 사다리 첫 칸은 `표현 보기`다([2]·A와 같은 규약) — 표현은 화면 어디에도 없다.
+    // 단 **두 줄째부터는 빼낸다**: 내가 쓴 줄이 위에 있고 거기 표현이 초록으로 보이므로
+    // 같은 것을 두 번 주게 된다.
+    const ladder=[ ...(wrote.length?[]:[{label:'표현 보기', run:openTip}]),
+                   {label:'첫 단어 보기', note:()=>`첫 단어<b>${escapeHtml(tok[0])} …</b>`},
                    {label:'정답 보기', note:()=>`정답<b>${escapeHtml(t.en)}</b>`} ];
     const hb=el('hintBtn'), hl=el('hintLabel');
     hb.disabled=false; hb.querySelector('.ic').textContent='?'; hl.textContent=ladder[0].label;
     hb.onclick=()=>{
       const d=ladder[hintLevel]; if(!d) return;
-      const rn=el('revealNote'); rn.classList.remove('hidden'); rn.innerHTML=d.note();
+      if(d.run) d.run();
+      if(d.note){ const rn=el('revealNote'); rn.classList.remove('hidden'); rn.innerHTML=d.note(); }
       hintLevel++;
       const next=ladder[hintLevel];
       if(next){ hl.textContent=next.label; hb.querySelector('.ic').textContent='✔'; }
@@ -1548,7 +1555,7 @@ function renderSpeakSheet(){
   function finish(){
     el('shRows').innerHTML=doneHtml();
     el('okBtn').disabled=true;
-    wrongBox.classList.add('hidden');
+    wrongBox.classList.add('hidden'); el('nbTip').classList.add('hidden');
     el('card').classList.add('correct');
     if(!el('card').querySelector('.check-mark')){ const c=document.createElement('div'); c.className='check-mark'; c.textContent='✓'; el('card').appendChild(c); }
     const fixes=wrote.flatMap(w=>w.fixes), rn=el('revealNote');
