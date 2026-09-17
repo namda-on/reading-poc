@@ -227,6 +227,7 @@
   .sh-rv { display:inline-block; background:#efe8fb; color:#6d54a8; border-radius:7px; padding:2px 8px;
     font-size:11.5px; font-weight:800; margin-bottom:5px; }
   .sh-rv.again { background:#fdf3d8; color:#8a6a1c; }
+  .sh-mat { margin-top:8px; }
   .sh-give { display:flex; flex-wrap:wrap; gap:7px; margin-top:8px; }
   .sh-give .give { background:#eef2f8; color:#7d8fa6; border-radius:8px; padding:4px 10px; font-size:14.5px; font-weight:700; }
   /* [4] 재료 — 표현은 여기 없다. 답의 범위만 닫아 두고 조합은 유저가 한다.
@@ -423,7 +424,15 @@ function escapeHtml(s){ return String(s).replace(/[&<>"]/g, c=>({'&':'&amp;','<'
 
 // localStorage — 버전(A/B)과 진행 위치. 위치는 두 버전이 공유해서
 // 같은 문항을 버전만 바꿔 바로 비교할 수 있게 한다.
-const VER_KEY='ve:ver', POS_KEY='ve:pos', SIT_KEY='ve:sit', FLOW_KEY='ve:flow', SPK_KEY='ve:spk', SPKV_KEY='ve:spkv';
+const VER_KEY='ve:ver', POS_KEY='ve:pos', SIT_KEY='ve:sit', FLOW_KEY='ve:flow', SPK_KEY='ve:spk', SPKV_KEY='ve:spkv', AID_KEY='ve:aid';
+// **[4]의 지원 단계.** 효용감의 근거를 산출물에서 찾는 것은 여러 번 실패했다 — 문장을
+// 하나 만들든 넷을 만들든, **매 문항 앱이 해주는 양이 같으면 내가 나아졌다는 근거가
+// 화면에 없다**. 그래서 근거를 **지원이 줄어드는 것**에 둔다:
+//   0 = 낱말 조각을 문장 순서대로 준다   1 = 낱말로 쪼개 섞어서 준다   2 = 안 준다
+// 그 문항을 **막히지 않고** 넘기면 한 단 내려가고(앱이 덜 해준다), 막히면 한 단 올라간다.
+// `한 번 더` 줄과 **같은 신호**(`struggled`)를 반대 방향으로 쓰는 것이다.
+let aidLevel=(()=>{ try{ const n=Number(localStorage.getItem(AID_KEY)); return (n===1||n===2)?n:0; }catch(e){ return 0; } })();
+function setAid(n){ aidLevel=Math.max(0, Math.min(2, n)); try{ localStorage.setItem(AID_KEY, String(aidLevel)); }catch(e){} }
 function getPos(){ try{ return Number(localStorage.getItem(POS_KEY))||0; }catch(e){ return 0; } }
 function setPos(n){ try{ localStorage.setItem(POS_KEY, String(n)); }catch(e){} }
 
@@ -624,7 +633,7 @@ function renderHome(){
 function startTwinOnly(){
   sitOnly=false; sampleMode=true; sampleRestart=startTwinOnly;
   sessionItems=DATA.items.filter(hasTwin);
-  itemIdx=0; learned=[]; made=[]; builtSet.clear();
+  itemIdx=0; learned=[]; made=[]; builtSet.clear(); setAid(0);
   buildStepIndex();
   home.classList.add('hidden'); topbar.classList.remove('hidden'); stage.classList.remove('hidden');
   el('backBtn').onclick=()=>renderHome();
@@ -635,7 +644,7 @@ function startSituationOnly(typing){
   sitOnly=true; sitTypeMode=!!typing;
   sampleMode=true; sampleRestart=()=>startSituationOnly(typing);
   sessionItems=DATA.items.filter(i=>i.situation);
-  itemIdx=0; learned=[]; made=[]; builtSet.clear();
+  itemIdx=0; learned=[]; made=[]; builtSet.clear(); setAid(0);
   buildStepIndex();
   home.classList.add('hidden'); topbar.classList.remove('hidden'); stage.classList.remove('hidden');
   el('backBtn').onclick=()=>{ sitOnly=false; renderHome(); };
@@ -645,7 +654,7 @@ function startSituationOnly(typing){
 function startSession(startIdx, flow){
   sitOnly=false; sampleMode=false; sampleRestart=null;
   if(flow){ curFlow=flow; try{localStorage.setItem(FLOW_KEY,flow);}catch(e){} }
-  sessionItems=DATA.items; itemIdx=Math.min(startIdx||0, sessionItems.length-1); learned=[]; made=[]; builtSet.clear();
+  sessionItems=DATA.items; itemIdx=Math.min(startIdx||0, sessionItems.length-1); learned=[]; made=[]; builtSet.clear(); setAid(0);
   buildStepIndex();
   home.classList.add('hidden'); topbar.classList.remove('hidden'); stage.classList.remove('hidden');
   el('backBtn').onclick=()=>{ setPos(itemIdx); renderHome(); };
@@ -766,7 +775,7 @@ function renderVocab(){
     const t=vin.value.trim();
     if(t.length>=answer.replace(/ /g,'').length && t.length>0){
       const {html,wrong}=diffSpell(t, answer);
-      struggled=true;
+      struggled=true; itemStuck=true;
       wrongBox.classList.remove('hidden'); wrongBox.innerHTML=`${html} - 정답과 ${wrong}글자 달라요.`;
     } else wrongBox.classList.add('hidden');
   }
@@ -1436,7 +1445,7 @@ function renderSpeakSheet(){
   const p=item.pattern||{};
   const bare=w=>String(w).toLowerCase().replace(/[^a-z0-9']/g,'');
   const wrote=[];               // 이 화면에서 내가 쓴 문장
-  let ri=0;
+  let ri=0, itemStuck=false;    // 이 문항에서 한 번이라도 막혔나 (지원 단계를 올리고 내린다)
 
   stage.innerHTML=`
     <div class="stage-scroll">
@@ -1486,9 +1495,14 @@ function renderSpeakSheet(){
     const tok=tokenize(t.en), flag=frameFlags(tok, t.segs);
     const frWords=tok.filter((w,i)=>flag[i]), matWords=tok.filter((w,i)=>!flag[i]);
     const allowedWords=frWords.concat(matWords);
-    // 주어지는 낱말 — 조각을 **섞지 않고 원래 순서대로** 둔다. 이 줄의 용도는 답의 범위를
-    // 닫는 것이 아니라 표현 말고는 떠올릴 것이 없게 만드는 것이라, 순서를 숨길 이유가 없다.
-    const gives=(t.segs||[]).filter(s=>s.t==='slot').map(s=>s.s.trim()).filter(s=>/[a-z0-9]/i.test(s));
+    // 주어지는 낱말 — 지원 단계가 형태를 정한다. 0단은 **조각을 문장 순서대로**(순서를
+    // 숨길 이유가 없다 — 이 줄의 용도는 표현 말고는 떠올릴 것이 없게 만드는 것이다),
+    // 1단은 **낱말로 쪼개 섞어서**(A의 `함께 쓸 낱말` 줄과 같은 표기라 새 표기가 아니다),
+    // 2단은 주지 않는다. 화면이 덜 해주는 것이 곧 내가 나아졌다는 근거다.
+    const pieces=(t.segs||[]).filter(s=>s.t==='slot').map(s=>s.s.trim()).filter(s=>/[a-z0-9]/i.test(s));
+    const gives = aidLevel===0 ? pieces
+                : aidLevel===1 ? shuffle(pieces.join(' ').split(/\s+/).filter(w=>/[a-z0-9]/i.test(w)))
+                : [];
     let hintLevel=0;
 
     el('shRows').innerHTML = doneHtml() + `
@@ -1497,7 +1511,10 @@ function renderSpeakSheet(){
           ${t.review?`<div class="sh-rv">복습 · ${escapeHtml((own.pattern||{}).meaning||'')}</div>`
             :t.again?`<div class="sh-rv again">한 번 더</div>`:''}
           <div class="sh-kr">${escapeHtml(t.kr)}</div>
-          ${gives.length?`<div class="sh-give">${gives.map(g=>`<span class="give">${escapeHtml(g)}</span>`).join('')}</div>`:''}
+          ${!gives.length?''
+            : aidLevel===0
+            ? `<div class="sh-give">${gives.map(g=>`<span class="give">${escapeHtml(g)}</span>`).join('')}</div>`
+            : `<div class="sp-mat sh-mat" id="spMatRow"><span class="lbl">함께 쓸 낱말</span>${gives.map(w=>`<span class="mat" data-w="${escapeHtml(bare(w))}">${escapeHtml(w)}</span>`).join('')}</div>`}
           <div class="sp-in" id="spIn"><div class="sp-slots" id="spSlots"></div><input class="sp-catch" id="spCatch" type="text"
             autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done" /></div>
         </div></div>`;
@@ -1517,7 +1534,20 @@ function renderSpeakSheet(){
       el('okBtn').disabled=!inp.value.trim();
     }
     renderSlots();
-    inp.addEventListener('input', ()=>{ wrongBox.classList.add('hidden'); renderSlots(); });
+    const matRow=el('spMatRow');
+    // 쓴 낱말만큼 칩을 죽인다(A와 같은 규약) — 이 줄의 용도는 '아직 뭐가 남았나'다
+    function syncMats(){
+      if(!matRow) return;
+      const left=new Map();
+      typedWords().forEach(w=>{ const k=bare(w); if(k) left.set(k, (left.get(k)||0)+1); });
+      matRow.querySelectorAll('.mat').forEach(m=>{
+        const k=m.dataset.w, n=left.get(k)||0, use=n>0;
+        if(use) left.set(k, n-1);
+        m.classList.toggle('used', use);
+      });
+    }
+    syncMats();
+    inp.addEventListener('input', ()=>{ wrongBox.classList.add('hidden'); renderSlots(); syncMats(); });
 
     // 채점 규약은 A와 같다 — 표현을 썼는가 + 주어진 낱말로만 만들었는가(오타 하나 관용).
     function matchWords(typedArr){
@@ -1559,7 +1589,7 @@ function renderSpeakSheet(){
       if(!words.length) return;
       const nz=x=>x.join(' ').toLowerCase().replace(/[^a-z0-9']+/g,' ').trim();
       if(nz(words)===nz(tokenize(t.en).concat(trailPunct(t.en)))) return pass(true, []);
-      struggled=true;
+      struggled=true; itemStuck=true;
       wrongBox.classList.remove('hidden');
       // 표현을 아직 안 썼으면 지적하는 대신 **오답노트 팁을 연다**([2]·A와 같은 규약).
       // 그때 사다리 첫 칸을 쓴 것으로 친다 — 같은 지원을 두 번 세지 않는다.
@@ -1578,13 +1608,16 @@ function renderSpeakSheet(){
     // 단 **두 줄째부터는 빼낸다**: 내가 쓴 줄이 위에 있고 거기 표현이 초록으로 보이므로
     // 같은 것을 두 번 주게 된다.
     const ladder=[ ...((wrote.length && !t.review)?[]:[{label:'표현 보기', run:()=>openTip(own)}]),
+                   // 2단은 낱말을 안 주므로 **한 칸으로 되돌릴 수 있어야** 백지가 막막해지지 않는다.
+                   // 지원을 아예 없애 놓고 되돌릴 길을 안 두면 그건 벌이지 졸업이 아니다.
+                   ...(aidLevel===2?[{label:'낱말 보기', note:()=>`낱말<b>${escapeHtml(pieces.join(' · '))}</b>`}]:[]),
                    {label:'첫 단어 보기', note:()=>`첫 단어<b>${escapeHtml(tok[0])} …</b>`},
                    {label:'정답 보기', note:()=>`정답<b>${escapeHtml(t.en)}</b>`} ];
     const hb=el('hintBtn'), hl=el('hintLabel');
     hb.disabled=false; hb.querySelector('.ic').textContent='?'; hl.textContent=ladder[0].label;
     hb.onclick=()=>{
       const d=ladder[hintLevel]; if(!d) return;
-      struggled=true;
+      struggled=true; itemStuck=true;
       if(d.run) d.run();
       if(d.note){ const rn=el('revealNote'); rn.classList.remove('hidden'); rn.innerHTML=d.note(); }
       hintLevel++;
@@ -1596,6 +1629,8 @@ function renderSpeakSheet(){
   }
 
   function finish(){
+    // 막히지 않고 넘겼으면 다음 문항은 앱이 **덜** 해준다. 막혔으면 한 칸 되돌린다.
+    setAid(itemStuck ? aidLevel-1 : aidLevel+1);
     el('shRows').innerHTML=doneHtml();
     el('okBtn').disabled=true;
     wrongBox.classList.add('hidden'); el('nbTip').classList.add('hidden');
