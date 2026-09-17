@@ -282,6 +282,8 @@
     padding:10px 13px; font-size:13px; font-weight:700; color:#8a6a1f; line-height:1.5; }
   .op-new b { color:#6f5312; font-weight:800; }
   .sp-kr { font-size:20px; font-weight:800; color:#2f3e52; line-height:1.4; margin-top:5px; }
+  .sit-turn + .sp-kr { margin-top:18px; }
+  .sit-bubble.mine .sp-kr { font-size:16px; color:#5b7c93; margin:0 0 9px; }
   .start-card.alt-card { background:#ffffffd9; }
   .twin-eg { display:inline-block; margin-top:5px; font-weight:700; color:#22794a; }
   /* 배열 지시문 — 데이터에 지시문 필드가 없어 종결부호로 유도한다 */
@@ -1528,7 +1530,7 @@ function renderSpeakSheet(){
       <div class="sh-row cur grow-in">${numbered()?`<span class="sh-n">${wrote.length+1}</span>`:''}
         <div class="sh-body">
           ${t.again?`<div class="sh-rv again">한 번 더</div>`:''}
-          ${spkStimHtml(t)}
+          ${spkAskHtml(t)}${spkKrHtml(t)}
           ${spkGivesHtml(gives, 'spMatRow')}
           <div class="sp-in" id="spIn"><div class="sp-slots" id="spSlots"></div><input class="sp-catch" id="spCatch" type="text"
             autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done" /></div>
@@ -1691,7 +1693,7 @@ function renderSpeakArrange(t){
     <div class="stage-scroll">
       <div class="chat-card" id="card">
         <div class="chat-tag rv">말해보기</div>
-        ${spkHeadHtml(item)}${spkStimHtml(t)}
+        ${spkHeadHtml(item)}${spkAskHtml(t)}${spkMode==='dlg'?'':spkKrHtml(t)}
         <div class="nb-tip hidden" id="nbTip"></div>
         ${spkAnswerHtml(t, `<div class="sp-in" id="spIn"><div class="sp-slots" id="spSlots"></div></div>`)}
         ${spkAfterHtml(t)}
@@ -1890,7 +1892,7 @@ function renderSpeakOpen(item){
     <div class="stage-scroll">
       <div class="chat-card" id="card">
         <div class="chat-tag rv">말해보기</div>
-        ${spkHeadHtml(item, spkMode==='kr' ? '이 표현으로 <b>하고 싶은 말</b>을 만들어 보세요' : null)}${spkStimHtml(ask0)}
+        ${spkHeadHtml(item, '이 표현으로 <b>하고 싶은 말</b>을 만들어 보세요')}${spkAskHtml(ask0)}
         <div class="nb-tip hidden" id="nbTip"></div>
         <div class="sp-in" id="spIn"><div class="sp-slots" id="spSlots"></div><input class="sp-catch" id="spCatch" type="text"
           autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done" /></div>
@@ -2030,29 +2032,28 @@ function renderSpeakOpen(item){
 // 대상 문장의 표기까지 같이 달라지면 무엇을 비교하고 있는지가 흐려진다(`줄어든다`와
 // `섞어서 준다`의 차이는 **재료 줄 하나**여야 한다). 그래서 모든 방식이 이 둘을 같이 쓰고,
 // 순서는 늘 **표제 → 지시문 → 자극 본문 → 팁 → 재료 → 답 자리**다.
-function spkTaskHtml(){
-  return spkMode==='en'  ? '이 표현을 넣어 <b>답해 보세요</b>'
-       : spkMode==='dlg' ? '이 표현을 넣어 <b>가운데를 채워 보세요</b>'
-       :                   '이 표현을 넣어 <b>이 문장을 만들어 보세요</b>';
-}
+// **지시문은 만들 문장이 화면에 없을 때만 둔다** — 한국어 문장이 표현 구간을 초록으로
+// 달고 서 있으면 `이 표현을 넣어 …`는 그 문장이 이미 하는 말이라 줄만 하나 늘린다.
 function spkHeadHtml(item, task){
   const pmean=((item.pattern||{}).meaning||'').trim();
   return `<div class="sh-head">
       <div class="sh-lbl">이번에 배운 표현</div>
       <div class="sh-form">${escapeHtml(pmean)}</div>
-    </div>
-    <div class="sp-q">${task||spkTaskHtml()}</div>`;
+    </div>` + (task ? `<div class="sp-q">${task}</div>` : '');
 }
-// 자극 본문 — `영어 질문`·`대화 한가운데`는 A 말풍선, 그 밖에는 한국어 문장(표현 구간 초록).
-// 연습지는 줄마다 대상이 달라 이 조각을 줄 안에서 쓴다.
-function spkStimHtml(t){
-  if(!t) return '';
-  if((spkMode==='en' || spkMode==='dlg') && t.ask) return `<div class="sit-turn${spkMode==='en'?' a':''}">
+// A 대사 — `영어 질문`·`대화 한가운데`의 자극
+function spkAskHtml(t){
+  if(!t || !t.ask || (spkMode!=='en' && spkMode!=='dlg')) return '';
+  return `<div class="sit-turn${spkMode==='en'?' a':''}">
       <div class="sit-role">A</div>
       <div class="sit-bubble"><div class="sit-en">${escapeHtml(t.ask.en)}</div>
         <div class="sit-kr">${escapeHtml(t.ask.kr)}</div></div>
     </div>`;
-  return `<div class="sp-kr">${sentTitleHtml(t)}</div>`;
+}
+// **내가 할 말의 한국어**(표현 구간 초록) — 자극과 무관하게 늘 같은 자리에 선다.
+// A의 영어만 주면 무슨 말을 해야 하는지가 화면에 없어 답이 A의 해석에 딸려 버린다.
+function spkKrHtml(t){
+  return t ? `<div class="sp-kr">${sentTitleHtml(t)}</div>` : '';
 }
 // 내 말 뒤에 오는 A의 반응 — 푸는 동안 흐리고, 통과하면 켜진다.
 // **내 말이 그 반응을 끌어냈다**는 것이 `대화 한가운데`의 산출물이다.
@@ -2067,8 +2068,10 @@ function spkAfterHtml(t){
 // 답 자리 — `대화 한가운데`에서는 내 말풍선 안에 들어간다(그래야 대화의 한가운데가 된다)
 function spkAnswerHtml(t, inner){
   if(spkMode!=='dlg' || !t || !t.reply) return inner;
+  // 대화에서는 내가 할 말의 한국어가 **내 말풍선 안**에 선다 — 카드 위쪽에 따로 두면
+  // 앞 대사와 내 차례 사이에 낀 줄이 되어 누구 말인지가 흐려진다.
   return `<div class="sit-turn b"><div class="sit-role">나</div>
-      <div class="sit-bubble mine">${inner}</div></div>`;
+      <div class="sit-bubble mine">${spkKrHtml(t)}${inner}</div></div>`;
 }
 function spkGives(item, t){
   const tok=tokenize(t.en), flag = t.segs ? frameFlags(tok, t.segs) : frameWordFlags(tok, item.frame);
@@ -2136,7 +2139,7 @@ function renderSpeakDialog(item, t){
     <div class="stage-scroll">
       <div class="chat-card" id="card">
         <div class="chat-tag rv">말해보기</div>
-        ${spkHeadHtml(item)}${spkStimHtml(t)}
+        ${spkHeadHtml(item)}${spkAskHtml(t)}
         <div class="nb-tip hidden" id="nbTip"></div>
         ${spkGivesHtml(gives, 'spMat')}
         ${spkAnswerHtml(t, `<div class="sp-in" id="spIn"><div class="sp-slots" id="spSlots"></div><input class="sp-catch" id="spCatch" type="text"
@@ -2305,7 +2308,7 @@ function renderSpeak(preset){
   const mats=shuffle(matWords);
   let done=false, hintLevel=0;
 
-  const head = spkHeadHtml(item) + spkStimHtml(t);
+  const head = spkHeadHtml(item) + spkAskHtml(t) + (spkMode==='dlg' ? '' : spkKrHtml(t));
 
   stage.innerHTML=`
     <div class="stage-scroll">
