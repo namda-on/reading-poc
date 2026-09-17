@@ -90,8 +90,14 @@
           ],
           "punct": ".",
           "krMark": "걔는 [일어나]야 해.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "Your brother is still in bed.",
+            "kr": "네 동생 아직 침대에 있어."
+          },
+          "reply": {
+            "en": "Fine, I'll go wake him.",
+            "kr": "알겠어, 가서 깨울게."
+          }
         },
         {
           "en": "You should get up early.",
@@ -241,8 +247,14 @@
           ],
           "punct": ".",
           "krMark": null,
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "She says she can't join the trip.",
+            "kr": "걔가 여행 못 간대."
+          },
+          "reply": {
+            "en": "That might change their mind.",
+            "kr": "그럼 마음이 바뀔 수도 있겠다."
+          }
         },
         {
           "en": "I'll talk to my parents again.",
@@ -423,8 +435,14 @@
           ],
           "punct": ".",
           "krMark": "이 옷 [입]어.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "I have nothing ready for tomorrow.",
+            "kr": "내일 입을 게 하나도 준비가 안 됐어."
+          },
+          "reply": {
+            "en": "Perfect fit. Let's go.",
+            "kr": "딱 맞네. 가자."
+          }
         },
         {
           "en": "Put your clothes on now.",
@@ -1489,8 +1507,14 @@
           ],
           "punct": "!",
           "krMark": "내일 저녁에 [놀러] 와!",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "I'm free all week after six.",
+            "kr": "이번 주는 여섯 시 이후로 다 한가해."
+          },
+          "reply": {
+            "en": "Great, I'll be there.",
+            "kr": "좋아, 갈게."
+          }
         },
         {
           "en": "Come over Friday evening!",
@@ -2116,8 +2140,14 @@
           ],
           "punct": "!",
           "krMark": "정말 봄 [같아]!",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "The sun is so warm today.",
+            "kr": "오늘 햇살 진짜 따뜻하다."
+          },
+          "reply": {
+            "en": "Let's walk instead of taking the bus.",
+            "kr": "버스 말고 걸어가자."
+          }
         },
         {
           "en": "It feels like spring today!",
@@ -2267,8 +2297,14 @@
           ],
           "punct": ".",
           "krMark": "스웨터 [벗]어도 돼.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "It's way too warm in here.",
+            "kr": "여기 너무 덥다."
+          },
+          "reply": {
+            "en": "Thanks, much better.",
+            "kr": "고마워, 훨씬 낫다."
+          }
         },
         {
           "en": "Should I take off my shoes?",
@@ -2578,8 +2614,14 @@
           ],
           "punct": ".",
           "krMark": "걘 걱정이 [너무] 많아.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "My brother barely slept again.",
+            "kr": "우리 형이 또 거의 못 잤대."
+          },
+          "reply": {
+            "en": "Yeah, I've noticed.",
+            "kr": "응, 나도 느꼈어."
+          }
         },
         {
           "en": "She worries too much.",
@@ -3028,8 +3070,14 @@
           ],
           "punct": ".",
           "krMark": "이메일 [꼭] 확인해.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "Anything I should do before Monday?",
+            "kr": "월요일 전에 뭐 해야 해?"
+          },
+          "reply": {
+            "en": "Got it, I'll do that tonight.",
+            "kr": "알겠어, 오늘 밤에 할게."
+          }
         },
         {
           "en": "Be sure to check your homework.",
@@ -3248,8 +3296,14 @@
           ],
           "punct": ".",
           "krMark": null,
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "How was the show last night?",
+            "kr": "어젯밤 공연 어땠어?"
+          },
+          "reply": {
+            "en": "Oh no, what happened?",
+            "kr": "이런, 무슨 일 있었어?"
+          }
         },
         {
           "en": "They missed most of the concert.",
@@ -4054,8 +4108,14 @@
           ],
           "punct": "!",
           "krMark": null,
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "I really don't think we can win.",
+            "kr": "우리 진짜 못 이길 것 같아."
+          },
+          "reply": {
+            "en": "Okay, I'll keep trying.",
+            "kr": "알았어, 계속 해볼게."
+          }
         },
         {
           "en": "Don't give up hope yet!",
@@ -4276,8 +4336,14 @@
           ],
           "punct": ".",
           "krMark": "마지막 주제로 [넘어가]죠.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "That's everything on the budget.",
+            "kr": "예산은 여기까지입니다."
+          },
+          "reply": {
+            "en": "Sure, go ahead.",
+            "kr": "네, 말씀하세요."
+          }
         },
         {
           "en": "Let's move on to a new topic.",
@@ -4712,8 +4778,14 @@
           ],
           "punct": "!",
           "krMark": "반갑습니다! 중국에 [오신] 걸 환영합니다!",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "Hi, I just got off the plane.",
+            "kr": "안녕하세요, 방금 비행기에서 내렸어요."
+          },
+          "reply": {
+            "en": "Thank you! It's my first time here.",
+            "kr": "감사합니다! 여긴 처음이에요."
+          }
         },
         {
           "en": "Welcome to China!",
@@ -4730,8 +4802,14 @@
           ],
           "punct": "!",
           "krMark": "안녕하세요! 중국에 [오신] 걸 환영합니다!",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "Good morning, I've just arrived.",
+            "kr": "안녕하세요, 방금 도착했습니다."
+          },
+          "reply": {
+            "en": "Thanks! I'm glad to be here.",
+            "kr": "감사해요! 오게 되어 기뻐요."
+          }
         },
         {
           "en": "Hi! Welcome to China again!",
@@ -5162,8 +5240,14 @@
           ],
           "punct": ".",
           "krMark": "걔넨 데이터가 [많]아.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "Why is that team so confident?",
+            "kr": "저 팀은 왜 저렇게 자신만만해?"
+          },
+          "reply": {
+            "en": "That explains it.",
+            "kr": "그래서 그렇구나."
+          }
         },
         {
           "en": "He has a lot of data.",
@@ -5833,8 +5917,14 @@
           ],
           "punct": "!",
           "krMark": "겨울 축제 [재밌게] 놀아!",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "I'm heading out now.",
+            "kr": "나 이제 나가."
+          },
+          "reply": {
+            "en": "Thanks! I'll send you pictures.",
+            "kr": "고마워! 사진 보낼게."
+          }
         },
         {
           "en": "Let's have fun at the festival!",
@@ -6254,8 +6344,14 @@
           ],
           "punct": ".",
           "krMark": "걔네 [각자] 공연을 하나씩 봤어.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "Did the whole group watch everything?",
+            "kr": "그 팀이 전부 다 봤어?"
+          },
+          "reply": {
+            "en": "Ah, so they split up.",
+            "kr": "아, 나눠서 봤구나."
+          }
         },
         {
           "en": "Each of us saw one performance today.",
@@ -6662,8 +6758,14 @@
           ],
           "punct": "!",
           "krMark": "내 변호사한테 다시 [전화]해야 해!",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "There are three missed calls here.",
+            "kr": "부재중 전화가 세 통 있어."
+          },
+          "reply": {
+            "en": "Go ahead, I'll wait.",
+            "kr": "그래, 기다릴게."
+          }
         },
         {
           "en": "She forgot to call her lawyer back!",
@@ -6924,8 +7026,14 @@
           ],
           "punct": "?",
           "krMark": "지금 런던은 [무슨 일이야]?",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "I've been away for two weeks.",
+            "kr": "나 2주 동안 떠나 있었어."
+          },
+          "reply": {
+            "en": "Honestly, I have no idea.",
+            "kr": "솔직히 나도 몰라."
+          }
         },
         {
           "en": "What's going on in London today?",
@@ -7069,8 +7177,14 @@
           ],
           "punct": ".",
           "krMark": null,
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "Excuse me, I think there's a mix-up.",
+            "kr": "실례지만 뭔가 착오가 있는 것 같은데요."
+          },
+          "reply": {
+            "en": "Oh, my apologies.",
+            "kr": "아, 죄송합니다."
+          }
         },
         {
           "en": "She'll get out of your seat.",
@@ -7309,8 +7423,14 @@
           ],
           "punct": ".",
           "krMark": null,
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "Where should I keep these plants?",
+            "kr": "이 화분들 어디에 둘까?"
+          },
+          "reply": {
+            "en": "The window it is, then.",
+            "kr": "그럼 창가에 두자."
+          }
         },
         {
           "en": "It needs plenty of sunlight every day.",
@@ -7549,8 +7669,14 @@
           ],
           "punct": "?",
           "krMark": "\"퀸\"이라는 밴드 [들어봤]어?",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "I'm making a playlist for the party.",
+            "kr": "파티용 플레이리스트 만드는 중이야."
+          },
+          "reply": {
+            "en": "Of course! Everyone knows them.",
+            "kr": "당연하지! 다 알지."
+          }
         },
         {
           "en": "Has he heard of a band called \"The Beatles\"?",
@@ -7768,8 +7894,14 @@
           ],
           "punct": ".",
           "krMark": "일정은 그녀가 [맡고] 있어.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "Who should I send this to?",
+            "kr": "이건 누구한테 보내면 되나요?"
+          },
+          "reply": {
+            "en": "Got it, thanks.",
+            "kr": "알겠어요, 고마워요."
+          }
         },
         {
           "en": "I'm in charge of the schedule.",
@@ -7790,8 +7922,14 @@
           ],
           "punct": ".",
           "krMark": "일정은 내가 [맡고] 있어.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "Who do I ask about the timing?",
+            "kr": "시간은 누구한테 물어봐야 해요?"
+          },
+          "reply": {
+            "en": "Great, I'll come to you then.",
+            "kr": "좋아요, 그럼 그쪽으로 갈게요."
+          }
         },
         {
           "en": "He's in charge of the new schedule.",
@@ -8172,8 +8310,14 @@
           ],
           "punct": ".",
           "krMark": "화면에 [집중]해 주세요.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "Everyone keeps looking at their phones.",
+            "kr": "다들 계속 휴대폰만 보네요."
+          },
+          "reply": {
+            "en": "Sorry, we'll focus.",
+            "kr": "죄송해요, 집중할게요."
+          }
         },
         {
           "en": "Pay attention to the screen in front.",
@@ -8208,8 +8352,14 @@
           ],
           "punct": ".",
           "krMark": "큰 화면에 [집중]해.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "I can't see anything from here.",
+            "kr": "여기선 아무것도 안 보여요."
+          },
+          "reply": {
+            "en": "Okay, I'm watching.",
+            "kr": "네, 보고 있어요."
+          }
         },
         {
           "en": "Pay attention to the screen now.",
@@ -8372,8 +8522,14 @@
           ],
           "punct": "?",
           "krMark": "내 안경이 [왜] 이래?",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "Everything looks blurry today.",
+            "kr": "오늘따라 다 흐릿하게 보여."
+          },
+          "reply": {
+            "en": "Let me take a look.",
+            "kr": "어디 봐 봐."
+          }
         },
         {
           "en": "What's wrong with his glasses?",
@@ -8720,8 +8876,14 @@
           ],
           "punct": ".",
           "krMark": "그것들은 케첩 [앞]에 있어.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "I can't find the pickles anywhere.",
+            "kr": "피클을 아무 데서도 못 찾겠어."
+          },
+          "reply": {
+            "en": "Found them, thanks!",
+            "kr": "찾았다, 고마워!"
+          }
         },
         {
           "en": "That's in front of the ketchup.",
@@ -9110,8 +9272,14 @@
           ],
           "punct": ".",
           "krMark": "저는 50분마다 [쉬]어도 돼요.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "How does your schedule work?",
+            "kr": "근무 시간은 어떻게 돼요?"
+          },
+          "reply": {
+            "en": "That sounds reasonable.",
+            "kr": "괜찮은 편이네요."
+          }
         },
         {
           "en": "We can take a break every forty minutes.",
@@ -9301,8 +9469,14 @@
           ],
           "punct": ".",
           "krMark": "걔 감자 [두어] 개 사야 해.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "What's left on the shopping list?",
+            "kr": "장 볼 게 뭐 남았어?"
+          },
+          "reply": {
+            "en": "I'll grab them on the way.",
+            "kr": "가는 길에 사 올게."
+          }
         },
         {
           "en": "She needs a couple of potatoes.",
@@ -9764,8 +9938,14 @@
           ],
           "punct": "?",
           "krMark": "얘 그림 [하나]만 더 그려도 돼요?",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "We're closing the art room soon.",
+            "kr": "곧 미술실 문 닫아요."
+          },
+          "reply": {
+            "en": "Sure, but be quick.",
+            "kr": "그럼요, 대신 빨리요."
+          }
         },
         {
           "en": "Can she do one more drawing?",
@@ -10199,8 +10379,14 @@
           ],
           "punct": ".",
           "krMark": "저 설문만 [작성하]시면 돼요.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "Is there anything else I need to do?",
+            "kr": "제가 더 해야 할 게 있나요?"
+          },
+          "reply": {
+            "en": "Okay, it'll only take a minute.",
+            "kr": "네, 금방 하겠네요."
+          }
         },
         {
           "en": "Just fill out these surveys.",
@@ -10417,8 +10603,14 @@
           ],
           "punct": "?",
           "krMark": "내가 걔 할머니잖니, [안] 그러니?",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "You spoil that boy too much.",
+            "kr": "그 애를 너무 오냐오냐하시네요."
+          },
+          "reply": {
+            "en": "Fair enough!",
+            "kr": "그건 그렇네요!"
+          }
         },
         {
           "en": "I'm her grandma, aren't I?",
@@ -10656,8 +10848,14 @@
           ],
           "punct": ".",
           "krMark": "걘 대중교통에만 [의존하]면 안 돼.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "My friend is always late for work.",
+            "kr": "내 친구가 맨날 회사에 늦어."
+          },
+          "reply": {
+            "en": "Maybe he should get a bike.",
+            "kr": "자전거라도 사야겠네."
+          }
         },
         {
           "en": "She shouldn't rely on public transportation.",
@@ -11229,8 +11427,14 @@
           ],
           "punct": ".",
           "krMark": "그 일을 겪은 [뒤로] 걘 물이 싫대.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "Why won't your brother go swimming?",
+            "kr": "네 동생은 왜 수영을 안 해?"
+          },
+          "reply": {
+            "en": "That's understandable.",
+            "kr": "그럴 만하네."
+          }
         },
         {
           "en": "Ever since that experience, she hates water.",
@@ -11430,8 +11634,14 @@
           ],
           "punct": ".",
           "krMark": null,
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "The repair might be expensive.",
+            "kr": "수리비가 비쌀 수도 있어요."
+          },
+          "reply": {
+            "en": "Then let's get started.",
+            "kr": "그럼 시작하죠."
+          }
         },
         {
           "en": "No matter the cost, she'll pay.",
@@ -11882,8 +12092,14 @@
           ],
           "punct": ".",
           "krMark": "십 대들은 늘 [어울리]고 싶어 해.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "Why does everyone wear the same shoes?",
+            "kr": "왜 다들 똑같은 신발을 신어?"
+          },
+          "reply": {
+            "en": "I guess that never changes.",
+            "kr": "그건 변하지 않나 보네."
+          }
         },
         {
           "en": "Teens just wanted to fit in.",
@@ -12120,8 +12336,14 @@
           ],
           "punct": "!",
           "krMark": "걔 것도 내 거랑 [똑같아]!",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "Did you two buy different bags?",
+            "kr": "너희 둘 다른 가방 산 거야?"
+          },
+          "reply": {
+            "en": "What are the odds!",
+            "kr": "이런 우연이!"
+          }
         }
       ],
       "siblings": [
@@ -12233,8 +12455,14 @@
           ],
           "punct": ".",
           "krMark": "걘 다음 단계를 [알아낼] 수가 없대.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "Why is your teammate stuck?",
+            "kr": "네 팀원은 왜 막혀 있어?"
+          },
+          "reply": {
+            "en": "Let's help him then.",
+            "kr": "그럼 우리가 도와주자."
+          }
         },
         {
           "en": "She can't figure out the next step.",
@@ -12518,8 +12746,14 @@
           ],
           "punct": ".",
           "krMark": "저것도 [같은] 주소야.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "I wrote down the one from the email.",
+            "kr": "이메일에 있던 걸 적어 왔어."
+          },
+          "reply": {
+            "en": "Good, no confusion then.",
+            "kr": "좋아, 헷갈릴 일 없겠네."
+          }
         },
         {
           "en": "This is the same address.",
@@ -13103,8 +13337,14 @@
           ],
           "punct": ".",
           "krMark": "그들은 다시 경제 위기를 [겪]고 있습니다.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "Why are prices rising over there?",
+            "kr": "거긴 왜 물가가 오르는 거야?"
+          },
+          "reply": {
+            "en": "That sounds serious.",
+            "kr": "심각하네."
+          }
         },
         {
           "en": "I'm going through another economic crisis.",
@@ -13554,8 +13794,14 @@
           ],
           "punct": "!",
           "krMark": "점심때 내 사무실에 [들러]!",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "When can we go over the report?",
+            "kr": "보고서는 언제 같이 볼까요?"
+          },
+          "reply": {
+            "en": "Sure, see you then.",
+            "kr": "네, 그때 뵐게요."
+          }
         },
         {
           "en": "Come by our place at lunchtime!",
@@ -13755,8 +14001,14 @@
           ],
           "punct": ".",
           "krMark": "[여러] 고객이 그에 대해 불만을 제기했어요.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "Why was that clerk moved?",
+            "kr": "저 직원은 왜 자리를 옮겼어요?"
+          },
+          "reply": {
+            "en": "I see. That's a shame.",
+            "kr": "그렇군요. 안타깝네요."
+          }
         },
         {
           "en": "A number of customers complained about her.",
@@ -14400,8 +14652,14 @@
           ],
           "punct": "!",
           "krMark": "걔가 숲 [한가운데]에 있어!",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "Where did your friend end up?",
+            "kr": "네 친구 어디까지 간 거야?"
+          },
+          "reply": {
+            "en": "Someone should go get him.",
+            "kr": "누가 데리러 가야겠다."
+          }
         },
         {
           "en": "She's in the middle of the forest!",
@@ -14904,8 +15162,14 @@
           ],
           "punct": ".",
           "krMark": "저 브랜드 [한번] 써봐.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "My usual shampoo isn't working.",
+            "kr": "늘 쓰던 샴푸가 별로야."
+          },
+          "reply": {
+            "en": "Okay, I'll buy one today.",
+            "kr": "그래, 오늘 하나 살게."
+          }
         },
         {
           "en": "Let's give this brand a try.",
@@ -15691,8 +15955,14 @@
           ],
           "punct": ".",
           "krMark": null,
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "How do you like the new market?",
+            "kr": "새로 생긴 시장 어때?"
+          },
+          "reply": {
+            "en": "Maybe I'll go early then.",
+            "kr": "그럼 일찍 가야겠다."
+          }
         },
         {
           "en": "It was fun except for the crowds.",
@@ -15865,8 +16135,14 @@
           ],
           "punct": ".",
           "krMark": "걔가 라디오 [켤] 거야.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "It's too quiet in the car.",
+            "kr": "차 안이 너무 조용해."
+          },
+          "reply": {
+            "en": "Much better now.",
+            "kr": "훨씬 낫다."
+          }
         },
         {
           "en": "She'll turn on the radio.",
@@ -16122,8 +16398,14 @@
           ],
           "punct": ".",
           "krMark": null,
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "I can't decide what to order.",
+            "kr": "뭘 시킬지 못 고르겠어."
+          },
+          "reply": {
+            "en": "Good, I'll order for us.",
+            "kr": "좋아, 내가 주문할게."
+          }
         },
         {
           "en": "Make a choice between soup or spaghetti.",
@@ -17242,8 +17524,14 @@
           ],
           "punct": "?",
           "krMark": "그분이 기록에서 좀 [찾아봐] 주실 수 있나요?",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "Nobody knows the old order number.",
+            "kr": "예전 주문 번호를 아무도 몰라요."
+          },
+          "reply": {
+            "en": "I'll ask him right away.",
+            "kr": "바로 물어볼게요."
+          }
         },
         {
           "en": "Can she look that up in her records?",
@@ -17502,8 +17790,14 @@
           ],
           "punct": ".",
           "krMark": "그 사람이 가방 좀 [챙기]게 해 줘.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "We're leaving in one minute!",
+            "kr": "1분 뒤에 출발해요!"
+          },
+          "reply": {
+            "en": "Okay, we'll wait.",
+            "kr": "네, 기다릴게요."
+          }
         },
         {
           "en": "Let her pick up her purse.",
@@ -18605,8 +18899,14 @@
           ],
           "punct": ".",
           "krMark": null,
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "How did the first test go?",
+            "kr": "첫 테스트는 어땠어?"
+          },
+          "reply": {
+            "en": "We'd better run it again.",
+            "kr": "다시 돌려 보는 게 낫겠다."
+          }
         },
         {
           "en": "There's a bunch of small errors.",
@@ -19257,8 +19557,14 @@
           ],
           "punct": ".",
           "krMark": "서둘러, 걔 회사에 [늦]었어.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "Why are you driving so fast?",
+            "kr": "왜 이렇게 빨리 달려?"
+          },
+          "reply": {
+            "en": "Okay, I'll take the fast road.",
+            "kr": "알았어, 빠른 길로 갈게."
+          }
         },
         {
           "en": "Hurry, she's late for work.",
@@ -19723,8 +20029,14 @@
           ],
           "punct": ".",
           "krMark": null,
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "How do the two teams compare?",
+            "kr": "두 팀은 어떻게 달라?"
+          },
+          "reply": {
+            "en": "Then we need a different plan.",
+            "kr": "그럼 다른 계획이 필요하겠다."
+          }
         },
         {
           "en": "He's better in terms of strength.",
@@ -20747,8 +21059,14 @@
           ],
           "punct": ".",
           "krMark": "둘 [다] 좋아.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "Which design should we print?",
+            "kr": "어떤 디자인으로 인쇄할까?"
+          },
+          "reply": {
+            "en": "That doesn't help me decide!",
+            "kr": "그럼 못 고르잖아!"
+          }
         },
         {
           "en": "Both of them are over there.",
@@ -21188,8 +21506,14 @@
           ],
           "punct": ".",
           "krMark": "걔 식단[에 관해서는] 조심해야 해.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "Anything I should know before cooking?",
+            "kr": "요리하기 전에 알아야 할 거 있어?"
+          },
+          "reply": {
+            "en": "Good to know, thanks.",
+            "kr": "알아 둘게, 고마워."
+          }
         },
         {
           "en": "Be careful when it comes to her diet.",
@@ -21812,8 +22136,14 @@
           ],
           "punct": ".",
           "krMark": "걘 운 같은 거 안 [믿]어.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "Why won't your friend buy a ticket?",
+            "kr": "네 친구는 왜 복권을 안 사?"
+          },
+          "reply": {
+            "en": "That's one way to see it.",
+            "kr": "그렇게 볼 수도 있겠네."
+          }
         },
         {
           "en": "She doesn't believe in luck.",
@@ -22032,8 +22362,14 @@
           ],
           "punct": ".",
           "krMark": null,
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "How does your team feel about the decision?",
+            "kr": "그 결정에 대해 팀 분위기는 어때요?"
+          },
+          "reply": {
+            "en": "That's good to hear.",
+            "kr": "다행이네요."
+          }
         },
         {
           "en": "They believe in our president.",
@@ -22179,8 +22515,14 @@
           ],
           "punct": "!",
           "krMark": "너 [때문에] 걔가 버스 놓쳤잖아!",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "Why is everyone upset with me?",
+            "kr": "왜 다들 나한테 화가 났어?"
+          },
+          "reply": {
+            "en": "I'll apologize right now.",
+            "kr": "지금 바로 사과할게."
+          }
         },
         {
           "en": "She missed the bus because of you!",
@@ -22639,8 +22981,14 @@
           ],
           "punct": "!",
           "krMark": "걔 약속 끝나면 [알려줘]!",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "I'm taking him to the doctor.",
+            "kr": "내가 걔 병원에 데려갈 거야."
+          },
+          "reply": {
+            "en": "Of course, I'll text you.",
+            "kr": "당연하지, 문자할게."
+          }
         },
         {
           "en": "Let me know after her appointment!",
@@ -22804,8 +23152,14 @@
           ],
           "punct": ".",
           "krMark": "걘 그쪽 사이트에서 [등록]해야 해.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "How does my friend join the class?",
+            "kr": "내 친구는 그 수업을 어떻게 신청해?"
+          },
+          "reply": {
+            "en": "I'll send him the link.",
+            "kr": "링크 보내 줄게."
+          }
         },
         {
           "en": "She has to sign up on their site.",
@@ -23597,8 +23951,14 @@
           ],
           "punct": ".",
           "krMark": "빵이 밥[보다] 비싸.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "Which one should I buy?",
+            "kr": "어느 걸 사는 게 나아?"
+          },
+          "reply": {
+            "en": "Then I'll get the cheaper one.",
+            "kr": "그럼 싼 걸로 살게."
+          }
         },
         {
           "en": "Meat is more expensive than rice.",
@@ -23946,8 +24306,14 @@
           ],
           "punct": "!",
           "krMark": "[즐겁게] 보내요, 할아버지!",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "I haven't been out in months.",
+            "kr": "몇 달 만에 나왔구나."
+          },
+          "reply": {
+            "en": "That's the spirit!",
+            "kr": "그래야지!"
+          }
         },
         {
           "en": "Please have a good time, grandpa!",
@@ -24114,8 +24480,14 @@
           ],
           "punct": ".",
           "krMark": "빈곤이 [가장] 심각한 문제였어.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "What did the report focus on?",
+            "kr": "보고서는 뭘 중심으로 다뤘어요?"
+          },
+          "reply": {
+            "en": "I expected that.",
+            "kr": "그럴 줄 알았어요."
+          }
         },
         {
           "en": "Child poverty is the most serious issue.",
@@ -24830,8 +25202,14 @@
           ],
           "punct": ".",
           "krMark": "우린 보통 오후에 [산책]해.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "When do you two get outside?",
+            "kr": "두 분은 언제 밖에 나가세요?"
+          },
+          "reply": {
+            "en": "That sounds nice.",
+            "kr": "좋네요."
+          }
         },
         {
           "en": "They usually take a walk in the afternoon.",
@@ -25011,8 +25389,14 @@
           ],
           "punct": ".",
           "krMark": "손님들 좀 가만히 [두]세요.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "The kids keep bothering them.",
+            "kr": "애들이 계속 귀찮게 해요."
+          },
+          "reply": {
+            "en": "Understood, I'll keep them busy.",
+            "kr": "알겠어요, 애들 데리고 있을게요."
+          }
         },
         {
           "en": "Please leave our guest alone.",
@@ -25248,8 +25632,14 @@
           ],
           "punct": ".",
           "krMark": "그것들은 냉장고 [위에] 있어.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "I can't find the cookies.",
+            "kr": "쿠키를 못 찾겠어."
+          },
+          "reply": {
+            "en": "Ah, that's why.",
+            "kr": "아, 그래서 안 보였구나."
+          }
         },
         {
           "en": "This is on top of the fridge.",
@@ -25531,8 +25921,14 @@
           ],
           "punct": ".",
           "krMark": "저는 그냥 [시작]할게요.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "The others are running late.",
+            "kr": "다른 사람들이 늦는대요."
+          },
+          "reply": {
+            "en": "Okay, I'll fill them in later.",
+            "kr": "알겠어요, 나중에 전달할게요."
+          }
         },
         {
           "en": "Let's get started.",
@@ -25745,8 +26141,14 @@
           ],
           "punct": ".",
           "krMark": "네가 [정해].",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "Should we take the train or drive?",
+            "kr": "기차 탈까, 운전할까?"
+          },
+          "reply": {
+            "en": "Fine, I'll decide then.",
+            "kr": "알았어, 그럼 내가 정할게."
+          }
         }
       ],
       "siblings": [
@@ -26266,8 +26668,14 @@
           ],
           "punct": ".",
           "krMark": "그분이 그 컨벤션에 못 [가]게 됐어요.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "Is your colleague coming this year?",
+            "kr": "동료분은 올해 오시나요?"
+          },
+          "reply": {
+            "en": "That's too bad.",
+            "kr": "아쉽네요."
+          }
         },
         {
           "en": "She can't make it to the convention.",
@@ -26503,8 +26911,14 @@
           ],
           "punct": ".",
           "krMark": "자금 건으로 [돌아가]죠.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "That's the schedule sorted.",
+            "kr": "일정은 정리됐습니다."
+          },
+          "reply": {
+            "en": "Right, where were we?",
+            "kr": "네, 어디까지 얘기했죠?"
+          }
         },
         {
           "en": "Let's go back to Marcy's question from earlier.",
@@ -26654,8 +27068,14 @@
           ],
           "punct": ".",
           "krMark": null,
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "Did you two talk last night?",
+            "kr": "어젯밤에 둘이 얘기했어?"
+          },
+          "reply": {
+            "en": "Try again tomorrow.",
+            "kr": "내일 다시 해 봐."
+          }
         },
         {
           "en": "She was asleep by the time I arrived.",
@@ -27100,8 +27520,14 @@
           ],
           "punct": ".",
           "krMark": "그분이 이거 먼저 신어 [보]실 거예요.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "Which shoes should we start with?",
+            "kr": "어느 신발부터 볼까요?"
+          },
+          "reply": {
+            "en": "Sure, take your time.",
+            "kr": "네, 천천히 하세요."
+          }
         },
         {
           "en": "She'll try on this pair first.",
@@ -28062,8 +28488,14 @@
           ],
           "punct": "?",
           "krMark": null,
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "Look at the sky over there.",
+            "kr": "저기 하늘 좀 봐."
+          },
+          "reply": {
+            "en": "It rained earlier, I think.",
+            "kr": "아까 비가 왔나 봐."
+          }
         },
         {
           "en": "What's with the big rainbow?",
@@ -28377,8 +28809,14 @@
           ],
           "punct": ".",
           "krMark": "걘 어두워지기 전에 집에 [도착하]고 싶어 해.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "Why is your friend in such a rush?",
+            "kr": "네 친구는 왜 저렇게 서둘러?"
+          },
+          "reply": {
+            "en": "Makes sense.",
+            "kr": "그럴 만하네."
+          }
         },
         {
           "en": "She wants to get home before dark.",
@@ -28613,8 +29051,14 @@
           ],
           "punct": ".",
           "krMark": "박람회를 잠깐 [둘러보]자.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "We still have an hour left.",
+            "kr": "아직 한 시간 남았어."
+          },
+          "reply": {
+            "en": "Sure, lead the way.",
+            "kr": "좋아, 앞장서."
+          }
         },
         {
           "en": "We're just going to look around.",
@@ -28804,8 +29248,14 @@
           ],
           "punct": "?",
           "krMark": "따뜻한 팝콘 [좀 더] 먹을래?",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "That bowl is already empty.",
+            "kr": "그릇이 벌써 비었네."
+          },
+          "reply": {
+            "en": "Yes please!",
+            "kr": "네, 주세요!"
+          }
         },
         {
           "en": "Can I get some more water?",
@@ -28955,8 +29405,14 @@
           ],
           "punct": ".",
           "krMark": "보다시피 그건 [잘] 안 풀렸어.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "How did the plan go?",
+            "kr": "그 계획은 어떻게 됐어?"
+          },
+          "reply": {
+            "en": "Sorry to hear that.",
+            "kr": "안됐다."
+          }
         },
         {
           "en": "They didn't work out, obviously.",
@@ -29789,8 +30245,14 @@
           ],
           "punct": "?",
           "krMark": null,
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "Work has been brutal lately.",
+            "kr": "요즘 일이 너무 힘들어."
+          },
+          "reply": {
+            "en": "I go running, usually.",
+            "kr": "난 보통 달리기해."
+          }
         }
       ],
       "siblings": [
@@ -29890,8 +30352,14 @@
           ],
           "punct": ".",
           "krMark": "이것들 주민센터 [거]야.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "Whose chairs are these?",
+            "kr": "이 의자들 누구 거야?"
+          },
+          "reply": {
+            "en": "I'll put them back, then.",
+            "kr": "그럼 갖다 놓을게."
+          }
         },
         {
           "en": "Who does it belong to?",
@@ -30454,8 +30922,14 @@
           ],
           "punct": ".",
           "krMark": null,
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "Your brother is on a diet, right?",
+            "kr": "네 형 다이어트 중이지?"
+          },
+          "reply": {
+            "en": "Ha, I know the feeling.",
+            "kr": "하하, 무슨 말인지 알아."
+          }
         },
         {
           "en": "She can't say no to a cheeseburger.",
@@ -30645,8 +31119,14 @@
           ],
           "punct": ".",
           "krMark": "우리 요건을 같이 [살펴보]자.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "Where should we start today?",
+            "kr": "오늘은 어디부터 할까요?"
+          },
+          "reply": {
+            "en": "Good idea, I'll take notes.",
+            "kr": "좋아요, 제가 적을게요."
+          }
         },
         {
           "en": "Let's go over his requirements.",
@@ -30912,8 +31392,14 @@
           ],
           "punct": ".",
           "krMark": "[더 이상] 실없는 변명하지 마.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "I overslept again, sorry.",
+            "kr": "또 늦잠 잤어, 미안."
+          },
+          "reply": {
+            "en": "Okay, it won't happen again.",
+            "kr": "알았어, 다신 안 그럴게."
+          }
         },
         {
           "en": "There's no more left.",
@@ -31121,8 +31607,14 @@
           ],
           "punct": ".",
           "krMark": "서울역에서 지하철을 [내리]세요.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "How do I reach the museum?",
+            "kr": "박물관은 어떻게 가나요?"
+          },
+          "reply": {
+            "en": "Thanks, that's easy enough.",
+            "kr": "감사해요, 어렵지 않네요."
+          }
         },
         {
           "en": "We get off at the next stop.",
@@ -31520,8 +32012,14 @@
           ],
           "punct": ".",
           "krMark": "걘 수업 시간에 [집중]을 안 하잖아.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "Why did your classmate fail?",
+            "kr": "네 동기는 왜 떨어졌어?"
+          },
+          "reply": {
+            "en": "He should fix that.",
+            "kr": "그건 고쳐야겠다."
+          }
         },
         {
           "en": "She doesn't pay attention during the lectures.",
@@ -32006,8 +32504,14 @@
           ],
           "punct": "?",
           "krMark": "[왜] 이렇게들 붐비지?",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "Every café on this street has a line.",
+            "kr": "이 거리 카페마다 줄이 있어."
+          },
+          "reply": {
+            "en": "There must be an event nearby.",
+            "kr": "근처에 행사가 있나 봐."
+          }
         },
         {
           "en": "How come it was so crowded?",
@@ -32639,8 +33143,14 @@
           ],
           "punct": "?",
           "krMark": "[우리] 같이 볼링 치러 갈까?",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "I'm bored this weekend.",
+            "kr": "이번 주말 심심해."
+          },
+          "reply": {
+            "en": "Sounds fun, count me in.",
+            "kr": "재밌겠다, 나도 갈래."
+          }
         },
         {
           "en": "Why don't we watch a movie?",
@@ -32791,8 +33301,14 @@
           ],
           "punct": ".",
           "krMark": "걔 가죽 재킷 먼저 [돌려줘].",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "I borrowed a few things from him.",
+            "kr": "걔한테 몇 개 빌렸어."
+          },
+          "reply": {
+            "en": "Okay, I'll drop it off today.",
+            "kr": "알았어, 오늘 갖다줄게."
+          }
         },
         {
           "en": "Give her leather jacket back first.",
@@ -33077,8 +33593,14 @@
           ],
           "punct": ".",
           "krMark": "그것들은 거의 [에]세이 수준이더라.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "Were the answers short?",
+            "kr": "답이 짧았어?"
+          },
+          "reply": {
+            "en": "No wonder it took so long.",
+            "kr": "어쩐지 오래 걸리더라."
+          }
         },
         {
           "en": "It is more like an essay.",
@@ -33255,8 +33777,14 @@
           ],
           "punct": ".",
           "krMark": "혹시 그 사람이 집에 없을지 [모르니] 여분 열쇠 가져가.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "I might get there before my brother.",
+            "kr": "내가 동생보다 먼저 도착할 수도 있어."
+          },
+          "reply": {
+            "en": "Good thinking, thanks.",
+            "kr": "좋은 생각이야, 고마워."
+          }
         },
         {
           "en": "Take the spare key in case they're not home.",
@@ -33889,8 +34417,14 @@
           ],
           "punct": ".",
           "krMark": "그 사람들은 걔 알레르기를 [진지하게] 봐 줘.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "Is that restaurant safe for your son?",
+            "kr": "그 식당 아드님한테 괜찮아요?"
+          },
+          "reply": {
+            "en": "That's a relief.",
+            "kr": "다행이네요."
+          }
         },
         {
           "en": "They take her allergies seriously.",
@@ -34074,8 +34608,14 @@
           ],
           "punct": ".",
           "krMark": "그 사람은 친척을 [돌보]고 있어.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "Why did he take the week off?",
+            "kr": "그 사람은 왜 일주일 쉬었어요?"
+          },
+          "reply": {
+            "en": "I hope everything's okay.",
+            "kr": "별일 없으면 좋겠네요."
+          }
         },
         {
           "en": "They're looking after a relative.",
@@ -34096,8 +34636,14 @@
           ],
           "punct": ".",
           "krMark": "걔넨 친척을 [돌보]고 있어.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "Why haven't they been around?",
+            "kr": "걔넨 왜 요즘 안 보여?"
+          },
+          "reply": {
+            "en": "That must be tiring.",
+            "kr": "힘들겠다."
+          }
         },
         {
           "en": "I'm looking after a relative.",
@@ -34410,8 +34956,14 @@
           ],
           "punct": "?",
           "krMark": "누가 날 털[면 어쩌지]?",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "Just carry the cash in your bag.",
+            "kr": "현금은 그냥 가방에 넣고 다녀."
+          },
+          "reply": {
+            "en": "Don't worry, this area is safe.",
+            "kr": "걱정 마, 여긴 안전해."
+          }
         },
         {
           "en": "What if someone robs him?",
@@ -34624,8 +35176,14 @@
           ],
           "punct": ".",
           "krMark": "그녀는 그[보다 덜] 믿음직해.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "Who should we put on the night shift?",
+            "kr": "야간 근무는 누구를 넣을까요?"
+          },
+          "reply": {
+            "en": "Then let's go with him.",
+            "kr": "그럼 그 사람으로 하죠."
+          }
         },
         {
           "en": "He's less reliable than me.",
@@ -34981,8 +35539,14 @@
           ],
           "punct": "?",
           "krMark": null,
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "My friend is getting my coat for me.",
+            "kr": "내 친구가 내 코트 찾아다 준대."
+          },
+          "reply": {
+            "en": "Oh, you're right. I'll send it.",
+            "kr": "아, 맞네. 보내 줄게."
+          }
         },
         {
           "en": "Doesn't she need the receipt to pick it up?",
@@ -35215,8 +35779,14 @@
           ],
           "punct": "?",
           "krMark": "걘 [왜] 그렇게 확신해?",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "He says the deal is done.",
+            "kr": "그 사람은 계약이 성사됐대요."
+          },
+          "reply": {
+            "en": "He talked to them directly.",
+            "kr": "직접 얘기해 봤대요."
+          }
         },
         {
           "en": "What makes her so certain?",
@@ -35471,8 +36041,14 @@
           ],
           "punct": "!",
           "krMark": "장례식에서 이런 얘기 [꺼내]지 마!",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "I want to ask about the inheritance.",
+            "kr": "상속 얘기를 물어보고 싶은데."
+          },
+          "reply": {
+            "en": "Fine, I'll wait until later.",
+            "kr": "알았어, 나중에 할게."
+          }
         },
         {
           "en": "Don't bring that up at his funeral!",
@@ -35669,8 +36245,14 @@
           ],
           "punct": ".",
           "krMark": "걘 그 관리자 자리를 [거절]했어.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "Why is that job still open?",
+            "kr": "그 자리는 왜 아직 비어 있어요?"
+          },
+          "reply": {
+            "en": "Really? That's surprising.",
+            "kr": "정말요? 의외네요."
+          }
         },
         {
           "en": "She turned down the supervisor position.",
@@ -35918,8 +36500,14 @@
           ],
           "punct": ".",
           "krMark": "그녀가 경력이 많다고 [해서] 그 말이 맞는 건 아니지.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "She's been here for twenty years.",
+            "kr": "그분은 여기서 20년 일했어요."
+          },
+          "reply": {
+            "en": "That's a fair point.",
+            "kr": "일리 있네요."
+          }
         },
         {
           "en": "Just because they're experienced doesn't mean they're right.",
@@ -36245,8 +36833,14 @@
           ],
           "punct": ".",
           "krMark": "[진전이] 있어.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "How's the project coming along?",
+            "kr": "프로젝트는 잘 돼 가?"
+          },
+          "reply": {
+            "en": "Glad to hear it.",
+            "kr": "다행이다."
+          }
         }
       ],
       "siblings": [
@@ -36496,8 +37090,14 @@
           ],
           "punct": ".",
           "krMark": "우린 그냥 쓰는 돈을 [계속] 기록해.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "How do you two save so much?",
+            "kr": "두 분은 어떻게 그렇게 모으세요?"
+          },
+          "reply": {
+            "en": "I should try that.",
+            "kr": "나도 해 봐야겠다."
+          }
         },
         {
           "en": "They just keep track of their expenses.",
@@ -36979,8 +37579,14 @@
           ],
           "punct": ".",
           "krMark": null,
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "What happens after this session?",
+            "kr": "이 수업 다음은 어떻게 되나요?"
+          },
+          "reply": {
+            "en": "Okay, I'll introduce myself then.",
+            "kr": "알겠어요, 그때 인사드릴게요."
+          }
         },
         {
           "en": "Our new trainer will take over.",
@@ -37137,8 +37743,14 @@
           ],
           "punct": "?",
           "krMark": "두 개 빼[는 게 어때]?",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "The list is still too long.",
+            "kr": "목록이 아직 너무 길어."
+          },
+          "reply": {
+            "en": "That could work.",
+            "kr": "그럴 수도 있겠다."
+          }
         },
         {
           "en": "Why not drop the last one?",
@@ -38563,8 +39175,14 @@
           ],
           "punct": ".",
           "krMark": "걘 더 싼 숙소를 [알아보]고 있어.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "The hotel quote was way over budget.",
+            "kr": "호텔 견적이 예산을 훨씬 넘었어요."
+          },
+          "reply": {
+            "en": "Good, keep me posted.",
+            "kr": "좋아요, 계속 알려 주세요."
+          }
         },
         {
           "en": "She's looking into cheaper accommodations.",
@@ -39505,8 +40123,14 @@
           ],
           "punct": "!",
           "krMark": "가방들 챙겨서 차에 [타]!",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "We're going to miss the ferry!",
+            "kr": "배 놓치겠어!"
+          },
+          "reply": {
+            "en": "Okay, okay, I'm coming!",
+            "kr": "알았어, 알았어, 가고 있어!"
+          }
         },
         {
           "en": "Grab your coat and get in the car!",
@@ -40222,8 +40846,14 @@
           ],
           "punct": ".",
           "krMark": null,
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "Could you tell the manager about this?",
+            "kr": "이거 매니저한테 전해 주실 수 있어요?"
+          },
+          "reply": {
+            "en": "Thank you, I appreciate it.",
+            "kr": "고맙습니다."
+          }
         },
         {
           "en": "I'll pass that on to the chef.",
@@ -40540,8 +41170,14 @@
           ],
           "punct": ".",
           "krMark": "그 거짓말쟁이들은 [책임을] 안 질 거야.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "Did anyone admit to the mistake?",
+            "kr": "그 실수를 인정한 사람 있어요?"
+          },
+          "reply": {
+            "en": "Then we handle it ourselves.",
+            "kr": "그럼 우리가 처리하죠."
+          }
         },
         {
           "en": "This liar won't take responsibility.",
@@ -40710,8 +41346,14 @@
           ],
           "punct": ".",
           "krMark": null,
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "My friend still blames himself.",
+            "kr": "내 친구가 아직도 자책해."
+          },
+          "reply": {
+            "en": "That's easier said than done.",
+            "kr": "말이 쉽지."
+          }
         },
         {
           "en": "She needs to let go of her guilt.",
@@ -41093,8 +41735,14 @@
           ],
           "punct": ".",
           "krMark": "걘 우표랑 봉투를 [다] 팔아.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "Where can I mail this?",
+            "kr": "이거 어디서 부칠 수 있어요?"
+          },
+          "reply": {
+            "en": "Perfect, I'll go there.",
+            "kr": "좋아요, 거기 갈게요."
+          }
         },
         {
           "en": "She sells both stamps and envelopes.",
@@ -41475,8 +42123,14 @@
           ],
           "punct": ".",
           "krMark": "파란 매트에 [누]워 봐.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "Where should I start stretching?",
+            "kr": "스트레칭은 어디서 시작할까요?"
+          },
+          "reply": {
+            "en": "Good, now breathe slowly.",
+            "kr": "좋아요, 이제 천천히 숨 쉬세요."
+          }
         },
         {
           "en": "Please lie down on the mat.",
@@ -41830,8 +42484,14 @@
           ],
           "punct": ".",
           "krMark": "따뜻한 햄 좀 [마음껏 드세요].",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "Everything smells amazing.",
+            "kr": "냄새가 정말 좋네요."
+          },
+          "reply": {
+            "en": "Thank you, I will.",
+            "kr": "감사합니다, 잘 먹을게요."
+          }
         },
         {
           "en": "Help yourself to some ham and cheese.",
@@ -42325,8 +42985,14 @@
           ],
           "punct": "!",
           "krMark": "걔 접시 [가득] 담아 줘!",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "That boy hasn't eaten all day.",
+            "kr": "쟤 하루 종일 못 먹었대."
+          },
+          "reply": {
+            "en": "Done. He'll be happy.",
+            "kr": "됐어. 좋아하겠다."
+          }
         },
         {
           "en": "Fill up her tray!",
@@ -42571,8 +43237,14 @@
           ],
           "punct": ".",
           "krMark": "크게 갈라진 데 [조심]해.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "This path looks rough.",
+            "kr": "길이 험해 보여."
+          },
+          "reply": {
+            "en": "Got it, I'll go slowly.",
+            "kr": "알겠어, 천천히 갈게."
+          }
         },
         {
           "en": "Please watch out for cracks.",
@@ -43020,8 +43692,14 @@
           ],
           "punct": ".",
           "krMark": "확정하기 전에 그건 좀 더 [생각해] 보자.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "They want an answer by Friday.",
+            "kr": "금요일까지 답을 달래요."
+          },
+          "reply": {
+            "en": "Agreed, let's not rush.",
+            "kr": "동의해요, 서두르지 말죠."
+          }
         },
         {
           "en": "I need some time to think things over.",
@@ -43385,8 +44063,14 @@
           ],
           "punct": ".",
           "krMark": "아주머니들께 [인사]해.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "My son is being shy today.",
+            "kr": "우리 아들이 오늘 부끄럼을 타네요."
+          },
+          "reply": {
+            "en": "Aww, hello there!",
+            "kr": "어머, 안녕!"
+          }
         },
         {
           "en": "Say hi to the kind lady.",
@@ -43811,8 +44495,14 @@
           ],
           "punct": ".",
           "krMark": null,
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "Why did they send the same design?",
+            "kr": "왜 똑같은 디자인으로 보냈대?"
+          },
+          "reply": {
+            "en": "I see, that explains it.",
+            "kr": "그렇구나, 그래서였네."
+          }
         },
         {
           "en": "I didn't have a choice regarding the invitations.",
@@ -44033,8 +44723,14 @@
           ],
           "punct": ".",
           "krMark": "걘 [갚]아야 할 돈이 엄청나.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "Why is your friend working two jobs?",
+            "kr": "네 친구는 왜 투잡을 뛰어?"
+          },
+          "reply": {
+            "en": "That's rough.",
+            "kr": "힘들겠다."
+          }
         },
         {
           "en": "She's got to pay back a fortune.",
@@ -44937,8 +45633,14 @@
           ],
           "punct": ".",
           "krMark": null,
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "He's going to the restroom.",
+            "kr": "걔 화장실 간대."
+          },
+          "reply": {
+            "en": "Sure, I've got it.",
+            "kr": "그래, 내가 볼게."
+          }
         },
         {
           "en": "Keep an eye on her luggage.",
@@ -45401,8 +46103,14 @@
           ],
           "punct": ".",
           "krMark": "걔가 정비사한테 [데이트] 신청이나 해 볼까.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "Your brother keeps visiting that garage.",
+            "kr": "네 형이 그 정비소에 계속 가네."
+          },
+          "reply": {
+            "en": "Ha, that would explain it.",
+            "kr": "하하, 그래서 그런 거였구나."
+          }
         },
         {
           "en": "Maybe she'll ask out her mechanic.",
@@ -45904,8 +46612,14 @@
           ],
           "punct": ".",
           "krMark": "걘 회계사한테 [전화]해 보는 게 좋겠어.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "My friend is confused about his taxes.",
+            "kr": "내 친구가 세금 때문에 헷갈려 해."
+          },
+          "reply": {
+            "en": "I'll tell him that.",
+            "kr": "그렇게 전할게."
+          }
         },
         {
           "en": "She should give her accountant a call.",
@@ -46362,8 +47076,14 @@
           ],
           "punct": ".",
           "krMark": "그분은 탄산음료를 [줄이]시는 게 좋겠어요.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "The doctor mentioned his sugar levels.",
+            "kr": "의사가 그분 혈당 얘기를 했어요."
+          },
+          "reply": {
+            "en": "I'll pass that along.",
+            "kr": "전해 드릴게요."
+          }
         },
         {
           "en": "She should cut down on soft drinks.",
@@ -46626,8 +47346,14 @@
           ],
           "punct": ".",
           "krMark": "걔넨 요리사도 제빵사[도 아니야].",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "Who runs that little shop?",
+            "kr": "그 작은 가게는 누가 해요?"
+          },
+          "reply": {
+            "en": "Interesting. What do they do?",
+            "kr": "신기하네요. 그럼 무슨 일을 해요?"
+          }
         },
         {
           "en": "I'm neither a chef nor a baker.",
@@ -47269,8 +47995,14 @@
           ],
           "punct": ".",
           "krMark": "걔가 공식을 [헷갈렸]네.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "Why are these numbers wrong?",
+            "kr": "이 숫자들이 왜 틀렸지?"
+          },
+          "reply": {
+            "en": "I'll ask him to redo it.",
+            "kr": "다시 하라고 할게."
+          }
         },
         {
           "en": "She mixed up the formulas.",
@@ -47489,8 +48221,14 @@
           ],
           "punct": "?",
           "krMark": null,
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "My hands are full right now.",
+            "kr": "지금 손이 안 비어요."
+          },
+          "reply": {
+            "en": "Sure, I'll send him in.",
+            "kr": "네, 들여보낼게요."
+          }
         },
         {
           "en": "Can she check on the turkey?",
@@ -47706,8 +48444,14 @@
           ],
           "punct": ".",
           "krMark": null,
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "How do you two travel?",
+            "kr": "두 분은 어떻게 다니세요?"
+          },
+          "reply": {
+            "en": "That sounds comfortable.",
+            "kr": "편하겠네요."
+          }
         },
         {
           "en": "They usually get around by rail.",
@@ -48066,8 +48810,14 @@
           ],
           "punct": ".",
           "krMark": "그것들이 독이 있는지 [모르겠어].",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "Can we eat these mushrooms?",
+            "kr": "이 버섯 먹어도 돼?"
+          },
+          "reply": {
+            "en": "Let's not risk it, then.",
+            "kr": "그럼 그냥 두자."
+          }
         },
         {
           "en": "I don't know if they're open.",
@@ -48228,8 +48978,14 @@
           ],
           "punct": ".",
           "krMark": null,
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "How was the guide?",
+            "kr": "가이드는 어땠어요?"
+          },
+          "reply": {
+            "en": "I'm glad to hear that.",
+            "kr": "다행이네요."
+          }
         },
         {
           "en": "She was more than helpful.",
@@ -48532,8 +49288,14 @@
           ],
           "punct": "?",
           "krMark": "뭐로 [먹고살] 거야?",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "I'm quitting to paint full time.",
+            "kr": "그림만 그리려고 일 그만둘 거야."
+          },
+          "reply": {
+            "en": "I've saved enough for a year.",
+            "kr": "1년 치는 모아 뒀어."
+          }
         }
       ],
       "siblings": [
@@ -49134,8 +49896,14 @@
           ],
           "punct": ".",
           "krMark": "걔가 디즈니 영화 [틀]었어.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "Why are the kids so quiet?",
+            "kr": "애들이 왜 이렇게 조용해?"
+          },
+          "reply": {
+            "en": "Smart move.",
+            "kr": "잘했네."
+          }
         },
         {
           "en": "Let's put on another Disney movie.",
@@ -49347,8 +50115,14 @@
           ],
           "punct": ".",
           "krMark": "걔라면 인사팀에 [연락하]겠지.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "Who would know about the contract?",
+            "kr": "계약 건은 누가 알까요?"
+          },
+          "reply": {
+            "en": "Right, I'll do that.",
+            "kr": "그렇네요, 그렇게 할게요."
+          }
         },
         {
           "en": "She'd get in touch with HR.",
@@ -49755,8 +50529,14 @@
           ],
           "punct": ".",
           "krMark": null,
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "Why did your friend leave the party?",
+            "kr": "네 친구는 왜 파티에서 나갔어?"
+          },
+          "reply": {
+            "en": "Fair enough.",
+            "kr": "그럴 만하네."
+          }
         },
         {
           "en": "She can't put up with small talk.",
@@ -49971,8 +50751,14 @@
           ],
           "punct": ".",
           "krMark": "걔가 번역가한테 [확인]하게 해 줘.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "This sentence doesn't make sense.",
+            "kr": "이 문장이 말이 안 돼요."
+          },
+          "reply": {
+            "en": "Okay, we'll wait for that.",
+            "kr": "네, 기다릴게요."
+          }
         },
         {
           "en": "Let her check with the translator.",
@@ -50250,8 +51036,14 @@
           ],
           "punct": ".",
           "krMark": null,
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "Should we try the advanced moves?",
+            "kr": "고난도 동작 해 볼까요?"
+          },
+          "reply": {
+            "en": "Understood, coach.",
+            "kr": "알겠습니다, 코치님."
+          }
         },
         {
           "en": "I'll stick with water.",
@@ -50949,8 +51741,14 @@
           ],
           "punct": ".",
           "krMark": "걔넨 보통 크리스마스이브에 [외식]해.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "Does that family cook for the holidays?",
+            "kr": "그 집은 명절에 요리해?"
+          },
+          "reply": {
+            "en": "That sounds easier.",
+            "kr": "그게 편하겠다."
+          }
         },
         {
           "en": "We usually eat out on New Year's Eve.",
@@ -52252,8 +53050,14 @@
           ],
           "punct": ".",
           "krMark": "걘 인조 제품하고 [구별]이 안 된대.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "Did your brother notice the real leather?",
+            "kr": "네 형이 진짜 가죽인 거 알아봤어?"
+          },
+          "reply": {
+            "en": "Ha, most people can't.",
+            "kr": "하하, 대부분 못 알아보지."
+          }
         },
         {
           "en": "She can't tell the difference from the synthetic one.",
@@ -52466,8 +53270,14 @@
           ],
           "punct": ".",
           "krMark": "걔가 길가에 [댈] 거야.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "I feel carsick.",
+            "kr": "차멀미 나."
+          },
+          "reply": {
+            "en": "Hang on, almost there.",
+            "kr": "조금만 참아, 거의 다 왔어."
+          }
         },
         {
           "en": "She'll pull over to the curb.",
@@ -52675,8 +53485,14 @@
           ],
           "punct": ".",
           "krMark": "걔넨 늘 수다 떨 [시간을] 내.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "Aren't those two really busy?",
+            "kr": "그 둘 엄청 바쁘지 않아?"
+          },
+          "reply": {
+            "en": "That's a good habit.",
+            "kr": "좋은 습관이네."
+          }
         },
         {
           "en": "I always make time for a chat.",
@@ -52847,8 +53663,14 @@
           ],
           "punct": ".",
           "krMark": "걘 세미나가 있어서 [차려입]었어.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "Why is your roommate in a suit?",
+            "kr": "네 룸메이트는 왜 정장을 입었어?"
+          },
+          "reply": {
+            "en": "Ah, that makes sense.",
+            "kr": "아, 그렇구나."
+          }
         },
         {
           "en": "She dressed up for the seminar.",
@@ -53056,8 +53878,14 @@
           ],
           "punct": ".",
           "krMark": "이상한 점을 발견[하시면] 전화해 주세요.",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "What do I do if something looks off?",
+            "kr": "뭔가 이상해 보이면 어떻게 하죠?"
+          },
+          "reply": {
+            "en": "Understood, I'll keep the number.",
+            "kr": "알겠습니다, 번호 저장해 둘게요."
+          }
         },
         {
           "en": "Should you see him, please give him this message.",
@@ -53228,8 +54056,14 @@
           ],
           "punct": "?",
           "krMark": "걔네 까다롭네, [안 그래]?",
-          "ask": null,
-          "reply": null
+          "ask": {
+            "en": "They sent the food back twice.",
+            "kr": "음식을 두 번이나 물렀어."
+          },
+          "reply": {
+            "en": "Definitely.",
+            "kr": "정말 그래."
+          }
         },
         {
           "en": "He's very picky, don't you think?",

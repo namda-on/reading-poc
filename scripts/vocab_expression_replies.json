@@ -1043,5 +1043,561 @@
  "You'll get used to it.": [
   "I hope so.",
   "그러면 좋겠어."
+ ],
+ "He should get up.": [
+  "Fine, I'll go wake him.",
+  "알겠어, 가서 깨울게."
+ ],
+ "I'll talk to her parents.": [
+  "That might change their mind.",
+  "그럼 마음이 바뀔 수도 있겠다."
+ ],
+ "Put these clothes on.": [
+  "Perfect fit. Let's go.",
+  "딱 맞네. 가자."
+ ],
+ "Come over tomorrow evening!": [
+  "Great, I'll be there.",
+  "좋아, 갈게."
+ ],
+ "It really feels like spring!": [
+  "Let's walk instead of taking the bus.",
+  "버스 말고 걸어가자."
+ ],
+ "You can take off your sweater.": [
+  "Thanks, much better.",
+  "고마워, 훨씬 낫다."
+ ],
+ "He worries too much.": [
+  "Yeah, I've noticed.",
+  "응, 나도 느꼈어."
+ ],
+ "Be sure to check your email.": [
+  "Got it, I'll do that tonight.",
+  "알겠어, 오늘 밤에 할게."
+ ],
+ "I missed most of the concert.": [
+  "Oh no, what happened?",
+  "이런, 무슨 일 있었어?"
+ ],
+ "Never give up hope!": [
+  "Okay, I'll keep trying.",
+  "알았어, 계속 해볼게."
+ ],
+ "Let's move on to the last topic.": [
+  "Sure, go ahead.",
+  "네, 말씀하세요."
+ ],
+ "Hello! Welcome to China!": [
+  "Thank you! It's my first time here.",
+  "감사합니다! 여긴 처음이에요."
+ ],
+ "Welcome to China!": [
+  "Thanks! I'm glad to be here.",
+  "감사해요! 오게 되어 기뻐요."
+ ],
+ "They have a lot of data.": [
+  "That explains it.",
+  "그래서 그렇구나."
+ ],
+ "Have fun at the winter festival!": [
+  "Thanks! I'll send you pictures.",
+  "고마워! 사진 보낼게."
+ ],
+ "Each of them saw one performance.": [
+  "Ah, so they split up.",
+  "아, 나눠서 봤구나."
+ ],
+ "I need to call my lawyer back!": [
+  "Go ahead, I'll wait.",
+  "그래, 기다릴게."
+ ],
+ "What's going on in London now?": [
+  "Honestly, I have no idea.",
+  "솔직히 나도 몰라."
+ ],
+ "He'll get out of your seat.": [
+  "Oh, my apologies.",
+  "아, 죄송합니다."
+ ],
+ "They need plenty of sunlight.": [
+  "The window it is, then.",
+  "그럼 창가에 두자."
+ ],
+ "Have you heard of a band called \"Queen\"?": [
+  "Of course! Everyone knows them.",
+  "당연하지! 다 알지."
+ ],
+ "I'm in charge of the schedule.": [
+  "Great, I'll come to you then.",
+  "좋아요, 그럼 그쪽으로 갈게요."
+ ],
+ "She's in charge of the schedule.": [
+  "Got it, thanks.",
+  "알겠어요, 고마워요."
+ ],
+ "Pay attention to the big screen.": [
+  "Okay, I'm watching.",
+  "네, 보고 있어요."
+ ],
+ "Please pay attention to the screen.": [
+  "Sorry, we'll focus.",
+  "죄송해요, 집중할게요."
+ ],
+ "What's wrong with my glasses?": [
+  "Let me take a look.",
+  "어디 봐 봐."
+ ],
+ "They're in front of the ketchup.": [
+  "Found them, thanks!",
+  "찾았다, 고마워!"
+ ],
+ "I can take a break every fifty minutes.": [
+  "That sounds reasonable.",
+  "괜찮은 편이네요."
+ ],
+ "He needs a couple of potatoes.": [
+  "I'll grab them on the way.",
+  "가는 길에 사 올게."
+ ],
+ "Can he do one more drawing?": [
+  "Sure, but be quick.",
+  "그럼요, 대신 빨리요."
+ ],
+ "Just fill out that survey.": [
+  "Okay, it'll only take a minute.",
+  "네, 금방 하겠네요."
+ ],
+ "I'm his grandma, aren't I?": [
+  "Fair enough!",
+  "그건 그렇네요!"
+ ],
+ "He shouldn't rely on public transportation.": [
+  "Maybe he should get a bike.",
+  "자전거라도 사야겠네."
+ ],
+ "Ever since that experience, he hates water.": [
+  "That's understandable.",
+  "그럴 만하네."
+ ],
+ "No matter the cost, he'll pay.": [
+  "Then let's get started.",
+  "그럼 시작하죠."
+ ],
+ "Teens always want to fit in.": [
+  "I guess that never changes.",
+  "그건 변하지 않나 보네."
+ ],
+ "Hers is the same as mine!": [
+  "What are the odds!",
+  "이런 우연이!"
+ ],
+ "He can't figure out the next step.": [
+  "Let's help him then.",
+  "그럼 우리가 도와주자."
+ ],
+ "That's the same address.": [
+  "Good, no confusion then.",
+  "좋아, 헷갈릴 일 없겠네."
+ ],
+ "They're going through another economic crisis.": [
+  "That sounds serious.",
+  "심각하네."
+ ],
+ "Come by my office at lunchtime!": [
+  "Sure, see you then.",
+  "네, 그때 뵐게요."
+ ],
+ "A number of customers complained about him.": [
+  "I see. That's a shame.",
+  "그렇군요. 안타깝네요."
+ ],
+ "He's in the middle of the forest!": [
+  "Someone should go get him.",
+  "누가 데리러 가야겠다."
+ ],
+ "Give that brand a try.": [
+  "Okay, I'll buy one today.",
+  "그래, 오늘 하나 살게."
+ ],
+ "It's great except for the crowds.": [
+  "Maybe I'll go early then.",
+  "그럼 일찍 가야겠다."
+ ],
+ "He'll turn on the radio.": [
+  "Much better now.",
+  "훨씬 낫다."
+ ],
+ "Make a choice between salad or spaghetti.": [
+  "Good, I'll order for us.",
+  "좋아, 내가 주문할게."
+ ],
+ "Can he look that up in his records?": [
+  "I'll ask him right away.",
+  "바로 물어볼게요."
+ ],
+ "Let him pick up his purse.": [
+  "Okay, we'll wait.",
+  "네, 기다릴게요."
+ ],
+ "There was a bunch of errors.": [
+  "We'd better run it again.",
+  "다시 돌려 보는 게 낫겠다."
+ ],
+ "Hurry, he's late for work.": [
+  "Okay, I'll take the fast road.",
+  "알았어, 빠른 길로 갈게."
+ ],
+ "They're better in terms of strength.": [
+  "Then we need a different plan.",
+  "그럼 다른 계획이 필요하겠다."
+ ],
+ "I like both of them.": [
+  "That doesn't help me decide!",
+  "그럼 못 고르잖아!"
+ ],
+ "Be careful when it comes to his diet.": [
+  "Good to know, thanks.",
+  "알아 둘게, 고마워."
+ ],
+ "He doesn't believe in luck.": [
+  "That's one way to see it.",
+  "그렇게 볼 수도 있겠네."
+ ],
+ "We believe in our president.": [
+  "That's good to hear.",
+  "다행이네요."
+ ],
+ "He missed the bus because of you!": [
+  "I'll apologize right now.",
+  "지금 바로 사과할게."
+ ],
+ "Let me know after his appointment!": [
+  "Of course, I'll text you.",
+  "당연하지, 문자할게."
+ ],
+ "He has to sign up on their site.": [
+  "I'll send him the link.",
+  "링크 보내 줄게."
+ ],
+ "Bread is more expensive than rice.": [
+  "Then I'll get the cheaper one.",
+  "그럼 싼 걸로 살게."
+ ],
+ "Let's have a good time, grandpa!": [
+  "That's the spirit!",
+  "그래야지!"
+ ],
+ "Poverty was the most serious issue.": [
+  "I expected that.",
+  "그럴 줄 알았어요."
+ ],
+ "We usually take a walk in the afternoon.": [
+  "That sounds nice.",
+  "좋네요."
+ ],
+ "Please leave the guests alone.": [
+  "Understood, I'll keep them busy.",
+  "알겠어요, 애들 데리고 있을게요."
+ ],
+ "They're on top of the fridge.": [
+  "Ah, that's why.",
+  "아, 그래서 안 보였구나."
+ ],
+ "I'll just get started anyway.": [
+  "Okay, I'll fill them in later.",
+  "알겠어요, 나중에 전달할게요."
+ ],
+ "It's up to you.": [
+  "Fine, I'll decide then.",
+  "알았어, 그럼 내가 정할게."
+ ],
+ "He can't make it to the convention.": [
+  "That's too bad.",
+  "아쉽네요."
+ ],
+ "Let's go back to the funding problem.": [
+  "Right, where were we?",
+  "네, 어디까지 얘기했죠?"
+ ],
+ "He was asleep by the time I arrived.": [
+  "Try again tomorrow.",
+  "내일 다시 해 봐."
+ ],
+ "He'll try on this pair first.": [
+  "Sure, take your time.",
+  "네, 천천히 하세요."
+ ],
+ "What's with that rainbow?": [
+  "It rained earlier, I think.",
+  "아까 비가 왔나 봐."
+ ],
+ "He wants to get home before dark.": [
+  "Makes sense.",
+  "그럴 만하네."
+ ],
+ "Let's look around the fair for a bit.": [
+  "Sure, lead the way.",
+  "좋아, 앞장서."
+ ],
+ "Want some more warm popcorn?": [
+  "Yes please!",
+  "네, 주세요!"
+ ],
+ "It didn't work out, obviously.": [
+  "Sorry to hear that.",
+  "안됐다."
+ ],
+ "How do you deal with stress?": [
+  "I go running, usually.",
+  "난 보통 달리기해."
+ ],
+ "These belong to the community center.": [
+  "I'll put them back, then.",
+  "그럼 갖다 놓을게."
+ ],
+ "He can't say no to a cheeseburger.": [
+  "Ha, I know the feeling.",
+  "하하, 무슨 말인지 알아."
+ ],
+ "Let's go over our requirements.": [
+  "Good idea, I'll take notes.",
+  "좋아요, 제가 적을게요."
+ ],
+ "No more silly excuses.": [
+  "Okay, it won't happen again.",
+  "알았어, 다신 안 그럴게."
+ ],
+ "Get off the subway at Seoul Station.": [
+  "Thanks, that's easy enough.",
+  "감사해요, 어렵지 않네요."
+ ],
+ "He doesn't pay attention during the lectures.": [
+  "He should fix that.",
+  "그건 고쳐야겠다."
+ ],
+ "How come they're so crowded?": [
+  "There must be an event nearby.",
+  "근처에 행사가 있나 봐."
+ ],
+ "Why don't we go bowling together?": [
+  "Sounds fun, count me in.",
+  "재밌겠다, 나도 갈래."
+ ],
+ "Give his leather jacket back first.": [
+  "Okay, I'll drop it off today.",
+  "알았어, 오늘 갖다줄게."
+ ],
+ "They were more like essays.": [
+  "No wonder it took so long.",
+  "어쩐지 오래 걸리더라."
+ ],
+ "Take the spare key in case he's not home.": [
+  "Good thinking, thanks.",
+  "좋은 생각이야, 고마워."
+ ],
+ "They take his allergies seriously.": [
+  "That's a relief.",
+  "다행이네요."
+ ],
+ "They're looking after a relative.": [
+  "That must be tiring.",
+  "힘들겠다."
+ ],
+ "He's looking after a relative.": [
+  "I hope everything's okay.",
+  "별일 없으면 좋겠네요."
+ ],
+ "What if someone robs me?": [
+  "Don't worry, this area is safe.",
+  "걱정 마, 여긴 안전해."
+ ],
+ "She's less reliable than him.": [
+  "Then let's go with him.",
+  "그럼 그 사람으로 하죠."
+ ],
+ "Doesn't he need the receipt to pick it up?": [
+  "Oh, you're right. I'll send it.",
+  "아, 맞네. 보내 줄게."
+ ],
+ "What makes him so certain?": [
+  "He talked to them directly.",
+  "직접 얘기해 봤대요."
+ ],
+ "Don't bring this up at the funeral!": [
+  "Fine, I'll wait until later.",
+  "알았어, 나중에 할게."
+ ],
+ "He turned down the supervisor position.": [
+  "Really? That's surprising.",
+  "정말요? 의외네요."
+ ],
+ "Just because she's experienced doesn't mean she's right.": [
+  "That's a fair point.",
+  "일리 있네요."
+ ],
+ "We're making progress.": [
+  "Glad to hear it.",
+  "다행이다."
+ ],
+ "We just keep track of our expenses.": [
+  "I should try that.",
+  "나도 해 봐야겠다."
+ ],
+ "Another trainer will take over.": [
+  "Okay, I'll introduce myself then.",
+  "알겠어요, 그때 인사드릴게요."
+ ],
+ "Why not drop two?": [
+  "That could work.",
+  "그럴 수도 있겠다."
+ ],
+ "He's looking into cheaper accommodations.": [
+  "Good, keep me posted.",
+  "좋아요, 계속 알려 주세요."
+ ],
+ "Grab your bags and get in the car!": [
+  "Okay, okay, I'm coming!",
+  "알았어, 알았어, 가고 있어!"
+ ],
+ "I'll pass that on.": [
+  "Thank you, I appreciate it.",
+  "고맙습니다."
+ ],
+ "Those liars won't take responsibility.": [
+  "Then we handle it ourselves.",
+  "그럼 우리가 처리하죠."
+ ],
+ "He needs to let go of his guilt.": [
+  "That's easier said than done.",
+  "말이 쉽지."
+ ],
+ "He sells both stamps and envelopes.": [
+  "Perfect, I'll go there.",
+  "좋아요, 거기 갈게요."
+ ],
+ "Lie down on the blue mat.": [
+  "Good, now breathe slowly.",
+  "좋아요, 이제 천천히 숨 쉬세요."
+ ],
+ "Help yourself to some warm ham.": [
+  "Thank you, I will.",
+  "감사합니다, 잘 먹을게요."
+ ],
+ "Fill up his tray!": [
+  "Done. He'll be happy.",
+  "됐어. 좋아하겠다."
+ ],
+ "Watch out for big cracks.": [
+  "Got it, I'll go slowly.",
+  "알겠어, 천천히 갈게."
+ ],
+ "Let's think that over before making a commitment.": [
+  "Agreed, let's not rush.",
+  "동의해요, 서두르지 말죠."
+ ],
+ "Say hi to the nice ladies.": [
+  "Aww, hello there!",
+  "어머, 안녕!"
+ ],
+ "They didn't have a choice regarding the invitations.": [
+  "I see, that explains it.",
+  "그렇구나, 그래서였네."
+ ],
+ "He's got to pay back a fortune.": [
+  "That's rough.",
+  "힘들겠다."
+ ],
+ "Keep an eye on his luggage.": [
+  "Sure, I've got it.",
+  "그래, 내가 볼게."
+ ],
+ "Maybe he'll ask out his mechanic.": [
+  "Ha, that would explain it.",
+  "하하, 그래서 그런 거였구나."
+ ],
+ "He should give his accountant a call.": [
+  "I'll tell him that.",
+  "그렇게 전할게."
+ ],
+ "He should cut down on soft drinks.": [
+  "I'll pass that along.",
+  "전해 드릴게요."
+ ],
+ "They're neither chefs nor bakers.": [
+  "Interesting. What do they do?",
+  "신기하네요. 그럼 무슨 일을 해요?"
+ ],
+ "He mixed up the formulas.": [
+  "I'll ask him to redo it.",
+  "다시 하라고 할게."
+ ],
+ "Can he check on the turkey?": [
+  "Sure, I'll send him in.",
+  "네, 들여보낼게요."
+ ],
+ "We usually get around by rail.": [
+  "That sounds comfortable.",
+  "편하겠네요."
+ ],
+ "I don't know if they're poisonous.": [
+  "Let's not risk it, then.",
+  "그럼 그냥 두자."
+ ],
+ "He was more than helpful.": [
+  "I'm glad to hear that.",
+  "다행이네요."
+ ],
+ "How will you make a living?": [
+  "I've saved enough for a year.",
+  "1년 치는 모아 뒀어."
+ ],
+ "He put on a Disney movie.": [
+  "Smart move.",
+  "잘했네."
+ ],
+ "He'd get in touch with HR.": [
+  "Right, I'll do that.",
+  "그렇네요, 그렇게 할게요."
+ ],
+ "He can't put up with small talk.": [
+  "Fair enough.",
+  "그럴 만하네."
+ ],
+ "Let him check with the translator.": [
+  "Okay, we'll wait for that.",
+  "네, 기다릴게요."
+ ],
+ "Stick with the basics for today.": [
+  "Understood, coach.",
+  "알겠습니다, 코치님."
+ ],
+ "They usually eat out on Christmas Eve.": [
+  "That sounds easier.",
+  "그게 편하겠다."
+ ],
+ "He can't tell the difference from the synthetic one.": [
+  "Ha, most people can't.",
+  "하하, 대부분 못 알아보지."
+ ],
+ "He'll pull over to the curb.": [
+  "Hang on, almost there.",
+  "조금만 참아, 거의 다 왔어."
+ ],
+ "They always make time for a chat.": [
+  "That's a good habit.",
+  "좋은 습관이네."
+ ],
+ "He dressed up for the seminar.": [
+  "Ah, that makes sense.",
+  "아, 그렇구나."
+ ],
+ "Should you find anything abnormal, please call us.": [
+  "Understood, I'll keep the number.",
+  "알겠습니다, 번호 저장해 둘게요."
+ ],
+ "They're picky, don't you think?": [
+  "Definitely.",
+  "정말 그래."
  ]
 }

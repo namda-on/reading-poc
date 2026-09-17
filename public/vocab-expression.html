@@ -1424,15 +1424,11 @@ function speakTarget(item){
   // → `Don't be sad.` 가 이 단계가 노리는 크기다. 표현은 내 손에서 나오면서도 문장이
   // 4낱말이라 부담이 없다. 조건은 넷을 모두 만족할 때뿐이다(하나라도 어긋나면 난이도가 튄다):
   // 재료 2낱말 이하 · 문장 5낱말 이하 · 조각 구조 일치 · 종결부호 일치.
-  // 데이터에 그런 짝이 있는 문항은 60/261이라, 나머지는 기존 규칙으로 고른다.
-  // **자극이 A 대사를 쓰는 경우에는 대사가 있는 후보를 먼저 고른다** — 질문은 영어
-  // 문장을 키로 손저작한 것이라 어느 문장이 대상이 되느냐에 딸려 있다. 시트에 문장1의
-  // 변형이 들어오면서 후보 풀이 커지자 `speakTarget`이 다른 문장을 고르게 되어
-  // 163문항에서 대사가 사라졌다 — 고르는 쪽에서 맞추는 것이 저작을 다시 하는 것보다 싸다.
-  if(spkMode!=='kr'){
-    const withAsk=step.filter(a=>a.ask);
-    if(withAsk.length) step=withAsk;
-  }
+  // 데이터에 그런 짝이 있는 문항은 62/261이라, 나머지는 아래 규칙으로 고른다.
+  // **자극은 여기에 끼어들지 않는다** — 대사가 있는 후보를 앞세우면 이 난이도 규칙을
+  // 이겨 유닛과 먼 문장이 뽑힌다(`~보다 더 ~해`에서 `Bread is more expensive than rice.`
+  // 대신 `I was more stressed than him.`이 나왔다). 대사를 대상에 맞추는 것이 아니라
+  // **대상에 맞춰 대사를 저작한다** — 대상이 유닛에서 멀어지면 단계 자체가 어긋난다.
   const twin=step.filter(a=>isTwin(item, a));
   if(twin.length) step=twin;
   const score=a=>[shape(a.segs)===baseShape ? 0 : 1,
@@ -1452,14 +1448,10 @@ function speakTarget(item){
 function sheetRows(item){
   const seen=new Set([item.sentence.en]), out=[];
   (item.apply||[]).forEach(a=>{ if(a.segs && !seen.has(a.en)){ seen.add(a.en); out.push(a); } });
-  const short=(x,y)=>tokenize(x.en).length-tokenize(y.en).length;
-  // 자극이 A 대사를 쓰면 대사가 있는 후보를 앞세운다(`speakTarget`의 ⓞ 규칙과 같다) —
-  // 그러지 않으면 연습지 칸에서만 자극이 안 움직여 `영어 질문`이 `한국어 문장`과 같아진다.
-  if(spkMode==='en'){
-    const withAsk=out.filter(a=>a.ask).sort(short), rest=out.filter(a=>!a.ask).sort(short);
-    return withAsk.concat(rest).slice(0,3);
-  }
-  return out.sort(short).slice(0,3);
+  // **자극은 대상 선택에 끼어들지 않는다** — 대사가 있는 후보를 앞세우면 난이도 규칙을
+  // 이겨 유닛과 먼 문장이 뽑힌다(`~보다 더 ~해`에서 `Bread is more expensive than rice.`
+  // 대신 `I was more stressed than him.`). 대사는 대상에 맞춰 저작한다.
+  return out.sort((x,y)=>tokenize(x.en).length-tokenize(y.en).length).slice(0,3);
 }
 
 function renderSpeakSheet(){
@@ -1701,7 +1693,8 @@ function renderSpeakArrange(t){
         <div class="chat-tag rv">말해보기</div>
         ${spkHeadHtml(item)}${spkStimHtml(t)}
         <div class="nb-tip hidden" id="nbTip"></div>
-        <div class="sp-in" id="spIn"><div class="sp-slots" id="spSlots"></div></div>
+        ${spkAnswerHtml(t, `<div class="sp-in" id="spIn"><div class="sp-slots" id="spSlots"></div></div>`)}
+        ${spkAfterHtml(t)}
         <div class="wrong-box hidden" id="wrongBox"></div>
         <div class="reveal-note hidden" id="revealNote"></div>
       </div>
@@ -1792,6 +1785,9 @@ function renderSpeakArrange(t){
     el('spIn').innerHTML=`<div class="sp-tiles">${sw.map((w,i)=>
       `<span class="sp-tile${sf[i]?' fr':''}">${escapeHtml(w)}</span>`).join('')}</div>`;
     el('bank').classList.add('hidden');
+    // 뒷 대사는 내가 채우기 전까지 흐려 둔다 — 내 말이 들어가서야 대화가 이어진다
+    const after=el('card').querySelector('.dlg-after');
+    if(after) after.classList.add('on');
     el('card').insertAdjacentHTML('beforeend', resultActionsHtml());
     const form=(p.form||'').trim(), pmean=(p.meaning||'').trim();
     el('payoffBox').innerHTML=`<div class="payoff">
@@ -1870,6 +1866,9 @@ function renderSpeakOpen(item){
   const knownWords=new Set();
   known.forEach(k=>tokenize(k.en).forEach(w=>knownWords.add(bareW(w))));
   (item.frame||[]).forEach(f=>f.split(/\s+/).forEach(w=>knownWords.add(bareW(w))));
+  // 자극은 재료와 직교한다 — 재료를 안 줘도 A는 말을 건다. 대사만 세우고
+  // **채점은 그대로 열어 둔다**(그 질문의 모범 답이 아니라 내 말을 하면 된다).
+  const ask0 = spkMode!=='kr' ? speakTarget(item) : null;
 
   const nz=x=>String(x).split(/\s+/).map(bareW).filter(Boolean).join(' ');
   // 제외 목록 — [2]·[3]에서 만든 문장과, 사다리로 이미 본 예문
@@ -1891,7 +1890,7 @@ function renderSpeakOpen(item){
     <div class="stage-scroll">
       <div class="chat-card" id="card">
         <div class="chat-tag rv">말해보기</div>
-        ${spkHeadHtml(item, '이 표현으로 <b>하고 싶은 말</b>을 만들어 보세요')}
+        ${spkHeadHtml(item, spkMode==='kr' ? '이 표현으로 <b>하고 싶은 말</b>을 만들어 보세요' : null)}${spkStimHtml(ask0)}
         <div class="nb-tip hidden" id="nbTip"></div>
         <div class="sp-in" id="spIn"><div class="sp-slots" id="spSlots"></div><input class="sp-catch" id="spCatch" type="text"
           autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done" /></div>
@@ -2044,16 +2043,32 @@ function spkHeadHtml(item, task){
     </div>
     <div class="sp-q">${task||spkTaskHtml()}</div>`;
 }
-// 자극 본문 — `영어 질문`은 A 말풍선, 그 밖에는 한국어 문장(표현 구간 초록).
+// 자극 본문 — `영어 질문`·`대화 한가운데`는 A 말풍선, 그 밖에는 한국어 문장(표현 구간 초록).
 // 연습지는 줄마다 대상이 달라 이 조각을 줄 안에서 쓴다.
 function spkStimHtml(t){
   if(!t) return '';
-  if(spkMode==='en' && t.ask) return `<div class="sit-turn a">
+  if((spkMode==='en' || spkMode==='dlg') && t.ask) return `<div class="sit-turn${spkMode==='en'?' a':''}">
       <div class="sit-role">A</div>
       <div class="sit-bubble"><div class="sit-en">${escapeHtml(t.ask.en)}</div>
         <div class="sit-kr">${escapeHtml(t.ask.kr)}</div></div>
     </div>`;
   return `<div class="sp-kr">${sentTitleHtml(t)}</div>`;
+}
+// 내 말 뒤에 오는 A의 반응 — 푸는 동안 흐리고, 통과하면 켜진다.
+// **내 말이 그 반응을 끌어냈다**는 것이 `대화 한가운데`의 산출물이다.
+function spkAfterHtml(t){
+  if(spkMode!=='dlg' || !t || !t.reply) return '';
+  return `<div class="sit-turn dlg-after">
+      <div class="sit-role">A</div>
+      <div class="sit-bubble"><div class="sit-en">${escapeHtml(t.reply.en)}</div>
+        <div class="sit-kr">${escapeHtml(t.reply.kr)}</div></div>
+    </div>`;
+}
+// 답 자리 — `대화 한가운데`에서는 내 말풍선 안에 들어간다(그래야 대화의 한가운데가 된다)
+function spkAnswerHtml(t, inner){
+  if(spkMode!=='dlg' || !t || !t.reply) return inner;
+  return `<div class="sit-turn b"><div class="sit-role">나</div>
+      <div class="sit-bubble mine">${inner}</div></div>`;
 }
 function spkGives(item, t){
   const tok=tokenize(t.en), flag = t.segs ? frameFlags(tok, t.segs) : frameWordFlags(tok, item.frame);
@@ -2121,30 +2136,12 @@ function renderSpeakDialog(item, t){
     <div class="stage-scroll">
       <div class="chat-card" id="card">
         <div class="chat-tag rv">말해보기</div>
-        ${spkHeadHtml(item)}
-        <div class="sit-turn">
-          <div class="sit-role">A</div>
-          <div class="sit-bubble">
-            <div class="sit-en">${escapeHtml(t.ask.en)}</div>
-            <div class="sit-kr">${escapeHtml(t.ask.kr)}</div>
-          </div>
-        </div>
+        ${spkHeadHtml(item)}${spkStimHtml(t)}
         <div class="nb-tip hidden" id="nbTip"></div>
         ${spkGivesHtml(gives, 'spMat')}
-        <div class="sit-turn b">
-          <div class="sit-role">나</div>
-          <div class="sit-bubble mine">
-            <div class="sp-in" id="spIn"><div class="sp-slots" id="spSlots"></div><input class="sp-catch" id="spCatch" type="text"
-              autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done" /></div>
-          </div>
-        </div>
-        <div class="sit-turn dlg-after">
-          <div class="sit-role">A</div>
-          <div class="sit-bubble">
-            <div class="sit-en">${escapeHtml(t.reply.en)}</div>
-            <div class="sit-kr">${escapeHtml(t.reply.kr)}</div>
-          </div>
-        </div>
+        ${spkAnswerHtml(t, `<div class="sp-in" id="spIn"><div class="sp-slots" id="spSlots"></div><input class="sp-catch" id="spCatch" type="text"
+              autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done" /></div>`)}
+        ${spkAfterHtml(t)}
         <div class="wrong-box hidden" id="wrongBox"></div>
         <div class="reveal-note hidden" id="revealNote"></div>
       </div>
@@ -2287,12 +2284,12 @@ function renderSpeak(preset){
   if(preset && !preset.en) preset=null;        // 이벤트 등이 새어 들어오면 무시한다
   const item=sessionItems[itemIdx];
   // **자극이 화면 골격을, 방식이 재료를 정한다.** `대화 한가운데`는 내 차례 앞뒤에
-  // 대사를 두므로 골격이 아예 다르고(재료 줄이 말풍선 위로 들어간다) 전용 화면을 쓴다.
-  // 탭해서 배열은 말풍선 안에 뱅크를 넣을 수 없어 이 자극을 받지 않는다.
-  if(spkMode==='dlg' && spkVar!=='c' && !preset){
-    const dt=dialogTarget(item);
-    if(dt) return renderSpeakDialog(item, dt);
-  }
+  // 대사를 두므로 골격이 아예 달라 전용 화면을 쓴다 — 단 **탭해서 배열은 예외다**:
+  // 뱅크가 카드 밖(하단)에 있어 대화를 그대로 두고 답 자리만 말풍선 안에 넣으면 된다.
+  // 폴백으로 문장 카드를 내보내면 지시문만 `가운데를 채워 보세요`로 남아 화면이 거짓말한다.
+  const dt = (spkMode==='dlg' && !preset) ? dialogTarget(item) : null;
+  if(dt && spkVar==='c') return renderSpeakArrange(dt);
+  if(dt) return renderSpeakDialog(item, dt);
   if(spkVar==='o' && !preset) return renderSpeakOpen(item);
   if(spkVar==='h' && !preset && sheetRows(item).length) return renderSpeakSheet();
   const t = preset || speakTarget(item);
