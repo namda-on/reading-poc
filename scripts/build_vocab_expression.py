@@ -30,7 +30,7 @@ from collections import OrderedDict
 from pathlib import Path
 
 DL = Path.home() / "Downloads"
-EXPR_CSV  = Path(os.environ.get("VE_EXPR_CSV",  DL / "유기적 통합모드 문장 (공유용) - 문장 제출(0827).csv"))
+EXPR_CSV  = Path(os.environ.get("VE_EXPR_CSV",  DL / "유기적 통합모드 문장 (공유용) - 문장1 변형후보 추가 (검토중).csv"))
 VOCAB_CSV = Path(os.environ.get("VE_VOCAB_CSV", DL / "All_(2026-09-01_20_14_12).csv"))
 GSE_CSV   = Path(os.environ.get("VE_GSE_CSV",   DL / "gse_corrected_final_0624 - 보정결과_전체.csv"))
 OUT = Path(__file__).resolve().parent.parent / "public" / "vocab-expression.data.json"
@@ -530,12 +530,16 @@ def slots_clean(lits, sents, cov):
     return not shared
 
 
-def extract_frame(sents):
+def extract_frame(sents, form=""):
     """문장1을 반드시 포함하면서 가장 많은 문장이 공유하는 프레임을 고른다.
 
     반환 (리터럴 목록, 커버하는 문장 인덱스). 못 찾으면 None.
-    우선순위: 커버 문장 수 → 슬롯이 깨끗한지 → 프레임 길이 → 조각 수.
+    우선순위: **form과 맞는지** → 커버 문장 수 → 슬롯이 깨끗한지 → 프레임 길이 → 조각 수.
     커버를 최우선에 두면 한 문장에만 맞는 과적합 프레임(`Don't be late`)을 걸러낸다.
+    **form 일치를 맨 앞에 두는 이유**: 시트에 문장1의 변형(`You should get up.` →
+    `He should get up.`)이 들어오면 변형끼리 공유하는 긴 구간(`should get up`)이 커버
+    수로 이기고, 그게 곧 form 검사에서 탈락해 그룹을 통째로 잃는다. 고른 뒤에 검사하지
+    말고 **고를 때 같이 보면** 같은 그룹에서 form에 맞는 후보를 살릴 수 있다.
     """
     best = None
     for j in range(1, len(sents)):
@@ -543,7 +547,8 @@ def extract_frame(sents):
             cov = [i for i, s in enumerate(sents) if segment(s, lits) is not None]
             if not cov or cov[0] != 0 or len(cov) < 2:
                 continue
-            key = (len(cov), slots_clean(lits, sents, cov),
+            key = (frame_matches_form(lits, form), len(cov),
+                   slots_clean(lits, sents, cov),
                    sum(len(x.split()) for x in lits), len(lits))
             if best is None or key > best[0]:
                 best = (key, lits, cov)
@@ -637,20 +642,39 @@ def load_gse():
     return out
 
 
+# 표현 CSV는 **열 이름으로** 읽는다 — 시트마다 열 순서가 다르고 열이 늘기도 한다
+# (`표제어 또는 회화패턴`이 9번째였다가 2번째로 오고, `jl 검토`가 뒤에 붙었다).
+# 인덱스로 읽으면 조용히 엉뚱한 열을 집어 트리거와 문장이 뒤바뀐다.
+EXPR_COLS = {"id": ("id",), "trigger": ("trigger",), "seq": ("trigger_dictseq",),
+             "rank": ("trigger_newRank3",), "en": ("sentence",), "kr": ("translation",),
+             "pattern": ("표제어 또는 회화패턴",), "form": ("카드 초록 (형태)", "카드 초록(형태)"),
+             "pmean": ("카드 회색 1행 (뜻)", "카드 회색1행 (뜻)"),
+             "pdesc": ("카드 회색 2행 (설명)", "카드 회색2행 (설명)")}
+
+
 def load_groups():
     if not EXPR_CSV.exists():
         die(f"표현 CSV 없음: {EXPR_CSV} (VE_EXPR_CSV로 지정)")
-    rows = list(csv.reader(open(EXPR_CSV, newline="", encoding="utf-8")))[1:]
+    rows = list(csv.reader(open(EXPR_CSV, newline="", encoding="utf-8-sig")))
+    head = [c.strip() for c in rows[0]]
+    idx = {}
+    for key, names in EXPR_COLS.items():
+        for n in names:
+            if n in head:
+                idx[key] = head.index(n)
+                break
+        else:
+            die(f"표현 CSV에 열이 없음: {key} ({' / '.join(names)}) — 실제 헤더: {head}")
+    get = lambda r, k: (r[idx[k]].strip() if idx[k] < len(r) else "")
     groups, cur = OrderedDict(), None
-    for r in rows:
-        r = r + [""] * (12 - len(r))
-        if r[0].strip():
-            cur = r[0].strip()
-            groups[cur] = {"trigger": r[1].strip(), "seq": r[2].strip(), "rank": r[5].strip(),
-                           "pattern": r[8].strip(), "form": r[9].strip(),
-                           "pmean": r[10].strip(), "pdesc": r[11].strip(), "sents": []}
-        if cur and r[3].strip():
-            groups[cur]["sents"].append({"en": r[3].strip(), "kr": r[4].strip()})
+    for r in rows[1:]:
+        if get(r, "id"):
+            cur = get(r, "id")
+            groups[cur] = {"trigger": get(r, "trigger"), "seq": get(r, "seq"), "rank": get(r, "rank"),
+                           "pattern": get(r, "pattern"), "form": get(r, "form"),
+                           "pmean": get(r, "pmean"), "pdesc": get(r, "pdesc"), "sents": []}
+        if cur and get(r, "en"):
+            groups[cur]["sents"].append({"en": get(r, "en"), "kr": get(r, "kr")})
     return groups
 
 
@@ -736,7 +760,7 @@ def main():
 
         # [3] 슬롯 치환: 학습 문장에서 공통 프레임을 추출한다(문장1 포함 필수)
         sents = [x["en"] for x in g["sents"]]
-        found = extract_frame(sents)
+        found = extract_frame(sents, g["form"] or g["pattern"])
         if found is None:
             skipped["공통프레임없음"] += 1
             continue

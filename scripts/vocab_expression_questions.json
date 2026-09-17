@@ -1298,7 +1298,7 @@
  ],
  "He's some kind of scientist.": [
   "What does your uncle do?",
-  "삼촌은 무슨 일 하셔?"
+  "삼촌은 어떤 일 하셔?"
  ],
  "How do you like it?": [
   "I bought a new phone.",
@@ -1478,7 +1478,7 @@
  ],
  "I wouldn't bring it up.": [
   "Should I mention the money?",
-  "돈 얘기를 꺼내야 할까?"
+  "돈 이야기를 해야 할까?"
  ],
  "She turned it down.": [
   "Did she take the offer?",
@@ -1817,8 +1817,8 @@
   "그건 정리된 것 같네요."
  ],
  "I think it's time for bed.": [
-  "It's already midnight.",
-  "벌써 자정이야."
+  "You've been up since dawn.",
+  "새벽부터 안 잤잖아."
  ],
  "We should go to bed.": [
   "We have to wake up at five.",
@@ -1994,7 +1994,7 @@
  ],
  "Let's leave at nine o'clock.": [
   "What time should we head out?",
-  "몇 시에 출발할까?"
+  "언제쯤 출발할까?"
  ],
  "You can take off your coat.": [
   "It's warm inside, isn't it?",
@@ -2091,5 +2091,161 @@
  "He passed out at work.": [
   "Why is Tom in the hospital?",
   "톰이 왜 병원에 있어?"
+ ],
+ "What do you think of it?": [
+  "I finally finished the logo.",
+  "로고 드디어 다 만들었어."
+ ],
+ "She'll come back soon.": [
+  "Is your sister still abroad?",
+  "누나 아직 외국에 있어?"
+ ],
+ "What kind of movies do you like?": [
+  "I watch films every weekend.",
+  "난 주말마다 영화 봐."
+ ],
+ "Why would you do that?": [
+  "I deleted the whole folder.",
+  "폴더를 다 지웠어."
+ ],
+ "Did you use to play tennis?": [
+  "My racket is in the closet.",
+  "내 라켓 옷장에 있어."
+ ],
+ "Check out her new boots!": [
+  "Everyone's staring at Mina.",
+  "다들 미나를 보고 있네."
+ ],
+ "This equipment is the same as theirs.": [
+  "Did you compare the two labs?",
+  "두 연구실 비교해 봤어?"
+ ],
+ "The dog wants to get out.": [
+  "Why is he scratching the door?",
+  "왜 문을 긁고 있지?"
+ ],
+ "He doesn't get along with his aunt.": [
+  "Why did he skip the family dinner?",
+  "왜 가족 식사에 안 왔어?"
+ ],
+ "I'm working on it.": [
+  "Is the report ready?",
+  "보고서 됐어?"
+ ],
+ "Both of these are good investments.": [
+  "Which one should I pick?",
+  "어느 걸 골라야 해?"
+ ],
+ "We go to school in uniform.": [
+  "Why is everyone dressed alike?",
+  "왜 다 똑같이 입었어?"
+ ],
+ "Make sure you're alone.": [
+  "I'll call you about the offer.",
+  "그 제안 건으로 전화할게."
+ ],
+ "One name comes to mind.": [
+  "Who could lead this team?",
+  "이 팀을 누가 이끌 수 있을까?"
+ ],
+ "It's up to him whether to register or not.": [
+  "Should we register him?",
+  "걔를 등록시켜야 할까?"
+ ],
+ "It's too far from here.": [
+  "Let's walk to the museum.",
+  "박물관까지 걸어가자."
+ ],
+ "Maddy's taking care of those.": [
+  "Who's handling the invoices?",
+  "청구서는 누가 하고 있어?"
+ ],
+ "That's a matter of justice.": [
+  "Isn't this just about money?",
+  "이게 돈 얘기일 뿐이야?"
+ ],
+ "Students deal with a lot of pressure from friends.": [
+  "Why do teens seem so tired?",
+  "왜 십 대들이 그렇게 지쳐 보여?"
+ ],
+ "He decided on a mouse.": [
+  "What pet did your son pick?",
+  "아들이 어떤 동물 골랐어?"
+ ],
+ "One is mine and the other is yours.": [
+  "There are two cups here.",
+  "여기 컵이 두 개 있네."
+ ],
+ "What do you mean by 'easy'?": [
+  "The exam was easy.",
+  "시험 쉬웠어."
+ ],
+ "Don't get rid of these balloons!": [
+  "I'm cleaning up the party stuff.",
+  "파티 물건 치우고 있어."
+ ],
+ "They don't have to collaborate.": [
+  "Should the two teams work together?",
+  "두 팀이 같이 해야 해?"
+ ],
+ "They're making progress with the specialist.": [
+  "How is your nephew doing?",
+  "조카는 어때?"
+ ],
+ "Grocery prices just kept going up.": [
+  "Why was last month so expensive?",
+  "지난달은 왜 그렇게 비쌌어?"
+ ],
+ "What do you say I grab some tacos?": [
+  "I'm starving and there's no food.",
+  "배고픈데 먹을 게 없어."
+ ],
+ "We take healthcare for granted.": [
+  "He was shocked by the hospital bill.",
+  "걔가 병원비에 놀랐대."
+ ],
+ "He'll be sure to pass on your complaint.": [
+  "Will the manager hear about this?",
+  "이거 매니저가 알게 되나요?"
+ ],
+ "Do you know what her name is?": [
+  "That woman keeps waving at us.",
+  "저 사람이 계속 손 흔드네."
+ ],
+ "He's having a problem with his monitor.": [
+  "Why did he call the help desk?",
+  "왜 헬프데스크에 전화했어?"
+ ],
+ "I ended up with a cold.": [
+  "How was the camping trip?",
+  "캠핑 어땠어?"
+ ],
+ "He's not only kind but also smart.": [
+  "What do you like about him?",
+  "걔 어디가 좋아?"
+ ],
+ "He can't make a living from poker.": [
+  "He plays cards all day.",
+  "걘 하루 종일 카드만 해."
+ ],
+ "That makes no sense.": [
+  "The rule applies only on Tuesdays.",
+  "그 규칙은 화요일에만 적용돼."
+ ],
+ "I can relate to that.": [
+  "I felt invisible at my first job.",
+  "첫 직장에서 나는 없는 사람 같았어."
+ ],
+ "Let me make a note real quick.": [
+  "The deadline moved to the 12th.",
+  "마감이 12일로 옮겨졌어요."
+ ],
+ "If it hadn't been for him, it would've collapsed.": [
+  "How did the bridge survive the storm?",
+  "그 다리가 폭풍을 어떻게 견뎠어?"
+ ],
+ "You'll get used to it.": [
+  "This keyboard feels so strange.",
+  "이 키보드 너무 낯설어."
  ]
 }
