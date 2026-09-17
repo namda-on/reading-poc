@@ -201,16 +201,19 @@
     font-size:16px; font-weight:800; color:#b6c3d4; letter-spacing:2px; }
   /* [4] 말해보기 — 배운 표현으로 새 문장 만들기 */
   .sp-q { font-size:13.5px; font-weight:700; color:#5b7c93; }
-  /* [4] 방식 H — **표현 연습지**. 연습지 제목처럼 표현을 맨 위에 걸어 두고, 그 아래
-     같은 표현으로 문장을 연달아 쓴다. 표현이 상시 보이므로 과제는 '떠올리기'가 아니라
-     **자리마다 다른 모양으로 끼워 보기**다(`put the TV on` / `put something funny on`). */
+  .sp-q b { color:#22794a; font-weight:800; }
+  .sh-head + .sp-q { margin-top:13px; }
+  /* [4] 카드 머리 — **모든 방식이 같이 쓴다**. 표현 뜻을 맨 위에 걸고 그 아래 지시문,
+     그 아래 자극 본문이 온다. 방식(재료)을 바꿔도 이 위쪽은 그대로여야 한다. */
   .sh-head { margin-top:2px; padding-bottom:11px; border-bottom:1.5px solid #e8eef7; }
   .sh-lbl { font-size:11.5px; font-weight:800; color:#a6b6c9; letter-spacing:.02em; }
   .sh-form { font-size:22px; font-weight:800; color:#22794a; letter-spacing:-.01em; margin-top:2px; }
   .sh-mean { font-size:13.5px; font-weight:700; color:#8c9bb0; margin-top:3px; }
-  .sh-q { font-size:13px; font-weight:700; color:#a6b6c9; margin-top:12px; }
   .sh-rows { margin-top:4px; }
   .sh-row { display:flex; gap:9px; padding:13px 0 2px; }
+  /* 첫 줄은 재료 화면과 같은 자리에서 시작해야 한다 — 방식을 바꿀 때 줄이 튀면
+     바뀐 것이 재료가 아니라 화면으로 읽힌다 */
+  .sh-rows > .sh-row:first-child { padding-top:1px; }
   .sh-row + .sh-row { border-top:1px dashed #e8eef7; }
   .sh-n { flex:none; width:21px; height:21px; border-radius:50%; background:#eef2f8; color:#9eadc2;
     font-size:12px; font-weight:800; display:inline-flex; align-items:center; justify-content:center; margin-top:2px; }
@@ -263,19 +266,11 @@
   .sp-tile { background:#eaf1fb; border:1.5px solid #dce7f6; border-radius:10px; padding:9px 12px;
     font-size:17px; font-weight:700; color:#2f3e52; }
   .sp-tile.fr { background:#e3fbec; border-color:#8ed9ab; color:#22794a; font-weight:800; }
-  .sp-q.sp-after { margin-top:18px; }
-  /* [4] O 「내 말로 하나」 — 지시문은 '하고 싶은 말'을 강조한다.
-     이 화면은 내용을 유저가 정하는 것이 전부라 그 한 마디가 과제의 정의다. */
   /* D 대화 — 뒷 대사는 내가 가운데를 채우기 전까지 흐리다. 앞뒤가 다 보이는 것이
      과제의 조건이고, 제 색으로 켜지는 것이 **대화가 이어졌다**는 신호다. */
   .sit-turn.dlg-after { opacity:.42; transition:opacity .34s ease; }
   .sit-turn.dlg-after.on { opacity:1; }
-  /* D 대화 — 지시문은 A 말풍선 바로 아래, 내 말풍선 바로 위에 온다 */
-  .sit-task.dlg-q { font-size:13.5px; font-weight:700; color:#5b7c93; margin:16px 0 0; }
-  .sit-task.dlg-q b { color:#22794a; font-weight:800; }
   .sit-bubble.mine .sp-in { margin-top:0; }
-  .sp-q.op-q { margin-top:13px; }
-  .sp-q.op-q b { color:#22794a; font-weight:800; }
   /* 내 발화는 예문들과 **같은 목록의 첫 줄**로 서고 배지만 다를 뿐이다 —
      목록을 가를면 '내 것 vs 상품'이 되어 한 줄로 물러진다. */
   .pf-cmp.mine .pf-cmp-en { color:#22794a; }
@@ -1457,7 +1452,14 @@ function speakTarget(item){
 function sheetRows(item){
   const seen=new Set([item.sentence.en]), out=[];
   (item.apply||[]).forEach(a=>{ if(a.segs && !seen.has(a.en)){ seen.add(a.en); out.push(a); } });
-  return out.sort((x,y)=>tokenize(x.en).length-tokenize(y.en).length).slice(0,3);
+  const short=(x,y)=>tokenize(x.en).length-tokenize(y.en).length;
+  // 자극이 A 대사를 쓰면 대사가 있는 후보를 앞세운다(`speakTarget`의 ⓞ 규칙과 같다) —
+  // 그러지 않으면 연습지 칸에서만 자극이 안 움직여 `영어 질문`이 `한국어 문장`과 같아진다.
+  if(spkMode==='en'){
+    const withAsk=out.filter(a=>a.ask).sort(short), rest=out.filter(a=>!a.ask).sort(short);
+    return withAsk.concat(rest).slice(0,3);
+  }
+  return out.sort(short).slice(0,3);
 }
 
 function renderSpeakSheet(){
@@ -1480,11 +1482,7 @@ function renderSpeakSheet(){
     <div class="stage-scroll">
       <div class="chat-card sheet" id="card">
         <div class="chat-tag rv">말해보기</div>
-        <div class="sh-head">
-          <div class="sh-lbl">이번에 배운 표현</div>
-          <div class="sh-form">${escapeHtml(p.meaning||'')}</div>
-        </div>
-        <div class="sh-q">이 표현으로 문장을 만들어 보세요</div>
+        ${spkHeadHtml(item)}
         <div class="sh-rows" id="shRows"></div>
         <div class="nb-tip hidden" id="nbTip"></div>
         <div class="wrong-box hidden" id="wrongBox"></div>
@@ -1531,20 +1529,15 @@ function renderSpeakSheet(){
     // 1단은 **낱말로 쪼개 섞어서**(A의 `함께 쓸 낱말` 줄과 같은 표기라 새 표기가 아니다),
     // 2단은 주지 않는다. 화면이 덜 해주는 것이 곧 내가 나아졌다는 근거다.
     const pieces=(t.segs||[]).filter(s=>s.t==='slot').map(s=>s.s.trim()).filter(s=>/[a-z0-9]/i.test(s));
-    const gives = aidLevel===0 ? pieces
-                : aidLevel===1 ? shuffle(pieces.join(' ').split(/\s+/).filter(w=>/[a-z0-9]/i.test(w)))
-                : [];
+    const gives=spkGives(own, t);
     let hintLevel=0;
 
     el('shRows').innerHTML = doneHtml() + `
       <div class="sh-row cur grow-in">${numbered()?`<span class="sh-n">${wrote.length+1}</span>`:''}
         <div class="sh-body">
           ${t.again?`<div class="sh-rv again">한 번 더</div>`:''}
-          <div class="sh-kr">${sentTitleHtml(t)}</div>
-          ${!gives.length?''
-            : aidLevel===0
-            ? `<div class="sh-give">${gives.map(g=>`<span class="give">${escapeHtml(g)}</span>`).join('')}</div>`
-            : `<div class="sp-mat sh-mat" id="spMatRow"><span class="lbl">함께 쓸 낱말</span>${gives.map(w=>`<span class="mat" data-w="${escapeHtml(bare(w))}">${escapeHtml(w)}</span>`).join('')}</div>`}
+          ${spkStimHtml(t)}
+          ${spkGivesHtml(gives, 'spMatRow')}
           <div class="sp-in" id="spIn"><div class="sp-slots" id="spSlots"></div><input class="sp-catch" id="spCatch" type="text"
             autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done" /></div>
         </div></div>`;
@@ -1579,18 +1572,8 @@ function renderSpeakSheet(){
     syncMats();
     inp.addEventListener('input', ()=>{ wrongBox.classList.add('hidden'); renderSlots(); syncMats(); });
 
-    // 채점 규약은 A와 같다 — 표현을 썼는가 + 주어진 낱말로만 만들었는가(오타 하나 관용).
-    function matchWords(typedArr){
-      const need=allowedWords.map(bare), got=typedArr.map(bare);
-      const usedN=need.map(()=>false), usedG=got.map(()=>false), fixes=[];
-      got.forEach((g,gi)=>{ if(!g){ usedG[gi]=true; return; }
-        const ni=need.findIndex((n,k)=>!usedN[k] && n===g);
-        if(ni>=0){ usedN[ni]=true; usedG[gi]=true; } });
-      got.forEach((g,gi)=>{ if(usedG[gi]) return;
-        const ni=need.findIndex((n,k)=>!usedN[k] && nearWord(n,g));
-        if(ni>=0){ usedN[ni]=true; usedG[gi]=true; fixes.push({i:gi, from:typedArr[gi], to:allowedWords[ni]}); } });
-      return { extra:got.filter((_,i)=>!usedG[i]), missing:need.filter((_,i)=>!usedN[i]), fixes };
-    }
+    // 채점은 방식과 무관하게 같은 함수를 쓴다 — 표현을 썼는가 + 주어진 낱말로만 만들었는가.
+    const matchWords=arr=>spkMatch(arr, allowedWords);
 
     function pass(exact, fixes){
       let said=inp.value.trim();
@@ -1712,18 +1695,11 @@ function renderSpeakArrange(t){
   const bankArr=shuffle(tok.map((w,i)=>({id:i, text:w.toLowerCase(), placed:false}))
     .concat(traps.map((w,i)=>({id:900+i, text:String(w).toLowerCase(), placed:false}))));
 
-  const byEn = spkMode==='en' && t.ask;
   stage.innerHTML=`
     <div class="stage-scroll">
       <div class="chat-card" id="card">
         <div class="chat-tag rv">말해보기</div>
-        ${byEn
-          ? `<div class="sit-turn a"><div class="sit-role">A</div>
-               <div class="sit-bubble"><div class="sit-en">${escapeHtml(t.ask.en)}</div>
-               <div class="sit-kr">${escapeHtml(t.ask.kr)}</div></div></div>
-             <div class="sp-q sp-after">배운 표현을 넣어 답해 보세요</div>`
-          : `<div class="sp-q">배운 표현을 넣어 이 문장을 만들어 보세요</div>
-             <div class="sp-kr">${sentTitleHtml(t)}</div>`}
+        ${spkHeadHtml(item)}${spkStimHtml(t)}
         <div class="nb-tip hidden" id="nbTip"></div>
         <div class="sp-in" id="spIn"><div class="sp-slots" id="spSlots"></div></div>
         <div class="wrong-box hidden" id="wrongBox"></div>
@@ -1915,11 +1891,7 @@ function renderSpeakOpen(item){
     <div class="stage-scroll">
       <div class="chat-card" id="card">
         <div class="chat-tag rv">말해보기</div>
-        <div class="sh-head">
-          <div class="sh-lbl">이번에 배운 표현</div>
-          <div class="sh-form">${escapeHtml(pmean)}</div>
-        </div>
-        <div class="sp-q op-q">이 표현으로 <b>하고 싶은 말</b>을 만들어 보세요</div>
+        ${spkHeadHtml(item, '이 표현으로 <b>하고 싶은 말</b>을 만들어 보세요')}
         <div class="nb-tip hidden" id="nbTip"></div>
         <div class="sp-in" id="spIn"><div class="sp-slots" id="spSlots"></div><input class="sp-catch" id="spCatch" type="text"
           autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done" /></div>
@@ -2055,6 +2027,34 @@ function renderSpeakOpen(item){
 // `ordered`는 조각을 문장 순서대로(순서를 숨길 이유가 없다 — 이 줄의 용도는 답의 범위만
 // 닫는 것이 아니라 **표현 말고는 떠올릴 것이 없게 만드는 것**이다), `shuffled`는 낱말로
 // 쪼개 섞어서, `none`은 주지 않는다(답이 열린다).
+// **카드 머리는 자극이 정한다** — 방식은 재료만 바꾼다. 방식을 바꿨는데 표제·지시문·
+// 대상 문장의 표기까지 같이 달라지면 무엇을 비교하고 있는지가 흐려진다(`줄어든다`와
+// `섞어서 준다`의 차이는 **재료 줄 하나**여야 한다). 그래서 모든 방식이 이 둘을 같이 쓰고,
+// 순서는 늘 **표제 → 지시문 → 자극 본문 → 팁 → 재료 → 답 자리**다.
+function spkTaskHtml(){
+  return spkMode==='en'  ? '이 표현을 넣어 <b>답해 보세요</b>'
+       : spkMode==='dlg' ? '이 표현을 넣어 <b>가운데를 채워 보세요</b>'
+       :                   '이 표현을 넣어 <b>이 문장을 만들어 보세요</b>';
+}
+function spkHeadHtml(item, task){
+  const pmean=((item.pattern||{}).meaning||'').trim();
+  return `<div class="sh-head">
+      <div class="sh-lbl">이번에 배운 표현</div>
+      <div class="sh-form">${escapeHtml(pmean)}</div>
+    </div>
+    <div class="sp-q">${task||spkTaskHtml()}</div>`;
+}
+// 자극 본문 — `영어 질문`은 A 말풍선, 그 밖에는 한국어 문장(표현 구간 초록).
+// 연습지는 줄마다 대상이 달라 이 조각을 줄 안에서 쓴다.
+function spkStimHtml(t){
+  if(!t) return '';
+  if(spkMode==='en' && t.ask) return `<div class="sit-turn a">
+      <div class="sit-role">A</div>
+      <div class="sit-bubble"><div class="sit-en">${escapeHtml(t.ask.en)}</div>
+        <div class="sit-kr">${escapeHtml(t.ask.kr)}</div></div>
+    </div>`;
+  return `<div class="sp-kr">${sentTitleHtml(t)}</div>`;
+}
 function spkGives(item, t){
   const tok=tokenize(t.en), flag = t.segs ? frameFlags(tok, t.segs) : frameWordFlags(tok, item.frame);
   const words=tok.filter((w,i)=>!flag[i]);
@@ -2121,10 +2121,7 @@ function renderSpeakDialog(item, t){
     <div class="stage-scroll">
       <div class="chat-card" id="card">
         <div class="chat-tag rv">말해보기</div>
-        <div class="sh-head">
-          <div class="sh-lbl">이번에 배운 표현</div>
-          <div class="sh-form">${escapeHtml(pmean)}</div>
-        </div>
+        ${spkHeadHtml(item)}
         <div class="sit-turn">
           <div class="sit-role">A</div>
           <div class="sit-bubble">
@@ -2132,7 +2129,6 @@ function renderSpeakDialog(item, t){
             <div class="sit-kr">${escapeHtml(t.ask.kr)}</div>
           </div>
         </div>
-        <div class="sit-task dlg-q">이 표현을 넣어 <b>가운데를 채워 보세요</b></div>
         <div class="nb-tip hidden" id="nbTip"></div>
         ${spkGivesHtml(gives, 'spMat')}
         <div class="sit-turn b">
@@ -2303,8 +2299,6 @@ function renderSpeak(preset){
   if(spkVar==='c') return renderSpeakArrange(t);
   setProgress(3);
 
-  const byEn = spkMode==='en' && t.ask;
-
   const bare=w=>String(w).toLowerCase().replace(/[^a-z0-9']/g,'');
   // 재료 = 프레임이 아닌 낱말들(섞어서). 표현은 넣지 않는다 — 그게 이 단계의 과제다.
   // 형제 문장에는 조각 정보(`segs`)가 없으므로 프레임 낱말을 굴절 허용으로 찾는다
@@ -2314,18 +2308,7 @@ function renderSpeak(preset){
   const mats=shuffle(matWords);
   let done=false, hintLevel=0;
 
-  const ask = byEn ? '배운 표현을 넣어 답해 보세요' : '배운 표현을 넣어 이 문장을 만들어 보세요';
-  const head = byEn
-    ? `<div class="sit-turn a">
-          <div class="sit-role">A</div>
-          <div class="sit-bubble">
-            <div class="sit-en">${escapeHtml(t.ask.en)}</div>
-            <div class="sit-kr">${escapeHtml(t.ask.kr)}</div>
-          </div>
-        </div>
-        <div class="sp-q sp-after">${escapeHtml(ask)}</div>`
-    : `<div class="sp-q">${escapeHtml(ask)}</div>
-        <div class="sp-kr">${sentTitleHtml(t)}</div>`;
+  const head = spkHeadHtml(item) + spkStimHtml(t);
 
   stage.innerHTML=`
     <div class="stage-scroll">
