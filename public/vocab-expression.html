@@ -276,6 +276,20 @@
     font-size:17px; font-weight:700; color:#2f3e52; }
   .sp-tile.fr { background:#e3fbec; border-color:#8ed9ab; color:#22794a; font-weight:800; }
   .sp-q.sp-after { margin-top:18px; }
+  /* [4] O 「내 말로 하나」 — 지시문은 '하고 싶은 말'을 강조한다.
+     이 화면은 내용을 유저가 정하는 것이 전부라 그 한 마디가 과제의 정의다. */
+  .sp-q.op-q { margin-top:13px; }
+  .sp-q.op-q b { color:#22794a; font-weight:800; }
+  /* 내 발화는 예문들과 **같은 목록의 첫 줄**로 서고 배지만 다를 뿐이다 —
+     목록을 가를면 '내 것 vs 상품'이 되어 한 줄로 물러진다. */
+  .pf-cmp.mine .pf-cmp-en { color:#22794a; }
+  .op-badge { display:inline-block; margin-left:7px; vertical-align:2px; font-size:10.5px; font-weight:800;
+    color:#22794a; background:#dff3e4; border-radius:6px; padding:2px 6px; letter-spacing:-.01em; }
+  /* 예문에 없는 말을 쓴 것은 감점이 아니라 **칭찬**이다 — 이 줄이 있어야
+     다장부터 새 낱말을 직접 밀어 넣어 본다. */
+  .op-new { display:flex; align-items:flex-start; gap:8px; margin-top:16px; background:#fff8e6; border-radius:11px;
+    padding:10px 13px; font-size:13px; font-weight:700; color:#8a6a1f; line-height:1.5; }
+  .op-new b { color:#6f5312; font-weight:800; }
   .sp-kr { font-size:20px; font-weight:800; color:#2f3e52; line-height:1.4; margin-top:5px; }
   .start-card.alt-card { background:#ffffffd9; }
   .twin-eg { display:inline-block; margin-top:5px; font-weight:700; color:#22794a; }
@@ -468,15 +482,16 @@ function setSpkMode(m){
 // 규칙·같은 단계 수를 쓰고 새 데이터도 쓰지 않는다. 다른 것은 **과제를 어떤 조작으로
 // 세우고 지원을 어떤 형태로 주는가**뿐이다.
 const SPK_VARS={
+  o:{label:'O 내 말로 하나', desc:'재료를 주지 않는다 — 이 표현으로 하고 싶은 말을 내가 정해서 한 문장'},
   w:{label:'W 자리 갈아 끼우기', desc:'틀의 빈 자리에 들어갈 말들을 주고, 그중 아무거나 골라 쓴다'},
   h:{label:'H 표현 연습지', desc:'표현을 위에 걸어 두고, 낱말은 다 주고, 같은 표현으로 2~4문장'},
   a:{label:'A 재료 상시', desc:'낱말을 섞어서 주고 표현은 감춘 채 한 문장만'},
   c:{label:'C 트랩 배열', desc:'낱말을 탭해 배열한다 — 뱅크에 함정이 섞여 있다'},
   r:{label:'R 복습 섞기', desc:'연습지 마지막 줄은 앞서 배운 다른 표현이다 — 뜻만 주고 알려주지 않는다'},
 };
-let spkVar=(()=>{ try{ const v=localStorage.getItem(SPKV_KEY); return SPK_VARS[v]?v:'w'; }catch(e){ return 'w'; } })();
+let spkVar=(()=>{ try{ const v=localStorage.getItem(SPKV_KEY); return SPK_VARS[v]?v:'o'; }catch(e){ return 'o'; } })();
 function setSpkVar(v){
-  spkVar = SPK_VARS[v] ? v : 'w';
+  spkVar = SPK_VARS[v] ? v : 'o';
   try{ localStorage.setItem(SPKV_KEY, spkVar); }catch(e){}
   renderSitOption(); applyStepOption();
 }
@@ -2070,10 +2085,201 @@ function renderSpeakArrange(t){
   el('hintBtn').onclick=advanceHint;
 }
 
+// [4] O 「내 말로 하나」 ────────────────────────────────────────────────────────
+// **답을 닫으려고 재료를 화면에 놓는 순간 과제가 조립이 된다** — 낱말을 다 주는
+// 연습지(H)든 섞어 주는 재료(A)든 후보 목록(W)이든 같은 실패였다. 답을 닫으려고
+// 준 것이 매번 답을 대신 써 줬다.
+//
+// 일본어 수업의 와우(`~の上に~が あります`를 배우고 "앞에 있는 거라면 뭐든 말할 수
+// 있겠구나")는 **한 문장을 맞힌 것이 아니라 아무거나 된다는 자각**이다. 거기서
+// 무료였던 것은 내용(츠쿠에·혼)이고 일거리는 구성이었다. 우리 데이터는 한 문항에서
+// 어휘와 표현이 **동시에** 새로 들어오므로(앞서 배운 어휘가 이 프레임 슬롯에 맞는
+// 문항은 43/222뿐이다) 그 구조를 데이터로는 만들 수 없다. 그러면 이 시점에 진짜로
+// 무료인 것은 **유저 머릿속의 어휘 전체**다 — 앱이 목록으로 줄 수 없는 것. 그래서
+// 아무것도 주지 않는다.
+//
+// 채점 조건은 셋이고 내용은 **완전히 자유**다:
+//   ① 배운 표현을 썼는가(`framePos`, 조각 순서·굴절·오타 허용)
+//   ② 표현 밖 낱말이 하나라도 있는가 — 표현만 치고 넘기는 것을 막는다
+//      (프레임이 문장 전체인 문항은 0/222라 이 조건은 항상 성립한다)
+//   ③ 앞에서 이미 만든/본 문장이 아닌가 — 베껴 쓰기를 막는다
+// 틀린 영어가 통과할 수 있는 것은 이 채점의 상한이고([5] 자유 입력도 같다),
+// 실시간 LLM 없이는 막을 수 없다.
+//
+// **와우는 통과 뒤에 온다**:
+//   · 내가 쓴 문장이 예문들과 **같은 목록의 첫 줄**로 선다 — 학습 문장과 내 문장
+//     두 줄은 "같은 표현"만 보여주고 "뭐든 된다"는 안 보여준다(형제 예문이 1개
+//     이상인 문항이 222/222, 2개 이상이 193)
+//   · 예문에 없는 낱말을 썼으면 **그것을 짚어 인정한다** — 앱이 몰랐던 문장을 내가
+//     만든 것이고, 그게 감점이 아니라 칭찬이면 다음 문항부터 일부러 새 낱말을 밀어
+//     넣어 본다. 그 순간이 "뭐든 말할 수 있겠구나"다
+// 지원 사다리는 `표현 보기` → `예문 보기` → `정답 보기`. **본 예문은 제외 목록에
+// 들어간다**(보고 베끼면 산출이 아니다) — 다만 마지막 칸은 그 제외를 풀고 칸을
+// 채워 준다. 완전히 막힌 유저의 탈출구가 없으면 진행이 끊긴다.
+const OP_FN=new Set(['the','a','an','my','your','his','her','its','our','their','this','that','these','those',
+  'i','you','he','she','it','we','they','me','him','us','them','to','of','in','on','at','for','with','and',
+  'or','but','is','are','am','was','were','be','do','does','did','not','so','too','very','some','any']);
+function renderSpeakOpen(item){
+  setProgress(3);
+  const p=item.pattern||{}, pmean=(p.meaning||'').trim();
+  // 이 표현으로 **앱이 아는** 문장들. 내 문장이 여기 끼어들고, 예문에 없는 낱말을
+  // 가려내는 기준도 이것이다.
+  const known=[{en:item.sentence.en, kr:item.sentence.kr, segs:item.baseSegs}], seen=new Set([item.sentence.en]);
+  (item.apply||[]).concat(item.siblings||[]).forEach(a=>{
+    if(a && a.en && !seen.has(a.en)){ seen.add(a.en); known.push({en:a.en, kr:a.kr||'', segs:a.segs||null}); }
+  });
+  const knownWords=new Set();
+  known.forEach(k=>tokenize(k.en).forEach(w=>knownWords.add(bareW(w))));
+  (item.frame||[]).forEach(f=>f.split(/\s+/).forEach(w=>knownWords.add(bareW(w))));
+
+  const nz=x=>String(x).split(/\s+/).map(bareW).filter(Boolean).join(' ');
+  // 제외 목록 — [2]·[3]에서 만든 문장과, 사다리로 이미 본 예문
+  const taken=new Set([nz(item.sentence.en)]);
+  known.forEach(k=>{ if(builtSet.has(k.en)) taken.add(nz(k.en)); });
+  // 사다리의 예문은 그 자신이 **이 화면의 채점을 통과하는 문장**이어야 한다 —
+  // 탈출구인데 그대로 쳤을 때 다시 막히면 진행이 끝난다. 걸러지는 것은 둘이다:
+  // 형제 문장이 **표현 그 자신**인 경우(`Have fun!`·`How come?`)와, 불규칙 활용이라
+  // `framePos`가 표현을 못 집는 경우(`get home` → `I got home`). 그 다음에 짧은 것.
+  const egOk=k=>{ const w=tokenize(k.en).map(bareW), pos=framePos(w, item.frame);
+                  return !!pos && w.length-pos.length>=1; };
+  const egPool=known.filter(k=>k.en!==item.sentence.en && egOk(k))
+                    .sort((x,y)=>tokenize(x.en).length-tokenize(y.en).length);
+  // 다 걸러지면 학습 문장으로 돌아간다 — 제외 목록에 있지만 마지막 칸이 그걸 푼다
+  const eg=egPool[0]||known[0];
+  let done=false, hintLevel=0;
+
+  stage.innerHTML=`
+    <div class="stage-scroll">
+      <div class="chat-card" id="card">
+        <div class="chat-tag rv">말해보기</div>
+        <div class="sh-head">
+          <div class="sh-lbl">이번에 배운 표현</div>
+          <div class="sh-form">${escapeHtml(pmean)}</div>
+        </div>
+        <div class="sp-q op-q">이 표현으로 <b>하고 싶은 말</b>을 만들어 보세요</div>
+        <div class="nb-tip hidden" id="nbTip"></div>
+        <div class="sp-in" id="spIn"><div class="sp-slots" id="spSlots"></div><input class="sp-catch" id="spCatch" type="text"
+          autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done" /></div>
+        <div class="wrong-box hidden" id="wrongBox"></div>
+        <div class="reveal-note hidden" id="revealNote"></div>
+      </div>
+      <div id="payoffBox"></div>
+    </div>
+    <div class="stage-bottom" id="bottom">
+      <div class="vtools" id="vtools">
+        <button class="vtool" id="hintBtn"><span class="ic">?</span><span id="hintLabel">표현 보기</span></button>
+        <button class="vtool mic" disabled><span class="ic">🎤</span><span>음성 모드</span></button>
+      </div>
+      <div class="arr-btns" style="margin-top:12px">
+        <button class="btn-confirm" id="okBtn" disabled>확인</button>
+      </div>
+    </div>`;
+
+  const inp=el('spCatch'), wrongBox=el('wrongBox');
+  setTimeout(()=>inp.focus(), 80);
+  const typedWords=()=> inp.value.trim().split(/\s+/).filter(Boolean);
+  // 칸 수를 미리 정하지 않는다 — 낱말 수가 곧 답의 범위를 알려주는 정보인데,
+  // 여기서는 그 범위 자체가 유저의 것이다. 칸은 치는 만큼 자란다.
+  function renderSlots(){
+    const ws=inp.value.split(' '), n=Math.max(ws.length, 1);
+    let h='';
+    for(let i=0;i<n;i++)
+      h+=`<span class="sp-slot${(i===ws.length-1 && !done)?' cur':''}">${escapeHtml(ws[i]||'')}</span>`;
+    el('spSlots').innerHTML=h;
+  }
+  function renderAll(){ renderSlots(); el('okBtn').disabled = done || !inp.value.trim(); }
+  renderAll();
+
+  function openTip(){ const tip=el('nbTip'); tip.innerHTML=nbTipHtml(item); tip.classList.remove('hidden'); }
+  function tipByFail(){ if(hintLevel===0) advanceHint(); else openTip(); }
+  inp.addEventListener('input', ()=>{ if(!done) wrongBox.classList.add('hidden'); renderAll(); });
+
+  function finish(fixes){
+    done=true;
+    // 프레임 오타는 정답 철자로 굳힌다 — 내가 만든 문장으로 남는 것이므로
+    if((fixes||[]).length){
+      const ws=inp.value.trim().split(/\s+/);
+      fixes.forEach(f=>{ if(ws[f.i]!==undefined) ws[f.i]=f.to; });
+      inp.value=ws.join(' ');
+    }
+    inp.readOnly=true; inp.blur();
+    const said=inp.value.trim();
+    el('okBtn').disabled=true;
+    el('card').classList.add('correct');
+    if(!el('card').querySelector('.check-mark')){ const c=document.createElement('div'); c.className='check-mark'; c.textContent='✓'; el('card').appendChild(c); }
+    if(!made.some(x=>x.en===said)) made.push({en:said, kr:''});
+    wrongBox.classList.add('hidden'); el('nbTip').classList.add('hidden');
+    const rn=el('revealNote');
+    if((fixes||[]).length){
+      rn.classList.remove('hidden');
+      rn.innerHTML=`철자<b>${fixes.map(f=>escapeHtml(f.from)+' → '+escapeHtml(f.to)).join(' · ')}</b>`;
+    } else rn.classList.add('hidden');
+    const sw=said.split(/\s+/), sf=frameWordFlags(sw, item.frame);
+    el('spIn').innerHTML=`<div class="sp-tiles">${sw.map((w,i)=>
+      `<span class="sp-tile${sf[i]?' fr':''}">${escapeHtml(w)}</span>`).join('')}</div>`;
+    el('card').insertAdjacentHTML('beforeend', resultActionsHtml());
+
+    // 예문에 없던 낱말 — 기능어와 세 글자 미만은 뺀다(`my`·`it`을 짚으면 소음이다)
+    const fresh=sw.map(w=>bareW(w)).filter((w,i)=>!sf[i] && w.length>=3 && !OP_FN.has(w) && !knownWords.has(w));
+    const form=(p.form||'').trim();
+    // 효용감의 근거는 문구가 아니라 **내 문장이 예문들과 같은 목록에 서는 것**이다.
+    // 두 줄로는 "같은 표현"까지만 보이고 "뭐든 된다"는 안 보인다.
+    el('payoffBox').innerHTML=`<div class="payoff">
+        <div class="chat-tag rv">학습 정보</div>
+        ${form?`<div class="pf-form">${escapeHtml(form).replace(/_{2,}|~/g,'<span class="slot"></span>')}</div>`:''}
+        ${pmean?`<div class="pf-mean">${escapeHtml(pmean)}</div>`:''}
+        <div class="pf-div"></div>
+        <div class="pf-sub"><span class="ic">ⓘ</span>이 표현으로 이렇게 말할 수 있어요</div>
+        <div class="pf-cmp mine"><div class="pf-cmp-en">${frameLine(said, null, item.frame)}<span class="op-badge">내가 만든 문장</span></div></div>
+        ${known.map(k=>`<div class="pf-cmp"><div class="pf-cmp-en">${frameLine(k.en, k.segs, item.frame)}</div>
+          ${k.kr?`<div class="pf-cmp-kr">${escapeHtml(k.kr)}</div>`:''}</div>`).join('')}
+        ${fresh.length?`<div class="op-new"><span class="ic">✨</span><span><b>${escapeHtml(fresh.join(' · '))}</b> 는 예문에 없는 말이에요 —
+          이 표현을 내가 아는 말에 붙여서 쓴 거예요.</span></div>`:''}
+      </div>`;
+    el('bottom').innerHTML=arrangeBottomHtml(lastItem()?'완료하기':'다음 문제');
+    el('nextBtn').onclick=advanceItem;
+  }
+
+  el('okBtn').onclick=()=>{
+    if(done) return;
+    const words=typedWords();
+    if(!words.length) return;
+    const pos=framePos(words.map(bareW), item.frame);
+    // 표현을 아직 안 썼으면 지적하는 대신 **오답노트 팁을 연다**([2] 화면과 같은 규약)
+    if(!pos){ wrongBox.classList.add('hidden'); tipByFail(); return; }
+    wrongBox.classList.remove('hidden');
+    if(words.length - pos.length < 1){
+      wrongBox.innerHTML=`표현만 있어요. <b>무엇을</b> 그렇게 할지 한 낱말이라도 붙여 보세요.`; return;
+    }
+    if(taken.has(nz(words.join(' ')))){
+      wrongBox.innerHTML=`이미 나온 문장이에요. <b>다른 말</b>을 만들어 보세요.`; return;
+    }
+    finish(frameFix(words, pos, item.frame));
+  };
+
+  const ladder=[ {label:'표현 보기', run:openTip},
+                 {label:'예문 보기', run:()=>{ taken.add(nz(eg.en)); },
+                  note:()=>`예문<b>${escapeHtml(eg.en)}</b>`},
+                 // 마지막 칸은 제외를 풀고 칸까지 채워 준다 — 탈출구가 없으면 진행이 끊긴다
+                 {label:'정답 보기', run:()=>{ taken.delete(nz(eg.en)); inp.value=tokenize(eg.en).join(' '); renderAll(); },
+                  note:()=>`이대로 써도 돼요<b>${escapeHtml(eg.en)}</b>`} ];
+  function advanceHint(){
+    const d=ladder[hintLevel]; if(!d) return;
+    if(d.run) d.run();
+    if(d.note){ const rn=el('revealNote'); rn.classList.remove('hidden'); rn.innerHTML=d.note(); }
+    hintLevel++;
+    const next=ladder[hintLevel];
+    if(next){ el('hintLabel').textContent=next.label; el('hintBtn').querySelector('.ic').textContent='✔'; }
+    else { el('hintBtn').disabled=true; el('hintLabel').textContent='정답 공개됨'; wrongBox.classList.add('hidden'); }
+  }
+  el('hintBtn').onclick=()=>{ advanceHint(); inp.focus(); };
+}
+
 function renderSpeak(preset){
   curStep=renderSpeak;
   if(preset && !preset.en) preset=null;        // 이벤트 등이 새어 들어오면 무시한다
   const item=sessionItems[itemIdx];
+  if(spkVar==='o' && !preset) return renderSpeakOpen(item);
   if(spkVar==='w' && !preset){
     const sw=swapSlot(item);
     if(sw) return renderSpeakSwap(sw);
@@ -2521,7 +2727,7 @@ function renderDone(){
     <p>어휘 ${items.length}개와 서로 다른 ${modeWord} ${items.length}개를 배웠어요.</p>
     ${made.length?`<div class="learned-list">
       <div class="h">내가 직접 말한 문장 ${made.length}개</div>
-      ${made.map(x=>`<div class="it"><span class="en">${escapeHtml(x.en)}</span><br>${escapeHtml(x.kr)}</div>`).join('')}
+      ${made.map(x=>`<div class="it"><span class="en">${escapeHtml(x.en)}</span>${x.kr?'<br>'+escapeHtml(x.kr):''}</div>`).join('')}
     </div>`:''}
     <div class="learned-list">
       <div class="h">배운 어휘 & ${modeWord}</div>
