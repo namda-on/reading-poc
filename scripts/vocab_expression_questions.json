@@ -905,8 +905,8 @@
   "팀에 못 들어갔어."
  ],
  "Let me explain.": [
-  "I don't understand at all.",
-  "전혀 이해가 안 돼요."
+  "I don't understand this at all.",
+  "이거 전혀 이해가 안 돼."
  ],
  "Why don't you sit down?": [
   "I've been standing all day.",
@@ -937,8 +937,8 @@
   "어서 들어와!"
  ],
  "How about Thursday?": [
-  "Wednesday doesn't work for me.",
-  "수요일은 안 되겠어."
+  "Wednesday would be difficult.",
+  "수요일은 어렵겠는데요."
  ],
  "You work too much.": [
   "I was at the office until midnight.",
@@ -953,12 +953,12 @@
   "남은 거 있어?"
  ],
  "Which one is yours?": [
-  "Someone left a jacket here.",
-  "누가 재킷을 두고 갔어."
+  "Two jackets were left here.",
+  "재킷 두 개가 남아 있어."
  ],
  "Would you close the window?": [
-  "It's so noisy in here.",
-  "여기 너무 시끄럽네."
+  "It's a bit noisy in here.",
+  "여기 좀 시끄럽네요."
  ],
  "You can't give up now!": [
   "I want to quit.",
@@ -1061,8 +1061,8 @@
   "공연 끝났어?"
  ],
  "I lost my wallet along with my passport.": [
-  "Just your wallet?",
-  "지갑만?"
+  "You look upset. What happened?",
+  "안색이 안 좋네. 무슨 일이야?"
  ],
  "Fill out your name here.": [
   "Where do I start?",
@@ -1110,7 +1110,7 @@
  ],
  "I'll keep that in mind.": [
   "Don't forget to lock the door.",
-  "문 잠그는 거 잊지 마."
+  "문 잠그는 거 잊지 마세요."
  ],
  "Come by anytime.": [
   "Can I visit your studio?",
@@ -1277,8 +1277,8 @@
   "항상 이렇게 비싸요?"
  ],
  "It takes up the whole room.": [
-  "Why don't you move the piano?",
-  "피아노를 왜 안 옮겨?"
+  "That piano is huge.",
+  "그 피아노 엄청 크다."
  ],
  "I'll think of something.": [
   "We still don't have a gift.",
@@ -1449,8 +1449,8 @@
   "하늘은 괜찮아 보이는데."
  ],
  "I believe in freedom.": [
-  "What do you stand for?",
-  "당신은 무엇을 지지하나요?"
+  "What matters most to you?",
+  "넌 뭘 제일 중요하게 생각해?"
  ],
  "Don't take it too seriously.": [
   "His comment really hurt.",
@@ -1514,7 +1514,7 @@
  ],
  "I'll set up a meeting.": [
   "We should discuss this properly.",
-  "이건 제대로 논의해야 해요."
+  "이건 제대로 논의해야 해."
  ],
  "Let's meet up after class.": [
   "I have your book.",
@@ -2093,8 +2093,8 @@
   "톰이 왜 병원에 있어?"
  ],
  "What do you think of it?": [
-  "I finally finished the logo.",
-  "로고 드디어 다 만들었어."
+  "I saw the new logo today.",
+  "오늘 새 로고 봤어."
  ],
  "She'll come back soon.": [
   "Is your sister still abroad?",
@@ -2189,8 +2189,8 @@
   "두 팀이 같이 해야 해?"
  ],
  "They're making progress with the specialist.": [
-  "How is your nephew doing?",
-  "조카는 어때?"
+  "How are your parents doing?",
+  "부모님은 어떠셔?"
  ],
  "Grocery prices just kept going up.": [
   "Why was last month so expensive?",
@@ -2214,7 +2214,7 @@
  ],
  "He's having a problem with his monitor.": [
   "Why did he call the help desk?",
-  "왜 헬프데스크에 전화했어?"
+  "그분이 헬프데스크에 왜 전화하셨나요?"
  ],
  "I ended up with a cold.": [
   "How was the camping trip?",
@@ -2257,8 +2257,8 @@
   "걔가 여행 못 간대."
  ],
  "Put these clothes on.": [
-  "I have nothing ready for tomorrow.",
-  "내일 입을 게 하나도 준비가 안 됐어."
+  "I don't know what to wear.",
+  "뭘 입어야 할지 모르겠어."
  ],
  "Come over tomorrow evening!": [
   "I'm free all week after six.",
@@ -2317,12 +2317,12 @@
   "부재중 전화가 세 통 있어."
  ],
  "What's going on in London now?": [
-  "I've been away for two weeks.",
-  "나 2주 동안 떠나 있었어."
+  "My cousin just moved to London.",
+  "사촌이 막 런던으로 이사 갔어."
  ],
  "He'll get out of your seat.": [
-  "Excuse me, I think there's a mix-up.",
-  "실례지만 뭔가 착오가 있는 것 같은데요."
+  "Excuse me, someone is in my seat.",
+  "실례지만 제 자리에 누가 앉아 있어요."
  ],
  "They need plenty of sunlight.": [
   "Where should I keep these plants?",
@@ -2349,8 +2349,8 @@
   "다들 계속 휴대폰만 보네요."
  ],
  "What's wrong with my glasses?": [
-  "Everything looks blurry today.",
-  "오늘따라 다 흐릿하게 보여."
+  "You keep squinting at the board.",
+  "너 계속 칠판을 찡그리며 보네."
  ],
  "They're in front of the ketchup.": [
   "I can't find the pickles anywhere.",
@@ -2646,7 +2646,7 @@
  ],
  "We just keep track of our expenses.": [
   "How do you two save so much?",
-  "두 분은 어떻게 그렇게 모으세요?"
+  "너희 둘은 어떻게 그렇게 모아?"
  ],
  "Another trainer will take over.": [
   "What happens after this session?",
@@ -2701,8 +2701,8 @@
   "금요일까지 답을 달래요."
  ],
  "Say hi to the nice ladies.": [
-  "My son is being shy today.",
-  "우리 아들이 오늘 부끄럼을 타네요."
+  "Oh, he's gotten so big!",
+  "어머, 많이 컸네요!"
  ],
  "They didn't have a choice regarding the invitations.": [
   "Why did they send the same design?",
