@@ -38,6 +38,8 @@ OUT = Path(__file__).resolve().parent.parent / "public" / "vocab-expression.data
 SITUATIONS = Path(__file__).resolve().parent / "vocab_expression_situations.json"
 # [4] 말해보기 옵션 B용 A 대사 — 그 문장이 짧은 답이 되는 질문. 손으로 적은 프로토타입 문안
 QUESTIONS = Path(__file__).resolve().parent / "vocab_expression_questions.json"
+# [4] 방식 D — 내 차례 **뒤**에 오는 A의 반응(앞 대사는 QUESTIONS)
+REPLIES = Path(__file__).resolve().parent / "vocab_expression_replies.json"
 
 MAX_ITEMS = int(os.environ.get("VE_MAX_ITEMS", "0"))    # 0이면 전체
 VOCAB_FILTER_SKIP = {"sexual", "unnecessary"}
@@ -145,39 +147,53 @@ def mark_meaning_kr(kr, meaning, authored=""):
 # 표현 뜻(`~을 입다`)을 문장 뜻(`옷 입어.`)에서 찾기 위한 후보들.
 # 어휘 뜻과 달리 `~`로 슬롯이 표시돼 있고 종결형이 문장마다 달라(`입다`→`입어`)
 # 조각·어간을 더 넓게 펼친다.
-EXPR_PARTICLE = ("을", "를", "이", "가", "에", "와", "과", "의", "로", "으로", "은", "는")
+EXPR_PARTICLE = ("을", "를", "이", "가", "에", "와", "과", "의", "로", "으로", "은", "는", "도")
 EXPR_TAIL = ("에서", "에게", "까지", "으로", "부터", "에", "께", "로")
 
 
 def expr_meaning_spans(meaning):
+    """표현 뜻에서 문장에 나타날 수 있는 조각 후보들 — **순서가 결정적이어야 한다**.
+
+    `set`을 길이만으로 정렬하면 같은 길이 후보의 순서가 `PYTHONHASHSEED`에 좌우돼
+    같은 입력에서 빌드마다 다른 구간이 칠해진다(`내가 [할게]` / `[내가] 할게`).
+    그래서 후보마다 **어느 낱말에서 나왔는지**를 같이 들고 다니며
+    `긴 것 → 뒤쪽 낱말에서 나온 것 → 앞쪽 글자 → 사전순`으로 못 박는다.
+    뒤쪽 낱말을 앞세우는 이유는 표현의 머리가 용언이기 때문이다
+    (`~에게 다시 전화하다`에서 칠할 것은 `다시`가 아니라 `전화`다).
+    """
     t = re.sub(r"<[^>]*>", " ", meaning or "")
     t = re.sub(r"\([^)]*\)", " ", t)
-    out = set()
+    best = {}
 
-    def add(x):
-        x = x.strip(" ?!.·")
-        if x:
-            out.add(x)
+    def add(x, wi):
+        x = x.strip(" ?!.\u00b7")
+        if not x:
+            return
+        # 같은 조각이 여러 낱말에서 나오면 **뒤쪽 낱말**의 것으로 본다
+        if x not in best or wi > best[x]:
+            best[x] = wi
 
+    wi = 0
     for part in re.split(r"[,;/~]", t):
         part = part.strip(" ?!.")
         if not part:
             continue
-        add(part)
-        if part.startswith("하"):          # `~하지 마` → `지 마`, `~하는 건 어때` → `는 건 어때`
-            add(part[1:])
         ws = part.split()
+        add(part, wi)                      # 조각 전체는 그 조각의 첫 낱말 자리로 본다
+        if part.startswith("하"):          # `~하지 마` → `지 마`, `~하는 건 어때` → `는 건 어때`
+            add(part[1:], wi)
         if ws and ws[0] in EXPR_PARTICLE:  # `을 입다` → `입다`
-            add(" ".join(ws[1:]))
-        for w in ws:
-            add(w)
+            add(" ".join(ws[1:]), wi)
+        for k, w in enumerate(ws):
+            add(w, wi + k)
             for suf in KR_SUFFIX + ("해", "하", "지"):
                 if w.endswith(suf) and len(w) > len(suf):
-                    add(w[: -len(suf)])
+                    add(w[: -len(suf)], wi + k)
             for suf in EXPR_TAIL:          # `덕분에` → `덕분`, `앞에서` → `앞`
                 if w.endswith(suf) and len(w) - len(suf) >= 1:
-                    add(w[: -len(suf)])
-    return sorted(out, key=len, reverse=True)
+                    add(w[: -len(suf)], wi + k)
+        wi += len(ws)
+    return sorted(best, key=lambda x: (-len(x), -best[x], t.find(x), x))
 
 
 HANGUL_BASE = 0xAC00
@@ -208,7 +224,7 @@ def expr_stem_spans(meaning):
             for suf in KR_SUFFIX + ("해", "하", "지"):
                 if w.endswith(suf) and len(w) > len(suf):
                     out.add(w[: -len(suf)])
-    return sorted(out, key=len, reverse=True)
+    return sorted(out, key=lambda x: (-len(x), t.find(x), x))
 
 
 def mark_expr_kr(kr, meaning):
@@ -572,6 +588,15 @@ def load_questions():
     return {k: {"en": v[0], "kr": v[1]} for k, v in raw.items() if not k.startswith("_")}
 
 
+def load_replies():
+    """영어 문장(en) → {en, kr}. [4] 방식 D가 **내 차례 뒤에 오는 A의 반응**으로 쓴다.
+    파일이 없어도 빌드는 진행한다(그 문항에서 D만 비활성)."""
+    if not REPLIES.exists():
+        return {}
+    raw = json.loads(REPLIES.read_text(encoding="utf-8"))
+    return {k: {"en": v[0], "kr": v[1]} for k, v in raw.items() if not k.startswith("_")}
+
+
 def load_situations():
     """학습 문장(en) → {a_en, a_kr}. 파일이 없어도 빌드는 진행한다([5]만 비활성)."""
     if not SITUATIONS.exists():
@@ -685,6 +710,7 @@ def main():
     vocab, gse, groups = load_vocab(), load_gse(), load_groups()
     situations = load_situations()
     questions = load_questions()
+    replies = load_replies()
     items, skipped = [], {"조인실패": 0, "버전A불가": 0, "버전B불가": 0, "문장부족": 0,
                           "공통프레임없음": 0, "문법틀form": 0, "프레임≠form": 0}
 
@@ -754,13 +780,15 @@ def main():
             "frame": lits,
             "situation": situations.get(s1["en"]),
             "ask": questions.get(s1["en"]),
+            "reply": replies.get(s1["en"]),
             "traps": [],
             "_trapSent": sents[cov[1]] if len(cov) > 1 else sents[0],
             "baseSegs": segd[0]["segs"],
             # 말해보기 옵션 B는 응용 예문을 대상으로 하므로 그쪽에도 질문을 붙인다
             "apply": [{"en": g["sents"][i]["en"], "kr": g["sents"][i]["kr"], **segd[i],
                        "krMark": mark_expr_kr(g["sents"][i]["kr"], g["pmean"]),
-                       "ask": questions.get(g["sents"][i]["en"])}
+                       "ask": questions.get(g["sents"][i]["en"]),
+                       "reply": replies.get(g["sents"][i]["en"])}
                       for i in cov[1:]],
             "siblings": [{"en": x["en"], "kr": x["kr"],
                           "krMark": mark_expr_kr(x["kr"], g["pmean"])}

@@ -278,6 +278,10 @@
   .sp-q.sp-after { margin-top:18px; }
   /* [4] O 「내 말로 하나」 — 지시문은 '하고 싶은 말'을 강조한다.
      이 화면은 내용을 유저가 정하는 것이 전부라 그 한 마디가 과제의 정의다. */
+  /* D 대화 — 뒷 대사는 내가 가운데를 채우기 전까지 흐리다. 앞뒤가 다 보이는 것이
+     과제의 조건이고, 제 색으로 켜지는 것이 **대화가 이어졌다**는 신호다. */
+  .sit-turn.dlg-after { opacity:.42; transition:opacity .34s ease; }
+  .sit-turn.dlg-after.on { opacity:1; }
   /* D 대화 — 지시문은 A 말풍선 바로 아래, 내 말풍선 바로 위에 온다 */
   .sit-task.dlg-q { font-size:13.5px; font-weight:700; color:#5b7c93; margin:16px 0 0; }
   .sit-task.dlg-q b { color:#22794a; font-weight:800; }
@@ -487,7 +491,7 @@ function setSpkMode(m){
 // 세우고 지원을 어떤 형태로 주는가**뿐이다.
 const SPK_VARS={
   o:{label:'O 내 말로 하나', desc:'재료를 주지 않는다 — 이 표현으로 하고 싶은 말을 내가 정해서 한 문장'},
-  d:{label:'D 대화 속에서', desc:'상대가 말을 걸고, 그 표현을 넣어 내 말로 답한다'},
+  d:{label:'D 대화 한가운데', desc:'대화의 앞뒤 대사가 정해져 있고 가운데 내 말만 비어 있다'},
   w:{label:'W 자리 갈아 끼우기', desc:'틀의 빈 자리에 들어갈 말들을 주고, 그중 아무거나 골라 쓴다'},
   h:{label:'H 표현 연습지', desc:'표현을 위에 걸어 두고, 낱말은 다 주고, 같은 표현으로 2~4문장'},
   a:{label:'A 재료 상시', desc:'낱말을 섞어서 주고 표현은 감춘 채 한 문장만'},
@@ -2285,23 +2289,27 @@ function renderSpeakOpen(item){
   el('hintBtn').onclick=()=>{ advanceHint(); inp.focus(); };
 }
 
-// [4] D 대화 속에서 ───────────────────────────────────────────────────────────
-// 상대가 말을 걸고 **내가 그 표현으로 답한다**. `상대가 말을 걸면 그 표현으로 답하기를
-// 2~3번`은 앞서 기각됐는데 이유는 *개수만 늘고 사실상 같다*였다 — 각 라운드가 독립적인
-// 번역 과제였기 때문이다. 여기서는 **한 번뿐이고, 답의 내용이 열려 있다**(O와 같은 채점).
-// 대화에 대한 답이 하나로 정해져 있으면 그건 대화가 아니라 빈칸 채우기다.
-// 재료를 주지 않는 것도 같은 이유다 — 낱말을 늘어놓는 순간 답변이 아니라 조립이 된다.
-// A 대사는 `apply[].ask`(저작된 질문 301/482, 문항마다 최소 하나는 있다)를 쓰고
-// **해석을 함께 연다** — 이 단계의 과제는 영어를 알아듣는 것이 아니라 답하는 것이다
-// (`[5]`가 해석을 잠그는 것은 거기가 *영어를 보고 영어로 인출*하는 단계라서다).
+// [4] D 대화 한가운데 ─────────────────────────────────────────────────────────
+// **내 차례가 대화의 가운데에 있다** — 앞 대사와 뒷 대사가 모두 정해져 있고 내 말만
+// 비어 있다. 앞 대사만 주면 *질문에 답하는 일*이 되어 `영어 질문 → 영어` 자극과
+// 구조가 같아진다(재료를 빼고 말풍선을 씌워도 같다). 뒤가 있어야 과제가 **"이 사이에
+// 맞는 말"**이 되고, 그것이 번역도 조립도 아닌 유일한 대화 과제다.
+// 닫는 일을 **문맥이** 하므로 재료를 화면에 놓지 않아도 된다 — 재료는 화면에 놓이는
+// 순간 조립이 되지만 문맥은 부품이 아니다. 채점은 O와 같이 프레임까지만 건다.
+// 해석은 양쪽 대사 모두 함께 연다 — 이 단계의 과제는 영어를 알아듣는 것이 아니라
+// 답하는 것이다(`[5]`가 해석을 잠그는 것은 거기가 *영어를 보고 영어로 인출*하는
+// 단계라서다).
+// 뒷 대사는 `apply[].reply`(`scripts/vocab_expression_replies.json`, 손저작 222개)다.
+// **내가 무엇을 말하든 이어지도록 내용어를 고정하지 않았다** — 답이 열려 있으므로
+// 반응이 특정 내용을 전제하면 내 답과 어긋난다.
 function dialogTarget(item){
+  const ok=a=>a && a.ask && a.reply;
   const t=speakTarget(item);
-  if(t && t.ask) return t;
-  // 질문이 없는 대상이면 질문이 붙은 형제 중 `speakTarget`의 꼬리 규칙(재료 적은 것 →
-  // 짧은 것)으로 고른다
-  const withAsk=(item.apply||[]).filter(a=>a.ask);
-  if(!withAsk.length) return null;
-  return withAsk.slice().sort((x,y)=>
+  if(ok(t)) return t;
+  // 앞뒤 대사가 다 있는 형제 중 `speakTarget`의 꼬리 규칙(재료 적은 것 → 짧은 것)으로
+  const both=(item.apply||[]).filter(ok);
+  if(!both.length) return null;
+  return both.slice().sort((x,y)=>
     spkMats(x).length-spkMats(y).length || tokenize(x.en).length-tokenize(y.en).length)[0];
 }
 function renderSpeakDialog(item, t){
@@ -2329,13 +2337,20 @@ function renderSpeakDialog(item, t){
             <div class="sit-kr">${escapeHtml(t.ask.kr)}</div>
           </div>
         </div>
-        <div class="sit-task dlg-q">이 표현을 넣어 <b>답해 보세요</b></div>
+        <div class="sit-task dlg-q">이 표현을 넣어 <b>가운데를 채워 보세요</b></div>
         <div class="nb-tip hidden" id="nbTip"></div>
         <div class="sit-turn b">
           <div class="sit-role">나</div>
           <div class="sit-bubble mine">
             <div class="sp-in" id="spIn"><div class="sp-slots" id="spSlots"></div><input class="sp-catch" id="spCatch" type="text"
               autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done" /></div>
+          </div>
+        </div>
+        <div class="sit-turn dlg-after">
+          <div class="sit-role">A</div>
+          <div class="sit-bubble">
+            <div class="sit-en">${escapeHtml(t.reply.en)}</div>
+            <div class="sit-kr">${escapeHtml(t.reply.kr)}</div>
           </div>
         </div>
         <div class="wrong-box hidden" id="wrongBox"></div>
@@ -2395,6 +2410,9 @@ function renderSpeakDialog(item, t){
     const sw=said.split(/\s+/), sf=frameWordFlags(sw, item.frame);
     el('spIn').innerHTML=`<div class="sp-tiles">${sw.map((w,i)=>
       `<span class="sp-tile${sf[i]?' fr':''}">${escapeHtml(w)}</span>`).join('')}</div>`;
+    // 뒷 대사는 내가 채우기 전까지 흐려 둔다 — 내 말이 들어가서야 대화가 이어진다
+    const after=el('card').querySelector('.dlg-after');
+    if(after) after.classList.add('on');
     el('card').insertAdjacentHTML('beforeend', resultActionsHtml());
     const form=(p.form||'').trim();
     el('payoffBox').innerHTML=`<div class="payoff">
