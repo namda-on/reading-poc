@@ -759,9 +759,12 @@ def main():
             "baseSegs": segd[0]["segs"],
             # 말해보기 옵션 B는 응용 예문을 대상으로 하므로 그쪽에도 질문을 붙인다
             "apply": [{"en": g["sents"][i]["en"], "kr": g["sents"][i]["kr"], **segd[i],
+                       "krMark": mark_expr_kr(g["sents"][i]["kr"], g["pmean"]),
                        "ask": questions.get(g["sents"][i]["en"])}
                       for i in cov[1:]],
-            "siblings": g["sents"][1:3],
+            "siblings": [{"en": x["en"], "kr": x["kr"],
+                          "krMark": mark_expr_kr(x["kr"], g["pmean"])}
+                         for x in g["sents"][1:3]],
         })
 
     items.sort(key=lambda x: (x["rank"], x["level"]))
