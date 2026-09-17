@@ -224,6 +224,8 @@
   .sh-row.cur .sh-n { background:#2f6fd0; color:#fff; }
   /* 주어지는 낱말 — 연습지의 괄호 표기다. **섞지 않고 원래 순서대로** 둔다: 이 줄의
      용도는 답의 범위를 닫는 것이 아니라 표현 말고는 떠올릴 것이 없게 만드는 것이다. */
+  .sh-rv { display:inline-block; background:#efe8fb; color:#6d54a8; border-radius:7px; padding:2px 8px;
+    font-size:11.5px; font-weight:800; margin-bottom:5px; }
   .sh-give { display:flex; flex-wrap:wrap; gap:7px; margin-top:8px; }
   .sh-give .give { background:#eef2f8; color:#7d8fa6; border-radius:8px; padding:4px 10px; font-size:14.5px; font-weight:700; }
   /* [4] 재료 — 표현은 여기 없다. 답의 범위만 닫아 두고 조합은 유저가 한다.
@@ -246,6 +248,8 @@
   .sp-slot { min-width:56px; min-height:42px; background:#eaf1fb; border:1.5px solid #dce7f6; border-radius:10px;
     display:inline-flex; align-items:center; justify-content:center; padding:0 11px; font-size:17px; font-weight:700; color:#2f3e52; }
   .sp-slot.cur { border-color:#7ea9e0; background:#fff; }
+  /* 놓은 카드는 눌러서 되가져온다(C) — 배열 화면과 같은 규약 */
+  .sp-slot.on { cursor:pointer; }
   .sp-slot.cur::after { content:''; width:2px; height:20px; background:#5b8fd6; margin-left:2px; animation:caret 1.05s steps(1) infinite; }
   @keyframes caret { 50% { opacity:0; } }
   /* 칸보다 많이 쓰면 넘친 칸을 따로 표시한다 — 재료를 더 쓴 것이 바로 보인다 */
@@ -443,6 +447,8 @@ function setSpkMode(m){
 const SPK_VARS={
   h:{label:'H 표현 연습지', desc:'표현을 위에 걸어 두고, 낱말은 다 주고, 같은 표현으로 2~4문장'},
   a:{label:'A 재료 상시', desc:'낱말을 섞어서 주고 표현은 감춘 채 한 문장만'},
+  c:{label:'C 트랩 배열', desc:'낱말을 탭해 배열한다 — 뱅크에 함정이 섞여 있다'},
+  r:{label:'R 복습 섞기', desc:'연습지 마지막 줄은 앞서 배운 다른 표현이다 — 뜻만 주고 알려주지 않는다'},
 };
 let spkVar=(()=>{ try{ const v=localStorage.getItem(SPKV_KEY); return SPK_VARS[v]?v:'h'; }catch(e){ return 'h'; } })();
 function setSpkVar(v){
@@ -1395,11 +1401,29 @@ function sheetRows(item){
   return out.sort((x,y)=>tokenize(x.en).length-tokenize(y.en).length).slice(0,3);
 }
 
+// 방식 R의 마지막 줄 — **앞서 배운 다른 표현**이다. 지금까지의 모든 방식은 *이번 표현*
+// 안에서만 놀았고, 그래서 효용감이 한 문항 안에 갇혔다. 배운 것이 쌓여 쓸 수 있다는
+// 감각은 **이번에 배운 것이 아닌 표현을 지정 없이 꺼낼 때** 나온다(어학 교재의 9과
+// 연습지에 8과 표현이 섞여 나오는 자리다).
+// 문장은 앞 문항의 남은 형제 문장이 있으면 그것, 없으면 그 문항의 학습 문장이다 —
+// 학습 문장은 `[2]`·`[3]`에서 **탭으로 배열만** 했고 손으로 쳐 본 적이 없다.
+// (H가 형제 문장을 거의 다 소진해 197/222는 남는 것이 0개다.)
+function reviewRow(){
+  const prev = learned.length ? learned[learned.length-1]
+             : (itemIdx>0 ? sessionItems[itemIdx-1] : null);
+  if(!prev || !prev.frame || !prev.frame.length) return null;
+  const used=new Set(sheetRows(prev).map(r=>r.en));
+  const spare=(prev.apply||[]).find(a=>a.segs && a.en!==prev.sentence.en && !used.has(a.en));
+  const r = spare || {en:prev.sentence.en, kr:prev.sentence.kr, segs:prev.baseSegs};
+  return {en:r.en, kr:r.kr, segs:r.segs, own:prev, review:true};
+}
+
 function renderSpeakSheet(){
   curStep=renderSpeak;              // 방식을 바꾸면 renderSpeak 이 다시 갈라야 한다
   const item=sessionItems[itemIdx];
   setProgress(3);
-  const rows=sheetRows(item);
+  const rows=sheetRows(item).map(r=>Object.assign({}, r, {own:item}));
+  if(spkVar==='r'){ const rv=reviewRow(); if(rv) rows.push(rv); }
   const p=item.pattern||{};
   const bare=w=>String(w).toLowerCase().replace(/[^a-z0-9']/g,'');
   const wrote=[];               // 이 화면에서 내가 쓴 문장
@@ -1432,7 +1456,7 @@ function renderSpeakSheet(){
     </div>`;
   const wrongBox=el('wrongBox');
   // 표현을 못 떠올렸을 때 여는 줄 — [2] 화면과 같은 규약이라 새 표기가 아니다
-  function openTip(){ const tip=el('nbTip'); tip.innerHTML=nbTipHtml(item); tip.classList.remove('hidden'); }
+  function openTip(it){ const tip=el('nbTip'); tip.innerHTML=nbTipHtml(it||item); tip.classList.remove('hidden'); }
 
   // 채워진 답을 미리 두지 않는다 — 모범 답안이 위에 있으면 그걸 보고 옮겨 적는 일이 된다.
   // 위에 쌓이는 것은 **내가 쓴 줄**뿐이다.
@@ -1442,11 +1466,12 @@ function renderSpeakSheet(){
   }
   function doneHtml(){
     return wrote.map((m,i)=>rowHtml(i+1, m.kr,
-      `<div class="sh-en">${frameLine(m.en, m.segs, item.frame)}</div>`, 'mine')).join('');
+      `${m.review?`<div class="sh-rv">복습 · ${escapeHtml((m.own.pattern||{}).meaning||'')}</div>`:''}
+       <div class="sh-en">${frameLine(m.en, m.segs, m.own.frame)}</div>`, 'mine')).join('');
   }
 
   function startRow(){
-    const t=rows[ri];
+    const t=rows[ri], own=t.own||item;
     const tok=tokenize(t.en), flag=frameFlags(tok, t.segs);
     const frWords=tok.filter((w,i)=>flag[i]), matWords=tok.filter((w,i)=>!flag[i]);
     const allowedWords=frWords.concat(matWords);
@@ -1458,6 +1483,7 @@ function renderSpeakSheet(){
     el('shRows').innerHTML = doneHtml() + `
       <div class="sh-row cur grow-in"><span class="sh-n">${wrote.length+1}</span>
         <div class="sh-body">
+          ${t.review?`<div class="sh-rv">복습 · ${escapeHtml((own.pattern||{}).meaning||'')}</div>`:''}
           <div class="sh-kr">${escapeHtml(t.kr)}</div>
           ${gives.length?`<div class="sh-give">${gives.map(g=>`<span class="give">${escapeHtml(g)}</span>`).join('')}</div>`:''}
           <div class="sp-in" id="spIn"><div class="sp-slots" id="spSlots"></div><input class="sp-catch" id="spCatch" type="text"
@@ -1506,7 +1532,7 @@ function renderSpeakSheet(){
       if(!made.some(x=>x.en===said)) made.push({en:said, kr:t.kr});
       // 통과한 줄은 **모범 표기로 굳혀** 위에 쌓는다 — 다음 줄을 쓰는 동안 바로 위에
       // 같은 초록 조각이 남아 있어야 '같은 표현을 자리만 바꿔 쓰고 있다'가 보인다.
-      wrote.push({en:said, kr:t.kr, segs:(exact||!fixes||!fixes.length)&&said===t.en?t.segs:null,
+      wrote.push({en:said, kr:t.kr, own, review:!!t.review, segs:(exact||!fixes||!fixes.length)&&said===t.en?t.segs:null,
                   alt:said!==t.en?t.en:null,
                   fixes:(fixes||[]).map(f=>f.from+' → '+f.to)});
       ri++;
@@ -1521,9 +1547,9 @@ function renderSpeakSheet(){
       wrongBox.classList.remove('hidden');
       // 표현을 아직 안 썼으면 지적하는 대신 **오답노트 팁을 연다**([2]·A와 같은 규약).
       // 그때 사다리 첫 칸을 쓴 것으로 친다 — 같은 지원을 두 번 세지 않는다.
-      if(!framePos(words.map(bare), item.frame)){
+      if(!framePos(words.map(bare), own.frame)){
         wrongBox.classList.add('hidden');
-        if(hintLevel===0 && ladder[0].run) hb.click(); else openTip();
+        if(hintLevel===0 && ladder[0].run) hb.click(); else openTip(own);
         return;
       }
       const { extra, missing, fixes } = matchWords(words);
@@ -1535,7 +1561,7 @@ function renderSpeakSheet(){
     // 사다리 첫 칸은 `표현 보기`다([2]·A와 같은 규약) — 표현은 화면 어디에도 없다.
     // 단 **두 줄째부터는 빼낸다**: 내가 쓴 줄이 위에 있고 거기 표현이 초록으로 보이므로
     // 같은 것을 두 번 주게 된다.
-    const ladder=[ ...(wrote.length?[]:[{label:'표현 보기', run:openTip}]),
+    const ladder=[ ...((wrote.length && !t.review)?[]:[{label:'표현 보기', run:()=>openTip(own)}]),
                    {label:'첫 단어 보기', note:()=>`첫 단어<b>${escapeHtml(tok[0])} …</b>`},
                    {label:'정답 보기', note:()=>`정답<b>${escapeHtml(t.en)}</b>`} ];
     const hb=el('hintBtn'), hl=el('hintLabel');
@@ -1572,8 +1598,11 @@ function renderSpeakSheet(){
         <div class="pf-sub"><span class="ic">ⓘ</span>이 표현으로 만든 문장</div>
         <div class="pf-cmp"><div class="pf-cmp-en">${frameLine(item.sentence.en, item.baseSegs, item.frame)}</div>
           <div class="pf-cmp-kr">${escapeHtml(item.sentence.kr)}</div></div>
-        ${wrote.map(w=>`<div class="pf-cmp"><div class="pf-cmp-en">${frameLine(w.en, w.segs, item.frame)}</div>
+        ${wrote.filter(w=>!w.review).map(w=>`<div class="pf-cmp"><div class="pf-cmp-en">${frameLine(w.en, w.segs, item.frame)}</div>
           <div class="pf-cmp-kr">${escapeHtml(w.kr)}</div></div>`).join('')}
+        ${wrote.filter(w=>w.review).map(w=>`<div class="pf-sub"><span class="ic">ⓘ</span>앞서 배운 표현도 다시 썼어요
+          <div class="pf-cmp"><div class="pf-cmp-en">${frameLine(w.en, w.segs, w.own.frame)}</div>
+          <div class="pf-cmp-kr">${escapeHtml(w.kr)}</div></div></div>`).join('')}
         ${alts.length?`<div class="pf-sub"><span class="ic">ⓘ</span>이렇게도 말해요</div>
         ${alts.map(w=>`<div class="pf-cmp"><div class="pf-cmp-en">${frameLine(w.alt, null, item.frame)}</div></div>`).join('')}`:''}
       </div>`;
@@ -1584,14 +1613,170 @@ function renderSpeakSheet(){
   startRow();
 }
 
+// 방식 C — **트랩 배열**. 낱말을 탭해 배열하고 뱅크에 함정이 섞인다.
+// `함께 쓸 낱말`이라면서 안 쓸 낱말을 주면 화면이 거짓말을 하지만, 배열 뱅크는 애초에
+// "이 중에서 고르라"는 약속이라 그 문제가 없다 — 그래서 재료 줄 대신 `[2]`·`[3]`과
+// 같은 `.bank`를 쓴다. **뱅크의 프레임 타일을 초록으로 칠하지 않는다** — 어느 것이 방금
+// 배운 표현인지 알아보는 것이 과제라, 표시해 주면 과제가 사라진다.
+function renderSpeakArrange(t){
+  curStep=renderSpeak;
+  const item=sessionItems[itemIdx];
+  setProgress(3);
+  const p=item.pattern||{};
+  const bare=w=>String(w).toLowerCase().replace(/[^a-z0-9']/g,'');
+  const tok=tokenize(t.en), flag = t.segs ? frameFlags(tok, t.segs) : frameWordFlags(tok, item.frame);
+  // 함정은 데이터에 이미 있는 `traps`(다른 표현들의 내용어)를 쓰므로 새 저작이 필요 없다.
+  // 대상 문장에 이미 든 낱말은 함정이 될 수 없으니 걸러낸다.
+  const traps=(item.traps||[]).filter(w=>!tok.some(x=>bare(x)===bare(w))).slice(0,2);
+  let done=false, hintLevel=0, ansArr=[];
+  const bankArr=shuffle(tok.map((w,i)=>({id:i, text:w.toLowerCase(), placed:false}))
+    .concat(traps.map((w,i)=>({id:900+i, text:String(w).toLowerCase(), placed:false}))));
+
+  const byEn = spkMode==='en' && t.ask;
+  stage.innerHTML=`
+    <div class="stage-scroll">
+      <div class="chat-card" id="card">
+        <div class="chat-tag rv">말해보기</div>
+        ${byEn
+          ? `<div class="sit-turn a"><div class="sit-role">A</div>
+               <div class="sit-bubble"><div class="sit-en">${escapeHtml(t.ask.en)}</div>
+               <div class="sit-kr">${escapeHtml(t.ask.kr)}</div></div></div>
+             <div class="sp-q sp-after">배운 표현을 넣어 답해 보세요</div>`
+          : `<div class="sp-q">배운 표현을 넣어 이 문장을 만들어 보세요</div>
+             <div class="sp-kr">${escapeHtml(t.kr)}</div>`}
+        <div class="nb-tip hidden" id="nbTip"></div>
+        <div class="sp-in" id="spIn"><div class="sp-slots" id="spSlots"></div></div>
+        <div class="wrong-box hidden" id="wrongBox"></div>
+        <div class="reveal-note hidden" id="revealNote"></div>
+      </div>
+      <div id="payoffBox"></div>
+    </div>
+    <div class="stage-bottom" id="bottom">
+      <div class="bank" id="bank"></div>
+      <div class="vtools" id="vtools">
+        <button class="vtool" id="hintBtn"><span class="ic">?</span><span id="hintLabel">표현 보기</span></button>
+        <button class="vtool mic" disabled><span class="ic">🎤</span><span>음성 모드</span></button>
+      </div>
+      <div class="arr-btns" style="margin-top:12px">
+        <button class="btn-confirm" id="okBtn" disabled>확인</button>
+      </div>
+    </div>`;
+  const wrongBox=el('wrongBox');
+
+  function renderSlots(){
+    const n=Math.max(tok.length, ansArr.length);
+    let h='';
+    for(let i=0;i<n;i++){
+      const a=ansArr[i], on=(a&&!done);
+      h+=`<span class="sp-slot${on?' on':''}${i>=tok.length?' extra':''}"${on?` data-i="${i}"`:''}>${escapeHtml(a?a.text:'')}</span>`;
+    }
+    el('spSlots').innerHTML=h;
+    if(done) return;
+    // 놓은 카드를 눌러 되가져온다 — 배열 화면과 같은 규약
+    el('spSlots').querySelectorAll('.sp-slot[data-i]').forEach(x=> x.onclick=()=>{
+      const a=ansArr[+x.dataset.i]; if(!a) return;
+      a.placed=false; ansArr.splice(+x.dataset.i,1);
+      wrongBox.classList.add('hidden'); renderAll();
+    });
+  }
+  function renderBank(){
+    const bankEl=el('bank'); bankEl.innerHTML='';
+    bankArr.forEach(tl=>{
+      const b=document.createElement('button');
+      b.className='tile'+(tl.placed?' placed':'');
+      b.textContent=tl.text;
+      if(!tl.placed && !done) b.onclick=()=>{
+        if(ansArr.length>=tok.length) return;
+        tl.placed=true; ansArr.push(tl); renderAll();
+      };
+      bankEl.appendChild(b);
+    });
+  }
+  function renderAll(){ renderSlots(); renderBank(); el('okBtn').disabled = done || ansArr.length<tok.length; }
+  renderAll();
+
+  function openTip(it){ const tip=el('nbTip'); tip.innerHTML=nbTipHtml(it||item); tip.classList.remove('hidden'); }
+
+  const frWords=tok.filter((w,i)=>flag[i]), matWords=tok.filter((w,i)=>!flag[i]);
+  const allowedWords=frWords.concat(matWords);
+  el('okBtn').onclick=()=>{
+    if(done) return;
+    const words=ansArr.map(x=>x.text);
+    const nz=x=>x.join(' ').toLowerCase().replace(/[^a-z0-9']+/g,' ').trim();
+    if(nz(words)===nz(tok)) return finish(true);
+    wrongBox.classList.remove('hidden');
+    if(!framePos(words.map(bare), item.frame)){
+      wrongBox.classList.add('hidden');
+      if(hintLevel===0) advanceHint(); else openTip();
+      return;
+    }
+    // 함정은 `allowedWords`에 없으므로 그대로 걸린다
+    const need=allowedWords.map(bare).sort().join('|'), got=words.map(bare).sort().join('|');
+    if(need!==got){
+      const extra=words.filter(w=>!allowedWords.some(a=>bare(a)===bare(w)));
+      wrongBox.innerHTML = extra.length
+        ? `<b>${escapeHtml(extra.join(', '))}</b> 는 이 문장에 필요하지 않아요.`
+        : `아직 다 쓰지 않은 낱말이 있어요.`;
+      return;
+    }
+    finish(false);
+  };
+
+  function finish(exact){
+    done=true;
+    let said=ansArr.map(x=>x.text).join(' ');
+    said = exact ? t.en : said.charAt(0).toUpperCase()+said.slice(1)+trailPunct(t.en);
+    el('okBtn').disabled=true;
+    el('card').classList.add('correct');
+    if(!el('card').querySelector('.check-mark')){ const c=document.createElement('div'); c.className='check-mark'; c.textContent='✓'; el('card').appendChild(c); }
+    builtSet.add(t.en);
+    if(!made.some(x=>x.en===said)) made.push({en:said, kr:t.kr});
+    wrongBox.classList.add('hidden'); el('nbTip').classList.add('hidden');
+    const sw=said.split(/\s+/), sf=frameWordFlags(sw, item.frame);
+    el('spIn').innerHTML=`<div class="sp-tiles">${sw.map((w,i)=>
+      `<span class="sp-tile${sf[i]?' fr':''}">${escapeHtml(w)}</span>`).join('')}</div>`;
+    el('bank').classList.add('hidden');
+    el('card').insertAdjacentHTML('beforeend', resultActionsHtml());
+    const form=(p.form||'').trim(), pmean=(p.meaning||'').trim();
+    el('payoffBox').innerHTML=`<div class="payoff">
+        <div class="chat-tag rv">학습 정보</div>
+        ${form?`<div class="pf-form">${escapeHtml(form).replace(/_{2,}|~/g,'<span class="slot"></span>')}</div>`:''}
+        ${pmean?`<div class="pf-mean">${escapeHtml(pmean)}</div>`:''}
+        <div class="pf-div"></div>
+        <div class="pf-sub"><span class="ic">ⓘ</span>이 표현으로 만든 문장</div>
+        <div class="pf-cmp"><div class="pf-cmp-en">${frameLine(item.sentence.en, item.baseSegs, item.frame)}</div>
+          <div class="pf-cmp-kr">${escapeHtml(item.sentence.kr)}</div></div>
+        <div class="pf-cmp"><div class="pf-cmp-en">${frameLine(said, exact?t.segs:null, item.frame)}</div>
+          <div class="pf-cmp-kr">${escapeHtml(t.kr)}</div></div>
+      </div>`;
+    el('bottom').innerHTML=arrangeBottomHtml(lastItem()?'완료하기':'다음 문제');
+    el('nextBtn').onclick=advanceItem;
+  }
+
+  // 뱅크에 낱말이 다 있으므로 `첫 단어 보기`는 의미가 없다 — 표현 다음이 바로 정답이다
+  const ladder=[ {label:'표현 보기', run:openTip},
+                 {label:'정답 보기', note:()=>`정답<b>${escapeHtml(t.en)}</b>`} ];
+  function advanceHint(){
+    const d=ladder[hintLevel]; if(!d) return;
+    if(d.run) d.run();
+    if(d.note){ const rn=el('revealNote'); rn.classList.remove('hidden'); rn.innerHTML=d.note(); }
+    hintLevel++;
+    const next=ladder[hintLevel];
+    if(next){ el('hintLabel').textContent=next.label; el('hintBtn').querySelector('.ic').textContent='✔'; }
+    else { el('hintBtn').disabled=true; el('hintLabel').textContent='정답 공개됨'; wrongBox.classList.add('hidden'); }
+  }
+  el('hintBtn').onclick=advanceHint;
+}
+
 function renderSpeak(preset){
   curStep=renderSpeak;
   if(preset && !preset.en) preset=null;        // 이벤트 등이 새어 들어오면 무시한다
   const item=sessionItems[itemIdx];
-  if(spkVar==='h' && !preset && sheetRows(item).length) return renderSpeakSheet();
+  if((spkVar==='h'||spkVar==='r') && !preset && sheetRows(item).length) return renderSpeakSheet();
+  const t = preset || speakTarget(item);
+  if(spkVar==='c') return renderSpeakArrange(t);
   setProgress(3);
 
-  const t = preset || speakTarget(item);
   const byEn = spkMode==='en' && t.ask;
 
   const bare=w=>String(w).toLowerCase().replace(/[^a-z0-9']/g,'');
