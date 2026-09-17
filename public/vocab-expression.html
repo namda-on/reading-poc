@@ -226,6 +226,7 @@
      용도는 답의 범위를 닫는 것이 아니라 표현 말고는 떠올릴 것이 없게 만드는 것이다. */
   .sh-rv { display:inline-block; background:#efe8fb; color:#6d54a8; border-radius:7px; padding:2px 8px;
     font-size:11.5px; font-weight:800; margin-bottom:5px; }
+  .sh-rv.again { background:#fdf3d8; color:#8a6a1c; }
   .sh-give { display:flex; flex-wrap:wrap; gap:7px; margin-top:8px; }
   .sh-give .give { background:#eef2f8; color:#7d8fa6; border-radius:8px; padding:4px 10px; font-size:14.5px; font-weight:700; }
   /* [4] 재료 — 표현은 여기 없다. 답의 범위만 닫아 두고 조합은 유저가 한다.
@@ -765,6 +766,7 @@ function renderVocab(){
     const t=vin.value.trim();
     if(t.length>=answer.replace(/ /g,'').length && t.length>0){
       const {html,wrong}=diffSpell(t, answer);
+      struggled=true;
       wrongBox.classList.remove('hidden'); wrongBox.innerHTML=`${html} - 정답과 ${wrong}글자 달라요.`;
     } else wrongBox.classList.add('hidden');
   }
@@ -1422,8 +1424,15 @@ function renderSpeakSheet(){
   curStep=renderSpeak;              // 방식을 바꾸면 renderSpeak 이 다시 갈라야 한다
   const item=sessionItems[itemIdx];
   setProgress(3);
-  const rows=sheetRows(item).map(r=>Object.assign({}, r, {own:item}));
-  if(spkVar==='r'){ const rv=reviewRow(); if(rv) rows.push(rv); }
+  // **기본은 한 줄이다** — `[4]`는 `[2]`·`[3]`을 지나 온 마지막 단계라, 여기서 여러 줄을
+  // 시키면 잘 넘긴 유저에게 벌을 주는 셈이 된다. 반복은 **막힌 유저에게만** 붙인다:
+  // 지원을 열었거나 오답을 낸 줄이면 같은 표현으로 한 줄이 더 열린다(후보가 있는 만큼).
+  const pool=sheetRows(item).map(r=>Object.assign({}, r, {own:item}));
+  const rvRow = spkVar==='r' ? reviewRow() : null;
+  const rows=[];
+  let poolNext=0;
+  if(pool.length) rows.push(pool[poolNext++]);
+  if(rvRow) rows.push(rvRow);
   const p=item.pattern||{};
   const bare=w=>String(w).toLowerCase().replace(/[^a-z0-9']/g,'');
   const wrote=[];               // 이 화면에서 내가 쓴 문장
@@ -1437,7 +1446,7 @@ function renderSpeakSheet(){
           <div class="sh-lbl">이번에 배운 표현</div>
           <div class="sh-form">${escapeHtml(p.meaning||'')}</div>
         </div>
-        <div class="sh-q">이 표현으로 아래 문장들을 만들어 보세요</div>
+        <div class="sh-q">이 표현으로 문장을 만들어 보세요</div>
         <div class="sh-rows" id="shRows"></div>
         <div class="nb-tip hidden" id="nbTip"></div>
         <div class="wrong-box hidden" id="wrongBox"></div>
@@ -1466,12 +1475,14 @@ function renderSpeakSheet(){
   }
   function doneHtml(){
     return wrote.map((m,i)=>rowHtml(i+1, m.kr,
-      `${m.review?`<div class="sh-rv">복습 · ${escapeHtml((m.own.pattern||{}).meaning||'')}</div>`:''}
+      `${m.review?`<div class="sh-rv">복습 · ${escapeHtml((m.own.pattern||{}).meaning||'')}</div>`
+        :m.again?`<div class="sh-rv again">한 번 더</div>`:''}
        <div class="sh-en">${frameLine(m.en, m.segs, m.own.frame)}</div>`, 'mine')).join('');
   }
 
   function startRow(){
     const t=rows[ri], own=t.own||item;
+    let struggled=false;          // 이 줄에서 지원을 열었거나 오답을 냈다
     const tok=tokenize(t.en), flag=frameFlags(tok, t.segs);
     const frWords=tok.filter((w,i)=>flag[i]), matWords=tok.filter((w,i)=>!flag[i]);
     const allowedWords=frWords.concat(matWords);
@@ -1483,7 +1494,8 @@ function renderSpeakSheet(){
     el('shRows').innerHTML = doneHtml() + `
       <div class="sh-row cur grow-in"><span class="sh-n">${wrote.length+1}</span>
         <div class="sh-body">
-          ${t.review?`<div class="sh-rv">복습 · ${escapeHtml((own.pattern||{}).meaning||'')}</div>`:''}
+          ${t.review?`<div class="sh-rv">복습 · ${escapeHtml((own.pattern||{}).meaning||'')}</div>`
+            :t.again?`<div class="sh-rv again">한 번 더</div>`:''}
           <div class="sh-kr">${escapeHtml(t.kr)}</div>
           ${gives.length?`<div class="sh-give">${gives.map(g=>`<span class="give">${escapeHtml(g)}</span>`).join('')}</div>`:''}
           <div class="sp-in" id="spIn"><div class="sp-slots" id="spSlots"></div><input class="sp-catch" id="spCatch" type="text"
@@ -1532,9 +1544,12 @@ function renderSpeakSheet(){
       if(!made.some(x=>x.en===said)) made.push({en:said, kr:t.kr});
       // 통과한 줄은 **모범 표기로 굳혀** 위에 쌓는다 — 다음 줄을 쓰는 동안 바로 위에
       // 같은 초록 조각이 남아 있어야 '같은 표현을 자리만 바꿔 쓰고 있다'가 보인다.
-      wrote.push({en:said, kr:t.kr, own, review:!!t.review, segs:(exact||!fixes||!fixes.length)&&said===t.en?t.segs:null,
+      wrote.push({en:said, kr:t.kr, own, review:!!t.review, again:!!t.again, segs:(exact||!fixes||!fixes.length)&&said===t.en?t.segs:null,
                   alt:said!==t.en?t.en:null,
                   fixes:(fixes||[]).map(f=>f.from+' → '+f.to)});
+      // 막힌 줄이면 같은 표현으로 한 줄 더 — 잘 넘긴 유저에게는 반복을 시키지 않는다
+      if(struggled && !t.review && poolNext<pool.length)
+        rows.splice(ri+1, 0, Object.assign({}, pool[poolNext++], {again:true}));
       ri++;
       if(ri<rows.length) startRow(); else finish();
     }
@@ -1544,6 +1559,7 @@ function renderSpeakSheet(){
       if(!words.length) return;
       const nz=x=>x.join(' ').toLowerCase().replace(/[^a-z0-9']+/g,' ').trim();
       if(nz(words)===nz(tokenize(t.en).concat(trailPunct(t.en)))) return pass(true, []);
+      struggled=true;
       wrongBox.classList.remove('hidden');
       // 표현을 아직 안 썼으면 지적하는 대신 **오답노트 팁을 연다**([2]·A와 같은 규약).
       // 그때 사다리 첫 칸을 쓴 것으로 친다 — 같은 지원을 두 번 세지 않는다.
@@ -1568,6 +1584,7 @@ function renderSpeakSheet(){
     hb.disabled=false; hb.querySelector('.ic').textContent='?'; hl.textContent=ladder[0].label;
     hb.onclick=()=>{
       const d=ladder[hintLevel]; if(!d) return;
+      struggled=true;
       if(d.run) d.run();
       if(d.note){ const rn=el('revealNote'); rn.classList.remove('hidden'); rn.innerHTML=d.note(); }
       hintLevel++;
