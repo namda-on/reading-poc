@@ -217,10 +217,27 @@
   /* 어느 줄에서 짚는지가 보여야 한다 — 탭할 수 있는 낱말만 밑줄을 흐리게 깐다 */
   .rc-w.pick { border-bottom-color:#d3e1f4; }
   .rc-w.on { background:#e7edfb; border-bottom-color:#7f9fd8; color:#3a6bb0; font-weight:800; }
+  /* 짚으면 **다른 줄의 같은 낱말이 같이 켜진다** — `저기도 있네`가 이 단계의 과제 자체다.
+     판정은 하지 않는다(유령 낱말도 켜진다) — 몇 줄이 켜졌는지 세는 것은 유저의 일이다. */
+  .rc-w.echo { background:#eef3fc; border-bottom-color:#c3d5ee; color:#5f80ad; font-weight:800; }
+  .rc-w { transition:background .15s ease, color .15s ease, border-color .15s ease; }
+  .rc-w.pop { animation:rcPop .36s ease; }
+  @keyframes rcPop { 0%{transform:none;} 42%{transform:translateY(-5px) scale(1.09);} 100%{transform:none;} }
+  .rc-row.shake, .fill.shake { animation:rcShake .34s ease; }
+  @keyframes rcShake { 0%,100%{transform:none;} 22%{transform:translateX(-5px);} 55%{transform:translateX(5px);} 82%{transform:translateX(-2px);} }
   .rc-w.bad { background:#fdeaea; border-bottom-color:#e8918d; color:#c0403b; }
   .rc-w.fr { background:#e3fbec; border-bottom-color:#8ed9ab; color:#22794a; font-weight:800; }
   .rc-p { font-size:18px; font-weight:600; margin-left:-3px; }
   .rc-kr { font-size:13.5px; color:#9aa8bc; font-weight:600; margin-top:7px; }
+  .rc-kr.open { animation:growIn .32s ease both; }
+  /* ver.2 예문 — 말풍선 톤(`.sit-bubble`)을 쓰되 화자가 없으므로 아바타는 두지 않는다.
+     패턴 구간은 앱의 표현 색(초록)에 점선 밑줄 — 무엇을 베낄지가 한눈에 보여야 한다. */
+  .rc-eg { background:#f2f5fa; border-radius:4px 14px 14px 14px; padding:11px 14px; margin-top:10px; }
+  .rc-eg-en { font-size:17px; font-weight:700; color:#2f3e52; line-height:1.5; }
+  .rc-eg-en em { font-style:normal; font-weight:800; color:#22794a; border-bottom:2px dotted #8ed9ab; padding-bottom:1px; }
+  .rc-eg-kr { font-size:13px; color:#9aa8bc; font-weight:600; margin-top:4px; }
+  .rc-eg-kr.open { animation:growIn .32s ease both; }
+  .rc-gap { height:1px; background:#eaeff6; margin:18px 0 2px; }
   .rc-more { display:flex; align-items:flex-start; gap:6px; font-size:13.5px; font-weight:700; color:#7c8b9e; margin-top:14px; line-height:1.5; }
   .rc-more b { color:#3a6bb0; font-weight:800; }
 
@@ -484,9 +501,16 @@ const VERSIONS={
 
 // [5] 상황 카드를 낄지. 켜면 REVIEW_EVERY 문항마다 한 번 나온다.
 const SIT_ROW='[5] 상황 카드 넣기 (3문항마다)';
-// 인식 단계를 낄지 — 빼면 `[1] 어휘` 다음이 바로 `[2] 표현 넣기`다(종전 흐름).
+// 인식 단계 — 빼면 `[1] 어휘` 다음이 바로 `[2] 표현 넣기`다(종전 흐름).
 // 번호를 붙이지 않는 것은 자리 때문이다 — `[1]`과 `[2]` 사이에 들어가므로 `[0]`도 `[2]`도 거짓말이 된다.
-const RCG_ROW='인식 단계 넣기 (패턴 찾기)';
+// **두 버전은 과제의 방향이 반대다**: `ver.1`은 여러 문장에서 공통을 **찾고**,
+// `ver.2`는 찾아 준 패턴을 새 문장에 **적용한다**. 어느 쪽이 "이 표현을 배웠다"를
+// 만드는지 보려고 나란히 둔다.
+const RCG_MODES={
+  off:{label:'안 넣는다', desc:'[1] 어휘 다음이 바로 [2] 표현 넣기다(종전 흐름)'},
+  v1:{label:'ver.1 패턴 찾기', desc:'세 문장에 똑같이 있는 말을 짚는다'},
+  v2:{label:'ver.2 패턴 완성', desc:'예문 둘을 보고 같은 패턴으로 빈칸을 채운다'},
+};
 // [4]는 **직교하는 두 축**이다. 일곱 개를 프로즈 라벨로 늘어놓았더니 무엇이 다른지
 // 읽히지 않았고, 실제로 절반은 옵션이 아니었다 — H는 지원 1단에서 A와 같고, R은
 // `H + 복습 줄 한 개`였고, D는 방식이 아니라 **자극**이었다(O와 `무엇을 보고`만 달랐다).
@@ -525,13 +549,17 @@ function setSpkVar(v){
   try{ localStorage.setItem(SPKV_KEY, spkVar); }catch(e){}
   renderSitOption(); applyStepOption();
 }
-let rcgOn=(()=>{ try{ return localStorage.getItem(RCG_KEY)!=='0'; }catch(e){ return true; } })();
-function setRcgOn(v){
-  rcgOn=!!v;
-  try{ localStorage.setItem(RCG_KEY, rcgOn?'1':'0'); }catch(e){}
+let rcgMode=(()=>{ try{ const v=localStorage.getItem(RCG_KEY);
+  if(v==='1') return 'v1'; if(v==='0') return 'off';   // 켬/끔만 있던 때의 저장값
+  return RCG_MODES[v]?v:'v1'; }catch(e){ return 'v1'; } })();
+let rcgOn = rcgMode!=='off';
+function setRcgMode(m){
+  rcgMode = RCG_MODES[m] ? m : 'v1'; rcgOn = rcgMode!=='off';
+  try{ localStorage.setItem(RCG_KEY, rcgMode); }catch(e){}
   buildStepIndex();          // 문항당 단계 수가 달라지므로 진행바 기준을 다시 잡는다
-  renderSitOption();
+  renderSitOption(); applyStepOption();
 }
+function recognizeStep(){ return rcgMode==='v2' ? renderRecognizeFill() : renderRecognize(); }
 let sitOn=(()=>{ try{ return localStorage.getItem(SIT_KEY)!=='0'; }catch(e){ return true; } })();
 function setSitOn(v){
   sitOn=!!v;
@@ -544,13 +572,19 @@ function setSitOn(v){
 // 도중에 화면을 갈아엎으면 풀던 것이 날아간다.
 function applyStepOption(){
   if(curStep===renderSpeak) renderSpeak();
+  // 인식 두 버전은 나란히 비교하는 것이라 그 자리에서 갈아 끼운다(끄면 그대로 둔다 —
+  // 풀던 화면을 지우고 다음 단계로 밀면 무엇이 달라졌는지가 안 보인다)
+  else if(curStep===recognizeStep && rcgOn) recognizeStep();
 }
 function renderSitOption(){
   ['optHome','settingPop'].forEach(id=>{
     const box=el(id);
     if(!box || box.classList.contains('hidden')) return;
-    box.innerHTML=`<div class="opt-row"><span class="rt">${RCG_ROW}</span>
-        <button class="opt-sw${rcgOn?' on':''}" data-k="rcg" aria-label="${RCG_ROW}"></button></div>
+    box.innerHTML=`<div class="opt-label">인식 단계 — 패턴을 어떻게 만나나</div>
+      <div class="seg seg-v">
+        ${Object.keys(RCG_MODES).map(k=>`<button class="seg-b" data-r="${k}"><b>${rcgMode===k?'✓ ':''}${RCG_MODES[k].label}</b><i>${RCG_MODES[k].desc}</i></button>`).join('')}
+      </div>
+      <div class="opt-div"></div>
       <div class="opt-row"><span class="rt">${SIT_ROW}</span>
         <button class="opt-sw${sitOn?' on':''}" data-k="sit" aria-label="${SIT_ROW}"></button></div>
       <div class="opt-div"></div>
@@ -565,9 +599,9 @@ function renderSitOption(){
       </div>`;
     box.querySelectorAll('.seg-b[data-m]').forEach(b=> b.classList.toggle('on', b.dataset.m===spkMode));
     box.querySelectorAll('.seg-b[data-v]').forEach(b=> b.classList.toggle('on', b.dataset.v===spkVar));
-    box.querySelectorAll('.opt-sw').forEach(b=> b.onclick=()=>{
-      if(b.dataset.k==='rcg') setRcgOn(!rcgOn); else setSitOn(!sitOn);
-    });
+    box.querySelectorAll('.seg-b[data-r]').forEach(b=> b.classList.toggle('on', b.dataset.r===rcgMode));
+    box.querySelectorAll('.seg-b[data-r]').forEach(b=> b.onclick=()=>setRcgMode(b.dataset.r));
+    box.querySelectorAll('.opt-sw').forEach(b=> b.onclick=()=>setSitOn(!sitOn));
     box.querySelectorAll('.seg-b[data-m]').forEach(b=> b.onclick=()=>setSpkMode(b.dataset.m));
     box.querySelectorAll('.seg-b[data-v]').forEach(b=> b.onclick=()=>setSpkVar(b.dataset.v));
   });
@@ -584,7 +618,7 @@ let DATA=null, curVer='a', sessionItems=[], itemIdx=0, learned=[];
 //  expand         — 1박자에 놓은 프레임이 굳고 나머지만 그 위로 자란다
 let curFlow='transfer';
 function patternStep(){ return curFlow==='expand' ? renderExpand() : renderPattern(); }
-function afterVocab(){ return rcgOn ? renderRecognize() : patternStep(); }
+function afterVocab(){ return rcgOn ? recognizeStep() : patternStep(); }
 // 지금 보고 있는 단계 — 옵션은 **그 자리에서 바로** 적용돼야 비교가 된다(설정 → 홈 →
 // 다시 풀기로 돌아가면 무엇이 달라졌는지 감각이 끊긴다). 각 단계 렌더가 자기를 적는다.
 let curStep=null;
@@ -1013,7 +1047,7 @@ function rcgRows(item){
   return out;
 }
 function renderRecognize(){
-  curStep=renderRecognize;
+  curStep=recognizeStep;
   const item=sessionItems[itemIdx];
   setProgress(1);
   const rows=rcgRows(item).map(r=>{
@@ -1066,8 +1100,14 @@ function renderRecognize(){
   const wrongBox=el('wrongBox');
   const rowEls=Array.from(el('rcList').querySelectorAll('.rc-row'));
   const headWs=Array.from(rowEls[0].querySelectorAll('.rc-w'));
+  const bare=w=>String(w).toLowerCase().replace(/[^a-z0-9']/g,'');
+  const rowWs=rowEls.map(r=>Array.from(r.querySelectorAll('.rc-w')));
   function sync(){
     headWs.forEach((b,i)=> b.classList.toggle('on', pick.has(i)));
+    // 짚은 낱말이 다른 줄에도 있으면 거기도 켠다 — 세 줄이 같이 켜지는 것이 곧 발견이다
+    const want=new Set([...pick].map(i=>bare(head.tok[i])).filter(Boolean));
+    rowWs.forEach((ws,ri)=>{ if(ri===0) return;
+      ws.forEach((w,i)=> w.classList.toggle('echo', want.has(bare(rows[ri].tok[i])))); });
     el('okBtn').disabled = done || !pick.size;
   }
   headWs.forEach((b,i)=> b.onclick=()=>{
@@ -1084,6 +1124,7 @@ function renderRecognize(){
     // 프레임 밖을 짚었으면 **왜 아닌지**를 말한다 — 슬롯은 문장마다 바뀌는 자리다
     if(extra.length){
       extra.forEach(i=>headWs[i].classList.add('bad'));
+      rowEls[0].classList.remove('shake'); void rowEls[0].offsetWidth; rowEls[0].classList.add('shake');
       wrongBox.classList.remove('hidden');
       wrongBox.innerHTML=`<b>${escapeHtml(extra.map(i=>head.tok[i]).join(', '))}</b> 는 문장마다 달라요. ${NW} 문장에 <b>똑같이</b> 있는 것만 짚어 보세요.`;
       return;
@@ -1121,12 +1162,17 @@ function renderRecognize(){
     if(!el('card').querySelector('.check-mark')){ const c=document.createElement('div'); c.className='check-mark'; c.textContent='✓'; el('card').appendChild(c); }
     // **이 순간이 인식이다** — 내가 짚은 조각이 나머지 문장에서도 같이 켜지고, 그때서야
     // 한국어가 열려 그 조각이 무슨 뜻인지가 붙는다(푸는 동안 한국어를 주면 눈이 거기로 간다).
+    // **위에서부터 한 줄씩** 켜야 `내가 짚은 것이 저기도, 저기도 있다`로 읽힌다 —
+    // 세 줄이 동시에 초록이 되면 그냥 정답 표시가 되고 발견의 순서가 사라진다.
     rowEls.forEach((row,ri)=>{
-      Array.from(row.querySelectorAll('.rc-w')).forEach((w,i)=>{
-        w.classList.remove('on','pick','bad');
-        if(rows[ri].flag[i]) w.classList.add('fr');
-      });
-      row.querySelector('.rc-kr').classList.remove('hidden');
+      const ws=Array.from(row.querySelectorAll('.rc-w'));
+      ws.forEach(w=>w.classList.remove('on','echo','pick','bad'));
+      const frIdx=ws.map((w,i)=>i).filter(i=>rows[ri].flag[i]);
+      frIdx.forEach((i,k)=> setTimeout(()=>{ if(!ws[i].isConnected) return;
+        ws[i].classList.add('fr','pop'); }, ri*200 + k*70));
+      const kr=row.querySelector('.rc-kr');
+      setTimeout(()=>{ if(!kr.isConnected) return;
+        kr.classList.remove('hidden'); kr.classList.add('open'); }, ri*200 + 230);
     });
     const p=item.pattern||{}, form=(p.form||'').trim(), pmean=(p.meaning||'').trim();
     el('payoffBox').innerHTML=`<div class="payoff">
@@ -1138,6 +1184,160 @@ function renderRecognize(){
         <div class="rc-more"><span class="ic">ⓘ</span>이 표현이 들어간 문장을 <b>${more}개</b> 더 알고 있어요</div>`:''}
       </div>`;
     el('bottom').innerHTML=arrangeBottomHtml('다음 문제');
+    el('nextBtn').onclick=patternStep;
+  }
+}
+
+
+// 인식 ver.2 · 패턴 완성 ────────────────────────────────────────────────────────
+// `ver.1`과 **과제의 방향이 반대다**. `ver.1`은 여러 문장에서 공통을 찾고, 여기서는
+// 공통을 찾아 준 다음 **같은 패턴으로 새 문장을 완성한다**(듀오링고 `같은 패턴으로
+// 완성하세요`). 찾는 부담이 없는 대신 **패턴이 재사용된다는 것을 손으로 겪는다.**
+// 대상은 `ver.1`과 같은 학습 문장이고 예문만 형제 문장이다 — 두 버전이 같은 문장을
+// 놓고 갈려야 무엇이 달랐는지 비교된다.
+// **`[2]` 1박자와 조작이 같다는 것이 이 버전의 값이자 위험이다** — 위의 예문 둘이
+// 유일한 차이이므로, 비교에서 볼 것은 "예문을 먼저 보는 것이 `[2]`를 바꾸는가"다.
+function renderRecognizeFill(){
+  curStep=recognizeStep;
+  const item=sessionItems[itemIdx];
+  setProgress(1);
+  const rows=rcgRows(item);
+  const target=rows[0], egs=rows.slice(1);
+  const tok=tokenize(target.en), flag=frameFlags(tok, target.segs), punct=trailPunct(target.en);
+  const runs=slotRuns(tok, flag);
+  const frameIdx=tok.map((w,i)=>i).filter(i=>flag[i]);
+  const want=frameIdx.map(i=>tok[i]);
+  // 뱅크는 **정확히 패턴 낱말만** 준다(레퍼런스와 같다) — 함정은 이 단계의 과제가 아니다.
+  // **글자는 모두 소문자로 내린다**(`[2]`·`c` 배열과 같은 규약) — 문장 첫 낱말만 대문자면
+  // 어느 타일이 맨 앞인지가 새고, 두 낱말짜리 패턴에서는 그것만으로 답이 정해진다.
+  let bank=shuffle(want.map((w,i)=>({id:i, text:w.toLowerCase(), placed:false})));
+  let ans=[], done=false, hintLevel=0;
+  const pool=new Set([item.sentence.en]);
+  (item.apply||[]).forEach(a=>pool.add(a.en));
+  (item.siblings||[]).forEach(a=>pool.add(a.en));
+  const more=Math.max(0, pool.size - rows.length);
+
+  // 예문의 패턴 구간을 `<em>`으로 감싼다 — 조각 순서대로 소진해 표시(`frameFlags`와 같은 규약)
+  const egHtml=r=>{
+    const t=tokenize(r.en), f=frameFlags(t, r.segs), parts=[];
+    let run=[];
+    const flush=()=>{ if(run.length){ parts.push(`<em>${escapeHtml(run.join(' '))}</em>`); run=[]; } };
+    t.forEach((w,i)=>{ if(f[i]){ run.push(w); return; } flush(); parts.push(escapeHtml(w)); });
+    flush();
+    return parts.join(' ') + escapeHtml(trailPunct(r.en));
+  };
+
+  stage.innerHTML=`
+    <div class="stage-scroll">
+      <div class="chat-card rcg" id="card">
+        ${chatTag(item)}<div class="chat-badge new">NEW</div>
+        <div class="sp-q" id="rcQ"><b>같은 패턴</b>으로 문장을 완성해 보세요</div>
+        ${egs.map(r=>`<div class="rc-eg">
+            <div class="rc-eg-en">${egHtml(r)}</div>
+            <div class="rc-eg-kr hidden">${escapeHtml(r.kr)}</div>
+          </div>`).join('')}
+        <div class="rc-gap"></div>
+        <div class="fill" id="fill"></div>
+        <div class="rc-kr hidden" id="tgtKr">${escapeHtml(target.kr)}</div>
+        <div class="wrong-box hidden" id="wrongBox"></div>
+        <div class="reveal-note hidden" id="revealNote"></div>
+      </div>
+      <div id="payoffBox"></div>
+    </div>
+    <div class="stage-bottom" id="bottom">
+      <div class="bank" id="bank"></div>
+      <div class="vtools" id="vtools">
+        <button class="vtool" id="hintBtn"><span class="ic">?</span><span id="hintLabel">첫 낱말 보기</span></button>
+        <button class="vtool mic" disabled><span class="ic">🎤</span><span>음성 모드</span></button>
+      </div>
+      <div class="arr-btns" style="margin-top:12px">
+        <button class="btn-confirm" id="okBtn" disabled>확인</button>
+      </div>
+    </div>`;
+
+  const fillEl=el('fill'), bankEl=el('bank'), wrongBox=el('wrongBox');
+  function renderFill(){
+    const parts=[]; let fi=0;
+    runs.forEach(r=>{
+      if(!r.fr){ parts.push(`<span class="fill-given">${escapeHtml(r.ws.join(' '))}</span>`); return; }
+      const i=fi++;
+      parts.push(i<ans.length
+        ? `<span class="fill-word frame-w" data-i="${i}">${escapeHtml(ans[i].text)}</span>`
+        : `<span class="fill-blank"></span>`);
+    });
+    fillEl.innerHTML=withPunct(parts, punct);
+    if(!done) fillEl.querySelectorAll('.fill-word[data-i]').forEach(w=> w.onclick=()=>{
+      const i=+w.dataset.i; ans[i].placed=false; ans.splice(i,1);
+      wrongBox.classList.add('hidden'); renderAll();
+    });
+  }
+  function renderBank(){
+    bankEl.innerHTML='';
+    bank.forEach(t=>{
+      const b=document.createElement('button');
+      b.className='tile'+(t.placed?' placed':'');
+      b.textContent=t.text;
+      if(!t.placed && !done) b.onclick=()=>{
+        if(ans.length>=want.length) return;
+        t.placed=true; ans.push(t); wrongBox.classList.add('hidden'); renderAll();
+      };
+      bankEl.appendChild(b);
+    });
+  }
+  function renderAll(){ renderFill(); renderBank(); el('okBtn').disabled = done || ans.length<want.length; }
+  renderAll();
+
+  const nz=a=>a.map(w=>String(w).toLowerCase()).join(' ');
+  el('okBtn').onclick=()=>{
+    if(done) return;
+    if(nz(ans.map(a=>a.text))===nz(want)) return finish();
+    fillEl.classList.remove('shake'); void fillEl.offsetWidth; fillEl.classList.add('shake');
+    wrongBox.classList.remove('hidden');
+    wrongBox.innerHTML=`예문과 <b>같은 순서</b>로 놓아 보세요.`;
+  };
+
+  const ladder=[ {label:'첫 낱말 보기', run:()=>{ if(ans.length) return;
+                    const t=bank.find(x=>!x.placed && x.text===want[0].toLowerCase()); if(t){ t.placed=true; ans.push(t); renderAll(); } },
+                  note:()=>`첫 낱말<b>${escapeHtml(want[0])}</b>`},
+                 {label:'정답 보기', run:()=>{ bank.forEach(t=>t.placed=false); ans=[];
+                    want.forEach(w=>{ const t=bank.find(x=>!x.placed && x.text===w.toLowerCase()); if(t){ t.placed=true; ans.push(t); } });
+                    renderAll(); }} ];
+  function advanceHint(){
+    const d=ladder[hintLevel]; if(!d) return;
+    if(d.run) d.run();
+    const rn=el('revealNote');
+    if(d.note){ rn.classList.remove('hidden'); rn.innerHTML=d.note(); } else rn.classList.add('hidden');
+    hintLevel++;
+    const nx=ladder[hintLevel];
+    if(nx) el('hintLabel').textContent=nx.label; else el('hintBtn').disabled=true;
+  }
+  el('hintBtn').onclick=advanceHint;
+
+  function finish(){
+    done=true;
+    el('okBtn').disabled=true;
+    wrongBox.classList.add('hidden'); el('revealNote').classList.add('hidden');
+    el('rcQ').classList.add('hidden');
+    el('card').classList.add('correct');
+    if(!el('card').querySelector('.check-mark')){ const c=document.createElement('div'); c.className='check-mark'; c.textContent='✓'; el('card').appendChild(c); }
+    renderAll();
+    // 내가 놓은 패턴이 먼저 팝하고, 그 다음 예문과 대상의 한국어가 차례로 열린다 —
+    // **내가 만든 줄이 예문과 같은 것**이라는 순서로 읽혀야 한다
+    fillEl.querySelectorAll('.fill-word.frame-w').forEach((w,k)=> setTimeout(()=>{
+      if(w.isConnected) w.classList.add('ok-pop'); }, k*70));
+    const krs=Array.from(document.querySelectorAll('.rc-eg-kr')).concat([el('tgtKr')]);
+    krs.forEach((k,i)=> setTimeout(()=>{ if(!k.isConnected) return;
+      k.classList.remove('hidden'); k.classList.add('open'); }, 220 + i*160));
+    const p=item.pattern||{}, form=(p.form||'').trim(), pmean=(p.meaning||'').trim();
+    el('payoffBox').innerHTML=`<div class="payoff">
+        <div class="chat-tag rv">학습 정보</div>
+        <div class="pf-sub"><span class="ic">💡</span>새로운 표현을 배웠어요</div>
+        ${form?`<div class="pf-form">${escapeHtml(form).replace(/_{2,}|~/g,'<span class="slot"></span>')}</div>`:''}
+        ${pmean?`<div class="pf-mean">${escapeHtml(pmean)}</div>`:''}
+        ${more?`<div class="pf-div"></div>
+        <div class="rc-more"><span class="ic">ⓘ</span>이 표현이 들어간 문장을 <b>${more}개</b> 더 알고 있어요</div>`:''}
+      </div>`;
+    el('bottom').innerHTML=arrangeBottomHtml('다음 문제');   // 뱅크도 이때 같이 사라진다
     el('nextBtn').onclick=patternStep;
   }
 }
