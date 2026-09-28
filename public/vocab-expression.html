@@ -223,7 +223,7 @@
   .rc-w.on { background:#e2ebfb; border-color:#7f9fd8; color:#3a6bb0; font-weight:800; }
   .rc-w.pop { animation:rcPop .36s ease; }
   @keyframes rcPop { 0%{transform:none;} 42%{transform:translateY(-5px) scale(1.09);} 100%{transform:none;} }
-  .rc-list.shake, .fill.shake { animation:rcShake .34s ease; }
+  .rc-list.shake, .rc-line.shake { animation:rcShake .34s ease; }
   @keyframes rcShake { 0%,100%{transform:none;} 22%{transform:translateX(-5px);} 55%{transform:translateX(5px);} 82%{transform:translateX(-2px);} }
   .rc-w.bad { background:#fdeaea; border-color:#e8918d; color:#c0403b; }
   .rc-w.fr { background:#e3fbec; border-color:#8ed9ab; color:#22794a; font-weight:800; }
@@ -232,15 +232,9 @@
      한국어를 잠근다"가 적용되지 않는다. 뜻이 없으면 모양만 맞추는 일이 되고, 복잡해
      보이는 것은 숨겨서가 아니라 크기로 누른다(본문의 4분의 3, 흐린 회색). */
   .rc-kr { font-size:13px; color:#9aa8bc; font-weight:600; margin-top:6px; }
-  .rc-kr.open { animation:growIn .32s ease both; }
-  /* ver.2 예문 — 말풍선 톤(`.sit-bubble`)을 쓰되 화자가 없으므로 아바타는 두지 않는다.
-     패턴 구간은 앱의 표현 색(초록)에 점선 밑줄 — 무엇을 베낄지가 한눈에 보여야 한다. */
-  .rc-eg { background:#f2f5fa; border-radius:4px 14px 14px 14px; padding:11px 14px; margin-top:10px; }
-  .rc-eg-en { font-size:17px; font-weight:700; color:#2f3e52; line-height:1.5; }
-  .rc-eg-en em { font-style:normal; font-weight:800; color:#22794a; border-bottom:2px dotted #8ed9ab; padding-bottom:1px; }
-  .rc-eg-kr { font-size:13px; color:#9aa8bc; font-weight:600; margin-top:4px; }
-  .rc-eg-kr.open { animation:growIn .32s ease both; }
-  .rc-gap { height:1px; background:#eaeff6; margin:18px 0 2px; }
+  /* ver.2 대상 줄의 빈칸 — 앱의 배열 빈칸 표기(`.fill-blank`)를 그대로 쓴다. 칩 줄 안에
+     서므로 inline-block 으로만 돌려 놓는다. */
+  .rc-line .fill-blank { display:inline-block; vertical-align:middle; }
   .rc-more { display:flex; align-items:flex-start; gap:6px; font-size:13.5px; font-weight:700; color:#7c8b9e; margin-top:14px; line-height:1.5; }
   .rc-more b { color:#3a6bb0; font-weight:800; }
 
@@ -1206,7 +1200,6 @@ function renderRecognizeFill(){
   const rows=rcgRows(item);
   const target=rows[0], egs=rows.slice(1);
   const tok=tokenize(target.en), flag=frameFlags(tok, target.segs), punct=trailPunct(target.en);
-  const runs=slotRuns(tok, flag);
   const frameIdx=tok.map((w,i)=>i).filter(i=>flag[i]);
   const want=frameIdx.map(i=>tok[i]);
   // 뱅크는 **정확히 패턴 낱말만** 준다(레퍼런스와 같다) — 함정은 이 단계의 과제가 아니다.
@@ -1219,28 +1212,29 @@ function renderRecognizeFill(){
   (item.siblings||[]).forEach(a=>pool.add(a.en));
   const more=Math.max(0, pool.size - rows.length);
 
-  // 예문의 패턴 구간을 `<em>`으로 감싼다 — 조각 순서대로 소진해 표시(`frameFlags`와 같은 규약)
-  const egHtml=r=>{
-    const t=tokenize(r.en), f=frameFlags(t, r.segs), parts=[];
-    let run=[];
-    const flush=()=>{ if(run.length){ parts.push(`<em>${escapeHtml(run.join(' '))}</em>`); run=[]; } };
-    t.forEach((w,i)=>{ if(f[i]){ run.push(w); return; } flush(); parts.push(escapeHtml(w)); });
-    flush();
-    return parts.join(' ') + escapeHtml(trailPunct(r.en));
-  };
+  // **세 문장이 한 목록에 같은 모양으로 선다**(ver.1과 같은 `.rc-row`·`.rc-w`). 예문만
+  // 말풍선이고 대상만 배열 줄이면 같은 표현의 문장 셋이 아니라 **다른 화면 둘**로 읽히고,
+  // 두 버전을 비교할 때 달라진 것이 과제인지 껍데기인지가 흐려진다. 대상 줄의 차이는
+  // **빈칸이 있다는 것 하나**이고, 그게 곧 이 단계의 과제다.
+  const egLine=r=>{ const t=tokenize(r.en), f=frameFlags(t, r.segs), p=trailPunct(r.en);
+    return t.map((w,i)=>`<span class="rc-w${f[i]?' fr':''}">${escapeHtml(w)}</span>`).join(' ')
+      + (p?`<span class="rc-p">${escapeHtml(p)}</span>`:''); };
 
   stage.innerHTML=`
     <div class="stage-scroll">
       <div class="chat-card rcg" id="card">
         ${chatTag(item)}<div class="chat-badge new">NEW</div>
-        <div class="sp-q" id="rcQ"><b>같은 패턴</b>으로 문장을 완성해 보세요</div>
-        ${egs.map(r=>`<div class="rc-eg">
-            <div class="rc-eg-en">${egHtml(r)}</div>
-            <div class="rc-eg-kr hidden">${escapeHtml(r.kr)}</div>
+        <div class="sp-q" id="rcQ"><b>같은 패턴</b>으로 마지막 문장을 완성해 보세요</div>
+        <div class="rc-list">
+          ${egs.map(r=>`<div class="rc-row">
+            <div class="rc-line">${egLine(r)}</div>
+            <div class="rc-kr">${escapeHtml(r.kr)}</div>
           </div>`).join('')}
-        <div class="rc-gap"></div>
-        <div class="fill" id="fill"></div>
-        <div class="rc-kr hidden" id="tgtKr">${escapeHtml(target.kr)}</div>
+          <div class="rc-row">
+            <div class="rc-line" id="fill"></div>
+            <div class="rc-kr">${escapeHtml(target.kr)}</div>
+          </div>
+        </div>
         <div class="wrong-box hidden" id="wrongBox"></div>
         <div class="reveal-note hidden" id="revealNote"></div>
       </div>
@@ -1258,17 +1252,19 @@ function renderRecognizeFill(){
     </div>`;
 
   const fillEl=el('fill'), bankEl=el('bank'), wrongBox=el('wrongBox');
+  // 놓은 낱말은 예문의 패턴과 **같은 초록 칩**이 된다(`[2]`의 `.frame-w`와 같은 규약) —
+  // 내가 놓고 있는 것이 위 두 줄에서 초록이던 그것이라는 게 놓는 즉시 보여야 한다.
   function renderFill(){
     const parts=[]; let fi=0;
-    runs.forEach(r=>{
-      if(!r.fr){ parts.push(`<span class="fill-given">${escapeHtml(r.ws.join(' '))}</span>`); return; }
-      const i=fi++;
-      parts.push(i<ans.length
-        ? `<span class="fill-word frame-w" data-i="${i}">${escapeHtml(ans[i].text)}</span>`
+    tok.forEach((w,i)=>{
+      if(!flag[i]){ parts.push(`<span class="rc-w">${escapeHtml(w)}</span>`); return; }
+      const k=fi++;
+      parts.push(k<ans.length
+        ? `<button class="rc-w fr" data-i="${k}">${escapeHtml(ans[k].text)}</button>`
         : `<span class="fill-blank"></span>`);
     });
-    fillEl.innerHTML=withPunct(parts, punct);
-    if(!done) fillEl.querySelectorAll('.fill-word[data-i]').forEach(w=> w.onclick=()=>{
+    fillEl.innerHTML=parts.join(' ') + (punct?`<span class="rc-p">${escapeHtml(punct)}</span>`:'');
+    if(!done) fillEl.querySelectorAll('.rc-w.fr[data-i]').forEach(w=> w.onclick=()=>{
       const i=+w.dataset.i; ans[i].placed=false; ans.splice(i,1);
       wrongBox.classList.add('hidden'); renderAll();
     });
@@ -1295,7 +1291,7 @@ function renderRecognizeFill(){
     if(nz(ans.map(a=>a.text))===nz(want)) return finish();
     fillEl.classList.remove('shake'); void fillEl.offsetWidth; fillEl.classList.add('shake');
     wrongBox.classList.remove('hidden');
-    wrongBox.innerHTML=`예문과 <b>같은 순서</b>로 놓아 보세요.`;
+    wrongBox.innerHTML=`위 문장들과 <b>같은 순서</b>로 놓아 보세요.`;
   };
 
   const ladder=[ {label:'첫 낱말 보기', run:()=>{ if(ans.length) return;
@@ -1323,13 +1319,10 @@ function renderRecognizeFill(){
     el('card').classList.add('correct');
     if(!el('card').querySelector('.check-mark')){ const c=document.createElement('div'); c.className='check-mark'; c.textContent='✓'; el('card').appendChild(c); }
     renderAll();
-    // 내가 놓은 패턴이 먼저 팝하고, 그 다음 예문과 대상의 한국어가 차례로 열린다 —
-    // **내가 만든 줄이 예문과 같은 것**이라는 순서로 읽혀야 한다
-    fillEl.querySelectorAll('.fill-word.frame-w').forEach((w,k)=> setTimeout(()=>{
-      if(w.isConnected) w.classList.add('ok-pop'); }, k*70));
-    const krs=Array.from(document.querySelectorAll('.rc-eg-kr')).concat([el('tgtKr')]);
-    krs.forEach((k,i)=> setTimeout(()=>{ if(!k.isConnected) return;
-      k.classList.remove('hidden'); k.classList.add('open'); }, 220 + i*160));
+    // 내가 놓은 낱말이 한 칸씩 팝한다 — 위 두 줄의 초록과 같은 것이 마지막 줄에도 섰다는
+    // 확인이다(ver.1의 `.pop`과 같은 연출·같은 간격).
+    fillEl.querySelectorAll('.rc-w.fr').forEach((w,k)=> setTimeout(()=>{
+      if(w.isConnected) w.classList.add('pop'); }, k*70));
     const p=item.pattern||{}, form=(p.form||'').trim(), pmean=(p.meaning||'').trim();
     el('payoffBox').innerHTML=`<div class="payoff">
         <div class="chat-tag rv">학습 정보</div>
