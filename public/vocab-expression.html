@@ -209,26 +209,29 @@
   /* 통과하면 지시문이 빠져 띠가 덮을 것이 없어진다 — 띠를 지우고 단색으로 둔다 */
   .chat-card.rcg.correct { background:#fbfffc; }
   .rc-list { margin-top:12px; }
-  .rc-row + .rc-row { margin-top:11px; padding-top:11px; border-top:1.5px solid #eef3f9; }
-  .rc-line { font-size:18px; line-height:1.7; color:#2f3e52; font-weight:600; }
-  .rc-w { display:inline-block; border:none; background:none; margin:0; padding:1px 3px; font:inherit; color:inherit;
-          border-radius:7px; border-bottom:2.5px solid transparent; }
+  .rc-row + .rc-row { margin-top:12px; padding-top:12px; border-top:1.5px solid #eef3f9; }
+  .rc-line { font-size:17.5px; line-height:2.05; color:#2f3e52; font-weight:700; }
+  /* **세 줄의 낱말이 모두 같은 칩이다.** 한 줄만 탭할 수 있게 하면 생김새가 같은데 한 줄만
+     반응해 어디를 짚어야 하는지가 안 보이고, 그 줄만 다르게 꾸미면 왜 다른지가 또 설명되지
+     않는다. 전부 같은 칩이면 `아무 데나 짚어도 된다`가 곧 화면의 말이다. */
+  .rc-w { display:inline-block; margin:0; padding:2px 7px; font:inherit; color:inherit;
+          border:1.5px solid #e7edf5; background:#f6f9fd; border-radius:9px;
+          transition:background .15s ease, color .15s ease, border-color .15s ease; }
   button.rc-w { cursor:pointer; }
-  /* 어느 줄에서 짚는지가 보여야 한다 — 탭할 수 있는 낱말만 밑줄을 흐리게 깐다 */
-  .rc-w.pick { border-bottom-color:#d3e1f4; }
-  .rc-w.on { background:#e7edfb; border-bottom-color:#7f9fd8; color:#3a6bb0; font-weight:800; }
-  /* 짚으면 **다른 줄의 같은 낱말이 같이 켜진다** — `저기도 있네`가 이 단계의 과제 자체다.
-     판정은 하지 않는다(유령 낱말도 켜진다) — 몇 줄이 켜졌는지 세는 것은 유저의 일이다. */
-  .rc-w.echo { background:#eef3fc; border-bottom-color:#c3d5ee; color:#5f80ad; font-weight:800; }
-  .rc-w { transition:background .15s ease, color .15s ease, border-color .15s ease; }
+  .rc-w.plain { border-color:transparent; background:none; }
+  /* 짚으면 **세 줄의 같은 낱말이 한꺼번에 켜진다** — `저기도 있네`가 짚기와 같은 동작이다 */
+  .rc-w.on { background:#e2ebfb; border-color:#7f9fd8; color:#3a6bb0; font-weight:800; }
   .rc-w.pop { animation:rcPop .36s ease; }
   @keyframes rcPop { 0%{transform:none;} 42%{transform:translateY(-5px) scale(1.09);} 100%{transform:none;} }
-  .rc-row.shake, .fill.shake { animation:rcShake .34s ease; }
+  .rc-list.shake, .fill.shake { animation:rcShake .34s ease; }
   @keyframes rcShake { 0%,100%{transform:none;} 22%{transform:translateX(-5px);} 55%{transform:translateX(5px);} 82%{transform:translateX(-2px);} }
-  .rc-w.bad { background:#fdeaea; border-bottom-color:#e8918d; color:#c0403b; }
-  .rc-w.fr { background:#e3fbec; border-bottom-color:#8ed9ab; color:#22794a; font-weight:800; }
-  .rc-p { font-size:18px; font-weight:600; margin-left:-3px; }
-  .rc-kr { font-size:13.5px; color:#9aa8bc; font-weight:600; margin-top:7px; }
+  .rc-w.bad { background:#fdeaea; border-color:#e8918d; color:#c0403b; }
+  .rc-w.fr { background:#e3fbec; border-color:#8ed9ab; color:#22794a; font-weight:800; }
+  .rc-p { font-size:17.5px; font-weight:700; margin-left:-2px; }
+  /* **뜻은 처음부터 보인다** — 이 단계는 인출이 아니라 인식이라 `[5]`의 "답하기 전에는
+     한국어를 잠근다"가 적용되지 않는다. 뜻이 없으면 모양만 맞추는 일이 되고, 복잡해
+     보이는 것은 숨겨서가 아니라 크기로 누른다(본문의 4분의 3, 흐린 회색). */
+  .rc-kr { font-size:13px; color:#9aa8bc; font-weight:600; margin-top:6px; }
   .rc-kr.open { animation:growIn .32s ease both; }
   /* ver.2 예문 — 말풍선 톤(`.sit-bubble`)을 쓰되 화자가 없으므로 아바타는 두지 않는다.
      패턴 구간은 앱의 표현 색(초록)에 점선 밑줄 — 무엇을 베낄지가 한눈에 보여야 한다. */
@@ -1055,9 +1058,15 @@ function renderRecognize(){
     return {kr:r.kr, tok, punct:trailPunct(r.en), flag:frameFlags(tok, r.segs)};
   });
   const NW=rows.length>=3?'세':'두';
-  // **짚는 것은 학습 문장 한 줄에서만** 한다. 세 줄 다 짚게 하면 같은 조작이 세 번이고,
-  // 그 줄이 곧 `[2]`가 만들 문장이라 두 단계가 같은 문장으로 이어진다.
-  const head=rows[0], want=head.tok.map((w,i)=>i).filter(i=>head.flag[i]);
+  const bare=w=>String(w).toLowerCase().replace(/[^a-z0-9']/g,'');
+  // **세 줄 어디서나 짚는다.** 한 줄만 탭할 수 있게 하면 나머지 두 줄은 장식이 되는데,
+  // 생김새가 같아 어디를 짚어야 하는지가 화면에 안 보이고, 그렇다고 그 줄만 다르게
+  // 꾸미면 왜 다른지가 또 설명이 안 된다. 그래서 **정답을 낱말 집합으로** 둔다 —
+  // 어느 줄에서 짚든 같은 낱말이면 같은 것을 짚은 것이고, 짚는 순간 세 줄의 그 낱말이
+  // 한꺼번에 켜진다. `저기도 있네`가 짚기와 같은 동작이 된다.
+  const head=rows[0], want=[];
+  head.tok.forEach((w,i)=>{ if(!head.flag[i]) return; const b=bare(w); if(b && want.indexOf(b)<0) want.push(b); });
+  const wantSet=new Set(want);
   // 앱이 아는 용례 — 화면에서 방금 증명된 수만 말한다(`이 표현으로 N가지를 말할 수 있다`가
   // 아니다. 실제 용례는 더 많을 수 있어 수치로 닫으면 거짓이 된다).
   const pool=new Set([item.sentence.en]);
@@ -1067,20 +1076,20 @@ function renderRecognize(){
   const pick=new Set();
   let done=false, hintLevel=0;
 
-  const lineHtml=(r, tap)=> r.tok.map((w,i)=> tap
-      ? `<button class="rc-w pick" data-i="${i}">${escapeHtml(w)}</button>`
-      : `<span class="rc-w" data-i="${i}">${escapeHtml(w)}</span>`).join(' ')
+  const lineHtml=r=> r.tok.map(w=>{ const b=bare(w);
+      return b ? `<button class="rc-w" data-b="${escapeHtml(b)}">${escapeHtml(w)}</button>`
+               : `<span class="rc-w plain">${escapeHtml(w)}</span>`; }).join(' ')
     + (r.punct?`<span class="rc-p">${escapeHtml(r.punct)}</span>`:'');
 
   stage.innerHTML=`
     <div class="stage-scroll">
       <div class="chat-card rcg" id="card">
         ${chatTag(item)}<div class="chat-badge new">NEW</div>
-        <div class="sp-q" id="rcQ">${NW} 문장에 <b>똑같이 있는 말</b>을 첫 문장에서 짚어 보세요</div>
-        <div class="rc-list" id="rcList">${rows.map((r,ri)=>`
+        <div class="sp-q" id="rcQ">${NW} 문장에 <b>반복되는 말</b>을 짚어 보세요</div>
+        <div class="rc-list" id="rcList">${rows.map(r=>`
           <div class="rc-row">
-            <div class="rc-line">${lineHtml(r, ri===0)}</div>
-            <div class="rc-kr hidden">${escapeHtml(r.kr)}</div>
+            <div class="rc-line">${lineHtml(r)}</div>
+            <div class="rc-kr">${escapeHtml(r.kr)}</div>
           </div>`).join('')}</div>
         <div class="wrong-box hidden" id="wrongBox"></div>
         <div class="reveal-note hidden" id="revealNote"></div>
@@ -1097,39 +1106,34 @@ function renderRecognize(){
       </div>
     </div>`;
 
-  const wrongBox=el('wrongBox');
-  const rowEls=Array.from(el('rcList').querySelectorAll('.rc-row'));
-  const headWs=Array.from(rowEls[0].querySelectorAll('.rc-w'));
-  const bare=w=>String(w).toLowerCase().replace(/[^a-z0-9']/g,'');
-  const rowWs=rowEls.map(r=>Array.from(r.querySelectorAll('.rc-w')));
+  const wrongBox=el('wrongBox'), listEl=el('rcList');
+  const rowEls=Array.from(listEl.querySelectorAll('.rc-row'));
+  const wordEls=Array.from(listEl.querySelectorAll('button.rc-w'));
   function sync(){
-    headWs.forEach((b,i)=> b.classList.toggle('on', pick.has(i)));
-    // 짚은 낱말이 다른 줄에도 있으면 거기도 켠다 — 세 줄이 같이 켜지는 것이 곧 발견이다
-    const want=new Set([...pick].map(i=>bare(head.tok[i])).filter(Boolean));
-    rowWs.forEach((ws,ri)=>{ if(ri===0) return;
-      ws.forEach((w,i)=> w.classList.toggle('echo', want.has(bare(rows[ri].tok[i])))); });
+    wordEls.forEach(b=> b.classList.toggle('on', pick.has(b.dataset.b)));
     el('okBtn').disabled = done || !pick.size;
   }
-  headWs.forEach((b,i)=> b.onclick=()=>{
+  wordEls.forEach(b=> b.onclick=()=>{
     if(done) return;
-    if(pick.has(i)) pick.delete(i); else pick.add(i);
-    headWs.forEach(x=>x.classList.remove('bad'));
+    const w=b.dataset.b;
+    if(pick.has(w)) pick.delete(w); else pick.add(w);
+    wordEls.forEach(x=>x.classList.remove('bad'));
     wrongBox.classList.add('hidden');
     sync();
   });
 
   el('okBtn').onclick=()=>{
     if(done) return;
-    const extra=[...pick].sort((a,b)=>a-b).filter(i=>!head.flag[i]);
+    const extra=[...pick].filter(w=>!wantSet.has(w));
     // 프레임 밖을 짚었으면 **왜 아닌지**를 말한다 — 슬롯은 문장마다 바뀌는 자리다
     if(extra.length){
-      extra.forEach(i=>headWs[i].classList.add('bad'));
-      rowEls[0].classList.remove('shake'); void rowEls[0].offsetWidth; rowEls[0].classList.add('shake');
+      wordEls.forEach(b=>{ if(extra.indexOf(b.dataset.b)>=0) b.classList.add('bad'); });
+      listEl.classList.remove('shake'); void listEl.offsetWidth; listEl.classList.add('shake');
       wrongBox.classList.remove('hidden');
-      wrongBox.innerHTML=`<b>${escapeHtml(extra.map(i=>head.tok[i]).join(', '))}</b> 는 문장마다 달라요. ${NW} 문장에 <b>똑같이</b> 있는 것만 짚어 보세요.`;
+      wrongBox.innerHTML=`<b>${escapeHtml(extra.join(', '))}</b> 는 문장마다 달라요. ${NW} 문장에 <b>다 있는</b> 말만 짚어 보세요.`;
       return;
     }
-    const missing=want.filter(i=>!pick.has(i));
+    const missing=want.filter(w=>!pick.has(w));
     if(missing.length){
       wrongBox.classList.remove('hidden');
       wrongBox.innerHTML=`같은 말이 <b>${missing.length}낱말</b> 더 있어요.`;
@@ -1139,9 +1143,9 @@ function renderRecognize(){
   };
 
   const ladder=[ {label:'첫 낱말 보기', run:()=>{ pick.add(want[0]); sync(); },
-                  note:()=>`첫 낱말<b>${escapeHtml(head.tok[want[0]])}</b>`},
+                  note:()=>`첫 낱말<b>${escapeHtml(want[0])}</b>`},
                  // 마지막 칸은 다 짚어 준다 — 탈출구가 없으면 진행이 끊긴다
-                 {label:'정답 보기', run:()=>{ pick.clear(); want.forEach(i=>pick.add(i)); sync(); }} ];
+                 {label:'정답 보기', run:()=>{ pick.clear(); want.forEach(w=>pick.add(w)); sync(); }} ];
   function advanceHint(){
     const d=ladder[hintLevel]; if(!d) return;
     if(d.run) d.run();
@@ -1160,19 +1164,17 @@ function renderRecognize(){
     el('rcQ').classList.add('hidden');     // 지시문은 과제가 끝나면 자리를 뺀다
     el('card').classList.add('correct');
     if(!el('card').querySelector('.check-mark')){ const c=document.createElement('div'); c.className='check-mark'; c.textContent='✓'; el('card').appendChild(c); }
-    // **이 순간이 인식이다** — 내가 짚은 조각이 나머지 문장에서도 같이 켜지고, 그때서야
-    // 한국어가 열려 그 조각이 무슨 뜻인지가 붙는다(푸는 동안 한국어를 주면 눈이 거기로 간다).
+    // **이 순간이 인식이다** — 짚는 동안 파랗던 낱말이 세 줄에서 한 줄씩 초록으로 굳는다.
     // **위에서부터 한 줄씩** 켜야 `내가 짚은 것이 저기도, 저기도 있다`로 읽힌다 —
     // 세 줄이 동시에 초록이 되면 그냥 정답 표시가 되고 발견의 순서가 사라진다.
+    // 짚는 자리(파랑)는 낱말 집합이라 슬롯에 같은 낱말이 있으면 거기도 켜지지만,
+    // **굳는 자리는 조각 기준(`flag`)이라** 프레임만 초록이 된다.
     rowEls.forEach((row,ri)=>{
       const ws=Array.from(row.querySelectorAll('.rc-w'));
-      ws.forEach(w=>w.classList.remove('on','echo','pick','bad'));
+      ws.forEach(w=>{ w.classList.remove('on','bad'); w.disabled=true; });
       const frIdx=ws.map((w,i)=>i).filter(i=>rows[ri].flag[i]);
       frIdx.forEach((i,k)=> setTimeout(()=>{ if(!ws[i].isConnected) return;
         ws[i].classList.add('fr','pop'); }, ri*200 + k*70));
-      const kr=row.querySelector('.rc-kr');
-      setTimeout(()=>{ if(!kr.isConnected) return;
-        kr.classList.remove('hidden'); kr.classList.add('open'); }, ri*200 + 230);
     });
     const p=item.pattern||{}, form=(p.form||'').trim(), pmean=(p.meaning||'').trim();
     el('payoffBox').innerHTML=`<div class="payoff">
