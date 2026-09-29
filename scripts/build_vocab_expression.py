@@ -73,68 +73,6 @@ def clean_meaning(m):
     return re.sub(r"^[^\w가-힣<(]+", "", (pick or (lines[0] if lines else "")).strip()).strip()
 
 
-def short_meaning(m, limit=14):
-    """빈칸 힌트용 짧은 뜻: <주석>·(부연) 제거 후 앞쪽 뜻만."""
-    t = re.sub(r"<[^>]*>", " ", m or "")
-    t = re.sub(r"\([^)]*\)", " ", t)
-    t = re.sub(r"\s+", " ", t).strip()
-    out = ""
-    for p in [x.strip() for x in re.split(r"[,;/]", t) if x.strip()]:
-        cand = f"{out}, {p}" if out else p
-        if len(cand) > limit:
-            break
-        out = cand
-    return out or t[:limit]
-
-
-# 용언 어미 — 뜻(`공부하다`)과 문장(`공부 안 했어`)을 잇기 위해 어간만 남긴다
-KR_SUFFIX = ("하다", "되다", "이다", "시키다", "스럽다", "롭다", "다", "은", "는", "한", "인", "적인", "적")
-
-
-def kr_meaning_spans(meaning):
-    """뜻에서 한국어 문장과 맞춰볼 후보들(긴 것부터)."""
-    t = re.sub(r"<[^>]*>", " ", meaning or "")
-    t = re.sub(r"\([^)]*\)", " ", t)
-    out = set()
-    for part in re.split(r"[,;/]", t):
-        part = part.strip()
-        if not part:
-            continue
-        out.add(part)
-        for suf in KR_SUFFIX:
-            if part.endswith(suf) and len(part) > len(suf):
-                out.add(part[: -len(suf)])
-    return sorted({x for x in out if x}, key=len, reverse=True)
-
-
-def mark_meaning_kr(kr, meaning, authored=""):
-    """한국어 문장에서 어휘 뜻에 해당하는 구간을 [..]로 감싼다. 못 찾으면 None.
-
-    앱의 어휘 학습은 번역문에서 정답 어휘의 뜻만 초록으로 보여준다. 표현 문장에는
-    그 마크업이 없으므로 뜻 조각(어간 포함)을 문장에서 직접 찾는다.
-
-    `authored`는 어휘 CSV 예문 번역에 **저작된** `[뜻]`이다. 사전 뜻보다 문맥에 맞는
-    구어체라 먼저 시도한다(`should`의 사전 뜻 `해야 한다`는 `일어나야 해.`에 없지만
-    저작된 `야 해`는 있다). 그래도 못 찾는 경우가 남으므로 그때는 별도 힌트 줄로 대체한다.
-    """
-    cands = []
-    for a in sorted(re.findall(r"\[([^\]]+)\]", authored or ""), key=len, reverse=True):
-        cands += kr_meaning_spans(a)
-    cands += kr_meaning_spans(meaning)
-    for cand in cands:
-        if len(cand) >= 2:
-            i = kr.find(cand)
-            if i >= 0:
-                return kr[:i] + "[" + cand + "]" + kr[i + len(cand):]
-        else:
-            # 한 글자 뜻은 낱말 첫머리에서만 인정 (우연 일치 방지)
-            mm = re.search(r"(?:^|\s)(" + re.escape(cand) + r")", kr)
-            if mm:
-                i = mm.start(1)
-                return kr[:i] + "[" + cand + "]" + kr[i + len(cand):]
-    return None
-
-
 def infl_match(tok, base):
     """tok이 base와 같거나 규칙 굴절형인지 (parents←parent, teaches←teach)."""
     t, b = tok.lower(), base.lower()
@@ -150,34 +88,6 @@ def infl_match(tok, base):
             return True
     stem = re.sub(r"[ey]$", "", b)                  # dance→dancing, party→parties
     return len(stem) >= 3 and stem != b and t.startswith(stem) and bool(INFL.match(t[len(stem):]))
-
-
-def blank_trigger(sent, trigger):
-    """문장에서 트리거 어휘 한 곳을 [..]로 감싼다. 못 찾으면 None.
-
-    여러 단어 트리거(`ice cream`)는 구 전체를 찾는다 — 토큰 하나씩 비교하면
-    문장에 그대로 있어도 매칭되지 않는다. 단일 단어는 정확일치 우선, 없으면 규칙 굴절형.
-    """
-    ws = str(trigger).split()
-    if len(ws) > 1:
-        # 마지막 단어의 규칙 복수/3인칭만 허용 (video game → video games)
-        pat = r"\b" + r"\s+".join(re.escape(w) for w in ws[:-1]) + r"\s+" + re.escape(ws[-1]) + r"(?:s|es)?\b"
-        mm = re.search(pat, sent, re.I)
-        if mm:
-            return sent[: mm.start()] + "[" + mm.group(0) + "]" + sent[mm.end() :], mm.group(0)
-        return None
-
-    best = None
-    # 앞따옴표를 토큰에 포함시키지 않는다 ('inappropriate' 같은 인용 표기)
-    for m in re.finditer(r"[A-Za-z]+(?:'[A-Za-z]+)*", sent):
-        if m.group(0).lower() == trigger.lower():
-            best = m
-            break
-        if best is None and infl_match(m.group(0), trigger):
-            best = m
-    if not best:
-        return None
-    return sent[: best.start()] + "[" + best.group(0) + "]" + sent[best.end() :], best.group(0)
 
 
 # 흩어진 기능어 조각들은 실제 패턴이 아니다 — `Can/Could you ~?`에서 `you` … `me`가
@@ -484,7 +394,7 @@ def main():
     situations = load_situations()
     questions = load_questions()
     replies = load_replies()
-    items, skipped = [], {"메타없음": 0, "조인실패": 0, "버전A불가": 0, "버전B불가": 0,
+    items, skipped = [], {"메타없음": 0, "조인실패": 0, "어휘예문불가": 0,
                           "프레임없음": 0, "슬롯없음": 0}
     dropped_variants = 0
 
@@ -503,7 +413,7 @@ def main():
 
         va = make_vocab_a(v, m["trigger"])
         if va is None:
-            skipped["버전A불가"] += 1
+            skipped["어휘예문불가"] += 1
             continue
 
         s1 = next((x for x in g["sents"] if x["role"] == "S1"), g["sents"][0])
@@ -515,13 +425,6 @@ def main():
         if not any(x["t"] == "slot" for x in s1["segs"]):
             skipped["슬롯없음"] += 1
             continue
-
-        blanked = blank_trigger(s1["en"], m["trigger"])
-        if blanked is None:
-            skipped["버전B불가"] += 1
-            continue
-        b_en, b_ans = blanked
-        b_kr = mark_meaning_kr(s1["kr"], v["meaning"], v["lsm"])
 
         # 응용 문장은 **S1과 프레임이 같은 것만** 쓴다. 같은 유닛에는 주어가 바뀐 변형도
         # 들어 있는데(`I didn't` → `She didn't`), 앱의 프레임 채점·초록 표기가 리터럴
@@ -539,12 +442,8 @@ def main():
             "cefr": gmeta.get("cefr", ""),
             "level": gmeta.get("level", 0),
             "rank": int(m["rank"]) if m["rank"].isdigit() else 10 ** 9,
-            # 버전 A — 어휘 문장과 표현 문장이 서로 다름
+            # 어휘는 어휘 CSV 예문의 빈칸으로 배운다(표현 문장과 다른 문장)
             "vocabA": va,
-            # 버전 B — 표현 문장 자체로 어휘를 배움(트리거 자리를 빈칸으로)
-            "vocabB": {"answer": b_ans, "enLines": [b_en],
-                       "koLines": [b_kr or s1["kr"]],
-                       "hint": "" if b_kr else short_meaning(v["meaning"])},
             # 한국어 표현 구간(`krMark`)은 저작 데이터다 — 뜻 문자열로 되짚지 않는다
             "sentence": {"en": s1["en"], "kr": s1["kr"], "trigger": m["trigger"],
                          "krMark": s1["krMark"]},
@@ -587,8 +486,7 @@ def main():
         "meta": {
             "type": "vocab-expression",
             "note": "한 문항 = 트리거 어휘 + 그 어휘가 트리거한 표현 문장. "
-                    "버전 A는 어휘 문장과 표현 문장이 다르고, 버전 B는 표현 문장으로 어휘를 배운다.",
-            "versions": {"a": "어휘 문장 ≠ 표현 문장", "b": "표현 문장으로 어휘 학습"},
+                    "어휘는 어휘 CSV 예문으로 배우고, 표현은 학습 문장(S1)으로 배운다.",
             "flow": "[1] 어휘 빈칸 → 인식 → [2] 표현 넣기 → [3] 문장 전체 → [4] 말해보기",
             "maxItems": MAX_ITEMS,
         },

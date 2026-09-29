@@ -1,153 +1,283 @@
 {
-  "_note": "[5] 상황 단계용 A 대사 — 소스 CSV에 상황 필드가 없어 손으로 적은 프로토타입용 임시 문안. 키는 학습 문장(sentence.en). hint_en 은 '지시문 있음' 버전에서만 쓰는 **간접** 안내로, 정답 문장의 번역이 아니라 무슨 행동을 하는지만 영어로 알려준다(프레임·슬롯 낱말 노출 금지).",
-  "You should get up.": {
-    "a_en": "I'm so sleepy... five more minutes.",
-    "a_kr": "너무 졸려... 5분만 더.",
-    "hint_en": "Push them to start the day."
-  },
-  "I'll talk to my parents.": {
-    "a_en": "Can you come on the trip with us?",
-    "a_kr": "우리랑 여행 같이 갈 수 있어?",
-    "hint_en": "Say it is not your decision alone."
-  },
-  "Put your clothes on.": {
-    "a_en": "Mom, I'm ready to go outside!",
-    "a_kr": "엄마, 나 나갈 준비 됐어!",
-    "hint_en": "Point out they are not dressed."
-  },
-  "Don't be late.": {
-    "a_en": "See you at the meeting tomorrow.",
-    "a_kr": "내일 회의에서 봐.",
-    "hint_en": "Remind them about the time."
-  },
-  "Let me fix your computer.": {
-    "a_en": "Ugh, my laptop froze again.",
-    "a_kr": "아, 노트북이 또 멈췄어.",
-    "hint_en": "Offer to take care of it."
-  },
-  "Why don't you invite a friend?": {
-    "a_en": "I don't want to go to the party alone.",
-    "a_kr": "파티에 혼자 가고 싶지 않아.",
-    "hint_en": "Suggest a way out."
-  },
-  "All of these boats are new.": {
-    "a_en": "Wow, the marina looks different.",
-    "a_kr": "와, 항구가 달라 보이네.",
-    "hint_en": "Explain what changed."
-  },
-  "Come over this evening!": {
-    "a_en": "I have nothing to do tonight.",
-    "a_kr": "오늘 밤에 할 일이 없네.",
-    "hint_en": "Ask them to your place."
-  },
-  "Let's go back to town.": {
-    "a_en": "It's getting dark out here.",
-    "a_kr": "여기 점점 어두워지는데.",
-    "hint_en": "Propose leaving."
-  },
-  "The paper is due at five o'clock.": {
-    "a_en": "When do we have to hand this in?",
-    "a_kr": "이거 언제까지 내야 해?",
-    "hint_en": "Give them the deadline."
-  },
-  "It feels like spring!": {
-    "a_en": "It's so warm outside today.",
-    "a_kr": "오늘 밖이 정말 따뜻하네.",
-    "hint_en": "React to the weather."
-  },
-  "Take off your sweater.": {
-    "a_en": "It's boiling in here.",
-    "a_kr": "여기 너무 더워.",
-    "hint_en": "Tell them what to do about it."
-  },
-  "How about a lemonade?": {
-    "a_en": "I'd like something cold to drink.",
-    "a_kr": "뭔가 차가운 걸 마시고 싶어요.",
-    "hint_en": "Suggest a drink."
-  },
-  "You worry too much.": {
-    "a_en": "What if nobody comes to my show?",
-    "a_kr": "내 공연에 아무도 안 오면 어떡하지?",
-    "hint_en": "Calm them down."
-  },
-  "Be sure to check your answers.": {
-    "a_en": "I finished the test early!",
-    "a_kr": "시험 일찍 다 풀었어요!",
-    "hint_en": "Give one last instruction."
-  },
-  "We missed most of the concert.": {
-    "a_en": "How was the show last night?",
-    "a_kr": "어젯밤 공연 어땠어?",
-    "hint_en": "Admit you were late."
-  },
-  "Which one do you prefer?": {
-    "a_en": "Both of these look good on me.",
-    "a_kr": "이 둘 다 나한테 잘 맞는 것 같아.",
-    "hint_en": "Ask them to choose."
-  },
-  "Would you do the next step?": {
-    "a_en": "Okay, I've finished my part.",
-    "a_kr": "네, 제 몫은 끝냈어요.",
-    "hint_en": "Politely ask for more work."
-  },
-  "Don't give up hope!": {
-    "a_en": "I don't think I can pass this time.",
-    "a_kr": "이번엔 못 붙을 것 같아.",
-    "hint_en": "Encourage them."
-  },
-  "Let's move on to the next topic.": {
-    "a_en": "I think we've covered enough here.",
-    "a_kr": "이 부분은 충분히 다룬 것 같아요.",
-    "hint_en": "Propose moving forward."
-  },
-  "Let's start with an interview.": {
-    "a_en": "Where should we begin?",
-    "a_kr": "어디서부터 시작할까요?",
-    "hint_en": "Propose a starting point."
-  },
-  "Hi! Welcome to China!": {
-    "a_en": "Hello, this is my first time here.",
-    "a_kr": "안녕하세요, 여기 처음 왔어요.",
-    "hint_en": "Greet a visitor."
-  },
-  "It's time for me to take my medicine.": {
-    "a_en": "Do you want another cup of coffee?",
-    "a_kr": "커피 한 잔 더 할래?",
-    "hint_en": "Explain why you cannot."
-  },
-  "We have a lot of data.": {
-    "a_en": "Do we have enough to start the report?",
-    "a_kr": "보고서 시작할 만큼 자료가 있어요?",
-    "hint_en": "Reassure them about the amount."
-  },
-  "What happened to that sign?": {
-    "a_en": "Careful, watch your step there.",
-    "a_kr": "조심해, 거기 발밑 봐.",
-    "hint_en": "Ask about something broken."
-  },
-  "Go to bed immediately!": {
-    "a_en": "Just one more episode, please!",
-    "a_kr": "딱 한 편만 더 볼게요!",
-    "hint_en": "Refuse and send them off."
-  },
-  "Have fun at the festival!": {
-    "a_en": "I'm heading out to the festival now.",
-    "a_kr": "나 지금 축제 가는 길이야.",
-    "hint_en": "Wish them a good time."
-  },
-  "It's all thanks to social media.": {
-    "a_en": "How did your shop get so popular?",
-    "a_kr": "가게가 어떻게 이렇게 유명해졌어요?",
-    "hint_en": "Credit something for it."
-  },
-  "Each of us saw one performance.": {
-    "a_en": "Did you two watch the same show?",
-    "a_kr": "둘이 같은 공연 봤어?",
-    "hint_en": "Explain you split up."
-  },
-  "I forgot to call my lawyer back!": {
-    "a_en": "You look like you remembered something.",
-    "a_kr": "뭔가 생각난 표정이네.",
-    "hint_en": "Say what you missed doing."
-  }
+ "_note": "[5] 상황 단계용 A 대사 — 소스 CSV에 상황 필드가 없어 손으로 적은 프로토타입용 임시 문안. 키는 학습 문장(sentence.en). hint_en 은 '지시문 있음' 버전에서만 쓰는 **간접** 안내로, 정답 문장의 번역이 아니라 무슨 행동을 하는지만 영어로 알려준다(프레임·슬롯 낱말 노출 금지).",
+ "You should get up.": {
+  "a_en": "I'm so sleepy... five more minutes.",
+  "a_kr": "너무 졸려... 5분만 더.",
+  "hint_en": "Push them to start the day."
+ },
+ "I'll talk to my parents.": {
+  "a_en": "Can you come on the trip with us?",
+  "a_kr": "우리랑 여행 같이 갈 수 있어?",
+  "hint_en": "Say it is not your decision alone."
+ },
+ "Put your clothes on.": {
+  "a_en": "Mom, I'm ready to go outside!",
+  "a_kr": "엄마, 나 나갈 준비 됐어!",
+  "hint_en": "Point out they are not dressed."
+ },
+ "Don't be late.": {
+  "a_en": "See you at the meeting tomorrow.",
+  "a_kr": "내일 회의에서 봐.",
+  "hint_en": "Remind them about the time."
+ },
+ "Let me fix your computer.": {
+  "a_en": "Ugh, my laptop froze again.",
+  "a_kr": "아, 노트북이 또 멈췄어.",
+  "hint_en": "Offer to take care of it."
+ },
+ "Why don't you invite a friend?": {
+  "a_en": "I don't want to go to the party alone.",
+  "a_kr": "파티에 혼자 가고 싶지 않아.",
+  "hint_en": "Suggest a way out."
+ },
+ "All of these boats are new.": {
+  "a_en": "Wow, the marina looks different.",
+  "a_kr": "와, 항구가 달라 보이네.",
+  "hint_en": "Explain what changed."
+ },
+ "Come over this evening!": {
+  "a_en": "I have nothing to do tonight.",
+  "a_kr": "오늘 밤에 할 일이 없네.",
+  "hint_en": "Ask them to your place."
+ },
+ "Let's go back to town.": {
+  "a_en": "It's getting dark out here.",
+  "a_kr": "여기 점점 어두워지는데.",
+  "hint_en": "Propose leaving."
+ },
+ "The paper is due at five o'clock.": {
+  "a_en": "When do we have to hand this in?",
+  "a_kr": "이거 언제까지 내야 해?",
+  "hint_en": "Give them the deadline."
+ },
+ "It feels like spring!": {
+  "a_en": "It's so warm outside today.",
+  "a_kr": "오늘 밖이 정말 따뜻하네.",
+  "hint_en": "React to the weather."
+ },
+ "Take off your sweater.": {
+  "a_en": "It's boiling in here.",
+  "a_kr": "여기 너무 더워.",
+  "hint_en": "Tell them what to do about it."
+ },
+ "How about a lemonade?": {
+  "a_en": "I'd like something cold to drink.",
+  "a_kr": "뭔가 차가운 걸 마시고 싶어요.",
+  "hint_en": "Suggest a drink."
+ },
+ "You worry too much.": {
+  "a_en": "What if nobody comes to my show?",
+  "a_kr": "내 공연에 아무도 안 오면 어떡하지?",
+  "hint_en": "Calm them down."
+ },
+ "Be sure to check your answers.": {
+  "a_en": "I finished the test early!",
+  "a_kr": "시험 일찍 다 풀었어요!",
+  "hint_en": "Give one last instruction."
+ },
+ "We missed most of the concert.": {
+  "a_en": "How was the show last night?",
+  "a_kr": "어젯밤 공연 어땠어?",
+  "hint_en": "Admit you were late."
+ },
+ "Which one do you prefer?": {
+  "a_en": "Both of these look good on me.",
+  "a_kr": "이 둘 다 나한테 잘 맞는 것 같아.",
+  "hint_en": "Ask them to choose."
+ },
+ "Would you do the next step?": {
+  "a_en": "Okay, I've finished my part.",
+  "a_kr": "네, 제 몫은 끝냈어요.",
+  "hint_en": "Politely ask for more work."
+ },
+ "Don't give up hope!": {
+  "a_en": "I don't think I can pass this time.",
+  "a_kr": "이번엔 못 붙을 것 같아.",
+  "hint_en": "Encourage them."
+ },
+ "Let's move on to the next topic.": {
+  "a_en": "I think we've covered enough here.",
+  "a_kr": "이 부분은 충분히 다룬 것 같아요.",
+  "hint_en": "Propose moving forward."
+ },
+ "Let's start with an interview.": {
+  "a_en": "Where should we begin?",
+  "a_kr": "어디서부터 시작할까요?",
+  "hint_en": "Propose a starting point."
+ },
+ "Hi! Welcome to China!": {
+  "a_en": "Hello, this is my first time here.",
+  "a_kr": "안녕하세요, 여기 처음 왔어요.",
+  "hint_en": "Greet a visitor."
+ },
+ "It's time for me to take my medicine.": {
+  "a_en": "Do you want another cup of coffee?",
+  "a_kr": "커피 한 잔 더 할래?",
+  "hint_en": "Explain why you cannot."
+ },
+ "We have a lot of data.": {
+  "a_en": "Do we have enough to start the report?",
+  "a_kr": "보고서 시작할 만큼 자료가 있어요?",
+  "hint_en": "Reassure them about the amount."
+ },
+ "What happened to that sign?": {
+  "a_en": "Careful, watch your step there.",
+  "a_kr": "조심해, 거기 발밑 봐.",
+  "hint_en": "Ask about something broken."
+ },
+ "Go to bed immediately!": {
+  "a_en": "Just one more episode, please!",
+  "a_kr": "딱 한 편만 더 볼게요!",
+  "hint_en": "Refuse and send them off."
+ },
+ "Have fun at the festival!": {
+  "a_en": "I'm heading out to the festival now.",
+  "a_kr": "나 지금 축제 가는 길이야.",
+  "hint_en": "Wish them a good time."
+ },
+ "It's all thanks to social media.": {
+  "a_en": "How did your shop get so popular?",
+  "a_kr": "가게가 어떻게 이렇게 유명해졌어요?",
+  "hint_en": "Credit something for it."
+ },
+ "Each of us saw one performance.": {
+  "a_en": "Did you two watch the same show?",
+  "a_kr": "둘이 같은 공연 봤어?",
+  "hint_en": "Explain you split up."
+ },
+ "I forgot to call my lawyer back!": {
+  "a_en": "You look like you remembered something.",
+  "a_kr": "뭔가 생각난 표정이네.",
+  "hint_en": "Say what you missed doing."
+ },
+ "Put it on.": {
+  "a_en": "Do I really need this helmet?",
+  "a_kr": "이 헬멧 진짜 써야 해?",
+  "hint_en": "Tell them to wear it."
+ },
+ "I didn't study.": {
+  "a_en": "How did the test go?",
+  "a_kr": "시험 어떻게 됐어?",
+  "hint_en": "Admit you were not ready."
+ },
+ "Was it bad?": {
+  "a_en": "I finally watched that movie last night.",
+  "a_kr": "어젯밤에 드디어 그 영화 봤어.",
+  "hint_en": "Ask about the quality."
+ },
+ "Are you in or out?": {
+  "a_en": "Everyone's joining game night tomorrow.",
+  "a_kr": "내일 게임 모임에 다들 온대.",
+  "hint_en": "Ask them to decide."
+ },
+ "Aren't you cold?": {
+  "a_en": "I'm heading out in just a T-shirt.",
+  "a_kr": "나 티셔츠만 입고 나갈래.",
+  "hint_en": "Ask about the temperature."
+ },
+ "Where's Mom?": {
+  "a_en": "Dinner's ready, but nobody's at the table.",
+  "a_kr": "저녁 다 됐는데 식탁에 아무도 없네.",
+  "hint_en": "Ask about one family member."
+ },
+ "How did you know?": {
+  "a_en": "You were at the dentist yesterday, right?",
+  "a_kr": "너 어제 치과 갔었지?",
+  "hint_en": "Ask about their source."
+ },
+ "What do you think?": {
+  "a_en": "I painted the whole wall blue.",
+  "a_kr": "벽 전체를 파랗게 칠했어.",
+  "hint_en": "Ask for their opinion."
+ },
+ "What time is it?": {
+  "a_en": "Hurry, we're going to be late!",
+  "a_kr": "서둘러, 우리 늦겠어!",
+  "hint_en": "Ask about the clock."
+ },
+ "Be nice.": {
+  "a_en": "My new coworker is so weird.",
+  "a_kr": "새로 온 동료 진짜 이상해.",
+  "hint_en": "Ask them to behave kindly."
+ },
+ "It's on the table.": {
+  "a_en": "Your phone is buzzing somewhere in this room.",
+  "a_kr": "네 폰이 이 방 어딘가에서 울리고 있어.",
+  "hint_en": "Point out the exact spot."
+ },
+ "These shoes hurt.": {
+  "a_en": "You're walking so slowly today.",
+  "a_kr": "오늘 왜 그렇게 천천히 걸어?",
+  "hint_en": "Blame what is on your feet."
+ },
+ "Let me try.": {
+  "a_en": "I can't get this jar open.",
+  "a_kr": "이 병 도저히 안 열려.",
+  "hint_en": "Offer to do it yourself."
+ },
+ "Go to the airport.": {
+  "a_en": "Good evening. Where to?",
+  "a_kr": "안녕하세요. 어디로 가시죠?",
+  "hint_en": "Name your destination."
+ },
+ "Let's go swimming!": {
+  "a_en": "It's so hot today. What should we do?",
+  "a_kr": "오늘 진짜 덥다. 뭐 하지?",
+  "hint_en": "Suggest water."
+ },
+ "What do you think of this photo?": {
+  "a_en": "Show me one picture from your trip.",
+  "a_kr": "여행 사진 하나 보여줘.",
+  "hint_en": "Ask for their opinion on it."
+ },
+ "It's very loud.": {
+  "a_en": "You look exhausted. Didn't you sleep?",
+  "a_kr": "엄청 피곤해 보여. 잠 못 잤어?",
+  "hint_en": "Complain about the noise."
+ },
+ "Why don't you invite her?": {
+  "a_en": "I wish Mina could see this movie too.",
+  "a_kr": "미나도 이 영화 보면 좋을 텐데.",
+  "hint_en": "Suggest asking her along."
+ },
+ "That sounds nice.": {
+  "a_en": "How about dinner by the river tonight?",
+  "a_kr": "오늘 저녁 강가에서 먹는 거 어때?",
+  "hint_en": "Agree warmly."
+ },
+ "It looks like a dolphin.": {
+  "a_en": "What do you see in that cloud?",
+  "a_kr": "저 구름 뭐처럼 보여?",
+  "hint_en": "Name the animal you see."
+ },
+ "I'm working.": {
+  "a_en": "Can you talk right now?",
+  "a_kr": "지금 통화 괜찮아?",
+  "hint_en": "Say what you are busy with."
+ },
+ "She's sleeping.": {
+  "a_en": "Can I say hi to your sister?",
+  "a_kr": "동생한테 인사해도 돼?",
+  "hint_en": "Explain why she can't come."
+ },
+ "She's never home.": {
+  "a_en": "I've knocked on her door three times this week.",
+  "a_kr": "이번 주에 세 번이나 문을 두드렸어.",
+  "hint_en": "Explain her habit."
+ },
+ "I never drink.": {
+  "a_en": "Should I pour you some wine?",
+  "a_kr": "와인 좀 따라 줄까?",
+  "hint_en": "Decline as a habit."
+ },
+ "Let's go back.": {
+  "a_en": "I think we took a wrong turn.",
+  "a_kr": "우리 길 잘못 든 것 같아.",
+  "hint_en": "Suggest returning."
+ },
+ "What's your boss like?": {
+  "a_en": "I started my new job last week.",
+  "a_kr": "나 지난주에 새 직장 시작했어.",
+  "hint_en": "Ask about a person's character."
+ }
 }
