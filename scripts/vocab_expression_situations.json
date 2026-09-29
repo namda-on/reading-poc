@@ -279,5 +279,35 @@
   "a_en": "I started my new job last week.",
   "a_kr": "나 지난주에 새 직장 시작했어.",
   "hint_en": "Ask about a person's character."
+ },
+ "Is it small or large?": {
+  "a_en": "I ordered a coffee for you.",
+  "a_kr": "너 마실 커피 시켰어.",
+  "hint_en": "Ask about the size."
+ },
+ "Who's that?": {
+  "a_en": "Someone's waving at us from across the street.",
+  "a_kr": "길 건너에서 누가 우리한테 손 흔드는데.",
+  "hint_en": "Ask about the person."
+ },
+ "Where did you go?": {
+  "a_en": "Sorry, I disappeared for a while.",
+  "a_kr": "미안, 잠깐 사라졌었지.",
+  "hint_en": "Ask about the place."
+ },
+ "I work late.": {
+  "a_en": "Want to grab dinner at six?",
+  "a_kr": "6시에 저녁 먹을래?",
+  "hint_en": "Explain your schedule."
+ },
+ "We're waiting.": {
+  "a_en": "Should I come now or later?",
+  "a_kr": "지금 갈까, 이따 갈까?",
+  "hint_en": "Say what you are doing."
+ },
+ "She's usually early.": {
+  "a_en": "Do you think Nari is here yet?",
+  "a_kr": "나리 벌써 왔을까?",
+  "hint_en": "Describe her habit."
  }
 }

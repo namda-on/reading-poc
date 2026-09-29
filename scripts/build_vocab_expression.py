@@ -387,6 +387,25 @@ def make_vocab_a(v, trigger):
             "koLines": [x.strip() for x in v["lsm"].split("\n")]}
 
 
+def spread_variants(items):
+    """같은 그룹에서 갈라진 유닛(`10013-1`~`-4`)이 연달아 나오지 않게 흩는다.
+
+    `What's ~?` · `Where's ~?` · `Who's ~?` · `How's ~?`는 정렬 키(트리거 빈도)가 같아
+    나란히 붙는데, 연속으로 풀면 같은 문항을 네 번 푸는 것처럼 읽힌다. 순서를 크게
+    흔들지 않고 **앞의 것과 그룹이 겹칠 때만** 뒤에서 다른 그룹을 하나 끌어온다.
+    """
+    base = lambda it: it["unit"].split("-")[0]
+    out, rest = [], list(items)
+    while rest:
+        i = 0
+        if out:
+            prev = base(out[-1])
+            # 그룹이 다른 것 중 가장 앞의 것을 쓴다 — 못 찾으면 원래 순서를 지킨다
+            i = next((k for k, it in enumerate(rest) if base(it) != prev), 0)
+        out.append(rest.pop(i))
+    return out
+
+
 def main():
     vocab, gse = load_vocab(), load_gse()
     meta = load_meta()
@@ -435,6 +454,8 @@ def main():
 
         gmeta = gse.get(seq, {})
         items.append({
+            # 유닛 id. `10013-1`처럼 갈라진 것은 접미사 앞이 원래 그룹이다
+            "unit": u,
             "trigger": m["trigger"],
             "word": v["spelling"],
             "meaning": v["meaning"],
@@ -466,6 +487,7 @@ def main():
         })
 
     items.sort(key=lambda x: (x["rank"], x["level"]))
+    items = spread_variants(items)
     if MAX_ITEMS:
         items = items[:MAX_ITEMS]
 

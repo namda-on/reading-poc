@@ -235,6 +235,9 @@
            transition:background .2s ease, color .2s ease; }
   /* ver.1 통과 연출용 — 자리는 그대로 두고 색만 늦게 들어온다(위에서부터 한 줄씩) */
   .rc-hl.q { background:transparent; color:#2f3e52; }
+  /* 문장마다 바뀌는 자리 — 통과하면 흐려져 프레임만 남는다 */
+  .rc-dim { color:#c6cfdb; font-weight:600; transition:color .4s ease; }
+  .rc-dim.q { color:#2f3e52; font-weight:700; }
   .rc-eg-kr { font-size:13px; color:#9aa8bc; font-weight:600; margin-top:7px; }
   .rc-more { display:flex; align-items:flex-start; gap:6px; font-size:13.5px; font-weight:700; color:#7c8b9e; margin-top:14px; line-height:1.5; }
   .rc-more b { color:#3a6bb0; font-weight:800; }
@@ -460,6 +463,16 @@
 const el = id => document.getElementById(id);
 const topbar = el('topbar'), home = el('home'), stage = el('stage');
 function shuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
+// **정답 순서 그대로 나오지 않게 섞는다.** 2낱말 프레임이 절반이라 균등하게 섞으면
+// 뱅크가 정답 순서로 나오는 문항이 43%였고, 그러면 배열이 `순서대로 누르기`가 된다.
+// 원래 순서와 같으면 다시 섞는다(같은 낱말이 반복돼 어떻게 섞어도 같은 경우는 그대로 둔다).
+function shuffleOrder(a, keyOf){
+  const key=x=>String(keyOf?keyOf(x):x);
+  const src=a.map(key).join('\u0001');
+  if(a.length<2 || a.every(x=>key(x)===key(a[0]))) return a.slice();
+  for(let k=0;k<12;k++){ const out=shuffle(a); if(out.map(key).join('\u0001')!==src) return out; }
+  return shuffle(a);
+}
 function escapeHtml(s){ return String(s).replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
 
 // localStorage — 버전(A/B)과 진행 위치. 위치는 두 버전이 공유해서
@@ -933,12 +946,20 @@ function rcgRows(item, n){
   const slots=r=>{ const t=tokenize(r.en), f=frameFlags(t, r.segs);
     return new Set(t.filter((w,i)=>!f[i]).map(bare).filter(Boolean)); };
   const ghosts=rows=>{ const ss=rows.map(slots); return [...ss[0]].filter(w=>ss.every(x=>x.has(w))).length; };
+  // **문장의 모양이 서로 달라야 한다.** 길이도 프레임 자리도 같은 문장을 고르면
+  // (`Please wait.` · `Please stop.` · `Please listen.`) 화면이 한 그림이 되어 과제가
+  // **틀린 그림 찾기**로 읽힌다 — 마지막 칸만 보게 되고, 같은 말을 찾은 것이 아니라
+  // 다른 곳을 찾은 것이 된다. 길이와 프레임 시작 위치가 겹치지 않는 문장을 앞세우면
+  // 같은 조각이 **다른 자리, 다른 길이의 문장**에 들어 있는 것이 보인다.
+  const shape=r=>{ const t=tokenize(r.en), f=frameFlags(t, r.segs);
+    return t.length + ':' + f.indexOf(true); };
   const out=[own];
   while(out.length<(n||3)){
+    const seen=new Set(out.map(shape));
     let best=null, bk=null;
     pool.forEach(a=>{ if(out.some(o=>o.en===a.en)) return;
-      const k=[ghosts(out.concat([a])), tokenize(a.en).length];
-      if(!bk || k[0]<bk[0] || (k[0]===bk[0] && k[1]<bk[1])){ best=a; bk=k; } });
+      const k=[ghosts(out.concat([a])), seen.has(shape(a))?1:0, tokenize(a.en).length];
+      if(!bk || k[0]<bk[0] || (k[0]===bk[0] && (k[1]<bk[1] || (k[1]===bk[1] && k[2]<bk[2])))){ best=a; bk=k; } });
     if(!best) break;
     out.push(best);
   }
@@ -947,13 +968,15 @@ function rcgRows(item, n){
 // 문장을 낱말로 쪼개지 않고 **패턴 조각만 초록 알약**으로 칠한다(`.rc-hl`) — 인식 두 버전이
 // 같이 쓴다. ver.2는 예문에, ver.1은 통과한 뒤 세 줄에 쓴다. 붙어 있는 조각은 낱말마다
 // 칠하지 않고 **한 덩어리로 이어 붙인다** — `go` `back` 두 알약보다 `go back` 하나가 표현이다.
-function frameHlHtml(row){
+function frameHlHtml(row, dim){
   const t=tokenize(row.en), f=frameFlags(t, row.segs), parts=[];
   let run=[];
   const flush=()=>{ if(run.length){ parts.push(`<span class="rc-hl">${escapeHtml(run.join(' '))}</span>`); run=[]; } };
-  t.forEach((w,i)=>{ if(f[i]){ run.push(w); return; } flush(); parts.push(escapeHtml(w)); });
+  t.forEach((w,i)=>{ if(f[i]){ run.push(w); return; } flush();
+    parts.push(dim ? `<span class="rc-dim">${escapeHtml(w)}</span>` : escapeHtml(w)); });
   flush();
-  return parts.join(' ') + escapeHtml(trailPunct(row.en));
+  const p=escapeHtml(trailPunct(row.en));
+  return parts.join(' ') + (dim && p ? `<span class="rc-dim">${p}</span>` : p);
 }
 function renderRecognize(){
   curStep=recognizeStep;
@@ -1087,12 +1110,19 @@ function renderRecognize(){
     // 화면에 남아야 할 것은 `이 문장들에 이게 들어 있다` 하나다.
     rowEls.forEach((row,ri)=>{
       const line=row.querySelector('.rc-line');
-      line.innerHTML=frameHlHtml(rows[ri].raw);
-      Array.from(line.querySelectorAll('.rc-hl')).forEach((h,k)=>{
+      line.innerHTML=frameHlHtml(rows[ri].raw, true);
+      const dims=Array.from(line.querySelectorAll('.rc-dim'));
+      dims.forEach(d=>d.classList.add('q'));
+      const hls=Array.from(line.querySelectorAll('.rc-hl'));
+      hls.forEach((h,k)=>{
         h.classList.add('q');
         setTimeout(()=>{ if(!h.isConnected) return; h.classList.remove('q'); h.classList.add('pop'); },
           ri*200 + k*70);
       });
+      // **슬롯이 같이 죽는다** — 초록만 칠하면 그냥 하이라이트로 읽히는데, 문장마다
+      // 바뀌는 부분이 흐려지면 세 줄이 **같은 조각만 남은 한 줄**로 수렴한다.
+      // 그 수렴하는 순간이 `이건 문장이 아니라 재사용 단위다`의 그림이다.
+      setTimeout(()=>{ dims.forEach(d=>{ if(d.isConnected) d.classList.remove('q'); }); }, ri*200 + 120);
     });
     const p=item.pattern||{}, form=(p.form||'').trim(), pmean=(p.meaning||'').trim();
     el('payoffBox').innerHTML=`<div class="payoff">
@@ -1132,7 +1162,7 @@ function renderRecognizeFill(){
   // 뱅크는 **정확히 패턴 낱말만** 준다(레퍼런스와 같다) — 함정은 이 단계의 과제가 아니다.
   // **글자는 모두 소문자로 내린다**(`[2]`·`c` 배열과 같은 규약) — 문장 첫 낱말만 대문자면
   // 어느 타일이 맨 앞인지가 새고, 두 낱말짜리 패턴에서는 그것만으로 답이 정해진다.
-  let bank=shuffle(want.map((w,i)=>({id:i, text:w.toLowerCase(), placed:false})));
+  let bank=shuffleOrder(want.map((w,i)=>({id:i, text:w.toLowerCase(), placed:false})), t=>t.text);
   let ans=[], done=false, hintLevel=0;
   const pool=new Set([item.sentence.en]);
   (item.apply||[]).forEach(a=>pool.add(a.en));
@@ -1294,7 +1324,7 @@ function renderPattern(){
   const frameIdx=tok.map((w,i)=>i).filter(i=>flag[i]);
 
   let phase=0, done=false, switching=false, bankIn=false;
-  let bank=shuffle(frameIdx.map((ti,i)=>({id:i, text:tok[ti].toLowerCase(), placed:false, fr:true})));
+  let bank=shuffleOrder(frameIdx.map((ti,i)=>({id:i, text:tok[ti].toLowerCase(), placed:false, fr:true})), t=>t.text);
   let ans=[];
 
   setProgress(stepAt(1));
@@ -1377,7 +1407,7 @@ function renderPattern(){
     setTimeout(()=>{
       if(!fillEl.isConnected) return;          // 전환 중 화면이 바뀌면 새 화면을 건드리지 않는다
       phase=1; ans=[]; switching=false;
-      bank=shuffle(tok.map((w,i)=>({id:i, text:w.toLowerCase(), placed:false, fr:flag[i]})));
+      bank=shuffleOrder(tok.map((w,i)=>({id:i, text:w.toLowerCase(), placed:false, fr:flag[i]})), t=>t.text);
       setProgress(stepAt(2));
       el('revealLabel').textContent='정답 보기'; el('revealBtn').disabled=false;
       el('nbTip').classList.add('hidden');       // 팁은 1박자의 것이다 — 함께 닫는다
@@ -1831,8 +1861,8 @@ function renderSpeakArrange(t){
   // 대상 문장에 이미 든 낱말은 함정이 될 수 없으니 걸러낸다.
   const traps=(item.traps||[]).filter(w=>!tok.some(x=>bare(x)===bare(w))).slice(0,2);
   let done=false, hintLevel=0, ansArr=[];
-  const bankArr=shuffle(tok.map((w,i)=>({id:i, text:w.toLowerCase(), placed:false}))
-    .concat(traps.map((w,i)=>({id:900+i, text:String(w).toLowerCase(), placed:false}))));
+  const bankArr=shuffleOrder(tok.map((w,i)=>({id:i, text:w.toLowerCase(), placed:false}))
+    .concat(traps.map((w,i)=>({id:900+i, text:String(w).toLowerCase(), placed:false}))), t=>t.text);
 
   stage.innerHTML=`
     <div class="stage-scroll">
@@ -2240,11 +2270,11 @@ function spkGives(item, t){
   const tok=tokenize(t.en), flag = t.segs ? frameFlags(tok, t.segs) : frameWordFlags(tok, item.frame);
   const words=tok.filter((w,i)=>!flag[i]);
   if(spkVar==='o') return {kind:'none', list:[], words};
-  if(spkVar==='a') return {kind:'shuffled', list:shuffle(words), words};
+  if(spkVar==='a') return {kind:'shuffled', list:shuffleOrder(words), words};
   // 줄어든다 — 지원 단계가 형태를 정한다. 화면이 덜 해주는 것이 곧 내가 나아졌다는 근거다.
   const pieces=(t.segs||[]).filter(g=>g.t==='slot').map(g=>g.s.trim()).filter(x=>/[a-z0-9]/i.test(x));
   if(aidLevel===0 && pieces.length) return {kind:'ordered', list:pieces, words};
-  if(aidLevel<=1) return {kind:'shuffled', list:shuffle(words), words};
+  if(aidLevel<=1) return {kind:'shuffled', list:shuffleOrder(words), words};
   return {kind:'none', list:[], words};
 }
 // 재료 줄 — `ordered`는 조각 칩, `shuffled`는 `함께 쓸 낱말`(다 쓴 칩은 죽는다)
@@ -2470,7 +2500,7 @@ function renderSpeak(preset){
   const tok=tokenize(t.en), flag = t.segs ? frameFlags(tok, t.segs) : frameWordFlags(tok, item.frame);
   const matWords=tok.filter((w,i)=>!flag[i]);
   const frWords=tok.filter((w,i)=>flag[i]);
-  const mats=shuffle(matWords);
+  const mats=shuffleOrder(matWords);
   let done=false, hintLevel=0;
 
   const head = spkAskHtml(t) + (spkMode==='dlg' && !spkFellBack ? '' : spkKrHtml(t, item));
