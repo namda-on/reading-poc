@@ -217,12 +217,6 @@
   /* 짚는 순간의 피드백 — 통과 연출(`pop`)보다 작고 빠르다(정답 표시가 아니라 반응이다) */
   .rc-w.tap { animation:rcTap .3s ease; }
   @keyframes rcTap { 0%{transform:none;} 40%{transform:translateY(-4px) scale(1.06);} 100%{transform:none;} }
-  /* 몇 개를 찾았는지 — 답의 개수를 알려 주는 것은 이 단계의 규약과 맞다(시험이 아니라 인식) */
-  .rc-cnt { display:inline-block; margin-left:7px; padding:1px 8px; border-radius:999px;
-    background:#e7edf5; color:#8d9bb0; font-size:12.5px; font-weight:800; vertical-align:1px;
-    transition:background .2s ease, color .2s ease; }
-  .rc-cnt b { color:#5f80ad; }
-  .rc-cnt.full { background:#dcf6e6; color:#1f7a49; }
   @keyframes rcPop { 0%{transform:none;} 42%{transform:translateY(-5px) scale(1.09);} 100%{transform:none;} }
   .rc-list.shake, .fill.shake { animation:rcShake .34s ease; }
   @keyframes rcShake { 0%,100%{transform:none;} 22%{transform:translateX(-5px);} 55%{transform:translateX(5px);} 82%{transform:translateX(-2px);} }
@@ -997,8 +991,7 @@ function renderRecognize(){
     <div class="stage-scroll">
       <div class="chat-card rcg" id="card">
         ${chatTag(item)}<div class="chat-badge new">NEW</div>
-        <div class="sp-q" id="rcQ">${NW} 문장에 <b>반복되는 말</b>을 짚어 보세요
-          <span class="rc-cnt" id="rcCnt"><b id="rcNow">0</b>/${want.length}</span></div>
+        <div class="sp-q" id="rcQ">${NW} 문장에 <b>반복되는 말</b>을 짚어 보세요</div>
         <div class="rc-list" id="rcList">${rows.map(r=>`
           <div class="rc-row">
             <div class="rc-line">${lineHtml(r)}</div>
@@ -1024,9 +1017,6 @@ function renderRecognize(){
   const wordEls=Array.from(listEl.querySelectorAll('button.rc-w'));
   function sync(){
     wordEls.forEach(b=> b.classList.toggle('on', pick.has(b.dataset.b)));
-    const got=want.filter(w=>pick.has(w)).length;
-    el('rcNow').textContent=got;
-    el('rcCnt').classList.toggle('full', got===want.length && pick.size===want.length);
     el('okBtn').disabled = done || !pick.size;
   }
   wordEls.forEach(b=> b.onclick=()=>{
@@ -1582,7 +1572,7 @@ function speakTarget(item){
   // → `Don't be sad.` 가 이 단계가 노리는 크기다. 표현은 내 손에서 나오면서도 문장이
   // 4낱말이라 부담이 없다. 조건은 넷을 모두 만족할 때뿐이다(하나라도 어긋나면 난이도가 튄다):
   // 재료 2낱말 이하 · 문장 5낱말 이하 · 조각 구조 일치 · 종결부호 일치.
-  // 데이터에 그런 짝이 있는 문항은 62/261이라, 나머지는 아래 규칙으로 고른다.
+  // 데이터에 그런 짝이 있는 문항은 445/729라, 나머지는 아래 규칙으로 고른다.
   // **자극은 여기에 끼어들지 않는다** — 대사가 있는 후보를 앞세우면 이 난이도 규칙을
   // 이겨 유닛과 먼 문장이 뽑힌다(`~보다 더 ~해`에서 `Bread is more expensive than rice.`
   // 대신 `I was more stressed than him.`이 나왔다). 대사를 대상에 맞추는 것이 아니라
