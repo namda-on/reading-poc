@@ -321,6 +321,9 @@
     padding:10px 13px; font-size:13px; font-weight:700; color:#8a6a1f; line-height:1.5; }
   .op-new b { color:#6f5312; font-weight:800; }
   /* [4] 타이틀 — `[2]`·`[3]`의 `.chat-ko`와 같은 값이어야 세 단계가 한 카드로 읽힌다 */
+  /* 자극이 이 문항에서 성립하지 않아 한국어 문장으로 내려왔다는 표시 */
+  .sp-nodlg { font-size:12.5px; font-weight:700; color:#9aa8bc; line-height:1.5; margin-bottom:10px; }
+  .sp-nodlg b { color:#7c8b9e; }
   .sp-kr { font-size:18px; line-height:1.55; color:#33465c; font-weight:600; margin-top:2px; }
   .sit-turn + .sp-kr { margin-top:16px; }
   .sit-bubble.mine .sp-kr { font-size:14.5px; color:#7b8ea6; font-weight:600; margin:0 0 8px; }
@@ -2105,7 +2108,7 @@ function renderSpeakArrange(t){
     <div class="stage-scroll">
       <div class="chat-card spk" id="card">
         ${chatTag(item)}<div class="chat-badge new">NEW</div>
-        ${spkAskHtml(t)}${spkMode==='dlg'?'':spkKrHtml(t, item)}
+        ${spkAskHtml(t)}${spkMode==='dlg' && !spkFellBack?'':spkKrHtml(t, item)}
         <div class="nb-tip hidden" id="nbTip"></div>
         ${spkAnswerHtml(t, `<div class="sp-in" id="spIn"><div class="sp-slots" id="spSlots"></div></div>`, item)}
         ${spkAfterHtml(t)}
@@ -2455,8 +2458,20 @@ function spkHeadHtml(item, task){
        + (task ? `<div class="sp-q">${task}</div>` : '');
 }
 // A 대사 — `영어 질문`·`대화 한가운데`의 자극
+// 고른 자극이 이 문항에서 성립하는지 — `영어 질문`·`대화 한가운데`는 손으로 적은 대사가
+// 있는 문항에서만 선다. 대사가 없으면 화면은 한국어 문장 카드로 내려오는데, **그것을
+// 화면에 적지 않으면 옵션 라벨과 화면이 어긋나** `한국어 문장`과 똑같은 것을 다른 이름으로
+// 보고 있게 된다(자극이 폴백하면 화면이 거짓말한다는 규약의 나머지 절반).
+let spkFellBack=false;
 function spkAskHtml(t){
-  if(!t || !t.ask || (spkMode!=='en' && spkMode!=='dlg')) return '';
+  if(spkMode!=='en' && spkMode!=='dlg') return '';
+  const note=what=>`<div class="sp-nodlg">이 문항에는 ${what} 아직 없어 <b>한국어 문장</b>으로 보여줘요</div>`;
+  // `영어 질문`은 **줄마다** 판정한다 — 연습지(`h`)는 줄마다 대상 문장이 달라
+  // 문항 단위로 정하면 어떤 줄에서는 대사도 없고 표시도 없는 화면이 된다.
+  if(spkMode==='en' && (!t || !t.ask)) return note('A의 영어 질문이');
+  // `대화 한가운데`는 앞뒤 **한 쌍**이 있어야 성립하므로 문항 단위 판정이다
+  if(spkMode==='dlg' && spkFellBack) return note('앞뒤 대사가');
+  if(!t || !t.ask) return '';
   return `<div class="sit-turn${spkMode==='en'?' a':''}">
       <div class="sit-role">A</div>
       <div class="sit-bubble"><div class="sit-en">${escapeHtml(t.ask.en)}</div>
@@ -2709,6 +2724,8 @@ function renderSpeak(preset){
   // 뱅크가 카드 밖(하단)에 있어 대화를 그대로 두고 답 자리만 말풍선 안에 넣으면 된다.
   // 폴백으로 문장 카드를 내보내면 지시문만 `가운데를 채워 보세요`로 남아 화면이 거짓말한다.
   const dt = (spkMode==='dlg' && !preset) ? dialogTarget(item) : null;
+  spkFellBack = (spkMode==='dlg' && !dt)
+             || (spkMode==='en' && !((preset || speakTarget(item) || {}).ask));
   if(dt && spkVar==='c') return renderSpeakArrange(dt);
   if(dt) return renderSpeakDialog(item, dt);
   if(spkVar==='o' && !preset) return renderSpeakOpen(item);
@@ -2726,7 +2743,7 @@ function renderSpeak(preset){
   const mats=shuffle(matWords);
   let done=false, hintLevel=0;
 
-  const head = spkAskHtml(t) + (spkMode==='dlg' ? '' : spkKrHtml(t, item));
+  const head = spkAskHtml(t) + (spkMode==='dlg' && !spkFellBack ? '' : spkKrHtml(t, item));
 
   stage.innerHTML=`
     <div class="stage-scroll">

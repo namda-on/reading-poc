@@ -2,34 +2,33 @@
 """어휘→표현 프로토타입 데이터 생성 (버전 A/B 공용).
 
 소스(레포 밖, 기본값은 ~/Downloads):
-  - 표현 CSV: `유기적 통합모드 문장 (공유용)` — 그룹(id)당 트리거 어휘 + 표현 패턴 +
-    문장 3~6개(문장1 = 트리거가 들어간 대표 문장) + 결과 카드(형태/뜻/설명)
+  - 문장 CSV: `표현데이터_재작업_전체900 - 문장` — **문장 한 줄 = 한 행**. 유닛(`유닛`)당
+    S1(학습 문장) + S2~S5 + 선택적 U1~U3(주어 변형)·X1~X2(확장). 프레임이 대괄호로
+    저작돼 있다: `[Talk to] your parents.` / `부모님[이랑 얘기해] 봐.` (`뼈대` 열 = form)
+  - 표현 CSV: `유기적 통합모드 문장 (공유용)` — 트리거 어휘(`trigger`,`trigger_dictseq`)와
+    결과 카드(형태/뜻/설명). **문장은 읽지 않고** `유닛`=`id`로 조인만 한다
   - 어휘 CSV(All_*.csv): seq(=dictSeq) → learnSentence(영어 예문, [단어]=빈칸 정답)
     + learnSentenceMeaning(한국어 번역, [뜻]=초록) + meaning + pos
   - gse CSV: dictSeq → 어휘 레벨(1~30) + CEFR
 
-두 버전이 같은 문항을 써야 비교가 되므로 **양쪽 모두 성립하는 그룹만** 남긴다.
+두 버전이 같은 문항을 써야 비교가 되므로 **양쪽 모두 성립하는 유닛만** 남긴다.
   - 버전 A: 어휘 학습 문장 = 어휘 CSV의 learnSentence (표현 문장과 다른 문장)
-  - 버전 B: 어휘 학습 문장 = 표현 문장(문장1)에서 트리거 어휘를 빈칸으로
+  - 버전 B: 어휘 학습 문장 = 학습 문장(S1)에서 트리거 어휘를 빈칸으로
 
-[3] 슬롯 치환 단계(`apply`)도 함께 굽는다. 목적은 **유저가 프레임을 직접 산출**하는 것이라
-슬롯(변하는 부분)은 주어진 채로 고정하고 프레임 자리를 비운다.
-
-프레임은 `form`(J열) 표기가 아니라 **학습 문장(D열)에서 직접 추출**한다 — `form`에는
-`주어 + didn't + ______`처럼 한글 자리표시자나 `What / Who / Where`처럼 대안이 박힌
-표기가 많아 문장에 그대로 등장하지 않는다. 문장1과 다른 문장의 **공통 연속 구간**을
-difflib으로 뽑아 프레임 후보로 쓰고, 문장1을 포함해 가장 많은 문장을 커버하는 후보를
-고른다. 1단어 조각 두 개로 된 프레임은 실제 패턴을 잃으므로(`Can/Could you ~?` →
-`you`+`me`) **단일 연속 구간 2단어 이상**만 인정한다.
+프레임·슬롯(`frame`·`baseSegs`·`apply`)과 한국어 표현 구간(`krMark`)은 **저작 데이터를
+그대로** 쓴다 — 대괄호 위치가 곧 경계라 문장에서 리터럴을 되찾지 않는다. 응용 문장은
+S1과 프레임 조각이 **같은 것만** 담는다(주어가 바뀐 변형은 앱의 리터럴 기준 채점과 어긋난다).
 
 출력: public/vocab-expression.data.json (커밋되는 생성물). 손으로 편집하지 말 것.
 """
 import csv, json, os, re, sys
-from difflib import SequenceMatcher
 from collections import OrderedDict
 from pathlib import Path
 
 DL = Path.home() / "Downloads"
+# 문장·프레임의 소스. 프레임과 한국어 표현 구간이 대괄호로 저작돼 있다.
+SENT_CSV  = Path(os.environ.get("VE_SENT_CSV",  DL / "표현데이터_재작업_전체900 - 문장.csv"))
+# 트리거 어휘·결과 카드(뜻/설명)의 소스. 문장은 여기서 읽지 않고 `유닛`=`id`로 조인만 한다.
 EXPR_CSV  = Path(os.environ.get("VE_EXPR_CSV",  DL / "유기적 통합모드 문장 (공유용) - 문장1 변형후보 추가 (검토중).csv"))
 VOCAB_CSV = Path(os.environ.get("VE_VOCAB_CSV", DL / "All_(2026-09-01_20_14_12).csv"))
 GSE_CSV   = Path(os.environ.get("VE_GSE_CSV",   DL / "gse_corrected_final_0624 - 보정결과_전체.csv"))
@@ -45,14 +44,6 @@ MAX_ITEMS = int(os.environ.get("VE_MAX_ITEMS", "0"))    # 0이면 전체
 VOCAB_FILTER_SKIP = {"sexual", "unnecessary"}
 BRACKET = re.compile(r"\[([^\]]+)\]")
 INFL = re.compile(r"^(?:s|es|ed|d|ing|er|est|ies|ier|iest|'s|')$")
-WORD = re.compile(r"[A-Za-z']+")
-SLOT_MARK = re.compile(r"_{2,}|~")
-KOR = re.compile(r"[가-힣]")
-# 홑 대명사 조각은 표현의 일부가 아니라 그 자리에 오는 주어·목적어다.
-# `get up`을 배우는데 `You` … `get up`이 프레임으로 잡히면 안 된다.
-PRONOUNS = {"i", "you", "he", "she", "it", "we", "they",
-            "me", "him", "her", "us", "them"}
-MIN_FRAME_WORDS = int(os.environ.get("VE_MIN_FRAME_WORDS", "2"))
 
 
 def die(msg):
@@ -144,125 +135,6 @@ def mark_meaning_kr(kr, meaning, authored=""):
     return None
 
 
-# 표현 뜻(`~을 입다`)을 문장 뜻(`옷 입어.`)에서 찾기 위한 후보들.
-# 어휘 뜻과 달리 `~`로 슬롯이 표시돼 있고 종결형이 문장마다 달라(`입다`→`입어`)
-# 조각·어간을 더 넓게 펼친다.
-EXPR_PARTICLE = ("을", "를", "이", "가", "에", "와", "과", "의", "로", "으로", "은", "는", "도")
-EXPR_TAIL = ("에서", "에게", "까지", "으로", "부터", "에", "께", "로")
-
-
-def expr_meaning_spans(meaning):
-    """표현 뜻에서 문장에 나타날 수 있는 조각 후보들 — **순서가 결정적이어야 한다**.
-
-    `set`을 길이만으로 정렬하면 같은 길이 후보의 순서가 `PYTHONHASHSEED`에 좌우돼
-    같은 입력에서 빌드마다 다른 구간이 칠해진다(`내가 [할게]` / `[내가] 할게`).
-    그래서 후보마다 **어느 낱말에서 나왔는지**를 같이 들고 다니며
-    `긴 것 → 뒤쪽 낱말에서 나온 것 → 앞쪽 글자 → 사전순`으로 못 박는다.
-    뒤쪽 낱말을 앞세우는 이유는 표현의 머리가 용언이기 때문이다
-    (`~에게 다시 전화하다`에서 칠할 것은 `다시`가 아니라 `전화`다).
-    """
-    t = re.sub(r"<[^>]*>", " ", meaning or "")
-    t = re.sub(r"\([^)]*\)", " ", t)
-    best = {}
-
-    def add(x, wi):
-        x = x.strip(" ?!.\u00b7")
-        if not x:
-            return
-        # 같은 조각이 여러 낱말에서 나오면 **뒤쪽 낱말**의 것으로 본다
-        if x not in best or wi > best[x]:
-            best[x] = wi
-
-    wi = 0
-    for part in re.split(r"[,;/~]", t):
-        part = part.strip(" ?!.")
-        if not part:
-            continue
-        ws = part.split()
-        add(part, wi)                      # 조각 전체는 그 조각의 첫 낱말 자리로 본다
-        if part.startswith("하"):          # `~하지 마` → `지 마`, `~하는 건 어때` → `는 건 어때`
-            add(part[1:], wi)
-        if ws and ws[0] in EXPR_PARTICLE:  # `을 입다` → `입다`
-            add(" ".join(ws[1:]), wi)
-        for k, w in enumerate(ws):
-            add(w, wi + k)
-            for suf in KR_SUFFIX + ("해", "하", "지"):
-                if w.endswith(suf) and len(w) > len(suf):
-                    add(w[: -len(suf)], wi + k)
-            for suf in EXPR_TAIL:          # `덕분에` → `덕분`, `앞에서` → `앞`
-                if w.endswith(suf) and len(w) - len(suf) >= 1:
-                    add(w[: -len(suf)], wi + k)
-        wi += len(ws)
-    return sorted(best, key=lambda x: (-len(x), -best[x], t.find(x), x))
-
-
-HANGUL_BASE = 0xAC00
-
-
-def syllable_class(ch, loose_vowel):
-    """한 음절을 정규식 문자 클래스로 — 활용으로 바뀌는 부분을 무시한다.
-
-    받침만 무시(`켜`↔`켤`, `기`↔`길`, `눕`↔`누`)하거나 모음까지 무시해 초성만
-    맞춘다(`우`↔`워`, `보`↔`봐`, `르`↔`러`, `리`↔`렸`).
-    """
-    if not ("가" <= ch <= "힣"):
-        return re.escape(ch)
-    idx = ord(ch) - HANGUL_BASE
-    cho, jung = idx // 588, (idx % 588) // 28
-    lo = HANGUL_BASE + cho * 588 + (0 if loose_vowel else jung * 28)
-    return "[" + chr(lo) + "-" + chr(lo + (587 if loose_vowel else 27)) + "]"
-
-
-def expr_stem_spans(meaning):
-    """용언 어간만 추린다 — 1글자 후보에 조사·파편이 섞이면 엉뚱한 구간을 칠한다
-    (`~만 빼고`의 `만`이 `많`을, `~이 기대돼`의 `이`가 `있`을 잡는다)."""
-    t = re.sub(r"<[^>]*>", " ", meaning or "")
-    t = re.sub(r"\([^)]*\)", " ", t)
-    out = set()
-    for part in re.split(r"[,;/~]", t):
-        for w in part.strip(" ?!.").split():
-            for suf in KR_SUFFIX + ("해", "하", "지"):
-                if w.endswith(suf) and len(w) > len(suf):
-                    out.add(w[: -len(suf)])
-    return sorted(out, key=lambda x: (-len(x), t.find(x), x))
-
-
-def mark_expr_kr(kr, meaning):
-    """문장 뜻에서 표현 뜻에 해당하는 구간을 [..]로 감싼다. 못 찾으면 None.
-
-    세 단계로 좁힌다: ① 글자 그대로 → ② 어간 끝 음절의 활용을 무시하고
-    (`치우다`→`치워`) → ③ 그래도 없으면 **용언 어간 1글자**를 낱말 첫머리에서만
-    (`켜다`→`켤게`). 160 + 9 + 5 = 174/222(78%)가 잡히고 나머지는 칩으로 대체된다.
-    """
-    for cand in expr_meaning_spans(meaning):
-        if len(cand) >= 2:
-            i = kr.find(cand)
-            if i >= 0:
-                return kr[:i] + "[" + cand + "]" + kr[i + len(cand):]
-        else:
-            mm = re.search(r"(?:^|\s)(" + re.escape(cand) + r")", kr)
-            if mm:
-                i = mm.start(1)
-                return kr[:i] + "[" + cand + "]" + kr[i + len(cand):]
-    for cand in expr_meaning_spans(meaning):
-        if len(cand) < 2:
-            continue
-        ko = len([c for c in cand if "가" <= c <= "힣"])
-        pat = "".join(re.escape(c) for c in cand[:-1]) + syllable_class(cand[-1], ko >= 2)
-        mm = re.search("(" + pat + ")", kr)
-        if mm:
-            i, j = mm.span(1)
-            return kr[:i] + "[" + kr[i:j] + "]" + kr[j:]
-    for cand in expr_stem_spans(meaning):
-        if len(cand) != 1:
-            continue
-        mm = re.search(r"(?:^|\s)(" + syllable_class(cand[0], False) + ")", kr)
-        if mm:
-            i, j = mm.span(1)
-            return kr[:i] + "[" + kr[i:j] + "]" + kr[j:]
-    return None
-
-
 def infl_match(tok, base):
     """tok이 base와 같거나 규칙 굴절형인지 (parents←parent, teaches←teach)."""
     t, b = tok.lower(), base.lower()
@@ -308,76 +180,6 @@ def blank_trigger(sent, trigger):
     return sent[: best.start()] + "[" + best.group(0) + "]" + sent[best.end() :], best.group(0)
 
 
-def lexical_form(form):
-    """`form`이 **어휘 표현**인가 — 한글 자리표시자(`주어`,`명사`)나 대안(`Do / Does`)이 섞이면
-    문법 틀이다. 문법 틀은 문장마다 표현 자체가 변형되므로([3]에서 `Don't you drive?`와
-    `Don't they work with you?`가 같은 프레임으로 잡힌다) 경계가 정해지지 않는다.
-    [3]은 **한 청크를 그대로 다시 쓰는** 과제라 어휘 표현만 확실하다."""
-    f = (form or "").strip()
-    return bool(f) and not KOR.search(f) and "/" not in f
-
-
-def words(sent):
-    return WORD.findall(re.sub(r"[.?!]+$", "", sent.strip()))
-
-
-def form_words(form):
-    """`form`의 어휘 내용을 (필수, 선택) 두 묶음으로 나눈다.
-
-    괄호 안은 저작자가 **선택**으로 표시한 것이다 — `come over (to ______)`의 `to`는
-    없어도 같은 표현이다. `(= turn ______ off)` 같은 부기도 괄호 안이라 선택으로 본다.
-    """
-    f = form or ""
-    optional = set()
-    for inner in re.findall(r"\(([^)]*)\)", f):
-        optional |= {w.lower() for w in WORD.findall(inner)}
-    required = {w.lower() for w in WORD.findall(re.sub(r"\([^)]*\)", " ", f))}
-    return required, optional | required
-
-
-def form_pieces(form):
-    """`form`의 리터럴 조각들을 순서대로 반환(괄호 안은 선택 취급해 제거).
-
-    `put ______ on` → ['put', 'on'] · `the ______ of the ______` → ['the', 'of the'] ·
-    `get up` → ['get up'] · `come over (to ______)` → ['come over'].
-    """
-    f = re.sub(r"\([^)]*\)", " ", form or "")
-    out = []
-    for part in SLOT_MARK.split(f):
-        ws = WORD.findall(part)
-        if ws:
-            out.append(ws)
-    return out
-
-
-def frame_matches_form(frame, form):
-    """프레임이 `form`의 어휘 내용과 **구조까지** 같은가(굴절 허용).
-
-    조각 개수와 순서가 맞아야 한다 — `the ______ of the ______`는 조각이 둘(`the`,`of the`)인데
-    프레임이 `of the` 하나로 잡히면 표현의 일부만 떼어낸 것이고, `What does ______ do ?`도
-    끝의 `do`가 빠지면 표현이 아니다. 괄호 안 낱말은 있어도 없어도 되는 것으로 본다
-    (`all (of) ______`의 `of`).
-    """
-    pieces = form_pieces(form)
-    if not pieces or len(pieces) != len(frame):
-        return False
-    _, optional = form_words(form)
-
-    def same(a, b):
-        return a == b or infl_match(a, b) or infl_match(b, a)
-
-    for want, got in zip(pieces, frame):
-        want_l = [w.lower() for w in want]
-        got_l = [w.lower() for w in got.split()]
-        for g in got_l:
-            if not any(same(g, w) for w in want_l) and g not in optional:
-                return False
-        for w in want_l:
-            if not any(same(g, w) for g in got_l):
-                return False
-    return True
-
-
 # 흩어진 기능어 조각들은 실제 패턴이 아니다 — `Can/Could you ~?`에서 `you` … `me`가
 # 뽑히면 정작 `Can/Could`가 빠진다. 반면 **붙어 있는 한 덩어리**는 기능어만이어도
 # 정상 패턴이다(`How about`, `What if`)므로 이 검사는 두 조각 이상에만 쓴다.
@@ -392,71 +194,6 @@ FUNCTION_WORDS = {
     "what", "who", "whom", "whose", "where", "when", "why", "how", "which",
     "to", "of", "in", "on", "at", "for", "with", "from", "by", "about", "too", "very",
 }
-
-# 한정사·소유격은 뒤따르는 슬롯(명사구)에 속하므로 프레임 끝에 남기지 않는다.
-DETERMINERS = {"a", "an", "the", "my", "your", "his", "her", "its", "our", "their",
-               "this", "that", "these", "those", "some", "any"}
-
-
-def has_content(lits):
-    return any(w.lower().strip("'") not in FUNCTION_WORDS
-               for lit in lits for w in lit.split())
-
-
-def trim_determiners(lits):
-    """조각 끝의 한정사를 떼고, 한정사만으로 된 조각은 버린다.
-
-    `Put your` … `on` → `Put` … `on` (슬롯 `your coat`).
-    다듬은 결과가 프레임으로 성립하지 않으면 원본을 그대로 돌려준다(`It's a` 등).
-    """
-    out = []
-    for lit in lits:
-        ws = lit.split()
-        while ws and ws[-1].lower() in DETERMINERS:
-            ws.pop()
-        if ws:
-            out.append(" ".join(ws))
-    if out and sum(len(x.split()) for x in out) >= MIN_FRAME_WORDS:
-        return out
-    if len(lits) == 1:
-        return lits      # `It's a` — 한 덩어리는 한정사로 끝나도 프레임이 된다
-    return None          # 조각이 한정사뿐이면 프레임 조각이 아니다
-
-
-def frame_candidates(base, other):
-    """두 문장의 공통 구간에서 프레임 후보를 만든다(원문 대소문자 유지).
-
-    한 덩어리(`talk to`)뿐 아니라 **떨어진 두 덩어리**(`put` … `on`)도 후보로 낸다 —
-    분리형 구동사는 슬롯이 프레임 사이에 들어가므로 연속 구간만 보면 particle(`on`)이
-    슬롯으로 새어 들어간다(`put your` + 슬롯 `coat on`).
-    """
-    wb, wo = words(base), words(other)
-    lb, lo = [w.lower() for w in wb], [w.lower() for w in wo]
-    blocks = [x for x in SequenceMatcher(None, lb, lo, autojunk=False).get_matching_blocks() if x.size]
-    lits = [(x, " ".join(wb[x.a : x.a + x.size])) for x in blocks]
-
-    out, seen = [], set()
-
-    def add(cand):
-        cand = trim_determiners(cand)
-        if cand is None or sum(len(x.split()) for x in cand) < MIN_FRAME_WORDS:
-            return
-        if len(cand) > 1 and not has_content(cand):
-            return
-        if any(x.lower() in PRONOUNS for x in cand):
-            return      # 홑 대명사 조각 — 표현이 아니라 그 자리에 오는 주어·목적어
-        key = tuple(x.lower() for x in cand)
-        if key in seen:
-            return
-        seen.add(key)
-        out.append(cand)
-
-    for _, lit in lits:
-        add([lit])
-    for i in range(len(lits)):
-        for j in range(i + 1, len(lits)):
-            add([lits[i][1], lits[j][1]])
-    return out
 
 
 # [3] 함정 단어 — 같은 자리에 올 수 있는 **같은 부류**의 낱말이어야 고민이 생긴다.
@@ -512,77 +249,6 @@ def make_traps(frame, sentence):
             if len(traps) >= 1:
                 return traps
     return traps
-
-
-def slots_clean(lits, sents, cov):
-    """커버되는 문장들의 슬롯이 공통 단어를 갖지 않는가.
-
-    슬롯에 모든 문장이 공유하는 단어가 남아 있으면 그건 아직 프레임의 일부라는 뜻이다
-    (`put your` + 슬롯 `clothes on`/`coat on` → `on`이 남아 있으므로 프레임이 미완성).
-    """
-    shared = None
-    for i in cov:
-        sd = segment(sents[i], lits)
-        ws = {w.lower() for x in sd["segs"] if x["t"] == "slot" for w in x["s"].split()}
-        shared = ws if shared is None else (shared & ws)
-        if not shared:
-            return True
-    return not shared
-
-
-def extract_frame(sents, form=""):
-    """문장1을 반드시 포함하면서 가장 많은 문장이 공유하는 프레임을 고른다.
-
-    반환 (리터럴 목록, 커버하는 문장 인덱스). 못 찾으면 None.
-    우선순위: **form과 맞는지** → 커버 문장 수 → 슬롯이 깨끗한지 → 프레임 길이 → 조각 수.
-    커버를 최우선에 두면 한 문장에만 맞는 과적합 프레임(`Don't be late`)을 걸러낸다.
-    **form 일치를 맨 앞에 두는 이유**: 시트에 문장1의 변형(`You should get up.` →
-    `He should get up.`)이 들어오면 변형끼리 공유하는 긴 구간(`should get up`)이 커버
-    수로 이기고, 그게 곧 form 검사에서 탈락해 그룹을 통째로 잃는다. 고른 뒤에 검사하지
-    말고 **고를 때 같이 보면** 같은 그룹에서 form에 맞는 후보를 살릴 수 있다.
-    """
-    best = None
-    for j in range(1, len(sents)):
-        for lits in frame_candidates(sents[0], sents[j]):
-            cov = [i for i, s in enumerate(sents) if segment(s, lits) is not None]
-            if not cov or cov[0] != 0 or len(cov) < 2:
-                continue
-            key = (frame_matches_form(lits, form), len(cov),
-                   slots_clean(lits, sents, cov),
-                   sum(len(x.split()) for x in lits), len(lits))
-            if best is None or key > best[0]:
-                best = (key, lits, cov)
-    return (best[1], best[2]) if best else None
-
-
-def segment(sentence, literals):
-    """문장을 [{t:'frame'|'slot', s:원문}] 으로 분해. 리터럴을 좌→우 순서로 찾는다.
-
-    frame = 유저가 직접 놓아야 하는 부분, slot = 미리 주어지는 부분.
-    슬롯이 하나도 없으면 치환할 게 없으므로 [3]이 성립하지 않는다.
-    """
-    s = sentence.strip()
-    punct = ""
-    m = re.search(r"[.?!]+$", s)
-    if m:
-        punct, s = m.group(0), s[: m.start()]
-    segs, pos = [], 0
-    for lit in literals:
-        pat = re.compile(r"\b" + r"\s+".join(re.escape(w) for w in lit.split()) + r"\b", re.I)
-        mm = pat.search(s, pos)
-        if not mm:
-            return None
-        pre = s[pos : mm.start()].strip()
-        if pre:
-            segs.append({"t": "slot", "s": pre})
-        segs.append({"t": "frame", "s": mm.group(0)})
-        pos = mm.end()
-    tail = s[pos:].strip()
-    if tail:
-        segs.append({"t": "slot", "s": tail})
-    if not any(x["t"] == "slot" for x in segs):
-        return None
-    return {"segs": segs, "punct": punct}
 
 
 def load_questions():
@@ -652,7 +318,90 @@ EXPR_COLS = {"id": ("id",), "trigger": ("trigger",), "seq": ("trigger_dictseq",)
              "pdesc": ("카드 회색 2행 (설명)", "카드 회색2행 (설명)")}
 
 
-def load_groups():
+# 문장 CSV는 **문장 한 줄 = 한 행**이고 프레임이 대괄호로 저작돼 있다
+# (`[Talk to] your parents.` / `부모님[이랑 얘기해] 봐.`). 그래서 이 빌드는 프레임을
+# 추론하지 않는다 — 공통 구간을 difflib 로 뽑고 `form`과 대조해 걸러내던 계층 전체가
+# 저작 데이터로 대체됐다(영어·한국어 마크업 5,740행 전부 존재).
+# 열은 **이름으로** 찾는다(`EXPR_COLS`와 같은 이유) — 소스에 열이 늘면 위치 기반 파싱은
+# 조용히 다른 열을 읽는다.
+SENT_COLS = {"unit": ("유닛",), "form": ("뼈대",), "role": ("역할",),
+             "en": ("문장 (빨강 = 트리거)", "문장(빨강 = 트리거)", "문장"),
+             "kr": ("번역",), "shape": ("문형",), "check": ("확인 필요",)}
+
+
+def sig(lits):
+    return tuple(x.lower().strip() for x in lits)
+
+
+def parse_marked(s):
+    """`[Talk to] your parents.` → (`Talk to your parents.`, ['Talk to'], segs, punct).
+
+    대괄호가 프레임, 나머지가 슬롯이다. **위치를 그대로 읽으므로** 리터럴을 문장에서
+    다시 찾지 않는다(`segment`가 하던 일) — 같은 낱말이 슬롯에도 있는 문장에서
+    엉뚱한 자리를 프레임으로 집는 일이 없다.
+    """
+    s = (s or "").strip()
+    lits, segs, pos = [], [], 0
+    for m in BRACKET.finditer(s):
+        pre = s[pos:m.start()]
+        if pre.strip():
+            segs.append({"t": "slot", "s": pre.strip()})
+        lit = m.group(1).strip()
+        lits.append(lit)
+        segs.append({"t": "frame", "s": lit})
+        pos = m.end()
+    tail = s[pos:]
+    plain = BRACKET.sub(lambda m: m.group(1), s)
+    plain = re.sub(r"\s+", " ", plain).strip()
+    punct = ""
+    mm = re.search(r"[.?!]+$", tail.strip())
+    if mm:
+        punct = mm.group(0)
+        tail = tail.strip()[: mm.start()]
+    if tail.strip():
+        segs.append({"t": "slot", "s": tail.strip()})
+    return plain, lits, segs, punct
+
+
+def load_sentences():
+    """문장 CSV를 유닛별로 묶는다. 유닛당 S1이 학습 문장이고 나머지는 응용 문장이다."""
+    if not SENT_CSV.exists():
+        die(f"문장 CSV 없음: {SENT_CSV} (VE_SENT_CSV로 지정)")
+    rows = list(csv.reader(open(SENT_CSV, newline="", encoding="utf-8-sig")))
+    head = [c.strip() for c in rows[0]]
+    idx = {}
+    for key, names in SENT_COLS.items():
+        for n in names:
+            if n in head:
+                idx[key] = head.index(n)
+                break
+        else:
+            die(f"문장 CSV에 열이 없음: {key} ({' / '.join(names)}) — 실제 헤더: {head}")
+    get = lambda r, k: (r[idx[k]].strip() if idx[k] < len(r) else "")
+    units = OrderedDict()
+    for r in rows[1:]:
+        u = get(r, "unit")
+        if not u or not get(r, "en"):
+            continue
+        plain, lits, segs, punct = parse_marked(get(r, "en"))
+        kr_mark = get(r, "kr")
+        units.setdefault(u, {"unit": u, "form": get(r, "form"), "sents": []})
+        units[u]["sents"].append({
+            "role": get(r, "role"), "en": plain, "lits": lits,
+            "segs": segs, "punct": punct,
+            # 한국어 표현 구간도 저작돼 있다 — `krMark`가 곧 소스 문자열이다
+            "kr": BRACKET.sub(lambda m: m.group(1), kr_mark).strip(),
+            "krMark": kr_mark,
+        })
+    return units
+
+
+def load_meta():
+    """트리거 어휘·결과 카드를 `id`별로 읽는다. 문장은 `load_sentences`가 읽는다.
+
+    그룹 첫 행에만 값이 있어 forward-fill 하고, 문장 CSV 의 유닛이 갈라진 경우
+    (`10013-1`~`10013-4`가 기존 `10013` 하나에서 나왔다) **접미사를 떼고** 조인한다.
+    """
     if not EXPR_CSV.exists():
         die(f"표현 CSV 없음: {EXPR_CSV} (VE_EXPR_CSV로 지정)")
     rows = list(csv.reader(open(EXPR_CSV, newline="", encoding="utf-8-sig")))
@@ -666,16 +415,14 @@ def load_groups():
         else:
             die(f"표현 CSV에 열이 없음: {key} ({' / '.join(names)}) — 실제 헤더: {head}")
     get = lambda r, k: (r[idx[k]].strip() if idx[k] < len(r) else "")
-    groups, cur = OrderedDict(), None
+    out, cur = OrderedDict(), None
     for r in rows[1:]:
         if get(r, "id"):
             cur = get(r, "id")
-            groups[cur] = {"trigger": get(r, "trigger"), "seq": get(r, "seq"), "rank": get(r, "rank"),
-                           "pattern": get(r, "pattern"), "form": get(r, "form"),
-                           "pmean": get(r, "pmean"), "pdesc": get(r, "pdesc"), "sents": []}
-        if cur and get(r, "en"):
-            groups[cur]["sents"].append({"en": get(r, "en"), "kr": get(r, "kr")})
-    return groups
+            out[cur] = {"trigger": get(r, "trigger"), "seq": get(r, "seq"), "rank": get(r, "rank"),
+                        "pattern": get(r, "pattern"), "form": get(r, "form"),
+                        "pmean": get(r, "pmean"), "pdesc": get(r, "pdesc")}
+    return out
 
 
 def norm_word(s):
@@ -731,92 +478,92 @@ def make_vocab_a(v, trigger):
 
 
 def main():
-    vocab, gse, groups = load_vocab(), load_gse(), load_groups()
+    vocab, gse = load_vocab(), load_gse()
+    meta = load_meta()
+    units = load_sentences()
     situations = load_situations()
     questions = load_questions()
     replies = load_replies()
-    items, skipped = [], {"조인실패": 0, "버전A불가": 0, "버전B불가": 0, "문장부족": 0,
-                          "공통프레임없음": 0, "문법틀form": 0, "프레임≠form": 0}
+    items, skipped = [], {"메타없음": 0, "조인실패": 0, "버전A불가": 0, "버전B불가": 0,
+                          "프레임없음": 0, "슬롯없음": 0}
+    dropped_variants = 0
 
-    for g in groups.values():
-        if not g["seq"].isdigit() or len(g["sents"]) < 1:
-            skipped["문장부족"] += 1
+    for u, g in units.items():
+        # 문장 CSV 에는 트리거 어휘가 없다 — 기존 표현 CSV 와 `유닛`=`id`로 조인한다.
+        # 유닛이 갈라진 경우(`10013-1`)는 접미사를 떼고 원래 그룹을 찾는다.
+        m = meta.get(u) or meta.get(u.split("-")[0])
+        if not m or not m["trigger"] or not m["seq"].isdigit():
+            skipped["메타없음"] += 1
             continue
-        seq = int(g["seq"])
+        seq = int(m["seq"])
         v = vocab.get(seq)
         if v is None:
             skipped["조인실패"] += 1
             continue
 
-        va = make_vocab_a(v, g["trigger"])
+        va = make_vocab_a(v, m["trigger"])
         if va is None:
             skipped["버전A불가"] += 1
             continue
 
-        # [3]은 어휘 표현에만 성립한다 — 문법 틀은 표현 경계가 정해지지 않는다
-        if not lexical_form(g["form"] or g["pattern"]):
-            skipped["문법틀form"] += 1
+        s1 = next((x for x in g["sents"] if x["role"] == "S1"), g["sents"][0])
+        lits = s1["lits"]
+        if not lits:
+            skipped["프레임없음"] += 1
+            continue
+        # 슬롯이 없으면 [2]에서 회색으로 줄 것이 없다(문장 전체가 표현인 경우)
+        if not any(x["t"] == "slot" for x in s1["segs"]):
+            skipped["슬롯없음"] += 1
             continue
 
-        # [3] 슬롯 치환: 학습 문장에서 공통 프레임을 추출한다(문장1 포함 필수)
-        sents = [x["en"] for x in g["sents"]]
-        found = extract_frame(sents, g["form"] or g["pattern"])
-        if found is None:
-            skipped["공통프레임없음"] += 1
-            continue
-        lits, cov = found
-        if not frame_matches_form(lits, g["form"] or g["pattern"]):
-            skipped["프레임≠form"] += 1
-            continue
-        # 프레임이 실제로 들어있는 문장만 [3]에 쓴다. cov[0]은 항상 문장1.
-        segd = {i: segment(sents[i], lits) for i in cov}
-
-        s1 = g["sents"][0]
-        blanked = blank_trigger(s1["en"], g["trigger"])
+        blanked = blank_trigger(s1["en"], m["trigger"])
         if blanked is None:
             skipped["버전B불가"] += 1
             continue
         b_en, b_ans = blanked
         b_kr = mark_meaning_kr(s1["kr"], v["meaning"], v["lsm"])
 
-        meta = gse.get(seq, {})
+        # 응용 문장은 **S1과 프레임이 같은 것만** 쓴다. 같은 유닛에는 주어가 바뀐 변형도
+        # 들어 있는데(`I didn't` → `She didn't`), 앱의 프레임 채점·초록 표기가 리터럴
+        # 기준이라 그것을 대상으로 쓰면 맞는 답을 틀렸다고 하게 된다.
+        fam = [x for x in g["sents"] if x is not s1 and sig(x["lits"]) == sig(lits)
+               and any(t["t"] == "slot" for t in x["segs"])]
+        dropped_variants += len(g["sents"]) - 1 - len(fam)
+
+        gmeta = gse.get(seq, {})
         items.append({
-            "trigger": g["trigger"],
+            "trigger": m["trigger"],
             "word": v["spelling"],
             "meaning": v["meaning"],
             "pos": v["pos"],
-            "cefr": meta.get("cefr", ""),
-            "level": meta.get("level", 0),
-            "rank": int(g["rank"]) if g["rank"].isdigit() else 10 ** 9,
+            "cefr": gmeta.get("cefr", ""),
+            "level": gmeta.get("level", 0),
+            "rank": int(m["rank"]) if m["rank"].isdigit() else 10 ** 9,
             # 버전 A — 어휘 문장과 표현 문장이 서로 다름
             "vocabA": va,
             # 버전 B — 표현 문장 자체로 어휘를 배움(트리거 자리를 빈칸으로)
-            # 번역문에서 정답 뜻을 찾으면 초록 마크업으로, 못 찾으면 별도 힌트 줄로
             "vocabB": {"answer": b_ans, "enLines": [b_en],
                        "koLines": [b_kr or s1["kr"]],
                        "hint": "" if b_kr else short_meaning(v["meaning"])},
-            "sentence": {"en": s1["en"], "kr": s1["kr"], "trigger": g["trigger"],
-                         "krMark": mark_expr_kr(s1["kr"], g["pmean"])},
-            "pattern": {"form": g["form"] or g["pattern"], "meaning": g["pmean"], "desc": g["pdesc"]},
-            # [3] 처음 보는 문장에 같은 프레임을 직접 써보는 단계.
-            # 프레임을 공유하는 문장만 담으므로 문항에 따라 1개 또는 여러 개다
-            # (2개 이상이면 [3]이 2회차까지 진행된다).
+            # 한국어 표현 구간(`krMark`)은 저작 데이터다 — 뜻 문자열로 되짚지 않는다
+            "sentence": {"en": s1["en"], "kr": s1["kr"], "trigger": m["trigger"],
+                         "krMark": s1["krMark"]},
+            "pattern": {"form": g["form"] or m["form"] or m["pattern"],
+                        "meaning": m["pmean"], "desc": m["pdesc"]},
             "frame": lits,
             "situation": situations.get(s1["en"]),
             "ask": questions.get(s1["en"]),
             "reply": replies.get(s1["en"]),
             "traps": [],
-            "_trapSent": sents[cov[1]] if len(cov) > 1 else sents[0],
-            "baseSegs": segd[0]["segs"],
-            # 말해보기 옵션 B는 응용 예문을 대상으로 하므로 그쪽에도 질문을 붙인다
-            "apply": [{"en": g["sents"][i]["en"], "kr": g["sents"][i]["kr"], **segd[i],
-                       "krMark": mark_expr_kr(g["sents"][i]["kr"], g["pmean"]),
-                       "ask": questions.get(g["sents"][i]["en"]),
-                       "reply": replies.get(g["sents"][i]["en"])}
-                      for i in cov[1:]],
-            "siblings": [{"en": x["en"], "kr": x["kr"],
-                          "krMark": mark_expr_kr(x["kr"], g["pmean"])}
-                         for x in g["sents"][1:3]],
+            "_trapSent": fam[0]["en"] if fam else s1["en"],
+            "baseSegs": s1["segs"],
+            "apply": [{"en": x["en"], "kr": x["kr"], "segs": x["segs"], "punct": x["punct"],
+                       "krMark": x["krMark"],
+                       "ask": questions.get(x["en"]),
+                       "reply": replies.get(x["en"])}
+                      for x in fam],
+            "siblings": [{"en": x["en"], "kr": x["kr"], "krMark": x["krMark"]}
+                         for x in fam[:2]],
         })
 
     items.sort(key=lambda x: (x["rank"], x["level"]))
@@ -842,14 +589,18 @@ def main():
             "note": "한 문항 = 트리거 어휘 + 그 어휘가 트리거한 표현 문장. "
                     "버전 A는 어휘 문장과 표현 문장이 다르고, 버전 B는 표현 문장으로 어휘를 배운다.",
             "versions": {"a": "어휘 문장 ≠ 표현 문장", "b": "표현 문장으로 어휘 학습"},
-            "flow": "[1] 어휘 빈칸 → [2] 같은 문장 배열 → [3] 처음 보는 문장에 프레임 직접 쓰기",
+            "flow": "[1] 어휘 빈칸 → 인식 → [2] 표현 넣기 → [3] 문장 전체 → [4] 말해보기",
             "maxItems": MAX_ITEMS,
         },
         "items": items,
     }
     OUT.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
+    ap = [len(x["apply"]) for x in items]
     print(f"[build_vocab_expression] 완료 → {OUT}")
-    print(f"  후보 그룹 {len(groups)} → 사용 {len(items)}문항 | 제외: {skipped}")
+    print(f"  문장 CSV 유닛 {len(units)} → 사용 {len(items)}문항 | 제외: {skipped}")
+    print(f"  응용 문장 {sum(ap)}개(문항당 중앙값 {sorted(ap)[len(ap)//2] if ap else 0}) | "
+          f"프레임이 달라 제외한 변형 문장 {dropped_variants}개")
+    print(f"  표현 뜻(krMark) 있는 문항: {len([x for x in items if x['sentence']['krMark'] != x['sentence']['kr']])}")
     print(f"  [4] 질문이 붙은 문항: {len([x for x in items if x.get('ask')])}")
     print(f"  [5] 상황 대사가 붙은 문항: {len([x for x in items if x.get('situation')])}")
 
