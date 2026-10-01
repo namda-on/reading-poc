@@ -238,6 +238,14 @@
   /* 문장마다 바뀌는 자리 — 통과하면 흐려져 프레임만 남는다 */
   .rc-dim { color:#c6cfdb; font-weight:600; transition:color .4s ease; }
   .rc-dim.q { color:#2f3e52; font-weight:700; }
+  /* 2박자 입력칸과, 내가 치는 대로 같이 채워지는 아래 줄의 칸.
+     **쓰는 자리는 하나**여야 `한 번 쓰면 둘 다 완성된다`가 보인다. */
+  .rc-in { min-width:74px; font-size:17.5px; }
+  .rc-in.bad { background:#fbdcda; color:#c0403b; }
+  .rc-mir { display:inline-block; min-width:74px; padding:2px 10px; border-radius:9px;
+    background:#eef2f8; border:1.5px dashed #ccd7e6; color:transparent; font-weight:800;
+    transition:background .18s ease, color .18s ease, border-color .18s ease; }
+  .rc-mir.on { background:#dcf6e6; border-color:transparent; color:#1f7a49; }
   /* 짚은 뒤 도착하는 문장 — 아래에서 올라온다. 내가 찾은 조각이 **아직 보지 않은
      문장**에서도 켜지는 것이 이 단계의 산출물이라, 도착 자체가 보여야 한다. */
   .rc-row.arrive { animation:rcArrive .42s cubic-bezier(.32,.02,.24,1) both; }
@@ -986,29 +994,33 @@ function renderRecognize(){
   curStep=recognizeStep;
   const item=sessionItems[itemIdx];
   setProgress(1);
-  // **예시 두 문장에서 공통 패턴을 찾는다.** 문장 하나만 주고 `다시 쓸 수 있는 말`을
-  // 예측하게 해 봤지만 단서가 없어 맞힐 수가 없었다 — 찾기는 쉬워야 한다(이 단계는
-  // 시험이 아니라 인식이다). 비교 대상은 **둘**이다: 셋을 늘어놓으면 마지막 칸만 다른
-  // 격자가 되어 `틀린 그림 찾기`로 읽히고, 둘이면 그림이 아니라 짝으로 읽힌다.
+  // **두 박자다: 예시 두 문장에서 패턴을 찾고(1박자), 그 패턴을 직접 쓴다(2박자).**
+  // 찾기만으로 끝내면 화면에 남는 것이 `같은 조각이 여러 문장에 있다`는 **관찰**뿐이고,
+  // `이걸 알면 내가 할 수 있는 말이 늘어난다`는 손에 들어오지 않는다. 그래서 찾은 조각을
+  // **내 손으로 세우게** 하고, **한 번 쓴 것이 여러 문장을 동시에 완성하는 것**을 보여준다.
+  //
+  // 비교 대상은 **둘**이다: 셋을 늘어놓으면 마지막 칸만 다른 격자가 되어 `틀린 그림 찾기`로
+  // 읽히고(길이·프레임 위치를 흩어도 마찬가지였다), 둘이면 그림이 아니라 짝으로 읽힌다.
+  // 반대로 문장 하나만 주고 예측하게 하면 단서가 없어 맞힐 수가 없다.
   const all=rcgRows(item, 5).map(r=>{
     const tok=tokenize(r.en);
     return {raw:r, kr:r.kr, tok, punct:trailPunct(r.en), flag:frameFlags(tok, r.segs)};
   });
   const rows=all.slice(0, 2), later=all.slice(2);
   const bare=w=>String(w).toLowerCase().replace(/[^a-z0-9']/g,'');
-  // **정답은 위치가 아니라 낱말 집합이다** — 어느 줄에서 짚든 같은 낱말이면 같은 것을
-  // 짚은 것이고, 짚는 순간 두 줄의 그 낱말이 한꺼번에 켜진다.
   const head=rows[0], want=[];
   head.tok.forEach((w,i)=>{ if(!head.flag[i]) return; const b=bare(w); if(b && want.indexOf(b)<0) want.push(b); });
   const wantSet=new Set(want);
-  // 앱이 아는 용례 — 화면에서 방금 증명된 수만 말한다(`이 표현으로 N가지를 말할 수 있다`가
-  // 아니다. 실제 용례는 더 많을 수 있어 수치로 닫으면 거짓이 된다).
+  // 쓰기 단계가 받을 정답 — 프레임 **조각**이다(`Is it` · `or`). 낱말로 쪼개지 않는 이유는
+  // 조각이 소스에 저작된 단위이고, 그 단위가 곧 재사용되는 덩어리이기 때문이다.
+  const pieces=(head.raw.segs||[]).filter(g=>g.t==='frame').map(g=>g.s);
+  const vals=pieces.map(()=>'');
   const pool=new Set([item.sentence.en]);
   (item.apply||[]).forEach(a=>pool.add(a.en));
   (item.siblings||[]).forEach(a=>pool.add(a.en));
   const more=Math.max(0, pool.size - all.length);
   const pick=new Set();
-  let done=false, hintLevel=0;
+  let phase=1, hintLevel=0;
 
   const lineHtml=r=> r.tok.map(w=>{ const b=bare(w);
       return b ? `<button class="rc-w" data-b="${escapeHtml(b)}">${escapeHtml(w)}</button>`
@@ -1043,12 +1055,14 @@ function renderRecognize(){
   const wrongBox=el('wrongBox'), listEl=el('rcList');
   const rowEls=Array.from(listEl.querySelectorAll('.rc-row'));
   const wordEls=Array.from(listEl.querySelectorAll('button.rc-w'));
+
+  // ── 1박자: 짚기 ───────────────────────────────────────────────────────────
   function sync(){
     wordEls.forEach(b=> b.classList.toggle('on', pick.has(b.dataset.b)));
-    el('okBtn').disabled = done || !pick.size;
+    el('okBtn').disabled = phase!==1 || !pick.size;
   }
   wordEls.forEach(b=> b.onclick=()=>{
-    if(done) return;
+    if(phase!==1) return;
     const w=b.dataset.b;
     const on=!pick.has(w);
     if(on) pick.add(w); else pick.delete(w);
@@ -1063,8 +1077,7 @@ function renderRecognize(){
       setTimeout(()=>{ if(x.isConnected) x.classList.add('tap'); }, k*40); });
   });
 
-  el('okBtn').onclick=()=>{
-    if(done) return;
+  function checkPick(){
     const extra=[...pick].filter(w=>!wantSet.has(w));
     // 프레임 밖을 짚었으면 **왜 아닌지**를 말한다 — 슬롯은 문장마다 바뀌는 자리다
     if(extra.length){
@@ -1080,61 +1093,140 @@ function renderRecognize(){
       wrongBox.innerHTML=`같은 말이 <b>${missing.length}낱말</b> 더 있어요.`;
       return;
     }
-    finish();
-  };
-
-  const ladder=[ {label:'첫 낱말 보기', run:()=>{ pick.add(want[0]); sync(); },
-                  note:()=>`첫 낱말<b>${escapeHtml(want[0])}</b>`},
-                 // 마지막 칸은 다 짚어 준다 — 탈출구가 없으면 진행이 끊긴다
-                 {label:'정답 보기', run:()=>{ pick.clear(); want.forEach(w=>pick.add(w)); sync(); }} ];
-  function advanceHint(){
-    const d=ladder[hintLevel]; if(!d) return;
-    if(d.run) d.run();
-    const rn=el('revealNote');
-    if(d.note){ rn.classList.remove('hidden'); rn.innerHTML=d.note(); } else rn.classList.add('hidden');
-    hintLevel++;
-    const nx=ladder[hintLevel];
-    if(nx) el('hintLabel').textContent=nx.label; else el('hintBtn').disabled=true;
-  }
-  el('hintBtn').onclick=advanceHint;
-
-  // 줄을 **문장으로** 굳힌다 — 낱말 칸이 사라지고 패턴만 초록 알약으로 남으며
-  // 문장마다 바뀌는 자리는 흐려진다(ver.2 예문과 같은 표기 `frameHlHtml`).
-  function settle(line, r, base){
-    line.innerHTML=frameHlHtml(r.raw, true);
-    const dims=Array.from(line.querySelectorAll('.rc-dim'));
-    dims.forEach(d=>d.classList.add('q'));
-    Array.from(line.querySelectorAll('.rc-hl')).forEach((h,k)=>{
-      h.classList.add('q');
-      setTimeout(()=>{ if(h.isConnected){ h.classList.remove('q'); h.classList.add('pop'); } }, base + k*70);
-    });
-    setTimeout(()=>{ dims.forEach(d=>{ if(d.isConnected) d.classList.remove('q'); }); }, base + 120);
+    recognized();
   }
 
-  function finish(){
-    done=true;
+  // 짚기를 인정한다 — 줄이 문장으로 돌아가고 패턴만 초록 알약으로 남으며
+  // 문장마다 바뀌는 자리는 흐려진다. 여기서 끝내지 않고 2박자로 넘어간다.
+  function recognized(){
+    phase=0;                               // 전환 중 입력 차단
     el('okBtn').disabled=true;
     wrongBox.classList.add('hidden'); el('revealNote').classList.add('hidden');
-    el('rcQ').classList.add('hidden');     // 지시문은 과제가 끝나면 자리를 뺀다
+    el('rcQ').innerHTML='찾았어요';
+    rowEls.forEach((row,ri)=>{
+      const line=row.querySelector('.rc-line');
+      line.innerHTML=frameHlHtml(rows[ri].raw, true);
+      const dims=Array.from(line.querySelectorAll('.rc-dim'));
+      dims.forEach(d=>d.classList.add('q'));
+      Array.from(line.querySelectorAll('.rc-hl')).forEach((h,k)=>{
+        h.classList.add('q');
+        setTimeout(()=>{ if(h.isConnected){ h.classList.remove('q'); h.classList.add('pop'); } }, ri*180 + k*70);
+      });
+      setTimeout(()=>{ dims.forEach(d=>{ if(d.isConnected) d.classList.remove('q'); }); }, ri*180 + 120);
+    });
+    setTimeout(()=>{ if(listEl.isConnected) askWrite(); }, rows.length*180 + 760);
+  }
+
+  // ── 2박자: 그 패턴을 직접 쓴다 ────────────────────────────────────────────
+  // **입력칸은 첫 줄에만 둔다.** 치는 대로 아래 줄에 같이 들어가는 것이 이 단계의 산출물이라,
+  // 쓰는 자리는 하나여야 그 **동시성**이 보인다. 한 번 쓴 것이 여러 문장을 완성한다.
+  function writeLine(r, mode){
+    const segs=r.raw.segs||[]; let k=0;
+    const parts=segs.map(g=>{
+      if(g.t==='slot') return `<span class="rc-dim">${escapeHtml(g.s)}</span>`;
+      const i=k++, v=vals[i]||'';
+      return mode==='input'
+        ? `<input class="blank rc-in" data-i="${i}" value="${escapeHtml(v)}" autocomplete="off" spellcheck="false" placeholder="?">`
+        : `<span class="rc-mir${v?' on':''}" data-i="${i}">${escapeHtml(v)}</span>`;
+    });
+    return parts.join(' ') + (r.punct?`<span class="rc-dim">${escapeHtml(r.punct)}</span>`:'');
+  }
+  function paintWrite(){
+    rowEls.forEach((row,ri)=>{
+      row.querySelector('.rc-line').innerHTML=writeLine(rows[ri], ri===0?'input':'mirror');
+    });
+    bindInputs();
+  }
+  function mirror(){
+    rowEls.forEach((row,ri)=>{ if(ri===0) return;
+      Array.from(row.querySelectorAll('.rc-mir')).forEach(m=>{
+        const v=vals[+m.dataset.i]||'';
+        m.textContent=v; m.classList.toggle('on', !!v);
+      });
+    });
+  }
+  function bindInputs(){
+    const ins=Array.from(listEl.querySelectorAll('input.rc-in'));
+    ins.forEach((inp,k)=>{
+      inp.oninput=()=>{ vals[+inp.dataset.i]=inp.value; mirror();
+        wrongBox.classList.add('hidden');
+        ins.forEach(x=>x.classList.remove('bad'));
+        el('okBtn').disabled = phase!==2 || vals.some(v=>!String(v).trim()); };
+      inp.onkeydown=e=>{ if(e.key!=='Enter') return; e.preventDefault();
+        const nx=ins[k+1]; if(nx) nx.focus(); else if(!el('okBtn').disabled) checkWrite(); };
+    });
+    if(ins[0]) ins[0].focus();
+  }
+  function askWrite(){
+    phase=2;
+    el('rcQ').classList.remove('hidden');
+    el('rcQ').innerHTML='찾은 표현을 <b>직접 써 보세요</b>';
+    el('card').classList.remove('correct');
+    paintWrite();
+    el('okBtn').disabled=true;
+    // 사다리는 여기서 철자를 여는 한 칸으로 바뀐다
+    hintLevel=0; el('hintBtn').disabled=false; el('hintLabel').textContent='표현 보기';
+  }
+  const normPiece=s=>String(s).toLowerCase().trim().replace(/\s+/g,' ').replace(/[^a-z0-9' ]/g,'');
+  function pieceOk(typed, ans){
+    const a=normPiece(typed).split(' ').filter(Boolean), b=normPiece(ans).split(' ').filter(Boolean);
+    if(a.length!==b.length) return false;
+    // 오타 한 글자는 같은 낱말로 본다(`[4]`와 같은 규약) — 과제는 패턴을 세우는 것이고
+    // 철자를 정확히 치는 것이 아니다.
+    return a.every((w,i)=>nearWord(w, b[i]));
+  }
+  function checkWrite(){
+    if(phase!==2) return;
+    const ins=Array.from(listEl.querySelectorAll('input.rc-in'));
+    const bad=pieces.map((p,i)=>!pieceOk(vals[i], p)).map((x,i)=>x?i:-1).filter(i=>i>=0);
+    if(bad.length){
+      bad.forEach(i=>{ const inp=ins.find(x=>+x.dataset.i===i); if(inp) inp.classList.add('bad'); });
+      listEl.classList.remove('shake'); void listEl.offsetWidth; listEl.classList.add('shake');
+      wrongBox.classList.remove('hidden');
+      wrongBox.innerHTML=`방금 짚은 말과 달라요. 철자를 다시 확인해 보세요.`;
+      return;
+    }
+    // 오타로 통과했으면 **정답 철자로 굳힌다** — 내가 세운 패턴으로 남는 것이라
+    // 틀린 철자를 남기면 안 된다(`[4]`와 같은 규약).
+    pieces.forEach((p,i)=>{ vals[i]=p; });
+    payoff();
+  }
+
+  // ── 결과: 한 번 쓴 것이 여러 문장을 완성한다 ────────────────────────────
+  function payoff(){
+    phase=3;
+    el('okBtn').disabled=true;
+    wrongBox.classList.add('hidden'); el('revealNote').classList.add('hidden');
+    el('rcQ').classList.add('hidden');
     el('card').classList.add('correct');
     if(!el('card').querySelector('.check-mark')){ const c=document.createElement('div'); c.className='check-mark'; c.textContent='✓'; el('card').appendChild(c); }
-    rowEls.forEach((row,ri)=> settle(row.querySelector('.rc-line'), rows[ri], ri*200));
-    // **아직 보지 않은 문장들이 하나씩 도착한다.** 내가 찾은 조각이 처음 보는 문장에서도
-    // 켜지는 것이 이 단계의 산출물이다 — `N개 더 알고 있어요`라는 숫자가 아니라
-    // **눈앞에 쌓이는 줄**이 그 근거다.
+    rowEls.forEach((row,ri)=>{
+      const line=row.querySelector('.rc-line');
+      line.innerHTML=frameHlHtml(rows[ri].raw, true);
+      Array.from(line.querySelectorAll('.rc-hl')).forEach((h,k)=>
+        setTimeout(()=>{ if(h.isConnected) h.classList.add('pop'); }, ri*160 + k*70));
+    });
+    // **아직 보지 않은 문장들이 도착한다 — 내가 쓴 조각이 이미 박힌 채로.**
+    // 한 번 세운 패턴이 처음 보는 문장까지 완성하는 것이 `이걸 알면 할 수 있는 말이
+    // 늘어난다`의 실체다. 숫자가 아니라 눈앞에 쌓이는 줄이 근거다.
     later.forEach((r,k)=>{
-      const at=rows.length*200 + 260 + k*520;
       setTimeout(()=>{
         if(!listEl.isConnected) return;
         const div=document.createElement('div');
         div.className='rc-row arrive';
-        div.innerHTML=`<div class="rc-line"></div><div class="rc-kr">${escapeHtml(r.kr)}</div>`;
+        div.innerHTML=`<div class="rc-line">${frameHlHtml(r.raw, true)}</div>
+          <div class="rc-kr">${escapeHtml(r.kr)}</div>`;
         listEl.appendChild(div);
-        settle(div.querySelector('.rc-line'), r, 180);
-      }, at);
+        Array.from(div.querySelectorAll('.rc-hl')).forEach((h,j)=>
+          setTimeout(()=>{ if(h.isConnected) h.classList.add('pop'); }, 180 + j*70));
+      }, rows.length*160 + 260 + k*520);
     });
     const p=item.pattern||{}, form=(p.form||'').trim(), pmean=(p.meaning||'').trim();
     setTimeout(()=>{
+      // **화면이 교체됐는지 확인한다** — `el('payoffBox')`는 늘 새 화면의 것을 찾으므로
+      // 가드가 없으면 이전 문항의 타이머가 다음 문항 화면에 결과창을 써 버린다
+      // (`[2]` 전환에서 겪은 것과 같은 함정이다. 스윕에서 오답이 통과한 것으로 잡혔다).
+      if(!listEl.isConnected) return;
       const box=el('payoffBox'); if(!box) return;
       box.innerHTML=`<div class="payoff grow-in">
         <div class="chat-tag rv">학습 정보</div>
@@ -1144,10 +1236,36 @@ function renderRecognize(){
         ${more?`<div class="pf-div"></div>
         <div class="rc-more"><span class="ic">ⓘ</span>이 표현이 들어간 문장을 <b>${more}개</b> 더 알고 있어요</div>`:''}
       </div>`;
-    }, rows.length*200 + 260 + later.length*520 + 200);
+    }, rows.length*160 + 260 + later.length*520 + 200);
     el('bottom').innerHTML=arrangeBottomHtml('다음 문제');
     el('nextBtn').onclick=patternStep;
   }
+
+  el('okBtn').onclick=()=>{ if(phase===1) checkPick(); else if(phase===2) checkWrite(); };
+
+  // ── 사다리 ────────────────────────────────────────────────────────────────
+  const pickLadder=[ {label:'첫 낱말 보기', run:()=>{ pick.add(want[0]); sync(); },
+                      note:()=>`첫 낱말<b>${escapeHtml(want[0])}</b>`},
+                     // 마지막 칸은 다 짚어 준다 — 탈출구가 없으면 진행이 끊긴다
+                     {label:'정답 보기', run:()=>{ pick.clear(); want.forEach(w=>pick.add(w)); sync(); }} ];
+  el('hintBtn').onclick=()=>{
+    if(phase===2){
+      // 2박자의 사다리는 철자를 여는 한 칸뿐이다 — 막혔을 때 필요한 것은 그것이고,
+      // 채워 주고 넘기지 않는 이유는 **손으로 한 번은 세워야** 산출이기 때문이다.
+      const rn=el('revealNote');
+      rn.classList.remove('hidden');
+      rn.innerHTML=`표현<b>${escapeHtml(pieces.join(' … '))}</b>`;
+      el('hintBtn').disabled=true;
+      return;
+    }
+    const d=pickLadder[hintLevel]; if(!d) return;
+    if(d.run) d.run();
+    const rn=el('revealNote');
+    if(d.note){ rn.classList.remove('hidden'); rn.innerHTML=d.note(); } else rn.classList.add('hidden');
+    hintLevel++;
+    const nx=pickLadder[hintLevel];
+    if(nx) el('hintLabel').textContent=nx.label; else el('hintBtn').disabled=true;
+  };
 }
 
 
