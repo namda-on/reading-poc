@@ -986,20 +986,19 @@ function renderRecognize(){
   curStep=recognizeStep;
   const item=sessionItems[itemIdx];
   setProgress(1);
-  // **문장 하나로 시작한다.** 여러 문장을 나란히 놓고 `안 변하는 부분`을 찾게 하면, 후보를
-  // 아무리 잘 골라도 유저가 하는 일은 **문장 비교**다 — 같은 곳을 찾는 것과 다른 곳을 찾는
-  // 것은 같은 작업이라 화면이 `틀린 그림 찾기`가 된다. 비교할 것이 없으면 그 길이 막힌다.
-  //
-  // 대신 **예측**을 시킨다: `이 문장에서 다시 쓸 수 있는 말은 어디인가`. 단서가 없으니
-  // 쉽지 않고(그게 이 단계가 노리는 판단이다), 확인을 누르면 **다음 문장이 도착해 채점을
-  // 대신한다** — 맞았으면 내가 짚은 조각이 새 문장에서도 켜지고, 틀렸으면 거기 없는 낱말이
-  // 빠진다. 채점이 정답표가 아니라 **문장 자체**라, 틀려도 왜 아닌지가 화면에 남는다.
+  // **예시 두 문장에서 공통 패턴을 찾는다.** 문장 하나만 주고 `다시 쓸 수 있는 말`을
+  // 예측하게 해 봤지만 단서가 없어 맞힐 수가 없었다 — 찾기는 쉬워야 한다(이 단계는
+  // 시험이 아니라 인식이다). 비교 대상은 **둘**이다: 셋을 늘어놓으면 마지막 칸만 다른
+  // 격자가 되어 `틀린 그림 찾기`로 읽히고, 둘이면 그림이 아니라 짝으로 읽힌다.
   const all=rcgRows(item, 5).map(r=>{
     const tok=tokenize(r.en);
     return {raw:r, kr:r.kr, tok, punct:trailPunct(r.en), flag:frameFlags(tok, r.segs)};
   });
+  const rows=all.slice(0, 2), later=all.slice(2);
   const bare=w=>String(w).toLowerCase().replace(/[^a-z0-9']/g,'');
-  const head=all[0], want=[];
+  // **정답은 위치가 아니라 낱말 집합이다** — 어느 줄에서 짚든 같은 낱말이면 같은 것을
+  // 짚은 것이고, 짚는 순간 두 줄의 그 낱말이 한꺼번에 켜진다.
+  const head=rows[0], want=[];
   head.tok.forEach((w,i)=>{ if(!head.flag[i]) return; const b=bare(w); if(b && want.indexOf(b)<0) want.push(b); });
   const wantSet=new Set(want);
   // 앱이 아는 용례 — 화면에서 방금 증명된 수만 말한다(`이 표현으로 N가지를 말할 수 있다`가
@@ -1009,7 +1008,7 @@ function renderRecognize(){
   (item.siblings||[]).forEach(a=>pool.add(a.en));
   const more=Math.max(0, pool.size - all.length);
   const pick=new Set();
-  let done=false, hintLevel=0, shown=1;   // shown = 화면에 나와 있는 문장 수
+  let done=false, hintLevel=0;
 
   const lineHtml=r=> r.tok.map(w=>{ const b=bare(w);
       return b ? `<button class="rc-w" data-b="${escapeHtml(b)}">${escapeHtml(w)}</button>`
@@ -1020,12 +1019,12 @@ function renderRecognize(){
     <div class="stage-scroll">
       <div class="chat-card rcg" id="card">
         ${chatTag(item)}<div class="chat-badge new">NEW</div>
-        <div class="sp-q" id="rcQ">이 문장에서 <b>다시 쓸 수 있는 말</b>은 어디일까요?</div>
-        <div class="rc-list" id="rcList">
+        <div class="sp-q" id="rcQ">두 문장에 <b>똑같이 있는 말</b>을 짚어 보세요</div>
+        <div class="rc-list" id="rcList">${rows.map(r=>`
           <div class="rc-row">
-            <div class="rc-line">${lineHtml(head)}</div>
-            <div class="rc-kr">${escapeHtml(head.kr)}</div>
-          </div></div>
+            <div class="rc-line">${lineHtml(r)}</div>
+            <div class="rc-kr">${escapeHtml(r.kr)}</div>
+          </div>`).join('')}</div>
         <div class="wrong-box hidden" id="wrongBox"></div>
         <div class="reveal-note hidden" id="revealNote"></div>
       </div>
@@ -1042,86 +1041,46 @@ function renderRecognize(){
     </div>`;
 
   const wrongBox=el('wrongBox'), listEl=el('rcList');
-  let wordEls=[];
-  function bindWords(){
-    wordEls=Array.from(listEl.querySelectorAll('button.rc-w'));
-    wordEls.forEach(b=> b.onclick=()=>{
-      if(done) return;
-      const w=b.dataset.b;
-      const on=!pick.has(w);
-      if(on) pick.add(w); else pick.delete(w);
-      wordEls.forEach(x=>x.classList.remove('bad'));
-      wrongBox.classList.add('hidden');
-      sync();
-      // 짚은 낱말이 **나와 있는 모든 줄에서 한꺼번에 튄다**(줄마다 40ms 차)
-      if(!on) return;
-      const hits=wordEls.filter(x=>x.dataset.b===w);
-      hits.forEach((x,k)=>{ x.classList.remove('tap'); void x.offsetWidth;
-        setTimeout(()=>{ if(x.isConnected) x.classList.add('tap'); }, k*40); });
-    });
-  }
+  const rowEls=Array.from(listEl.querySelectorAll('.rc-row'));
+  const wordEls=Array.from(listEl.querySelectorAll('button.rc-w'));
   function sync(){
     wordEls.forEach(b=> b.classList.toggle('on', pick.has(b.dataset.b)));
     el('okBtn').disabled = done || !pick.size;
   }
-  bindWords();
-
-  // 문장 한 줄을 화면에 얹는다. `tap`이면 짚을 수 있는 낱말로, 아니면 굳은 표기로.
-  function addRow(r, tap){
-    const div=document.createElement('div');
-    div.className='rc-row arrive';
-    div.innerHTML=`<div class="rc-line">${tap?lineHtml(r):''}</div><div class="rc-kr">${escapeHtml(r.kr)}</div>`;
-    listEl.appendChild(div);
-    return div;
-  }
-  // 줄을 **문장으로** 굳힌다 — 낱말 칸이 사라지고 패턴만 초록 알약으로 남으며
-  // 문장마다 바뀌는 자리는 흐려진다(ver.2 예문과 같은 표기 `frameHlHtml`).
-  function settle(line, r, base){
-    line.innerHTML=frameHlHtml(r.raw, true);
-    const dims=Array.from(line.querySelectorAll('.rc-dim'));
-    dims.forEach(d=>d.classList.add('q'));
-    Array.from(line.querySelectorAll('.rc-hl')).forEach((h,k)=>{
-      h.classList.add('q');
-      setTimeout(()=>{ if(h.isConnected){ h.classList.remove('q'); h.classList.add('pop'); } }, base + k*70);
-    });
-    setTimeout(()=>{ dims.forEach(d=>{ if(d.isConnected) d.classList.remove('q'); }); }, base + 120);
-  }
+  wordEls.forEach(b=> b.onclick=()=>{
+    if(done) return;
+    const w=b.dataset.b;
+    const on=!pick.has(w);
+    if(on) pick.add(w); else pick.delete(w);
+    wordEls.forEach(x=>x.classList.remove('bad'));
+    wrongBox.classList.add('hidden');
+    sync();
+    // 짚은 낱말이 **두 줄에서 한꺼번에 튄다**(줄마다 40ms 차) — 색만 바뀌면
+    // `저기도 있다`가 눈으로만 남고, 이 단계에서 남아야 하는 것은 그 감각이다.
+    if(!on) return;
+    const hits=wordEls.filter(x=>x.dataset.b===w);
+    hits.forEach((x,k)=>{ x.classList.remove('tap'); void x.offsetWidth;
+      setTimeout(()=>{ if(x.isConnected) x.classList.add('tap'); }, k*40); });
+  });
 
   el('okBtn').onclick=()=>{
     if(done) return;
-    const missing=want.filter(w=>!pick.has(w));
     const extra=[...pick].filter(w=>!wantSet.has(w));
-    if(!extra.length && !missing.length) return finish();
-    // **다음 문장이 채점한다.** 아직 남은 문장이 있으면 한 줄을 내려보내 틀린 자리를
-    // 그 문장으로 보여준다 — 정답표가 아니라 문장이 알려주므로 틀린 것이 곧 단서가 된다.
-    if(shown < all.length){
-      const next=all[shown++];
-      const nextBare=new Set(next.tok.map(bare).filter(Boolean));
-      const gone=extra.filter(w=>!nextBare.has(w));
-      const row=addRow(next, true);
-      bindWords(); sync();
-      gone.forEach(w=>pick.delete(w));
-      sync();
-      wordEls.forEach(b=>{ if(gone.indexOf(b.dataset.b)>=0) b.classList.add('bad'); });
-      wrongBox.classList.remove('hidden');
-      wrongBox.innerHTML = gone.length
-        ? `<b>${escapeHtml(gone.join(', '))}</b> 는 새 문장엔 없어요. <b>두 문장에 다 있는</b> 말만 남겨 보세요.`
-        : (extra.length
-            ? `<b>${escapeHtml(extra.join(', '))}</b> 는 문장마다 달라요.`
-            : `같은 말이 <b>${missing.length}낱말</b> 더 있어요.`);
-      row.scrollIntoView({block:'nearest', behavior:'smooth'});
-      return;
-    }
-    // 더 내려보낼 문장이 없으면 그때부터는 화면에 있는 문장들로 판정한다
+    // 프레임 밖을 짚었으면 **왜 아닌지**를 말한다 — 슬롯은 문장마다 바뀌는 자리다
     if(extra.length){
       wordEls.forEach(b=>{ if(extra.indexOf(b.dataset.b)>=0) b.classList.add('bad'); });
       listEl.classList.remove('shake'); void listEl.offsetWidth; listEl.classList.add('shake');
       wrongBox.classList.remove('hidden');
-      wrongBox.innerHTML=`<b>${escapeHtml(extra.join(', '))}</b> 는 문장마다 달라요. <b>모든 문장에 다 있는</b> 말만 짚어 보세요.`;
+      wrongBox.innerHTML=`<b>${escapeHtml(extra.join(', '))}</b> 는 문장마다 달라요. 두 문장에 <b>다 있는</b> 말만 짚어 보세요.`;
       return;
     }
-    wrongBox.classList.remove('hidden');
-    wrongBox.innerHTML=`같은 말이 <b>${missing.length}낱말</b> 더 있어요.`;
+    const missing=want.filter(w=>!pick.has(w));
+    if(missing.length){
+      wrongBox.classList.remove('hidden');
+      wrongBox.innerHTML=`같은 말이 <b>${missing.length}낱말</b> 더 있어요.`;
+      return;
+    }
+    finish();
   };
 
   const ladder=[ {label:'첫 낱말 보기', run:()=>{ pick.add(want[0]); sync(); },
@@ -1139,6 +1098,19 @@ function renderRecognize(){
   }
   el('hintBtn').onclick=advanceHint;
 
+  // 줄을 **문장으로** 굳힌다 — 낱말 칸이 사라지고 패턴만 초록 알약으로 남으며
+  // 문장마다 바뀌는 자리는 흐려진다(ver.2 예문과 같은 표기 `frameHlHtml`).
+  function settle(line, r, base){
+    line.innerHTML=frameHlHtml(r.raw, true);
+    const dims=Array.from(line.querySelectorAll('.rc-dim'));
+    dims.forEach(d=>d.classList.add('q'));
+    Array.from(line.querySelectorAll('.rc-hl')).forEach((h,k)=>{
+      h.classList.add('q');
+      setTimeout(()=>{ if(h.isConnected){ h.classList.remove('q'); h.classList.add('pop'); } }, base + k*70);
+    });
+    setTimeout(()=>{ dims.forEach(d=>{ if(d.isConnected) d.classList.remove('q'); }); }, base + 120);
+  }
+
   function finish(){
     done=true;
     el('okBtn').disabled=true;
@@ -1146,18 +1118,18 @@ function renderRecognize(){
     el('rcQ').classList.add('hidden');     // 지시문은 과제가 끝나면 자리를 뺀다
     el('card').classList.add('correct');
     if(!el('card').querySelector('.check-mark')){ const c=document.createElement('div'); c.className='check-mark'; c.textContent='✓'; el('card').appendChild(c); }
-    // 화면에 나와 있는 줄이 먼저 굳고,
-    const cur=Array.from(listEl.querySelectorAll('.rc-row'));
-    cur.forEach((row,ri)=> settle(row.querySelector('.rc-line'), all[ri], ri*200));
-    // **아직 보지 않은 문장들이 하나씩 도착한다.** 내가 예측한 조각이 처음 보는 문장에서도
+    rowEls.forEach((row,ri)=> settle(row.querySelector('.rc-line'), rows[ri], ri*200));
+    // **아직 보지 않은 문장들이 하나씩 도착한다.** 내가 찾은 조각이 처음 보는 문장에서도
     // 켜지는 것이 이 단계의 산출물이다 — `N개 더 알고 있어요`라는 숫자가 아니라
     // **눈앞에 쌓이는 줄**이 그 근거다.
-    const later=all.slice(cur.length);
     later.forEach((r,k)=>{
-      const at=cur.length*200 + 260 + k*520;
+      const at=rows.length*200 + 260 + k*520;
       setTimeout(()=>{
         if(!listEl.isConnected) return;
-        const div=addRow(r, false);
+        const div=document.createElement('div');
+        div.className='rc-row arrive';
+        div.innerHTML=`<div class="rc-line"></div><div class="rc-kr">${escapeHtml(r.kr)}</div>`;
+        listEl.appendChild(div);
         settle(div.querySelector('.rc-line'), r, 180);
       }, at);
     });
@@ -1172,7 +1144,7 @@ function renderRecognize(){
         ${more?`<div class="pf-div"></div>
         <div class="rc-more"><span class="ic">ⓘ</span>이 표현이 들어간 문장을 <b>${more}개</b> 더 알고 있어요</div>`:''}
       </div>`;
-    }, cur.length*200 + 260 + later.length*520 + 200);
+    }, rows.length*200 + 260 + later.length*520 + 200);
     el('bottom').innerHTML=arrangeBottomHtml('다음 문제');
     el('nextBtn').onclick=patternStep;
   }
