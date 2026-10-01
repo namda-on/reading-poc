@@ -171,23 +171,15 @@
   /* 배열 — 인라인 문장 채우기 */
   .fill { position:relative; display:flex; flex-wrap:wrap; align-items:center; gap:7px 8px; margin-top:16px; min-height:44px;
     transition:opacity .22s ease, transform .26s cubic-bezier(.32,.02,.24,1); }
-  .fill.fade-out { opacity:0; }
-  /* 들어올 때는 살짝 아래에서 올라온다 — 나갈 때와 방향을 갈라 두 동작이 겹쳐 보이지 않게 */
-  .fill.pre-in { opacity:0; transform:translateY(9px); transition:none; }
   .fill-word { background:#eaf1fb; border:1px solid #cdddf3; border-radius:9px; padding:6px 13px; font-size:17px; color:#2f3e52; cursor:pointer; }
   .fill-blank { min-width:52px; border-bottom:2px solid #b9c7db; height:26px; }
   .grow-in { animation:growIn .34s ease both; }
   @keyframes growIn { from{ opacity:0; transform:translateY(5px);} to{ opacity:1; transform:none;} }
-  /* 1박자 완료를 먼저 인정한다 — 곧바로 줄을 비우면 '회수'로 읽힌다 */
+  /* 놓은 낱말을 인정하는 팝(ver.2 패턴 완성이 쓴다) */
   .fill-word.ok-pop { animation:okPop .28s ease; }
   @keyframes okPop { 0%{transform:scale(1);} 44%{transform:scale(1.1);} 100%{transform:scale(1);} }
-  /* 2박자 재료가 도착하는 방향 — 위에서 끌어내리는 게 아니라 아래에서 올라온다 */
   .bank { transition:opacity .2s ease; }
-  .bank.fade-out { opacity:0; }
-  .bank.bank-in .tile { animation:bankIn .32s cubic-bezier(.32,.02,.24,1) both; animation-delay:calc(var(--i, 0) * 36ms); }
-  @keyframes bankIn { from{ opacity:0; transform:translateY(12px);} to{ opacity:1; transform:none;} }
-  /* 2박자에서 타이틀이 문장 뜻으로 바뀔 때 표현 뜻은 초록 칩으로 남아 연결을 잇는다.
-     `이 표현 …` 처럼 라벨을 붙이면 화면 문구로 어색하고, 칩은 문장 해석의 일부로 읽히지 않는다. */
+  /* 문장 뜻에서 표현 구간을 못 찾은 문항이 표현 뜻을 초록 칩으로 따로 세울 때 쓴다 */
   .expand-mean { margin-top:6px; }
   /* 흐름 2 [2] — 문장 해석은 타이틀이 아니라 영어 아래에 둔다(타이틀은 표현 뜻) */
   /* [4] 답 줄에 박혀 있는 프레임 — 내가 쓰는 도구다 */
@@ -213,6 +205,8 @@
   .rc-w.plain { border-bottom-color:transparent; }
   /* 짚으면 **세 줄의 같은 낱말이 한꺼번에 켜진다** — `저기도 있네`가 짚기와 같은 동작이다 */
   .rc-w.on { background:#e2ebfb; color:#3a6bb0; font-weight:800; border-bottom-color:transparent; }
+  /* 맞게 짚었다는 인정 — 그 자리가 그대로 입력칸이 된다 */
+  .rc-w.ok { background:#dcf6e6; color:#1f7a49; font-weight:800; border-bottom-color:transparent; }
   .rc-w.pop, .rc-hl.pop { animation:rcPop .36s ease; }
   /* 짚는 순간의 피드백 — 통과 연출(`pop`)보다 작고 빠르다(정답 표시가 아니라 반응이다) */
   .rc-w.tap { animation:rcTap .3s ease; }
@@ -509,10 +503,11 @@ const SIT_ROW='[5] 상황 카드 넣기 (3문항마다)';
 // **두 버전은 과제의 방향이 반대다**: `ver.1`은 여러 문장에서 공통을 **찾고**,
 // `ver.2`는 찾아 준 패턴을 새 문장에 **적용한다**. 어느 쪽이 "이 표현을 배웠다"를
 // 만드는지 보려고 나란히 둔다.
+// **[2] 패턴 단계의 두 방식.** 끌 수 없다 — 패턴을 내 손으로 세우는 것이 이 흐름의
+// 핵심이고, 그래서 `[2] 표현 넣기`(프레임 자리만 배열하던 박자)를 이 단계가 흡수했다.
 const RCG_MODES={
-  off:{label:'안 넣는다', desc:'[1] 어휘 다음이 바로 [2] 표현 넣기다(종전 흐름)'},
-  v1:{label:'ver.1 패턴 찾기', desc:'세 문장에 똑같이 있는 말을 짚는다'},
-  v2:{label:'ver.2 패턴 완성', desc:'예문 둘을 보고 같은 패턴으로 빈칸을 채운다'},
+  v1:{label:'찾아서 쓴다', desc:'두 문장에서 공통 패턴을 찾고 직접 써 본다'},
+  v2:{label:'보고 맞춘다', desc:'예문 하나를 보고 같은 패턴으로 빈칸을 채운다'},
 };
 // [4]는 **직교하는 두 축**이다. 일곱 개를 프로즈 라벨로 늘어놓았더니 무엇이 다른지
 // 읽히지 않았고, 실제로 절반은 옵션이 아니었다 — H는 지원 1단에서 A와 같고, R은
@@ -553,13 +548,10 @@ function setSpkVar(v){
   renderSitOption(); applyStepOption();
 }
 let rcgMode=(()=>{ try{ const v=localStorage.getItem(RCG_KEY);
-  if(v==='1') return 'v1'; if(v==='0') return 'off';   // 켬/끔만 있던 때의 저장값
   return RCG_MODES[v]?v:'v1'; }catch(e){ return 'v1'; } })();
-let rcgOn = rcgMode!=='off';
 function setRcgMode(m){
-  rcgMode = RCG_MODES[m] ? m : 'v1'; rcgOn = rcgMode!=='off';
+  rcgMode = RCG_MODES[m] ? m : 'v1';
   try{ localStorage.setItem(RCG_KEY, rcgMode); }catch(e){}
-  buildStepIndex();          // 문항당 단계 수가 달라지므로 진행바 기준을 다시 잡는다
   renderSitOption(); applyStepOption();
 }
 function recognizeStep(){ return rcgMode==='v2' ? renderRecognizeFill() : renderRecognize(); }
@@ -577,13 +569,13 @@ function applyStepOption(){
   if(curStep===renderSpeak) renderSpeak();
   // 인식 두 버전은 나란히 비교하는 것이라 그 자리에서 갈아 끼운다(끄면 그대로 둔다 —
   // 풀던 화면을 지우고 다음 단계로 밀면 무엇이 달라졌는지가 안 보인다)
-  else if(curStep===recognizeStep && rcgOn) recognizeStep();
+  else if(curStep===recognizeStep) recognizeStep();
 }
 function renderSitOption(){
   ['optHome','settingPop'].forEach(id=>{
     const box=el(id);
     if(!box || box.classList.contains('hidden')) return;
-    box.innerHTML=`<div class="opt-label">인식 단계 — 패턴을 어떻게 만나나</div>
+    box.innerHTML=`<div class="opt-label">[2] 패턴 단계 — 패턴을 어떻게 세우나</div>
       <div class="seg seg-v">
         ${Object.keys(RCG_MODES).map(k=>`<button class="seg-b" data-r="${k}"><b>${rcgMode===k?'✓ ':''}${RCG_MODES[k].label}</b><i>${RCG_MODES[k].desc}</i></button>`).join('')}
       </div>
@@ -620,7 +612,7 @@ let DATA=null, sessionItems=[], itemIdx=0, learned=[];
 //  transfer(기본) — 2박자에서 문장을 표현까지 포함해 통째로 배열한다
 //  expand         — 1박자에 놓은 프레임이 굳고 나머지만 그 위로 자란다
 function patternStep(){ return renderPattern(); }
-function afterVocab(){ return rcgOn ? recognizeStep() : patternStep(); }
+function afterVocab(){ return recognizeStep(); }
 // 지금 보고 있는 단계 — 옵션은 **그 자리에서 바로** 적용돼야 비교가 된다(설정 → 홈 →
 // 다시 풀기로 돌아가면 무엇이 달라졌는지 감각이 끊긴다). 각 단계 렌더가 자기를 적는다.
 let curStep=null;
@@ -662,7 +654,7 @@ function renderHome(){
 
   const card=document.createElement('div'); card.className='start-card';
   card.innerHTML=`
-    <div class="start-flow">어휘 빈칸 <span class="ar">→</span> 표현 넣기 <span class="ar">→</span> 문장 배열 <span class="ar">→</span> 말해보기</div>
+    <div class="start-flow">어휘 빈칸 <span class="ar">→</span> 패턴 찾고 쓰기 <span class="ar">→</span> 문장 배열 <span class="ar">→</span> 말해보기</div>
     <div class="start-count">${rest===0?`${total}문항을 모두 풀었어요`:`남은 <b>${rest}</b>문항 · 총 ${total}문항`}</div>
     <div class="start-note">표현을 먼저 익히고, 그 표현으로 새 문장을 만들어봐요</div>
     <button class="start-btn" id="startBtn">${rest===0?'다시 처음부터 ▶':(resume?`이어서 풀기 ▶`:`학습 시작 ▶`)}</button>
@@ -688,10 +680,10 @@ function startSession(startIdx){
 }
 // [5] 구간이 몇 문항마다 끼어드므로 총 단계 수를 미리 합산해 진행바가 튀지 않게 한다.
 let stepStart=[], stepTotal=0;
-// 문항당 4단계 — 어휘 · 표현 산출 · 문장 배열 · 질문에 답하기. 인식을 켜면 앞에 한 칸 더.
-function itemSteps(){ return rcgOn ? 5 : 4; }
-// 어휘(0) 뒤의 단계들은 인식이 켜져 있으면 한 칸씩 밀린다
-function stepAt(n){ return n + (rcgOn ? 1 : 0); }
+// **문항당 4단계다** — `[1] 어휘` · `[2] 패턴 찾고 쓰기` · `[3] 문장 배열` · `[4] 말해보기`.
+// 한 표현을 익히는 데 그 이상을 거치면 길다: 패턴을 세우는 박자가 인식 단계와 `[2]`
+// 1박자에 **두 번** 있었고(같은 과제였다), 그걸 하나로 합쳐 6 → 4가 됐다.
+function itemSteps(){ return 4; }
 function buildStepIndex(){
   stepStart=[]; let acc=0;
   sessionItems.forEach((_,i)=>{ stepStart.push(acc); acc+=itemSteps(); if(isReviewAfter(i)) acc+=1; });
@@ -1031,7 +1023,7 @@ function renderRecognize(){
     <div class="stage-scroll">
       <div class="chat-card rcg" id="card">
         ${chatTag(item)}<div class="chat-badge new">NEW</div>
-        <div class="sp-q" id="rcQ">두 문장에 <b>똑같이 있는 말</b>을 짚어 보세요</div>
+        <div class="sp-q" id="rcQ">아래 두 문장에서 <b>공통되는 패턴</b>을 찾아 눌러 보세요</div>
         <div class="rc-list" id="rcList">${rows.map(r=>`
           <div class="rc-row">
             <div class="rc-line">${lineHtml(r)}</div>
@@ -1084,7 +1076,7 @@ function renderRecognize(){
       wordEls.forEach(b=>{ if(extra.indexOf(b.dataset.b)>=0) b.classList.add('bad'); });
       listEl.classList.remove('shake'); void listEl.offsetWidth; listEl.classList.add('shake');
       wrongBox.classList.remove('hidden');
-      wrongBox.innerHTML=`<b>${escapeHtml(extra.join(', '))}</b> 는 문장마다 달라요. 두 문장에 <b>다 있는</b> 말만 짚어 보세요.`;
+      wrongBox.innerHTML=`<b>${escapeHtml(extra.join(', '))}</b> 는 문장마다 달라요. <b>두 문장에 다 있는</b> 말만 눌러 보세요.`;
       return;
     }
     const missing=want.filter(w=>!pick.has(w));
@@ -1098,23 +1090,15 @@ function renderRecognize(){
 
   // 짚기를 인정한다 — 줄이 문장으로 돌아가고 패턴만 초록 알약으로 남으며
   // 문장마다 바뀌는 자리는 흐려진다. 여기서 끝내지 않고 2박자로 넘어간다.
+  // 맞게 짚었음을 인정하고 **바로** 쓰는 자리로 넘긴다. 초록으로 굳혔다가 다시 비우면
+  // 그 순서가 `회수`로 읽혀 어색하다(`[2]` 전환에서 배운 것과 같다) — 짚은 낱말이 초록으로
+  // 한 번 튀고, 그 자리가 그대로 입력칸이 된다. 화면은 한 번만 바뀐다.
   function recognized(){
     phase=0;                               // 전환 중 입력 차단
     el('okBtn').disabled=true;
     wrongBox.classList.add('hidden'); el('revealNote').classList.add('hidden');
-    el('rcQ').innerHTML='찾았어요';
-    rowEls.forEach((row,ri)=>{
-      const line=row.querySelector('.rc-line');
-      line.innerHTML=frameHlHtml(rows[ri].raw, true);
-      const dims=Array.from(line.querySelectorAll('.rc-dim'));
-      dims.forEach(d=>d.classList.add('q'));
-      Array.from(line.querySelectorAll('.rc-hl')).forEach((h,k)=>{
-        h.classList.add('q');
-        setTimeout(()=>{ if(h.isConnected){ h.classList.remove('q'); h.classList.add('pop'); } }, ri*180 + k*70);
-      });
-      setTimeout(()=>{ dims.forEach(d=>{ if(d.isConnected) d.classList.remove('q'); }); }, ri*180 + 120);
-    });
-    setTimeout(()=>{ if(listEl.isConnected) askWrite(); }, rows.length*180 + 760);
+    wordEls.forEach(b=>{ if(pick.has(b.dataset.b)){ b.classList.remove('on'); b.classList.add('ok','pop'); } });
+    setTimeout(()=>{ if(listEl.isConnected) askWrite(); }, 300);
   }
 
   // ── 2박자: 그 패턴을 직접 쓴다 ────────────────────────────────────────────
@@ -1160,8 +1144,7 @@ function renderRecognize(){
   function askWrite(){
     phase=2;
     el('rcQ').classList.remove('hidden');
-    el('rcQ').innerHTML='찾은 표현을 <b>직접 써 보세요</b>';
-    el('card').classList.remove('correct');
+    el('rcQ').innerHTML='찾은 패턴을 <b>직접 써 보세요</b>';
     paintWrite();
     el('okBtn').disabled=true;
     // 사다리는 여기서 철자를 여는 한 칸으로 바뀐다
@@ -1228,16 +1211,20 @@ function renderRecognize(){
       // (`[2]` 전환에서 겪은 것과 같은 함정이다. 스윕에서 오답이 통과한 것으로 잡혔다).
       if(!listEl.isConnected) return;
       const box=el('payoffBox'); if(!box) return;
+      const made=listEl.querySelectorAll('.rc-row').length;
+      const desc=((item.pattern||{}).desc||'').trim();
       box.innerHTML=`<div class="payoff grow-in">
         <div class="chat-tag rv">학습 정보</div>
         <div class="pf-sub"><span class="ic">💡</span>새로운 표현을 배웠어요</div>
         ${form?`<div class="pf-form">${escapeHtml(form).replace(/_{2,}|~/g,'<span class="slot"></span>')}</div>`:''}
         ${pmean?`<div class="pf-mean">${escapeHtml(pmean)}</div>`:''}
-        ${more?`<div class="pf-div"></div>
-        <div class="rc-more"><span class="ic">ⓘ</span>이 표현이 들어간 문장을 <b>${more}개</b> 더 알고 있어요</div>`:''}
+        <div class="pf-div"></div>
+        <div class="rc-more"><span class="ic">✍</span>이 패턴 하나를 써서 위 <b>${made}문장</b>이 완성됐어요</div>
+        ${desc?`<div class="rc-more"><span class="ic">ⓘ</span>${escapeHtml(desc)}</div>`:''}
+        ${more?`<div class="rc-more"><span class="ic">ⓘ</span>이 패턴이 들어간 문장을 <b>${more}개</b> 더 알고 있어요</div>`:''}
       </div>`;
     }, rows.length*160 + 260 + later.length*520 + 200);
-    el('bottom').innerHTML=arrangeBottomHtml('다음 문제');
+    el('bottom').innerHTML=arrangeBottomHtml('다음 단계');
     el('nextBtn').onclick=patternStep;
   }
 
@@ -1406,7 +1393,7 @@ function renderRecognizeFill(){
         ${more?`<div class="pf-div"></div>
         <div class="rc-more"><span class="ic">ⓘ</span>이 표현이 들어간 문장을 <b>${more}개</b> 더 알고 있어요</div>`:''}
       </div>`;
-    el('bottom').innerHTML=arrangeBottomHtml('다음 문제');   // 뱅크도 이때 같이 사라진다
+    el('bottom').innerHTML=arrangeBottomHtml('다음 단계');   // 뱅크도 이때 같이 사라진다
     el('nextBtn').onclick=patternStep;
   }
 }
@@ -1448,22 +1435,21 @@ function slotRuns(tokens, flags){
 function renderPattern(){
   curStep=patternStep;
   const item=sessionItems[itemIdx], s=item.sentence;
-  const pmean=((item.pattern||{}).meaning||'').trim(), punct=trailPunct(s.en);
+  const punct=trailPunct(s.en);
   const tok=tokenize(s.en), flag=frameFlags(tok, item.baseSegs);
-  const runs=slotRuns(tok, flag);
-  const frameIdx=tok.map((w,i)=>i).filter(i=>flag[i]);
 
-  let phase=0, done=false, switching=false, bankIn=false;
-  let bank=shuffleOrder(frameIdx.map((ti,i)=>({id:i, text:tok[ti].toLowerCase(), placed:false, fr:true})), t=>t.text);
+  // **문장을 통째로 배열한다.** 프레임 자리만 채우는 박자는 `[2] 패턴 단계`가 이미
+  // 하므로(거기서 패턴을 직접 쓴다) 여기서 한 번 더 하면 같은 과제가 두 번이 된다.
+  let done=false;
+  let bank=shuffleOrder(tok.map((w,i)=>({id:i, text:w.toLowerCase(), placed:false, fr:flag[i]})), t=>t.text);
   let ans=[];
 
-  setProgress(stepAt(1));
+  setProgress(2);
   stage.innerHTML=`
     <div class="stage-scroll">
       <div class="chat-card" id="card">
         ${chatTag(item)}<div class="chat-badge new">NEW</div>
         <div class="chat-ko" id="koLine">${sentTitleHtml(s)}</div>
-        <div class="expand-mean hidden" id="meanLine"></div>
         <div class="fill" id="fill"></div>
         <div class="mic-float" id="micFloat">🎤</div>
       </div>
@@ -1471,28 +1457,18 @@ function renderPattern(){
     </div>
     <div class="stage-bottom" id="bottom">
       <div class="bank" id="bank"></div>
-      <div class="nb-tip hidden" id="nbTip"></div>
       <div class="arr-btns" id="arrBtns">
-        <button class="btn-ghost2" id="revealBtn"><span class="ic">✔</span><span id="revealLabel">표현 보기</span></button>
+        <button class="btn-ghost2" id="revealBtn"><span class="ic">✔</span><span id="revealLabel">정답 보기</span></button>
         <button class="btn-confirm" id="confirmBtn" disabled>확인</button>
       </div>
     </div>`;
 
   const fillEl=el('fill'), bankEl=el('bank');
-  const need=()=> phase===0 ? frameIdx.length : tok.length;
+  const need=()=> tok.length;
 
   function renderFill(){
     const parts=[];
-    if(phase===0){
-      let fi=0;
-      runs.forEach(r=>{
-        if(!r.fr){ parts.push(`<span class="fill-given">${escapeHtml(r.ws.join(' '))}</span>`); return; }
-        const i=fi++;
-        parts.push(i<ans.length
-          ? `<span class="fill-word frame-w" data-i="${i}">${escapeHtml(ans[i].text)}</span>`
-          : `<span class="fill-blank"></span>`);
-      });
-    } else {
+    {
       for(let i=0;i<tok.length;i++){
         parts.push(i<ans.length
           ? `<span class="fill-word${ans[i].fr?' frame-w':''}" data-i="${i}">${escapeHtml(ans[i].text)}</span>`
@@ -1510,48 +1486,16 @@ function renderPattern(){
       const b=document.createElement('button');
       b.className='tile'+(t.placed?' placed':'')+(t.fr&&!done?' fr':'');
       b.textContent=t.text;
-      if(bankIn) b.style.setProperty('--i', String(bankEl.childElementCount));
       if(!t.placed && !done) b.onclick=()=>{
         if(ans.length>=need()) return;
         t.placed=true; ans.push(t); renderAll();
       };
       bankEl.appendChild(b);
     });
-    bankEl.classList.toggle('bank-in', bankIn);
-    if(bankIn) setTimeout(()=>bankEl.classList.remove('bank-in'), 700);
   }
   function renderAll(){
     renderFill(); renderBank();
     el('confirmBtn').disabled = ans.length<need();
-  }
-
-  // 1박자 통과 → 2박자. **먼저 1박자 완료를 인정하고**(놓은 프레임이 초록으로 팝) 그
-  // 다음에 줄이 제자리에서 비고, 뱅크가 아래에서 올라온다. 내가 놓은 타일을 뱅크로
-  // 끌어내리면 순서가 '회수'로 읽힌다 — 완료 → 재료 도착으로 읽히게 방향을 바꾼 것이다.
-  function toPhase2(){
-    if(switching) return;
-    switching=true;
-    fillEl.querySelectorAll('.fill-word.frame-w').forEach(w=> w.classList.add('ok-pop'));
-    setTimeout(()=>{ if(!fillEl.isConnected) return;
-      fillEl.classList.add('fade-out'); bankEl.classList.add('fade-out'); }, 190);
-    setTimeout(()=>{
-      if(!fillEl.isConnected) return;          // 전환 중 화면이 바뀌면 새 화면을 건드리지 않는다
-      phase=1; ans=[]; switching=false;
-      bank=shuffleOrder(tok.map((w,i)=>({id:i, text:w.toLowerCase(), placed:false, fr:flag[i]})), t=>t.text);
-      setProgress(stepAt(2));
-      el('revealLabel').textContent='정답 보기'; el('revealBtn').disabled=false;
-      el('nbTip').classList.add('hidden');       // 팁은 1박자의 것이다 — 함께 닫는다
-      // 문장 뜻에서 표현 구간을 못 찾은 문항만 뜻을 칩으로 따로 보여준다
-      if(!s.krMark){ const m=el('meanLine'); m.classList.remove('hidden');
-        m.innerHTML=`<span class="rv-chip fr">${escapeHtml(pmean||'')}</span>`; }
-      bankIn=true; renderAll(); bankIn=false;
-      // 나간 방향과 겹치지 않게 pre-in 으로 한 프레임 눌러 두고 놓아 준다
-      fillEl.classList.remove('fade-out'); fillEl.classList.add('pre-in');
-      bankEl.classList.remove('fade-out');
-      const release=()=> fillEl.classList.remove('pre-in');
-      requestAnimationFrame(()=>requestAnimationFrame(release));
-      setTimeout(release, 90);
-    }, 400);
   }
 
   function finish(){
@@ -1569,31 +1513,19 @@ function renderPattern(){
   }
 
   function grade(){
-    const target=(phase===0 ? frameIdx.map(i=>tok[i]) : tok).map(w=>w.toLowerCase()).join(' ');
+    const target=tok.map(w=>w.toLowerCase()).join(' ');
     return ans.map(x=>x.text).join(' ')===target;
   }
   // 1박자에서 표현을 못 떠올린 경우(오답 · 표현 보기) — 오답노트 팁을 열고 정답으로
   // 교정한 뒤 2박자로 넘긴다. 팁은 2박자 내내 남아 문장을 배열하는 동안 계속 보인다.
-  function showTip(){
-    const tip=el('nbTip');
-    tip.innerHTML=nbTipHtml(item);
-    tip.classList.remove('hidden');
-  }
-  function clearLine(){ ans.forEach(x=>{ x.placed=false; }); ans=[]; renderAll(); }
   el('confirmBtn').onclick=()=>{
     if(ans.length<need()) return;
-    if(grade()) return phase===0 ? toPhase2() : finish();
+    if(grade()) return finish();
+    // 어순이 틀리면 붉게 표시한 뒤 정답으로 교정하고 결과로 간다
     fillEl.querySelectorAll('.fill-word').forEach(w=>w.style.color='#e14b46');
-    if(phase===1) return void setTimeout(finish, 700);
-    // 1박자는 대신 채워 주지 않는다 — 팁을 열고 줄을 비워 **직접 다시 배열**하게 한다.
-    // 표현을 스스로 놓아야 넘어가므로, 못 떠올린 경우에도 결국 손으로 한 번은 만든다.
-    showTip();
-    setTimeout(()=>{ if(fillEl.isConnected) clearLine(); }, 700);
+    setTimeout(finish, 700);
   };
-  el('revealBtn').onclick=()=>{
-    if(phase===1) return finish();
-    showTip(); clearLine();                   // 오답을 확인했을 때와 같다 — 팁을 열고 다시 배열
-  };
+  el('revealBtn').onclick=()=>finish();
 
   renderAll();
 }
@@ -1765,7 +1697,7 @@ function sheetRows(item){
 function renderSpeakSheet(){
   curStep=renderSpeak;              // 방식을 바꾸면 renderSpeak 이 다시 갈라야 한다
   const item=sessionItems[itemIdx];
-  setProgress(stepAt(3));
+  setProgress(3);
   // **기본은 한 줄이다** — `[4]`는 `[2]`·`[3]`을 지나 온 마지막 단계라, 여기서 여러 줄을
   // 시키면 잘 넘긴 유저에게 벌을 주는 셈이 된다. 반복은 **막힌 유저에게만** 붙인다:
   // 지원을 열었거나 오답을 낸 줄이면 같은 표현으로 한 줄이 더 열린다(후보가 있는 만큼).
@@ -1983,7 +1915,7 @@ function renderSpeakSheet(){
 function renderSpeakArrange(t){
   curStep=renderSpeak;
   const item=sessionItems[itemIdx];
-  setProgress(stepAt(3));
+  setProgress(3);
   const p=item.pattern||{};
   const bare=w=>String(w).toLowerCase().replace(/[^a-z0-9']/g,'');
   const tok=tokenize(t.en), flag = t.segs ? frameFlags(tok, t.segs) : frameWordFlags(tok, item.frame);
@@ -2162,7 +2094,7 @@ const OP_FN=new Set(['the','a','an','my','your','his','her','its','our','their',
   'i','you','he','she','it','we','they','me','him','us','them','to','of','in','on','at','for','with','and',
   'or','but','is','are','am','was','were','be','do','does','did','not','so','too','very','some','any']);
 function renderSpeakOpen(item){
-  setProgress(stepAt(3));
+  setProgress(3);
   const p=item.pattern||{}, pmean=(p.meaning||'').trim();
   // 이 표현으로 **앱이 아는** 문장들. 내 문장이 여기 끼어들고, 예문에 없는 낱말을
   // 가려내는 기준도 이것이다.
@@ -2442,7 +2374,7 @@ function dialogTarget(item){
     spkMats(x).length-spkMats(y).length || tokenize(x.en).length-tokenize(y.en).length)[0];
 }
 function renderSpeakDialog(item, t){
-  setProgress(stepAt(3));
+  setProgress(3);
   const p=item.pattern||{}, pmean=(p.meaning||'').trim();
   const nz=x=>String(x).split(/\s+/).map(bareW).filter(Boolean).join(' ');
   // **재료는 방식이 정한다.** 문맥만 주고 아무것도 안 주면 `~하지 마` + `I didn't make
@@ -2622,7 +2554,7 @@ function renderSpeak(preset){
   if(spkVar==='h' && !preset && sheetRows(item).length) return renderSpeakSheet();
   const t = preset || speakTarget(item);
   if(spkVar==='c') return renderSpeakArrange(t);
-  setProgress(stepAt(3));
+  setProgress(3);
 
   const bare=w=>String(w).toLowerCase().replace(/[^a-z0-9']/g,'');
   // 재료 = 프레임이 아닌 낱말들(섞어서). 표현은 넣지 않는다 — 그게 이 단계의 과제다.
@@ -2800,7 +2732,7 @@ function renderSpeak(preset){
 //   · 정답 후에야 `의미:`로 한국어를 열고 A 해석도 함께 공개한다
 // 자유 입력 버전은 `ve:opts.sitType` 으로 비교할 수 있게 남겨둔다(기본 = 선택형).
 function renderSituation(target, pool){
-  setProgress(stepAt(4));
+  setProgress(4);
   const sit=target.situation;
   let done=false, picked=null, revealedList=false;
 
