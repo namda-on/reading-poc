@@ -21,7 +21,7 @@ S1과 프레임 조각이 **같은 것만** 담는다(주어가 바뀐 변형은
 
 출력: public/vocab-expression.data.json (커밋되는 생성물). 손으로 편집하지 말 것.
 """
-import csv, json, os, re, sys
+import csv, json, os, random, re, sys
 from collections import OrderedDict
 from pathlib import Path
 
@@ -41,6 +41,10 @@ QUESTIONS = Path(__file__).resolve().parent / "vocab_expression_questions.json"
 REPLIES = Path(__file__).resolve().parent / "vocab_expression_replies.json"
 
 MAX_ITEMS = int(os.environ.get("VE_MAX_ITEMS", "0"))    # 0이면 전체
+# 같은 그룹에서 갈라진 파생 유닛(`10002-2`·`10013-3`)을 담을지. 기본은 대표 유닛만 담는다.
+INCLUDE_VARIANTS = os.environ.get("VE_VARIANTS", "0") not in ("0", "", "false")
+# 문항 순서를 섞는 시드. 0이면 섞지 않고 트리거 빈도 순으로 둔다.
+SHUFFLE_SEED = int(os.environ.get("VE_SHUFFLE_SEED", "20261001"))
 VOCAB_FILTER_SKIP = {"sexual", "unnecessary"}
 BRACKET = re.compile(r"\[([^\]]+)\]")
 INFL = re.compile(r"^(?:s|es|ed|d|ing|er|est|ies|ier|iest|'s|')$")
@@ -387,6 +391,25 @@ def make_vocab_a(v, trigger):
             "koLines": [x.strip() for x in v["lsm"].split("\n")]}
 
 
+def pick_representatives(items):
+    """같은 그룹에서 갈라진 유닛은 **대표 하나만** 남긴다(접미사가 가장 작은 것).
+
+    `10002-1`(`put on ___`)과 `10002-2`(`put ___ on`)처럼 파생 유닛은 프레임이 서로
+    다르지만 한 어휘에서 갈라져 나온 것이라, 한 세션에서 연달아 나오면 같은 것을 여러 번
+    배우는 것처럼 읽힌다. 파생까지 보려면 `VE_VARIANTS=1`.
+    """
+    def key(u):
+        base, _, suf = str(u).partition("-")
+        return (base, int(suf) if suf.isdigit() else -1, suf)
+    best = {}
+    for it in items:
+        base, rest = key(it["unit"])[0], key(it["unit"])[1:]
+        if base not in best or rest < key(best[base]["unit"])[1:]:
+            best[base] = it
+    keep = {id(it) for it in best.values()}
+    return [it for it in items if id(it) in keep]
+
+
 def spread_variants(items):
     """같은 그룹에서 갈라진 유닛(`10013-1`~`-4`)이 연달아 나오지 않게 흩는다.
 
@@ -487,7 +510,15 @@ def main():
         })
 
     items.sort(key=lambda x: (x["rank"], x["level"]))
-    items = spread_variants(items)
+    n_all = len(items)
+    if not INCLUDE_VARIANTS:
+        items = pick_representatives(items)
+    # **순서를 섞는다** — 트리거 빈도 순으로 두면 비슷한 틀(`Are you ~?` · `Was it ~?`)이
+    # 이웃하고, 테스트할 때마다 앞쪽 같은 문항만 반복해서 보게 된다. 시드를 고정해 같은
+    # 소스에서 같은 순서가 나오게 한다(`VE_SHUFFLE_SEED=0`이면 빈도 순 그대로).
+    if SHUFFLE_SEED:
+        random.Random(SHUFFLE_SEED).shuffle(items)
+    items = spread_variants(items)   # 파생을 담은 경우에만 할 일이 있다
     if MAX_ITEMS:
         items = items[:MAX_ITEMS]
 
@@ -517,7 +548,9 @@ def main():
     OUT.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
     ap = [len(x["apply"]) for x in items]
     print(f"[build_vocab_expression] 완료 → {OUT}")
-    print(f"  문장 CSV 유닛 {len(units)} → 사용 {len(items)}문항 | 제외: {skipped}")
+    print(f"  문장 CSV 유닛 {len(units)} → 조건 통과 {n_all} → 사용 {len(items)}문항 "
+          f"(파생 {'포함' if INCLUDE_VARIANTS else f'제외 {n_all - len(items)}'}"
+          f" · 순서 {'시드 ' + str(SHUFFLE_SEED) if SHUFFLE_SEED else '빈도순'}) | 제외: {skipped}")
     print(f"  응용 문장 {sum(ap)}개(문항당 중앙값 {sorted(ap)[len(ap)//2] if ap else 0}) | "
           f"프레임이 달라 제외한 변형 문장 {dropped_variants}개")
     print(f"  표현 뜻(krMark) 있는 문항: {len([x for x in items if x['sentence']['krMark'] != x['sentence']['kr']])}")

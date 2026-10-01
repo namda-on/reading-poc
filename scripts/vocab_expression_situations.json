@@ -309,5 +309,125 @@
   "a_en": "Do you think Nari is here yet?",
   "a_kr": "나리 벌써 왔을까?",
   "hint_en": "Describe her habit."
+ },
+ "Look at the menu.": {
+  "a_en": "I can't decide what to order.",
+  "a_kr": "뭘 주문할지 못 정하겠어.",
+  "hint_en": "Point them to where the choices are."
+ },
+ "Stop by the bookstore.": {
+  "a_en": "I need a new notebook for class.",
+  "a_kr": "수업에 쓸 새 공책이 필요해.",
+  "hint_en": "Tell them to drop in on the way."
+ },
+ "Don't bring up money.": {
+  "a_en": "I'm meeting his parents for dinner tonight.",
+  "a_kr": "오늘 저녁에 그 사람 부모님을 뵙기로 했어.",
+  "hint_en": "Warn them about one topic."
+ },
+ "I feel sorry for him.": {
+  "a_en": "Tom lost his job last week.",
+  "a_kr": "톰이 지난주에 직장을 잃었어.",
+  "hint_en": "Show sympathy for Tom."
+ },
+ "Take your time.": {
+  "a_en": "Sorry, I need a few more minutes.",
+  "a_kr": "미안, 몇 분만 더 걸릴 것 같아.",
+  "hint_en": "Tell them not to rush."
+ },
+ "Did you use to like this album?": {
+  "a_en": "I found this old CD in your room.",
+  "a_kr": "네 방에서 이 오래된 CD를 찾았어.",
+  "hint_en": "Ask about a past habit."
+ },
+ "I'm off to the bookshop.": {
+  "a_en": "Where are you going with that bag?",
+  "a_kr": "그 가방 들고 어디 가?",
+  "hint_en": "Say where you are headed."
+ },
+ "I'll take care of the entertainment.": {
+  "a_en": "We still need music and a show for the party.",
+  "a_kr": "파티에 음악이랑 공연이 아직 필요해.",
+  "hint_en": "Offer to handle that part."
+ },
+ "What makes you certain?": {
+  "a_en": "I'm sure she'll say yes.",
+  "a_kr": "걔가 분명히 좋다고 할 거야.",
+  "hint_en": "Ask for the reason behind that confidence."
+ },
+ "I'll major in literature.": {
+  "a_en": "Have you picked your field yet?",
+  "a_kr": "전공은 정했어?",
+  "hint_en": "Name the subject you will study."
+ },
+ "You'll come to embrace it.": {
+  "a_en": "I don't like this new company policy at all.",
+  "a_kr": "이 새 회사 정책이 전혀 마음에 안 들어.",
+  "hint_en": "Tell them the feeling will change."
+ },
+ "Let's decide on one.": {
+  "a_en": "We've been looking at these three sofas for an hour.",
+  "a_kr": "이 소파 세 개를 한 시간이나 보고 있어.",
+  "hint_en": "Suggest settling the choice now."
+ },
+ "It's far from here.": {
+  "a_en": "Can we walk to the museum?",
+  "a_kr": "박물관까지 걸어갈 수 있어?",
+  "hint_en": "Tell them about the distance."
+ },
+ "Turn down the offer.": {
+  "a_en": "They want me to work every weekend.",
+  "a_kr": "주말마다 일하라고 해.",
+  "hint_en": "Tell them to refuse it."
+ },
+ "The introduction was interesting.": {
+  "a_en": "How was the book you started?",
+  "a_kr": "읽기 시작한 책 어땠어?",
+  "hint_en": "Give your impression of the opening part."
+ },
+ "Without you, I wouldn't have made it.": {
+  "a_en": "Congratulations on finishing the marathon!",
+  "a_kr": "마라톤 완주 축하해!",
+  "hint_en": "Give them the credit."
+ },
+ "I will carry it.": {
+  "a_en": "My arms are full already.",
+  "a_kr": "팔이 이미 꽉 찼어.",
+  "hint_en": "Offer to take it yourself."
+ },
+ "She's quite a cook.": {
+  "a_en": "Did you try the soup your mom made?",
+  "a_kr": "어머니가 만드신 수프 먹어 봤어?",
+  "hint_en": "Praise her skill."
+ },
+ "I have a problem with that.": {
+  "a_en": "We decided to cancel your vacation days.",
+  "a_kr": "네 휴가를 취소하기로 했어.",
+  "hint_en": "Say you are not fine with it."
+ },
+ "You hurt his feelings.": {
+  "a_en": "I told Mike his drawing looked like a child's.",
+  "a_kr": "마이크한테 그림이 애가 그린 것 같다고 했어.",
+  "hint_en": "Tell them what they did to Mike."
+ },
+ "Because it's illegal.": {
+  "a_en": "Why can't we just download the movie?",
+  "a_kr": "그 영화 그냥 다운로드하면 안 돼?",
+  "hint_en": "Give the reason."
+ },
+ "I believe in donations.": {
+  "a_en": "Why do you send money to that charity?",
+  "a_kr": "왜 그 단체에 돈을 보내?",
+  "hint_en": "Say what you think is right."
+ },
+ "It's either green tea or coffee.": {
+  "a_en": "What can I drink here?",
+  "a_kr": "여기서 뭘 마실 수 있어?",
+  "hint_en": "Give the two options."
+ },
+ "He didn't show up.": {
+  "a_en": "Was Daniel at the meeting?",
+  "a_kr": "다니엘은 회의에 왔어?",
+  "hint_en": "Say he never came."
  }
 }
