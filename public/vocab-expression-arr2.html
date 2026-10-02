@@ -1,0 +1,539 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<title>탭 배열 난이도 실험 — 어휘→표현</title>
+<style>
+  /* `[4] 말해보기 × 탭해서 배열(c)`의 **난이도**를 올리는 세 레버를 토글로 켜고 끈다.
+     본체는 건드리지 않는다.
+       진단 — `[4] c`는 지금 `[3]`보다 어렵지 않다: 배열할 문장 길이가 거의 같고(509/633 동일,
+       중앙값 4낱말) 뱅크 차이는 타일 1개뿐이다. 함정이 제 역할을 못 하는 이유는 둘:
+       ① 칸 수가 답의 길이를 알려줘 함정을 역산으로 걸러낼 수 있다
+       ② 함정 1~2개는 과잉으로 **보이지도** 않고 고민거리도 안 된다(가장 애매한 수다)
+     그래서 세 레버를 함께 올린다. ②가 `고르는 곳`을 설명 없이 선언하고, ①이 그 선택을 진짜
+     과제로 만들고, ③이 선택을 의미 있게 만든다 — 고지 문구도 코치마크도 필요 없어진다. */
+  :root { --bg:#a9ccf2; --ink:#2f3e52; --sub:#6b7c93; --blue:#4b83d6; --green:#2e9e57; --purple:#7b6ef0; --purple-d:#5b3fb0; }
+  * { box-sizing:border-box; }
+  html, body { margin:0; height:100%; }
+  body { font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+    background:var(--bg); color:var(--ink); display:flex; justify-content:center; }
+  .app { width:100%; max-width:460px; height:100dvh; min-height:100vh; display:flex; flex-direction:column;
+    background:linear-gradient(#aacdf3,#bfe0ef); }
+  .hidden { display:none !important; }
+
+  /* ── 실험실 상단바 ─────────────────────────────────────────────────────── */
+  .lab { flex-shrink:0; padding:10px 12px 8px; }
+  .lab-nav { display:flex; align-items:center; gap:8px; }
+  .lab-nav button { border:none; border-radius:9px; background:#fff; color:#3a6bb0; font-weight:800;
+    font-size:13px; padding:7px 11px; cursor:pointer; box-shadow:0 1px 3px rgba(47,79,128,.12); }
+  .lab-pos { flex:1; display:flex; align-items:center; justify-content:center; gap:4px;
+    font-size:13px; font-weight:800; color:#3a6bb0; }
+  .lab-pos input { width:58px; border:none; border-radius:8px; padding:6px 7px; text-align:center;
+    font:inherit; font-weight:800; color:#3a6bb0; background:rgba(255,255,255,.75); outline:none; }
+  .lab-sw { display:flex; gap:6px; margin-top:8px; }
+  .lab-sw button { flex:1; border:1.5px solid rgba(255,255,255,.75); border-radius:11px; cursor:pointer;
+    background:rgba(255,255,255,.3); color:#3f5876; text-align:left; padding:6px 9px; font:inherit; }
+  .lab-sw button b { display:block; font-size:12px; font-weight:800; }
+  .lab-sw button i { display:block; font-size:10.5px; font-style:normal; color:#5c7693; margin-top:1px; line-height:1.35; }
+  .lab-sw button.on { background:#fff; border-color:#fff; color:#2e9e57; box-shadow:0 2px 6px rgba(30,60,110,.14); }
+  .lab-sw button.on i { color:#6f8ba6; }
+  .lab-note { font-size:11.5px; color:#476a93; margin-top:7px; line-height:1.5; }
+  .lab-note b { color:#2e5f94; }
+
+  .stage { flex:1; display:flex; flex-direction:column; min-height:0; }
+  .stage-scroll { flex:1; overflow-y:auto; padding:22px 16px 10px; }
+  .stage-bottom { flex-shrink:0; padding:6px 16px 16px; }
+
+  /* ── 본 프로토타입에서 그대로 가져온 표기 ────────────────────────────────── */
+  .chat-card { position:relative; background:linear-gradient(#e9f1fb 0%, #f4f8fd 42%, #ffffff 42%, #ffffff 100%);
+    border-radius:22px; box-shadow:0 6px 18px rgba(30,60,110,.13); padding:22px 20px 16px; }
+  .chat-card.spk { background:linear-gradient(#e9f1fb 0,#f4f8fd 74px,#ffffff 74px,#ffffff 100%); }
+  .chat-card.spk.correct { background:linear-gradient(#dff3e4 0,#eaf8ee 74px,#fbfffc 74px,#fbfffc 100%); }
+  .chat-tag { position:absolute; top:-13px; left:16px; background:#cfe0f5; color:#3a6bb0; font-size:12px; font-weight:800; border-radius:11px 11px 11px 3px; padding:3px 11px; display:flex; align-items:center; gap:5px; }
+  .chat-tag .q { width:15px; height:15px; border-radius:50%; background:#a9c4e8; color:#fff; font-size:10px; display:inline-flex; align-items:center; justify-content:center; }
+  .chat-tag.rv { background:#dff3e4; color:#22794a; }
+  .chat-badge { position:absolute; top:-11px; right:16px; font-size:12px; font-weight:800; padding:3px 10px; border-radius:9px 9px 3px 9px; background:#ff6f6f; color:#fff; }
+  .check-mark { position:absolute; top:-22px; left:2px; font-size:46px; color:var(--green); text-shadow:0 2px 4px rgba(0,0,0,.12); animation:pop .3s ease; }
+  @keyframes pop { from{opacity:0; transform:scale(.5) rotate(-15deg);} to{opacity:1; transform:none;} }
+  .tgt { color:var(--green); font-weight:800; }
+  .sp-kr { font-size:18px; line-height:1.55; color:#33465c; font-weight:600; margin-top:2px; }
+  .expand-mean { margin-top:6px; }
+  .rv-chip { font-size:13px; font-weight:600; color:#5b7c93; background:#eef2f8; border-radius:8px; padding:3px 9px; }
+  .rv-chip.fr { color:#22794a; background:#e8f8ee; font-weight:800; }
+  .nb-tip { display:flex; align-items:center; gap:9px; background:#fdf3d8; border-radius:11px;
+    padding:9px 13px; margin:11px 0; font-size:13px; color:#8a6a1f; line-height:1.45; }
+  .nb-tip::before { content:''; flex-shrink:0; width:6px; height:6px; border-radius:2px; background:#e0b64a; }
+  .nb-tip b { color:#6f5312; font-weight:800; margin-right:2px; }
+  .wrong-box { background:#cdd8f2; color:#42527a; border-radius:11px; padding:10px 14px; font-size:15px; font-weight:600; margin:14px 0 2px; }
+  .wrong-box b { color:#e14b46; font-weight:800; }
+  .reveal-note { margin-top:10px; font-size:13.5px; font-weight:700; color:#7d97b8; }
+  .reveal-note b { font-size:16px; font-weight:800; color:#3a6bb0; margin-left:2px; }
+
+  .sp-in { position:relative; margin-top:12px; min-height:42px; }
+  .sp-slots { display:flex; flex-wrap:wrap; align-items:center; gap:8px; }
+  .sp-slot { min-width:56px; min-height:42px; background:#eaf1fb; border:1.5px solid #dce7f6; border-radius:10px;
+    display:inline-flex; align-items:center; justify-content:center; padding:0 11px; font-size:17px; font-weight:700; color:#2f3e52; }
+  .sp-slot.on { cursor:pointer; }
+  /* ① 칸 비공개 — 다음 자리 하나만 캐럿으로 열어 둔다(총 개수는 안 보여준다) */
+  .sp-slot.cur { background:#fff; border-color:#7ea9e0; min-width:40px; }
+  .sp-slot.cur::after { content:''; width:2px; height:20px; background:#5b8fd6; animation:caret 1.05s steps(1) infinite; }
+  @keyframes caret { 50% { opacity:0; } }
+  .sp-tiles { display:flex; flex-wrap:wrap; gap:8px; }
+  .sp-tile { background:#eaf1fb; border:1.5px solid #dce7f6; border-radius:10px; padding:9px 12px;
+    font-size:17px; font-weight:700; color:#2f3e52; }
+  .sp-tile.fr { background:#e3fbec; border-color:#8ed9ab; color:#22794a; font-weight:800; }
+
+  .bank { display:flex; flex-wrap:wrap; gap:9px; margin-bottom:12px; padding-top:9px; transition:opacity .2s ease; }
+  .tile { position:relative; border:1px solid #cdddf3; background:#fff; border-radius:11px; padding:12px 16px;
+    font-size:16.5px; color:#2f3e52; cursor:pointer; box-shadow:0 1px 3px rgba(30,60,110,.08);
+    transition:opacity .22s ease, background .22s ease, border-color .22s ease, color .22s ease; }
+  .tile.placed { background:#e3e9f2; border-color:#dbe2ee; color:transparent; box-shadow:none; cursor:default; pointer-events:none; }
+
+  .vtools { display:flex; justify-content:space-between; align-items:center; padding:4px 6px; }
+  .vtool { display:flex; align-items:center; gap:7px; background:#fff; border:none; border-radius:999px; cursor:pointer;
+           color:#8a7fc0; font-size:13px; font-weight:800; padding:6px 14px 6px 7px; box-shadow:0 1px 3px rgba(47,79,128,.10); }
+  .vtool .ic { width:24px; height:24px; border-radius:50%; background:#eae6fb; display:flex; align-items:center; justify-content:center; font-size:13px; color:var(--purple-d); }
+  .vtool.mic .ic { background:#eef1fb; color:#5b83b8; }
+  .vtool:disabled { opacity:.85; cursor:default; }
+  .arr-btns { display:flex; gap:10px; align-items:center; margin-top:12px; }
+  .btn-confirm { flex:1; border:none; border-radius:14px; background:#6d7ff0; color:#fff; font-size:17px; font-weight:800;
+    padding:15px 0; cursor:pointer; box-shadow:0 4px 0 #4f5fd0; }
+  .btn-confirm:disabled { background:#c7d2e4; box-shadow:0 4px 0 #b2bfd4; cursor:default; }
+  .vbtns { display:flex; gap:10px; margin-top:12px; }
+  .vbtn { flex:1; display:flex; align-items:center; justify-content:center; gap:8px; border:none; border-radius:14px;
+    background:#6d7ff0; color:#fff; font-size:16px; font-weight:800; padding:15px 0; cursor:pointer; box-shadow:0 4px 0 #4f5fd0; }
+  .payoff { position:relative; background:#fff; border-radius:22px; box-shadow:0 6px 18px rgba(30,60,110,.13);
+    margin:32px 0 6px; padding:20px 20px 22px; }
+  .pf-div { height:1px; background:#eaeff6; margin:16px 0 0; }
+  .pf-form { font-size:20px; font-weight:800; color:var(--green); line-height:1.4; margin-top:10px; }
+  .pf-form .slot { display:inline-block; min-width:44px; border-bottom:2.5px solid #7bbd96; }
+  .pf-mean { font-size:14px; color:#8c9aab; font-weight:600; margin-top:4px; line-height:1.5; }
+  .pf-sub { display:flex; align-items:center; gap:5px; font-size:13px; font-weight:700; color:#7c8b9e; margin:18px 0 2px; }
+  .pf-cmp { margin-top:12px; }
+  .pf-cmp-en { font-size:16px; font-weight:700; color:#2f3e52; line-height:1.45; }
+  .pf-cmp-kr { font-size:13px; color:#9aa8bc; margin-top:2px; }
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="lab">
+    <div class="lab-nav">
+      <button id="prevBtn">‹ 이전</button>
+      <div class="lab-pos"><input id="posIn" type="text" inputmode="numeric" /> / <span id="posTot">—</span></div>
+      <button id="nextItemBtn">다음 ›</button>
+    </div>
+    <div class="lab-sw">
+      <button id="sw1"><b>① 칸 비공개</b><i>답의 길이를 안 알려준다</i></button>
+      <button id="sw2"><b>② 함정 3~5개</b><i>뱅크가 과잉임이 보인다</i></button>
+      <button id="sw3"><b>③ 부류 함정</b><i>대상 문장 기준·같은 부류</i></button>
+    </div>
+    <div class="lab-note" id="labNote"></div>
+  </div>
+  <div class="stage" id="stage"></div>
+</div>
+<script>
+let DATA=null, items=[], idx=0;
+let hideLen=true, moreTraps=true, smartTraps=true;
+const el=id=>document.getElementById(id);
+const stage=el('stage');
+function escapeHtml(s){ return String(s).replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+function tokenize(sent){ return sent.trim().replace(/[.?!]+$/,'').split(/\s+/); }
+function trailPunct(sent){ const m=sent.trim().match(/[.?!]+$/); return m?m[0]:''; }
+const bare=w=>String(w).toLowerCase().replace(/[^a-z0-9']/g,'');
+function shuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
+function shuffleOrder(a, keyOf){
+  const key=x=>String(keyOf?keyOf(x):x);
+  const src=a.map(key).join('\u0001');
+  if(a.length<2 || a.every(x=>key(x)===key(a[0]))) return a.slice();
+  for(let k=0;k<12;k++){ const out=shuffle(a); if(out.map(key).join('\u0001')!==src) return out; }
+  return shuffle(a);
+}
+function frameFlags(tokens, segs){
+  const flags=new Array(tokens.length).fill(false);
+  let ti=0;
+  segs.forEach(sg=>{
+    const n=sg.s.split(/\s+/).map(bare).filter(Boolean).length;
+    for(let k=0;k<n && ti<tokens.length;k++, ti++) if(sg.t==='frame') flags[ti]=true;
+  });
+  return flags;
+}
+function editDist(a,b){
+  const m=a.length, n=b.length;
+  if(Math.abs(m-n)>1) return 9;
+  let prev2=null, prev=Array.from({length:n+1},(_,j)=>j), cur=null;
+  for(let i=1;i<=m;i++){
+    cur=[i];
+    for(let j=1;j<=n;j++){
+      const c=a[i-1]===b[j-1]?0:1;
+      let v=Math.min(prev[j]+1, cur[j-1]+1, prev[j-1]+c);
+      if(i>1 && j>1 && a[i-1]===b[j-2] && a[i-2]===b[j-1]) v=Math.min(v, prev2[j-2]+1);
+      cur[j]=v;
+    }
+    prev2=prev; prev=cur;
+  }
+  return prev[n];
+}
+function nearWord(a,b){ return a===b || (a.length>=4 && b.length>=4 && editDist(a,b)<=1); }
+const SFX=['s','es','ed','d','ing'];
+function framePos(words, frame){
+  let from=0; const hit=[];
+  const ok=(frame||[]).every(lit=>{
+    const ws=lit.split(/\s+/).map(bare).filter(Boolean);
+    for(let i=from;i+ws.length<=words.length;i++){
+      if(ws.every((w,k)=>{ const c=words[i+k];
+        return nearWord(c,w) || SFX.some(sfx=>nearWord(c,w+sfx)); })){
+        ws.forEach((w,k)=>hit.push({at:i+k, want:w}));
+        from=i+ws.length; return true;
+      }
+    }
+    return false;
+  });
+  return ok ? hit : null;
+}
+function frameWordFlags(words, frame){
+  const flags=words.map(()=>false);
+  let from=0;
+  (frame||[]).forEach(lit=>{
+    const ws=lit.split(/\s+/).map(bare).filter(Boolean);
+    for(let i=from;i+ws.length<=words.length;i++){
+      const hit=ws.every((w,k)=>{ const c=bare(words[i+k]);
+        return c===w || SFX.some(sfx=>c===w+sfx); });
+      if(hit){ ws.forEach((_,k)=>flags[i+k]=true); from=i+ws.length; break; }
+    }
+  });
+  return flags;
+}
+function frameLine(en, segs, frame){
+  if(segs && segs.length){
+    const punct=(String(en).match(/[.?!]+$/)||[''])[0];
+    return (segs.map(g=> g.t==='frame'
+      ? `<span class="tgt">${escapeHtml(g.s)}</span>`
+      : escapeHtml(g.s)).join(' ') + escapeHtml(punct)).replace(/\s+([,.!?;:])/g, '$1');
+  }
+  let out=escapeHtml(en);
+  (frame||[]).forEach(lit=>{
+    const ws=lit.split(/\s+/).map(w=>w.replace(/[^A-Za-z']/g,'')).map(w=>w.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'));
+    const re=new RegExp('\\b('+ws.join("(?:s|es|ed|d|ing)?\\s+")+"(?:s|es|ed|d|ing)?)\\b", 'i');
+    out=out.replace(re, m=>`<span class="tgt">${m}</span>`);
+  });
+  return out;
+}
+function exprLabel(form){
+  const M='\u0001';
+  let x=String(form||'').replace(/_{2,}/g, M).replace(/~/g, M);
+  x=x.replace(new RegExp('\\s*\\([^)]*'+M+'[^)]*\\)','g'), '');
+  x=x.replace(new RegExp('^\\s*'+M+'\\s*'), '');
+  x=x.replace(new RegExp(M+'[\\s.?!,]*$'), '');
+  return x.split(M).join('…').replace(/\s+/g,' ').trim();
+}
+function nbTipHtml(item){
+  const p=item.pattern||{}, label=exprLabel(p.form)||(item.frame||[]).join(' … ');
+  return `<b>${escapeHtml(label)}</b> : ${escapeHtml((p.meaning||'').trim())}`;
+}
+function sentTitleHtml(s){
+  return s.krMark
+    ? escapeHtml(s.krMark).replace(/\[([^\]]+)\]/g, (m,g)=>`<span class="tgt">${g}</span>`)
+    : escapeHtml(s.kr);
+}
+function chatTag(item){ return `<div class="chat-tag">레벨 ${item.level}<span class="q">?</span></div>`; }
+
+// 대상 문장 — 본체의 `speakTarget` 과 같은 구현
+const spkMats=a=>(a.segs||[]).filter(g=>g.t==='slot').flatMap(g=>g.s.split(/\s+/)).filter(Boolean);
+const spkShape=segs=>(segs||[]).map(g=>g.t[0]).join(',');
+const spkEnd=x=>{ const m=String(x).trim().match(/[.?!]+$/); return m?m[0][0]:'.'; };
+function isTwin(item, a){
+  return spkMats(a).length<=2 && a.en.split(/\s+/).length<=5
+      && spkShape(a.segs)===spkShape(item.baseSegs)
+      && spkEnd(a.en)===spkEnd(item.sentence.en);
+}
+function speakTarget(item){
+  const nz=x=>x.split(/\s+/).map(bare).filter(Boolean).join(' ');
+  const base=nz(item.sentence.en);
+  const baseShape=spkShape(item.baseSegs), baseEnd=spkEnd(item.sentence.en);
+  const cands=(item.apply||[]).filter(a=>a.en!==item.sentence.en);
+  const pool=cands.length?cands:(item.apply||[]);
+  const free=pool.filter(a=>{ const x=nz(a.en); return !base.includes(x) && !x.includes(base); });
+  let step=free.length?free:pool;
+  const twin=step.filter(a=>isTwin(item, a));
+  if(twin.length) step=twin;
+  const score=a=>[spkShape(a.segs)===baseShape?0:1, spkEnd(a.en)===baseEnd?0:1,
+                  spkMats(a).length, a.en.split(/\s+/).length];
+  return step.reduce((b,a)=>{
+    if(!b) return a;
+    const sb=score(b), sa=score(a);
+    for(let i=0;i<sa.length;i++){ if(sa[i]!==sb[i]) return sa[i]<sb[i] ? a : b; }
+    return b;
+  }, null);
+}
+
+// ── ②③ 함정 ────────────────────────────────────────────────────────────────
+// 빌드(`build_vocab_expression.py`)에 이미 **부류 기반 함정**이 있다 — "같은 자리에 올 수 있는
+// 같은 부류여야 고민이 생긴다". 다만 거기서는 **학습 문장 + 프레임** 기준으로 만들어, `c` 가
+// 실제로 배열하는 **대상 문장과 무관**하다. 그래서 `I can't fall asleep.` 에 `refers`,
+// `This system needs fixing.` 에 `impact` 같은 노이즈가 붙는다 — 읽는 부담만 올리고 고민은
+// 안 만든다. 여기서는 같은 부류 목록을 **대상 문장에** 돌린다(새 저작 0).
+const TRAP_BUCKETS=[
+  ['particle',['on','off','up','down','out','over','back','away','through','along']],
+  ['prep',['to','for','with','about','from','at','of','by','into','in']],
+  ['auxneg',["don't","doesn't","didn't","isn't","aren't","wasn't","weren't","won't","can't","couldn't","shouldn't","haven't","hasn't"]],
+  ['aux',['do','does','did','is','are','was','were','am','will','would','can','could','should','have','has','had']],
+  // 주격·목적격을 한 부류로 묶으면 `I` 자리에 `us`·`her` 가 와서 **그럴듯하지 않다** —
+  // 같은 부류여야 고민이 생기는데, 자리에 못 들어가는 낱말은 고민 없이 걸러진다.
+  ['pron-subj',['i','you','he','she','it','we','they']],
+  ['pron-obj',['me','you','him','her','it','us','them']],
+  ['poss',['my','your','his','her','its','our','their']],
+  ['quant',['a','an','the','some','any','much','many','few','little','every','each']],
+];
+let CONTENT_POOL=[];   // 다른 표현의 프레임 내용어 — 부류로 못 채운 자리를 메운다
+function buildContentPool(){
+  const fn=new Set(TRAP_BUCKETS.flatMap(b=>b[1]));
+  const seen=new Set();
+  items.forEach(it=>(it.frame||[]).forEach(lit=>lit.split(/\s+/).forEach(w=>{
+    const b=bare(w);
+    if(b.length>=3 && /^[a-z']+$/.test(b) && !fn.has(b) && !seen.has(b)){ seen.add(b); CONTENT_POOL.push(b); }
+  })));
+  CONTENT_POOL.sort();
+}
+// 몇 개를 둘까 — **1~2개가 가장 애매한 수다**(4+1=5 는 과잉으로 안 보인다). 정답 수에
+// 비례해 두면 7~11타일이 되어 `여기서 고르는 거구나`가 설명 없이 읽힌다.
+const trapWant=n=> moreTraps ? Math.max(3, Math.round(n*0.75)) : 2;
+function makeTraps(item, t){
+  const tok=tokenize(t.en);
+  const used=new Set(tok.map(bare));
+  const seed=[...t.en].reduce((a,c)=>a+c.charCodeAt(0),0);
+  const out=[];
+  const push=w=>{ const b=bare(w); if(b && !used.has(b) && !out.some(x=>bare(x)===b)) out.push(w); };
+  const want=trapWant(tok.length);
+  if(smartTraps){
+    // 대상 문장의 기능어 자리마다 **같은 부류**의 다른 낱말을 — 한 부류에서 몰아 뽑지 않도록
+    // 라운드로빈으로 한 바퀴씩 돈다(`up`에 `down`·`out`·`off`가 셋 다 오면 패턴이 읽힌다).
+    const hits=[];
+    tok.forEach(w=>{ const b=bare(w);
+      const bk=TRAP_BUCKETS.find(([,pool])=>pool.includes(b));
+      if(bk) hits.push(bk[1]); });
+    for(let round=0; round<3 && out.length<want; round++){
+      hits.forEach(pool=>{
+        if(out.length>=want) return;
+        const cands=pool.filter(x=>!used.has(x) && !out.some(y=>bare(y)===x));
+        if(cands.length) push(cands[(seed+out.length+round)%cands.length]);
+      });
+      if(!hits.length) break;
+    }
+  }
+  // 저작 데이터의 함정(`item.traps`)을 먼저 쓰고, 그래도 모자라면 내용어 풀에서 채운다.
+  // `smartTraps` 가 꺼져 있으면 이게 **현재 동작**이다(1~2개).
+  (item.traps||[]).forEach(w=>{ if(out.length<want) push(w); });
+  if(moreTraps){
+    const avg=Math.round(tok.reduce((a,w)=>a+bare(w).length,0)/Math.max(1,tok.length));
+    const near=CONTENT_POOL.filter(x=>!used.has(x) && Math.abs(x.length-avg)<=2);
+    let k=0;
+    while(out.length<want && near.length){ push(near[(seed+k*7)%near.length]); k++; if(k>near.length) break; }
+  }
+  return out.slice(0, want);
+}
+
+// ── 화면 ─────────────────────────────────────────────────────────────────────
+function render(){
+  const item=items[idx];
+  el('posIn').value=String(idx+1);
+  const t=speakTarget(item);
+  const p=item.pattern||{};
+  const tok=tokenize(t.en), flag = t.segs ? frameFlags(tok, t.segs) : frameWordFlags(tok, item.frame);
+  const traps=makeTraps(item, t);
+  let done=false, hintLevel=0, ansArr=[];
+  const bankArr=shuffleOrder(tok.map((w,i)=>({id:i, text:w.toLowerCase(), placed:false}))
+    .concat(traps.map((w,i)=>({id:900+i, text:String(w).toLowerCase(), placed:false}))), x=>x.text);
+
+  el('labNote').innerHTML=`정답 <b>${tok.length}낱말</b> · 뱅크 <b>${bankArr.length}타일</b>`
+    + ` · 함정 <b>${traps.length}</b> (${traps.map(escapeHtml).join(', ')||'없음'})`
+    + ` · 칸 ${hideLen?'<b>비공개</b>':'공개'}`;
+
+  stage.innerHTML=`
+    <div class="stage-scroll">
+      <div class="chat-card spk" id="card">
+        ${chatTag(item)}<div class="chat-badge">NEW</div>
+        <div class="sp-kr">${sentTitleHtml(t)}</div>
+        ${t.krMark||!(p.meaning||'').trim() ? '' :
+          `<div class="expand-mean"><span class="rv-chip fr">${escapeHtml(p.meaning.trim())}</span></div>`}
+        <div class="nb-tip hidden" id="nbTip"></div>
+        <div class="sp-in" id="spIn"><div class="sp-slots" id="spSlots"></div></div>
+        <div class="wrong-box hidden" id="wrongBox"></div>
+        <div class="reveal-note hidden" id="revealNote"></div>
+      </div>
+      <div id="payoffBox"></div>
+    </div>
+    <div class="stage-bottom" id="bottom">
+      <div class="bank" id="bank"></div>
+      <div class="vtools" id="vtools">
+        <button class="vtool" id="hintBtn"><span class="ic">?</span><span id="hintLabel">표현 보기</span></button>
+        <button class="vtool mic" disabled><span class="ic">🎤</span><span>음성 모드</span></button>
+      </div>
+      <div class="arr-btns"><button class="btn-confirm" id="okBtn" disabled>확인</button></div>
+    </div>`;
+  const wrongBox=el('wrongBox');
+
+  // ① **칸을 미리 그리지 않는다** — 놓은 만큼만 서고, 다음 자리 하나를 캐럿으로 열어 둔다.
+  // 칸 수가 보이면 `N개만 쓰면 됨`이 새어 함정을 역산으로 걸러낼 수 있다 — 그게 지금
+  // 함정 효과를 반감시키는 원인이다. 끄면 현재 동작(정답 길이만큼 미리 그림)이다.
+  function renderSlots(){
+    let h='';
+    if(hideLen){
+      ansArr.forEach((a,i)=>{ h+=`<span class="sp-slot${done?'':' on'}"${done?'':` data-i="${i}"`}>${escapeHtml(a.text)}</span>`; });
+      if(!done && ansArr.length<bankArr.length) h+=`<span class="sp-slot cur"></span>`;
+    } else {
+      const n=Math.max(tok.length, ansArr.length);
+      for(let i=0;i<n;i++){
+        const a=ansArr[i], on=(a&&!done);
+        h+=`<span class="sp-slot${on?' on':''}"${on?` data-i="${i}"`:''}>${escapeHtml(a?a.text:'')}</span>`;
+      }
+    }
+    el('spSlots').innerHTML=h;
+    if(done) return;
+    el('spSlots').querySelectorAll('.sp-slot[data-i]').forEach(x=> x.onclick=()=>{
+      const a=ansArr[+x.dataset.i]; if(!a) return;
+      a.placed=false; ansArr.splice(+x.dataset.i,1);
+      wrongBox.classList.add('hidden'); renderAll();
+    });
+  }
+  function renderBank(){
+    const bankEl=el('bank'); bankEl.innerHTML='';
+    bankArr.forEach(tl=>{
+      const b=document.createElement('button');
+      b.className='tile'+(tl.placed?' placed':'');
+      b.textContent=tl.text;
+      if(!tl.placed && !done) b.onclick=()=>{
+        // 칸을 안 그리면 상한은 **뱅크 전체**다 — 답의 길이를 유저가 정한다
+        if(!hideLen && ansArr.length>=tok.length) return;
+        tl.placed=true; ansArr.push(tl); renderAll();
+      };
+      bankEl.appendChild(b);
+    });
+  }
+  function renderAll(){
+    renderSlots(); renderBank();
+    // 칸 비공개에서는 **한 낱말만 놓아도 확인할 수 있다** — 몇 개가 끝인지 앱이 안 알려준다
+    el('okBtn').disabled = done || (hideLen ? ansArr.length===0 : ansArr.length<tok.length);
+  }
+  renderAll();
+
+  function openTip(){ const tip=el('nbTip'); tip.innerHTML=nbTipHtml(item); tip.classList.remove('hidden'); }
+
+  const frWords=tok.filter((w,i)=>flag[i]), matWords=tok.filter((w,i)=>!flag[i]);
+  const allowedWords=frWords.concat(matWords);
+  el('okBtn').onclick=()=>{
+    if(done) return;
+    const words=ansArr.map(x=>x.text);
+    const nz=x=>x.join(' ').toLowerCase().replace(/[^a-z0-9']+/g,' ').trim();
+    if(nz(words)===nz(tok)) return finish(true);
+    wrongBox.classList.remove('hidden');
+    if(!framePos(words.map(bare), item.frame)){
+      wrongBox.classList.add('hidden');
+      if(hintLevel===0) advanceHint(); else openTip();
+      return;
+    }
+    const need=allowedWords.map(bare).sort().join('|'), got=words.map(bare).sort().join('|');
+    if(need!==got){
+      const extra=words.filter(w=>!allowedWords.some(a=>bare(a)===bare(w)));
+      wrongBox.innerHTML = extra.length
+        ? `<b>${escapeHtml(extra.join(', '))}</b> 는 이 문장에 필요하지 않아요.`
+        : `아직 다 쓰지 않은 낱말이 있어요.`;
+      return;
+    }
+    finish(false);
+  };
+
+  function finish(exact){
+    done=true;
+    let said=ansArr.map(x=>x.text).join(' ');
+    said = exact ? t.en : said.charAt(0).toUpperCase()+said.slice(1)+trailPunct(t.en);
+    el('okBtn').disabled=true;
+    el('card').classList.add('correct');
+    if(!el('card').querySelector('.check-mark')){ const c=document.createElement('div'); c.className='check-mark'; c.textContent='✓'; el('card').appendChild(c); }
+    wrongBox.classList.add('hidden'); el('nbTip').classList.add('hidden');
+    const sw=said.split(/\s+/), sf=frameWordFlags(sw, item.frame);
+    el('spIn').innerHTML=`<div class="sp-tiles">${sw.map((w,i)=>
+      `<span class="sp-tile${sf[i]?' fr':''}">${escapeHtml(w)}</span>`).join('')}</div>`;
+    el('bank').classList.add('hidden');
+    const form=(p.form||'').trim(), pmean=(p.meaning||'').trim();
+    el('payoffBox').innerHTML=`<div class="payoff">
+        <div class="chat-tag rv">학습 정보</div>
+        ${form?`<div class="pf-form">${escapeHtml(form).replace(/_{2,}|~/g,'<span class="slot"></span>')}</div>`:''}
+        ${pmean?`<div class="pf-mean">${escapeHtml(pmean)}</div>`:''}
+        <div class="pf-div"></div>
+        <div class="pf-sub"><span class="ic">ⓘ</span>이 표현으로 만든 문장</div>
+        <div class="pf-cmp"><div class="pf-cmp-en">${frameLine(item.sentence.en, item.baseSegs, item.frame)}</div>
+          <div class="pf-cmp-kr">${escapeHtml(item.sentence.kr)}</div></div>
+        <div class="pf-cmp"><div class="pf-cmp-en">${frameLine(said, exact?t.segs:null, item.frame)}</div>
+          <div class="pf-cmp-kr">${escapeHtml(t.kr)}</div></div>
+      </div>`;
+    el('bottom').innerHTML=`<div class="vbtns"><button class="vbtn" id="nextBtn">▶ 다음 문항</button></div>`;
+    el('nextBtn').onclick=()=>go(1);
+  }
+
+  const ladder=[ {label:'표현 보기', run:openTip},
+                 {label:'정답 보기', note:()=>`정답<b>${escapeHtml(t.en)}</b>`} ];
+  function advanceHint(){
+    const d=ladder[hintLevel]; if(!d) return;
+    if(d.run) d.run();
+    if(d.note){ const rn=el('revealNote'); rn.classList.remove('hidden'); rn.innerHTML=d.note(); }
+    hintLevel++;
+    const next=ladder[hintLevel];
+    if(next){ el('hintLabel').textContent=next.label; el('hintBtn').querySelector('.ic').textContent='✔'; }
+    else { el('hintBtn').disabled=true; el('hintLabel').textContent='정답 공개됨'; wrongBox.classList.add('hidden'); }
+  }
+  el('hintBtn').onclick=advanceHint;
+}
+
+// ── 네비·토글 ────────────────────────────────────────────────────────────────
+const QS=new URLSearchParams(location.search);
+const EMBED=QS.has('i')||QS.has('a')||QS.has('b')||QS.has('c');
+function go(d){ idx=(idx+d+items.length)%items.length; save(); render(); }
+function save(){ if(EMBED) return;
+  try{ localStorage.setItem('verarr2', JSON.stringify({idx, hideLen, moreTraps, smartTraps})); }catch(e){} }
+function paintSw(){ el('sw1').classList.toggle('on', hideLen);
+  el('sw2').classList.toggle('on', moreTraps); el('sw3').classList.toggle('on', smartTraps); }
+el('prevBtn').onclick=()=>go(-1);
+el('nextItemBtn').onclick=()=>go(1);
+el('sw1').onclick=()=>{ hideLen=!hideLen; paintSw(); save(); render(); };
+el('sw2').onclick=()=>{ moreTraps=!moreTraps; paintSw(); save(); render(); };
+el('sw3').onclick=()=>{ smartTraps=!smartTraps; paintSw(); save(); render(); };
+el('posIn').onchange=()=>{ const n=parseInt(el('posIn').value,10);
+  if(n>=1 && n<=items.length){ idx=n-1; save(); render(); } else el('posIn').value=String(idx+1); };
+
+// 비교 페이지용 훅
+window.__demo=function(kind){
+  const t=speakTarget(items[idx]); if(!t) return {ok:false};
+  const tok=tokenize(t.en);
+  const take=kind==='half' ? tok.slice(0, Math.max(1, Math.floor(tok.length/2))) : tok;
+  take.forEach(w=>{ const b=Array.from(document.querySelectorAll('#bank .tile'))
+    .find(x=>x.textContent===w.toLowerCase() && !x.classList.contains('placed')); if(b) b.click(); });
+  if(kind==='rest'){
+    const left=Array.from(document.querySelectorAll('#bank .tile')).filter(x=>!x.classList.contains('placed'));
+    if(left[0]) left[0].click();
+  }
+  return {ok:true, slots:tok.length, bank:document.querySelectorAll('#bank .tile').length};
+};
+window.__reset=function(){ render(); };
+window.__goto=function(n){ if(n>=0 && n<items.length){ idx=n; render(); } };
+
+fetch('/vocab-expression.data.json').then(r=>r.json()).then(d=>{
+  DATA=d; items=d.items||d;
+  buildContentPool();
+  try{ const s=JSON.parse(localStorage.getItem('verarr2')||'{}');
+    if(typeof s.idx==='number' && s.idx<items.length) idx=s.idx;
+    if(typeof s.hideLen==='boolean') hideLen=s.hideLen;
+    if(typeof s.moreTraps==='boolean') moreTraps=s.moreTraps;
+    if(typeof s.smartTraps==='boolean') smartTraps=s.smartTraps;
+  }catch(e){}
+  if(QS.has('a')) hideLen=QS.get('a')!=='0';
+  if(QS.has('b')) moreTraps=QS.get('b')!=='0';
+  if(QS.has('c')) smartTraps=QS.get('c')!=='0';
+  if(QS.has('i')){ const n=parseInt(QS.get('i'),10); if(n>=0 && n<items.length) idx=n; }
+  if(EMBED) document.querySelector('.lab').classList.add('hidden');
+  el('posTot').textContent=String(items.length);
+  paintSw(); render();
+});
+</script>
+</body>
+</html>

@@ -69,7 +69,8 @@
 
   <div class="tabs">
     <button class="tab on" data-tab="rcg">[1]·[2] 패턴 찾기</button>
-    <button class="tab" data-tab="arr">[3] 탭 배열</button>
+    <button class="tab" data-tab="arr">[3] 탭 배열 — 함정 고지</button>
+    <button class="tab" data-tab="arr2">[3] 탭 배열 — 난이도</button>
   </div>
 
   <div class="bar" id="bar"></div>
@@ -82,11 +83,14 @@
   <div class="notes" id="notes"></div>
 </div>
 <script>
+// `urlL`/`urlR` 가 다를 수도 있다 — 난이도 탭은 같은 실험 파일을 양쪽에 다른 설정으로 띄운다
 const SRC={
   rcg:{ url:'/vocab-expression-rcg.html', now:'fm=0&fx=0', next:'fm=1&fx=1',
         capL:'형태 슬롯 인정 꺼짐 · 연출 꺼짐', capR:'형태 슬롯 인정 · 수렴 · 손맛' },
   arr:{ url:'/vocab-expression-arr.html', now:'fix=0', next:'fix=1',
         capL:'칸·뱅크 표기 그대로', capR:'칸이 개수를 말한다' },
+  arr2:{ url:'/vocab-expression-arr2.html', now:'a=0&b=0&c=0', next:'a=1&b=1&c=1',
+         capL:'칸 공개 · 함정 1~2 (현재)', capR:'칸 비공개 · 함정 3~5 · 부류' },
 };
 let tab='rcg', idx=0, total=633;
 const el=id=>document.getElementById(id);
@@ -95,8 +99,8 @@ const L=()=>el('fL').contentWindow, R=()=>el('fR').contentWindow;
 function load(){
   const s=SRC[tab];
   el('capL').textContent=s.capL; el('capR').textContent=s.capR;
-  el('fL').src=`${s.url}?i=${idx}&${s.now}`;
-  el('fR').src=`${s.url}?i=${idx}&${s.next}`;
+  el('fL').src=`${s.urlL||s.url}?i=${idx}&${s.now}`;
+  el('fR').src=`${s.urlR||s.url}?i=${idx}&${s.next}`;
 }
 // 두 프레임이 모두 그려진 뒤에 동작을 건다 — 한쪽만 준비됐을 때 걸면 비교가 어긋난다
 function both(fn){
@@ -122,6 +126,14 @@ const BARS={
        <span class="cap">같은 동작 걸기</span>
        <button class="go" data-act="pick">프레임만 짚고 확인</button>
        <button class="go" data-act="plus">프레임 + 바뀌는 자리 짚고 확인</button>
+       <span class="sp"></span>
+       <button data-act="reset">처음으로</button>`,
+  arr2:`<button class="ghost" data-act="prev">‹</button>
+       <span class="pos"><input id="posIn" type="text" inputmode="numeric"> / ${'{T}'}</span>
+       <button class="ghost" data-act="next">›</button>
+       <span class="cap">같은 동작 걸기</span>
+       <button class="go" data-act="half">절반만 놓기</button>
+       <button class="go" data-act="fill">정답 낱말만 놓기</button>
        <span class="sp"></span>
        <button data-act="reset">처음으로</button>`,
   arr:`<button class="ghost" data-act="prev">‹</button>
@@ -152,6 +164,24 @@ const NOTES={
     {t:'[2]-C <em>짚는 손맛</em>',
      rows:[['지금','알약이 위로 튀어오른다(0.3s) · 쌍둥이 낱말 40ms 차'],
            ['개선','알약이 <b>좌→우로 채워진다</b>(0.22s) · 60ms 차로 둘이 차례로 켜진다']]},
+  ],
+  arr2:[
+    {t:'진단 — 지금 <em>[4] c</em>는 <em>[3]</em>보다 어렵지 않다',
+     rows:[['지금','배열할 문장이 <b>중앙값 4낱말</b>로 `[3]`과 거의 같고(509/633 동일), 뱅크 차이는 <b>타일 1개</b>뿐이다'],
+           ['개선','선택·길이 두 축을 올려 `[3]`을 지나온 유저에게 한 단계 위를 준다']],
+     why:'함정이 제 역할을 못 한 이유 둘 — ① 칸 수가 답의 길이를 알려줘 함정을 역산으로 걸러낼 수 있다 ② 1~2개는 과잉으로 보이지도 않고 고민거리도 안 된다.'},
+    {t:'① <em>칸 비공개</em> — 답의 길이를 안 알려준다',
+     rows:[['지금','정답 낱말 수만큼 칸을 미리 그려 준다 → `5개 중 4개`가 역산된다'],
+           ['개선','놓은 만큼만 서고 <b>다음 자리 하나만 캐럿</b>으로 열린다. 한 낱말만 놓아도 <b>확인</b>을 누를 수 있다']],
+     why:'`o`(안 준다) 방식이 이미 같은 구조다. "이것도 써야 하나?"가 버그에서 과제로 바뀐다 — 답의 범위를 유저가 정하는 것이 이 단계의 과제라면 그 의문은 정상이다.'},
+    {t:'② 함정 <em>3~5개</em> — 과잉임이 보인다',
+     rows:[['지금','1개 477문항 · 2개 156 · <b>3개 이상 0</b>. 4+1=5는 과잉으로 안 보인다'],
+           ['개선','정답 수에 비례해 <b>3~5개</b>. 뱅크 중앙값 <b>7타일</b>(최대 12) — 보는 즉시 `여기서 고르는 거구나`']],
+     why:'사전 인지가 여기서 해결된다 — 고지 문구도 코치마크도 필요 없다. 대신 읽는 부담은 오른다(7낱말 답에 12타일).'},
+    {t:'③ <em>부류 함정</em> — 대상 문장 기준, 같은 부류',
+     rows:[['지금','학습 문장+프레임 기준이라 대상 문장과 무관하다 — `I can\'t fall asleep.`에 <b>refers</b>'],
+           ['개선','대상 문장의 기능어 자리에 같은 부류를 — `out`에 <b>along·over</b>, `of`에 <b>to</b>, `I`에 <b>he·we</b>']],
+     why:'빌드에 이미 부류 목록(particle/prep/aux/pron…)이 있는데 학습 문장에만 돌린다. 대상 문장에 돌리면 "왜 여기 있지?"가 "어느 쪽이지?"가 된다. 새 저작 0. 대상에 기능어가 있는 문항은 563/633이고, 나머지 70은 내용어 풀로 떨어져 여전히 노이즈다.'},
   ],
   arr:[
     {t:'① 빈 칸은 <em>점선</em>, 채운 칸은 실선',
