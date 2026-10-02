@@ -192,7 +192,7 @@
   .chat-card.rcg { background:linear-gradient(#e9f1fb 0,#f4f8fd 45px,#ffffff 45px,#ffffff 100%); }
   /* 통과하면 지시문이 빠져 띠가 덮을 것이 없어진다 — 띠를 지우고 단색으로 둔다 */
   .chat-card.rcg.correct { background:#fbfffc; }
-  .rc-list { margin-top:12px; }
+  .rc-list { position:relative; margin-top:12px; }
   .rc-row { max-height:300px; transition:max-height .34s cubic-bezier(.4,0,.2,1), opacity .24s ease; }
   .rc-row + .rc-row { margin-top:12px; padding-top:12px; border-top:1.5px solid #eef3f9; }
   /* 2박자로 넘어가면 예시 두 줄은 **참고**가 된다 — 지우지 않는다. 내가 찾은 패턴이 거기
@@ -237,8 +237,30 @@
            transition:background .2s ease, color .2s ease; }
   /* ver.1 통과 연출용 — 자리는 그대로 두고 색만 늦게 들어온다(위에서부터 한 줄씩) */
   .rc-hl.q { background:transparent; color:#2f3e52; }
-  /* 문장마다 바뀌는 자리 — 통과하면 흐려져 프레임만 남는다 */
-  .rc-dim { color:#c6cfdb; font-weight:600; transition:color .4s ease; }
+  /* 문장마다 바뀌는 자리 — 통과하면 흐려져 프레임만 남는다.
+     **수렴**: 거기서 더 나아가 제자리에서 작아진다 — 두 줄이 `같은 조각만 남은 한 줄`로
+     모이는 그림이 색만으로는 안 선다. */
+  .rc-dim { color:#c6cfdb; font-weight:600;
+            transition:color .4s ease, font-size .34s ease, opacity .34s ease; }
+  .rc-row.ref .rc-dim { font-size:.82em; opacity:.55; }
+  /* 두 줄의 초록 조각을 세로로 맞춘다 — 줄 전체를 민다(레이아웃은 안 건드린다) */
+  .rc-line { transition:transform .46s cubic-bezier(.3,.02,.2,1); }
+  .rc-row.ref .rc-hl { box-shadow:0 2px 7px rgba(46,158,87,.22); }
+  /* **형태 슬롯** — 프레임(글자가 그대로)과 다르게 칠한다. 프레임은 꽉 찬 초록,
+     이쪽은 **점선 테두리의 빈 초록**이다: 색이 아니라 **채움 여부**로 갈라야 한다.
+     색만 흐리게 하면 `덜 맞은 것`으로 읽히는데, 이건 덜 맞은 게 아니라 **다른 종류**다. */
+  .rc-fm { background:#f1fbf5; color:#3f9268; font-weight:800; border:1.5px dashed #9fd9bb;
+           border-radius:8px; padding:1px 6px;
+           -webkit-box-decoration-break:clone; box-decoration-break:clone; }
+  /* 짚는 중에도 프레임 탭(파랑)과 구분해 둔다 — 통과 전에 이미 두 종류임이 보인다 */
+  .rc-w.on.fm { background:#e9f7f0; color:#3f9268; }
+  .rc-w.ok.fm { background:#f1fbf5; color:#3f9268; box-shadow:inset 0 0 0 1.5px #9fd9bb; }
+  /* 형태 이름은 **줄 안이 아니라 아래 범례**에 둔다 — 낱말 옆에 칩을 끼우면 문장이 두 줄로
+     밀려 마지막 낱말만 다음 줄에 떨어지고, 그 줄에서는 수렴도 건너뛰게 된다. */
+  .rc-legend { display:flex; align-items:center; gap:7px; margin-top:14px; font-size:12px; font-weight:700; color:#8fa2b8; }
+  .rc-legend .sw { display:inline-block; width:22px; height:14px; border-radius:5px;
+                   background:#f1fbf5; border:1.5px dashed #9fd9bb; }
+  .rc-legend b { color:#3f9268; font-weight:800; }
   .rc-dim.q { color:#2f3e52; font-weight:700; }
   /* 2박자 입력칸 */
   .rc-in { min-width:74px; font-size:17.5px; }
@@ -987,6 +1009,65 @@ function frameHlHtml(row, dim){
   const p=escapeHtml(trailPunct(row.en));
   return parts.join(' ') + (dim && p ? `<span class="rc-dim">${p}</span>` : p);
 }
+// ── 형태 슬롯 ────────────────────────────────────────────────────────────────
+// 프레임 옆 자리가 **문장마다 낱말은 바뀌지만 형태는 같은** 경우(`need ~ing` · `the ~est`)를
+// 찾아 이름을 붙인다. 출처는 둘: ① 저작된 `pattern.form`의 마커(`___ needs ___-ing.`)
+// ② 형제 문장에서 같은 자리의 낱말이 모두 같은 접미사를 쓰는 경우. 둘 다 없으면 **이름을
+// 붙이지 않는다**(점선 자리는 라벨 없이 남는다) — 없는 규칙을 지어내지 않는다.
+// **`-s`는 쓰지 않는다** — 복수 명사(`potatoes`)·3인칭 단수 동사(`knows`)·축약형(`She's`)이
+// 전부 `s`로 끝나는데 품사를 모르면 구분할 수 없어, `She's`를 복수라고 가르치게 된다.
+// **불규칙 최상급·비교급은 닫힌 목록으로 적어 둔다** — `one of the brightest/best/nicest`는
+// `best` 하나 때문에 접미사 규칙이 통째로 깨진다.
+const RCG_SUF=['ing','est','ed','er'];
+const RCG_SUF_KO={ing:'~ing', est:'가장 ~한', er:'더 ~한', ed:'~ed'};
+const RCG_IRR_EST=new Set(['best','worst','most','least','furthest','farthest','eldest']);
+const RCG_IRR_ER =new Set(['better','worse','more','less','further','farther','elder']);
+function rcgSuf(w){ const x=String(w).toLowerCase().replace(/[^a-z0-9']/g,'');
+  if(RCG_IRR_EST.has(x)) return 'est';
+  if(RCG_IRR_ER.has(x))  return 'er';
+  for(const sfx of RCG_SUF) if(x.endsWith(sfx) && x.length>sfx.length+1) return sfx;
+  return null; }
+function formLabels(item){
+  const bare=w=>String(w).toLowerCase().replace(/[^a-z0-9']/g,'');
+  const out=new Map();
+  const base=item.baseSegs;
+  const fams=[base].concat((item.apply||[]).map(a=>a.segs).filter(Boolean))
+    .filter(f=>f.length===base.length && f.every((g,i)=>g.t===base[i].t));
+  const slotIdx=base.map((g,i)=>g.t==='slot'?i:-1).filter(i=>i>=0);
+  // ① 저작 form 마커 — 자리표시자를 **오른쪽부터** 슬롯에 맞춘다(form 은 앞의 주어를
+  //    생략하는 일이 잦다: `the ___-est` ↔ 슬롯 `It's` + `smallest basket`). 맞춘 자리에
+  //    그 접미사를 가진 낱말이 실제로 없으면 **버린다**(틀린 라벨 금지).
+  const form=((item.pattern||{}).form||'');
+  const holes=[...form.matchAll(/_{2,}(?:\s*-\s*([a-z]+))?/ig)].map(m=>(m[1]||'').toLowerCase());
+  const off=slotIdx.length-holes.length;
+  const mark=new Map();
+  holes.forEach((h,k)=>{ const si=slotIdx[k+off]; if(h && si!==undefined) mark.set(si, h); });
+
+  slotIdx.forEach(si=>{
+    const fills=fams.map(f=>f[si].s.trim().split(/\s+/)).filter(x=>x.length);
+    if(fills.length<2) return;
+    let label=null, pick=null;
+    const m=mark.get(si);
+    if(m && RCG_SUF_KO[m] && fills.some(ws=>ws.some(w=>rcgSuf(w)===m))){ pick=m; label=RCG_SUF_KO[m]; }
+    if(!label && fills.length>=3){
+      // ② 관찰 — 왼쪽/오른쪽 양쪽 정렬로 같은 자리의 낱말을 비교한다
+      for(const side of ['L','R']){
+        const L=Math.min(...fills.map(x=>x.length));
+        for(let k=0;k<L;k++){
+          const ws=fills.map(x=> side==='L' ? x[k] : x[x.length-1-k]);
+          if(new Set(ws.map(bare)).size<3) continue;   // 그 자리가 실제로 바뀌어야 한다
+          const s0=rcgSuf(ws[0]);
+          if(s0 && ws.every(w=>rcgSuf(w)===s0)){ pick=s0; label=RCG_SUF_KO[s0]; break; }
+        }
+        if(label) break;
+      }
+    }
+    if(!label) return;
+    fills.forEach(ws=>ws.forEach(w=>{ if(rcgSuf(w)===pick && bare(w)) out.set(bare(w), label); }));
+  });
+  return out;
+}
+
 // 1박자의 비교 대상 **두 문장**을 고른다 — 학습 문장은 쓰지 않는다. 그 자리는 2박자에서
 // 패턴을 세울 문장이고, 1박자에 미리 보여주면 거기 답이 적혀 있는 셈이 된다.
 //
@@ -1044,7 +1125,8 @@ function renderRecognize(){
   // **둘**인 이유는 셋을 늘어놓으면 마지막 칸만 다른 격자가 되어 `틀린 그림 찾기`로
   // 읽히고, 하나만 주면 단서가 없어 맞힐 수가 없기 때문이다.
   const mk=r=>{ const tok=tokenize(r.en);
-    return {raw:r, kr:r.kr, tok, punct:trailPunct(r.en), flag:frameFlags(tok, r.segs)}; };
+    return {raw:r, kr:r.kr, tok, punct:trailPunct(r.en),
+            flag:frameFlags(tok, r.segs), seg:segIndexOf(tok, r.segs)}; };
   const pair=rcgPair(item);
   // 낱말 단위로 패턴을 짚을 수 없는 유닛은 ver.2(패턴 완성)로 보낸다 — `rcgPair` 참고
   if(!pair) return renderRecognizeFill();
@@ -1058,6 +1140,17 @@ function renderRecognize(){
   // 않는 이유는 조각이 소스에 저작된 단위이고, 그 단위가 곧 재사용되는 덩어리이기 때문이다.
   const pieces=(tgt.raw.segs||[]).filter(g=>g.t==='frame').map(g=>g.s);
   const vals=pieces.map(()=>'');
+  // **프레임보다 큰 패턴을 인정한다** — 학습자가 보는 패턴이 프레임(`needs`)보다 커서
+  // `need ~ing`·`one of the 최상급`까지 짚는 일이 있다. 그걸 오답으로 막으면 **맞는 직관을
+  // 틀렸다고** 하게 된다. 그래서 프레임에 **인접한** 슬롯 낱말은 최대 2개까지 함께 짚어도
+  // 통과시키고, 통과 화면에서 프레임과 **다른 표기**로 갈라 보여준다(`.rc-fm` 점선 초록).
+  // 인접으로 제한하는 이유는 다 짚고 통과하는 것을 막기 위해서다.
+  const adj=new Set();
+  rows.forEach(r=> r.tok.forEach((w,i)=>{
+    if(r.flag[i]) return;
+    if(r.flag[i-1] || r.flag[i+1]){ const b=bare(w); if(b) adj.add(b); }
+  }));
+  const labels=formLabels(item);
   const pick=new Set();
   let phase=1, hintLevel=0;
 
@@ -1080,6 +1173,7 @@ function renderRecognize(){
             <div class="rc-line"></div>
             <div class="rc-kr">${escapeHtml(tgt.kr)}</div>
           </div></div>
+        <div class="rc-legend hidden" id="rcLegend"></div>
         <div class="wrong-box hidden" id="wrongBox"></div>
         <div class="reveal-note hidden" id="revealNote"></div>
       </div>
@@ -1101,7 +1195,11 @@ function renderRecognize(){
 
   // ── 1박자: 짚기 ───────────────────────────────────────────────────────────
   function sync(){
-    wordEls.forEach(b=> b.classList.toggle('on', pick.has(b.dataset.b)));
+    wordEls.forEach(b=>{
+      const on=pick.has(b.dataset.b);
+      b.classList.toggle('on', on);
+      b.classList.toggle('fm', on && !wantSet.has(b.dataset.b));
+    });
     el('okBtn').disabled = phase!==1 || !pick.size;
   }
   wordEls.forEach(b=> b.onclick=()=>{
@@ -1122,18 +1220,24 @@ function renderRecognize(){
 
   function checkPick(){
     const extra=[...pick].filter(w=>!wantSet.has(w));
-    // 프레임 밖을 짚었으면 **왜 아닌지**를 말한다 — 슬롯은 문장마다 바뀌는 자리다.
+    // **프레임에 인접한 자리는 함께 짚어도 틀린 것이 아니다**(최대 2낱말) — 위 `adj` 참고.
+    // 그 밖을 짚었으면 **왜 아닌지**를 말한다 — 슬롯은 문장마다 바뀌는 자리다.
     // **짚은 것이 두 문장에 다 있는 낱말이면 문구를 바꾼다**(유령, 633 중 21) — 거기에
     // `두 문장에 다 있는 말만 눌러 보세요`라고 답하면 화면과 어긋난 말이 된다.
-    if(extra.length){
-      wordEls.forEach(b=>{ if(extra.indexOf(b.dataset.b)>=0) b.classList.add('bad'); });
+    const allowed=extra.filter(w=>adj.has(w));
+    const bad=extra.filter(w=>allowed.indexOf(w)<0);
+    if(bad.length || allowed.length>2){
+      const show=bad.length?bad:allowed;
+      wordEls.forEach(b=>{ if(show.indexOf(b.dataset.b)>=0) b.classList.add('bad'); });
       listEl.classList.remove('shake'); void listEl.offsetWidth; listEl.classList.add('shake');
       const cnt=w=>rowEls.filter(row=>row.querySelector(`button.rc-w[data-b="${w}"]`)).length;
-      const ghost=extra.filter(w=>cnt(w)>=rowEls.length);
+      const ghost=show.filter(w=>cnt(w)>=rowEls.length);
       wrongBox.classList.remove('hidden');
-      wrongBox.innerHTML = ghost.length===extra.length
-        ? `<b>${escapeHtml(extra.join(', '))}</b> 는 두 문장에 다 있지만 <b>패턴은 아니에요</b> — 바뀌는 자리에 우연히 같은 말이 온 거예요.`
-        : `<b>${escapeHtml(extra.join(', '))}</b> 는 문장마다 달라요. <b>두 문장에 다 있는</b> 말만 눌러 보세요.`;
+      wrongBox.innerHTML = (allowed.length>2 && !bad.length)
+        ? `패턴이 너무 넓어요. <b>문장마다 바뀌는 자리</b>는 한두 개까지만 함께 짚을 수 있어요.`
+        : (ghost.length===show.length
+            ? `<b>${escapeHtml(show.join(', '))}</b> 는 두 문장에 다 있지만 <b>패턴은 아니에요</b> — 바뀌는 자리에 우연히 같은 말이 온 거예요.`
+            : `<b>${escapeHtml(show.join(', '))}</b> 는 문장마다 달라요. <b>두 문장에 다 있는</b> 말만 눌러 보세요.`);
       return;
     }
     const missing=want.filter(w=>!pick.has(w));
@@ -1142,25 +1246,84 @@ function renderRecognize(){
       wrongBox.innerHTML=`같은 말이 <b>${missing.length}낱말</b> 더 있어요.`;
       return;
     }
-    recognized();
+    recognized(allowed);
+  }
+
+  // 통과한 줄을 문장으로 굳힌다 — **세 종류가 한 줄에서 갈린다**: 프레임(글자가 그대로 온다)
+  // 은 꽉 찬 초록, 함께 짚은 **형태 슬롯**은 점선 초록, 나머지 바뀌는 자리는 흐려진다.
+  function extraSlots(extras){
+    const m=new Map();                      // seg 인덱스 → 라벨
+    rows.forEach(r=> r.tok.forEach((w,i)=>{
+      const b=bare(w);
+      if(r.flag[i] || extras.indexOf(b)<0) return;
+      const lab=labels.get(b);
+      if(lab) m.set(r.seg[i], lab);
+    }));
+    return m;
+  }
+  // 한 줄에서만 점선이 서면 `fixing 만 형태 슬롯`이라는 거짓이 되므로 **자리 기준**으로
+  // 두 줄 모두 칠한다(같은 seg 인덱스에 같은 형태의 낱말이 선 경우).
+  function settleHtml(r, extras, slotMap){
+    const parts=[]; let run=[];
+    const flush=()=>{ if(run.length){ parts.push(`<span class="rc-hl">${escapeHtml(run.join(' '))}</span>`); run=[]; } };
+    r.tok.forEach((w,i)=>{
+      if(r.flag[i]){ run.push(w); return; }
+      flush();
+      const b=bare(w), lab=labels.get(b);
+      const isFm = extras.indexOf(b)>=0 || (slotMap.get(r.seg[i]) && lab===slotMap.get(r.seg[i]));
+      parts.push(isFm ? `<span class="rc-fm">${escapeHtml(w)}</span>`
+                      : `<span class="rc-dim">${escapeHtml(w)}</span>`);
+    });
+    flush();
+    return parts.join(' ') + (r.punct?`<span class="rc-dim">${escapeHtml(r.punct)}</span>`:'');
+  }
+
+  // **수렴** — 두 줄의 초록 조각을 세로로 맞춘다. 줄바꿈된 줄이나 밀면 넘치는 줄이 하나라도
+  // 있으면 **건너뛴다**: 어긋나 보이면 수렴이 아니라 고장으로 읽힌다. 넘침은 `.rc-line`의
+  // **내용 폭**으로 잰다 — 블록 폭은 늘 컨테이너와 같아 항상 넘친다고 나온다.
+  function converge(){
+    const box=listEl.getBoundingClientRect();
+    const info=rowEls.map(row=>{
+      const line=row.querySelector('.rc-line'), hl=line.querySelector('.rc-hl');
+      if(!hl) return null;
+      const lr=line.getBoundingClientRect(), hr=hl.getBoundingClientRect();
+      if(lr.height>40) return null;
+      const kids=Array.from(line.children);
+      if(!kids.length) return null;
+      const right=Math.max(...kids.map(k=>k.getBoundingClientRect().right));
+      return {line, dx0:hr.left-lr.left, w:right-lr.left};
+    });
+    if(info.some(x=>!x)) return;
+    const target=Math.max(...info.map(x=>x.dx0));
+    if(info.some(x=>x.w + (target-x.dx0) > box.width)) return;
+    info.forEach(x=>{ x.line.style.transform=`translateX(${(target-x.dx0).toFixed(1)}px)`; });
   }
 
   // 짚기를 인정하고 쓰는 줄을 연다. **화면을 교체하지 않는다** — 짚은 낱말이 초록으로 한 번
-  // 튀고(① 인정), 두 예시 줄이 문장으로 굳어 패턴만 초록으로 남고 바뀌는 자리는 흐려지고
-  // (② 패턴만 남는 그림), 그 아래로 쓰는 줄이 열린다(③ 내 차례). 아무것도 지워지지 않으므로
-  // `회수`로 읽히는 순간이 없다(`[3]` 전환에서 배운 것과 같은 리듬이다).
-  function recognized(){
+  // 튀고(① 인정), 두 예시 줄이 문장으로 굳어 프레임만 초록·바뀌는 자리는 작아지며 초록
+  // 조각이 세로로 모이고(② 같은 것만 남는 그림), 그 아래로 쓰는 줄이 열린다(③ 내 차례).
+  // 아무것도 지워지지 않으므로 `회수`로 읽히는 순간이 없다.
+  function recognized(extras){
     phase=0;                               // 전환 중 입력 차단
     el('okBtn').disabled=true;
     wrongBox.classList.add('hidden'); el('revealNote').classList.add('hidden');
     wordEls.forEach(b=>{ if(pick.has(b.dataset.b)){ b.classList.remove('on'); b.classList.add('ok','pop'); } });
     setTimeout(()=>{ if(!listEl.isConnected) return;
+      const slotMap=extraSlots(extras);
       rowEls.forEach((row,ri)=>{
         row.classList.add('ref');
-        row.querySelector('.rc-line').innerHTML=frameHlHtml(rows[ri].raw, true);
+        row.querySelector('.rc-line').innerHTML=settleHtml(rows[ri], extras, slotMap);
       });
+      // 점선이 무엇인지와 그 자리의 형태를 한 줄로 — 함께 짚은 것이 있을 때만 선다
+      if(extras.length){
+        const lab=[...new Set([...slotMap.values()])].join(' · ');
+        el('rcLegend').classList.remove('hidden');
+        el('rcLegend').innerHTML=`<span class="sw"></span>문장마다 바뀌는 자리`
+          + (lab ? ` — 늘 <b>${escapeHtml(lab)}</b>` : '');
+      }
+      converge();
     }, 330);
-    setTimeout(()=>{ if(listEl.isConnected) askWrite(); }, 620);
+    setTimeout(()=>{ if(listEl.isConnected) askWrite(); }, 780);
   }
 
   // ── 2박자: 그 패턴을 **새 문장에** 쓴다 ───────────────────────────────────
@@ -1419,6 +1582,17 @@ function renderRecognizeFill(){
 // 공백으로 자르면 `, grandpa` 같은 슬롯에서 쉼표만 든 타일이 생긴다. 토큰 쪽은 `time,`
 // 처럼 부호가 낱말에 붙어 자연스럽고, 어느 토큰이 프레임인지는 조각을 순서대로 소진해
 // 표시한다(`frameFlags`).
+// 토큰이 몇 번째 seg 에 속하는지 — 형태 슬롯을 낱말이 아니라 **자리**로 칠하기 위해 쓴다
+function segIndexOf(tokens, segs){
+  const bare=w=>String(w).toLowerCase().replace(/[^a-z0-9']/g,'');
+  const out=new Array(tokens.length).fill(-1);
+  let ti=0;
+  segs.forEach((sg,si)=>{
+    const n=sg.s.split(/\s+/).map(bare).filter(Boolean).length;
+    for(let k=0;k<n && ti<tokens.length;k++, ti++) out[ti]=si;
+  });
+  return out;
+}
 function frameFlags(tokens, segs){
   const bare=w=>String(w).toLowerCase().replace(/[^a-z0-9']/g,'');
   const flags=new Array(tokens.length).fill(false);
