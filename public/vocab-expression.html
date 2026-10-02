@@ -81,7 +81,24 @@
 
   /* 채팅 말풍선 카드 */
   .chat-card { position:relative; background:linear-gradient(#e9f1fb 0%, #f4f8fd 42%, #ffffff 42%, #ffffff 100%);
-    border-radius:22px; box-shadow:0 6px 18px rgba(30,60,110,.13); padding:22px 20px 16px; }
+    border-radius:22px; box-shadow:0 6px 18px rgba(30,60,110,.13); padding:22px 20px 16px;
+    transition:box-shadow .4s ease; }
+  /* **한 표현의 네 단계가 카드 한 묶음으로 보이게** 뒤에 카드를 포개 둔다 — 단계가 넘어갈
+     때마다 한 장씩 줄어 `이 표현에 남은 분량`이 화면에 선다. 단계마다 카드를 새로 그리므로
+     마크업을 건드리지 않는 방법이 필요했다: `box-shadow` 를 여러 겹 쌓으면 같은 둥근
+     모서리로 **아래에 삐져나온 카드 테두리**가 된다(엘리먼트를 추가하면 모든 render 를
+     고쳐야 하고, 음수 z-index 가상요소는 `.app` 의 배경 뒤로 숨어 안 보인다).
+     깊이는 `body[data-stack]` 로만 바꾼다 — `setProgress` 가 단계마다 찍어 준다. */
+  body[data-stack="1"] .chat-card { box-shadow:
+      0 6px 18px rgba(30,60,110,.13),
+      0 9px 0 -4px #f4f8fd, 0 11px 12px -6px rgba(30,60,110,.10); }
+  body[data-stack="2"] .chat-card { box-shadow:
+      0 6px 18px rgba(30,60,110,.13),
+      0 9px 0 -4px #f4f8fd, 0 11px 12px -6px rgba(30,60,110,.10),
+      0 17px 0 -8px #e8eff8, 0 19px 12px -10px rgba(30,60,110,.08); }
+  /* 포갠 카드는 **문제 카드에만** 둔다 — `학습 정보`(`.payoff`)는 그 문장의 것이 아니라
+     표현의 것이라 묶음에 들어가지 않는다. */
+  body[data-stack] .payoff { box-shadow:0 6px 18px rgba(30,60,110,.13); }
   .chat-card.correct { background:linear-gradient(#dff3e4 0%,#eaf8ee 46%,#fbfffc 46%,#fbfffc 100%); }
   /* 연습지 카드는 줄이 쌓여 키가 크다 — 머리 그라데이션의 %는 카드 키를 따라가므로
      첫 줄까지 물들어 '이 줄만 맞았다'처럼 읽힌다. 표제 높이에 px로 고정한다. */
@@ -222,7 +239,16 @@
   @keyframes rcPop { 0%{transform:none;} 42%{transform:translateY(-5px) scale(1.09);} 100%{transform:none;} }
   .rc-list.shake, .fill.shake { animation:rcShake .34s ease; }
   @keyframes rcShake { 0%,100%{transform:none;} 22%{transform:translateX(-5px);} 55%{transform:translateX(5px);} 82%{transform:translateX(-2px);} }
-  .rc-w.bad { background:#fdeaea; color:#c0403b; border-bottom-color:transparent; }
+  /* **틀린 표시는 기분 나쁘지 않을 정도로** — 붉은 칠은 `실수했다`가 먼저 오고, 이 단계는
+     시험이 아니라 인식이다. 흐려지고 **얇은 밑줄**만 남는다(칠하지 않는다). */
+  .rc-w.bad { background:transparent; color:#aab7c8; font-weight:700;
+              border-bottom:1.5px solid #dcc3a8; }
+  /* 흔들림(`shake`)도 질책으로 읽힌다 — 폭을 줄여 **한 번만 가볍게** 밀린다 */
+  .rc-list.nudge { animation:rcNudge .26s ease; }
+  @keyframes rcNudge { 0%,100%{transform:none;} 45%{transform:translateX(-3px);} }
+  /* 인식 단계의 안내 문구는 빨강을 쓰지 않는다 — 같은 박스가 `N낱말 더 있어요` 처럼
+     오답이 아닌 말도 담는다 */
+  .chat-card.rcg .wrong-box b { color:#8a6a1f; }
   .rc-p { font-size:17.5px; font-weight:700; margin-left:-5px; }
   /* **뜻은 처음부터 보인다** — 이 단계는 인출이 아니라 인식이라 `[5]`의 "답하기 전에는
      한국어를 잠근다"가 적용되지 않는다. 뜻이 없으면 모양만 맞추는 일이 되고, 복잡해
@@ -246,21 +272,22 @@
   /* **줄을 가로로 밀어 초록 조각을 맞추지 않는다** — 문장이 통째로 들여쓰기된 것처럼 보여
      `왜 움직였지?`가 먼저 읽힌다. 수렴은 바뀌는 자리가 작아지는 것으로 충분하다. */
   .rc-row.ref .rc-hl { box-shadow:0 2px 7px rgba(46,158,87,.22); }
-  /* **형태 슬롯** — 프레임(글자가 그대로)과 다르게 칠한다. 프레임은 꽉 찬 초록,
-     이쪽은 **점선 테두리의 빈 초록**이다: 색이 아니라 **채움 여부**로 갈라야 한다.
-     색만 흐리게 하면 `덜 맞은 것`으로 읽히는데, 이건 덜 맞은 게 아니라 **다른 종류**다. */
-  .rc-fm { background:#f1fbf5; color:#3f9268; font-weight:800; border:1.5px dashed #9fd9bb;
+  /* **형태 슬롯** — 프레임(글자가 그대로)과 다르게 칠한다. 다만 **초록은 쓰지 않는다**:
+     초록은 이 화면에서 `정답/패턴 본체`의 색이라, 거기까지 주면 `이것도 패턴이다`로 읽혀
+     과하다. 여기 필요한 신호는 **`틀린 건 아니다`** 정도다 — 점선 테두리의 **중립색**으로
+     둔다(색이 아니라 **채움 여부**로 프레임과 갈라지는 것은 그대로다). */
+  .rc-fm { background:#f6f8fc; color:#7d8ea6; font-weight:700; border:1.5px dashed #cdd8e8;
            border-radius:8px; padding:1px 6px;
            -webkit-box-decoration-break:clone; box-decoration-break:clone; }
   /* 짚는 중에도 프레임 탭(파랑)과 구분해 둔다 — 통과 전에 이미 두 종류임이 보인다 */
-  .rc-w.on.fm { background:#e9f7f0; color:#3f9268; }
-  .rc-w.ok.fm { background:#f1fbf5; color:#3f9268; box-shadow:inset 0 0 0 1.5px #9fd9bb; }
+  .rc-w.on.fm { background:#eef1f6; color:#7d8ea6; font-weight:700; }
+  .rc-w.ok.fm { background:#f6f8fc; color:#7d8ea6; font-weight:700; box-shadow:inset 0 0 0 1.5px #cdd8e8; }
   /* 형태 이름은 **줄 안이 아니라 아래 범례**에 둔다 — 낱말 옆에 칩을 끼우면 문장이 두 줄로
      밀려 마지막 낱말만 다음 줄에 떨어지고, 그 줄에서는 수렴도 건너뛰게 된다. */
   .rc-legend { display:flex; align-items:center; gap:7px; margin-top:14px; font-size:12px; font-weight:700; color:#8fa2b8; }
   .rc-legend .sw { display:inline-block; width:22px; height:14px; border-radius:5px;
-                   background:#f1fbf5; border:1.5px dashed #9fd9bb; }
-  .rc-legend b { color:#3f9268; font-weight:800; }
+                   background:#f6f8fc; border:1.5px dashed #cdd8e8; }
+  .rc-legend b { color:#6f8299; font-weight:800; }
   .rc-dim.q { color:#2f3e52; font-weight:700; }
   /* 2박자 입력칸 */
   .rc-in { min-width:74px; font-size:17.5px; }
@@ -718,6 +745,8 @@ function buildStepIndex(){
 }
 // 진행바: 문항 내 단계 위치(step)를 전체 누적 위치로 환산한다
 function setProgress(step){
+  // 남은 단계만큼 카드를 포개 둔다(최대 2장) — `[4]`에서는 포갠 것이 없어 한 장으로 끝난다
+  try{ document.body.setAttribute('data-stack', String(Math.max(0, Math.min(2, itemSteps()-1-step)))); }catch(e){}
   const stepDone=(stepStart[itemIdx]||0)+step;
   const total=stepTotal||sessionItems.length*itemSteps(), pct=Math.min(100, stepDone/total*100);
   el('barFill').style.width=pct+'%';
@@ -1229,7 +1258,7 @@ function renderRecognize(){
     if(bad.length || allowed.length>2){
       const show=bad.length?bad:allowed;
       wordEls.forEach(b=>{ if(show.indexOf(b.dataset.b)>=0) b.classList.add('bad'); });
-      listEl.classList.remove('shake'); void listEl.offsetWidth; listEl.classList.add('shake');
+      listEl.classList.remove('nudge'); void listEl.offsetWidth; listEl.classList.add('nudge');
       const cnt=w=>rowEls.filter(row=>row.querySelector(`button.rc-w[data-b="${w}"]`)).length;
       const ghost=show.filter(w=>cnt(w)>=rowEls.length);
       wrongBox.classList.remove('hidden');
@@ -1356,7 +1385,7 @@ function renderRecognize(){
     const bad=pieces.map((p,i)=>!pieceOk(vals[i], p)).map((x,i)=>x?i:-1).filter(i=>i>=0);
     if(bad.length){
       bad.forEach(i=>{ const inp=ins.find(x=>+x.dataset.i===i); if(inp) inp.classList.add('bad'); });
-      listEl.classList.remove('shake'); void listEl.offsetWidth; listEl.classList.add('shake');
+      listEl.classList.remove('nudge'); void listEl.offsetWidth; listEl.classList.add('nudge');
       wrongBox.classList.remove('hidden');
       wrongBox.innerHTML=`위 두 문장의 초록색 패턴과 달라요. 철자를 다시 확인해 보세요.`;
       return;
@@ -2110,14 +2139,16 @@ function buildTrapPool(){
   })));
   CONTENT_TRAP_POOL.sort();
 }
-// 정답 낱말 수에 비례해 둔다 — 7~12타일이 되어 `여기서 고르는 거구나`가 **설명 없이** 읽힌다.
+// **함정은 3개로 고정한다.** 1~2개는 과잉으로 보이지도 않아 `이것도 써야 하나?`가 되고,
+// 정답 수에 비례해 늘리면(7낱말 → 5개) 뱅크가 12타일이 되어 이번에는 **헷갈린다**. 3개면
+// 가장 짧은 답에서도 과잉이 보이고(2+3=5) 가장 긴 답에서도 읽을 만하다(7+3=10).
 // 고지 문구("안 쓰는 낱말이 섞여 있어요")는 두지 않는다 — 앱이 자기 규칙을 변명하는 말이 된다.
 function speakTraps(item, t){
   const bare=w=>String(w).toLowerCase().replace(/[^a-z0-9']/g,'');
   const tok=tokenize(t.en);
   const used=new Set(tok.map(bare));
   const seed=[...t.en].reduce((a,c)=>a+c.charCodeAt(0),0);   // 난수를 쓰지 않아 다시 그려도 같다
-  const want=Math.max(3, Math.round(tok.length*0.75));
+  const want=3;
   const out=[];
   const push=w=>{ const b=bare(w); if(b && !used.has(b) && !out.some(x=>bare(x)===b)) out.push(w); };
   // 대상 문장의 기능어 자리마다 같은 부류에서 하나씩 — **한 부류에서 몰아 뽑지 않도록**
