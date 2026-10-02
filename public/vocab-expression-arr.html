@@ -436,8 +436,11 @@ function trapCount(i){
   const tok=tokenize(t.en);
   return (it.traps||[]).filter(w=>!tok.some(x=>bare(x)===bare(w))).slice(0,2).length;
 }
+const QS=new URLSearchParams(location.search);
+const EMBED=QS.has('fix')||QS.has('i');   // 비교 페이지가 끼운 프레임인가
 function go(d){ idx=(idx+d+items.length)%items.length; save(); render(); }
-function save(){ try{ localStorage.setItem('verarr', JSON.stringify({idx, fixOn})); }catch(e){} }
+function save(){ if(EMBED) return;
+  try{ localStorage.setItem('verarr', JSON.stringify({idx, fixOn})); }catch(e){} }
 el('prevBtn').onclick=()=>go(-1);
 el('nextItemBtn').onclick=()=>go(1);
 el('next2Btn').onclick=()=>{
@@ -450,12 +453,40 @@ el('swFix').onclick=()=>{ fixOn=!fixOn; el('swFix').classList.toggle('on', fixOn
 el('posIn').onchange=()=>{ const n=parseInt(el('posIn').value,10);
   if(n>=1 && n<=items.length){ idx=n-1; save(); render(); } else el('posIn').value=String(idx+1); };
 
+// ── 비교 페이지용 훅 ────────────────────────────────────────────────────────
+window.__demo=function(kind){
+  const t=speakTarget(items[idx]); if(!t) return {ok:false};
+  const tok=tokenize(t.en);
+  if(kind==='fill' || kind==='rest'){
+    tok.forEach(w=>{ const b=Array.from(document.querySelectorAll('#bank .tile'))
+      .find(x=>x.textContent===w.toLowerCase() && !x.classList.contains('placed')); if(b) b.click(); });
+  }
+  if(kind==='half'){
+    tok.slice(0, Math.max(1, Math.floor(tok.length/2))).forEach(w=>{
+      const b=Array.from(document.querySelectorAll('#bank .tile'))
+        .find(x=>x.textContent===w.toLowerCase() && !x.classList.contains('placed')); if(b) b.click(); });
+  }
+  if(kind==='rest'){
+    // 칸이 다 찬 뒤 남은 타일을 눌러 본다 — 지금은 아무 일도 없고, 개선 쪽은 줄이 펄스한다
+    const left=Array.from(document.querySelectorAll('#bank .tile'))
+      .filter(x=>!x.classList.contains('placed'));
+    if(left[0]) left[0].click();
+  }
+  return {ok:true, slots:tok.length, bank:document.querySelectorAll('#bank .tile').length};
+};
+window.__reset=function(){ render(); };
+window.__goto=function(n){ if(n>=0 && n<items.length){ idx=n; render(); } };
+window.__trap2=function(){ const out=[]; items.forEach((_,i)=>{ if(trapCount(i)===2) out.push(i); }); return out; };
+
 fetch('/vocab-expression.data.json').then(r=>r.json()).then(d=>{
   DATA=d; items=d.items||d;
   try{ const s=JSON.parse(localStorage.getItem('verarr')||'{}');
     if(typeof s.idx==='number' && s.idx<items.length) idx=s.idx;
     if(typeof s.fixOn==='boolean') fixOn=s.fixOn;
   }catch(e){}
+  if(QS.has('fix')) fixOn = QS.get('fix')!=='0';
+  if(QS.has('i')){ const n=parseInt(QS.get('i'),10); if(n>=0 && n<items.length) idx=n; }
+  if(EMBED) document.querySelector('.lab').classList.add('hidden');
   el('posTot').textContent=String(items.length);
   el('swFix').classList.toggle('on', fixOn);
   render();

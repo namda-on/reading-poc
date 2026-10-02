@@ -590,8 +590,11 @@ function render(){
 }
 
 // ── 네비·토글 ────────────────────────────────────────────────────────────────
+const QS=new URLSearchParams(location.search);
+const EMBED=QS.has('fm')||QS.has('fx')||QS.has('i');   // 비교 페이지가 끼운 프레임인가
 function go(d){ idx=(idx+d+items.length)%items.length; save(); render(); }
-function save(){ try{ localStorage.setItem('vercg', JSON.stringify({idx, fmOn, fxOn, onlyFm})); }catch(e){} }
+function save(){ if(EMBED) return;
+  try{ localStorage.setItem('vercg', JSON.stringify({idx, fmOn, fxOn, onlyFm})); }catch(e){} }
 function paintSw(){ el('swFm').classList.toggle('on', fmOn); el('swFx').classList.toggle('on', fxOn); }
 
 // 형태 라벨이 붙는 다음 문항으로 — `[1]`의 라벨을 훑어보려면 손으로 찾기엔 49/633이다
@@ -621,6 +624,31 @@ el('swFx').onclick=()=>{ fxOn=!fxOn; paintSw(); save(); render(); };
 el('posIn').onchange=()=>{ const n=parseInt(el('posIn').value,10);
   if(n>=1 && n<=items.length){ idx=n-1; save(); render(); } else el('posIn').value=String(idx+1); };
 
+// ── 비교 페이지용 훅 — 부모가 두 프레임에 **같은 동작**을 같은 순간에 건다 ─────────
+// 사람이 양쪽을 따로 조작하면 타이밍이 어긋나 연출을 나란히 볼 수 없다.
+window.__demo=function(kind){
+  const W=()=>Array.from(document.querySelectorAll('#rcList button.rc-w'));
+  const it=items[idx], pair=rcgPair(it);
+  if(!pair) return {ok:false, why:'짚기 비대상'};
+  const t0=tokenize(pair[0].en), f0=frameFlags(t0, pair[0].segs);
+  const want=[...new Set(t0.filter((w,k)=>f0[k]).map(bare).filter(Boolean))];
+  const labels=formLabels(it);
+  const adj=[];
+  pair.forEach(p=>{ const t=tokenize(p.en), f=frameFlags(t,p.segs);
+    t.forEach((w,k)=>{ if(f[k]) return; const b=bare(w);
+      if(b && (f[k-1]||f[k+1]) && !want.includes(b)) adj.push(b); }); });
+  const fmWord=adj.find(w=>labels.has(w)) || adj[0];
+  const target = kind==='plus' && fmWord ? want.concat([fmWord]) : want;
+  // 같은 낱말이 두 줄에 있으면 두 번 눌려 **다시 꺼진다** — 켜진 것만 보고 토글한다
+  W().forEach(b=>{ if(b.classList.contains('on')) b.click(); });
+  W().forEach(b=>{ if(target.includes(b.dataset.b) && !b.classList.contains('on')) b.click(); });
+  document.getElementById('okBtn').click();
+  return {ok:true, tapped:target, extra:kind==='plus'?fmWord:null, label:fmWord?labels.get(fmWord)||null:null};
+};
+window.__reset=function(){ render(); };
+window.__goto=function(n){ if(n>=0 && n<items.length){ idx=n; render(); } };
+window.__labelItems=function(){ const out=[]; items.forEach((_,i)=>{ if(hasLabel(i)) out.push(i); }); return out; };
+
 fetch('/vocab-expression.data.json').then(r=>r.json()).then(d=>{
   DATA=d; items=d.items||d;
   try{ const s=JSON.parse(localStorage.getItem('vercg')||'{}');
@@ -628,6 +656,10 @@ fetch('/vocab-expression.data.json').then(r=>r.json()).then(d=>{
     if(typeof s.fmOn==='boolean') fmOn=s.fmOn;
     if(typeof s.fxOn==='boolean') fxOn=s.fxOn;
   }catch(e){}
+  if(QS.has('fm')) fmOn = QS.get('fm')!=='0';
+  if(QS.has('fx')) fxOn = QS.get('fx')!=='0';
+  if(QS.has('i')){ const n=parseInt(QS.get('i'),10); if(n>=0 && n<items.length) idx=n; }
+  if(EMBED) document.querySelector('.lab').classList.add('hidden');   // 조작부는 부모가 가진다
   el('posTot').textContent=String(items.length);
   paintSw(); render();
 });
