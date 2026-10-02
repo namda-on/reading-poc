@@ -243,8 +243,8 @@
   .rc-dim { color:#c6cfdb; font-weight:600;
             transition:color .4s ease, font-size .34s ease, opacity .34s ease; }
   .rc-row.ref .rc-dim { font-size:.82em; opacity:.55; }
-  /* 두 줄의 초록 조각을 세로로 맞춘다 — 줄 전체를 민다(레이아웃은 안 건드린다) */
-  .rc-line { transition:transform .46s cubic-bezier(.3,.02,.2,1); }
+  /* **줄을 가로로 밀어 초록 조각을 맞추지 않는다** — 문장이 통째로 들여쓰기된 것처럼 보여
+     `왜 움직였지?`가 먼저 읽힌다. 수렴은 바뀌는 자리가 작아지는 것으로 충분하다. */
   .rc-row.ref .rc-hl { box-shadow:0 2px 7px rgba(46,158,87,.22); }
   /* **형태 슬롯** — 프레임(글자가 그대로)과 다르게 칠한다. 프레임은 꽉 찬 초록,
      이쪽은 **점선 테두리의 빈 초록**이다: 색이 아니라 **채움 여부**로 갈라야 한다.
@@ -1278,30 +1278,9 @@ function renderRecognize(){
     return parts.join(' ') + (r.punct?`<span class="rc-dim">${escapeHtml(r.punct)}</span>`:'');
   }
 
-  // **수렴** — 두 줄의 초록 조각을 세로로 맞춘다. 줄바꿈된 줄이나 밀면 넘치는 줄이 하나라도
-  // 있으면 **건너뛴다**: 어긋나 보이면 수렴이 아니라 고장으로 읽힌다. 넘침은 `.rc-line`의
-  // **내용 폭**으로 잰다 — 블록 폭은 늘 컨테이너와 같아 항상 넘친다고 나온다.
-  function converge(){
-    const box=listEl.getBoundingClientRect();
-    const info=rowEls.map(row=>{
-      const line=row.querySelector('.rc-line'), hl=line.querySelector('.rc-hl');
-      if(!hl) return null;
-      const lr=line.getBoundingClientRect(), hr=hl.getBoundingClientRect();
-      if(lr.height>40) return null;
-      const kids=Array.from(line.children);
-      if(!kids.length) return null;
-      const right=Math.max(...kids.map(k=>k.getBoundingClientRect().right));
-      return {line, dx0:hr.left-lr.left, w:right-lr.left};
-    });
-    if(info.some(x=>!x)) return;
-    const target=Math.max(...info.map(x=>x.dx0));
-    if(info.some(x=>x.w + (target-x.dx0) > box.width)) return;
-    info.forEach(x=>{ x.line.style.transform=`translateX(${(target-x.dx0).toFixed(1)}px)`; });
-  }
-
   // 짚기를 인정하고 쓰는 줄을 연다. **화면을 교체하지 않는다** — 짚은 낱말이 초록으로 한 번
-  // 튀고(① 인정), 두 예시 줄이 문장으로 굳어 프레임만 초록·바뀌는 자리는 작아지며 초록
-  // 조각이 세로로 모이고(② 같은 것만 남는 그림), 그 아래로 쓰는 줄이 열린다(③ 내 차례).
+  // 튀고(① 인정), 두 예시 줄이 문장으로 굳어 프레임만 초록으로 남고 바뀌는 자리는
+  // 제자리에서 작아지고(② 같은 것만 남는 그림), 그 아래로 쓰는 줄이 열린다(③ 내 차례).
   // 아무것도 지워지지 않으므로 `회수`로 읽히는 순간이 없다.
   function recognized(extras){
     phase=0;                               // 전환 중 입력 차단
@@ -1321,7 +1300,6 @@ function renderRecognize(){
         el('rcLegend').innerHTML=`<span class="sw"></span>문장마다 바뀌는 자리`
           + (lab ? ` — 늘 <b>${escapeHtml(lab)}</b>` : '');
       }
-      converge();
     }, 330);
     setTimeout(()=>{ if(listEl.isConnected) askWrite(); }, 780);
   }
