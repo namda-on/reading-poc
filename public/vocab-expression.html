@@ -219,27 +219,36 @@
   .rc-row.ref { opacity:.82; }
   /* 쓰는 줄 — 예시와 점선으로 갈라 `여기가 내 차례`를 표시한다 */
   .rc-row.tgt + .rc-row.tgt, .rc-row.tgt { border-top-style:dashed; border-top-color:#d7e1ef; }
-  .rc-line { font-size:17px; line-height:2.05; color:#2f3e52; font-weight:700;
-             word-spacing:-5px; }
+  /* **간격은 `gap` 하나로 잡는다.** 낱말 사이 공백을 `word-spacing` 으로 줄였더니 칩이 없는
+     상태(굳은 줄의 `.rc-dim`·한 알약 안의 `fall asleep`)에서 글자가 **붙어 버렸다**. flex 에서는
+     자식 사이의 공백 텍스트 노드가 렌더되지 않으므로 칩이 있든 없든 간격이 똑같이 잡힌다. */
+  .rc-line { display:flex; flex-wrap:wrap; align-items:baseline; gap:4px 3px;
+             font-size:16.5px; line-height:1.6; color:#2f3e52; font-weight:700; }
   /* **낱말을 칸에 넣지 않는다.** 세 줄을 전부 칩으로 쪼개면 문장이 아니라 타일 더미로 보여
      읽기 전에 이미 복잡하다. 탭할 수 있다는 표시는 **흐린 점선 하나**로 충분하고, 세 줄이
      모두 같으니 `아무 데나 짚어도 된다`는 그대로 남는다. 짚은 낱말만 알약이 된다. */
   /* **눌러도 되는 것처럼 보여야 한다** — 점선 밑줄만으로는 `만질 수 있다`가 약했다.
      그렇다고 테두리 있는 타일로 만들면 문장이 **타일 더미**로 보이므로(이미 한 번 겪었다),
      테두리 없이 **아주 옅은 판**만 깔고 살짝 띄운다. 자간은 그대로라 문장으로 읽힌다. */
-  .rc-w { display:inline-block; margin:0; padding:2px 6px; font:inherit; color:inherit;
-          border:none; background:#eef3fa; border-radius:9px;
-          box-shadow:0 1px 0 rgba(47,79,128,.07);
-          transition:background .15s ease, color .15s ease, transform .1s ease, box-shadow .1s ease; }
+  /* **눌러도 되는 것처럼 보여야 한다** — 옅은 판만으로는 약했다. 흰 판에 테두리를 두르고
+     **아래 모서리**를 깔아 키처럼 보이게 한다(뱅크의 `.tile` 과 같은 신호라 손이 가는 자리가
+     앞뒤 단계와 같다). 그래도 테두리가 얇고 둥글어 문장으로 읽힌다. */
+  .rc-w { display:inline-block; margin:0; padding:3px 6px; font:inherit; color:inherit;
+          border:1px solid #dbe6f5; background:#fff; border-radius:10px;
+          box-shadow:0 2px 0 #e7eef8;
+          transition:background .15s ease, color .15s ease, border-color .15s ease,
+                     transform .09s ease, box-shadow .09s ease; }
   button.rc-w { cursor:pointer; }
-  /* 누르는 동안 눌리는 느낌 — 손끝이 닿았다는 응답이 색보다 먼저 온다 */
-  button.rc-w:active { transform:translateY(1px); box-shadow:none; }
+  /* 누르는 동안 **실제로 내려앉는다** — 손끝이 닿았다는 응답이 색보다 먼저 온다 */
+  button.rc-w:active { transform:translateY(2px); box-shadow:0 0 0 #e7eef8; }
   /* 부호만 든 조각은 만질 것이 아니다 — 판을 깔지 않는다 */
-  .rc-w.plain { background:none; box-shadow:none; padding:3px 1px; }
+  .rc-w.plain { background:none; border-color:transparent; box-shadow:none; padding:3px 0; }
   /* 짚으면 **세 줄의 같은 낱말이 한꺼번에 켜진다** — `저기도 있네`가 짚기와 같은 동작이다 */
-  .rc-w.on { background:#e2ebfb; color:#3a6bb0; font-weight:800; border-bottom-color:transparent; }
+  .rc-w.on { background:#dbe8fb; color:#3a6bb0; font-weight:800;
+             border-color:#b9d0ef; box-shadow:0 2px 0 #c7d9f2; }
   /* 맞게 짚었다는 인정 — 그 자리가 그대로 입력칸이 된다 */
-  .rc-w.ok { background:#dcf6e6; color:#1f7a49; font-weight:800; border-bottom-color:transparent; }
+  .rc-w.ok { background:#dcf6e6; color:#1f7a49; font-weight:800;
+             border-color:#a9dec2; box-shadow:0 2px 0 #c2ebd4; }
   .rc-w.pop, .rc-hl.pop { animation:rcPop .36s ease; }
   /* 짚는 순간의 피드백 — 통과 연출(`pop`)보다 작고 빠르다(정답 표시가 아니라 반응이다) */
   .rc-w.tap { animation:rcTap .3s ease; }
@@ -249,15 +258,16 @@
   @keyframes rcShake { 0%,100%{transform:none;} 22%{transform:translateX(-5px);} 55%{transform:translateX(5px);} 82%{transform:translateX(-2px);} }
   /* **틀린 표시는 기분 나쁘지 않을 정도로** — 붉은 칠은 `실수했다`가 먼저 오고, 이 단계는
      시험이 아니라 인식이다. 흐려지고 **얇은 밑줄**만 남는다(칠하지 않는다). */
-  .rc-w.bad { background:transparent; color:#aab7c8; font-weight:700;
-              border-bottom:1.5px solid #dcc3a8; }
+  .rc-w.bad { background:#fff; color:#aab7c8; font-weight:700;
+              border-color:#e6d3bd; box-shadow:0 2px 0 #f0e4d3; }
   /* 흔들림(`shake`)도 질책으로 읽힌다 — 폭을 줄여 **한 번만 가볍게** 밀린다 */
   .rc-list.nudge { animation:rcNudge .26s ease; }
   @keyframes rcNudge { 0%,100%{transform:none;} 45%{transform:translateX(-3px);} }
   /* 인식 단계의 안내 문구는 빨강을 쓰지 않는다 — 같은 박스가 `N낱말 더 있어요` 처럼
      오답이 아닌 말도 담는다 */
   .chat-card.rcg .wrong-box b { color:#8a6a1f; }
-  .rc-p { font-size:17.5px; font-weight:700; margin-left:-3px; }
+  /* 종결부호는 flex 아이템이라 그냥 두면 `gap` 만큼 떨어져 **딴 낱말처럼** 보인다 */
+  .rc-p, .rc-tail { font-size:16.5px; font-weight:700; margin-left:-4px; }
   /* **뜻은 처음부터 보인다** — 이 단계는 인출이 아니라 인식이라 `[5]`의 "답하기 전에는
      한국어를 잠근다"가 적용되지 않는다. 뜻이 없으면 모양만 맞추는 일이 되고, 복잡해
      보이는 것은 숨겨서가 아니라 크기로 누른다(본문의 4분의 3, 흐린 회색). */
@@ -288,7 +298,8 @@
            border-radius:8px; padding:1px 6px;
            -webkit-box-decoration-break:clone; box-decoration-break:clone; }
   /* 짚는 중에도 프레임 탭(파랑)과 구분해 둔다 — 통과 전에 이미 두 종류임이 보인다 */
-  .rc-w.on.fm { background:#eef1f6; color:#7d8ea6; font-weight:700; }
+  .rc-w.on.fm { background:#eef1f6; color:#7d8ea6; font-weight:700;
+                border-color:#d3dbe6; box-shadow:0 2px 0 #e0e5ed; }
   .rc-w.ok.fm { background:#f6f8fc; color:#7d8ea6; font-weight:700; box-shadow:inset 0 0 0 1.5px #cdd8e8; }
   /* 형태 이름은 **줄 안이 아니라 아래 범례**에 둔다 — 낱말 옆에 칩을 끼우면 문장이 두 줄로
      밀려 마지막 낱말만 다음 줄에 떨어지고, 그 줄에서는 수렴도 건너뛰게 된다. */
@@ -1233,8 +1244,7 @@ function renderRecognize(){
   // ── 1박자: 짚기 ───────────────────────────────────────────────────────────
   // **확인 버튼을 누르지 않는다.** 패턴을 다 짚는 순간이 곧 답을 낸 순간이라, 그 뒤에 버튼을
   // 한 번 더 누르게 하면 같은 판단을 두 번 시키는 셈이다. 그래서 1박자에는 버튼을 아예
-  // 두지 않고(`#okWrap` 숨김) **다 짚으면 저절로 넘어간다**. 버튼은 2박자(타이핑)에서만 선다.
-  let passT=null;
+  // 두지 않고(`#okWrap` 숨김) **다 짚는 순간 넘어간다**. 버튼은 2박자(타이핑)에서만 선다.
   function sync(){
     wordEls.forEach(b=>{
       const on=pick.has(b.dataset.b);
@@ -1244,7 +1254,6 @@ function renderRecognize(){
   }
   wordEls.forEach(b=> b.onclick=()=>{
     if(phase!==1) return;
-    clearTimeout(passT);                      // 예약된 전환을 취소하고 다시 판단한다
     const w=b.dataset.b;
     const on=!pick.has(w);
     if(on) pick.add(w); else pick.delete(w);
@@ -1265,17 +1274,17 @@ function renderRecognize(){
   // 다 짚었으면 잠깐 두고 넘어간다. **바로 넘기지 않는 이유**는 프레임을 다 짚은 뒤에
   // `~ing` 자리를 더 짚는 경우가 있어서다 — 즉시 넘기면 그 기회가 사라진다. 그 사이에
   // 한 번 더 누르면 예약이 취소되고 다시 판단한다.
-  // 450ms — 프레임을 다 짚은 뒤 `~ing` 자리를 더 짚을 틈은 주되, 그보다 길면 **지연으로
-  // 느껴진다**(확인 버튼을 없앤 이유가 즉시성이다). 이 사이에 한 번 더 누르면 예약이
-  // 취소되고 다시 450ms가 주어진다.
-  const PASS_WAIT=450;
+  // **기다리지 않는다.** 다 짚은 그 순간 넘어간다 — 확인 버튼을 없앤 이유가 즉시성이고,
+  // 전환을 미뤄 두면 그 틈이 지연으로 느껴진다. 대가는 **프레임을 다 짚은 뒤에는 `~ing`
+  // 자리를 더 짚을 수 없다**는 것이다(형태 슬롯을 함께 짚으려면 프레임을 완성하기 전에
+  // 누르면 된다 — 순서와 무관하게 통과한다).
   function evalPick(){
     const extra=[...pick].filter(w=>!wantSet.has(w));
     const allowed=extra.filter(w=>adj.has(w));
     const bad=extra.filter(w=>allowed.indexOf(w)<0);
     if(bad.length || allowed.length>2){ showWrong(allowed, bad); return; }
     if(want.some(w=>!pick.has(w))) return;    // 아직 덜 짚었다 — 재촉하지 않는다
-    passT=setTimeout(()=>{ if(listEl.isConnected && phase===1) recognized(allowed); }, PASS_WAIT);
+    recognized(allowed);
   }
 
   function showWrong(allowed, bad){
@@ -1323,7 +1332,7 @@ function renderRecognize(){
                       : `<span class="rc-dim">${escapeHtml(w)}</span>`);
     });
     flush();
-    return parts.join(' ') + (r.punct?`<span class="rc-dim">${escapeHtml(r.punct)}</span>`:'');
+    return parts.join(' ') + (r.punct?`<span class="rc-dim rc-tail">${escapeHtml(r.punct)}</span>`:'');
   }
 
   // 짚기를 인정하고 쓰는 줄을 연다. **화면을 교체하지 않는다** — 짚은 낱말이 초록으로 한 번
@@ -1332,7 +1341,6 @@ function renderRecognize(){
   // 아무것도 지워지지 않으므로 `회수`로 읽히는 순간이 없다.
   function recognized(extras){
     phase=0;                               // 전환 중 입력 차단
-    clearTimeout(passT);
     wrongBox.classList.add('hidden'); el('revealNote').classList.add('hidden');
     wordEls.forEach(b=>{ if(pick.has(b.dataset.b)){ b.classList.remove('on'); b.classList.add('ok','pop'); } });
     setTimeout(()=>{ if(!listEl.isConnected) return;
@@ -1363,7 +1371,7 @@ function renderRecognize(){
         ? `<span class="rc-hl">${escapeHtml(v)}</span>`
         : `<input class="blank rc-in" data-i="${i}" value="${escapeHtml(v)}" autocomplete="off" spellcheck="false">`;
     });
-    return parts.join(' ') + (tgt.punct?`<span class="rc-dim">${escapeHtml(tgt.punct)}</span>`:'');
+    return parts.join(' ') + (tgt.punct?`<span class="rc-dim rc-tail">${escapeHtml(tgt.punct)}</span>`:'');
   }
   function bindInputs(){
     const ins=Array.from(listEl.querySelectorAll('input.rc-in'));
@@ -1447,7 +1455,7 @@ function renderRecognize(){
                       note:()=>`첫 낱말<b>${escapeHtml(want[0])}</b>`},
                      // 마지막 칸은 다 짚어 준다 — 탈출구가 없으면 진행이 끊긴다.
                      // 다 짚어 주면 짚기와 같은 길로 저절로 넘어간다.
-                     {label:'정답 보기', run:()=>{ clearTimeout(passT); pick.clear();
+                     {label:'정답 보기', run:()=>{ pick.clear();
                         want.forEach(w=>pick.add(w)); sync(); evalPick(); }} ];
   el('hintBtn').onclick=()=>{
     if(phase===2){
