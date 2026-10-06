@@ -71,6 +71,7 @@
     <button class="tab on" data-tab="rcg">[1]·[2] 패턴 찾기</button>
     <button class="tab" data-tab="arr">[3] 탭 배열 — 함정 고지</button>
     <button class="tab" data-tab="arr2">[3] 탭 배열 — 난이도</button>
+    <button class="tab" data-tab="pay">표현 카드</button>
   </div>
 
   <div class="bar" id="bar"></div>
@@ -91,6 +92,8 @@ const SRC={
         capL:'칸·뱅크 표기 그대로', capR:'칸이 개수를 말한다' },
   arr2:{ url:'/vocab-expression-arr2.html', now:'a=0&b=0&c=0', next:'a=1&b=1&c=1',
          capL:'칸 공개 · 함정 1~2 (현재)', capR:'칸 비공개 · 함정 3~5 · 부류' },
+  pay:{ url:'/vocab-expression-pay.html', now:'g=0&d=0&l=0', next:'g=1&d=1&l=1',
+        capL:'모든 문항에 요약 카드', capR:'줄 게 있을 때만 · desc 주인공 · 앞 표현 연결' },
 };
 let tab='rcg', idx=0, total=633;
 const el=id=>document.getElementById(id);
@@ -126,6 +129,13 @@ const BARS={
        <span class="cap">같은 동작 걸기</span>
        <button class="go" data-act="pick">프레임만 짚고 확인</button>
        <button class="go" data-act="plus">프레임 + 바뀌는 자리 짚고 확인</button>
+       <span class="sp"></span>
+       <button data-act="reset">처음으로</button>`,
+  pay:`<button class="ghost" data-act="prev">‹</button>
+       <span class="pos"><input id="posIn" type="text" inputmode="numeric"> / ${'{T}'}</span>
+       <button class="ghost" data-act="next">›</button>
+       <span class="cap">같은 동작 걸기</span>
+       <button class="go" data-act="stuck">막혔다고 가정 / 해제</button>
        <span class="sp"></span>
        <button data-act="reset">처음으로</button>`,
   arr2:`<button class="ghost" data-act="prev">‹</button>
@@ -164,6 +174,26 @@ const NOTES={
     {t:'[2]-C <em>짚는 손맛</em>',
      rows:[['지금','알약이 위로 튀어오른다(0.3s) · 쌍둥이 낱말 40ms 차'],
            ['개선','알약이 <b>좌→우로 채워진다</b>(0.22s) · 60ms 차로 둘이 차례로 켜진다']]},
+  ],
+  pay:[
+    {t:'진단 — 카드가 <em>이미 아는 것</em>을 다시 말한다',
+     rows:[['지금','카드가 뜨는 시점에 유저는 그 표현을 <b>세 번 산출</b>했고(짚기·타이핑·배열) 같은 표현 문장을 중앙값 <b>3개</b> 봤다. 그런데 예문은 <b>632/633</b>에서 이미 본 문장이고 <b>381/633</b>은 둘 다 이미 본 것이다'],
+           ['개선','<b>새로 알려줄 것이 있을 때만</b> 뜬다 — 요약은 전부 걷어낸다']],
+     why:'`form`·`meaning`도 `[2]`·`[3]` 타이틀이 초록으로 이미 말한 것이다. 유일하게 새로운 것은 `desc` 인데 맨 아래 회색 각주로 깔려 있고 268/633(42%)에만 있다. 받은 피드백 그대로 — "왜 나오는지 모르겠다".'},
+    {t:'① <em>desc</em>를 각주에서 주인공으로',
+     rows:[['지금','`💡 새로운 표현을 배웠어요` + 형태 + 뜻 + 회색 각주 + 예문 2개'],
+           ['개선','<b>한 줄</b> — `⚠ 이건 헷갈리기 쉬워요` + <b>one of the</b> — 뒤에 반드시 복수 명사가 와요']],
+     why:'`desc` 는 전부 "네가 틀리게 알고 있었을 법한 것"이다(`bring up` 은 들어 올리다가 아니다 · `Will you` 보다 `Would` 가 정중 · got·made·bought 는 for, passed·sent 는 to). 이것만 남긴다.',
+     jump:'desc', jumpLabel:'desc 가 있는 문항으로'},
+    {t:'② 앞에서 배운 표현과의 <em>연결</em>',
+     rows:[['지금','없음'],
+           ['개선','<b>miss out → run out of</b> · 둘 다 `out` 자리를 써요 (97/632)']],
+     why:'**앱만 아는 내 이력**이다. 낱말 공유 전체로는 396/632가 걸리지만 `you`·`of` 같은 것은 의미가 없어 **조사·부사**로만 좁혔다.',
+     jump:'link', jumpLabel:'연결이 있는 문항으로'},
+    {t:'③ 줄 게 없으면 <em>안 띄운다</em> — 빈도가 핵심이다',
+     rows:[['지금','<b>633/633</b> 전 문항에서 뜬다 → 몇 문항 만에 "안 보게 된다"'],
+           ['개선','<b>338/633 (53%)</b>. 그리고 <b>막혔으면</b> `desc` 를 그 자리(오답노트 팁)에서 받으므로 끝 카드는 <b>97개(15%)</b>만 남는다']],
+     why:'이 레포에 이미 같은 규약이 있다 — `[4] h` 의 `aidLevel`: "막히지 않고 넘긴 문항이면 앱이 덜 해준다". 카드는 **드물어져야** 읽힌다. 화면 아래 빈도 스트립에서 직접 세어 볼 수 있다.'},
   ],
   arr2:[
     {t:'진단 — 지금 <em>[4] c</em>는 <em>[3]</em>보다 어렵지 않다',
@@ -226,7 +256,11 @@ function paint(){
     both(()=>{
       // 그 변경이 **실제로 보이는** 문항으로 양쪽을 함께 옮긴다
       let list=[];
-      try{ list = b.dataset.jump==='label' ? R().__labelItems() : R().__trap2(); }catch(e){}
+      try{ const w=R();
+        list = b.dataset.jump==='label' ? w.__labelItems()
+             : b.dataset.jump==='desc'  ? w.__descItems()
+             : b.dataset.jump==='link'  ? w.__linkItems()
+             : w.__trap2(); }catch(e){}
       if(!list || !list.length) return;
       const nx = list.find(n=>n>idx);
       goto(nx===undefined ? list[0] : nx);

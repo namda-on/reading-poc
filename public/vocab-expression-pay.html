@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<title>표현 카드 실험 — 어휘→표현</title>
+<style>
+  /* `[3]` 끝에 뜨는 **표현 카드(`학습 정보`)**만 떼어 온 실험 페이지. 본체는 건드리지 않는다.
+     받은 피드백 둘 — `전혀 유용하지 않다(왜 나오는지 모르겠다)` · `new/복습 관계없이 노출돼
+     점점 안 보게 된다`.
+     **측정** — 카드가 뜨는 시점에 유저는 그 표현을 이미 세 번 산출했고(짚기·타이핑·배열) 같은
+     표현 문장을 중앙값 3개 봤다. 그런데 카드의 예문은 **632/633**에서 이미 본 문장이고
+     **381/633**은 둘 다 이미 본 것이다. `form`·`meaning`도 `[2]`·`[3]` 타이틀이 초록으로 이미
+     말한 것이다 — **카드 전체가 요약이고 새 정보가 없다**. 유일하게 새로운 것은 `desc`인데
+     맨 아래 회색 각주로 깔려 있고 268/633(42%)에만 있다. */
+  :root { --bg:#a9ccf2; --ink:#2f3e52; --sub:#6b7c93; --blue:#4b83d6; --green:#2e9e57; --purple-d:#5b3fb0; }
+  * { box-sizing:border-box; }
+  html, body { margin:0; height:100%; }
+  body { font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+    background:var(--bg); color:var(--ink); display:flex; justify-content:center; }
+  .app { width:100%; max-width:460px; height:100dvh; min-height:100vh; display:flex; flex-direction:column;
+    background:linear-gradient(#aacdf3,#bfe0ef); }
+  .hidden { display:none !important; }
+
+  /* ── 실험실 상단바 ─────────────────────────────────────────────────────── */
+  .lab { flex-shrink:0; padding:10px 12px 8px; }
+  .lab-nav { display:flex; align-items:center; gap:7px; }
+  .lab-nav button { border:none; border-radius:9px; background:#fff; color:#3a6bb0; font-weight:800;
+    font-size:12.5px; padding:7px 10px; cursor:pointer; box-shadow:0 1px 3px rgba(47,79,128,.12); }
+  .lab-pos { flex:1; display:flex; align-items:center; justify-content:center; gap:4px;
+    font-size:13px; font-weight:800; color:#3a6bb0; }
+  .lab-pos input { width:56px; border:none; border-radius:8px; padding:6px; text-align:center;
+    font:inherit; font-weight:800; color:#3a6bb0; background:rgba(255,255,255,.75); outline:none; }
+  .lab-sw { display:flex; gap:6px; margin-top:8px; }
+  .lab-sw button { flex:1; border:1.5px solid rgba(255,255,255,.75); border-radius:11px; cursor:pointer;
+    background:rgba(255,255,255,.3); color:#3f5876; text-align:left; padding:6px 9px; font:inherit; }
+  .lab-sw button b { display:block; font-size:12px; font-weight:800; }
+  .lab-sw button i { display:block; font-size:10.5px; font-style:normal; color:#5c7693; margin-top:1px; line-height:1.35; }
+  .lab-sw button.on { background:#fff; border-color:#fff; color:#2e9e57; box-shadow:0 2px 6px rgba(30,60,110,.14); }
+  .lab-sw button.on i { color:#6f8ba6; }
+  .lab-note { font-size:11.5px; color:#476a93; margin-top:7px; line-height:1.5; }
+  .lab-note b { color:#2e5f94; }
+
+  .stage { flex:1; display:flex; flex-direction:column; min-height:0; }
+  .stage-scroll { flex:1; overflow-y:auto; padding:22px 16px 24px; }
+
+  /* ── 본 프로토타입에서 그대로 가져온 표기 ────────────────────────────────── */
+  .chat-card { position:relative; background:linear-gradient(#dff3e4 0%,#eaf8ee 46%,#fbfffc 46%,#fbfffc 100%);
+    border-radius:22px; box-shadow:0 6px 18px rgba(30,60,110,.13); padding:22px 20px 16px; }
+  .chat-tag { position:absolute; top:-13px; left:16px; background:#cfe0f5; color:#3a6bb0; font-size:12px; font-weight:800; border-radius:11px 11px 11px 3px; padding:3px 11px; display:flex; align-items:center; gap:5px; }
+  .chat-tag .q { width:15px; height:15px; border-radius:50%; background:#a9c4e8; color:#fff; font-size:10px; display:inline-flex; align-items:center; justify-content:center; }
+  .chat-tag.rv { background:#dff3e4; color:#22794a; }
+  .chat-ko { font-size:18px; line-height:1.55; color:#33465c; font-weight:600; }
+  .tgt { color:var(--green); font-weight:800; }
+  .check-mark { position:absolute; top:-22px; left:2px; font-size:46px; color:var(--green); text-shadow:0 2px 4px rgba(0,0,0,.12); }
+  .fill { display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin-top:16px; }
+  .fill-word { background:#eaf1fb; border:1.5px solid #dce7f6; border-radius:10px; padding:7px 11px;
+    font-size:16.5px; font-weight:700; color:#2f3e52; }
+  .fill-word.frame-w { background:#e3fbec; border-color:#8ed9ab; color:#22794a; font-weight:800; }
+
+  .payoff { position:relative; background:#fff; border-radius:22px; box-shadow:0 6px 18px rgba(30,60,110,.13);
+    margin:32px 0 6px; padding:20px 20px 22px; }
+  .pf-div { height:1px; background:#eaeff6; margin:16px 0 0; }
+  .pf-form { font-size:20px; font-weight:800; color:var(--green); line-height:1.4; margin-top:10px; }
+  .pf-form .slot { display:inline-block; min-width:44px; border-bottom:2.5px solid #7bbd96; }
+  .pf-mean { font-size:14px; color:#8c9aab; font-weight:600; margin-top:4px; line-height:1.5; }
+  .pf-desc { background:#f3f6fb; border-radius:12px; padding:11px 14px; font-size:13.5px; color:#6b7c93; margin-top:14px; line-height:1.6; }
+  .pf-sub { display:flex; align-items:center; gap:5px; font-size:13px; font-weight:700; color:#7c8b9e; margin:18px 0 2px; }
+  .pf-ex { margin-top:12px; }
+  .pf-ex-en { font-size:16px; font-weight:700; color:var(--green); line-height:1.45; }
+  .pf-ex-kr { font-size:13px; color:#9aa8bc; margin-top:2px; }
+
+  /* ── 개선 표기 ─────────────────────────────────────────────────────────── */
+  /* ① `desc` 를 각주에서 **주인공으로** — 유일하게 새로운 정보다. 표제·형태·뜻·예문을 전부
+     걷어내고 한 줄만 남긴다. 크기와 자리가 곧 `이게 이 카드의 용건`이라는 말이다. */
+  .pf-head { display:flex; align-items:center; gap:6px; font-size:12.5px; font-weight:800;
+             color:#b08a2e; margin-bottom:9px; }
+  .pf-lead { font-size:17px; font-weight:800; color:#33465c; line-height:1.55; }
+  .pf-lead b { color:var(--green); }
+  .pf-lead .no { color:#c0784b; }
+  /* ② 앞에서 배운 표현과의 연결 — **앱만 아는 내 이력**이다 */
+  .pf-link { display:flex; align-items:center; gap:9px; margin-top:4px; }
+  .pf-link .a, .pf-link .b { font-size:16px; font-weight:800; color:#2f3e52;
+    background:#f1f5fb; border-radius:9px; padding:5px 10px; }
+  .pf-link .b { background:#e3fbec; color:#22794a; }
+  .pf-link .mid { font-size:12px; font-weight:800; color:#9aa8bc; }
+  .pf-linkno { font-size:13px; color:#8c9aab; font-weight:600; margin-top:8px; line-height:1.5; }
+  .pf-linkno b { color:#3f9268; }
+  /* 막힌 그 순간에 붙는 줄 — `[2]`·`[3]`의 오답노트 팁과 같은 모양 */
+  .nb-tip { display:flex; align-items:flex-start; gap:9px; background:#fdf3d8; border-radius:11px;
+    padding:11px 13px; margin-top:14px; font-size:13.5px; color:#8a6a1f; line-height:1.5; }
+  .nb-tip::before { content:''; flex-shrink:0; width:6px; height:6px; border-radius:2px; background:#e0b64a; margin-top:6px; }
+  .nb-tip b { color:#6f5312; font-weight:800; }
+  .inflow-lbl { font-size:11.5px; font-weight:800; color:#7a8ca6; margin:26px 0 0; }
+  .none-note { background:rgba(255,255,255,.55); border:1.5px dashed #cfdcee; border-radius:16px;
+    padding:18px 16px; margin-top:32px; text-align:center; font-size:13.5px; color:#5c7693; line-height:1.6; }
+  .none-note b { color:#2e5f94; }
+
+  /* ── 노출 빈도 스트립 ──────────────────────────────────────────────────── */
+  .freq { background:rgba(255,255,255,.6); border-radius:16px; padding:14px 15px; margin-top:26px; }
+  .freq h3 { margin:0 0 4px; font-size:13px; font-weight:800; color:#2e5f94; }
+  .freq p { margin:0 0 10px; font-size:11.5px; color:#5c7693; line-height:1.55; }
+  .freq-row { display:flex; align-items:center; gap:7px; margin-top:8px; }
+  .freq-row .lbl { width:38px; flex-shrink:0; font-size:11px; font-weight:800; color:#7a8ca6; }
+  .freq-cells { flex:1; display:flex; gap:2px; }
+  .cell { flex:1; height:17px; border-radius:3px; background:#e3eaf4; cursor:pointer; }
+  .cell.on { background:#9db9dd; }
+  .cell.desc { background:#e8c76a; }
+  .cell.link { background:#7fc79e; }
+  .cell.cur { outline:2px solid #3a6bb0; outline-offset:1px; }
+  .freq-sum { font-size:11.5px; color:#476a93; margin-top:9px; line-height:1.6; }
+  .freq-sum b { color:#2e5f94; }
+  .freq-key { display:flex; flex-wrap:wrap; gap:10px; margin-top:8px; font-size:10.5px; color:#6b7c93; }
+  .freq-key span { display:flex; align-items:center; gap:4px; }
+  .freq-key i { width:10px; height:10px; border-radius:3px; display:inline-block; }
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="lab">
+    <div class="lab-nav">
+      <button id="prevBtn">‹</button>
+      <div class="lab-pos"><input id="posIn" type="text" inputmode="numeric" /> / <span id="posTot">—</span></div>
+      <button id="nextBtn">›</button>
+      <button id="descBtn" title="desc 가 있는 문항으로">desc ›</button>
+      <button id="linkBtn" title="앞 표현과 연결되는 문항으로">연결 ›</button>
+    </div>
+    <div class="lab-sw">
+      <button id="swGate"><b>③ 있을 때만</b><i>줄 게 없으면 카드를 안 띄운다</i></button>
+      <button id="swDesc"><b>① desc 주인공</b><i>요약을 걷고 한 줄만</i></button>
+      <button id="swLink"><b>② 앞 표현 연결</b><i>같은 조사·부사를 쓴 표현</i></button>
+      <button id="swStuck"><b>막혔다고 가정</b><i>사다리를 열었거나 틀렸다</i></button>
+    </div>
+    <div class="lab-note" id="labNote"></div>
+  </div>
+  <div class="stage" id="stage"></div>
+</div>
+<script>
+let DATA=null, items=[], idx=0;
+let gate=true, descLead=true, linkOn=true, stuck=false;
+const el=id=>document.getElementById(id);
+const stage=el('stage');
+function escapeHtml(s){ return String(s).replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+function tokenize(sent){ return sent.trim().replace(/[.?!]+$/,'').split(/\s+/); }
+const bare=w=>String(w).toLowerCase().replace(/[^a-z0-9']/g,'');
+function frameFlags(tokens, segs){
+  const flags=new Array(tokens.length).fill(false);
+  let ti=0;
+  segs.forEach(sg=>{
+    const n=sg.s.split(/\s+/).map(bare).filter(Boolean).length;
+    for(let k=0;k<n && ti<tokens.length;k++, ti++) if(sg.t==='frame') flags[ti]=true;
+  });
+  return flags;
+}
+function sentTitleHtml(s){
+  return s.krMark
+    ? escapeHtml(s.krMark).replace(/\[([^\]]+)\]/g, (m,g)=>`<span class="tgt">${g}</span>`)
+    : escapeHtml(s.kr);
+}
+function frameLine(en, segs){
+  const punct=(String(en).match(/[.?!]+$/)||[''])[0];
+  return (segs.map(g=> g.t==='frame'
+    ? `<span class="tgt">${escapeHtml(g.s)}</span>`
+    : escapeHtml(g.s)).join(' ') + escapeHtml(punct)).replace(/\s+([,.!?;:])/g, '$1');
+}
+// `form` 의 자리표시자를 걷어 **인용 라벨**로 줄인다(`feel like ______` → `feel like`)
+function exprLabel(form){
+  const M='\u0001';
+  let x=String(form||'').replace(/_{2,}/g, M).replace(/~/g, M);
+  x=x.replace(new RegExp('\\s*\\([^)]*'+M+'[^)]*\\)','g'), '');
+  x=x.replace(new RegExp('^\\s*'+M+'\\s*'), '');
+  x=x.replace(new RegExp(M+'[\\s.?!,]*$'), '');
+  return x.split(M).join('…').replace(/\s+/g,' ').trim();
+}
+function chatTag(item){ return `<div class="chat-tag">레벨 ${item.level}<span class="q">?</span></div>`; }
+
+// ── ② 앞에서 배운 표현과의 연결 ───────────────────────────────────────────────
+// **조사·부사(particle)만** 본다. 낱말 공유 전체로는 396/632가 걸리지만 `you`·`of` 같은 것은
+// `I got ___ for you` ↔ `Will you` 처럼 의미가 없다. `up`·`out`·`on` 처럼 **뜻을 만드는 자리**가
+// 겹칠 때만 `앞에서 배운 그것과 같은 자리`라고 말할 수 있다(97/632).
+const PARTICLE=new Set(['up','out','on','off','down','over','back','away','through','along','in','into']);
+const frameWordsOf=i=>new Set((items[i].frame||[]).join(' ').split(/\s+/).map(bare).filter(Boolean));
+function priorLink(i){
+  const cur=[...frameWordsOf(i)].filter(x=>PARTICLE.has(x));
+  if(!cur.length) return null;
+  for(let j=Math.max(0,i-30); j<i; j++){
+    const sh=cur.filter(x=>frameWordsOf(j).has(x));
+    if(sh.length) return {j, w:sh[0]};
+  }
+  return null;
+}
+const descOf=it=>((it.pattern||{}).desc||'').trim();
+
+// ── 카드 ─────────────────────────────────────────────────────────────────────
+// **지금** — 요약이다. 유저가 이미 세 번 산출한 표현의 형태·뜻을 다시 적고, 예문은
+// 632/633에서 앞 단계에 나온 문장이다.
+function payoffNow(item){
+  const p=item.pattern||{}, form=(p.form||'').trim(), mean=(p.meaning||'').trim(), desc=descOf(item);
+  const sibs=(item.siblings||[]).slice(0,2);
+  return `<div class="payoff">
+    <div class="chat-tag rv">학습 정보</div>
+    <div class="pf-sub"><span class="ic">💡</span>새로운 표현을 배웠어요</div>
+    ${form?`<div class="pf-form">${escapeHtml(form).replace(/_{2,}|~/g,'<span class="slot"></span>')}</div>`:''}
+    ${mean?`<div class="pf-mean">${escapeHtml(mean)}</div>`:''}
+    ${desc?`<div class="pf-desc">${escapeHtml(desc)}</div>`:''}
+    <div class="pf-div"></div>
+    <div class="pf-sub"><span class="ic">ⓘ</span>단어만 바꿔서 이렇게도 말할 수 있어요</div>
+    ${sibs.map(x=>`<div class="pf-ex"><div class="pf-ex-en">${escapeHtml(x.en)}</div>
+      <div class="pf-ex-kr">${escapeHtml(x.kr)}</div></div>`).join('')}
+  </div>`;
+}
+
+// **개선** — 카드에 남는 것은 `유저가 틀리게 알고 있었을 법한 것`과 `앱만 아는 내 이력`뿐이다.
+//   · `desc` 는 **막혔으면 그 자리(오답노트 팁)에서 이미 줬으므로** 끝에서 반복하지 않는다
+//   · 안 막혔으면 그 한 줄을 끝에 **한 번** 준다
+//   · 연결은 막힘과 무관하게, 있을 때만
+//   · 둘 다 없으면 **카드를 띄우지 않는다** — 드물어져야 읽힌다
+function payoffNext(item, i){
+  const desc=descOf(item), link=linkOn?priorLink(i):null;
+  const showDesc = descLead && desc && !stuck;       // 막혔으면 in-flow 로 이미 받았다
+  const parts=[];
+  if(showDesc){
+    const label=exprLabel((item.pattern||{}).form) || (item.frame||[]).join(' … ');
+    parts.push(`<div class="pf-head"><span>⚠</span>이건 헷갈리기 쉬워요</div>
+      <div class="pf-lead"><b>${escapeHtml(label)}</b> — ${escapeHtml(desc)}</div>`);
+  }
+  if(link){
+    const prev=exprLabel((items[link.j].pattern||{}).form) || (items[link.j].frame||[]).join(' ');
+    const now=exprLabel((item.pattern||{}).form) || (item.frame||[]).join(' ');
+    if(parts.length) parts.push('<div class="pf-div"></div>');
+    parts.push(`<div class="pf-head" style="color:#3f9268;margin-top:${parts.length?'14px':'0'}"><span>⌁</span>앞에서 배운 것과 같은 자리</div>
+      <div class="pf-link"><span class="a">${escapeHtml(prev)}</span><span class="mid">→</span><span class="b">${escapeHtml(now)}</span></div>
+      <div class="pf-linkno">둘 다 <b>${escapeHtml(link.w)}</b> 자리를 써요 — 그 자리가 뜻을 만들어요.</div>`);
+  }
+  if(!parts.length) return gate ? '' : `<div class="payoff">
+      <div class="chat-tag rv">학습 정보</div>
+      <div class="pf-lead" style="color:#9aa8bc">이 문항에서 새로 알려줄 것이 없어요.</div>
+    </div>`;
+  return `<div class="payoff"><div class="chat-tag rv">학습 정보</div>${parts.join('')}</div>`;
+}
+
+// ── 화면 ─────────────────────────────────────────────────────────────────────
+// 토글을 **셋 다 끄면 현재 동작**(요약 카드)이고, 하나라도 켜면 개선 카드다
+const improved=()=> gate || descLead || linkOn;
+function render(){
+  const item=items[idx], i=idx;
+  el('posIn').value=String(i+1);
+  const desc=descOf(item), link=linkOn?priorLink(i):null;
+  el('labNote').innerHTML=`desc <b>${desc?'있음':'없음'}</b> · 앞 표현 연결 <b>${link?items[link.j].frame.join(' ')+' ('+link.w+')':'없음'}</b>`
+    + ` · 막힘 <b>${stuck?'가정함':'아님'}</b>`;
+
+  const tok=tokenize(item.sentence.en), flag=frameFlags(tok, item.baseSegs);
+  const punct=(item.sentence.en.match(/[.?!]+$/)||[''])[0];
+  // 막혔으면 `desc` 는 **그 자리에서** 받는다 — `[2]` 2박자/`[3]` 어순 오답의 오답노트 팁에 붙는다
+  const inflow = (descLead && desc && stuck)
+    ? `<div class="inflow-lbl">↓ 막혔을 때 <b>그 자리</b>에서 받는 줄 — [2]·[3]의 오답노트 팁</div>
+       <div class="nb-tip"><div><b>${escapeHtml(exprLabel((item.pattern||{}).form)||item.frame.join(' … '))}</b> — ${escapeHtml(desc)}</div></div>` : '';
+
+  stage.innerHTML=`
+    <div class="stage-scroll">
+      <div class="chat-card" id="card">
+        ${chatTag(item)}
+        <div class="check-mark">✓</div>
+        <div class="chat-ko">${sentTitleHtml(item.sentence)}</div>
+        <div class="fill">${tok.map((w,k)=>
+          `<span class="fill-word${flag[k]?' frame-w':''}">${escapeHtml(w)}${k===tok.length-1?escapeHtml(punct):''}</span>`).join('')}</div>
+      </div>
+      ${inflow}
+      ${improved() ? payoffNext(item, i) : payoffNow(item)}
+      <div class="freq" id="freq"></div>
+    </div>`;
+  renderFreq();
+}
+// 카드가 **얼마나 드물어지는가** — 피드백의 절반이 빈도 문제라 숫자로 보여야 한다
+function renderFreq(){
+  const N=Math.min(30, items.length), start=Math.max(0, Math.min(idx-Math.floor(N/2), items.length-N));
+  let d=0, l=0, none=0;
+  const cells=[];
+  for(let k=0;k<N;k++){
+    const i=start+k, it=items[i];
+    const hasD=!!descOf(it), hasL=linkOn && !!priorLink(i);
+    let cls='on';                                     // 지금은 전부 뜬다
+    if(hasD){ cls='desc'; d++; } else if(hasL){ cls='link'; l++; } else { cls=''; none++; }
+    cells.push({i, cls});
+  }
+  const shown=N-none;
+  el('freq').innerHTML=`
+    <h3>카드가 뜨는 빈도</h3>
+    <p>지금 보고 있는 문항 주변 ${N}문항. <b>지금</b>은 전부 뜨고, <b>개선</b>은 줄 게 있을 때만 뜬다.
+       칸을 누르면 그 문항으로 간다.</p>
+    <div class="freq-row"><div class="lbl">지금</div><div class="freq-cells">
+      ${cells.map(c=>`<div class="cell on${c.i===idx?' cur':''}" data-i="${c.i}"></div>`).join('')}</div></div>
+    <div class="freq-row"><div class="lbl">개선</div><div class="freq-cells">
+      ${cells.map(c=>`<div class="cell ${c.cls}${c.i===idx?' cur':''}" data-i="${c.i}"></div>`).join('')}</div></div>
+    <div class="freq-key">
+      <span><i style="background:#e8c76a"></i>헷갈리기 쉬운 것(desc)</span>
+      <span><i style="background:#7fc79e"></i>앞 표현과 연결</span>
+      <span><i style="background:#e3eaf4"></i>안 뜸</span></div>
+    <div class="freq-sum">${N}문항 중 <b>${shown}번</b> 뜬다 (지금은 ${N}번).
+      desc ${d} · 연결 ${l} · 안 뜸 ${none}.<br>
+      <b>막혔을 때</b>는 desc를 그 자리에서 받으므로 끝 카드에서 빠진다 — 실제로는 이보다 더 드물다.</div>`;
+  el('freq').querySelectorAll('.cell[data-i]').forEach(c=> c.onclick=()=>{ idx=+c.dataset.i; save(); render(); });
+}
+
+// ── 네비·토글 ────────────────────────────────────────────────────────────────
+const QS=new URLSearchParams(location.search);
+const EMBED=QS.has('i')||QS.has('g')||QS.has('d')||QS.has('l')||QS.has('s');
+function go(n){ idx=((n%items.length)+items.length)%items.length; save(); render(); }
+function save(){ if(EMBED) return;
+  try{ localStorage.setItem('verpay', JSON.stringify({idx, gate, descLead, linkOn, stuck})); }catch(e){} }
+function paintSw(){ el('swGate').classList.toggle('on', gate); el('swDesc').classList.toggle('on', descLead);
+  el('swLink').classList.toggle('on', linkOn); el('swStuck').classList.toggle('on', stuck); }
+el('prevBtn').onclick=()=>go(idx-1);
+el('nextBtn').onclick=()=>go(idx+1);
+el('descBtn').onclick=()=>{ for(let k=1;k<=items.length;k++){ const j=(idx+k)%items.length;
+  if(descOf(items[j])){ go(j); return; } } };
+el('linkBtn').onclick=()=>{ for(let k=1;k<=items.length;k++){ const j=(idx+k)%items.length;
+  if(priorLink(j)){ go(j); return; } } };
+el('swGate').onclick=()=>{ gate=!gate; paintSw(); save(); render(); };
+el('swDesc').onclick=()=>{ descLead=!descLead; paintSw(); save(); render(); };
+el('swLink').onclick=()=>{ linkOn=!linkOn; paintSw(); save(); render(); };
+el('swStuck').onclick=()=>{ stuck=!stuck; paintSw(); save(); render(); };
+el('posIn').onchange=()=>{ const n=parseInt(el('posIn').value,10);
+  if(n>=1 && n<=items.length) go(n-1); else el('posIn').value=String(idx+1); };
+
+window.__goto=function(n){ if(n>=0 && n<items.length){ idx=n; render(); } };
+window.__reset=function(){ render(); };
+window.__demo=function(kind){ if(kind==='stuck'){ stuck=!stuck; paintSw(); render(); } return {ok:true}; };
+window.__descItems=function(){ const o=[]; items.forEach((x,i)=>{ if(descOf(x)) o.push(i); }); return o; };
+window.__linkItems=function(){ const o=[]; items.forEach((x,i)=>{ if(priorLink(i)) o.push(i); }); return o; };
+
+fetch('/vocab-expression.data.json').then(r=>r.json()).then(d=>{
+  DATA=d; items=d.items||d;
+  try{ const s=JSON.parse(localStorage.getItem('verpay')||'{}');
+    if(typeof s.idx==='number' && s.idx<items.length) idx=s.idx;
+    if(typeof s.gate==='boolean') gate=s.gate;
+    if(typeof s.descLead==='boolean') descLead=s.descLead;
+    if(typeof s.linkOn==='boolean') linkOn=s.linkOn;
+    if(typeof s.stuck==='boolean') stuck=s.stuck;
+  }catch(e){}
+  if(QS.has('g')) gate=QS.get('g')!=='0';
+  if(QS.has('d')) descLead=QS.get('d')!=='0';
+  if(QS.has('l')) linkOn=QS.get('l')!=='0';
+  if(QS.has('s')) stuck=QS.get('s')!=='0';
+  if(QS.has('i')){ const n=parseInt(QS.get('i'),10); if(n>=0 && n<items.length) idx=n; }
+  if(EMBED) document.querySelector('.lab').classList.add('hidden');
+  el('posTot').textContent=String(items.length);
+  paintSw(); render();
+});
+</script>
+</body>
+</html>
