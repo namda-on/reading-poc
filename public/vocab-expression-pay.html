@@ -78,7 +78,7 @@
   .pf-lead { font-size:17px; font-weight:800; color:#33465c; line-height:1.55; }
   .pf-lead b { color:var(--green); }
   .pf-lead .no { color:#c0784b; }
-  /* ② 앞에서 배운 표현과의 연결 — **앱만 아는 내 이력**이다 */
+  /* ② 이번 세션에 이미 나온 같은 자리 — **앱만 아는 내 이력**이다(저작물이 아니다) */
   .pf-link { display:flex; align-items:center; gap:9px; margin-top:4px; }
   .pf-link .a, .pf-link .b { font-size:16px; font-weight:800; color:#2f3e52;
     background:#f1f5fb; border-radius:9px; padding:5px 10px; }
@@ -123,12 +123,12 @@
       <div class="lab-pos"><input id="posIn" type="text" inputmode="numeric" /> / <span id="posTot">—</span></div>
       <button id="nextBtn">›</button>
       <button id="descBtn" title="desc 가 있는 문항으로">desc ›</button>
-      <button id="linkBtn" title="앞 표현과 연결되는 문항으로">연결 ›</button>
+      <button id="linkBtn" title="세션 내 연결이 있는 문항으로">연결 ›</button>
     </div>
     <div class="lab-sw">
       <button id="swGate"><b>③ 있을 때만</b><i>줄 게 없으면 카드를 안 띄운다</i></button>
       <button id="swDesc"><b>① desc 주인공</b><i>요약을 걷고 한 줄만</i></button>
-      <button id="swLink"><b>② 앞 표현 연결</b><i>같은 조사·부사를 쓴 표현</i></button>
+      <button id="swLink"><b>② 세션 내 연결</b><i>이번 세션에 나온 같은 자리</i></button>
       <button id="swStuck"><b>막혔다고 가정</b><i>사다리를 열었거나 틀렸다</i></button>
     </div>
     <div class="lab-note" id="labNote"></div>
@@ -174,18 +174,26 @@ function exprLabel(form){
 }
 function chatTag(item){ return `<div class="chat-tag">레벨 ${item.level}<span class="q">?</span></div>`; }
 
-// ── ② 앞에서 배운 표현과의 연결 ───────────────────────────────────────────────
+// ── ② 이번 세션에 이미 나온 표현과의 연결 ─────────────────────────────────────
+// **`앞에서 배운`이라고 말할 수 없다.** 패턴은 커리큘럼 순서로 나오는 것이 아니라 **트리거 어휘가
+// 나와야** 그 패턴이 따라 나오는 구조다. 그 시점에 앱이 확실히 아는 것은 **`이번 세션에 이미
+// 등장했는가`** 하나뿐이고, 무엇이 먼저 나올지 **예상해서 카드 문안을 미리 써 둘 수도 없다**.
+// 그래서 이 줄은 **저작물이 아니라 런타임 계산**이다 — 세션 이력(`learned`, 여기서는 `idx` 앞의
+// 문항)에서 찾고, 없으면 아무것도 띄우지 않는다. 창(30문항 같은 것)도 두지 않는다 — 임의의
+// 구간은 `순서`를 가정하는 또 다른 방식이다.
+//
 // **조사·부사(particle)만** 본다. 낱말 공유 전체로는 396/632가 걸리지만 `you`·`of` 같은 것은
 // `I got ___ for you` ↔ `Will you` 처럼 의미가 없다. `up`·`out`·`on` 처럼 **뜻을 만드는 자리**가
-// 겹칠 때만 `앞에서 배운 그것과 같은 자리`라고 말할 수 있다(97/632).
+// 겹칠 때만 같은 자리라고 말할 수 있다.
 const PARTICLE=new Set(['up','out','on','off','down','over','back','away','through','along','in','into']);
 const frameWordsOf=i=>new Set((items[i].frame||[]).join(' ').split(/\s+/).map(bare).filter(Boolean));
-function priorLink(i){
+function sessionEcho(i){
   const cur=[...frameWordsOf(i)].filter(x=>PARTICLE.has(x));
   if(!cur.length) return null;
-  for(let j=Math.max(0,i-30); j<i; j++){
+  // 세션 이력을 **가까운 것부터** 거슬러 본다 — 방금 나온 것일수록 기억에 남아 있다
+  for(let j=i-1; j>=0; j--){
     const sh=cur.filter(x=>frameWordsOf(j).has(x));
-    if(sh.length) return {j, w:sh[0]};
+    if(sh.length) return {j, w:sh[0], ago:i-j};
   }
   return null;
 }
@@ -216,7 +224,7 @@ function payoffNow(item){
 //   · 연결은 막힘과 무관하게, 있을 때만
 //   · 둘 다 없으면 **카드를 띄우지 않는다** — 드물어져야 읽힌다
 function payoffNext(item, i){
-  const desc=descOf(item), link=linkOn?priorLink(i):null;
+  const desc=descOf(item), link=linkOn?sessionEcho(i):null;
   const showDesc = descLead && desc && !stuck;       // 막혔으면 in-flow 로 이미 받았다
   const parts=[];
   if(showDesc){
@@ -228,8 +236,10 @@ function payoffNext(item, i){
     const prev=exprLabel((items[link.j].pattern||{}).form) || (items[link.j].frame||[]).join(' ');
     const now=exprLabel((item.pattern||{}).form) || (item.frame||[]).join(' ');
     if(parts.length) parts.push('<div class="pf-div"></div>');
-    parts.push(`<div class="pf-head" style="color:#3f9268;margin-top:${parts.length?'14px':'0'}"><span>⌁</span>앞에서 배운 것과 같은 자리</div>
-      <div class="pf-link"><span class="a">${escapeHtml(prev)}</span><span class="mid">→</span><span class="b">${escapeHtml(now)}</span></div>
+    // 문구가 **순서를 주장하지 않아야 한다** — `앞에서 배운`은 커리큘럼을 전제한다.
+    // 앱이 아는 사실은 `이번 세션에 나왔다` 하나뿐이고, 그것만 말한다.
+    parts.push(`<div class="pf-head" style="color:#3f9268;margin-top:${parts.length?'14px':'0'}"><span>⌁</span>이번 세션에 이미 나온 자리예요</div>
+      <div class="pf-link"><span class="a">${escapeHtml(prev)}</span><span class="mid">·</span><span class="b">${escapeHtml(now)}</span></div>
       <div class="pf-linkno">둘 다 <b>${escapeHtml(link.w)}</b> 자리를 써요 — 그 자리가 뜻을 만들어요.</div>`);
   }
   if(!parts.length) return gate ? '' : `<div class="payoff">
@@ -245,8 +255,8 @@ const improved=()=> gate || descLead || linkOn;
 function render(){
   const item=items[idx], i=idx;
   el('posIn').value=String(i+1);
-  const desc=descOf(item), link=linkOn?priorLink(i):null;
-  el('labNote').innerHTML=`desc <b>${desc?'있음':'없음'}</b> · 앞 표현 연결 <b>${link?items[link.j].frame.join(' ')+' ('+link.w+')':'없음'}</b>`
+  const desc=descOf(item), link=linkOn?sessionEcho(i):null;
+  el('labNote').innerHTML=`desc <b>${desc?'있음':'없음'}</b> · 세션 내 같은 자리 <b>${link?items[link.j].frame.join(' ')+' ('+link.w+', '+link.ago+'문항 전)':'없음'}</b>`
     + ` · 막힘 <b>${stuck?'가정함':'아님'}</b>`;
 
   const tok=tokenize(item.sentence.en), flag=frameFlags(tok, item.baseSegs);
@@ -278,7 +288,7 @@ function renderFreq(){
   const cells=[];
   for(let k=0;k<N;k++){
     const i=start+k, it=items[i];
-    const hasD=!!descOf(it), hasL=linkOn && !!priorLink(i);
+    const hasD=!!descOf(it), hasL=linkOn && !!sessionEcho(i);
     let cls='on';                                     // 지금은 전부 뜬다
     if(hasD){ cls='desc'; d++; } else if(hasL){ cls='link'; l++; } else { cls=''; none++; }
     cells.push({i, cls});
@@ -294,7 +304,7 @@ function renderFreq(){
       ${cells.map(c=>`<div class="cell ${c.cls}${c.i===idx?' cur':''}" data-i="${c.i}"></div>`).join('')}</div></div>
     <div class="freq-key">
       <span><i style="background:#e8c76a"></i>헷갈리기 쉬운 것(desc)</span>
-      <span><i style="background:#7fc79e"></i>앞 표현과 연결</span>
+      <span><i style="background:#7fc79e"></i>세션 내 같은 자리</span>
       <span><i style="background:#e3eaf4"></i>안 뜸</span></div>
     <div class="freq-sum">${N}문항 중 <b>${shown}번</b> 뜬다 (지금은 ${N}번).
       desc ${d} · 연결 ${l} · 안 뜸 ${none}.<br>
@@ -315,7 +325,7 @@ el('nextBtn').onclick=()=>go(idx+1);
 el('descBtn').onclick=()=>{ for(let k=1;k<=items.length;k++){ const j=(idx+k)%items.length;
   if(descOf(items[j])){ go(j); return; } } };
 el('linkBtn').onclick=()=>{ for(let k=1;k<=items.length;k++){ const j=(idx+k)%items.length;
-  if(priorLink(j)){ go(j); return; } } };
+  if(sessionEcho(j)){ go(j); return; } } };
 el('swGate').onclick=()=>{ gate=!gate; paintSw(); save(); render(); };
 el('swDesc').onclick=()=>{ descLead=!descLead; paintSw(); save(); render(); };
 el('swLink').onclick=()=>{ linkOn=!linkOn; paintSw(); save(); render(); };
@@ -327,7 +337,7 @@ window.__goto=function(n){ if(n>=0 && n<items.length){ idx=n; render(); } };
 window.__reset=function(){ render(); };
 window.__demo=function(kind){ if(kind==='stuck'){ stuck=!stuck; paintSw(); render(); } return {ok:true}; };
 window.__descItems=function(){ const o=[]; items.forEach((x,i)=>{ if(descOf(x)) o.push(i); }); return o; };
-window.__linkItems=function(){ const o=[]; items.forEach((x,i)=>{ if(priorLink(i)) o.push(i); }); return o; };
+window.__linkItems=function(){ const o=[]; items.forEach((x,i)=>{ if(sessionEcho(i)) o.push(i); }); return o; };
 
 fetch('/vocab-expression.data.json').then(r=>r.json()).then(d=>{
   DATA=d; items=d.items||d;

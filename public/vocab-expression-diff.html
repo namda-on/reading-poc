@@ -93,7 +93,7 @@ const SRC={
   arr2:{ url:'/vocab-expression-arr2.html', now:'a=0&b=0&c=0', next:'a=1&b=1&c=1',
          capL:'칸 공개 · 함정 1~2 (현재)', capR:'칸 비공개 · 함정 3~5 · 부류' },
   pay:{ url:'/vocab-expression-pay.html', now:'g=0&d=0&l=0', next:'g=1&d=1&l=1',
-        capL:'모든 문항에 요약 카드', capR:'줄 게 있을 때만 · desc 주인공 · 앞 표현 연결' },
+        capL:'모든 문항에 요약 카드', capR:'줄 게 있을 때만 · desc 주인공 · 세션 내 연결' },
 };
 let tab='rcg', idx=0, total=633;
 const el=id=>document.getElementById(id);
@@ -185,10 +185,10 @@ const NOTES={
            ['개선','<b>한 줄</b> — `⚠ 이건 헷갈리기 쉬워요` + <b>one of the</b> — 뒤에 반드시 복수 명사가 와요']],
      why:'`desc` 는 전부 "네가 틀리게 알고 있었을 법한 것"이다(`bring up` 은 들어 올리다가 아니다 · `Will you` 보다 `Would` 가 정중 · got·made·bought 는 for, passed·sent 는 to). 이것만 남긴다.',
      jump:'desc', jumpLabel:'desc 가 있는 문항으로'},
-    {t:'② 앞에서 배운 표현과의 <em>연결</em>',
+    {t:'② <em>이번 세션에 이미 나온</em> 자리',
      rows:[['지금','없음'],
-           ['개선','<b>miss out → run out of</b> · 둘 다 `out` 자리를 써요 (97/632)']],
-     why:'**앱만 아는 내 이력**이다. 낱말 공유 전체로는 396/632가 걸리지만 `you`·`of` 같은 것은 의미가 없어 **조사·부사**로만 좁혔다.',
+           ['개선','<b>miss out · run out of</b> — 둘 다 `out` 자리를 써요 (97/632)']],
+     why:'`앞에서 배운`이라고 말할 수 없다 — 패턴은 커리큘럼 순서가 아니라 **트리거 어휘가 나와야** 따라 나온다. 그 시점에 앱이 확실히 아는 것은 `이번 세션에 등장했는가` 하나뿐이고, 무엇이 먼저 나올지 예상해 **문안을 미리 써 둘 수도 없다**. 그래서 이 줄은 저작물이 아니라 **세션 이력에서 런타임 계산**한 것이고, 임의의 창(30문항 같은 것)도 두지 않는다.',
      jump:'link', jumpLabel:'연결이 있는 문항으로'},
     {t:'③ 줄 게 없으면 <em>안 띄운다</em> — 빈도가 핵심이다',
      rows:[['지금','<b>633/633</b> 전 문항에서 뜬다 → 몇 문항 만에 "안 보게 된다"'],
