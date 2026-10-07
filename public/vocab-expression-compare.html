@@ -49,13 +49,6 @@
   .ask { font-size:14px; font-weight:700; color:#5d6f88; margin-bottom:12px; }
   .tgt { color:var(--green); font-weight:800; }
   .kr { font-size:18px; color:#33465c; font-weight:600; line-height:1.5; margin-bottom:12px; }
-  .changed { display:flex; flex-wrap:wrap; align-items:center; gap:5px; font-size:12px; color:#8a98ad; font-weight:700; margin:-4px 0 12px; }
-  .changed b { background:#fff4d6; color:#8a6a1f; border-radius:7px; padding:1px 7px; font-weight:800; }
-
-  /* 앞 문장 — ④ 에서 기준으로 위에 흐리게 남긴다 */
-  .ref { font-size:14px; color:#8a98ad; font-weight:700; padding:8px 12px; background:#f4f7fb; border-radius:12px; margin-bottom:14px; line-height:1.5; }
-  .ref .h { font-size:11px; font-weight:800; color:#a7b3c4; display:block; margin-bottom:1px; }
-  .ref .c { color:#3f8f63; }
 
   /* 낱말 카드 — 보기와 배열 뱅크가 같은 모양이다 */
   .line { display:flex; flex-wrap:wrap; align-items:center; gap:8px 6px; font-size:17px; font-weight:700; line-height:1.5; }
@@ -85,12 +78,14 @@
   .rule .d { font-size:13.5px; color:#3c5a48; margin-top:8px; line-height:1.55; }
   @keyframes fadeUp { from{opacity:0; transform:translateY(-4px);} to{opacity:1; transform:none;} }
 
-  /* 정리 — 네 문장의 초록 조각을 세로로 맞춘다 */
+  /* 정리 — 만든 문장의 초록 조각을 세로로 맞춘다 */
   .stack { display:grid; grid-template-columns:auto auto 1fr; column-gap:6px; row-gap:9px; align-items:baseline; font-size:15px; font-weight:700; margin:4px 0 2px; }
   .stack .pre { text-align:right; color:#7d8ea6; }
   .stack .chunk { color:#1f7a49; background:#dcf6e6; border-radius:7px; padding:1px 6px; white-space:nowrap; }
   .stack .post { color:#7d8ea6; }
   .stack-k { grid-column:1 / -1; font-size:11.5px; color:#a7b3c4; margin-top:-6px; }
+  .stack-h { grid-column:1 / -1; font-size:11.5px; font-weight:800; color:#8a98ad; margin-top:6px; padding-top:8px; border-top:1px dashed #e2e9f3; }
+  .stack .more { opacity:.7; }
 
   .btns { display:flex; gap:8px; margin-top:18px; }
   .btn { flex:1; border:none; border-radius:15px; padding:14px 8px; font-size:15px; font-weight:800; cursor:pointer; }
@@ -106,16 +101,16 @@
 
   <details class="guide" open>
     <summary>제안 요약</summary>
-    <div class="g-flow">① 보기 → ② 배열 → ③ 쓰기 → ④ 새 문장 배열 → 정리</div>
-    <p class="g-p"><b>한 문장의 틀을 끝까지 끌고 가며 도움을 줄이고, 새 문장은 마지막에 한 번.</b> 단계마다 문장이 통째로 바뀌면 주관식에서 막힌다. 그래서 ①~③은 S1과 그 <b>주어 변형</b>(문장1-2 · 1-3)을 쓴다 — 데이터의 변형 문장 1,784개 중 97%는 초록 자리가 S1과 같고, 62%는 낱말 하나만 바뀐 문장이다(My skin → His skin).</p>
+    <div class="g-flow">① 보기 → ② 배열 → ③ 쓰기 → ④ 처음 문장 배열 → 정리</div>
+    <p class="g-p"><b>한 문장의 틀을 끝까지 끌고 가며 도움을 줄인다.</b> 단계마다 문장이 통째로 바뀌면 주관식에서 막힌다. 그래서 ①~③은 S1과 그 <b>주어 변형</b>(문장1-2 · 1-3)을 쓴다 — 데이터의 변형 문장 1,784개 중 97%는 초록 자리가 S1과 같고, 62%는 낱말 하나만 바뀐 문장이다(My skin → His skin).</p>
     <table class="g-t">
       <tr><th>단계</th><th>문장</th><th>하는 일</th></tr>
       <tr><td>① 보기</td><td>S1</td><td>초록 뜻에 해당하는 낱말을 모두 짚는다(낱말 카드 하나씩)</td></tr>
-      <tr><td>② 배열</td><td>문장1-2</td><td>뱅크에 trap 이 섞인 배열 — 바뀐 것: 주어 하나</td></tr>
-      <tr><td>③ 쓰기</td><td>문장1-3</td><td>초록 자리를 직접 친다 — 바뀐 것: 또 하나</td></tr>
-      <tr><td>④ 새 문장</td><td>기본 / 문장2</td><td>처음 보는 문장을 trap 섞인 배열로 — ③ 문장을 위에 남겨 둔다</td></tr>
+      <tr><td>② 배열</td><td>문장1-2</td><td>뱅크에 trap 이 섞인 배열</td></tr>
+      <tr><td>③ 쓰기</td><td>문장1-3</td><td>초록 자리를 직접 친다</td></tr>
+      <tr><td>④ 처음 문장</td><td>S1</td><td>① 에서 본 문장을 이번엔 trap 섞인 뱅크로 직접 세운다</td></tr>
     </table>
-    <p class="g-p"><b>확인할 것</b> — ①→③이 같은 문장의 반복이라 <b>지루할 수 있고</b>, ④로 넘어갈 때 <b>당황스러울 수 있다</b>. 그래서 ②③에는 이번에 <b>바뀐 곳</b>을 짚어 주고(같은 문장이 아니라 "이번엔 이게 다르다"로 읽히게), ④에는 <b>바로 앞 문장을 기준으로 위에 남긴다</b>. 정리 화면은 네 문장의 초록 조각을 세로로 맞춰 세운다 — 한 틀이 처음 보는 문장까지 만들었다는 것이 화면에 남는다. 이 둘이 실제로 효과가 있는지는 풀어 보고 판단해야 한다.</p>
+    <p class="g-p"><b>처음 보는 문장은 첫 학습에서 풀게 하지 않는다</b> — 문장이 통째로 바뀌면 너무 어렵다. 정리 화면에 <b>이 틀로 이런 말도 해요</b> 한 줄로만 보여 주고, 직접 만드는 것은 복습으로 미룬다. 정리 화면은 만든 세 문장의 초록 조각을 세로로 맞춰 세운다.</p>
     <p class="g-p"><b>trap</b> — 기획이 제작할 trap(초록 자리를 대신하는 말, 문장당 2개)을 배열 뱅크에 그대로 섞는다. 지금은 대표 12유닛의 샘플(<code>vocab-expression-traps.sample.json</code>, 45문장)이고, 샘플이 없는 유닛(<b>다른 유닛 ↻</b>)은 trap 없이 배열한다. 화면 부품은 <b>낱말 카드 · 배열 뱅크 · 입력칸</b> 셋뿐이다. 구조형·해당없음은 뺐다.</p>
     <p class="g-p">기존 문제 풀이는 그대로 있다 → <a href="vocab-expression-types.html">유형별 학습 방식</a></p>
   </details>
@@ -132,7 +127,7 @@
    trap 은 vocab-expression-traps.sample.json — 문장(대괄호 포함) → [trap 마다 자리 순서대로 대신할 말, 안 바꾸는 자리는 '-']. */
 const TYPES = ['패턴형', '변화형', '대비형', '자리형'];
 const FEATURED = { '패턴형':['10000','10033','10444'], '변화형':['10065','10299','10317'], '대비형':['10369','10313','10059'], '자리형':['10041','10043','10132'] };
-const STEPS = ['① 보기', '② 배열', '③ 쓰기', '④ 새 문장'];
+const STEPS = ['① 보기', '② 배열', '③ 쓰기', '④ 처음 문장'];
 
 let U = [], byId = {}, TRAPS = {};
 let st = { t:0, id:'10000', step:0 };
@@ -168,12 +163,6 @@ function words(en) {
 const bare = en => words(en).filter(x => x.w).map(x => x.w);
 const tileText = w => (w === 'I' || /^I'/.test(w)) ? w : w.toLowerCase();
 
-/* 앞 문장과 비교해 이번에 바뀐 낱말 */
-function changed(prev, cur) {
-  const p = new Set(bare(prev).map(low));
-  return [...new Set(bare(cur).filter(w => !p.has(low(w))))];
-}
-
 /* trap 문장(초록 자리를 trap 으로 바꾼 문장)에만 있는 낱말 → 뱅크에 섞을 타일 */
 function trapTiles(en) {
   const traps = TRAPS[en]; if (!traps) return null;
@@ -207,19 +196,17 @@ function header() {
   $$('.unit[data-id]').forEach(b => b.onclick = () => openUnit(st.t, b.dataset.id));
   $('#rand').onclick = () => { const pool = U.filter(x => x.type === TYPES[st.t] && x.id !== st.id); openUnit(st.t, pool[Math.floor(Math.random() * pool.length)].id); };
 }
-function openUnit(t, id) { st = { t, id, step:0 }; save(); render(); window.scrollTo({ top:0, behavior:'smooth' }); }
+function openUnit(t, id) { st = { t, id, step:0 }; save(); render(); keepCardInView(); }
 function render() { header(); [renderSee, () => renderArrange(1), renderWrite, () => renderArrange(3), renderDone][st.step](); }
-function go(step) { st.step = step; render(); window.scrollTo({ top:0, behavior:'smooth' }); }
+/* 단계가 바뀌어도 맨 위로 올리지 않는다 — 새 카드 윗변이 화면 위로 벗어났을 때만 카드까지 올린다 */
+function keepCardInView() { const r = document.getElementById('stage').getBoundingClientRect(); if (r.top < 0) window.scrollBy({ top:r.top - 12, behavior:'smooth' }); }
+function go(step) { st.step = step; render(); keepCardInView(); }
 function src(u, en) {
   const tr = en === undefined ? '' : TRAPS[en] ? ` · <span class="tr">trap 샘플</span>` : ` · <span class="tmp">trap 없음</span>`;
   return `<div class="src">유닛 ${u.id} · ${u.type}${tr}</div>`;
 }
 function ruleHtml(u) {
   return `<div class="rule"><div class="f">${esc(u.form)}</div><div class="m">${esc(u.mean)}</div>${u.desc ? `<div class="d">${esc(u.desc)}</div>` : ''}</div>`;
-}
-function changedHtml(prev, cur) {
-  const c = changed(prev, cur);
-  return c.length ? `<div class="changed">앞 문장에서 바뀐 곳 ${c.map(w => `<b>${esc(w)}</b>`).join('')}</div>` : '';
 }
 
 /* ① 보기 — S1 의 초록 뜻에 해당하는 낱말을 하나씩 모두 짚는다 */
@@ -247,22 +234,18 @@ function renderSee() {
   });
 }
 
-/* ② · ④ 배열 — 뱅크에 trap 을 섞는다. ④ 는 ③ 문장을 위에 기준으로 남긴다 */
+/* ② · ④ 배열 — 뱅크에 trap 을 섞는다. ④ 는 ① 에서 본 S1 을 이번엔 직접 세운다 */
 function renderArrange(step) {
   const u = unit(), P = pick(u);
-  const [, en, kr] = step === 1 ? P.v1 : P.nw;
-  const prev = step === 1 ? P.s1[1] : P.v2[1];
-  const prevKr = step === 1 ? P.s1[2] : P.v2[2];
+  const [, en, kr] = step === 1 ? P.v1 : P.s1;
   const ans = bare(en), punct = (plain(en).match(/[.,!?]+$/) || [''])[0];
   const extra = trapTiles(en) || [];
   const tiles = ans.map((w, i) => ({ w, i })).concat(extra.map(w => ({ w, trap:true })));
   for (let n = 0; n < 20; n++) { tiles.sort(() => Math.random() - .5); if (tiles.some((t, k) => t.i !== k)) break; }
   const placed = []; let fin = false;
   $('#stage').innerHTML = `<div class="chat-card" id="card"><div class="chat-tag">${STEPS[step]}</div>
-    ${step === 3 ? `<div class="ref"><span class="h">앞 문장</span>${esc(plain(prev))}<br>${krHtml(prevKr).replace(/class="tgt"/g, 'class="c"')}</div>` : ''}
-    <div class="ask">${step === 3 ? '처음 보는 문장이에요. 같은 틀로 만들어 보세요' : '문장을 배열해 보세요'}</div>
+    <div class="ask">${step === 3 ? '처음 본 문장을 이번엔 직접 만들어 보세요' : '문장을 배열해 보세요'}</div>
     <div class="kr">${krHtml(kr)}</div>
-    ${step === 1 ? changedHtml(prev, en) : ''}
     <div class="fill" id="fill"></div>
     <div class="bank" id="bank">${tiles.map((t, k) => `<button class="card" data-k="${k}">${esc(tileText(t.w))}</button>`).join('')}</div>
     <div id="fb"></div><div class="btns" id="bb"><button class="btn ghost" id="show">정답 보기</button></div><div id="after"></div>${src(u, en)}</div>`;
@@ -307,7 +290,7 @@ function renderWrite() {
   }).join(' ');
   $('#stage').innerHTML = `<div class="chat-card" id="card"><div class="chat-tag">③ 쓰기</div>
     <div class="ask">초록 자리를 직접 써 보세요</div>
-    <div class="kr">${krHtml(kr)}</div>${changedHtml(P.v1[1], en)}
+    <div class="kr">${krHtml(kr)}</div>
     <div class="line" id="line">${line}</div>
     <div id="fb"></div><div class="btns" id="bb"><button class="btn ghost" id="hint">첫 글자</button><button class="btn ghost" id="show">정답 보기</button><button class="btn main" id="chk">확인</button></div>
     <div id="after"></div>${src(u)}</div>`;
@@ -317,31 +300,34 @@ function renderWrite() {
     if (fin) return; fin = true;
     inps.forEach(i => { i.value = answers[+i.dataset.b]; i.classList.add('ok'); i.disabled = true; });
     $('#card').classList.add('correct'); $('#bb').remove(); $('#fb').innerHTML = '';
-    $('#after').innerHTML = `<div class="btns"><button class="btn main" id="next">새 문장으로 ›</button></div>`;
+    $('#after').innerHTML = `<div class="btns"><button class="btn main" id="next">처음 문장 만들기 ›</button></div>`;
     $('#next').onclick = () => go(3);
   };
   inps.forEach(i => { i.oninput = () => { i.classList.toggle('ok', isOk(i)); if (inps.every(isOk)) finish(); }; i.onkeydown = e => { if (e.key === 'Enter' && $('#chk')) $('#chk').click(); }; });
   $('#chk').onclick = () => {
     if (inps.every(isOk)) return finish();
     $('#line').classList.remove('shake'); void $('#line').offsetWidth; $('#line').classList.add('shake');
-    $('#fb').innerHTML = `<div class="msg">② 에서 배열한 문장과 비교해 보세요. 바뀐 곳만 다르게 쓰면 돼요.</div>`;
+    $('#fb').innerHTML = `<div class="msg">② 에서 배열한 문장을 떠올려 보세요.</div>`;
   };
   $('#hint').onclick = () => inps.forEach(i => { if (!isOk(i)) { i.value = ''; i.placeholder = answers[+i.dataset.b].replace(/[A-Za-z]+/g, w => w[0] + '·'.repeat(w.length - 1)); } });
   $('#show').onclick = finish;
   setTimeout(() => inps[0] && inps[0].focus(), 50);
 }
 
-/* 정리 — 네 문장의 초록 조각을 세로로 맞춰 세운다(초록 앞 / 초록 / 초록 뒤) */
+/* 정리 — 만든 세 문장의 초록 조각을 세로로 맞춰 세우고(초록 앞 / 초록 / 초록 뒤),
+   처음 보는 문장(기본 / 문장2)은 풀게 하지 않고 '이 틀로 이런 말도 해요' 한 줄로만 보여 준다 */
 function renderDone() {
   const u = unit(), P = pick(u);
-  const rows = [P.s1, P.v1, P.v2, P.nw].map(([, en, kr]) => {
+  const row = ([, en, kr], more) => {
     const a = en.indexOf('['), b = en.lastIndexOf(']');
     const pre = en.slice(0, a), chunk = plain(en.slice(a, b + 1)), post = en.slice(b + 1);
-    return `<span class="pre">${esc(plain(pre))}</span><span class="chunk">${esc(chunk)}</span><span class="post">${esc(plain(post))}</span>`
+    return `<span class="pre${more ? ' more' : ''}">${esc(plain(pre))}</span><span class="chunk${more ? ' more' : ''}">${esc(chunk)}</span><span class="post${more ? ' more' : ''}">${esc(plain(post))}</span>`
       + `<span class="stack-k">${esc(plain(kr))}</span>`;
-  }).join('');
+  };
+  const rows = [P.s1, P.v1, P.v2].map(x => row(x)).join('')
+    + `<span class="stack-h">이 틀로 이런 말도 해요</span>` + row(P.nw, true);
   $('#stage').innerHTML = `<div class="chat-card correct"><div class="chat-tag">정리</div>
-    <div class="ask">같은 틀로 만든 네 문장</div>
+    <div class="ask">같은 틀로 만든 문장</div>
     <div class="stack">${rows}</div>
     ${ruleHtml(u)}
     <div class="btns"><button class="btn ghost" id="again">다시</button><button class="btn main" id="next">다른 유닛 ↻</button></div></div>`;

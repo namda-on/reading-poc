@@ -372,5 +372,103 @@
   [
    "Put its down"
   ]
+ ],
+ "You should [get up].": [
+  [
+   "get on"
+  ],
+  [
+   "get out"
+  ]
+ ],
+ "[Why don't you] invite a friend?": [
+  [
+   "Why you don't"
+  ],
+  [
+   "Why doesn't you"
+  ]
+ ],
+ "[If I were] you, [I would] do the laundry.": [
+  [
+   "If I am",
+   "-"
+  ],
+  [
+   "-",
+   "I will"
+  ]
+ ],
+ "[I opened] it.": [
+  [
+   "I open"
+  ],
+  [
+   "I opening"
+  ]
+ ],
+ "This is [the smallest] basket.": [
+  [
+   "the smaller"
+  ],
+  [
+   "the most small"
+  ]
+ ],
+ "It [was rejected].": [
+  [
+   "was reject"
+  ],
+  [
+   "were rejected"
+  ]
+ ],
+ "I stopped [eating] grains.": [
+  [
+   "to eat"
+  ],
+  [
+   "eat"
+  ]
+ ],
+ "The introduction [was interesting].": [
+  [
+   "was interested"
+  ],
+  [
+   "was interest"
+  ]
+ ],
+ "See you [on Thursday].": [
+  [
+   "at Thursday"
+  ],
+  [
+   "in Thursday"
+  ]
+ ],
+ "My skin [is always] dry.": [
+  [
+   "always is"
+  ],
+  [
+   "are always"
+  ]
+ ],
+ "I [always answer] the phone.": [
+  [
+   "answer always"
+  ],
+  [
+   "always answers"
+  ]
+ ],
+ "[Pick me up] at the market.": [
+  [
+   "Pick up me"
+  ],
+  [
+   "Pick I up"
+  ]
  ]
 }
