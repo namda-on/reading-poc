@@ -87,6 +87,41 @@
   .btn.main { background:linear-gradient(#8b7cf0,#6f5bf0); color:#fff; }
   .btn.ghost { flex:0 0 26%; background:#fff; color:#6b7c93; box-shadow:0 1px 4px rgba(30,60,110,.12); font-size:13.5px; }
   .src { margin-top:12px; text-align:right; font-size:11px; color:#b5c1d1; }
+
+  /* 전체 유닛 분류 — scripts/classify_units.py 산출물(vocab-expression-units.gen.json)을 그대로 보여준다 */
+  .ul-rule { background:#fff; border-radius:16px; padding:4px 14px 10px; margin-bottom:12px; box-shadow:0 2px 8px rgba(30,60,110,.08); }
+  .ul-rule summary { cursor:pointer; font-weight:800; font-size:13.5px; padding:9px 0 5px; color:#3a6bb0; list-style:none; }
+  .ul-rule summary::-webkit-details-marker { display:none; }
+  .ul-rule ol { margin:4px 0 6px; padding-left:20px; font-size:12.5px; color:#4d5f78; line-height:1.65; }
+  .ul-rule p { font-size:12px; color:#7d8ea6; margin:4px 0; line-height:1.55; }
+  .ul-sum { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:8px; }
+  .ul-chip { border:none; border-radius:16px; padding:6px 11px; font-size:12.5px; font-weight:800; cursor:pointer; background:rgba(255,255,255,.55); color:#4d6585; }
+  .ul-chip.on { background:#fff; color:#2f3e52; box-shadow:0 2px 6px rgba(30,60,110,.15); }
+  .ul-tools { display:flex; flex-wrap:wrap; gap:6px 10px; margin-bottom:10px; align-items:center; }
+  .ul-q { flex:1 1 160px; border:none; border-radius:12px; padding:9px 12px; font-size:14px; font-family:inherit; }
+  .ul-tg { font-size:12px; color:#35506f; font-weight:700; display:flex; gap:4px; align-items:center; white-space:nowrap; }
+  .ul-count { font-size:12px; color:#4d6585; margin:0 2px 8px; }
+  .ul-row { background:#fff; border-radius:14px; padding:10px 12px; margin-bottom:8px; box-shadow:0 2px 6px rgba(30,60,110,.08); cursor:pointer; }
+  .ul-h { display:flex; flex-wrap:wrap; gap:4px 8px; align-items:baseline; }
+  .ty { font-size:11px; font-weight:800; border-radius:8px; padding:2px 7px; white-space:nowrap; }
+  .ty.p { background:#e3edfb; color:#3a6bb0; } .ty.c { background:#dcf6e6; color:#1f7a49; }
+  .ty.d { background:#ece8fd; color:#5b47c9; } .ty.l { background:#fdf0e1; color:#a5641a; } .ty.n { background:#eef1f5; color:#7d8ea6; }
+  .ul-id { font-size:11px; color:#9aa8bc; }
+  .ul-f { font-size:14px; font-weight:800; color:#2f3e52; }
+  .ul-m { font-size:12px; color:#7d8ea6; }
+  .ul-why { font-size:12px; color:#5d6f88; margin-top:4px; }
+  .ul-tags { display:flex; flex-wrap:wrap; gap:4px; margin-top:5px; }
+  .tg { font-size:11px; border-radius:7px; padding:1px 7px; background:#f1f5fa; color:#5d6f88; }
+  .tg.warn { background:#fdf0e1; color:#a5641a; } .tg.man { background:#f3eefe; color:#5b47c9; } .tg.no { background:#fbe9e9; color:#b34c4c; }
+  .ul-s { margin-top:8px; border-top:1px dashed #e2e9f3; padding-top:6px; }
+  .ul-sen { font-size:13.5px; line-height:1.45; padding:3px 0; display:flex; gap:6px; align-items:baseline; }
+  .ul-sen.var { opacity:.45; }
+  .ul-sen .k { font-size:12px; color:#8a98ad; }
+  .ul-role { flex:0 0 auto; font-size:10.5px; font-weight:800; color:#fff; background:#8b7cf0; border-radius:6px; padding:1px 5px; }
+  .ul-role.none { background:#d5dce6; }
+  .ul-side { font-size:10.5px; color:#8a98ad; white-space:nowrap; }
+  .ulhl { color:#1f7a49; background:#dcf6e6; border-radius:5px; padding:0 3px; font-weight:800; }
+  .ul-more { width:100%; border:none; border-radius:12px; padding:12px; font-weight:800; color:#3a6bb0; background:#fff; cursor:pointer; }
 </style>
 </head>
 <body>
@@ -96,6 +131,7 @@
   <details class="guide" open>
     <summary>이 페이지는</summary>
     <div class="g-flow">보기 2개 → 새 문장의 초록 자리 채우기 (×2) → 전체 문장 배열</div>
+    <p class="g-p"><b>검토 결과</b> — 이 흐름으로는 유용함이 느껴지지 않았다. 네 유형에 공통으로 남길 수 있는 건 <b>한국어 초록에 해당하는 영어를 짚는 것</b>(과 전체 문장 배열)까지다. 초록 부분이 문장마다 다르면 "보기에서 공통점을 찾아라"는 성립하지 않는다 → <a href="vocab-expression-types.html">유형별 페이지</a>로 이어진다.</p>
     <p class="g-p">유형마다 방식을 바꾸지 않는다. 모든 문장에 저작된 대괄호(초록)만 쓰고, 앱은 규칙을 먼저 말하지 않는다 — 보기 두 문장에서 무엇이 같고 무엇이 다른지를 보고 새 문장의 초록 자리를 직접 친다. 규칙은 두 문장을 다 채운 뒤에 한 번 보여준다(저작된 설명이 있는 유닛만).</p>
     <p class="g-p">유형 탭은 비교용이다. 화면과 조작은 네 탭이 모두 같다. 유형별 방식은 <a href="vocab-expression-types.html">유형별 실험 페이지</a>.</p>
   </details>
@@ -167,7 +203,7 @@ const TYPES = [
 const STEPS = ['① 보고 채우기','② 보고 채우기','③ 전체 문장'];
 
 let st = { t:0, u:0, step:0 };
-try { const s = JSON.parse(localStorage.getItem('vecommon') || 'null'); if (s && TYPES[s.t] && TYPES[s.t].units[s.u]) st = { t:s.t, u:s.u, step:0 }; } catch (e) {}
+try { const s = JSON.parse(localStorage.getItem('vecommon') || 'null'); if (s && (s.t === 'all' || (TYPES[s.t] && TYPES[s.t].units[s.u]))) st = { t:s.t, u:s.u || 0, step:0 }; } catch (e) {}
 function save() { try { localStorage.setItem('vecommon', JSON.stringify({ t:st.t, u:st.u })); } catch (e) {} }
 
 const $ = s => document.querySelector(s);
@@ -188,13 +224,15 @@ function norm(s) {
 const mask = a => a.replace(/[A-Za-z]+/g, w => w[0] + '·'.repeat(w.length - 1));
 
 function header() {
-  $('#tabs').innerHTML = TYPES.map((T, i) => `<button class="tab${i === st.t ? ' on' : ''}" data-t="${i}">${T.name}</button>`).join('');
+  $('#tabs').innerHTML = TYPES.map((T, i) => `<button class="tab${i === st.t ? ' on' : ''}" data-t="${i}">${T.name}</button>`).join('')
+    + `<button class="tab${st.t === 'all' ? ' on' : ''}" data-t="all">전체</button>`;
+  $$('.tab').forEach(b => b.onclick = () => { st = { t:b.dataset.t === 'all' ? 'all' : +b.dataset.t, u:0, step:0 }; save(); render(); });
+  if (st.t === 'all') { $('#units').innerHTML = ''; $('#steps').innerHTML = ''; return; }
   $('#units').innerHTML = TYPES[st.t].units.map((U, i) => `<button class="unit${i === st.u ? ' on' : ''}" data-u="${i}">${esc(U.name)}</button>`).join('');
   $('#steps').innerHTML = STEPS.map((n, i) => `<div class="step${i === st.step ? ' on' : (i < st.step ? ' done' : '')}">${n}</div>`).join('');
-  $$('.tab').forEach(b => b.onclick = () => { st = { t:+b.dataset.t, u:0, step:0 }; save(); render(); });
   $$('.unit').forEach(b => b.onclick = () => { st.u = +b.dataset.u; st.step = 0; save(); render(); });
 }
-function render() { header(); if (st.step < 2) renderFill(); else if (st.step === 2) renderArrange(); else renderDone(); }
+function render() { header(); if (st.t === 'all') renderUnits($('#stage')); else if (st.step < 2) renderFill(); else if (st.step === 2) renderArrange(); else renderDone(); }
 function go(step) { st.step = step; render(); window.scrollTo({ top:0, behavior:'smooth' }); }
 
 function ruleHtml(U) {
@@ -306,6 +344,74 @@ function renderDone() {
     if (last) st = { t:(st.t + 1) % TYPES.length, u:0, step:0 }; else { st.u++; st.step = 0; }
     save(); render(); window.scrollTo({ top:0, behavior:'smooth' });
   };
+}
+
+/* 전체 유닛 분류 — scripts/classify_units.py 가 확정 CSV 에서 만든 vocab-expression-units.gen.json 을 보여준다.
+   유형·판정 이유·①②③ 에 쓸 문장이 모두 그 스크립트의 규칙에서 나온다(이 화면은 계산하지 않는다). */
+const TY_CLS = { '패턴형':'p', '변화형':'c', '대비형':'d', '자리형':'l', '해당없음':'n' };
+const ROLE = (p, k) => !p ? '' : p.find.includes(k) ? '①' : p.apply.includes(k) ? '②' : p.arrange === k ? '③' : '';
+let UL = { data:null, ty:'전체', q:'', issue:false, limit:60, open:new Set() };
+async function renderUnits(stage) {
+  if (!UL.data) {
+    stage.innerHTML = `<div class="ul-count">불러오는 중…</div>`;
+    try { UL.data = await (await fetch('vocab-expression-units.gen.json')).json(); }
+    catch (e) { stage.innerHTML = `<div class="msg">분류 데이터를 불러오지 못했어요.</div>`; return; }
+  }
+  const D = UL.data;
+  const cnt = t => D.filter(x => t === '전체' || x.type === t).length;
+  const noPlan = D.filter(x => !x.plan).length;
+  const q = UL.q.trim().toLowerCase();
+  const rows = D.filter(x => (UL.ty === '전체' || x.type === UL.ty)
+    && (!UL.issue || !x.plan || x.flags.length || x.manual)
+    && (!q || x.id.includes(q) || x.form.toLowerCase().includes(q) || x.sents.some(s => s[1].toLowerCase().includes(q))));
+  const hl = s => esc(s).replace(/\[([^\]]+)\]/g, '<span class="ulhl">$1</span>');
+  const row = x => {
+    const tags = [];
+    Object.entries(x.sides || {}).forEach(([k, v]) => tags.push(`<span class="tg">${esc(k)} ${v}</span>`));
+    if (x.slot) tags.push(`<span class="tg">슬롯 꼴: ${esc(x.slot)}</span>`);
+    if (x.manual) tags.push(`<span class="tg man">사람이 분류</span>`);
+    x.flags.forEach(f => tags.push(`<span class="tg warn">${esc(f)}</span>`));
+    if (!x.plan) tags.push(`<span class="tg no">${x.type === '해당없음' ? '맞는 유형 없음' : '문제 계획 없음 — 문장·괄호 보강 필요'}</span>`);
+    let body = '';
+    if (UL.open.has(x.id)) {
+      body = `<div class="ul-s">` + x.sents.map((s, i) => {
+        const k = x.indep.indexOf(i), role = k < 0 ? '' : ROLE(x.plan, k), side = k < 0 ? '주어 변형' : (x.labels[k] || '');
+        return `<div class="ul-sen${k < 0 ? ' var' : ''}"><span class="ul-role${role ? '' : ' none'}">${role || '·'}</span>`
+          + `<span>${hl(s[1])} <span class="k">${esc(s[2].replace(/[[\]]/g, ''))}</span></span>`
+          + (side ? `<span class="ul-side">${esc(side)}</span>` : '') + `</div>`;
+      }).join('') + `</div>`;
+    }
+    return `<div class="ul-row" data-id="${x.id}"><div class="ul-h"><span class="ty ${TY_CLS[x.type]}">${x.type}</span>`
+      + `<span class="ul-f">${esc(x.form)}</span><span class="ul-m">${esc(x.mean)}</span><span class="ul-id">${x.id}</span></div>`
+      + `<div class="ul-why">${esc(x.why)}</div><div class="ul-tags">${tags.join('')}</div>${body}</div>`;
+  };
+  stage.innerHTML = `
+    <details class="ul-rule"><summary>분류 규칙 (위에서부터 먼저 걸리는 것)</summary>
+      <ol>
+        <li>대괄호가 모든 문장에서 같은 덩어리다 (시제·주어·축약 차이는 무시) → <b>패턴형</b></li>
+        <li>서로 다른 꼴이 번갈아 온다 (-ing / to, -ing / -ed) → <b>대비형</b></li>
+        <li>꼴은 같고 낱말이 제각각이다 (-ed · -est · -er · 's · 서수) → <b>변화형</b></li>
+        <li>빈도·정도 부사가 갈아 끼워진다 → <b>자리형</b> / 기능어가 번갈아 온다 (at / on / in, can / could) → <b>대비형</b></li>
+        <li>공통 낱말이 남는다 → <b>패턴형</b> (괄호 안에 슬롯 낱말이 함께 들어 있다)</li>
+        <li>첫 낱말이 몇 개 안에서 번갈아 온다 (become / get / turn) → <b>대비형</b></li>
+        <li>그 밖 → <b>해당없음</b>. 규칙이 틀리는 13개는 사람이 정했고 이유를 적어 두었다</li>
+      </ol>
+      <p>2·3은 카드 초록에 형태 변화가 적혀 있을 때만 인정한다 — 시제 때문에 우연히 생긴 -ed/-ing 를 학습 대상으로 착각하지 않게. '번갈아 온다'는 둘 이상이 쓰이고 한쪽이 80%를 넘게 독차지하지 않을 때다. 주어가 정해 주는 be·do·have 일치(is/are, do/does)는 고를 것이 없어 결정으로 보지 않는다. 판정에는 S1 의 주어 변형(문장1-2·1-3)을 쓰지 않는다.</p>
+      <p>문장 앞 ①②③ 은 그 유닛으로 문제를 만들 때 쓰는 문장이다(같은 스크립트가 정한다). 계획이 없는 유닛은 문장이나 괄호를 보강해야 문제가 된다.</p>
+    </details>
+    <div class="ul-sum">${['전체', '패턴형', '변화형', '대비형', '자리형', '해당없음'].map(t =>
+      `<button class="ul-chip${UL.ty === t ? ' on' : ''}" data-ty="${t}">${t} ${cnt(t)}</button>`).join('')}</div>
+    <div class="ul-tools"><input class="ul-q" id="ulq" placeholder="id · 카드 초록 · 문장 검색" value="${esc(UL.q)}">
+      <label class="ul-tg"><input type="checkbox" id="uli"${UL.issue ? ' checked' : ''}> 손봐야 할 것만 (${D.filter(x => !x.plan || x.flags.length || x.manual).length})</label></div>
+    <div class="ul-count">${rows.length}개 · 문제 계획 없음 ${noPlan}개 · 줄을 누르면 문장과 ①②③ 이 열린다</div>
+    <div id="ulrows">${rows.slice(0, UL.limit).map(row).join('')}</div>
+    ${rows.length > UL.limit ? `<button class="ul-more" id="ulmore">더 보기 (${rows.length - UL.limit})</button>` : ''}`;
+  stage.querySelectorAll('.ul-chip').forEach(b => b.onclick = () => { UL.ty = b.dataset.ty; UL.limit = 60; renderUnits(stage); });
+  const qi = stage.querySelector('#ulq');
+  qi.oninput = () => { UL.q = qi.value; UL.limit = 60; renderUnits(stage); const n = stage.querySelector('#ulq'); n.focus(); n.setSelectionRange(n.value.length, n.value.length); };
+  stage.querySelector('#uli').onchange = e => { UL.issue = e.target.checked; UL.limit = 60; renderUnits(stage); };
+  const more = stage.querySelector('#ulmore'); if (more) more.onclick = () => { UL.limit += 120; renderUnits(stage); };
+  stage.querySelectorAll('.ul-row').forEach(r => r.onclick = () => { const id = r.dataset.id; UL.open.has(id) ? UL.open.delete(id) : UL.open.add(id); renderUnits(stage); });
 }
 
 render();
