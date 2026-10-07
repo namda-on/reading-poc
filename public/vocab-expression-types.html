@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>패턴화 어려운 유형</title>
+<style>
+  :root { --bg:#a9ccf2; --ink:#2f3e52; --sub:#6b7c93; --blue:#4b83d6; --green:#2e9e57; --purple:#7b6ef0; }
+  * { box-sizing:border-box; }
+  html, body { margin:0; }
+  body { font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+    background:var(--bg); color:var(--ink); display:flex; justify-content:center; }
+  .app { width:100%; max-width:460px; min-height:100vh; padding:14px 16px 40px;
+    background:linear-gradient(#aacdf3,#bfe0ef); }
+  h1 { font-size:17px; margin:2px 2px 10px; color:#fff; text-shadow:0 1px 2px rgba(30,60,110,.25); }
+
+  /* 한눈에 보기 */
+  .guide { background:#fff; border-radius:18px; padding:4px 14px 12px; box-shadow:0 4px 12px rgba(30,60,110,.1); margin-bottom:14px; }
+  .guide summary { cursor:pointer; font-weight:800; font-size:14px; padding:10px 0 6px; color:#3a6bb0; list-style:none; }
+  .guide summary::-webkit-details-marker { display:none; }
+  .guide summary::after { content:' ▾'; color:#9aa8bc; }
+  .guide[open] summary::after { content:' ▴'; }
+  .g-row { display:grid; grid-template-columns:62px 1fr; gap:2px 10px; padding:9px 0; border-top:1px solid #eef2f8; }
+  .g-row b.k { grid-row:span 3; font-size:14px; color:#2f3e52; padding-top:1px; }
+  .g-core { font-size:13.5px; font-weight:700; color:#2f3e52; }
+  .g-eg { font-size:12.5px; color:#8a98ad; }
+  .g-how { font-size:13px; color:#22794a; font-weight:700; }
+  .g-note { font-size:12.5px; color:#6b7c93; line-height:1.55; padding-top:9px; border-top:1px solid #eef2f8; }
+  .g-note a { color:#3a6bb0; }
+
+  /* 유형·유닛 선택 */
+  .tabs { display:flex; gap:6px; margin-bottom:8px; }
+  .tab { flex:1; border:none; border-radius:12px; padding:10px 4px; font-size:14px; font-weight:800; cursor:pointer;
+    background:rgba(255,255,255,.55); color:#4d6585; }
+  .tab.on { background:#fff; color:#2f3e52; box-shadow:0 2px 6px rgba(30,60,110,.15); }
+  .units { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:14px; }
+  .unit { border:1px solid rgba(255,255,255,.8); background:rgba(255,255,255,.35); color:#35506f; border-radius:20px;
+    padding:6px 12px; font-size:13px; font-weight:700; cursor:pointer; }
+  .unit.on { background:#4b83d6; border-color:#4b83d6; color:#fff; }
+
+  .steps { display:flex; gap:6px; margin:0 0 18px; }
+  .step { flex:1; text-align:center; font-size:12px; font-weight:800; padding:6px 0; border-radius:10px;
+    background:rgba(255,255,255,.4); color:#6f88a8; }
+  .step.on { background:#fff; color:#3a6bb0; }
+  .step.done { background:rgba(255,255,255,.75); color:#2e9e57; }
+
+  /* 카드 */
+  .chat-card { position:relative; background:linear-gradient(#e9f1fb 0,#f4f8fd 48px,#ffffff 48px,#ffffff 100%);
+    border-radius:22px; box-shadow:0 6px 18px rgba(30,60,110,.13); padding:24px 18px 18px; }
+  .chat-card.correct { background:linear-gradient(#dff3e4 0,#eaf8ee 48px,#fbfffc 48px,#fbfffc 100%); }
+  .chat-tag { position:absolute; top:-13px; left:16px; background:#cfe0f5; color:#3a6bb0; font-size:12px; font-weight:800;
+    border-radius:11px 11px 11px 3px; padding:3px 11px; }
+  .chat-card.correct .chat-tag { background:#dff3e4; color:#22794a; }
+  .ask { font-size:14px; font-weight:700; color:#5d6f88; margin-bottom:14px; }
+  .tgt { color:var(--green); font-weight:800; }
+
+  .row { padding:12px 0; }
+  .row + .row { border-top:1px dashed #e2e9f3; }
+  .kr { font-size:14px; color:#7d8ea6; font-weight:600; margin-bottom:8px; line-height:1.5; }
+  .kr.big { font-size:18px; color:#33465c; }
+  .line { display:flex; flex-wrap:wrap; align-items:flex-start; gap:8px 4px; font-size:17px; font-weight:700; line-height:1.5; }
+
+  /* 짚는 낱말 — 흰 키처럼 보이고 누르면 내려앉는다 */
+  .w { display:inline-flex; flex-direction:column; align-items:center; }
+  .w > button, .w > span.k { font:inherit; color:inherit; padding:3px 7px; border:1px solid #dbe6f5; background:#fff;
+    border-radius:10px; box-shadow:0 2px 0 #e7eef8; cursor:pointer; transition:background .15s, transform .09s, box-shadow .09s; }
+  .w > button:active { transform:translateY(2px); box-shadow:none; }
+  .w > span.k { cursor:default; }
+  .w.p > span.k { border-color:transparent; background:none; box-shadow:none; padding:3px 0; margin-left:-4px; }
+  .w.ok > button, .w.ok > span.k { background:#dcf6e6; color:#1f7a49; border-color:#a9dec2; box-shadow:0 2px 0 #c2ebd4; }
+  .w.bad > button { color:#aab7c8; border-color:#e6d3bd; box-shadow:0 2px 0 #f0e4d3; }
+  .w.nb > span.k, .w.nb > button { border:1.5px dashed #9fb7d8; background:#f3f7fd; color:#3a6bb0; }
+  .w.tap > button { animation:tap .3s ease; }
+  @keyframes tap { 40%{transform:translateY(-4px) scale(1.06);} }
+  .anat { margin-top:5px; font-size:12px; font-weight:700; color:#8a98ad; white-space:nowrap; animation:fadeUp .3s ease both; }
+  .anat b { color:var(--green); }
+  .anat .irr { color:#b07a1f; }
+  .lab { margin-top:5px; font-size:11.5px; font-weight:800; padding:2px 8px; border-radius:8px; white-space:nowrap; animation:fadeUp .3s ease both; }
+  .lab.a { background:#e3edfb; color:#3a6bb0; }
+  .lab.b { background:#ece8fd; color:#5b47c9; }
+  .lab.c { background:#fdf0e1; color:#a5641a; }
+  @keyframes fadeUp { from{opacity:0; transform:translateY(-4px);} to{opacity:1; transform:none;} }
+  .nudge { animation:nudge .26s ease; }
+  @keyframes nudge { 30%{transform:translateX(-4px);} 70%{transform:translateX(3px);} }
+  .shake { animation:shake .34s ease; }
+  @keyframes shake { 22%{transform:translateX(-5px);} 55%{transform:translateX(5px);} 82%{transform:translateX(-2px);} }
+
+  .msg { margin-top:12px; font-size:13.5px; color:#6b5a2e; background:#fbf6ea; border-radius:12px; padding:9px 12px; line-height:1.5; }
+  .msg.good { color:#22794a; background:#edf9f1; }
+
+  /* 규칙 공개 */
+  .rule { margin-top:16px; border-radius:16px; background:#f4fbf6; border:1px solid #cdebd8; padding:13px 14px; animation:fadeUp .35s ease both; }
+  .rule .f { font-size:17px; font-weight:800; color:#22794a; }
+  .rule .m { font-size:13px; color:#6b7c93; margin-top:2px; }
+  .rule .d { font-size:13.5px; color:#3c5a48; margin-top:8px; line-height:1.55; }
+
+  /* 적용 — 빈칸·선택지·자리 */
+  input.blank { font:inherit; color:#1f4f8f; width:7.5em; border:none; border-bottom:2px solid #8fb1e3; background:#f3f7fd;
+    border-radius:6px 6px 0 0; padding:2px 6px; outline:none; text-align:center; }
+  input.blank.ok { color:#1f7a49; border-bottom-color:#5cc08a; background:#e8f8ee; }
+  .cue { font-size:13px; font-weight:800; color:#8a6a1f; background:#fdf3dc; border-radius:8px; padding:3px 8px; align-self:center; }
+  .slot { min-width:70px; border-bottom:2px solid #b9c7db; text-align:center; color:#1f7a49; }
+  .slot.ok { border-bottom-color:#5cc08a; background:#e8f8ee; border-radius:6px 6px 0 0; padding:0 6px; }
+  .opts { display:flex; flex-wrap:wrap; gap:9px; margin-top:16px; }
+  .opt { border:1px solid #cdddf3; background:#fff; border-radius:12px; padding:11px 16px; font-size:16px; font-weight:700;
+    color:#2f3e52; cursor:pointer; box-shadow:0 2px 0 #e1e9f5; }
+  .opt.bad { color:#aab7c8; border-color:#e6d3bd; }
+  .opt.ok { background:#dcf6e6; color:#1f7a49; border-color:#a9dec2; }
+  .put { font-size:13px; color:#7d8ea6; font-weight:700; margin:2px 0 10px; }
+  .put b { display:inline-block; background:#fdf3dc; color:#8a6a1f; border-radius:8px; padding:2px 9px; margin-left:4px; }
+  .gap { width:28px; height:36px; margin:0 -4px; border:none; background:none; cursor:pointer; position:relative; padding:0; align-self:center; }
+  .gap::after { content:''; position:absolute; left:11px; top:4px; width:6px; height:28px; border-radius:3px; background:#d3deed; transition:background .15s; }
+  .gap:hover::after { background:#8fb1e3; }
+  .gap.bad::after { background:#e6c9a6; }
+  .ins { color:#1f7a49; background:#dcf6e6; border-radius:8px; padding:0 6px; animation:fadeUp .3s ease both; }
+
+  /* 전체 문장 배열 */
+  .fill { display:flex; flex-wrap:wrap; align-items:center; gap:7px 7px; min-height:46px; padding:8px 0 10px; border-bottom:2px solid #e2e9f3; }
+  .fw { background:#eaf1fb; border:1px solid #cdddf3; border-radius:9px; padding:6px 12px; font-size:17px; cursor:pointer; }
+  .fill.ok .fw { background:#dcf6e6; border-color:#a9dec2; color:#1f7a49; }
+  .punct { font-size:18px; font-weight:700; margin-left:-4px; }
+  .bank { display:flex; flex-wrap:wrap; gap:9px; margin-top:16px; }
+  .tile { border:1px solid #cdddf3; background:#fff; border-radius:11px; padding:11px 15px; font-size:16.5px; color:#2f3e52;
+    cursor:pointer; box-shadow:0 1px 3px rgba(30,60,110,.08); }
+  .tile.used { background:#e3e9f2; border-color:#dbe2ee; color:transparent; box-shadow:none; pointer-events:none; }
+
+  .btns { display:flex; gap:10px; margin-top:18px; }
+  .btn { flex:1; border:none; border-radius:15px; padding:14px; font-size:15px; font-weight:800; cursor:pointer; }
+  .btn.main { background:linear-gradient(#8b7cf0,#6f5bf0); color:#fff; }
+  .btn.ghost { flex:0 0 34%; background:#fff; color:#6b7c93; box-shadow:0 1px 4px rgba(30,60,110,.12); }
+  .src { margin-top:12px; text-align:right; font-size:11px; color:#b5c1d1; }
+</style>
+</head>
+<body>
+<div class="app">
+  <h1>패턴화 어려운 유형 — 학습 방식 실험</h1>
+
+  <details class="guide" open>
+    <summary>한눈에 보기</summary>
+    <div class="g-row"><b class="k">변화형</b>
+      <div class="g-core">낱말의 <u>모양이 바뀌는 것</u>이 핵심</div>
+      <div class="g-eg">opened · the smallest · was rejected</div>
+      <div class="g-how">바뀐 낱말 짚기 → 원형 보고 바꿔 쓰기</div></div>
+    <div class="g-row"><b class="k">대비형</b>
+      <div class="g-core">둘 중 <u>무엇을 고르나</u>가 핵심</div>
+      <div class="g-eg">stop ~ing / to ~ · exciting / excited · at / on / in</div>
+      <div class="g-how">다른 부분 짚기 → 뜻 보고 고르기</div></div>
+    <div class="g-row"><b class="k">자리형</b>
+      <div class="g-core">낱말은 바꿔 끼우고 <u>들어갈 자리</u>가 핵심</div>
+      <div class="g-eg">always / usually / never</div>
+      <div class="g-how">자리 짚기 → 새 문장에 넣기</div></div>
+    <div class="g-note">세 유형 모두 <b>① 짚기 → ② 적용 → ③ 전체 문장 배열</b> 순서로 같다. ①에서는 초록 뜻에 해당하는 말을 짚으면 그 말의 구조(변화·차이·자리)가 펼쳐진다.<br>
+      그 밖: 공통 낱말이 있는 유닛은 <a href="vocab-expression.html">지금 방식</a> 그대로. 불규칙 형태(went · feet)는 어휘로, 숫자(at ~ o'clock)는 대괄호만 고치면 지금 방식으로 된다.</div>
+  </details>
+
+  <div class="tabs" id="tabs"></div>
+  <div class="units" id="units"></div>
+  <div class="steps" id="steps"></div>
+  <div id="stage"></div>
+</div>
+
+<script>
+/* 문장은 `유기적 통합모드 문장 (문장만 확정).csv` 에서 그대로 가져왔다.
+   {} = ①에서 짚을 말 / ②에서 비울 자리. 한국어 [ ] = 그 말에 해당하는 뜻(초록).
+   ①의 한국어 일부는 짚을 말과 뜻이 맞물리게 다듬었다(원문 번역의 괄호가 다른 곳을 가리키는 경우). */
+const TYPES = [
+  { key:'change', name:'변화형', units:[
+    { id:'10065', name:'과거 -ed', form:'동사 + -ed', mean:'~했어',
+      desc:'동사 끝에 -ed 를 붙이면 ‘~했어’가 돼요. y로 끝나면 y를 i로 바꾸고 -ed (cry → cried).',
+      find:[ { en:'I {opened} it.', kr:'내가 그걸 [열었어].', info:[{base:'open', stem:'open', suf:'ed'}] },
+             { en:'She {cried}.', kr:'걔는 [울었어].', info:[{base:'cry', stem:'cr', suf:'ied'}] } ],
+      apply:[ { en:'We {talked} today.', kr:'우리 오늘 [얘기했어].', base:'talk' },
+              { en:'I {enjoyed} the movie.', kr:'난 그 영화 [재밌게 봤어].', base:'enjoy' } ],
+      arrange:{ en:'I really liked it.', kr:'난 그거 정말 [마음에 들었어].' } },
+    { id:'10299', name:'최상급 -est', form:'the + 형용사-est', mean:'가장 ~한',
+      desc:'‘가장 ~한’은 the + 형용사-est. 짧은 형용사에 붙어요 (big → biggest, happy → happiest).',
+      find:[ { en:'This is {the smallest} basket.', kr:'이게 [제일 작은] 바구니야.', info:[{base:'small', pre:'the', stem:'small', suf:'est'}] },
+             { en:"She's {the smartest} person here.", kr:'걔가 여기서 [제일 똑똑해].', info:[{base:'smart', pre:'the', stem:'smart', suf:'est'}] } ],
+      apply:[ { en:"He's the {tallest} boy in my class.", kr:'걔가 우리 반에서 [제일 키가 커].', base:'tall' },
+              { en:'That was the {happiest} day of my life.', kr:'그날이 내 인생에서 [가장 행복한] 날이었어.', base:'happy' } ],
+      arrange:{ en:"It's the biggest house on the street.", kr:'이 동네에서 [제일 큰] 집이야.' } },
+    { id:'10317', name:'수동태 was + p.p.', form:'was / were + 과거분사', mean:'~됐어 · ~당했어',
+      desc:'‘~됐어·~당했어’는 was/were + 과거분사. 규칙 동사는 -ed, 불규칙은 따로 외워요 (bite → bitten, find → found).',
+      find:[ { en:'It {was rejected}.', kr:'그건 [거절됐어].', info:[{base:'reject', pre:'was', stem:'reject', suf:'ed'}] },
+             { en:'He {was bitten} by a dog.', kr:'걔는 개에게 [물렸어].', info:[{base:'bite', pre:'was', form:'bitten', irr:true}] } ],
+      apply:[ { en:'My flight was {canceled}.', kr:'내 항공편이 [취소됐어].', base:'cancel', src:'10321' },
+              { en:'This was {found} under a table.', kr:'이거 탁자 밑에서 [발견됐어요].', base:'find' } ],
+      arrange:{ en:'These were submitted by fans.', kr:'이건 팬들이 [보내준] 거야.' } },
+  ]},
+  { key:'contrast', name:'대비형', units:[
+    { id:'10369', name:'~ing / to ~', form:'stop ~ing  /  stop to ~', mean:'~하던 걸 멈추다 / ~하려고 멈추다',
+      desc:'-ing 는 이미 하던·한 일, to 는 앞으로 할 일이에요. stop eating = 먹던 걸 멈춤, stop to buy = 사려고 멈춤.',
+      find:[ { en:'I stopped {eating} grains.', kr:'난 곡물 [먹는 걸] 끊었어.', info:[{label:'-ing · 하던 일', side:'a'}] },
+             { en:'He stopped {to buy} some coffee.', kr:'걔는 커피를 [사려고] 멈췄어.', info:[{label:'to · 하려고', side:'b'}] } ],
+      apply:[ { en:'Remember {to call} your mother tonight.', kr:'오늘 밤 엄마한테 [전화하는 거] 잊지 마.', opts:['to call','calling'],
+                why:{ calling:'-ing 는 이미 한 일이에요. 전화는 아직 안 했죠.' } },
+              { en:'I remember {meeting} him last time.', kr:'지난번에 걔를 [만난 게] 기억나.', opts:['meeting','to meet'],
+                why:{ 'to meet':'to 는 앞으로 할 일이에요. 만난 건 이미 지난 일이죠.' } } ],
+      arrange:{ en:'I regret telling her the truth.', kr:'걔한테 사실을 [말한 게] 후회돼.' } },
+    { id:'10313', name:'exciting / excited', form:'사물 + -ing  ↔  사람 + -ed', mean:'~가 흥미로워 ↔ ~가 흥미를 느껴',
+      desc:"감정을 ‘일으키는’ 쪽은 -ing, ‘느끼는’ 쪽은 -ed.",
+      find:[ { en:"That's so {exciting}!", kr:'그거 정말 [신난다]!', info:[{label:'-ing · 감정을 일으켜', side:'a'}] },
+             { en:"I'm so {excited} to see you!", kr:'널 보게 되어 정말 [신나]!', info:[{label:'-ed · 내가 느껴', side:'b'}] } ],
+      apply:[ { en:'The introduction was {interesting}.', kr:'도입부가 [흥미로웠어].', opts:['interesting','interested'],
+                why:{ interested:'-ed 는 사람이 느낄 때예요. 도입부는 흥미를 일으키는 쪽이죠.' } },
+              { en:'I was really {surprised} to see her there.', kr:'거기서 걔를 보고 정말 [놀랐어].', opts:['surprised','surprising'],
+                why:{ surprising:'-ing 는 감정을 일으키는 쪽이에요. 놀란 건 나죠.' } } ],
+      arrange:{ en:'We were all exhausted by the end.', kr:'끝날 무렵엔 다들 완전히 [지쳤어].' } },
+    { id:'10059', name:'at / on / in', form:'at / on / in + 때', mean:'~에',
+      desc:'시각은 at, 요일·날짜는 on, 아침·달·계절은 in.',
+      why:{ at:'at 은 시각(3시·12시)에 써요.', on:'on 은 요일·날짜에 써요.', in:'in 은 아침·달·계절에 써요.' },
+      find:[ { en:"Let's go {at three o'clock}.", kr:'[3시에] 가자.', info:[{label:'at · 시각', side:'a'}] },
+             { en:'See you {on Thursday}.', kr:'[목요일에] 보자.', info:[{label:'on · 요일', side:'b'}] } ],
+      apply:[ { en:"I'm busy {in} the morning.", kr:'난 [아침에] 바빠.', opts:['at','on','in'] },
+              { en:"Are you busy {at} twelve o'clock?", kr:'[12시에] 바빠?', opts:['at','on','in'] } ],
+      arrange:{ en:"Let's meet on Friday morning.", kr:'[금요일 아침에] 만나자.' } },
+  ]},
+  { key:'position', name:'자리형', units:[
+    { id:'10041', name:'be동사 + 빈도부사', form:'be동사 + always / usually / never', mean:'항상 / 보통 / 절대 ~해',
+      desc:'빈도부사는 be동사 ‘뒤’에 놓아요.',
+      find:[ { en:'My skin is {always} dry.', kr:'내 피부는 [항상] 건조해.', info:[{prev:true, label:'be동사 뒤'}] },
+             { en:"He's {never} late.", kr:'걔는 [절대] 안 늦어.', info:[{prev:true, label:'be동사 뒤'}] } ],
+      apply:[ { en:"It's {usually} easy.", kr:'[보통은] 쉬워.' },
+              { en:'My hands are {always} dry.', kr:'내 손은 [항상] 건조해.' } ],
+      arrange:{ en:"She's usually pretty nice.", kr:'걔는 [보통] 꽤 친절해.' } },
+    { id:'10043', name:'빈도부사 + 일반동사', form:'always / usually / never + 일반동사', mean:'항상 / 보통 / 절대 ~해',
+      desc:'빈도부사는 일반동사 ‘앞’에 놓아요. be동사와 자리가 반대예요.',
+      find:[ { en:'I {always} answer the phone.', kr:'난 [항상] 전화 받아.', info:[{next:true, label:'일반동사 앞'}] },
+             { en:'She {never} listens.', kr:'걔는 [절대] 말을 안 들어.', info:[{next:true, label:'일반동사 앞'}] } ],
+      apply:[ { en:'He {usually} wins.', kr:'걔는 [보통] 이겨.' },
+              { en:'We {rarely} talk on the phone.', kr:'우리는 전화로 [거의] 이야기하지 않아.' } ],
+      arrange:{ en:'Do you usually take the bus?', kr:'너는 [보통] 버스를 타?' } },
+  ]},
+];
+
+const STEP_NAMES = ['① 짚기','② 적용','③ 전체 문장'];
+const FIND_ASK = '초록 뜻에 해당하는 말을 두 문장에서 눌러 보세요';
+const APPLY_ASK = {
+  change:  '규칙대로 모양을 바꿔 써 보세요',
+  contrast:'뜻에 맞는 것을 골라 보세요',
+  position:'들어갈 자리를 눌러 보세요',
+};
+
+let st = { t:0, u:0, step:0, k:0 };
+try { const s = JSON.parse(localStorage.getItem('vetypes') || 'null'); if (s && TYPES[s.t] && TYPES[s.t].units[s.u]) st = { t:s.t, u:s.u, step:0, k:0 }; } catch (e) {}
+function save() { try { localStorage.setItem('vetypes', JSON.stringify({ t:st.t, u:st.u })); } catch (e) {} }
+
+const $ = (s, r=document) => r.querySelector(s);
+const esc = s => s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const krHtml = s => esc(s).replace(/\[([^\]]+)\]/g, '<span class="tgt">$1</span>');
+const norm = s => s.toLowerCase().replace(/[’]/g, "'").replace(/[^a-z' ]/g, '').trim();
+const unit = () => TYPES[st.t].units[st.u];
+const type = () => TYPES[st.t].key;
+
+/* `I {opened} it.` → [{t:'I'},{t:'opened',target:0},{t:'it'},{t:'.',p:true}] */
+function tokens(en) {
+  const out = []; let ti = 0;
+  for (const m of en.matchAll(/\{([^}]+)\}([.,!?]*)|([^\s{}]+)/g)) {
+    if (m[1] !== undefined) { out.push({ t:m[1], target:ti++ }); if (m[2]) out.push({ t:m[2], p:true }); continue; }
+    const w = m[3]; const mm = w.match(/^(.*?)([.,!?]+)$/);
+    if (mm && mm[1]) { out.push({ t:mm[1] }); out.push({ t:mm[2], p:true }); }
+    else out.push(mm ? { t:w, p:true } : { t:w });
+  }
+  return out;
+}
+const plain = en => en.replace(/[{}]/g, '');
+
+function header() {
+  $('#tabs').innerHTML = TYPES.map((T, i) => `<button class="tab${i === st.t ? ' on' : ''}" data-t="${i}">${T.name}</button>`).join('');
+  $('#units').innerHTML = TYPES[st.t].units.map((U, i) => `<button class="unit${i === st.u ? ' on' : ''}" data-u="${i}">${esc(U.name)}</button>`).join('');
+  $('#steps').innerHTML = STEP_NAMES.map((n, i) => `<div class="step${i === st.step ? ' on' : (i < st.step ? ' done' : '')}">${n}</div>`).join('');
+  $('#tabs').querySelectorAll('.tab').forEach(b => b.onclick = () => { st = { t:+b.dataset.t, u:0, step:0, k:0 }; save(); render(); });
+  $('#units').querySelectorAll('.unit').forEach(b => b.onclick = () => { st.u = +b.dataset.u; st.step = 0; st.k = 0; save(); render(); });
+}
+
+function render() {
+  header();
+  if (st.step === 0) renderFind();
+  else if (st.step === 1) renderApply();
+  else if (st.step === 2) renderArrange();
+  else renderDone();
+}
+function go(step) { st.step = step; st.k = 0; render(); window.scrollTo({ top:0, behavior:'smooth' }); }
+
+function ruleHtml(U) {
+  return `<div class="rule"><div class="f">${esc(U.form)}</div><div class="m">${esc(U.mean)}</div><div class="d">${esc(U.desc)}</div></div>`;
+}
+
+/* ① 짚기 — 초록 뜻에 해당하는 말을 짚으면 그 말의 구조가 펼쳐진다 */
+function renderFind() {
+  const U = unit(), T = type();
+  const rows = U.find.map((f, ri) => {
+    const tk = tokens(f.en);
+    const words = tk.map((x, i) => x.p
+      ? `<span class="w p"><span class="k">${esc(x.t)}</span></span>`
+      : `<span class="w" data-r="${ri}" data-i="${i}"${x.target !== undefined ? ` data-tg="${x.target}"` : ''}><button>${esc(x.t)}</button></span>`).join('');
+    return `<div class="row"><div class="kr">${krHtml(f.kr)}</div><div class="line">${words}</div></div>`;
+  }).join('');
+  $('#stage').innerHTML = `<div class="chat-card" id="card"><div class="chat-tag">① 짚기</div>
+    <div class="ask">${FIND_ASK}</div><div id="rows">${rows}</div><div id="fb"></div><div id="after"></div>
+    <div class="src">유닛 ${U.id}</div></div>`;
+  const need = U.find.reduce((n, f) => n + tokens(f.en).filter(x => x.target !== undefined).length, 0);
+  let got = 0;
+  $('#rows').querySelectorAll('.w[data-r]').forEach(el => {
+    el.querySelector('button').onclick = () => {
+      if (el.classList.contains('ok')) return;
+      if (el.dataset.tg === undefined) {
+        el.classList.add('bad'); el.closest('.line').classList.remove('nudge'); void el.offsetWidth; el.closest('.line').classList.add('nudge');
+        $('#fb').innerHTML = `<div class="msg">초록 뜻에 해당하는 말을 찾아 보세요.</div>`;
+        return;
+      }
+      el.classList.add('ok', 'tap'); $('#fb').innerHTML = '';
+      if (++got === need) reveal();
+    };
+  });
+
+  function reveal() {
+    $('#rows').querySelectorAll('.w.bad').forEach(e => e.classList.remove('bad'));
+    $('#rows').querySelectorAll('.w[data-tg]').forEach(el => {
+      const f = U.find[+el.dataset.r], info = f.info[+el.dataset.tg];
+      el.querySelector('button').disabled = true;
+      let extra = '';
+      if (T === 'change') {
+        extra = info.irr
+          ? `<div class="anat">${esc(info.base)} → <b class="irr">${esc(info.form)}</b> · 불규칙</div>`
+          : `<div class="anat">${esc(info.base)} → ${info.pre ? esc(info.pre) + ' ' : ''}${esc(info.stem)}<b>${esc(info.suf)}</b></div>`;
+      } else if (T === 'contrast') {
+        extra = `<div class="lab ${info.side}">${esc(info.label)}</div>`;
+      } else {
+        extra = `<div class="lab c">${esc(info.label)}</div>`;
+        const nb = el.parentNode.children[[...el.parentNode.children].indexOf(el) + (info.prev ? -1 : 1)];
+        if (nb) nb.classList.add('nb');
+      }
+      el.insertAdjacentHTML('beforeend', extra);
+    });
+    $('#card').classList.add('correct');
+    $('#after').innerHTML = ruleHtml(U) + `<div class="btns"><button class="btn main" id="next">새 문장에 적용해 보기 ›</button></div>`;
+    $('#next').onclick = () => go(1);
+  }
+}
+
+/* ② 적용 — 새 문장 두 개. 변화형은 원형 보고 쓰기, 대비형은 뜻 보고 고르기, 자리형은 자리 짚기 */
+function renderApply() {
+  const U = unit(), T = type(), A = U.apply[st.k];
+  const tk = tokens(A.en), target = tk.find(x => x.target !== undefined).t;
+  let line = '', below = '';
+  if (T === 'change') {
+    line = tk.map(x => x.target !== undefined
+      ? `<input class="blank" id="inp" autocomplete="off" autocapitalize="off" spellcheck="false"><span class="cue">${esc(A.base)}</span>`
+      : (x.p ? `<span class="punct">${esc(x.t)}</span>` : `<span>${esc(x.t)}</span>`)).join(' ');
+    below = `<div class="btns"><button class="btn ghost" id="show">정답 보기</button><button class="btn main" id="chk">확인</button></div>`;
+  } else if (T === 'contrast') {
+    line = tk.map(x => x.target !== undefined ? `<span class="slot" id="slot">&nbsp;</span>`
+      : (x.p ? `<span class="punct">${esc(x.t)}</span>` : `<span>${esc(x.t)}</span>`)).join(' ');
+    const opts = [...A.opts].sort(() => Math.random() - .5);
+    below = `<div class="opts" id="opts">${opts.map(o => `<button class="opt" data-o="${esc(o)}">${esc(o)}</button>`).join('')}</div>`;
+  } else {
+    const rest = tk.filter(x => x.target === undefined);
+    const ti = tk.findIndex(x => x.target !== undefined);
+    let html = '', gi = 0;
+    rest.forEach((x, i) => {
+      if (!x.p) html += `<button class="gap" data-g="${gi}" aria-label="여기"></button>`;
+      html += x.p ? `<span class="punct">${esc(x.t)}</span>` : `<span>${esc(x.t)}</span>`;
+      if (!x.p) gi++;
+    });
+    line = html;
+    A._gap = tk.slice(0, ti).filter(x => !x.p).length;
+  }
+  $('#stage').innerHTML = `<div class="chat-card" id="card"><div class="chat-tag">② 적용 ${st.k + 1}/${U.apply.length}</div>
+    <div class="ask">${APPLY_ASK[T]}</div>
+    <div class="kr big">${krHtml(A.kr)}</div>
+    ${T === 'position' ? `<div class="put">넣을 말<b>${esc(target)}</b></div>` : ''}
+    <div class="line" id="line" style="gap:8px 6px;align-items:center;margin-top:8px">${line}</div>
+    <div id="fb"></div>${below}<div id="after"></div>
+    <div class="src">유닛 ${A.src || U.id}</div></div>`;
+
+  const done = () => {
+    $('#card').classList.add('correct');
+    const last = st.k === U.apply.length - 1;
+    $('#after').innerHTML = `<div class="btns"><button class="btn main" id="next">${last ? '전체 문장 배열하기 ›' : '다음 문장 ›'}</button></div>`;
+    $('#next').onclick = () => { if (last) go(2); else { st.k++; render(); } };
+  };
+
+  if (T === 'change') {
+    const inp = $('#inp');
+    inp.style.width = Math.max(5, target.length + 2) + 'ch';
+    const ok = () => { inp.value = target; inp.classList.add('ok'); inp.disabled = true; $('.btns').remove(); $('#fb').innerHTML = `<div class="msg good">${esc(A.base)} → ${esc(target)}</div>`; done(); };
+    inp.oninput = () => { if (norm(inp.value) === norm(target)) ok(); };
+    inp.onkeydown = e => { if (e.key === 'Enter') $('#chk').click(); };
+    $('#chk').onclick = () => {
+      if (!inp.value.trim()) return;
+      if (norm(inp.value) === norm(target)) return ok();
+      $('#line').classList.remove('shake'); void $('#line').offsetWidth; $('#line').classList.add('shake');
+      $('#fb').innerHTML = `<div class="msg">끝 모양을 다시 볼까요? ${esc(U.desc)}</div>`;
+    };
+    $('#show').onclick = ok;
+    setTimeout(() => inp.focus(), 50);
+  } else if (T === 'contrast') {
+    $('#opts').querySelectorAll('.opt').forEach(b => b.onclick = () => {
+      const o = b.dataset.o;
+      if (o === target) {
+        b.classList.add('ok'); $('#slot').textContent = target; $('#slot').classList.add('ok');
+        $('#opts').querySelectorAll('.opt').forEach(x => x.disabled = true);
+        $('#fb').innerHTML = ''; done();
+      } else {
+        b.classList.add('bad');
+        const why = (A.why && A.why[o]) || (U.why && U.why[o]) || '뜻을 다시 볼까요?';
+        $('#fb').innerHTML = `<div class="msg">${esc(why)}</div>`;
+      }
+    });
+  } else {
+    $('#line').querySelectorAll('.gap').forEach(g => g.onclick = () => {
+      if (+g.dataset.g === A._gap) {
+        g.outerHTML = `<span class="ins">${esc(target)}</span>`;
+        $('#line').querySelectorAll('.gap').forEach(x => x.remove());
+        $('#fb').innerHTML = ''; done();
+      } else {
+        g.classList.add('bad');
+        $('#line').classList.remove('shake'); void $('#line').offsetWidth; $('#line').classList.add('shake');
+        $('#fb').innerHTML = `<div class="msg">${esc(U.desc)}</div>`;
+      }
+    });
+  }
+}
+
+/* ③ 전체 문장 배열 — 세 유형 공통 */
+function renderArrange() {
+  const U = unit(), R = U.arrange;
+  const tk = tokens(R.en);
+  const words = tk.filter(x => !x.p).map(x => x.t);
+  const punct = tk.filter(x => x.p).map(x => x.t).join('');
+  const shown = w => w === 'I' || w.startsWith("I'") ? w : w.toLowerCase();
+  let order = words.map((_, i) => i);
+  for (let n = 0; n < 20; n++) { order.sort(() => Math.random() - .5); if (order.some((v, i) => v !== i)) break; }
+  const placed = [];
+  $('#stage').innerHTML = `<div class="chat-card" id="card"><div class="chat-tag">③ 전체 문장</div>
+    <div class="kr big">${krHtml(R.kr)}</div>
+    <div class="fill" id="fill"></div>
+    <div class="bank" id="bank">${order.map(i => `<button class="tile" data-i="${i}">${esc(shown(words[i]))}</button>`).join('')}</div>
+    <div id="fb"></div>
+    <div class="btns" id="bb"><button class="btn ghost" id="show">정답 보기</button></div><div id="after"></div>
+    <div class="src">유닛 ${U.id}</div></div>`;
+  const draw = () => {
+    $('#fill').innerHTML = placed.map((i, k) => `<span class="fw" data-k="${k}">${esc(shown(words[i]))}</span>`).join('')
+      + (placed.length === words.length ? `<span class="punct">${esc(punct)}</span>` : '');
+    $('#bank').querySelectorAll('.tile').forEach(t => t.classList.toggle('used', placed.includes(+t.dataset.i)));
+    $('#fill').querySelectorAll('.fw').forEach(f => f.onclick = () => { if (fin) return; placed.splice(+f.dataset.k, 1); draw(); });
+  };
+  let fin = false;
+  const finish = () => {
+    fin = true; $('#fill').classList.add('ok'); $('#card').classList.add('correct'); $('#bb').remove(); $('#fb').innerHTML = '';
+    $('#after').innerHTML = `<div class="btns"><button class="btn main" id="next">정리 보기 ›</button></div>`;
+    $('#next').onclick = () => go(3);
+  };
+  $('#bank').querySelectorAll('.tile').forEach(t => t.onclick = () => {
+    if (fin) return;
+    placed.push(+t.dataset.i); draw();
+    if (placed.length < words.length) return;
+    const ok = placed.map(i => norm(words[i])).join(' ') === words.map(norm).join(' ');
+    if (ok) return finish();
+    $('#fill').classList.remove('shake'); void $('#fill').offsetWidth; $('#fill').classList.add('shake');
+    $('#fb').innerHTML = `<div class="msg">순서를 다시 볼까요? 낱말을 누르면 뺄 수 있어요.</div>`;
+  });
+  $('#show').onclick = () => { placed.length = 0; words.forEach((_, i) => placed.push(i)); draw(); finish(); };
+  draw();
+}
+
+function renderDone() {
+  const U = unit(), units = TYPES[st.t].units, last = st.u === units.length - 1;
+  $('#stage').innerHTML = `<div class="chat-card correct"><div class="chat-tag">정리</div>
+    <div class="ask">이 유닛에서 익힌 것</div>${ruleHtml(U)}
+    <div class="btns"><button class="btn ghost" id="again">다시</button><button class="btn main" id="next">${last ? '다른 유형 보기 ›' : '다음 유닛 ›'}</button></div></div>`;
+  $('#again').onclick = () => go(0);
+  $('#next').onclick = () => {
+    if (last) { st = { t:(st.t + 1) % TYPES.length, u:0, step:0, k:0 }; } else { st.u++; st.step = 0; st.k = 0; }
+    save(); render(); window.scrollTo({ top:0, behavior:'smooth' });
+  };
+}
+
+render();
+</script>
+</body>
+</html>
