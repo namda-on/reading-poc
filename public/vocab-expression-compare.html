@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>비교로 배우기</title>
+<style>
+  :root { --bg:#a9ccf2; --ink:#2f3e52; --green:#2e9e57; }
+  * { box-sizing:border-box; }
+  html, body { margin:0; }
+  body { font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+    background:var(--bg); color:var(--ink); display:flex; justify-content:center; }
+  .app { width:100%; max-width:460px; min-height:100vh; padding:14px 16px 40px; background:linear-gradient(#aacdf3,#bfe0ef); }
+  h1 { font-size:17px; margin:2px 2px 10px; color:#fff; text-shadow:0 1px 2px rgba(30,60,110,.25); }
+
+  .guide { background:#fff; border-radius:18px; padding:4px 14px 12px; box-shadow:0 4px 12px rgba(30,60,110,.1); margin-bottom:14px; }
+  .guide summary { cursor:pointer; font-weight:800; font-size:14px; padding:10px 0 6px; color:#3a6bb0; list-style:none; }
+  .guide summary::-webkit-details-marker { display:none; }
+  .guide summary::after { content:' ▾'; color:#9aa8bc; }
+  .guide[open] summary::after { content:' ▴'; }
+  .g-flow { font-size:15px; font-weight:800; color:#22794a; padding:2px 0 8px; }
+  .g-p { font-size:12.5px; color:#5d6f88; line-height:1.6; margin:0 0 8px; }
+  .g-p a { color:#3a6bb0; }
+  .g-t { width:100%; border-collapse:collapse; font-size:12.5px; margin:2px 0 10px; }
+  .g-t th { text-align:left; color:#8a98ad; font-weight:800; padding:4px 4px; border-bottom:1px solid #eef2f8; }
+  .g-t td { padding:6px 4px; border-bottom:1px solid #f2f5fa; vertical-align:top; line-height:1.45; }
+  .g-t td:first-child { font-weight:800; white-space:nowrap; }
+  .o { color:#1f7a49; font-weight:700; } .x { color:#b0573f; text-decoration:line-through; text-decoration-thickness:1.5px; }
+
+  .tabs { display:flex; gap:6px; margin-bottom:8px; }
+  .tab { flex:1; border:none; border-radius:12px; padding:10px 0; font-size:13.5px; font-weight:800; cursor:pointer;
+    background:rgba(255,255,255,.55); color:#4d6585; }
+  .tab.on { background:#fff; color:#2f3e52; box-shadow:0 2px 6px rgba(30,60,110,.15); }
+  .units { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:14px; }
+  .unit { border:1px solid rgba(255,255,255,.8); background:rgba(255,255,255,.35); color:#35506f; border-radius:20px;
+    padding:6px 12px; font-size:13px; font-weight:700; cursor:pointer; }
+  .unit.on { background:#4b83d6; border-color:#4b83d6; color:#fff; }
+  .unit.rand { border-style:dashed; }
+  .steps { display:flex; gap:6px; margin:0 0 18px; }
+  .step { flex:1; text-align:center; font-size:12px; font-weight:800; padding:6px 0; border-radius:10px;
+    background:rgba(255,255,255,.4); color:#6f88a8; }
+  .step.on { background:#fff; color:#3a6bb0; } .step.done { background:rgba(255,255,255,.75); color:#2e9e57; }
+
+  .chat-card { position:relative; background:linear-gradient(#e9f1fb 0,#f4f8fd 48px,#ffffff 48px,#ffffff 100%);
+    border-radius:22px; box-shadow:0 6px 18px rgba(30,60,110,.13); padding:24px 18px 18px; }
+  .chat-card.correct { background:linear-gradient(#dff3e4 0,#eaf8ee 48px,#fbfffc 48px,#fbfffc 100%); }
+  .chat-tag { position:absolute; top:-13px; left:16px; background:#cfe0f5; color:#3a6bb0; font-size:12px; font-weight:800;
+    border-radius:11px 11px 11px 3px; padding:3px 11px; }
+  .chat-card.correct .chat-tag { background:#dff3e4; color:#22794a; }
+  .ask { font-size:14px; font-weight:700; color:#5d6f88; margin-bottom:12px; }
+  .tgt { color:var(--green); font-weight:800; }
+  .row { padding:12px 0; } .row + .row { border-top:1px dashed #e2e9f3; }
+  .kr { font-size:14px; color:#7d8ea6; font-weight:600; margin-bottom:8px; line-height:1.5; }
+  .kr.big { font-size:18px; color:#33465c; }
+  .line { display:flex; flex-wrap:wrap; align-items:center; gap:8px 4px; font-size:17px; font-weight:700; line-height:1.5; }
+  .line.shake, .opts.shake { animation:shake .34s ease; }
+  @keyframes shake { 22%{transform:translateX(-5px);} 55%{transform:translateX(5px);} 82%{transform:translateX(-2px);} }
+  .nudge { animation:nudge .26s ease; }
+  @keyframes nudge { 30%{transform:translateX(-4px);} 70%{transform:translateX(3px);} }
+
+  /* ① 짚기 — 흰 키 */
+  .w > button, .w > span.k { font:inherit; color:inherit; padding:3px 7px; border:1px solid #dbe6f5; background:#fff;
+    border-radius:10px; box-shadow:0 2px 0 #e7eef8; cursor:pointer; }
+  .w > button:active { transform:translateY(2px); box-shadow:none; }
+  .w.p > span.k { border-color:transparent; background:none; box-shadow:none; padding:3px 0; margin-left:-4px; cursor:default; }
+  .w.ok > button { background:#dcf6e6; color:#1f7a49; border-color:#a9dec2; box-shadow:0 2px 0 #c2ebd4; }
+  .w.bad > button { color:#aab7c8; border-color:#e6d3bd; box-shadow:0 2px 0 #f0e4d3; }
+
+  /* ② 고르기 — 두 문장 카드 */
+  .opts { display:flex; flex-direction:column; gap:10px; margin-top:6px; }
+  .opt { text-align:left; border:1.5px solid #cdddf3; background:#fff; border-radius:14px; padding:13px 14px; font-size:16.5px;
+    font-weight:700; color:#2f3e52; cursor:pointer; box-shadow:0 2px 0 #e1e9f5; line-height:1.5; font-family:inherit; }
+  .opt:active { transform:translateY(1px); }
+  .opt .mk { float:right; font-size:13px; font-weight:800; margin-left:8px; }
+  .opt.right { border-color:#7fd0a3; background:#f1fbf5; }
+  .opt.right .mk { color:#1f7a49; }
+  .opt.wrongpick { border-color:#e8b9a3; background:#fdf5f1; }
+  .opt.dim { color:#8796ab; }
+  .opt .d-o { color:#1f7a49; background:#dcf6e6; border-radius:5px; padding:0 3px; }
+  .opt .d-x { color:#b0573f; background:#fbe7df; border-radius:5px; padding:0 3px; text-decoration:line-through; text-decoration-thickness:1.5px; }
+  .why { margin-top:12px; font-size:13.5px; line-height:1.55; border-radius:12px; padding:10px 12px; background:#f4fbf6; color:#2f5a42; border:1px solid #cdebd8; animation:fadeUp .3s ease both; }
+  .why.miss { background:#fdf6ee; color:#6b4a2e; border-color:#f0dcc6; }
+  .why b { font-weight:800; }
+  @keyframes fadeUp { from{opacity:0; transform:translateY(-4px);} to{opacity:1; transform:none;} }
+
+  /* ③ 쓰기 */
+  input.blank { font:inherit; color:#1f4f8f; border:none; border-bottom:2px solid #8fb1e3; background:#f3f7fd;
+    border-radius:6px 6px 0 0; padding:2px 6px; outline:none; text-align:center; }
+  input.blank::placeholder { color:#a9b9cf; }
+  input.blank.ok { color:#1f7a49; border-bottom-color:#5cc08a; background:#e8f8ee; }
+  .punct { margin-left:-5px; }
+  .msg { margin-top:12px; font-size:13.5px; color:#6b5a2e; background:#fbf6ea; border-radius:12px; padding:9px 12px; line-height:1.5; }
+
+  .rule { margin-top:16px; border-radius:16px; background:#f4fbf6; border:1px solid #cdebd8; padding:13px 14px; animation:fadeUp .35s ease both; }
+  .rule .f { font-size:17px; font-weight:800; color:#22794a; }
+  .rule .m { font-size:13px; color:#6b7c93; margin-top:2px; }
+  .rule .d { font-size:13.5px; color:#3c5a48; margin-top:8px; line-height:1.55; }
+  .pair { font-size:14px; line-height:1.55; padding:6px 0; border-top:1px dashed #e2e9f3; }
+  .pair:first-of-type { border-top:none; }
+
+  .btns { display:flex; gap:8px; margin-top:18px; }
+  .btn { flex:1; border:none; border-radius:15px; padding:14px 8px; font-size:15px; font-weight:800; cursor:pointer; }
+  .btn.main { background:linear-gradient(#8b7cf0,#6f5bf0); color:#fff; }
+  .btn.ghost { flex:0 0 26%; background:#fff; color:#6b7c93; box-shadow:0 1px 4px rgba(30,60,110,.12); font-size:13.5px; }
+  .src { margin-top:12px; text-align:right; font-size:11px; color:#b5c1d1; }
+</style>
+</head>
+<body>
+<div class="app">
+  <h1>공통 학습 방식 제안 — 비교로 배우기</h1>
+
+  <details class="guide" open>
+    <summary>제안 요약</summary>
+    <div class="g-flow">① 짚기 → ② 두 문장 중 맞는 것 고르기 → ③ 직접 쓰기</div>
+    <p class="g-p">대비형(stop ~ing / stop to ~)에서 유용했던 순간은 <b>두 문장을 나란히 놓고 무엇이 다른지 보는 것</b>이었다. 그 순간을 패턴형·변화형·대비형·자리형 모두에 준다. 화면과 조작은 네 유형이 똑같고, 다른 것은 <b>비교 상대</b> 하나다. 비교 상대는 그 유형이 실제로 틀리는 방식 그대로다.</p>
+    <table class="g-t">
+      <tr><th>유형</th><th>비교 상대 (흔히 틀리는 문장)</th></tr>
+      <tr><td>패턴형</td><td>굳은 표현의 낱말 하나를 헷갈리는 짝으로<br><span class="o">get up</span> · <span class="x">get on</span> / <span class="o">If she were</span> · <span class="x">If she was</span> / <span class="o">pay attention</span> · <span class="x">give attention</span></td></tr>
+      <tr><td>변화형</td><td>모양을 안 바꾼 문장<br><span class="o">We talked today</span> · <span class="x">We talk today</span></td></tr>
+      <tr><td>대비형</td><td>다른 후보를 고른 문장<br><span class="o">Remember to call</span> · <span class="x">Remember calling</span></td></tr>
+      <tr><td>자리형</td><td>자리를 옮긴 문장<br><span class="o">Can I try it on?</span> · <span class="x">Can I try on it?</span></td></tr>
+    </table>
+    <p class="g-p"><b>저작 없이 데이터에서 만든다</b> — 비교 상대는 <code>scripts/build_compare_items.py</code>가 분류 결과에서 자동으로 만든다. 패턴형 683/793 · 변화형 41/42 · 대비형 46/47 · 자리형 9/10, 합계 <b>779/892</b>(87%). 구조형 8개와 해당없음 1개는 뺐다.</p>
+    <p class="g-p"><b>품질</b> — 무작위 59개를 읽어 보니 52개는 비교 상대로 잘 작동했고, 5개는 비교 상대가 사실상 맞는 영어거나 엉뚱했고(speak up against, Can you finish…, Tell me this it happened), 2개는 교과서상 틀림이지만 회화에선 쓰인다(It usually is easy). 탭 아래 <b>다른 유닛 ↻</b>로 아무 유닛이나 풀어 보며 확인할 수 있다.</p>
+    <p class="g-p">기존 문제 풀이는 그대로 있다 → <a href="vocab-expression-types.html">유형별 학습 방식</a></p>
+  </details>
+
+  <div class="tabs" id="tabs"></div>
+  <div class="units" id="units"></div>
+  <div class="steps" id="steps"></div>
+  <div id="stage"></div>
+</div>
+
+<script>
+/* 문항은 scripts/build_compare_items.py 가 만든 vocab-expression-compare.gen.json 이다 — 이 페이지는 문항을 만들지 않는다.
+   유형 탭의 대표 유닛 셋은 유형별 페이지와 같은 유닛이고, '다른 유닛 ↻' 는 같은 유형의 아무 유닛이나 연다. */
+const TYPES = ['패턴형', '변화형', '대비형', '자리형'];
+const FEATURED = { '패턴형':['10000','10033','10444'], '변화형':['10065','10299','10317'], '대비형':['10369','10313','10059'], '자리형':['10041','10043','10132'] };
+const STEPS = ['① 짚기', '② 고르기', '③ 쓰기'];
+
+let D = null, byId = {};
+let st = { t:0, id:'10000', step:0, k:0, score:[] };
+try { const s = JSON.parse(localStorage.getItem('vecompare') || 'null'); if (s && TYPES[s.t]) st = { t:s.t, id:s.id, step:0, k:0, score:[] }; } catch (e) {}
+function save() { try { localStorage.setItem('vecompare', JSON.stringify({ t:st.t, id:st.id })); } catch (e) {} }
+
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const krHtml = s => esc(s).replace(/\[([^\]]+)\]/g, '<span class="tgt">$1</span>');
+const plain = s => s.replace(/[[\]]/g, '');
+function norm(s) {
+  return s.toLowerCase().replace(/[’]/g, "'")
+    .replace(/\bwon't\b/g, 'will not').replace(/\bcan't\b/g, 'can not').replace(/n't\b/g, ' not')
+    .replace(/'re\b/g, ' are').replace(/'m\b/g, ' am').replace(/'ll\b/g, ' will').replace(/'ve\b/g, ' have')
+    .replace(/'d\b/g, ' would').replace(/'s\b/g, ' is').replace(/[^a-z ]/g, ' ').replace(/\s+/g, ' ').trim();
+}
+const unit = () => byId[st.id];
+
+/* 낱말 단위 차이 — 고른 뒤 두 문장에서 다른 부분만 칠한다 */
+function diffHtml(a, b, cls) {
+  const A = a.split(' '), B = b.split(' '), n = A.length, m = B.length;
+  const L = Array.from({ length:n + 1 }, () => Array(m + 1).fill(0));
+  const k = w => w.toLowerCase().replace(/[^a-z']/g, '');
+  for (let i = n - 1; i >= 0; i--) for (let j = m - 1; j >= 0; j--)
+    L[i][j] = k(A[i]) === k(B[j]) ? L[i + 1][j + 1] + 1 : Math.max(L[i + 1][j], L[i][j + 1]);
+  const out = []; let i = 0, j = 0;
+  while (i < n) {
+    if (j < m && k(A[i]) === k(B[j])) { out.push(esc(A[i])); i++; j++; }
+    else if (j < m && L[i][j + 1] >= L[i + 1][j]) { j++; }
+    else { out.push(`<span class="${cls}">${esc(A[i])}</span>`); i++; }
+  }
+  return out.join(' ');
+}
+
+function header() {
+  $('#tabs').innerHTML = TYPES.map((t, i) => `<button class="tab${i === st.t ? ' on' : ''}" data-t="${i}">${t}</button>`).join('');
+  const feat = FEATURED[TYPES[st.t]].filter(id => byId[id]);
+  const chips = feat.map(id => `<button class="unit${id === st.id ? ' on' : ''}" data-id="${id}">${esc(byId[id].form.length > 22 ? byId[id].form.slice(0, 21) + '…' : byId[id].form)}</button>`);
+  if (!feat.includes(st.id)) chips.push(`<button class="unit on" data-id="${st.id}">${esc(unit().form.slice(0, 24))}</button>`);
+  chips.push(`<button class="unit rand" id="rand">다른 유닛 ↻</button>`);
+  $('#units').innerHTML = chips.join('');
+  $('#steps').innerHTML = STEPS.map((n, i) => `<div class="step${i === st.step ? ' on' : (i < st.step ? ' done' : '')}">${n}</div>`).join('');
+  $$('.tab').forEach(b => b.onclick = () => { const t = +b.dataset.t; openUnit(t, FEATURED[TYPES[t]].find(id => byId[id])); });
+  $$('.unit[data-id]').forEach(b => b.onclick = () => openUnit(st.t, b.dataset.id));
+  $('#rand').onclick = () => { const pool = D.filter(x => x.type === TYPES[st.t] && x.id !== st.id); openUnit(st.t, pool[Math.floor(Math.random() * pool.length)].id); };
+}
+function openUnit(t, id) { st = { t, id, step:0, k:0, score:[] }; save(); render(); window.scrollTo({ top:0, behavior:'smooth' }); }
+function render() { header(); [renderFind, renderCompare, renderWrite, renderDone][st.step](); }
+function go(step) { st.step = step; st.k = 0; render(); window.scrollTo({ top:0, behavior:'smooth' }); }
+
+function ruleHtml(U) {
+  return `<div class="rule"><div class="f">${esc(U.form)}</div><div class="m">${esc(U.mean)}</div>${U.desc ? `<div class="d">${esc(U.desc)}</div>` : ''}</div>`;
+}
+
+/* ① 짚기 — 다섯 유형 공통: 한국어 초록에 해당하는 영어를 짚는다 */
+function renderFind() {
+  const U = unit();
+  const rows = U.find.map((f, r) => {
+    const parts = [];
+    for (const m of f.en.matchAll(/\[([^\]]+)\]([.,!?]*)|([^\s[\]]+)/g)) {
+      if (m[1] !== undefined) { parts.push(`<span class="w" data-r="${r}" data-tg="1"><button>${esc(m[1])}</button></span>`); if (m[2]) parts.push(`<span class="w p"><span class="k">${esc(m[2])}</span></span>`); continue; }
+      const w = m[3], mm = w.match(/^(.*?)([.,!?]+)$/);
+      if (mm && mm[1]) { parts.push(`<span class="w" data-r="${r}"><button>${esc(mm[1])}</button></span>`); parts.push(`<span class="w p"><span class="k">${esc(mm[2])}</span></span>`); }
+      else parts.push(mm ? `<span class="w p"><span class="k">${esc(w)}</span></span>` : `<span class="w" data-r="${r}"><button>${esc(w)}</button></span>`);
+    }
+    return `<div class="row"><div class="kr">${krHtml(f.kr)}</div><div class="line">${parts.join('')}</div></div>`;
+  }).join('');
+  $('#stage').innerHTML = `<div class="chat-card" id="card"><div class="chat-tag">① 짚기</div>
+    <div class="ask">초록 뜻에 해당하는 말을 두 문장에서 눌러 보세요</div>${rows}<div id="fb"></div><div id="after"></div>
+    <div class="src">유닛 ${U.id} · ${U.type}</div></div>`;
+  const need = $$('.w[data-tg]').length; let got = 0;
+  $$('.w[data-r]').forEach(el => el.querySelector('button').onclick = () => {
+    if (el.classList.contains('ok')) return;
+    if (!el.dataset.tg) { el.classList.add('bad'); el.closest('.line').classList.remove('nudge'); void el.offsetWidth; el.closest('.line').classList.add('nudge');
+      $('#fb').innerHTML = `<div class="msg">초록 뜻에 해당하는 말을 찾아 보세요.</div>`; return; }
+    el.classList.add('ok'); $('#fb').innerHTML = '';
+    if (++got === need) {
+      $$('.w.bad').forEach(e => e.classList.remove('bad'));
+      $('#card').classList.add('correct');
+      $('#after').innerHTML = ruleHtml(U) + `<div class="btns"><button class="btn main" id="next">맞는 문장 고르기 ›</button></div>`;
+      $('#next').onclick = () => go(1);
+    }
+  });
+}
+
+/* ② 고르기 — 맞는 문장과 흔히 틀리는 문장 중 하나. 고르면 두 문장에서 다른 부분만 칠하고 이유를 한 줄 */
+function renderCompare() {
+  const U = unit(), C = U.compare[st.k], right = plain(C.en), wrong = C.wrong;
+  const opts = Math.random() < .5 ? [right, wrong] : [wrong, right];
+  $('#stage').innerHTML = `<div class="chat-card" id="card"><div class="chat-tag">② 고르기 ${st.k + 1}/${U.compare.length}</div>
+    <div class="ask">이 뜻으로 맞는 문장을 골라 보세요</div>
+    <div class="kr big">${krHtml(C.kr)}</div>
+    <div class="opts" id="opts">${opts.map(o => `<button class="opt" data-ok="${o === right ? 1 : 0}">${esc(o)}</button>`).join('')}</div>
+    <div id="fb"></div><div id="after"></div><div class="src">유닛 ${U.id} · ${U.type} · 자동 생성</div></div>`;
+  $$('.opt').forEach(b => b.onclick = () => {
+    if ($('#card').dataset.done) return;
+    $('#card').dataset.done = '1';
+    const hit = b.dataset.ok === '1';
+    st.score.push(hit);
+    $$('.opt').forEach(o => {
+      const isRight = o.dataset.ok === '1';
+      o.innerHTML = (isRight ? diffHtml(right, wrong, 'd-o') : diffHtml(wrong, right, 'd-x')) + `<span class="mk">${isRight ? '✓ 맞는 문장' : '✗'}</span>`;
+      o.classList.add(isRight ? 'right' : (o === b ? 'wrongpick' : 'dim'));
+    });
+    if (hit) $('#card').classList.add('correct');
+    else { $('#opts').classList.remove('shake'); void $('#opts').offsetWidth; $('#opts').classList.add('shake'); }
+    $('#fb').innerHTML = `<div class="why${hit ? '' : ' miss'}">${hit ? '' : '<b>다른 쪽이 맞아요.</b> '}${esc(C.why)}</div>`;
+    const last = st.k === U.compare.length - 1;
+    $('#after').innerHTML = `<div class="btns"><button class="btn main" id="next">${last ? '직접 써 보기 ›' : '다음 문장 ›'}</button></div>`;
+    $('#next').onclick = () => { if (last) go(2); else { st.k++; render(); } };
+  });
+}
+
+/* ③ 쓰기 — 초록 자리를 직접 친다(축약형은 풀어서 비교) */
+function renderWrite() {
+  const U = unit(), W = U.write[st.k];
+  const answers = [], parts = [];
+  for (const m of W.en.matchAll(/\[([^\]]+)\]|([^\s[\]]+)/g)) {
+    if (m[1] !== undefined) { parts.push({ b:answers.length }); answers.push(m[1]); continue; }
+    const w = m[2], mm = w.match(/^(.*?)([.,!?]+)$/);
+    if (mm && mm[1]) { parts.push({ t:mm[1] }); parts.push({ p:mm[2] }); } else if (mm) parts.push({ p:w }); else parts.push({ t:w });
+  }
+  const line = parts.map(x => x.b !== undefined
+    ? `<input class="blank" data-b="${x.b}" autocomplete="off" autocapitalize="off" spellcheck="false" style="width:${Math.max(4, answers[x.b].length + 2)}ch">`
+    : x.p ? `<span class="punct">${esc(x.p)}</span>` : `<span>${esc(x.t)}</span>`).join(' ');
+  $('#stage').innerHTML = `<div class="chat-card" id="card"><div class="chat-tag">③ 쓰기 ${st.k + 1}/${U.write.length}</div>
+    <div class="ask">초록 자리를 직접 써 보세요</div>
+    <div class="kr big">${krHtml(W.kr)}</div><div class="line" id="line">${line}</div>
+    <div id="fb"></div><div class="btns" id="bb"><button class="btn ghost" id="hint">첫 글자</button><button class="btn ghost" id="show">정답 보기</button><button class="btn main" id="chk">확인</button></div>
+    <div id="after"></div><div class="src">유닛 ${U.id} · ${U.type}</div></div>`;
+  const inps = $$('input.blank'), isOk = i => norm(i.value) === norm(answers[+i.dataset.b]);
+  let fin = false;
+  const finish = () => {
+    if (fin) return; fin = true;
+    inps.forEach(i => { i.value = answers[+i.dataset.b]; i.classList.add('ok'); i.disabled = true; });
+    $('#card').classList.add('correct'); $('#bb').remove(); $('#fb').innerHTML = '';
+    const last = st.k === U.write.length - 1;
+    $('#after').innerHTML = `<div class="btns"><button class="btn main" id="next">${last ? '정리 보기 ›' : '다음 문장 ›'}</button></div>`;
+    $('#next').onclick = () => { if (last) go(3); else { st.k++; render(); } };
+  };
+  inps.forEach(i => { i.oninput = () => { i.classList.toggle('ok', isOk(i)); if (inps.every(isOk)) finish(); }; i.onkeydown = e => { if (e.key === 'Enter' && $('#chk')) $('#chk').click(); }; });
+  $('#chk').onclick = () => {
+    if (inps.every(isOk)) return finish();
+    $('#line').classList.remove('shake'); void $('#line').offsetWidth; $('#line').classList.add('shake');
+    $('#fb').innerHTML = `<div class="msg">② 에서 고른 문장을 떠올려 보세요.</div>`;
+  };
+  $('#hint').onclick = () => inps.forEach(i => { if (!isOk(i)) { i.value = ''; i.placeholder = answers[+i.dataset.b].replace(/[A-Za-z]+/g, w => w[0] + '·'.repeat(w.length - 1)); } });
+  $('#show').onclick = finish;
+  setTimeout(() => inps[0] && inps[0].focus(), 50);
+}
+
+function renderDone() {
+  const U = unit(), hits = st.score.filter(Boolean).length;
+  $('#stage').innerHTML = `<div class="chat-card correct"><div class="chat-tag">정리</div>
+    <div class="ask">고르기 ${hits}/${st.score.length} · 이 유닛에서 비교한 문장</div>
+    ${U.compare.map(c => `<div class="pair"><span class="o">${diffHtml(plain(c.en), c.wrong, 'd-o')}</span><br><span class="x">${esc(c.wrong)}</span></div>`).join('')}
+    ${ruleHtml(U)}
+    <div class="btns"><button class="btn ghost" id="again">다시</button><button class="btn main" id="next">다른 유닛 ↻</button></div></div>`;
+  $('#again').onclick = () => { st.score = []; go(0); };
+  $('#next').onclick = () => $('#rand').click();
+}
+
+fetch('vocab-expression-compare.gen.json').then(r => r.json()).then(data => {
+  D = data; D.forEach(x => byId[x.id] = x);
+  if (!byId[st.id] || byId[st.id].type !== TYPES[st.t]) st.id = FEATURED[TYPES[st.t]].find(id => byId[id]);
+  render();
+}).catch(() => { $('#stage').innerHTML = `<div class="msg">문항을 불러오지 못했어요.</div>`; });
+</script>
+</body>
+</html>
