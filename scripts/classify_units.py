@@ -9,7 +9,8 @@
   - 패턴형: 대괄호가 모든 문장에서 같다(굴절·주어·축약만 다름)          → 결정 없음, 덩어리를 기억
   - 변화형: 바뀌는 낱말이 문장마다 다르지만 같은 꼴(-ed·-ing·-est·-er)로 바뀐다 → 규칙을 적용
   - 대비형: 바뀌는 자리에 몇 개 안 되는 선택지가 번갈아 온다(-ing/to, at/on/in) → 뜻으로 고른다
-  - 자리형: 번갈아 오는 것이 빈도·정도 부사다(always/usually/never)       → 자리를 정한다
+  - 자리형: 번갈아 오는 것이 빈도·정도 부사다(always/usually/never)       → 낱말 하나의 자리를 정한다
+  - 구조형: 고정된 말이 없고 틀이 자리(동사+사람+물건)의 순서뿐이다        → 덩어리들의 순서를 정한다
 판정에는 S1의 주어 변형(문장1-2·1-3)을 쓰지 않는다 — 주어만 바꾼 같은 문장이라 무엇이 반복되는지를 부풀린다.
 """
 import csv, json, os, re, sys
@@ -22,11 +23,7 @@ OUT = Path(__file__).resolve().parent.parent / "public" / "vocab-expression-unit
 
 # 규칙이 데이터와 어긋나는 유닛 — 사람이 정한 값과 그 이유. 규칙을 고치기 전까지 여기서 덮는다.
 OVERRIDES = {
-    "10084": ("해당없음", "4형식 어순(동사+사람+물건) — 바뀌는 것이 동사 자체라 고정부도 선택지도 없다"),
-    "10395": ("해당없음", "관계부사 생략 — 학습 대상이 '빠진 낱말'이라 짚을 것이 없다"),
-    "10405": ("해당없음", "목적격 관계대명사 생략 — 학습 대상이 '빠진 낱말'이라 짚을 것이 없다"),
     "10061": ("해당없음", "시각 읽기(four fifteen) — 틀도 규칙도 없는 숫자 읽기"),
-    "10107": ("해당없음", "keep/make/find + 목적어 + 형용사 어순 — 괄호가 형용사를 덮지 않아 자리를 짚을 수 없다"),
     "10028": ("자리형", "동사 + 부사(well · fast · carefully) — 부사가 열린 목록이라 규칙의 부사 목록에 없다"),
     "10030": ("자리형", "동사 + 부사(early · late · hard) — 부사가 열린 목록이라 규칙의 부사 목록에 없다"),
     "10132": ("자리형", "대명사는 동사와 부사 사이(pick it up) — 부사가 달라지는 건 구동사가 달라서다"),
@@ -143,6 +140,9 @@ def form_classes(toks):
     if any(a == "to" and b == "W" for a, b in zip(sh, sh[1:])): out.add("to-V")
     return out
 
+# 카드 초록이 고정된 말 대신 자리(역할)의 순서로 적혀 있는가 — 구조형의 표식
+ROLE_HINT = re.compile(r"목적어|사람|\+ 주어 \+ 동사")
+
 # 카드 초록(형태)에 형태 변화가 적혀 있는가 — 시제 때문에 우연히 생긴 -ed/-ing 를 학습 대상으로 착각하지 않게 한다
 FORM_HINT = re.compile(r"-ing|_ing|-ed|_ed|_est|_er|er than|과거|분사|복수|단수|서수|원형|[_ ]['’]s\b")
 
@@ -151,6 +151,9 @@ def classify(indep, form):
     1 대괄호가 모두 같은 덩어리                    → 패턴형
       같은 낱말이 시제·생략만 다름                   → 패턴형 (went out / going out)
     2 서로 다른 꼴이 번갈아 온다                     → 대비형 (-ing / to, -ing / -ed)
+    2' 고정된 말이 없고(절반을 넘게 공유되는 낱말이 없다) 카드 초록이 자리의 순서로 적혀 있다
+                                                  → 구조형 (see + 목적어 + ~ing, 동사 + 사람 + 물건, 명사 + 주어 + 동사)
+       단, 기능어가 번갈아 오는 선택이 있으면 그쪽(대비형)이 먼저다 — for / to 를 고르는 유닛
     3 모두 같은 꼴, 낱말은 제각각                    → 변화형 (-ed, -est, -er, -ing, 's, 서수)
     4 문장마다 빈도·정도 부사가 하나씩, 종류가 둘 이상 → 자리형 (always / usually / never)
       기능어가 번갈아 온다                           → 대비형 (at / on / in, can / could, some / any)
@@ -173,22 +176,16 @@ def classify(indep, form):
         return "패턴형", "같은 낱말이 활용·생략만 다름: " + " ".join(o_mode), " ".join(o_mode), {"같은 덩어리": o_cnt}, ["같은 덩어리" if o == o_mode else None for o in opens]
 
     fc = [form_classes(t) for t in toks]
-    single = [next(iter(f)) for f in fc if len(f) == 1]
-    only = Counter(single)
-    if hint and len(only) >= 2 and len(single) / n >= 0.8 and max(only.values()) / len(single) <= 0.8:
-        return "대비형", "번갈아 오는 꼴: " + " / ".join(sorted(only)), " / ".join(sorted(only)), dict(only), [next(iter(f)) if len(f) == 1 else None for f in fc]
-
     def choice(picks):
         """번갈아 오는 선택지인가 — 둘 이상이 쓰이고, 한쪽이 80%를 넘게 독차지하지 않는다
         (If I were ~, I would ~ 에 could 가 한 번 섞인 것은 선택지가 아니다)"""
         c = Counter(picks)
         return len(c) >= 2 and len(picks) / n >= 0.7 and max(c.values()) / len(picks) <= 0.8 and max(c.values()) >= 2
 
-    used = Counter(x for f in fc for x in f)
-    top, cnt = (used.most_common(1)[0] if used else (None, 0))
-    form_common = hint and top and cnt / n >= 0.6 and len(set(opens)) >= 2
-    if form_common:
-        return "변화형", "바뀌는 낱말은 제각각, 꼴은 같음: " + top, top, {top: len({o for o, f in zip(opens, fc) if top in f})}, [top if top in f else None for f in fc]
+    single = [next(iter(f)) for f in fc if len(f) == 1]
+    only = Counter(single)
+    if hint and len(only) >= 2 and len(single) / n >= 0.8 and max(only.values()) / len(single) <= 0.8:
+        return "대비형", "번갈아 오는 꼴: " + " / ".join(sorted(only)), " / ".join(sorted(only)), dict(only), [next(iter(f)) if len(f) == 1 else None for f in fc]
 
     lits = [set(w for w, c in t if c in ("FUNC", "MODAL") and w not in ARTICLE) for t in toks]
     every = set.intersection(*lits)
@@ -196,6 +193,18 @@ def classify(indep, form):
     alt = {x for x in set().union(*lits) - every if seen[x] / n < 0.8}
     # 한 문장에 둘이 겹치면(some more time) 유닛 전체에서 더 자주 나온 쪽을 그 문장의 선택으로 본다
     picks = [max(l & alt, key=lambda x: (seen[x], x)) for l in lits if l & alt]
+
+    tally = Counter(x for k in keys for x in set(k) if x not in ("BE", "DO", "HAVE", "POSS") and x not in ARTICLE)
+    anchored = any(v / n > 0.5 for v in tally.values())
+    if ROLE_HINT.search(form) and not anchored and not choice(picks):
+        return "구조형", "고정된 말 없이 자리의 순서만 있음: " + form.strip(), form.strip(), {"구조": n}, ["구조"] * n
+
+    used = Counter(x for f in fc for x in f)
+    top, cnt = (used.most_common(1)[0] if used else (None, 0))
+    form_common = hint and top and cnt / n >= 0.6 and len(set(opens)) >= 2
+    if form_common:
+        return "변화형", "바뀌는 낱말은 제각각, 꼴은 같음: " + top, top, {top: len({o for o, f in zip(opens, fc) if top in f})}, [top if top in f else None for f in fc]
+
     advs = [l & POS_ADV for l in lits]
     one_adv = [next(iter(a)) for a in advs if len(a) == 1]
     if len(set(one_adv)) >= 2 and len(one_adv) / n >= 0.8:
@@ -239,6 +248,7 @@ def plan(typ, labels, opens):
             변화형: 같은 꼴이면서 낱말이 서로 다른 2개 — 낱말은 달라도 같은 변화
             대비형: 가장 많이 쓰인 두 쪽에서 하나씩 — 무엇이 다른지
             자리형: 부사가 서로 다른 2개 — 부사는 달라도 같은 자리
+            구조형: 앞의 2개 — 낱말은 달라도 덩어리의 순서가 같다
     ② 적용  패턴형: S1(학습 문장)에 패턴 쓰기 / 그 밖: ① 에 안 쓴 문장 2개(대비형은 두 쪽에서 하나씩)
     ③ 배열  패턴형은 S1(쓴 문장을 통째로 세운다), 그 밖은 ①② 에 안 쓴 문장 — 없으면 S1
     고를 수 없으면 None — 그 유닛은 문장을 더 저작해야 문제가 된다"""
@@ -246,6 +256,9 @@ def plan(typ, labels, opens):
     if typ == "패턴형":
         rest = [i for i in idx if i != 0]
         return dict(find=rest[:2], apply=[0], arrange=0) if len(rest) >= 2 else None
+    if typ == "구조형":
+        if len(idx) < 4: return None
+        return dict(find=idx[:2], apply=idx[2:4], arrange=spare(labels, idx[:4]))
     if typ in ("변화형", "자리형"):
         find, seen = [], set()
         for i in idx:

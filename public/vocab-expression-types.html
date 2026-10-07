@@ -21,7 +21,9 @@
   .guide summary::after { content:' ▾'; color:#9aa8bc; }
   .guide[open] summary::after { content:' ▴'; }
   .g-row { display:grid; grid-template-columns:62px 1fr; gap:2px 10px; padding:9px 0; border-top:1px solid #eef2f8; }
-  .g-row b.k { grid-row:span 3; font-size:14px; color:#2f3e52; padding-top:1px; }
+  .g-q { font-size:13px; color:#3a6bb0; font-weight:700; padding:2px 0 8px; }
+  .g-wr { font-size:12.5px; color:#a5641a; }
+  .g-row b.k { grid-row:span 4; font-size:14px; color:#2f3e52; padding-top:1px; }
   .g-core { font-size:13.5px; font-weight:700; color:#2f3e52; }
   .g-eg { font-size:12.5px; color:#8a98ad; }
   .g-how { font-size:13px; color:#22794a; font-weight:700; }
@@ -30,7 +32,7 @@
 
   /* 유형·유닛 선택 */
   .tabs { display:flex; gap:6px; margin-bottom:8px; }
-  .tab { flex:1; border:none; border-radius:12px; padding:10px 4px; font-size:14px; font-weight:800; cursor:pointer;
+  .tab { flex:1; border:none; border-radius:12px; padding:10px 0; font-size:12.5px; font-weight:800; cursor:pointer;
     background:rgba(255,255,255,.55); color:#4d6585; }
   .tab.on { background:#fff; color:#2f3e52; box-shadow:0 2px 6px rgba(30,60,110,.15); }
   .units { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:14px; }
@@ -79,6 +81,14 @@
   .lab.a { background:#e3edfb; color:#3a6bb0; }
   .lab.b { background:#ece8fd; color:#5b47c9; }
   .lab.c { background:#fdf0e1; color:#a5641a; }
+  .lab.s { background:#e6f4f6; color:#1f6f7a; }
+  .w { position:relative; }
+  .ord { position:absolute; top:-9px; right:-6px; min-width:17px; height:17px; border-radius:9px; background:#1f6f7a; color:#fff;
+    font-size:11px; font-weight:800; display:flex; align-items:center; justify-content:center; padding:0 4px; animation:fadeUp .2s ease both; }
+  .ordline { margin-top:8px; font-size:13px; color:#3c5a48; font-weight:700; animation:fadeUp .35s ease both; }
+  .ordline.en { color:#1f6f7a; margin-top:3px; }
+  .ol-h { display:inline-block; width:66px; font-size:11.5px; font-weight:800; color:#8a98ad; }
+  .tile.chunk { padding:11px 13px; }
   @keyframes fadeUp { from{opacity:0; transform:translateY(-4px);} to{opacity:1; transform:none;} }
   .nudge { animation:nudge .26s ease; }
   @keyframes nudge { 30%{transform:translateX(-4px);} 70%{transform:translateX(3px);} }
@@ -148,6 +158,7 @@
   .ty { font-size:11px; font-weight:800; border-radius:8px; padding:2px 7px; white-space:nowrap; }
   .ty.p { background:#e3edfb; color:#3a6bb0; } .ty.c { background:#dcf6e6; color:#1f7a49; }
   .ty.d { background:#ece8fd; color:#5b47c9; } .ty.l { background:#fdf0e1; color:#a5641a; } .ty.n { background:#eef1f5; color:#7d8ea6; }
+  .ty.s { background:#e6f4f6; color:#1f6f7a; }
   .ul-id { font-size:11px; color:#9aa8bc; }
   .ul-f { font-size:14px; font-weight:800; color:#2f3e52; }
   .ul-m { font-size:12px; color:#7d8ea6; }
@@ -172,24 +183,34 @@
 
   <details class="guide" open>
     <summary>한눈에 보기</summary>
+    <div class="g-q">낱말 뜻은 다 안다고 칠 때, 이 문장을 만들려면 <b>아직 무엇이 남아 있나?</b></div>
     <div class="g-row"><b class="k">패턴형</b>
-      <div class="g-core">모든 문장에 <u>같은 덩어리</u>가 반복 (901 중 794)</div>
-      <div class="g-eg">get up · Why don't you ~? · If I were ~, I would ~</div>
-      <div class="g-how">같은 말 짚기 → 새 문장에 그 덩어리 쓰기</div></div>
+      <div class="g-core">고정된 말 + 빈칸의 <u>틀을 통째로 꺼낸다</u></div>
+      <div class="g-eg">일어나야 해 → You should <b>get up</b> · 신뢰를 쌓기는 어려워 → <b>It's</b> hard <b>to</b> build trust</div>
+      <div class="g-wr">틀리면: 다른 표현을 쓴다 (get up 대신 stand up)</div>
+      <div class="g-how">같은 말 짚기 → 새 문장에 틀 넣어 쓰기</div></div>
     <div class="g-row"><b class="k">변화형</b>
-      <div class="g-core">낱말의 <u>모양이 바뀌는 것</u>이 핵심</div>
-      <div class="g-eg">opened · the smallest · was rejected</div>
+      <div class="g-core">아는 낱말 <u>하나의 모양</u>을 규칙대로 바꾼다</div>
+      <div class="g-eg">우리 오늘 얘기했어 → We <b>talked</b> today (talk → talk<b>ed</b>)</div>
+      <div class="g-wr">틀리면: 낱말은 맞는데 모양이 틀린다 (We talk today)</div>
       <div class="g-how">바뀐 낱말 짚기 → 원형 보고 바꿔 쓰기</div></div>
     <div class="g-row"><b class="k">대비형</b>
-      <div class="g-core">둘 중 <u>무엇을 고르나</u>가 핵심</div>
-      <div class="g-eg">stop ~ing / to ~ · exciting / excited · at / on / in</div>
+      <div class="g-core">후보 2~3개 중 <u>뜻에 맞는 것</u>을 고른다</div>
+      <div class="g-eg">커피 사려고 멈췄어 → stopped <b>to buy</b> (≠ stopped <b>buying</b> 사던 걸 그만뒀어)</div>
+      <div class="g-wr">틀리면: 문법은 맞지만 뜻이 다른 문장이 된다</div>
       <div class="g-how">다른 부분 짚기 → 뜻 보고 고르기</div></div>
     <div class="g-row"><b class="k">자리형</b>
-      <div class="g-core">낱말은 바꿔 끼우고 <u>들어갈 자리</u>가 핵심</div>
-      <div class="g-eg">always / usually / never</div>
+      <div class="g-core">낱말 <u>하나의 자리</u>를 정한다</div>
+      <div class="g-eg">내 피부는 항상 건조해 → My skin is <b>always</b> dry</div>
+      <div class="g-wr">틀리면: 한 낱말만 엉뚱한 곳에 있다 (always is)</div>
       <div class="g-how">자리 짚기 → 새 문장에 넣기</div></div>
-    <div class="g-note">네 유형 모두 <b>① 짚기 → ② 적용 → ③ 전체 문장 배열</b>이다. <b>①과 ③은 네 유형이 똑같고</b>(한국어 초록에 해당하는 영어를 짚는다 · 문장을 통째로 세운다), 다른 것은 ①을 마친 뒤 펼쳐지는 구조(반복 · 변화 · 차이 · 자리)와 ②의 조작뿐이다.<br>
-      901유닛이 어느 유형인지와 그 판정 근거는 <b>전체</b> 탭에 있다.</div>
+    <div class="g-row"><b class="k">구조형</b>
+      <div class="g-core">고정된 말 없이 <u>덩어리들의 순서</u>를 다시 짠다</div>
+      <div class="g-eg">걔가 도망치는 걸 봤어 → I <b>saw</b> / <b>him</b> / <b>escaping</b></div>
+      <div class="g-wr">틀리면: 한국어 순서대로 늘어놓는다</div>
+      <div class="g-how">한국어 순서대로 짚기 → 덩어리를 영어 순서로 놓기</div></div>
+    <div class="g-note"><b>패턴형과 구조형</b>은 둘 다 한국어와 순서가 다르지만, 패턴형에는 붙잡을 <b>고정된 말</b>이 있고(It's · to · that) 구조형에는 없다(saw / heard / felt가 바뀌고, 틀은 동사 + 목적어 + 동작뿐).<br>
+      다섯 유형 모두 <b>① 짚기 → ② 적용 → ③ 전체 문장 배열</b>이다. ①(한국어 초록에 해당하는 영어 짚기)과 ③은 같고, 다른 것은 ①을 마친 뒤 펼쳐지는 것과 ②의 조작이다. 901유닛이 어느 유형인지와 그 근거는 <b>전체</b> 탭에 있다.</div>
   </details>
 
   <div class="tabs" id="tabs"></div>
@@ -200,6 +221,8 @@
 
 <script>
 /* 문장은 `유기적 통합모드 문장 (문장만 확정).csv` 에서 그대로 가져왔다.
+   구조형만 예외다 — CSV 대괄호에 덩어리 경계가 없어(`[She gave me] a magazine`) 짚을 덩어리와 ② 의 덩어리를 여기서 나눴고,
+   한국어도 덩어리마다 초록을 쳤다. 실제로 쓰려면 덩어리 경계를 저작해야 한다.
    {} = ①에서 짚을 말 / ②에서 비울 자리. 한국어 [ ] = 그 말에 해당하는 뜻(초록).
    ①의 한국어 일부는 짚을 말과 뜻이 맞물리게 다듬었다(원문 번역의 괄호가 다른 곳을 가리키는 경우). */
 const TYPES = [
@@ -290,11 +313,33 @@ const TYPES = [
               { en:'We {rarely} talk on the phone.', kr:'우리는 전화로 [거의] 이야기하지 않아.' } ],
       arrange:{ en:'Do you usually take the bus?', kr:'너는 [보통] 버스를 타?' } },
   ]},
+  { key:'structure', name:'구조형', units:[
+    { id:'10300', name:'지각동사 + 목적어 + ~ing', form:'see / hear + 목적어 + ______ -ing', mean:'~가 ~하는 걸 보다 / 듣다', desc:'한창 하는 중인 장면이면 동사원형 대신 -ing를 써요',
+      find:[ { en:'I {saw} {him} {escaping}.', kr:'[걔가] [도망치는 걸] [봤어].', info:[{kr:'봤어', role:'지각동사'},{kr:'걔가', role:'목적어'},{kr:'도망치는 걸', role:'동작 -ing'}] },
+             { en:'I {heard} {them} {fighting}.', kr:'[그들이] [싸우는 소리를] [들었어].', info:[{kr:'들었어', role:'지각동사'},{kr:'그들이', role:'목적어'},{kr:'싸우는 소리를', role:'동작 -ing'}] } ],
+      apply:[ { kr:'[걔가] 큰 상자를 [들고 가는 걸] [봤어].', chunks:['I saw','him','carrying','a large box'] },
+              { kr:'[걔가] 샤워하면서 [노래하는 걸] [들었어].', chunks:['I heard','her','singing','in the shower'] } ],
+      arrange:{ en:'I saw them studying in the library.', kr:'[그들이] 도서관에서 [공부하는 걸 봤어].' } },
+    { id:'10084', name:'동사 + 사람 + 물건', form:'주어 + 동사 + 사람 + ______ .', mean:'~에게 ~를 해주다', desc:"gave·send·asked·bought·wrote처럼 '~에게 ~를' 두 개를 나란히 쓰는 동사예요",
+      find:[ { en:'{She} {gave} {me} {a magazine}.', kr:'[걔가] [나한테] [잡지를] [줬어].', info:[{kr:'걔가', role:'주어'},{kr:'줬어', role:'동사'},{kr:'나한테', role:'사람'},{kr:'잡지를', role:'물건'}] },
+             { en:'{He} {asked} {me} {a question}.', kr:'[걔가] [나한테] [질문을] [했어].', info:[{kr:'걔가', role:'주어'},{kr:'했어', role:'동사'},{kr:'나한테', role:'사람'},{kr:'질문을', role:'물건'}] } ],
+      apply:[ { kr:'[걔가] [나한테] [커피를] [사줬어].', chunks:['She','bought','me','some coffee'] },
+              { kr:'[걔는] [아들에게] [편지를] [썼어].', chunks:['He','wrote','his son','a letter'] } ],
+      arrange:{ en:'My mom gave us some snacks.', kr:'[엄마가] 우리한테 간식을 [주셨어].' } },
+    { id:'10405', name:'명사 + 주어 + 동사', form:'the 명사 + 주어 + 동사', mean:'내가 ~한 그 ~', desc:'관계대명사를 생략하고 명사 뒤에 바로 주어와 동사를 붙인 형태예요',
+      find:[ { en:"That's {the campus} {I visited}.", kr:'저기가 [내가 가본] [캠퍼스]야.', info:[{kr:'캠퍼스', role:'명사'},{kr:'내가 가본', role:'주어 + 동사'}] },
+             { en:"There's {the cafe} {Emma recommended}.", kr:'저기가 [엠마가 추천한] [카페]야.', info:[{kr:'카페', role:'명사'},{kr:'엠마가 추천한', role:'주어 + 동사'}] } ],
+      apply:[ { kr:'이게 [우리가 읽어야 할] [책]이야.', chunks:['This is','the book','we have to read'] },
+              { kr:'걔가 [내가 말했던] [그 사람]이야.', chunks:["He's",'the guy','I was telling you about'] } ],
+      arrange:{ en:'This is the mug I always use.', kr:'이게 [내가] 늘 [쓰는] 컵이야.' } },
+  ]},
 ];
 
 const STEP_NAMES = ['① 짚기','② 적용','③ 전체 문장'];
 const FIND_ASK = '초록 뜻에 해당하는 말을 두 문장에서 눌러 보세요';
+const FIND_ASK_STRUCT = '한국어 초록을 앞에서부터 차례로, 해당하는 영어를 눌러 보세요';
 const APPLY_ASK = {
+  structure:'덩어리를 영어 순서로 놓아 보세요',
   pattern: '찾은 덩어리를 넣어 문장을 완성해 보세요',
   change:  '규칙대로 모양을 바꿔 써 보세요',
   contrast:'뜻에 맞는 것을 골라 보세요',
@@ -360,10 +405,13 @@ function renderFind() {
     return `<div class="row"><div class="kr">${krHtml(f.kr)}</div><div class="line">${words}</div></div>`;
   }).join('');
   $('#stage').innerHTML = `<div class="chat-card" id="card"><div class="chat-tag">① 짚기</div>
-    <div class="ask">${FIND_ASK}</div><div id="rows">${rows}</div><div id="fb"></div><div id="after"></div>
+    <div class="ask">${T === 'structure' ? FIND_ASK_STRUCT : FIND_ASK}</div><div id="rows">${rows}</div><div id="fb"></div><div id="after"></div>
     <div class="src">유닛 ${U.id}</div></div>`;
   const need = U.find.reduce((n, f) => n + tokens(f.en).filter(x => x.target !== undefined).length, 0);
   let got = 0;
+  // 구조형: 문장마다 한국어 초록이 나오는 순서 = 짚어야 하는 순서
+  const koOrder = U.find.map(f => f.info.map((x, i) => i).sort((a, b) => f.kr.indexOf('[' + f.info[a].kr + ']') - f.kr.indexOf('[' + f.info[b].kr + ']')));
+  const nextIdx = U.find.map(() => 0);
   $('#rows').querySelectorAll('.w[data-r]').forEach(el => {
     el.querySelector('button').onclick = () => {
       if (el.classList.contains('ok')) return;
@@ -371,6 +419,16 @@ function renderFind() {
         el.classList.add('bad'); el.closest('.line').classList.remove('nudge'); void el.offsetWidth; el.closest('.line').classList.add('nudge');
         $('#fb').innerHTML = `<div class="msg">초록 뜻에 해당하는 말을 찾아 보세요.</div>`;
         return;
+      }
+      if (T === 'structure') {
+        const r = +el.dataset.r, want = koOrder[r][nextIdx[r]];
+        if (+el.dataset.tg !== want) {
+          el.closest('.line').classList.remove('nudge'); void el.offsetWidth; el.closest('.line').classList.add('nudge');
+          $('#fb').innerHTML = `<div class="msg">다음 한국어는 <b>${esc(U.find[r].info[want].kr)}</b> 예요. 거기에 해당하는 영어를 찾아 보세요.</div>`;
+          return;
+        }
+        nextIdx[r]++;
+        el.insertAdjacentHTML('beforeend', `<div class="ord">${nextIdx[r]}</div>`);
       }
       el.classList.add('ok', 'tap'); $('#fb').innerHTML = '';
       if (++got === need) reveal();
@@ -391,6 +449,8 @@ function renderFind() {
           : `<div class="anat">${esc(info.base)} → ${info.pre ? esc(info.pre) + ' ' : ''}${esc(info.stem)}<b>${esc(info.suf)}</b></div>`;
       } else if (T === 'contrast') {
         extra = `<div class="lab ${info.side}">${esc(info.label)}</div>`;
+      } else if (T === 'structure') {
+        extra = `<div class="lab s">${esc(info.kr)} · ${esc(info.role)}</div>`;
       } else {
         extra = `<div class="lab c">${esc(info.label)}</div>`;
         const nb = el.parentNode.children[[...el.parentNode.children].indexOf(el) + (info.prev ? -1 : 1)];
@@ -398,8 +458,17 @@ function renderFind() {
       }
       el.insertAdjacentHTML('beforeend', extra);
     });
+    if (T === 'structure') {
+      $('#rows').querySelectorAll('.row').forEach((row, r) => {
+        const f = U.find[r];
+        const ko = koOrder[r].map(i => f.info[i].kr), en = f.info.map(x => x.kr);
+        row.insertAdjacentHTML('beforeend', `<div class="ordline"><span class="ol-h">한국어 순서</span>${ko.map(esc).join(' → ')}</div>`
+          + `<div class="ordline en"><span class="ol-h">영어 순서</span>${en.map(esc).join(' → ')}</div>`);
+      });
+    }
     $('#card').classList.add('correct');
-    $('#after').innerHTML = (T === 'pattern' ? `<div class="msg good">두 문장에 같은 말이 반복돼요 — 이 덩어리를 통째로 기억해요.</div>` : '')
+    $('#after').innerHTML = (T === 'structure' ? `<div class="msg good">낱말은 그대로인데 덩어리의 순서가 바뀌어요 — 이 순서가 이 유닛의 핵심이에요.</div>` : '')
+      + (T === 'pattern' ? `<div class="msg good">두 문장에 같은 말이 반복돼요 — 이 덩어리를 통째로 기억해요.</div>` : '')
       + ruleHtml(U) + `<div class="btns"><button class="btn main" id="next">새 문장에 적용해 보기 ›</button></div>`;
     $('#next').onclick = () => go(1);
   }
@@ -408,6 +477,7 @@ function renderFind() {
 /* ② 적용 — 새 문장 두 개. 변화형은 원형 보고 쓰기, 대비형은 뜻 보고 고르기, 자리형은 자리 짚기 */
 function renderApply() {
   const U = unit(), T = type(), A = U.apply[st.k];
+  if (T === 'structure') return renderChunks(U, A);
   const tk = tokens(A.en), target = tk.find(x => x.target !== undefined).t;
   const answers = tk.filter(x => x.target !== undefined).map(x => x.t);
   let line = '', below = '';
@@ -508,7 +578,43 @@ function renderApply() {
   }
 }
 
-/* ③ 전체 문장 배열 — 세 유형 공통 */
+/* ② 구조형 — 낱말이 아니라 덩어리를 영어 순서로 놓는다 */
+function renderChunks(U, A) {
+  const n = A.chunks.length, placed = [];
+  const order = A.chunks.map((_, i) => i);
+  for (let t = 0; t < 20; t++) { order.sort(() => Math.random() - .5); if (order.some((v, i) => v !== i)) break; }
+  $('#stage').innerHTML = `<div class="chat-card" id="card"><div class="chat-tag">② 적용 ${st.k + 1}/${U.apply.length}</div>
+    <div class="ask">덩어리를 영어 순서로 놓아 보세요</div>
+    <div class="kr big">${krHtml(A.kr)}</div>
+    <div class="fill" id="fill"></div>
+    <div class="bank">${order.map(i => `<button class="tile chunk" data-i="${i}">${esc(A.chunks[i])}</button>`).join('')}</div>
+    <div id="fb"></div><div class="btns" id="bb"><button class="btn ghost" id="show">정답 보기</button></div><div id="after"></div>
+    <div class="src">유닛 ${U.id}</div></div>`;
+  let fin = false;
+  const draw = () => {
+    $('#fill').innerHTML = placed.map((i, k) => `<span class="fw" data-k="${k}">${esc(A.chunks[i])}</span>`).join('');
+    document.querySelectorAll('.tile.chunk').forEach(t => t.classList.toggle('used', placed.includes(+t.dataset.i)));
+    document.querySelectorAll('#fill .fw').forEach(f => f.onclick = () => { if (fin) return; placed.splice(+f.dataset.k, 1); draw(); });
+  };
+  const finish = () => {
+    fin = true; $('#fill').classList.add('ok'); $('#card').classList.add('correct'); $('#bb').remove(); $('#fb').innerHTML = '';
+    const last = st.k === U.apply.length - 1;
+    $('#after').innerHTML = `<div class="btns"><button class="btn main" id="next">${last ? '전체 문장 배열하기 ›' : '다음 문장 ›'}</button></div>`;
+    $('#next').onclick = () => { if (last) go(2); else { st.k++; render(); } };
+  };
+  document.querySelectorAll('.tile.chunk').forEach(t => t.onclick = () => {
+    if (fin) return;
+    placed.push(+t.dataset.i); draw();
+    if (placed.length < n) return;
+    if (placed.every((v, i) => v === i)) return finish();
+    $('#fill').classList.remove('shake'); void $('#fill').offsetWidth; $('#fill').classList.add('shake');
+    $('#fb').innerHTML = `<div class="msg">순서를 다시 볼까요? ${esc(U.desc)}</div>`;
+  });
+  $('#show').onclick = () => { placed.length = 0; A.chunks.forEach((_, i) => placed.push(i)); draw(); finish(); };
+  draw();
+}
+
+/* ③ 전체 문장 배열 — 다섯 유형 공통 */
 function renderArrange() {
   const U = unit(), R = U.arrange;
   const tk = tokens(R.en);
@@ -564,7 +670,7 @@ function renderDone() {
 
 /* 전체 유닛 분류 — scripts/classify_units.py 가 확정 CSV 에서 만든 vocab-expression-units.gen.json 을 보여준다.
    유형·판정 이유·①②③ 에 쓸 문장이 모두 그 스크립트의 규칙에서 나온다(이 화면은 계산하지 않는다). */
-const TY_CLS = { '패턴형':'p', '변화형':'c', '대비형':'d', '자리형':'l', '해당없음':'n' };
+const TY_CLS = { '패턴형':'p', '변화형':'c', '대비형':'d', '자리형':'l', '구조형':'s', '해당없음':'n' };
 const ROLE = (p, k) => !p ? '' : p.find.includes(k) ? '①' : p.apply.includes(k) ? '②' : p.arrange === k ? '③' : '';
 let UL = { data:null, ty:'전체', q:'', issue:false, limit:60, open:new Set() };
 async function renderUnits(stage) {
@@ -606,16 +712,17 @@ async function renderUnits(stage) {
       <ol>
         <li>대괄호가 모든 문장에서 같은 덩어리다 (시제·주어·축약 차이는 무시) → <b>패턴형</b></li>
         <li>서로 다른 꼴이 번갈아 온다 (-ing / to, -ing / -ed) → <b>대비형</b></li>
+        <li>절반을 넘게 공유되는 고정된 말이 없고, 카드 초록이 자리의 순서(목적어 · 사람 · 주어 + 동사)로 적혀 있다 → <b>구조형</b> (I saw him escaping, She gave me a magazine)</li>
         <li>꼴은 같고 낱말이 제각각이다 (-ed · -est · -er · 's · 서수) → <b>변화형</b></li>
         <li>빈도·정도 부사가 갈아 끼워진다 → <b>자리형</b> / 기능어가 번갈아 온다 (at / on / in, can / could) → <b>대비형</b></li>
         <li>공통 낱말이 남는다 → <b>패턴형</b> (괄호 안에 슬롯 낱말이 함께 들어 있다)</li>
         <li>첫 낱말이 몇 개 안에서 번갈아 온다 (become / get / turn) → <b>대비형</b></li>
-        <li>그 밖 → <b>해당없음</b>. 규칙이 틀리는 13개는 사람이 정했고 이유를 적어 두었다</li>
+        <li>그 밖 → <b>해당없음</b>. 규칙이 틀리는 유닛은 사람이 정했고 이유를 적어 두었다</li>
       </ol>
       <p>2·3은 카드 초록에 형태 변화가 적혀 있을 때만 인정한다 — 시제 때문에 우연히 생긴 -ed/-ing 를 학습 대상으로 착각하지 않게. '번갈아 온다'는 둘 이상이 쓰이고 한쪽이 80%를 넘게 독차지하지 않을 때다. 주어가 정해 주는 be·do·have 일치(is/are, do/does)는 고를 것이 없어 결정으로 보지 않는다. 판정에는 S1 의 주어 변형(문장1-2·1-3)을 쓰지 않는다.</p>
       <p>문장 앞 ①②③ 은 그 유닛으로 문제를 만들 때 쓰는 문장이다(같은 스크립트가 정한다). 계획이 없는 유닛은 문장이나 괄호를 보강해야 문제가 된다.</p>
     </details>
-    <div class="ul-sum">${['전체', '패턴형', '변화형', '대비형', '자리형', '해당없음'].map(t =>
+    <div class="ul-sum">${['전체', '패턴형', '변화형', '대비형', '자리형', '구조형', '해당없음'].map(t =>
       `<button class="ul-chip${UL.ty === t ? ' on' : ''}" data-ty="${t}">${t} ${cnt(t)}</button>`).join('')}</div>
     <div class="ul-tools"><input class="ul-q" id="ulq" placeholder="id · 카드 초록 · 문장 검색" value="${esc(UL.q)}">
       <label class="ul-tg"><input type="checkbox" id="uli"${UL.issue ? ' checked' : ''}> 손봐야 할 것만 (${D.filter(x => !x.plan || x.flags.length || x.manual).length})</label></div>
