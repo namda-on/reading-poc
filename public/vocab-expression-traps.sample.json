@@ -1,204 +1,10 @@
 {
- "You [got up] so early!": [
-  [
-   "got on"
-  ],
-  [
-   "got out"
-  ]
- ],
- "He should [get up].": [
+ "You should [get up].": [
   [
    "get on"
   ],
   [
-   "get out"
-  ]
- ],
- "[Why don't you] call her?": [
-  [
-   "Why you don't"
-  ],
-  [
-   "Why aren't you"
-  ]
- ],
- "[Why don't you] invite your friends?": [
-  [
-   "Why you don't"
-  ],
-  [
-   "Why doesn't you"
-  ]
- ],
- "[If she were] here, [she would] help.": [
-  [
-   "If she is",
-   "-"
-  ],
-  [
-   "-",
-   "she will"
-  ]
- ],
- "[I wouldn't] worry [if I were] you.": [
-  [
-   "-",
-   "if I am"
-  ],
-  [
-   "I won't",
-   "-"
-  ]
- ],
- "[We talked] today.": [
-  [
-   "We talk"
-  ],
-  [
-   "We talking"
-  ]
- ],
- "[I] really [liked] it.": [
-  [
-   "-",
-   "like"
-  ],
-  [
-   "-",
-   "likes"
-  ]
- ],
- "She's [the smartest] person here.": [
-  [
-   "the smarter"
-  ],
-  [
-   "the most smart"
-  ]
- ],
- "He's [the nicest] person in the world.": [
-  [
-   "the nicer"
-  ],
-  [
-   "the most nice"
-  ]
- ],
- "These [were submitted] by fans.": [
-  [
-   "were submit"
-  ],
-  [
-   "submitted"
-  ]
- ],
- "This [was found] under a table.": [
-  [
-   "was find"
-  ],
-  [
-   "was finded"
-  ]
- ],
- "I regret [telling] her the truth.": [
-  [
-   "to tell"
-  ],
-  [
-   "tell"
-  ]
- ],
- "Remember [to call] your mother tonight.": [
-  [
-   "calling"
-  ],
-  [
-   "call"
-  ]
- ],
- "[That's] so [exciting]!": [
-  [
-   "-",
-   "excited"
-  ],
-  [
-   "-",
-   "excite"
-  ]
- ],
- "I [was] really [surprised] to see her there.": [
-  [
-   "-",
-   "surprising"
-  ],
-  [
-   "-",
-   "surprise"
-  ]
- ],
- "Let's meet [on Friday morning].": [
-  [
-   "at Friday morning"
-  ],
-  [
-   "in Friday morning"
-  ]
- ],
- "Are you busy [at twelve o'clock]?": [
-  [
-   "on twelve o'clock"
-  ],
-  [
-   "in twelve o'clock"
-  ]
- ],
- "[It's usually] easy.": [
-  [
-   "It usually is"
-  ],
-  [
-   "It usually"
-  ]
- ],
- "[She's usually] pretty nice.": [
-  [
-   "She usually is"
-  ],
-  [
-   "She usually"
-  ]
- ],
- "He [usually wins].": [
-  [
-   "wins usually"
-  ],
-  [
-   "usually win"
-  ]
- ],
- "I [usually have] enough milk.": [
-  [
-   "have usually"
-  ],
-  [
-   "usually has"
-  ]
- ],
- "Can I [try it on]?": [
-  [
-   "try on it"
-  ],
-  [
-   "it try on"
-  ]
- ],
- "The taxi [dropped me off] at home.": [
-  [
-   "dropped off me"
-  ],
-  [
-   "dropped me"
+   "get off"
   ]
  ],
  "I [got up] at five.": [
@@ -206,7 +12,23 @@
    "got on"
   ],
   [
-   "got out"
+   "getted up"
+  ]
+ ],
+ "You [got up] so early!": [
+  [
+   "got on"
+  ],
+  [
+   "getted up"
+  ]
+ ],
+ "[Why don't you] invite a friend?": [
+  [
+   "Why you don't"
+  ],
+  [
+   "Why doesn't you"
   ]
  ],
  "[Why don't you] sit down?": [
@@ -214,174 +36,10 @@
    "Why you don't"
   ],
   [
-   "Why aren't you"
+   "Why not you"
   ]
  ],
- "[If I were] him, [I would] do the laundry.": [
-  [
-   "If I am",
-   "-"
-  ],
-  [
-   "-",
-   "I will"
-  ]
- ],
- "[If I were] you, [I would] apologize.": [
-  [
-   "If I am",
-   "-"
-  ],
-  [
-   "-",
-   "I will"
-  ]
- ],
- "[She opened] it.": [
-  [
-   "She open"
-  ],
-  [
-   "She opens"
-  ]
- ],
- "[She cried].": [
-  [
-   "She cry"
-  ],
-  [
-   "She cryed"
-  ]
- ],
- "That is [the smallest] basket.": [
-  [
-   "the smaller"
-  ],
-  [
-   "the most small"
-  ]
- ],
- "He's [the tallest] boy in my class.": [
-  [
-   "the taller"
-  ],
-  [
-   "the most tall"
-  ]
- ],
- "They [were rejected].": [
-  [
-   "were reject"
-  ],
-  [
-   "was rejected"
-  ]
- ],
- "He [was bitten] by a dog.": [
-  [
-   "was bite"
-  ],
-  [
-   "was bited"
-  ]
- ],
- "He stopped [eating] grains.": [
-  [
-   "to eat"
-  ],
-  [
-   "eat"
-  ]
- ],
- "He stopped [to buy] some coffee.": [
-  [
-   "buying"
-  ],
-  [
-   "buy"
-  ]
- ],
- "His introduction [was interesting].": [
-  [
-   "was interested"
-  ],
-  [
-   "was interest"
-  ]
- ],
- "Let's meet [on Thursday].": [
-  [
-   "at Thursday"
-  ],
-  [
-   "in Thursday"
-  ]
- ],
- "Let's go [at three o'clock].": [
-  [
-   "on three o'clock"
-  ],
-  [
-   "in three o'clock"
-  ]
- ],
- "His skin [is always] dry.": [
-  [
-   "always is"
-  ],
-  [
-   "are always"
-  ]
- ],
- "[He's never] late.": [
-  [
-   "He never"
-  ],
-  [
-   "He's ever"
-  ]
- ],
- "She [always answers] the phone.": [
-  [
-   "answers always"
-  ],
-  [
-   "always answer"
-  ]
- ],
- "She [never listens].": [
-  [
-   "listens never"
-  ],
-  [
-   "never listen"
-  ]
- ],
- "[Pick him up] at the market.": [
-  [
-   "Pick up him"
-  ],
-  [
-   "Pick he up"
-  ]
- ],
- "[Put it down]!": [
-  [
-   "Put down it"
-  ],
-  [
-   "Put its down"
-  ]
- ],
- "You should [get up].": [
-  [
-   "get on"
-  ],
-  [
-   "get out"
-  ]
- ],
- "[Why don't you] invite a friend?": [
+ "[Why don't you] call her?": [
   [
    "Why you don't"
   ],
@@ -399,12 +57,48 @@
    "I will"
   ]
  ],
+ "[If she were] here, [she would] help.": [
+  [
+   "If she is",
+   "-"
+  ],
+  [
+   "-",
+   "she will"
+  ]
+ ],
+ "[If I were] you, [I would] apologize.": [
+  [
+   "If I am",
+   "-"
+  ],
+  [
+   "-",
+   "I will"
+  ]
+ ],
  "[I opened] it.": [
   [
    "I open"
   ],
   [
    "I opening"
+  ]
+ ],
+ "[She cried].": [
+  [
+   "She cryed"
+  ],
+  [
+   "She cry"
+  ]
+ ],
+ "[We talked] today.": [
+  [
+   "We talk"
+  ],
+  [
+   "We talking"
   ]
  ],
  "This is [the smallest] basket.": [
@@ -415,12 +109,44 @@
    "the most small"
   ]
  ],
+ "He's [the tallest] boy in my class.": [
+  [
+   "the taller"
+  ],
+  [
+   "the most tall"
+  ]
+ ],
+ "She's [the smartest] person here.": [
+  [
+   "the smarter"
+  ],
+  [
+   "the most smart"
+  ]
+ ],
  "It [was rejected].": [
   [
    "was reject"
   ],
   [
-   "were rejected"
+   "rejected"
+  ]
+ ],
+ "He [was bitten] by a dog.": [
+  [
+   "was bite"
+  ],
+  [
+   "was bited"
+  ]
+ ],
+ "These [were submitted] by fans.": [
+  [
+   "were submit"
+  ],
+  [
+   "was submitted"
   ]
  ],
  "I stopped [eating] grains.": [
@@ -431,44 +157,28 @@
    "eat"
   ]
  ],
+ "He stopped [to buy] some coffee.": [
+  [
+   "buying"
+  ],
+  [
+   "buy"
+  ]
+ ],
+ "She stopped [smoking] last year.": [
+  [
+   "to smoke"
+  ],
+  [
+   "smoke"
+  ]
+ ],
  "The introduction [was interesting].": [
   [
    "was interested"
   ],
   [
    "was interest"
-  ]
- ],
- "See you [on Thursday].": [
-  [
-   "at Thursday"
-  ],
-  [
-   "in Thursday"
-  ]
- ],
- "My skin [is always] dry.": [
-  [
-   "always is"
-  ],
-  [
-   "are always"
-  ]
- ],
- "I [always answer] the phone.": [
-  [
-   "answer always"
-  ],
-  [
-   "always answers"
-  ]
- ],
- "[Pick me up] at the market.": [
-  [
-   "Pick up me"
-  ],
-  [
-   "Pick I up"
   ]
  ],
  "[I'm] so [excited] to see you!": [
@@ -481,12 +191,110 @@
    "excite"
   ]
  ],
+ "[That's] so [exciting]!": [
+  [
+   "-",
+   "excited"
+  ],
+  [
+   "-",
+   "excite"
+  ]
+ ],
+ "See you [on Thursday].": [
+  [
+   "at Thursday"
+  ],
+  [
+   "in Thursday"
+  ]
+ ],
+ "Let's go [at three o'clock].": [
+  [
+   "on three o'clock"
+  ],
+  [
+   "in three o'clock"
+  ]
+ ],
  "I'm busy [in the morning].": [
   [
    "at the morning"
   ],
   [
    "on the morning"
+  ]
+ ],
+ "My skin [is always] dry.": [
+  [
+   "always"
+  ],
+  [
+   "are always"
+  ]
+ ],
+ "[He's never] late.": [
+  [
+   "He never"
+  ],
+  [
+   "He's ever"
+  ]
+ ],
+ "[It's usually] easy.": [
+  [
+   "It usually"
+  ],
+  [
+   "It's usual"
+  ]
+ ],
+ "I [always answer] the phone.": [
+  [
+   "answer always"
+  ],
+  [
+   "always answers"
+  ]
+ ],
+ "She [never listens].": [
+  [
+   "listens never"
+  ],
+  [
+   "never listen"
+  ]
+ ],
+ "He [usually wins].": [
+  [
+   "usually win"
+  ],
+  [
+   "usual wins"
+  ]
+ ],
+ "[Pick me up] at the market.": [
+  [
+   "Pick up me"
+  ],
+  [
+   "Pick I up"
+  ]
+ ],
+ "[Put it down]!": [
+  [
+   "Put down it"
+  ],
+  [
+   "Put its down"
+  ]
+ ],
+ "Can I [try it on]?": [
+  [
+   "try on it"
+  ],
+  [
+   "try it in"
   ]
  ]
 }
