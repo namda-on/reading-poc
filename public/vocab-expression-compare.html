@@ -83,6 +83,19 @@
   .why b { font-weight:800; }
   @keyframes fadeUp { from{opacity:0; transform:translateY(-4px);} to{opacity:1; transform:none;} }
 
+  /* ② trap 고르기 — 초록 자리가 빈칸, 정답과 trap 중에 고른다 */
+  .tline { font-size:17px; font-weight:700; line-height:1.9; margin:4px 0 14px; }
+  .slot { display:inline-block; min-width:76px; padding:0 6px; margin:0 2px; border-bottom:2px solid #8fb1e3; text-align:center; color:#1f4f8f; line-height:1.5; }
+  .slot.ok { border-bottom-color:#5cc08a; background:#e8f8ee; color:#1f7a49; border-radius:6px 6px 0 0; }
+  .slot.no { border-bottom-color:#e2a98a; background:#fdf1ec; color:#b0573f; border-radius:6px 6px 0 0; text-decoration:line-through; }
+  .topts { display:flex; flex-direction:column; gap:9px; }
+  .topt { text-align:center; border:1.5px solid #cdddf3; background:#fff; border-radius:13px; padding:12px; font-size:16px; font-weight:700;
+    color:#2f3e52; cursor:pointer; box-shadow:0 2px 0 #e1e9f5; font-family:inherit; }
+  .topt.right { border-color:#7fd0a3; background:#f1fbf5; color:#1f7a49; }
+  .topt.wrongpick { border-color:#e8b9a3; background:#fdf5f1; color:#b0573f; }
+  .topt.dim { color:#9aa8bc; }
+  .src .tr { color:#2e9e57; font-weight:800; } .src .tmp { color:#c08a3a; font-weight:800; }
+
   /* ③ 쓰기 */
   input.blank { font:inherit; color:#1f4f8f; border:none; border-bottom:2px solid #8fb1e3; background:#f3f7fd;
     border-radius:6px 6px 0 0; padding:2px 6px; outline:none; text-align:center; }
@@ -111,17 +124,18 @@
 
   <details class="guide" open>
     <summary>제안 요약</summary>
-    <div class="g-flow">① 짚기 → ② 두 문장 중 맞는 것 고르기 → ③ 직접 쓰기</div>
+    <div class="g-flow">① 짚기 → ② 빈칸 고르기(정답 / trap) → ③ 직접 쓰기</div>
     <p class="g-p">대비형(stop ~ing / stop to ~)에서 유용했던 순간은 <b>두 문장을 나란히 놓고 무엇이 다른지 보는 것</b>이었다. 그 순간을 패턴형·변화형·대비형·자리형 모두에 준다. 화면과 조작은 네 유형이 똑같고, 다른 것은 <b>비교 상대</b> 하나다. 비교 상대는 그 유형이 실제로 틀리는 방식 그대로다.</p>
     <table class="g-t">
-      <tr><th>유형</th><th>비교 상대 (흔히 틀리는 문장)</th></tr>
-      <tr><td>패턴형</td><td>굳은 표현의 낱말 하나를 헷갈리는 짝으로<br><span class="o">get up</span> · <span class="x">get on</span> / <span class="o">If she were</span> · <span class="x">If she was</span> / <span class="o">pay attention</span> · <span class="x">give attention</span></td></tr>
-      <tr><td>변화형</td><td>모양을 안 바꾼 문장<br><span class="o">We talked today</span> · <span class="x">We talk today</span></td></tr>
-      <tr><td>대비형</td><td>다른 후보를 고른 문장<br><span class="o">Remember to call</span> · <span class="x">Remember calling</span></td></tr>
-      <tr><td>자리형</td><td>자리를 옮긴 문장<br><span class="o">Can I try it on?</span> · <span class="x">Can I try on it?</span></td></tr>
+      <tr><th>유형</th><th>trap 예 (초록 자리를 대신하는 말)</th></tr>
+      <tr><td>패턴형</td><td><span class="o">got up</span> · <span class="x">got on</span> <span class="x">got out</span> / <span class="o">Why don't you</span> · <span class="x">Why you don't</span></td></tr>
+      <tr><td>변화형</td><td><span class="o">talked</span> · <span class="x">talk</span> <span class="x">talking</span> / <span class="o">the smartest</span> · <span class="x">the most smart</span></td></tr>
+      <tr><td>대비형</td><td><span class="o">to call</span> · <span class="x">calling</span> <span class="x">call</span> / <span class="o">on Friday morning</span> · <span class="x">at</span> <span class="x">in</span></td></tr>
+      <tr><td>자리형</td><td><span class="o">usually wins</span> · <span class="x">wins usually</span> / <span class="o">try it on</span> · <span class="x">try on it</span></td></tr>
     </table>
-    <p class="g-p"><b>저작 없이 데이터에서 만든다</b> — 비교 상대는 <code>scripts/build_compare_items.py</code>가 분류 결과에서 자동으로 만든다. 패턴형 683/793 · 변화형 41/42 · 대비형 46/47 · 자리형 9/10, 합계 <b>779/892</b>(87%). 구조형 8개와 해당없음 1개는 뺐다.</p>
-    <p class="g-p"><b>품질</b> — 무작위 59개를 읽어 보니 52개는 비교 상대로 잘 작동했고, 5개는 비교 상대가 사실상 맞는 영어거나 엉뚱했고(speak up against, Can you finish…, Tell me this it happened), 2개는 교과서상 틀림이지만 회화에선 쓰인다(It usually is easy). 탭 아래 <b>다른 유닛 ↻</b>로 아무 유닛이나 풀어 보며 확인할 수 있다.</p>
+    <p class="g-p"><b>고르기 후보 = 기획이 제작하는 trap 그대로</b> — trap 은 <b>초록 자리를 대신하는 말</b>로 문장마다 만든다. 고르기는 초록 자리를 빈칸으로 두고 <b>정답 / trap 2개</b> 중에 고른다. 같은 trap 을 뱅크 타일·복습에도 그대로 쓰므로 후보를 따로 만들 리소스가 없다.</p>
+    <p class="g-p"><b>trap 형식</b> — 문장마다 2개. 초록 자리가 둘이면 자리 순서대로 적고, 대신하지 않는 자리는 <code>-</code>. 예: <code>[If she were] here, [she would] help.</code> → <code>If she is / -</code> · <code>- / she will</code>.</p>
+    <p class="g-p"><b>지금은 샘플</b> — 대표 12유닛의 고르기 문장 24개에 trap 을 직접 만들어 연결했다(<code>vocab-expression-traps.sample.json</code>). 샘플이 없는 유닛(<b>다른 유닛 ↻</b>)은 자동 생성한 비교 문장을 <b>임시</b>로 보여준다.</p>
     <p class="g-p">기존 문제 풀이는 그대로 있다 → <a href="vocab-expression-types.html">유형별 학습 방식</a></p>
   </details>
 
@@ -133,12 +147,15 @@
 
 <script>
 /* 문항은 scripts/build_compare_items.py 가 만든 vocab-expression-compare.gen.json 이다 — 이 페이지는 문항을 만들지 않는다.
+   고르기 후보는 기획이 제작하는 trap(초록 자리를 대신하는 말, 문장당 2개)을 그대로 쓴다. 지금은 대표 12유닛 24문장의 샘플
+   (vocab-expression-traps.sample.json, 문장 → [trap 마다 자리 순서대로 대신할 말, 안 바꾸는 자리는 '-']).
+   샘플이 없는 문장만 자동 생성 비교 문장을 임시로 보여준다.
    유형 탭의 대표 유닛 셋은 유형별 페이지와 같은 유닛이고, '다른 유닛 ↻' 는 같은 유형의 아무 유닛이나 연다. */
 const TYPES = ['패턴형', '변화형', '대비형', '자리형'];
 const FEATURED = { '패턴형':['10000','10033','10444'], '변화형':['10065','10299','10317'], '대비형':['10369','10313','10059'], '자리형':['10041','10043','10132'] };
 const STEPS = ['① 짚기', '② 고르기', '③ 쓰기'];
 
-let D = null, byId = {};
+let D = null, byId = {}, TRAPS = {};
 let st = { t:0, id:'10000', step:0, k:0, score:[] };
 try { const s = JSON.parse(localStorage.getItem('vecompare') || 'null'); if (s && TYPES[s.t]) st = { t:s.t, id:s.id, step:0, k:0, score:[] }; } catch (e) {}
 function save() { try { localStorage.setItem('vecompare', JSON.stringify({ t:st.t, id:st.id })); } catch (e) {} }
@@ -225,13 +242,15 @@ function renderFind() {
 
 /* ② 고르기 — 맞는 문장과 흔히 틀리는 문장 중 하나. 고르면 두 문장에서 다른 부분만 칠하고 이유를 한 줄 */
 function renderCompare() {
-  const U = unit(), C = U.compare[st.k], right = plain(C.en), wrong = C.wrong;
+  const U = unit(), C = U.compare[st.k];
+  if (TRAPS[C.en]) return renderTrapChoice(U, C, TRAPS[C.en]);
+  const right = plain(C.en), wrong = C.wrong;
   const opts = Math.random() < .5 ? [right, wrong] : [wrong, right];
   $('#stage').innerHTML = `<div class="chat-card" id="card"><div class="chat-tag">② 고르기 ${st.k + 1}/${U.compare.length}</div>
     <div class="ask">이 뜻으로 맞는 문장을 골라 보세요</div>
     <div class="kr big">${krHtml(C.kr)}</div>
     <div class="opts" id="opts">${opts.map(o => `<button class="opt" data-ok="${o === right ? 1 : 0}">${esc(o)}</button>`).join('')}</div>
-    <div id="fb"></div><div id="after"></div><div class="src">유닛 ${U.id} · ${U.type} · 자동 생성</div></div>`;
+    <div id="fb"></div><div id="after"></div><div class="src">유닛 ${U.id} · ${U.type} · <span class="tmp">trap 없음 — 자동 생성 임시값</span></div></div>`;
   $$('.opt').forEach(b => b.onclick = () => {
     if ($('#card').dataset.done) return;
     $('#card').dataset.done = '1';
@@ -242,6 +261,44 @@ function renderCompare() {
       o.innerHTML = (isRight ? diffHtml(right, wrong, 'd-o') : diffHtml(wrong, right, 'd-x')) + `<span class="mk">${isRight ? '✓ 맞는 문장' : '✗'}</span>`;
       o.classList.add(isRight ? 'right' : (o === b ? 'wrongpick' : 'dim'));
     });
+    if (hit) $('#card').classList.add('correct');
+    else { $('#opts').classList.remove('shake'); void $('#opts').offsetWidth; $('#opts').classList.add('shake'); }
+    $('#fb').innerHTML = `<div class="why${hit ? '' : ' miss'}">${hit ? '' : '<b>다른 쪽이 맞아요.</b> '}${esc(C.why)}</div>`;
+    const last = st.k === U.compare.length - 1;
+    $('#after').innerHTML = `<div class="btns"><button class="btn main" id="next">${last ? '직접 써 보기 ›' : '다음 문장 ›'}</button></div>`;
+    $('#next').onclick = () => { if (last) go(2); else { st.k++; render(); } };
+  });
+}
+
+/* ② trap 고르기 — 초록 자리 중 trap 이 대신하는 자리를 빈칸으로 두고 정답 / trap 2개 중에 고른다.
+   자리가 둘이고 trap 마다 바꾸는 자리가 다르면(If she is / - · - / she will) 두 자리를 함께 비우고 묶음으로 고른다 */
+function renderTrapChoice(U, C, traps) {
+  const slots = [...C.en.matchAll(/\[([^\]]+)\]/g)].map(m => m[1]);
+  const used = slots.map((_, i) => traps.some(t => t[i] !== '-'));
+  const cands = [slots, ...traps.map(t => t.map((x, i) => x === '-' ? slots[i] : x))];
+  const label = c => c.filter((_, i) => used[i]).join(' … ');
+  const order = cands.map((_, i) => i).sort(() => Math.random() - .5);
+  let si = 0;
+  const line = C.en.split(/(\[[^\]]+\])/).map(part => {
+    const m = part.match(/^\[([^\]]+)\]$/);
+    if (!m) return esc(part);
+    const i = si++;
+    return used[i] ? `<span class="slot" data-s="${i}">&nbsp;</span>` : esc(m[1]);
+  }).join('');
+  $('#stage').innerHTML = `<div class="chat-card" id="card"><div class="chat-tag">② 고르기 ${st.k + 1}/${U.compare.length}</div>
+    <div class="ask">빈칸에 알맞은 말을 골라 보세요</div>
+    <div class="kr big">${krHtml(C.kr)}</div>
+    <div class="tline">${line}</div>
+    <div class="topts" id="opts">${order.map(j => `<button class="topt" data-j="${j}">${esc(label(cands[j]))}</button>`).join('')}</div>
+    <div id="fb"></div><div id="after"></div><div class="src">유닛 ${U.id} · ${U.type} · <span class="tr">trap 샘플</span></div></div>`;
+  $$('.topt').forEach(b => b.onclick = () => {
+    if ($('#card').dataset.done) return;
+    $('#card').dataset.done = '1';
+    const j = +b.dataset.j, hit = j === 0;
+    st.score.push(hit);
+    $$('.slot').forEach(el => { el.textContent = cands[j][+el.dataset.s]; el.classList.add(hit ? 'ok' : 'no'); });
+    if (!hit) $$('.slot').forEach(el => el.insertAdjacentHTML('afterend', ` <span class="slot ok">${esc(slots[+el.dataset.s])}</span>`));
+    $$('.topt').forEach(o => o.classList.add(+o.dataset.j === 0 ? 'right' : (o === b ? 'wrongpick' : 'dim')));
     if (hit) $('#card').classList.add('correct');
     else { $('#opts').classList.remove('shake'); void $('#opts').offsetWidth; $('#opts').classList.add('shake'); }
     $('#fb').innerHTML = `<div class="why${hit ? '' : ' miss'}">${hit ? '' : '<b>다른 쪽이 맞아요.</b> '}${esc(C.why)}</div>`;
@@ -292,16 +349,21 @@ function renderWrite() {
 function renderDone() {
   const U = unit(), hits = st.score.filter(Boolean).length;
   $('#stage').innerHTML = `<div class="chat-card correct"><div class="chat-tag">정리</div>
-    <div class="ask">고르기 ${hits}/${st.score.length} · 이 유닛에서 비교한 문장</div>
-    ${U.compare.map(c => `<div class="pair"><span class="o">${diffHtml(plain(c.en), c.wrong, 'd-o')}</span><br><span class="x">${esc(c.wrong)}</span></div>`).join('')}
+    <div class="ask">고르기 ${hits}/${st.score.length} · 이 유닛에서 고른 문장</div>
+    ${U.compare.map(c => TRAPS[c.en]
+      ? `<div class="pair"><span class="o">${esc(plain(c.en))}</span><br>trap: ${TRAPS[c.en].map(t => `<span class="x">${esc(t.filter(x => x !== '-').join(' … '))}</span>`).join(' · ')}</div>`
+      : `<div class="pair"><span class="o">${diffHtml(plain(c.en), c.wrong, 'd-o')}</span><br><span class="x">${esc(c.wrong)}</span></div>`).join('')}
     ${ruleHtml(U)}
     <div class="btns"><button class="btn ghost" id="again">다시</button><button class="btn main" id="next">다른 유닛 ↻</button></div></div>`;
   $('#again').onclick = () => { st.score = []; go(0); };
   $('#next').onclick = () => $('#rand').click();
 }
 
-fetch('vocab-expression-compare.gen.json').then(r => r.json()).then(data => {
-  D = data; D.forEach(x => byId[x.id] = x);
+Promise.all([
+  fetch('vocab-expression-compare.gen.json').then(r => r.json()),
+  fetch('vocab-expression-traps.sample.json').then(r => r.json()).catch(() => ({})),
+]).then(([data, traps]) => {
+  D = data; TRAPS = traps; D.forEach(x => byId[x.id] = x);
   if (!byId[st.id] || byId[st.id].type !== TYPES[st.t]) st.id = FEATURED[TYPES[st.t]].find(id => byId[id]);
   render();
 }).catch(() => { $('#stage').innerHTML = `<div class="msg">문항을 불러오지 못했어요.</div>`; });
