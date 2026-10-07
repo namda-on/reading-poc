@@ -50,15 +50,38 @@
   .tgt { color:var(--green); font-weight:800; }
   .kr { font-size:18px; color:#33465c; font-weight:600; line-height:1.5; margin-bottom:12px; }
 
-  /* 낱말 카드 — 보기와 배열 뱅크가 같은 모양이다 */
+  /* ① 뜻 — 모델 문장 하나 */
+  .model { font-size:21px; font-weight:800; color:#2f3e52; line-height:1.45; }
+  .model .tgt { background:#dcf6e6; border-radius:7px; padding:0 5px; }
+  .mean { display:inline-block; margin-top:12px; font-size:13px; font-weight:800; color:#22794a; background:#edf9f1; border-radius:9px; padding:3px 10px; }
+
+  /* ② 범위 · 정리 — 문장들의 초록 조각을 세로로 맞춘다(초록 앞 / 초록 / 초록 뒤) */
+  .stack { display:grid; grid-template-columns:minmax(0,max-content) minmax(0,max-content) minmax(5.5em,1fr); column-gap:6px; row-gap:4px; align-items:start; font-size:15.5px; font-weight:700; margin:4px 0 2px; }
+  .stack .pre { text-align:right; color:#7d8ea6; padding-top:2px; overflow-wrap:anywhere; }
+  .stack .post { color:#7d8ea6; padding-top:2px; overflow-wrap:anywhere; }
+  .stack .ck { display:flex; flex-direction:column; align-items:flex-start; }
+  .stack .chunk { color:#1f7a49; background:#dcf6e6; border-radius:7px; padding:2px 6px; }
+  .stack .chunk .gap { color:#7d8ea6; font-weight:600; }
+  .stack .chunk b { color:#0f5e33; text-decoration:underline; text-decoration-thickness:2px; text-underline-offset:3px; }
+  .stack .chunk .nb { border-bottom:2px dashed #e0a458; }
+  .stack-k { grid-column:1 / -1; font-size:12px; color:#a7b3c4; margin:1px 0 10px; }
+  .stack-h { grid-column:1 / -1; font-size:11.5px; font-weight:800; color:#8a98ad; margin-top:2px; padding-top:10px; border-top:1px dashed #e2e9f3; }
+  .stack .more { opacity:.6; }
+  .stack .row-in { animation:fadeUp .35s ease both; }
+  .lab { margin-top:5px; font-size:11.5px; font-weight:800; padding:2px 8px; border-radius:8px; white-space:nowrap; }
+  .lab.a { background:#e3edfb; color:#3a6bb0; }
+  .lab.b { background:#ece8fd; color:#5b47c9; }
+  .lab.c { background:#fdf0e1; color:#a5641a; }
+  .lab.g { background:#eef2f7; color:#6b7c93; }
+  .lab b { color:var(--green); }
+
+  /* 낱말 카드 — 배열 뱅크 */
   .line { display:flex; flex-wrap:wrap; align-items:center; gap:8px 6px; font-size:17px; font-weight:700; line-height:1.5; }
   .line.shake, .fill.shake { animation:shake .34s ease; }
   @keyframes shake { 22%{transform:translateX(-5px);} 55%{transform:translateX(5px);} 82%{transform:translateX(-2px);} }
   .card { font:inherit; font-size:16.5px; font-weight:700; color:#2f3e52; padding:8px 13px; border:1px solid #d3e0f2; background:#fff;
     border-radius:11px; box-shadow:0 2px 0 #e1e9f5; cursor:pointer; }
   .card:active { transform:translateY(2px); box-shadow:none; }
-  .card.ok { background:#dcf6e6; color:#1f7a49; border-color:#a9dec2; box-shadow:0 2px 0 #c2ebd4; }
-  .card.bad { color:#aab7c8; border-color:#e6d3bd; box-shadow:0 2px 0 #f0e4d3; }
   .card.used { background:#e3e9f2; border-color:#dbe2ee; color:transparent; box-shadow:none; pointer-events:none; }
   .punct { margin-left:-4px; font-size:18px; font-weight:700; }
   .fill { display:flex; flex-wrap:wrap; align-items:center; gap:8px 6px; min-height:52px; padding:6px 0 10px; border-bottom:2px solid #e2e9f3; margin-bottom:14px; }
@@ -72,20 +95,13 @@
 
   .msg { margin-top:12px; font-size:13.5px; color:#6b5a2e; background:#fbf6ea; border-radius:12px; padding:9px 12px; line-height:1.5; }
   .msg b { color:#8a4a1f; }
-  .rule { margin-top:16px; border-radius:16px; background:#f4fbf6; border:1px solid #cdebd8; padding:13px 14px; animation:fadeUp .35s ease both; }
+  .msg.good { color:#22794a; background:#edf9f1; }
+  .msg.good b { color:#1f7a49; }
+  .rule { margin-top:14px; border-radius:16px; background:#f4fbf6; border:1px solid #cdebd8; padding:13px 14px; animation:fadeUp .35s ease both; }
   .rule .f { font-size:17px; font-weight:800; color:#22794a; }
   .rule .m { font-size:13px; color:#6b7c93; margin-top:2px; }
   .rule .d { font-size:13.5px; color:#3c5a48; margin-top:8px; line-height:1.55; }
   @keyframes fadeUp { from{opacity:0; transform:translateY(-4px);} to{opacity:1; transform:none;} }
-
-  /* 정리 — 만든 문장의 초록 조각을 세로로 맞춘다 */
-  .stack { display:grid; grid-template-columns:auto auto 1fr; column-gap:6px; row-gap:9px; align-items:baseline; font-size:15px; font-weight:700; margin:4px 0 2px; }
-  .stack .pre { text-align:right; color:#7d8ea6; }
-  .stack .chunk { color:#1f7a49; background:#dcf6e6; border-radius:7px; padding:1px 6px; white-space:nowrap; }
-  .stack .post { color:#7d8ea6; }
-  .stack-k { grid-column:1 / -1; font-size:11.5px; color:#a7b3c4; margin-top:-6px; }
-  .stack-h { grid-column:1 / -1; font-size:11.5px; font-weight:800; color:#8a98ad; margin-top:6px; padding-top:8px; border-top:1px dashed #e2e9f3; }
-  .stack .more { opacity:.7; }
 
   .btns { display:flex; gap:8px; margin-top:18px; }
   .btn { flex:1; border:none; border-radius:15px; padding:14px 8px; font-size:15px; font-weight:800; cursor:pointer; }
@@ -101,17 +117,19 @@
 
   <details class="guide" open>
     <summary>제안 요약</summary>
-    <div class="g-flow">① 보기 → ② 배열 → ③ 쓰기 → ④ 처음 문장 배열 → 정리</div>
-    <p class="g-p"><b>한 문장의 틀을 끝까지 끌고 가며 도움을 줄인다.</b> 단계마다 문장이 통째로 바뀌면 주관식에서 막힌다. 그래서 ①~③은 S1과 그 <b>주어 변형</b>(문장1-2 · 1-3)을 쓴다 — 데이터의 변형 문장 1,784개 중 97%는 초록 자리가 S1과 같고, 62%는 낱말 하나만 바뀐 문장이다(My skin → His skin).</p>
+    <div class="g-flow">① 뜻 → ② 범위 → ③ 배열 → ④ 쓰기 → 정리 · 복습</div>
+    <p class="g-p">한 유닛에서 알게 할 것은 셋이다 — <b>이 뜻이면 이 영어</b>(뜻) · <b>무엇이 그대로이고 무엇이 바뀌나</b>(범위) · <b>내가 만든다</b>(산출). 지금까지는 S1과 그 주어 변형만 돌려 써서 <b>뜻만</b> 가르쳤다 — 주어 변형은 초록 자리가 S1과 똑같아 범위를 하나도 넓히지 않고, 그래서 복습에서 <code>stop ~ing</code>만 배운 유저가 <code>stop to</code>를 처음 만난다.</p>
     <table class="g-t">
       <tr><th>단계</th><th>문장</th><th>하는 일</th></tr>
-      <tr><td>① 보기</td><td>S1</td><td>초록 뜻에 해당하는 낱말을 모두 짚는다(낱말 카드 하나씩)</td></tr>
-      <tr><td>② 배열</td><td>문장1-2</td><td>뱅크에 trap 이 섞인 배열</td></tr>
-      <tr><td>③ 쓰기</td><td>문장1-3</td><td>초록 자리를 직접 친다</td></tr>
-      <tr><td>④ 처음 문장</td><td>S1</td><td>① 에서 본 문장을 이번엔 trap 섞인 뱅크로 직접 세운다</td></tr>
+      <tr><td>① 뜻</td><td>S1</td><td>모델 문장을 보여 주기만 한다(과제 없음)</td></tr>
+      <tr><td>② 범위</td><td>S1 + 기본 2</td><td>세 문장의 초록을 세로로 맞춰 세우고 유형별로 펼친다 — 변화형은 바뀐 끝 모양, 대비형은 갈리는 쪽(-ing / to), 자리형은 부사의 자리</td></tr>
+      <tr><td>③ 배열</td><td>기본 1</td><td>trap 섞인 뱅크로 문장을 세운다</td></tr>
+      <tr><td>④ 쓰기</td><td>기본 2</td><td>초록 자리를 직접 친다</td></tr>
+      <tr><td>복습</td><td>어려운</td><td>1~3일 뒤 처음 보는 문장으로(이 페이지 밖)</td></tr>
     </table>
-    <p class="g-p"><b>처음 보는 문장은 첫 학습에서 풀게 하지 않는다</b> — 문장이 통째로 바뀌면 너무 어렵다. 정리 화면에 <b>이 틀로 이런 말도 해요</b> 한 줄로만 보여 주고, 직접 만드는 것은 복습으로 미룬다. 정리 화면은 만든 세 문장의 초록 조각을 세로로 맞춰 세운다.</p>
-    <p class="g-p"><b>trap</b> — 기획이 제작할 trap(초록 자리를 대신하는 말, 문장당 2개)을 배열 뱅크에 그대로 섞는다. 지금은 대표 12유닛의 샘플(<code>vocab-expression-traps.sample.json</code>, 45문장)이고, 샘플이 없는 유닛(<b>다른 유닛 ↻</b>)은 trap 없이 배열한다. 화면 부품은 <b>낱말 카드 · 배열 뱅크 · 입력칸</b> 셋뿐이다. 구조형·해당없음은 뺐다.</p>
+    <p class="g-p"><b>공통인 것은 ①·③·④와 순서</b>이고, <b>②에서 펼치는 내용만 유형마다 다르다</b>. ③·④는 ②에서 본 문장만 쓴다 — 처음 보는 문장을 첫 학습에서 풀게 하면 너무 어렵다(그건 복습의 몫이다). <b>S1 주어 변형(문장1-2 · 1-3)은 첫 학습에 쓰지 않는다.</b></p>
+    <p class="g-p"><b>대비형은 ②에서 양쪽을 다 만난다</b> — 기본 문장이 한쪽뿐인 유닛(47 중 5)은 어려운 문장에서 다른 쪽을 하나 끌어온다. ③ 배열은 S1과 <b>다른 쪽</b> 문장으로 한다.</p>
+    <p class="g-p"><b>trap</b> — 기획이 제작할 trap(초록 자리를 대신하는 말, 문장당 2개)을 ③ 뱅크에 섞고, ④에서 trap과 같은 답을 치면 왜 아닌지 짚는다. 지금은 대표 12유닛 샘플(<code>vocab-expression-traps.sample.json</code>)이고, 샘플이 없는 유닛(<b>다른 유닛 ↻</b>)은 trap 없이 푼다. 구조형·해당없음은 뺐다.</p>
     <p class="g-p">기존 문제 풀이는 그대로 있다 → <a href="vocab-expression-types.html">유형별 학습 방식</a></p>
   </details>
 
@@ -123,11 +141,27 @@
 
 <script>
 /* 문장은 scripts/classify_units.py 가 확정 CSV 에서 만든 vocab-expression-units.gen.json 그대로다.
-   단계마다 쓰는 문장: ① S1 · ② 문장1-2 · ③ 문장1-3 · ④ S1 다음의 첫 '기본' 또는 '문장2'.
+   ① S1 · ② S1 + 기본 2(대비형은 양쪽이 다 나오게) · ③ ②의 기본 첫째 · ④ ②의 기본 둘째 · 복습 = 어려운.
    trap 은 vocab-expression-traps.sample.json — 문장(대괄호 포함) → [trap 마다 자리 순서대로 대신할 말, 안 바꾸는 자리는 '-']. */
 const TYPES = ['패턴형', '변화형', '대비형', '자리형'];
 const FEATURED = { '패턴형':['10000','10033','10444'], '변화형':['10065','10299','10317'], '대비형':['10369','10313','10059'], '자리형':['10041','10043','10132'] };
-const STEPS = ['① 보기', '② 배열', '③ 쓰기', '④ 처음 문장'];
+const STEPS = ['① 뜻', '② 범위', '③ 배열', '④ 쓰기'];
+const BASIC = ['기본', '문장1', '문장2', '문장3'];
+
+/* ② 펼침에 쓰는 말 — 대표 유닛만 손으로 적었다. 나머지 유닛은 데이터의 형태 라벨로 대신한다 */
+const SIDE_NOTE = {
+  '10369': { 'V-ing':'-ing · 이미 하던·한 일', 'to-V':'to · 하려고' },
+  '10313': { 'V-ing':'-ing · 감정을 일으켜', 'V-ed':'-ed · 내가 느껴' },
+  '10059': { 'at':'at · 시각', 'on':'on · 요일', 'in':'in · 아침·달·계절' },
+};
+const BASE = { opened:'open', cried:'cry', talked:'talk', smallest:'small', tallest:'tall', smartest:'smart',
+  rejected:'reject', bitten:'bite', submitted:'submit' };
+const SHAPE = { 'V-ed':'-ed', 'A-est':'-est', 'A-er':'-er', 'V-ing':'-ing', "N-'s":"'s", 'ORD':'서수', 'to-V':'to ~' };
+const SUF = { 'V-ed':/(ied|ed)$/i, 'A-est':/(iest|est)$/i, 'A-er':/(ier|er)$/i, 'V-ing':/ing$/i, "N-'s":/'s$/i, 'ORD':/(st|nd|rd|th)$/i };
+const BE = /^(is|are|am|was|were|be|been|\w+'s|\w+'re|\w+'m)$/i;
+const AUX = /^(can|could|will|would|should|may|might|must|do|does|did|have|has|had|\w+'ll|\w+'ve|\w+'d|\w+n't)$/i;
+const PRON = /^(me|you|him|her|it|us|them)$/i;
+const FREQ = /^(always|usually|often|sometimes|rarely|seldom|never)$/i;
 
 let U = [], byId = {}, TRAPS = {};
 let st = { t:0, id:'10000', step:0 };
@@ -140,6 +174,7 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':
 const krHtml = s => esc(s).replace(/\[([^\]]+)\]/g, '<span class="tgt">$1</span>');
 const plain = s => s.replace(/[[\]]/g, '');
 const low = w => w.toLowerCase().replace(/[’]/g, "'");
+const clean = w => low(w).replace(/[.,!?]+$/, '');
 function norm(s) {
   return low(s).replace(/\bwon't\b/g, 'will not').replace(/\bcan't\b/g, 'can not').replace(/n't\b/g, ' not')
     .replace(/'re\b/g, ' are').replace(/'m\b/g, ' am').replace(/'ll\b/g, ' will').replace(/'ve\b/g, ' have')
@@ -176,12 +211,101 @@ function trapTiles(en) {
   return out;
 }
 
+/* ② 에 세울 기본 두 문장 — 대비형은 S1 과 다른 쪽이 하나는 들어가게 하고, 그 문장을 ③ 배열에 먼저 쓴다 */
 function pick(u) {
-  const s = u.sents, by = tag => s.find(x => x[0] === tag);
-  const nw = s.find((x, j) => j > 0 && (x[0] === '기본' || x[0] === '문장2'));
-  return { s1:s[0], v1:by('문장1-2') || s[1], v2:by('문장1-3') || s[2], nw:nw || s[s.length - 1] };
+  const s = u.sents, lab = {};
+  u.indep.forEach((i, k) => lab[i] = u.labels[k]);
+  const pool = u.indep.filter(i => i !== 0);
+  let b = pool.filter(i => BASIC.includes(s[i][0])).slice(0, 2);
+  if (u.type === '대비형') {
+    const sides = new Set([lab[0], ...b.map(i => lab[i])].filter(Boolean));
+    if (sides.size < 2) {
+      const o = pool.find(i => lab[i] && lab[i] !== lab[0]);
+      if (o !== undefined) b = [o, ...b.filter(i => i !== o)].slice(0, 2);
+    }
+    b.sort((x, y) => (lab[x] === lab[0]) - (lab[y] === lab[0]));
+  }
+  for (const i of [...pool, ...s.keys()]) { if (b.length >= 2) break; if (i !== 0 && !b.includes(i)) b.push(i); }
+  const review = pool.find(i => !b.includes(i) && s[i][0] === '어려운');
+  return { s1:s[0], b1:s[b[0]], b2:s[b[1]], review:review === undefined ? null : s[review], lab:[lab[0], lab[b[0]], lab[b[1]]] };
 }
 const unit = () => byId[st.id];
+
+/* 초록 조각 안에서 유형별로 짚을 낱말과 그 아래 칩 */
+function spread(u, en, label) {
+  const a = en.indexOf('['), z = en.lastIndexOf(']');
+  const all = words(en.slice(a, z + 1)), ws = all.filter(x => x.w);
+  let hit = -1, nb = -1, chip = '', cls = 'a', suf = null;
+  if (u.type === '변화형') {
+    const re = SUF[label];
+    hit = ws.findIndex(x => x.g && re && re.test(x.w));
+    if (hit < 0) hit = ws.findIndex(x => x.g && BASE[clean(x.w)]);
+    const w = hit >= 0 ? clean(ws[hit].w) : '', base = BASE[w], m = re && w.match(re);
+    if (base && m && w.startsWith(base.replace(/y$/, ''))) chip = `${esc(base)} → ${esc(w.slice(0, m.index))}<b>${esc(m[0])}</b>`;
+    else if (base) chip = `${esc(base)} → <b>${esc(w)}</b> · 불규칙`;
+    else chip = esc(SHAPE[label] || '모양이 바뀌어요');
+    if (m) suf = m[0].length;
+  } else if (u.type === '대비형') {
+    const sides = Object.keys(u.sides);
+    cls = 'abc'[Math.min(2, Math.max(0, sides.indexOf(label)))] || 'a';
+    if (label === 'to-V') hit = ws.findIndex(x => x.g && clean(x.w) === 'to');
+    else if (SUF[label]) { hit = ws.findIndex(x => x.g && SUF[label].test(x.w)); if (hit >= 0) suf = ws[hit].w.match(SUF[label])[0].length; }
+    else if (label) hit = ws.findIndex(x => x.g && clean(x.w).startsWith(label));
+    const note = SIDE_NOTE[u.id] && SIDE_NOTE[u.id][label];
+    chip = esc(note || SHAPE[label] || (hit >= 0 ? clean(ws[hit].w) : label || ''));
+  } else if (u.type === '자리형') {
+    cls = 'c';
+    if (label) {
+      hit = ws.findIndex(x => clean(x.w) === label);
+      if (hit > 0 && BE.test(clean(ws[hit - 1].w))) { nb = hit - 1; chip = `${esc(label)} · be동사 뒤`; }
+      else if (hit > 0 && AUX.test(clean(ws[hit - 1].w))) { nb = hit - 1; chip = `${esc(label)} · 조동사 뒤`; }
+      else if (hit >= 0 && hit < ws.length - 1) { nb = hit + 1; chip = FREQ.test(label) ? `${esc(label)} · 동사 앞` : `${esc(label)} · ${esc(clean(ws[hit + 1].w))} 앞`; }
+      else chip = esc(label);
+    } else {
+      hit = ws.findIndex((x, i) => i > 0 && i < ws.length - 1 && PRON.test(clean(x.w)));
+      if (hit >= 0) chip = `${esc(clean(ws[hit].w))} · 사이에`;
+    }
+  }
+  const inner = ws.map((x, i) => {
+    let h = esc(x.w);
+    if (i === hit) h = suf ? `${esc(x.w.slice(0, x.w.length - suf))}<b>${esc(x.w.slice(-suf))}</b>` : `<b>${h}</b>`;
+    if (i === nb) h = `<span class="nb">${h}</span>`;
+    const nx = all[all.indexOf(x) + 1], p = nx && nx.p ? esc(nx.p) : '';
+    return x.g ? h + p : `<span class="gap">${h + p}</span>`;
+  }).join(' ');
+  /* 초록이 문장 끝이면 마침표만 따로 떨어지지 않게 조각에 붙인다 */
+  const post = plain(en.slice(z + 1)), tail = /^[.,!?]+$/.test(post.trim());
+  return { pre:plain(en.slice(0, a)), inner:tail ? inner + esc(post.trim()) : inner, post:tail ? '' : post, chip:chip ? `<span class="lab ${cls}">${chip}</span>` : '' };
+}
+
+function stackRow(u, [, en, kr], label, opt = {}) {
+  const r = spread(u, en, label), m = opt.more ? ' more' : '', anim = opt.delay !== undefined ? ` row-in" style="animation-delay:${opt.delay}ms` : '';
+  return `<span class="pre${m}${anim}">${esc(r.pre)}</span>`
+    + `<span class="ck${m}${anim}"><span class="chunk">${r.inner}</span>${opt.chip === false ? '' : r.chip}</span>`
+    + `<span class="post${m}${anim}">${esc(r.post)}</span>`
+    + `<span class="stack-k${m}${anim}">${esc(plain(kr))}</span>`;
+}
+
+function rangeNote(u, P) {
+  if (u.type === '패턴형') return '초록 말은 세 문장에서 그대로예요. 앞뒤 말만 바꿔 끼우면 새 문장이 돼요.';
+  if (u.type === '변화형') {
+    const s = SHAPE[P.lab[0]];
+    const irr = [P.s1, P.b1, P.b2].some((x, i) => /불규칙/.test(spread(u, x[1], P.lab[i]).chip));
+    return (s ? `낱말은 달라도 끝 모양은 같아요 — <b>${esc(s)}</b>. 아는 낱말에 붙이면 돼요.` : '낱말은 달라도 같은 규칙으로 모양이 바뀌어요.')
+      + (irr ? ' 불규칙한 낱말은 따로 외워요.' : '');
+  }
+  if (u.type === '대비형') {
+    const shown = [...new Set(P.lab.filter(Boolean))].map(l => SHAPE[l] || l);
+    return shown.length > 1
+      ? `같은 자리에 <b>${shown.map(esc).join(' / ')}</b> 중 하나가 와요. 뜻을 보고 골라요.`
+      : '같은 자리에 다른 꼴이 올 수 있어요. 뜻을 보고 골라요.';
+  }
+  if (/사이에/.test(spread(u, P.s1[1], P.lab[0]).chip)) return '목적어가 대명사면 늘 동사와 부사 <b>사이</b>에 와요.';
+  return '초록 말의 순서는 문장이 바뀌어도 늘 같아요.';
+}
+function ruleHtml(u) {
+  return `<div class="rule"><div class="f">${esc(u.form)}</div><div class="m">${esc(u.mean)}</div>${u.desc ? `<div class="d">${esc(u.desc)}</div>` : ''}</div>`;
+}
 
 function header() {
   $('#tabs').innerHTML = TYPES.map((t, i) => `<button class="tab${i === st.t ? ' on' : ''}" data-t="${i}">${t}</button>`).join('');
@@ -197,7 +321,7 @@ function header() {
   $('#rand').onclick = () => { const pool = U.filter(x => x.type === TYPES[st.t] && x.id !== st.id); openUnit(st.t, pool[Math.floor(Math.random() * pool.length)].id); };
 }
 function openUnit(t, id) { st = { t, id, step:0 }; save(); render(); keepCardInView(); }
-function render() { header(); [renderSee, () => renderArrange(1), renderWrite, () => renderArrange(3), renderDone][st.step](); }
+function render() { header(); [renderMeaning, renderRange, renderArrange, renderWrite, renderDone][st.step](); }
 /* 단계가 바뀌어도 맨 위로 올리지 않는다 — 새 카드 윗변이 화면 위로 벗어났을 때만 카드까지 올린다 */
 function keepCardInView() { const r = document.getElementById('stage').getBoundingClientRect(); if (r.top < 0) window.scrollBy({ top:r.top - 12, behavior:'smooth' }); }
 function go(step) { st.step = step; render(); keepCardInView(); }
@@ -205,46 +329,40 @@ function src(u, en) {
   const tr = en === undefined ? '' : TRAPS[en] ? ` · <span class="tr">trap 샘플</span>` : ` · <span class="tmp">trap 없음</span>`;
   return `<div class="src">유닛 ${u.id} · ${u.type}${tr}</div>`;
 }
-function ruleHtml(u) {
-  return `<div class="rule"><div class="f">${esc(u.form)}</div><div class="m">${esc(u.mean)}</div>${u.desc ? `<div class="d">${esc(u.desc)}</div>` : ''}</div>`;
-}
 
-/* ① 보기 — S1 의 초록 뜻에 해당하는 낱말을 하나씩 모두 짚는다 */
-function renderSee() {
+/* ① 뜻 — 모델 문장을 보여 주기만 한다 */
+function renderMeaning() {
   const u = unit(), [, en, kr] = pick(u).s1;
-  const ws = words(en);
-  $('#stage').innerHTML = `<div class="chat-card" id="card"><div class="chat-tag">① 보기</div>
-    <div class="ask">초록 뜻에 해당하는 낱말을 모두 눌러 보세요</div>
+  $('#stage').innerHTML = `<div class="chat-card" id="card"><div class="chat-tag">① 뜻</div>
     <div class="kr">${krHtml(kr)}</div>
-    <div class="line" id="line">${ws.map((x, i) => x.p ? `<span class="punct">${esc(x.p)}</span>` : `<button class="card" data-i="${i}">${esc(x.w)}</button>`).join('')}</div>
-    <div id="fb"></div><div id="after"></div>${src(u)}</div>`;
-  const need = ws.filter(x => x.g).length; let got = 0;
-  $$('#line .card').forEach(b => b.onclick = () => {
-    const x = ws[+b.dataset.i];
-    if (b.classList.contains('ok')) return;
-    if (!x.g) { b.classList.add('bad'); $('#line').classList.remove('shake'); void $('#line').offsetWidth; $('#line').classList.add('shake');
-      $('#fb').innerHTML = `<div class="msg">초록 뜻에 해당하는 낱말을 찾아 보세요.</div>`; return; }
-    b.classList.add('ok'); $('#fb').innerHTML = '';
-    if (++got === need) {
-      $$('#line .card.bad').forEach(e => e.classList.remove('bad'));
-      $('#card').classList.add('correct');
-      $('#after').innerHTML = ruleHtml(u) + `<div class="btns"><button class="btn main" id="next">주어를 바꿔 배열하기 ›</button></div>`;
-      $('#next').onclick = () => go(1);
-    }
-  });
+    <div class="model">${krHtml(en)}</div>
+    <div class="mean">${esc(u.mean)}</div>
+    <div class="btns"><button class="btn main" id="next">다른 문장도 보기 ›</button></div>${src(u)}</div>`;
+  $('#next').onclick = () => go(1);
 }
 
-/* ② · ④ 배열 — 뱅크에 trap 을 섞는다. ④ 는 ① 에서 본 S1 을 이번엔 직접 세운다 */
-function renderArrange(step) {
+/* ② 범위 — S1 + 기본 두 문장의 초록을 세로로 맞추고, 유형별로 무엇이 그대로이고 무엇이 바뀌는지 펼친다 */
+function renderRange() {
   const u = unit(), P = pick(u);
-  const [, en, kr] = step === 1 ? P.v1 : P.s1;
+  const rows = [P.s1, P.b1, P.b2].map((x, i) => stackRow(u, x, P.lab[i], { delay:i * 160 })).join('');
+  $('#stage').innerHTML = `<div class="chat-card" id="card"><div class="chat-tag">② 범위</div>
+    <div class="ask">같은 표현으로 만든 세 문장</div>
+    <div class="stack">${rows}</div>
+    <div class="msg good">${rangeNote(u, P)}</div>
+    ${ruleHtml(u)}
+    <div class="btns"><button class="btn main" id="next">직접 만들어 보기 ›</button></div>${src(u)}</div>`;
+  $('#next').onclick = () => go(2);
+}
+
+/* ③ 배열 — ② 에서 본 기본 첫 문장. 뱅크에 trap 을 섞는다 */
+function renderArrange() {
+  const u = unit(), [, en, kr] = pick(u).b1;
   const ans = bare(en), punct = (plain(en).match(/[.,!?]+$/) || [''])[0];
   const extra = trapTiles(en) || [];
   const tiles = ans.map((w, i) => ({ w, i })).concat(extra.map(w => ({ w, trap:true })));
   for (let n = 0; n < 20; n++) { tiles.sort(() => Math.random() - .5); if (tiles.some((t, k) => t.i !== k)) break; }
   const placed = []; let fin = false;
-  $('#stage').innerHTML = `<div class="chat-card" id="card"><div class="chat-tag">${STEPS[step]}</div>
-    <div class="ask">${step === 3 ? '처음 본 문장을 이번엔 직접 만들어 보세요' : '문장을 배열해 보세요'}</div>
+  $('#stage').innerHTML = `<div class="chat-card" id="card"><div class="chat-tag">③ 배열</div>
     <div class="kr">${krHtml(kr)}</div>
     <div class="fill" id="fill"></div>
     <div class="bank" id="bank">${tiles.map((t, k) => `<button class="card" data-k="${k}">${esc(tileText(t.w))}</button>`).join('')}</div>
@@ -257,8 +375,8 @@ function renderArrange(step) {
   };
   const finish = () => {
     fin = true; $('#fill').classList.add('ok'); $('#card').classList.add('correct'); $('#bb').remove(); $('#fb').innerHTML = '';
-    $('#after').innerHTML = `<div class="btns"><button class="btn main" id="next">${step === 1 ? '직접 써 보기 ›' : '정리 보기 ›'}</button></div>`;
-    $('#next').onclick = () => go(step + 1);
+    $('#after').innerHTML = `<div class="btns"><button class="btn main" id="next">직접 써 보기 ›</button></div>`;
+    $('#next').onclick = () => go(3);
   };
   $$('#bank .card').forEach(b => b.onclick = () => {
     if (fin) return;
@@ -276,9 +394,9 @@ function renderArrange(step) {
   draw();
 }
 
-/* ③ 쓰기 — 또 하나만 바뀐 문장의 초록 자리를 직접 친다 */
+/* ④ 쓰기 — ② 에서 본 기본 둘째 문장의 초록 자리를 직접 친다. trap 과 같은 답이면 왜 아닌지 짚는다 */
 function renderWrite() {
-  const u = unit(), P = pick(u), [, en, kr] = P.v2;
+  const u = unit(), [, en, kr] = pick(u).b2;
   const answers = [];
   const line = words(en).map((x, i, arr) => {
     if (x.p) return `<span class="punct">${esc(x.p)}</span>`;
@@ -288,46 +406,45 @@ function renderWrite() {
     answers.push(grp.join(' '));
     return `<input class="blank" data-b="${answers.length - 1}" autocomplete="off" autocapitalize="off" spellcheck="false" style="width:${Math.max(4, grp.join(' ').length + 2)}ch">`;
   }).join(' ');
-  $('#stage').innerHTML = `<div class="chat-card" id="card"><div class="chat-tag">③ 쓰기</div>
-    <div class="ask">초록 자리를 직접 써 보세요</div>
+  $('#stage').innerHTML = `<div class="chat-card" id="card"><div class="chat-tag">④ 쓰기</div>
     <div class="kr">${krHtml(kr)}</div>
     <div class="line" id="line">${line}</div>
     <div id="fb"></div><div class="btns" id="bb"><button class="btn ghost" id="hint">첫 글자</button><button class="btn ghost" id="show">정답 보기</button><button class="btn main" id="chk">확인</button></div>
-    <div id="after"></div>${src(u)}</div>`;
+    <div id="after"></div>${src(u, en)}</div>`;
   const inps = $$('input.blank'), isOk = i => norm(i.value) === norm(answers[+i.dataset.b]);
+  /* 빈칸 묶음이 원문 대괄호와 다를 수 있어(이웃한 괄호가 합쳐짐) trap 은 답 전체를 한 줄로 비교한다 */
+  const trapAns = (TRAPS[en] || []).map(t => { let k = 0; return en.replace(/\[([^\]]+)\]/g, (m, x) => { const v = t[k++]; return '[' + (v === '-' ? x : v) + ']'; }); })
+    .map(s => [...s.matchAll(/\[([^\]]+)\]/g)].map(m => m[1]).join(' '));
   let fin = false;
   const finish = () => {
     if (fin) return; fin = true;
     inps.forEach(i => { i.value = answers[+i.dataset.b]; i.classList.add('ok'); i.disabled = true; });
     $('#card').classList.add('correct'); $('#bb').remove(); $('#fb').innerHTML = '';
-    $('#after').innerHTML = `<div class="btns"><button class="btn main" id="next">처음 문장 만들기 ›</button></div>`;
-    $('#next').onclick = () => go(3);
+    $('#after').innerHTML = `<div class="btns"><button class="btn main" id="next">정리 보기 ›</button></div>`;
+    $('#next').onclick = () => go(4);
   };
   inps.forEach(i => { i.oninput = () => { i.classList.toggle('ok', isOk(i)); if (inps.every(isOk)) finish(); }; i.onkeydown = e => { if (e.key === 'Enter' && $('#chk')) $('#chk').click(); }; });
   $('#chk').onclick = () => {
     if (inps.every(isOk)) return finish();
     $('#line').classList.remove('shake'); void $('#line').offsetWidth; $('#line').classList.add('shake');
-    $('#fb').innerHTML = `<div class="msg">② 에서 배열한 문장을 떠올려 보세요.</div>`;
+    const typed = norm(inps.map(i => i.value).join(' '));
+    const hitTrap = trapAns.some(t => norm(t) === typed);
+    $('#fb').innerHTML = hitTrap
+      ? `<div class="msg"><b>${esc(inps.map(i => i.value.trim()).join(' … '))}</b> 는 이 문장에 맞지 않아요.${u.desc ? ' ' + esc(u.desc) : ''}</div>`
+      : `<div class="msg">② 에서 본 문장을 떠올려 보세요.</div>`;
   };
   $('#hint').onclick = () => inps.forEach(i => { if (!isOk(i)) { i.value = ''; i.placeholder = answers[+i.dataset.b].replace(/[A-Za-z]+/g, w => w[0] + '·'.repeat(w.length - 1)); } });
   $('#show').onclick = finish;
-  setTimeout(() => inps[0] && inps[0].focus(), 50);
+  setTimeout(() => inps[0] && inps[0].focus({ preventScroll:true }), 50);
 }
 
-/* 정리 — 만든 세 문장의 초록 조각을 세로로 맞춰 세우고(초록 앞 / 초록 / 초록 뒤),
-   처음 보는 문장(기본 / 문장2)은 풀게 하지 않고 '이 틀로 이런 말도 해요' 한 줄로만 보여 준다 */
+/* 정리 — 만든 세 문장을 다시 세로로 맞추고, 복습에서 만날 처음 보는 문장을 흐리게 한 줄 둔다 */
 function renderDone() {
   const u = unit(), P = pick(u);
-  const row = ([, en, kr], more) => {
-    const a = en.indexOf('['), b = en.lastIndexOf(']');
-    const pre = en.slice(0, a), chunk = plain(en.slice(a, b + 1)), post = en.slice(b + 1);
-    return `<span class="pre${more ? ' more' : ''}">${esc(plain(pre))}</span><span class="chunk${more ? ' more' : ''}">${esc(chunk)}</span><span class="post${more ? ' more' : ''}">${esc(plain(post))}</span>`
-      + `<span class="stack-k">${esc(plain(kr))}</span>`;
-  };
-  const rows = [P.s1, P.v1, P.v2].map(x => row(x)).join('')
-    + `<span class="stack-h">이 틀로 이런 말도 해요</span>` + row(P.nw, true);
+  const rows = [P.s1, P.b1, P.b2].map((x, i) => stackRow(u, x, P.lab[i])).join('')
+    + (P.review ? `<span class="stack-h">복습(1~3일 뒤)에서 처음 보는 문장으로</span>` + stackRow(u, P.review, null, { more:true, chip:false }) : '');
   $('#stage').innerHTML = `<div class="chat-card correct"><div class="chat-tag">정리</div>
-    <div class="ask">같은 틀로 만든 문장</div>
+    <div class="ask">이 표현으로 만든 문장</div>
     <div class="stack">${rows}</div>
     ${ruleHtml(u)}
     <div class="btns"><button class="btn ghost" id="again">다시</button><button class="btn main" id="next">다른 유닛 ↻</button></div></div>`;
