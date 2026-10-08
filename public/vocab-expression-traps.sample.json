@@ -320,5 +320,65 @@
   [
    "Pick he up"
   ]
+ ],
+ "[I wouldn't] worry [if I were] you.": [
+  [
+   "-",
+   "if I am"
+  ],
+  [
+   "I won't",
+   "-"
+  ]
+ ],
+ "[I] really [liked] it.": [
+  [
+   "-",
+   "likes"
+  ],
+  [
+   "-",
+   "liking"
+  ]
+ ],
+ "He's [the nicest] person in the world.": [
+  [
+   "the nicer"
+  ],
+  [
+   "the most nice"
+  ]
+ ],
+ "This [was found] under a table.": [
+  [
+   "was find"
+  ],
+  [
+   "was finded"
+  ]
+ ],
+ "[She's usually] pretty nice.": [
+  [
+   "She usually"
+  ],
+  [
+   "She's usual"
+  ]
+ ],
+ "I [usually have] enough milk.": [
+  [
+   "have usually"
+  ],
+  [
+   "usually has"
+  ]
+ ],
+ "The taxi [dropped me off] at home.": [
+  [
+   "dropped off me"
+  ],
+  [
+   "dropped I off"
+  ]
  ]
 }
