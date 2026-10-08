@@ -1,6 +1,6 @@
 """확정 CSV의 901유닛을 기획 검토용으로 정리한다 — ① 한 유닛에 갈래가 섞인 것을 나누고 ② 나눈 뒤 유닛마다 패턴화 가능/불가를 판정한다.
 소스(레포 밖): UNITS_CSV(classify_units.py 와 같은 확정 CSV) · CONCERN_CSV(기본 ~/Downloads/패턴화 고민 목록 - 목록.csv)
-산출: docs/units/ 아래 CSV 세 장(시트에 붙여 넣는 용도, UTF-8 BOM)
+산출: public/units/ 아래 CSV 세 장 — 배포 사이트에서 서빙되므로 Google 시트가 IMPORTDATA 로 바로 불러온다(BOM 을 붙이면 첫 칸에 섞여 들어간다)
   unit-splits.gen.csv            나눌 유닛 — 새 유닛마다 카드 초록·뜻 제안과 배정된 문장(문장 한 줄 = 한 행, 확정 CSV 와 같은 모양)
   units-after-split.gen.csv      나눈 뒤 전체 유닛 — 패턴화 가능/불가와 그 근거
   pattern-concern-list.judged.gen.csv  고민 목록 133유닛에 '패턴 학습 포인트'·'판단'을 채운 것
@@ -17,7 +17,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import classify_units as cu
 
 CONCERN = Path(os.environ.get("CONCERN_CSV", cu.DL / "패턴화 고민 목록 - 목록.csv"))
-OUT = Path(__file__).resolve().parent.parent / "docs" / "units"
+OUT = Path(__file__).resolve().parent.parent / "public" / "units"
 VARIANT = ("문장1-2", "문장1-3")
 BASIC = ("기본", "문장1", "문장2", "문장3")
 
@@ -243,7 +243,7 @@ def main():
         after.append([uid, uid, "", u["form"], u["mean"], g["type"], pat, anc, why_not, chk, len(indep), KEEP.get(uid, ""),
                       "Y" if subj_in_bracket(u["sents"]) else "", concern.get(uid, {}).get("유형", ""), concern.get(uid, {}).get("메모", "")])
 
-    w = lambda name: csv.writer(open(OUT / name, "w", encoding="utf-8-sig", newline=""))
+    w = lambda name: csv.writer(open(OUT / name, "w", encoding="utf-8", newline=""))
     s = w("unit-splits.gen.csv")
     s.writerow(["원 유닛", "새 유닛", "갈래", "나누는 이유", "카드 초록 (제안)", "카드 회색 1행 (뜻, 제안)", "태그", "sentence", "translation", "메모"])
     s.writerows(split_rows)
