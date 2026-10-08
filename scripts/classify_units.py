@@ -294,7 +294,7 @@ def slot_form(indep, form):
     if sum(1 for _, e, _ in indep if form_classes(tokens(e))) / len(indep) >= 0.5: return ""
     return next((label for key, label in SLOT_FORMS if key in form), "")
 
-def main():
+def load_units():
     if not SRC.exists(): die(f"CSV 없음: {SRC} (UNITS_CSV로 지정)")
     rows = list(csv.reader(open(SRC, encoding="utf-8")))
     head = rows[0]
@@ -307,6 +307,10 @@ def main():
                               mean=r[col["카드 회색 1행 (뜻)"]], desc=r[col["카드 회색 2행 (설명)"]], sents=[])
         if cur and r[col["sentence"]].strip():
             units[cur]["sents"].append((r[col["태그"]].strip(), r[col["sentence"]].strip(), r[col["translation"]].strip()))
+    return units
+
+def main():
+    units = load_units()
     out = []
     for u in units.values():
         indep = [s for s in u["sents"] if not s[0].startswith("문장1-")]
