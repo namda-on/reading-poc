@@ -1,9 +1,10 @@
 """확정 CSV의 901유닛을 기획 검토용으로 정리한다 — ① 한 유닛에 갈래가 섞인 것을 나누고 ② 나눈 뒤 유닛마다 패턴화 가능/불가를 판정한다.
 소스(레포 밖): UNITS_CSV(classify_units.py 와 같은 확정 CSV) · CONCERN_CSV(기본 ~/Downloads/패턴화 고민 목록 - 목록.csv)
 산출: public/units/ 아래 CSV 세 장 — 배포 사이트에서 서빙되므로 Google 시트가 IMPORTDATA 로 바로 불러온다(BOM 을 붙이면 첫 칸에 섞여 들어간다)
-  unit-splits.gen.csv            나눌 유닛 — 새 유닛마다 카드 초록·뜻 제안과 배정된 문장(문장 한 줄 = 한 행, 확정 CSV 와 같은 모양)
-  units-after-split.gen.csv      나눈 뒤 전체 유닛 — 패턴화 가능/불가와 그 근거
-  pattern-concern-list.judged.gen.csv  고민 목록 133유닛에 '패턴 학습 포인트'·'판단'을 채운 것
+  열 이름 앞에 출처를 붙인다 — `원본 ·` 확정 CSV 그대로 · `변경 ·` 원본을 바꾸자는 제안(나눈 유닛뿐) · `추가 ·` 원본에 없던 판정 · `채움 ·` 원본에 빈 열로 있던 것
+  units-after-split.gen.csv      확정 CSV 의 문장 행 전부(순서·내용 그대로) + 오른쪽에 변경·추가 열
+  unit-splits.gen.csv            나눈 26유닛만 — 원본 문장을 새 유닛별로 묶어 원본 태그와 새 태그를 나란히
+  pattern-concern-list.judged.gen.csv  고민 목록 133유닛 그대로 + 빈 열이던 '패턴 학습 포인트'·'판단'을 채움
 
 나누는 기준: 갈래마다 뜻이나 쓰는 자리가 달라 따로 골라야 하는 것(stop -ing / stop to, some / any, at / on / in …)과
 카드 초록에 틀이 둘 적힌 것. 같은 자리에 같은 부류 낱말이 갈아 끼워지는 열린 목록(의문사·감각동사·접속사),
@@ -219,60 +220,97 @@ def main():
     else:
         print(f"고민 목록 없음: {CONCERN} — 판단 CSV 는 건너뛴다", file=sys.stderr)
 
-    # ① 나눌 유닛
-    split_rows, after = [], []
+    # 원본 문장 행은 순서·내용을 그대로 두고, 바꾼 것(변경 ·)과 새로 붙인 것(추가 ·)은 오른쪽 열에만 적는다
+    O = ["원본 · id", "원본 · trigger", "원본 · 카드 초록 (형태)", "원본 · 카드 회색 1행 (뜻)", "원본 · 카드 회색 2행 (설명)", "원본 · 태그", "원본 · sentence", "원본 · translation"]
+    C = ["변경 · 요약", "변경 · 새 유닛", "변경 · 새 카드 초록 (제안)", "변경 · 새 뜻 (제안)", "변경 · 새 태그"]
+    A = ["추가 · 유형", "추가 · 패턴화", "추가 · 공통 고정어", "추가 · 패턴화 불가 이유", "추가 · 확인", "추가 · 나누거나 남긴 이유", "추가 · 메모"]
+    all_rows, split_rows, judged = [], [], []
     for uid, u in units.items():
         g = gen[uid]
-        if uid in SPLITS:
-            parts = split_unit(u, g)
-            for p in parts:
-                indep = [s for s in p["sents"] if s[0] not in VARIANT]
-                short = max(0, 3 - len(indep))
-                memo = []
-                if p["new_s1"]: memo.append(f"S1 새로 지정({p['sents'][0][1]}) — 주어 변형 문장 없음")
-                if short: memo.append(f"독립 문장 {len(indep)}개 — {short}개 보강 필요(S1 + 2문장 기준)")
-                for n, (tag, en, kr) in enumerate(p["sents"]):
-                    split_rows.append([uid if n == 0 else "", p["id"] if n == 0 else "", p["side"] if n == 0 else "", p["why"] if n == 0 else "",
-                                       p["form"] if n == 0 else "", p["mean"] if n == 0 else "", "S1" if n == 0 else tag, en, kr, " · ".join(memo) if n == 0 else ""])
-                pat, anc, why_not, chk = judge(p["form"], p["sents"], side=p["side"])
-                after.append([p["id"], uid, "분리", p["form"], p["mean"], f"{g['type']} → 분리", pat, anc, why_not, chk, len(indep), "",
-                              "Y" if subj_in_bracket(p["sents"]) else "", concern.get(uid, {}).get("유형", ""), concern.get(uid, {}).get("메모", "")])
+        head = [uid, u["trigger"], u["form"], u["mean"], u["desc"]]
+        subj = "괄호가 주어까지 묶었다" if subj_in_bracket(u["sents"]) else ""
+        if uid not in SPLITS:
+            pat, anc, why_not, chk = judge(u["form"], u["sents"], g["type"], keep=KEEP.get(uid, ""))
+            keep = f"나누지 않음 — {KEEP[uid]}" if uid in KEEP else ""
+            judged.append(dict(id=uid, parent=uid, form=u["form"], pat=pat, anc=anc, why=why_not, chk=chk))
+            for n, (tag, en, kr) in enumerate(u["sents"]):
+                first = n == 0
+                all_rows.append((head if first else [""] * 5) + [tag, en, kr] + [""] * 5
+                                + ([g["type"], pat, anc, why_not, chk, keep, subj] if first else [""] * 7))
             continue
-        indep = [s for s in u["sents"] if s[0] not in VARIANT]
-        pat, anc, why_not, chk = judge(u["form"], u["sents"], g["type"], keep=KEEP.get(uid, ""))
-        after.append([uid, uid, "", u["form"], u["mean"], g["type"], pat, anc, why_not, chk, len(indep), KEEP.get(uid, ""),
-                      "Y" if subj_in_bracket(u["sents"]) else "", concern.get(uid, {}).get("유형", ""), concern.get(uid, {}).get("메모", "")])
+        parts = split_unit(u, g)
+        where = {}  # 원본 문장 번호 → (새 유닛, 그 유닛의 S1 인가)
+        for p in parts:
+            for k, s in enumerate(p["sents"]):
+                where[next(i for i, x in enumerate(u["sents"]) if x is s)] = (p, k == 0)
+        summary = f"{len(parts)}개로 나눔: " + " · ".join(p["id"] for p in parts)
+        for n, (tag, en, kr) in enumerate(u["sents"]):
+            p, is_s1 = where[n]
+            new_tag = ("S1" if n == 0 else f"S1 (원래 {tag})") if is_s1 else ""
+            indep = [s for s in p["sents"] if s[0] not in VARIANT]
+            memo = []
+            if p["new_s1"]: memo.append("S1 새로 지정 — 주어 변형 문장 없음")
+            if len(indep) < 3: memo.append(f"독립 문장 {len(indep)}개 — {3 - len(indep)}개 보강 필요(S1 + 2문장 기준)")
+            if is_s1:
+                pat, anc, why_not, chk = judge(p["form"], p["sents"], side=p["side"])
+                judged.append(dict(id=p["id"], parent=uid, form=p["form"], pat=pat, anc=anc, why=why_not, chk=chk, short=len(indep) < 3))
+                add = [f"{g['type']}에서 나눔", pat, anc, why_not, chk, f"나눔 — {p['why']}", " · ".join(memo)]
+            else:
+                add = [""] * 7
+            all_rows.append((head if n == 0 else [""] * 5) + [tag, en, kr]
+                            + [summary if n == 0 else "", p["id"], p["form"] if is_s1 else "", p["mean"] if is_s1 else "", new_tag] + add)
+        for p in parts:
+            indep = [s for s in p["sents"] if s[0] not in VARIANT]
+            memo = []
+            if p["new_s1"]: memo.append("S1 새로 지정 — 주어 변형 문장 없음")
+            if len(indep) < 3: memo.append(f"독립 문장 {len(indep)}개 — {3 - len(indep)}개 보강 필요(S1 + 2문장 기준)")
+            for k, (tag, en, kr) in enumerate(p["sents"]):
+                first_of_unit = p is parts[0] and k == 0
+                orig_s1 = p["sents"][k] is u["sents"][0]
+                split_rows.append([uid if first_of_unit else "", u["form"] if first_of_unit else "", u["mean"] if first_of_unit else "", tag, en, kr,
+                                   p["id"] if k == 0 else "", p["form"] if k == 0 else "", p["mean"] if k == 0 else "",
+                                   ("S1" if orig_s1 else f"S1 (원래 {tag})") if k == 0 else "",
+                                   p["why"] if k == 0 else "", " · ".join(memo) if k == 0 else ""])
+
+    # 원본 열은 다시 짜 맞추지 않고 확정 CSV 의 같은 행에서 그대로 옮긴다 — 작업 표시(여기까지 10-06 업로드) 같은 칸도 남는다
+    src = list(csv.reader(open(cu.SRC, encoding="utf-8")))
+    sh = src[0]
+    pick = [sh.index(n) for n in ("id", "trigger", "카드 초록 (형태)", "카드 회색 1행 (뜻)", "카드 회색 2행 (설명)", "태그", "sentence", "translation")]
+    body = [r for r in src[1:] if r[sh.index("sentence")].strip()]
+    if len(body) != len(all_rows): cu.die(f"원본 문장 행 수가 다르다: {len(body)} ≠ {len(all_rows)}")
+    for row, r in zip(all_rows, body):
+        if row[6] != r[pick[6]].strip(): cu.die(f"원본 행 순서가 어긋났다: {row[6]} ≠ {r[pick[6]]}")
+        row[:8] = [r[i] for i in pick]
 
     w = lambda name: csv.writer(open(OUT / name, "w", encoding="utf-8", newline=""))
-    s = w("unit-splits.gen.csv")
-    s.writerow(["원 유닛", "새 유닛", "갈래", "나누는 이유", "카드 초록 (제안)", "카드 회색 1행 (뜻, 제안)", "태그", "sentence", "translation", "메모"])
-    s.writerows(split_rows)
-    a = w("units-after-split.gen.csv")
-    a.writerow(["유닛", "원 유닛", "분리", "카드 초록", "카드 회색 1행 (뜻)", "기존 분류", "패턴화", "공통 고정어", "패턴화 불가 이유",
-                "확인", "독립 문장 수", "대비형인데 나누지 않은 이유", "괄호에 주어 포함", "고민 목록 유형", "고민 목록 메모"])
-    a.writerows(after)
+    t = w("units-after-split.gen.csv"); t.writerow(O + C + A); t.writerows(all_rows)
+    t = w("unit-splits.gen.csv")
+    t.writerow(["원본 · id", "원본 · 카드 초록 (형태)", "원본 · 카드 회색 1행 (뜻)", "원본 · 태그", "원본 · sentence", "원본 · translation",
+                "변경 · 새 유닛", "변경 · 새 카드 초록 (제안)", "변경 · 새 뜻 (제안)", "변경 · 새 태그", "추가 · 나누는 이유", "추가 · 메모"])
+    t.writerows(split_rows)
 
     if concern:
         byp = {}
-        for r in after: byp.setdefault(r[1], []).append(r)
+        for j in judged: byp.setdefault(j["parent"], []).append(j)
         rows = list(csv.reader(open(CONCERN, encoding="utf-8")))
         head = rows[0]; ip, ij = head.index("패턴 학습 포인트"), head.index("판단")
-        c = w("pattern-concern-list.judged.gen.csv"); c.writerow(head)
+        t = w("pattern-concern-list.judged.gen.csv")
+        # 원본에 빈 열로 있던 두 칸만 채운다 — 나머지 열은 그대로
+        t.writerow([("채움 · " if i in (ip, ij) else "원본 · ") + h for i, h in enumerate(head)])
         for r in rows[1:]:
-            rs = byp.get(r[0].strip(), [])
-            if len(rs) > 1:
-                r[ij] = "분리 필요 → " + " / ".join(f"{x[0]} {x[3]}" for x in rs)
-                r[ip] = " / ".join(f"{x[0]}: {x[7] or x[8]}" for x in rs)
-            elif rs:
-                x = rs[0]
-                r[ij] = f"패턴화 {x[6]}"
-                r[ip] = x[7] if x[6] == "가능" else x[8]
-            c.writerow(r)
+            js = byp.get(r[0].strip(), [])
+            if len(js) > 1:
+                r[ij] = "나눔 → " + " / ".join(f"{j['id']} {j['form']}" for j in js)
+                r[ip] = " / ".join(f"{j['id']}: {j['anc'] or j['why']}" for j in js)
+            elif js:
+                r[ij] = f"패턴화 {js[0]['pat']}"
+                r[ip] = js[0]["anc"] if js[0]["pat"] == "가능" else js[0]["why"]
+            t.writerow(r)
 
-    n_split = sum(1 for r in after if r[2] == "분리")
-    cnt = Counter(r[6] for r in after)
-    print(f"나눌 유닛 {len(SPLITS)}개 → 새 유닛 {n_split}개 · 나눈 뒤 전체 {len(after)}유닛 (패턴화 가능 {cnt['가능']} · 불가 {cnt['불가']})")
-    print("보강이 필요한 새 유닛:", sum(1 for r in after if r[2] == "분리" and r[10] < 3), "· 고정어가 기능어 하나뿐:", sum(1 for r in after if r[9]))
+    cnt = Counter(j["pat"] for j in judged)
+    print(f"원본 {len(units)}유닛 · {sum(len(u['sents']) for u in units.values())}문장 → 나눈 유닛 {len(SPLITS)}개(새 유닛 {sum(1 for j in judged if j['parent'] != j['id'])}개)"
+          f" · 나눈 뒤 {len(judged)}유닛 (패턴화 가능 {cnt['가능']} · 불가 {cnt['불가']})")
+    print("보강이 필요한 새 유닛:", sum(1 for j in judged if j.get("short")), "· 고정어가 기능어 하나뿐:", sum(1 for j in judged if j["chk"]))
     print("산출:", ", ".join(p.name for p in sorted(OUT.glob("*.gen.csv"))))
 
 if __name__ == "__main__":
