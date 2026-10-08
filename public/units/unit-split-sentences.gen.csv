@@ -1,0 +1,465 @@
+새 유닛,카드 초록 (제안),뜻 (제안),칸,sentence,translation,출처,원래 유닛 · 원래 칸
+10019-A,주어 + be동사 + in + ______ .,~ 안에 있어,S1,[She's in] the library.,[걔는] 도서관[에 있어].,기존,10019 · 기본
+,,,문장1-2,[He's in] the library.,[걔는] 도서관[에 있어].,기존,10019 · 문장1-2
+,,,문장1-3,[We're in] the library.,[우리는] 도서관[에 있어].,기존,10019 · 문장1-3
+,,,기본,[It was in] the car.,[그거] 차 안[에 있었어].,기존,10019 · 기본
+,,,기본,[They're in] the kitchen.,[걔네] 부엌[에 있어].,새로 씀,
+,,,어려운,[He was in] the bathroom.,[걔] 화장실[에 있었어].,기존,10019 · 어려운
+,,,어려운,[She was in] the hospital for a week.,[걔는] 일주일 동안 병원[에 있었어].,새로 씀,
+,,,어려운,[He's] still [in] his room.,[걔는] 아직 자기 방[에 있어].,새로 씀,
+10019-B,주어 + be동사 + on + ______ .,~ 위에 있어,S1,[They're on] the table.,[그것들은] 탁자 위[에 있어].,기존,10019 · 기본
+,,,문장1-2,[It's on] the table.,[그거] 탁자 위[에 있어].,새로 씀,
+,,,문장1-3,[They're on] the kitchen table.,[그것들은] 식탁 위[에 있어].,새로 씀,
+,,,기본,[It's on] the shelf.,[그거] 선반 위[에 있어].,새로 씀,
+,,,기본,[They're on] the floor.,[그것들] 바닥[에 있어].,새로 씀,
+,,,어려운,[They were on] the desk.,[그것들은] 책상 위[에 있었어].,기존,10019 · 어려운
+,,,어려운,[It was on] the top shelf the whole time.,[그거] 계속 맨 위 선반[에 있었어].,새로 씀,
+,,,어려운,[Are they] still [on] the bed?,[그거] 아직 침대 위[에 있어]?,새로 씀,
+10019-C,주어 + be동사 + at + ______ .,~에 있어,S1,[I'm] not [at] home.,[나] 집[에] 없[어].,기존,10019 · 어려운
+,,,문장1-2,[He's] not [at] home.,[걔] 집[에] 없[어].,새로 씀,
+,,,문장1-3,[I'm] not [at] home right now.,[나] 지금 집[에] 없[어].,새로 씀,
+,,,기본,[She's at] school.,[걔는] 학교[에 있어].,새로 씀,
+,,,기본,[We're at] the station.,[우리] 역[에 있어].,새로 씀,
+,,,어려운,[He was at] the office until midnight.,[걔는] 자정까지 사무실[에 있었어].,새로 씀,
+,,,어려운,[They were at] the party last night.,[걔네] 어젯밤 파티[에 있었어].,새로 씀,
+,,,어려운,[I'll be at] the front desk if you need me.,필요하면 [나] 프런트[에 있을게].,새로 씀,
+10026-A,Let's ______ .,~하자,S1,[Let's] cook!,[우리] 요리하[자]!,기존,10026 · 기본
+,,,문장1-2,[Let's] cook together!,같이 요리하[자]!,기존,10026 · 문장1-2
+,,,문장1-3,[Let's] cook tonight!,오늘 저녁에 요리하[자]!,기존,10026 · 문장1-3
+,,,기본,[Let's] watch TV.,[우리] TV 보[자].,기존,10026 · 기본
+,,,기본,[Let's] go home.,집에 가[자].,새로 씀,
+,,,어려운,[Let's] have pasta for dinner.,저녁으로 파스타 먹[자].,기존,10026 · 어려운
+,,,어려운,[Let's] listen to some music.,음악 좀 듣[자].,기존,10026 · 어려운
+,,,어려운,[Let's] take a break and get some coffee.,잠깐 쉬고 커피 좀 마시[자].,새로 씀,
+10026-B,Let's go ______ -ing .,~하러 가자,S1,[Let's go] swimming!,수영하러 [가자]!,기존,10026 · 기본
+,,,문장1-2,[Let's go] shopping!,쇼핑하러 [가자]!,새로 씀,
+,,,문장1-3,[Let's go] swimming today!,오늘 수영하러 [가자]!,새로 씀,
+,,,기본,[Let's go] camping.,캠핑하러 [가자].,새로 씀,
+,,,기본,[Let's go] fishing.,낚시하러 [가자].,새로 씀,
+,,,어려운,[Let's go] hiking tomorrow.,내일 등산 [가자].,기존,10026 · 어려운
+,,,어려운,[Let's go] skiing this weekend if it snows.,눈 오면 이번 주말에 스키 타러 [가자].,새로 씀,
+,,,어려운,[Let's go] jogging in the park before breakfast.,아침 먹기 전에 공원으로 조깅하러 [가자].,새로 씀,
+10059-A,on + 요일·날짜,~에 (요일·날짜),S1,See you [on Thursday].,[목요일에] 보자.,기존,10059 · 기본
+,,,문장1-2,Let's meet [on Thursday].,[목요일에] 만나자.,기존,10059 · 문장1-2
+,,,문장1-3,We went out [on Thursday].,우리 [목요일에] 외출했어.,기존,10059 · 문장1-3
+,,,기본,I work [on Mondays].,난 [월요일마다] 일해.,새로 씀,
+,,,기본,The party is [on Saturday].,파티는 [토요일에] 해.,새로 씀,
+,,,어려운,Let's meet [on Friday morning].,[금요일 아침에] 만나자.,기존,10059 · 어려운
+,,,어려운,What are you doing [on Sunday evening]?,[일요일 저녁에] 뭐 해?,기존,10059 · 어려운
+,,,어려운,We got married [on May 5th].,우린 [5월 5일에] 결혼했어.,새로 씀,
+10059-B,at + 시각,~시에,S1,Let's go [at three o'clock].,[3시에] 가자.,기존,10059 · 기본
+,,,문장1-2,Let's meet [at three o'clock].,[3시에] 만나자.,새로 씀,
+,,,문장1-3,Let's go [at four o'clock].,[4시에] 가자.,새로 씀,
+,,,기본,I get up [at seven].,난 [7시에] 일어나.,새로 씀,
+,,,기본,The class starts [at nine].,수업은 [9시에] 시작해.,새로 씀,
+,,,어려운,Are you busy [at twelve o'clock]?,[12시에] 바빠?,기존,10059 · 어려운
+,,,어려운,The store closes [at ten thirty] on weekdays.,그 가게는 평일엔 [10시 반에] 문을 닫아.,새로 씀,
+,,,어려운,Can you pick me up [at noon] tomorrow?,내일 [정오에] 나 데리러 올 수 있어?,새로 씀,
+10059-C,in + 아침·달·계절,~에 (아침·달·계절),S1,I'm busy [in the morning].,난 [아침에] 바빠.,기존,10059 · 기본
+,,,문장1-2,She's busy [in the morning].,걔는 [아침에] 바빠.,새로 씀,
+,,,문장1-3,I'm always busy [in the morning].,난 [아침에] 늘 바빠.,새로 씀,
+,,,기본,It's cold [in winter].,[겨울에는] 추워.,새로 씀,
+,,,기본,My birthday is [in May].,내 생일은 [5월에] 있어.,새로 씀,
+,,,어려운,We usually go to the beach [in August].,우린 보통 [8월에] 바다에 가.,새로 씀,
+,,,어려운,I like to read [in the evening] after dinner.,난 [저녁에] 밥 먹고 책 읽는 걸 좋아해.,새로 씀,
+,,,어려운,The flowers bloom [in spring] every year.,꽃은 해마다 [봄에] 펴.,새로 씀,
+10083-A,some ______,좀 ~,S1,You have [some gifts].,너한테 온 [선물이 몇 개] 있어.,기존,10083 · 기본
+,,,문장1-2,She has [some gifts].,걔한테 [선물이 몇 개] 있어.,기존,10083 · 문장1-2
+,,,문장1-3,He has [some gifts].,걔한테 [선물이 몇 개] 있어.,기존,10083 · 문장1-3
+,,,기본,Let's make [some pasta].,[파스타 좀] 만들자.,기존,10083 · 기본
+,,,기본,I bought [some apples].,[사과를 좀] 샀어.,새로 씀,
+,,,어려운,Could we have [some more time]?,[시간을 좀 더] 주실 수 있을까요?,기존,10083 · 어려운
+,,,어려운,She gave me [some good advice].,걔가 [좋은 조언을 좀] 해줬어.,기존,10083 · 어려운
+,,,어려운,Can I get [some water] for my friend?,제 친구한테 [물 좀] 줄 수 있어요?,새로 씀,
+10083-B,not any ______ / any ______ ?,~가 하나도 없는 / ~ 있어?,S1,I [don't] have [any milk].,우유가 [하나도 없어].,기존,10083 · 기본
+,,,문장1-2,She [doesn't] have [any milk].,걔는 우유가 [하나도 없어].,새로 씀,
+,,,문장1-3,I [don't] have [any milk] left.,남은 우유가 [하나도 없어].,새로 씀,
+,,,기본,Do you have [any questions]?,[질문] 있어요?,새로 씀,
+,,,기본,We [don't] have [any bread].,빵이 [하나도 없어].,새로 씀,
+,,,어려운,Do you have [any other ideas]?,[다른 생각 좀] 있어?,기존,10083 · 어려운
+,,,어려운,There [aren't any] seats left on the train.,기차에 남은 자리가 [하나도 없어].,새로 씀,
+,,,어려운,Did you find [any good restaurants] near the hotel?,호텔 근처에서 [괜찮은 식당 좀] 찾았어?,새로 씀,
+10097-A,How many ______ ?,~가 몇 개야?,S1,[How many] channels [do you] get?,채널이 [몇 개]나 나와?,기존,10097 · 기본
+,,,문장1-2,[How many] channels [do you] watch?,채널을 [몇 개]나 봐?,기존,10097 · 문장1-2
+,,,문장1-3,[How many] channels [do you] get now?,지금은 채널이 [몇 개]나 나와?,기존,10097 · 문장1-3
+,,,기본,[How many] apples [do you] need?,사과가 [몇 개] 필요해?,새로 씀,
+,,,기본,[How many] kids [do you] have?,아이가 [몇 명]이에요?,새로 씀,
+,,,어려운,[How many] people came to the party?,파티에 [몇] 명이나 왔어?,기존,10097 · 어려운
+,,,어려운,[How many] languages can you speak?,[몇 개] 국어를 할 줄 알아?,기존,10097 · 어려운
+,,,어려운,[How many] times have you been to Japan?,일본에 [몇 번]이나 가 봤어?,새로 씀,
+10097-B,How much ______ ?,~가 얼마나 돼?,S1,[How much] milk is there?,우유가 [얼마나] 있어?,기존,10097 · 기본
+,,,문장1-2,[How much] water is there?,물이 [얼마나] 있어?,새로 씀,
+,,,문장1-3,[How much] milk is there left?,우유가 [얼마나] 남았어?,새로 씀,
+,,,기본,[How much] time [did it] take?,시간이 [얼마나] 걸렸[어]?,기존,10097 · 기본
+,,,기본,[How much] is this?,이거 [얼마]예요?,새로 씀,
+,,,어려운,[How much] sugar [did you] put in this?,여기 설탕 [얼마나] 넣었[어]?,기존,10097 · 어려운
+,,,어려운,[How much] money do we need for the trip?,여행에 돈이 [얼마나] 필요해?,새로 씀,
+,,,어려운,[How much] sleep do you usually get?,보통 잠을 [얼마나] 자?,새로 씀,
+10098-A,not much ______,~가 많지 않아 (셀 수 없는 것),S1,There's [not much] space.,공간이 [별로 없]어.,기존,10098 · 기본
+,,,문장1-2,There's [not much] space left.,남은 공간이 [별로 없]어.,기존,10098 · 문장1-2
+,,,문장1-3,There's [not much] space here.,여긴 공간이 [별로 없]어.,기존,10098 · 문장1-3
+,,,기본,We [don't] have [much] time.,시간이 [별로 없어].,기존,10098 · 기본
+,,,기본,There's [not much] food.,음식이 [별로 없]어.,새로 씀,
+,,,어려운,We [didn't] have [much] money.,우린 돈이 [별로 없었어].,기존,10098 · 어려운
+,,,어려운,I [don't] have [much] experience with kids.,난 아이들과 지낸 경험이 [별로 없어].,새로 씀,
+,,,어려운,There [wasn't much] traffic this morning.,오늘 아침엔 차가 [많지 않았어].,새로 씀,
+10098-B,not many ______,~가 많지 않아 (셀 수 있는 것),S1,We [don't] have [many] options.,선택지가 [많지 않아].,기존,10098 · 기본
+,,,문장1-2,They [don't] have [many] options.,그들은 선택지가 [많지 않아].,새로 씀,
+,,,문장1-3,We [don't] have [many] options left.,남은 선택지가 [많지 않아].,새로 씀,
+,,,기본,I [don't] have [many] friends.,난 친구가 [많지 않아].,새로 씀,
+,,,기본,There [aren't many] cars on the road.,도로에 차가 [많지 않아].,새로 씀,
+,,,어려운,He [didn't] have [many] friends in school.,걔는 학교에서 친구가 [많지 않았어].,기존,10098 · 어려운
+,,,어려운,There [aren't many] schools in this area.,이 동네엔 학교가 [많지 않아].,기존,10098 · 어려운
+,,,어려운,[Not many] students passed the exam this year.,올해 시험에 붙은 학생이 [많지 않아].,새로 씀,
+10102-A,"______ , too.",나도 ~해,S1,"[I] prefer this ring, [too].",[나도] 이 반지가 더 좋아.,기존,10102 · 기본
+,,,문장1-2,"[She] prefers this ring, [too].",[걔도] 이 반지가 더 좋대.,기존,10102 · 문장1-2
+,,,문장1-3,"[I] prefer this gold ring, [too].",[나도] 이 금반지가 더 좋아.,기존,10102 · 문장1-3
+,,,기본,"[I] like it, [too].",[나도] 그거 좋아.,새로 씀,
+,,,기본,"[We] want pizza, [too].",[우리도] 피자 먹고 싶어.,새로 씀,
+,,,어려운,"Did [he] go out, [too]?",[걔도] 나갔어?,기존,10102 · 어려운
+,,,어려운,"[My sister] wants to come with us, [too].",[내 여동생도] 우리랑 같이 가고 싶어 해.,새로 씀,
+,,,어려운,"[They] were at the party last night, [too].",[걔네도] 어젯밤 파티에 있었어.,새로 씀,
+10102-B,"______ not ~ , either.",나도 안 해,S1,"[I don't] like math, [either].",[나도] 수학 [안] 좋아해.,기존,10102 · 기본
+,,,문장1-2,"[She doesn't] like math, [either].",[걔도] 수학 [안] 좋아해.,새로 씀,
+,,,문장1-3,"[I don't] like science, [either].",[나도] 과학 [안] 좋아해.,새로 씀,
+,,,기본,"Did you not like it, [either]?",너[도] 그거 별로였어?,기존,10102 · 기본
+,,,기본,"[I can't] swim, [either].",[나도] 수영 [못] 해.,새로 씀,
+,,,어려운,"[I didn't] go to the concert, [either].",[나도] 콘서트에 [안] 갔어.,기존,10102 · 어려운
+,,,어려운,I'm not happy about it [either].,나[도] 그게 마음에 안 들어.,기존,10102 · 어려운
+,,,어려운,"[He hasn't] finished his homework, [either].",[걔도] 숙제를 [안] 끝냈어.,새로 씀,
+10117-A,some of ______,~ 중 몇몇,S1,[Some of them] are adults.,[그중] [몇몇]은 어른이야.,기존,10117 · 기본
+,,,문장1-2,[Some of them] are young adults.,[그중] [몇몇]은 젊은 어른이야.,기존,10117 · 문장1-2
+,,,문장1-3,[Some of them] are adults now.,[그중] [몇몇]은 이제 어른이야.,기존,10117 · 문장1-3
+,,,기본,[Some of us] were late.,[우리 중 몇 명]은 늦었어.,새로 씀,
+,,,기본,I ate [some of the cake].,[케이크를 좀] 먹었어.,새로 씀,
+,,,어려운,[Some of their songs] are pretty weird.,[그들 노래 중 몇 개]는 꽤 이상해.,기존,10117 · 어려운
+,,,어려운,Would you like [some of my pasta]?,[내 파스타 좀] 먹을래?,기존,10117 · 어려운
+,,,어려운,[Some of my friends] live abroad now.,[내 친구 중 몇 명]은 지금 해외에 살아.,새로 씀,
+10117-B,any (of) ______,~ 중 아무거나 / 하나도,S1,Take [any of them].,[그중에 아무거나] 가져가.,기존,10117 · 기본
+,,,문장1-2,Pick [any of them].,[그중에 아무거나] 골라.,새로 씀,
+,,,문장1-3,Take [any of them] you like.,[그중에] 마음에 드는 거 [아무거나] 가져가.,새로 씀,
+,,,기본,I don't have [any].,난 [하나도] 없어.,기존,10117 · 기본
+,,,기본,Is [any of this] yours?,[이 중에] 네 거 [있어]?,새로 씀,
+,,,어려운,Did [any of them] call?,[그중에] 전화한 [사람 있어]?,기존,10117 · 어려운
+,,,어려운,I haven't read [any of his books] yet.,[걔 책은] 아직 [하나도] 안 읽었어.,새로 씀,
+,,,어려운,"If [any of you] need help, just ask me.",[너희 중 누구든] 도움이 필요하면 나한테 말해.,새로 씀,
+10127-A,주어 + 동사 + 목적어 + for + 사람 .,~에게 ~를 해주다 (got·made·bought),S1,I [got] this drink [for you].,이 음료 [너 주려고 사왔어].,기존,10127 · 기본
+,,,문장1-2,I [got] this drink [for her].,이 음료 [걔 주려고 사왔어].,기존,10127 · 문장1-2
+,,,문장1-3,I [got] this drink [for him].,이 음료 [걔 주려고 사왔어].,기존,10127 · 문장1-3
+,,,기본,She [made] cookies [for us].,걔가 [우리 주려고] 쿠키를 [만들었어].,기존,10127 · 기본
+,,,기본,I [bought] flowers [for my mom].,[엄마 드리려고] 꽃을 [샀어].,새로 씀,
+,,,어려운,My boss [bought] dinner [for everyone].,상사가 [모두에게] 저녁을 [사줬어].,기존,10127 · 어려운
+,,,어려운,I [saved] the last one [for you].,마지막 하나는 [너 주려고] [남겨뒀어].,기존,10127 · 어려운
+,,,어려운,He [cooked] a big dinner [for his parents] last night.,걔가 어젯밤 [부모님을 위해] 근사한 저녁을 [차렸어].,새로 씀,
+10127-B,주어 + 동사 + 목적어 + to + 사람 .,~에게 ~를 건네다 (passed·sent),S1,I [passed] the ball [to her].,내가 [걔한테] 공을 [패스했어].,기존,10127 · 기본
+,,,문장1-2,I [passed] the ball [to him].,내가 [걔한테] 공을 [패스했어].,새로 씀,
+,,,문장1-3,I [passed] the ball [to my friend].,내가 [친구한테] 공을 [패스했어].,새로 씀,
+,,,기본,I [gave] the book [to him].,내가 [걔한테] 책을 [줬어].,새로 씀,
+,,,기본,She [showed] the photo [to me].,걔가 [나한테] 사진을 [보여줬어].,새로 씀,
+,,,어려운,She [sent] the money [to me].,걔가 [나한테] 돈을 [보냈어].,기존,10127 · 어려운
+,,,어려운,Please [send] the report [to the manager] by Friday.,금요일까지 보고서를 [매니저한테] [보내] 주세요.,새로 씀,
+,,,어려운,He [lent] his car [to his brother] for the weekend.,걔는 주말 동안 [동생한테] 차를 [빌려줬어].,새로 씀,
+10137-A,must not ______,~하면 안 돼,S1,Visitors [must not] feed the animals.,방문객은 동물에게 먹이를 주[면 안 됩니다].,기존,10137 · 기본
+,,,문장1-2,Visitors [must not] feed the birds.,방문객은 새에게 먹이를 주[면 안 됩니다].,기존,10137 · 문장1-2
+,,,문장1-3,You [must not] feed the fish.,물고기에게 먹이를 주[면 안 됩니다].,기존,10137 · 문장1-3
+,,,기본,We [must not] give up.,우린 포기하[면 안 돼].,기존,10137 · 기본
+,,,기본,You [must not] touch this.,이거 만지[면 안 돼].,새로 씀,
+,,,어려운,Students [must not] run in the hallways.,학생들은 복도에서 뛰[면 안 됩니다].,기존,10137 · 어려운
+,,,어려운,Passengers [must not] smoke on the plane.,승객은 기내에서 담배를 피우[면 안 됩니다].,새로 씀,
+,,,어려운,You [must not] tell anyone about this plan.,이 계획은 아무한테도 말하[면 안 돼].,새로 씀,
+10137-B,don't have to ______,~ 안 해도 돼,S1,You [don't have to] come.,너 [안] 와[도 돼].,기존,10137 · 기본
+,,,문장1-2,She [doesn't have to] come.,걔는 [안] 와[도 돼].,새로 씀,
+,,,문장1-3,You [don't have to] come tomorrow.,너 내일 [안] 와[도 돼].,새로 씀,
+,,,기본,You [don't have to] pay.,돈 [안] 내[도 돼].,새로 씀,
+,,,기본,I [don't have to] work today.,난 오늘 일 [안] 해[도 돼].,새로 씀,
+,,,어려운,She [doesn't have to] work today.,걔는 오늘 일 [안] 해[도 돼].,기존,10137 · 어려운
+,,,어려운,We [don't have to] attend this meeting.,우린 이 회의에 참석 [안] 해[도 돼].,기존,10137 · 어려운
+,,,어려운,"You [don't have to] decide right now, so take your time.",지금 바로 결정 [안] 해[도 되니까] 천천히 해.,새로 씀,
+10180-A,a few ______,몇 개의 ~,S1,[A few] users had the same problem.,[몇몇] 사용자가 같은 문제를 겪었어요.,기존,10180 · 기본
+,,,문장1-2,[A few] users had the same opinion.,[몇몇] 사용자들이 같은 의견을 가지고 있었어요.,기존,10180 · 문장1-2
+,,,문장1-3,[A few] users had the same thought.,[몇몇] 사용자들이 같은 생각을 가지고 있었어요.,기존,10180 · 문장1-3
+,,,기본,I have [a few] questions.,질문이 [몇 개] 있어.,새로 씀,
+,,,기본,Wait [a few] minutes.,[몇 분]만 기다려.,새로 씀,
+,,,어려운,I had [a few] pancakes for breakfast.,아침으로 팬케이크를 [몇 장] 먹었어.,기존,10180 · 어려운
+,,,어려운,Can we have [a few] more minutes?,[몇 분]만 더 주실 수 있을까요?,기존,10180 · 어려운
+,,,어려운,We stayed in Paris for [a few] days last summer.,작년 여름에 파리에서 [며칠] 지냈어.,새로 씀,
+10180-B,a little ______,조금의 ~,S1,Add [a little] pepper.,후추를 [조금] 넣어.,기존,10180 · 기본
+,,,문장1-2,Add [a little] salt.,소금을 [조금] 넣어.,새로 씀,
+,,,문장1-3,Add [a little] more pepper.,후추를 [조금] 더 넣어.,새로 씀,
+,,,기본,I need [a little] more time.,시간이 [조금] 더 필요해.,기존,10180 · 기본
+,,,기본,I speak [a little] English.,난 영어를 [조금] 해.,새로 씀,
+,,,어려운,I added [a little] sugar.,설탕을 [조금] 넣었어.,기존,10180 · 어려운
+,,,어려운,Can I have [a little] milk in my coffee?,커피에 우유 [조금] 넣어 주실래요?,새로 씀,
+,,,어려운,She gave me [a little] advice before the interview.,면접 전에 걔가 [조금] 조언해 줬어.,새로 씀,
+10186-A,few ______,~가 거의 없어 (셀 수 있는 것),S1,There are [few bad authors].,[나쁜 작가는 거의 없]어.,기존,10186 · 기본
+,,,문장1-2,There are [few famous authors].,[유명한 작가는 거의 없]어.,기존,10186 · 문장1-2
+,,,문장1-3,There are [few young authors].,[젊은 작가는 거의 없]어.,기존,10186 · 문장1-3
+,,,기본,There are [few cars] here.,여긴 [차가 거의 없]어.,새로 씀,
+,,,기본,She has [few toys].,걔는 [장난감이 거의 없]어.,새로 씀,
+,,,어려운,He has very [few friends].,걔는 [친구가] 정말 [적]어.,기존,10186 · 어려운
+,,,어려운,[Few people] know the real reason.,진짜 이유를 아는 [사람은 거의 없]어.,새로 씀,
+,,,어려운,There were very [few seats] left at the concert.,콘서트에 남은 [자리가] 정말 [거의 없]었어.,새로 씀,
+10186-B,little ______,~가 거의 없어 (셀 수 없는 것),S1,There is [little hope].,[희망이 거의 없]어.,기존,10186 · 기본
+,,,문장1-2,There is [little time].,[시간이 거의 없]어.,새로 씀,
+,,,문장1-3,There is [little hope] now.,이제 [희망이 거의 없]어.,새로 씀,
+,,,기본,We have very [little time].,[시간이] 정말 [얼마 없]어.,기존,10186 · 기본
+,,,기본,There is [little water].,[물이 거의 없]어.,새로 씀,
+,,,어려운,I have [little interest] in music.,난 음악에 [별 관심이 없]어.,기존,10186 · 어려운
+,,,어려운,I have [little doubt] about that.,그건 [거의 의심하지 않]아.,기존,10186 · 어려운
+,,,어려운,He paid [little attention] to the teacher.,걔는 선생님 말에 [거의 신경 쓰지 않았]어.,새로 씀,
+10312-A,______(과거분사) + 명사,~된 ~,S1,He's a [retired pilot].,걔는 [은퇴한 조종사]야.,기존,10312 · 기본
+,,,문장1-2,She's a [retired pilot].,걔는 [은퇴한 조종사]야.,기존,10312 · 문장1-2
+,,,문장1-3,They're [retired pilots].,그들은 [은퇴한 조종사]야.,기존,10312 · 문장1-3
+,,,기본,He fixed my [broken glasses].,걔가 내 [부러진 안경]을 고쳐줬어.,기존,10312 · 기본
+,,,기본,I bought a [used car].,난 [중고차]를 샀어.,새로 씀,
+,,,어려운,Any [food made] by her is excellent.,걔가 [만든 음식]은 뭐든 훌륭해.,기존,10312 · 어려운
+,,,어려운,Be careful with the [broken glass] on the floor.,바닥에 [깨진 유리] 조심해.,새로 씀,
+,,,어려운,We found a [lost dog] near the park yesterday.,어제 공원 근처에서 [길 잃은 개]를 발견했어.,새로 씀,
+10312-B,______(현재분사) + 명사,~하는 ~,S1,She picked up the [crying baby].,걔가 [우는 아기]를 안아 올렸어.,기존,10312 · 기본
+,,,문장1-2,He picked up the [crying baby].,걔가 [우는 아기]를 안아 올렸어.,새로 씀,
+,,,문장1-3,She picked up the [crying baby] gently.,걔가 [우는 아기]를 살며시 안아 올렸어.,새로 씀,
+,,,기본,Look at the [sleeping cat].,[자고 있는 고양이] 좀 봐.,새로 씀,
+,,,기본,I heard a [ringing phone].,[울리는 전화] 소리를 들었어.,새로 씀,
+,,,어려운,The [barking dog] scared my sister.,[짖는 개]가 내 동생을 놀라게 했어.,기존,10312 · 어려운
+,,,어려운,Do you know the [girl playing] the piano?,피아노 [치고 있는 여자애] 알아?,기존,10312 · 어려운
+,,,어려운,The [rising prices] are worrying many families.,[오르는 물가]가 많은 가정을 걱정시키고 있어.,새로 씀,
+10313-A,사물 + be동사 + ______ -ing,~가 흥미로워 (감정을 일으켜),S1,The introduction [was interesting].,도입부가 [흥미로웠어].,기존,10313 · 기본
+,,,문장1-2,His introduction [was interesting].,걔 도입부가 [흥미로웠어].,기존,10313 · 문장1-2
+,,,문장1-3,The introduction [is interesting].,도입부가 [흥미로워].,기존,10313 · 문장1-3
+,,,기본,[That's] so [exciting]!,[그거] 정말 [신난다]!,기존,10313 · 기본
+,,,기본,It [was] so [boring].,정말 [지루했어].,기존,10313 · 기본
+,,,어려운,The movie [was] really [interesting] until the end.,그 영화는 끝까지 정말 [흥미로웠어].,새로 씀,
+,,,어려운,His speech [was] so [boring] that I fell asleep.,걔 연설이 너무 [지루해서] 잠들었어.,새로 씀,
+,,,어려운,The news [was] really [surprising] to everyone.,그 소식은 모두에게 정말 [놀라웠어].,새로 씀,
+10313-B,사람 + be동사 + ______ -ed,~가 흥미를 느껴 (내가 느껴),S1,[I'm] so [excited] to see you!,널 보게 되어 정말 [신나]!,기존,10313 · 어려운
+,,,문장1-2,[She's] so [excited] to see you!,걔는 널 보게 되어 정말 [신나 해]!,새로 씀,
+,,,문장1-3,[I'm] so [excited] to see you again!,널 다시 보게 되어 정말 [신나]!,새로 씀,
+,,,기본,[I'm] so [bored].,너무 [지루해].,새로 씀,
+,,,기본,[I'm] [interested] in art.,난 미술에 [관심 있어].,새로 씀,
+,,,어려운,I [was] really [surprised] to see her there.,거기서 걔를 보고 정말 [놀랐어].,기존,10313 · 어려운
+,,,어려운,We [were] all [exhausted] by the end.,끝날 무렵엔 다들 완전히 [지쳤어].,기존,10313 · 어려운
+,,,어려운,They [were] really [disappointed] with the result.,그들은 결과에 정말 [실망했어].,새로 씀,
+10335-A,Would you like ______ ?,~ 드릴까요?,S1,[Would you like] a milkshake?,밀크셰이크 [드시겠어요]?,기존,10335 · 기본
+,,,문장1-2,[Would he like] a milkshake?,[그분] 밀크셰이크 [드시겠어요]?,기존,10335 · 문장1-2
+,,,문장1-3,[Would she like] a milkshake?,[그 여자분] 밀크셰이크 [드시겠어요]?,기존,10335 · 문장1-3
+,,,기본,[Would you like] some tea?,차 좀 [드릴까요]?,새로 씀,
+,,,기본,[Would you like] a bag?,봉투 [드릴까요]?,새로 씀,
+,,,어려운,[Would you like] another cup of tea?,차 한 잔 더 [드시겠어요]?,기존,10335 · 어려운
+,,,어려운,[Would you like] a room with a view?,전망 있는 방으로 [드릴까요]?,기존,10335 · 어려운
+,,,어려운,[Would you like] some dessert after your meal?,식사 후에 디저트 [드시겠어요]?,새로 씀,
+10335-B,I'd like ______ .,~ 주세요,S1,[I'd like] a glass of water.,물 한 잔 [주세요].,기존,10335 · 기본
+,,,문장1-2,[We'd like] a glass of water.,물 한 잔 [주세요].,새로 씀,
+,,,문장1-3,[I'd like] a glass of orange juice.,오렌지 주스 한 잔 [주세요].,새로 씀,
+,,,기본,"[I'd like] the check, please.",계산서 [주세요].,기존,10335 · 기본
+,,,기본,"[I'd like] a coffee, please.",커피 한 잔 [주세요].,새로 씀,
+,,,어려운,[We'd like] a table by the window.,창가 자리로 [주세요].,기존,10335 · 어려운
+,,,어려운,"[I'd like] a room for two nights, please.",2박 묵을 방으로 [주세요].,새로 씀,
+,,,어려운,[I'd like] a ticket to Busan for tomorrow morning.,내일 아침 부산행 표 한 장 [주세요].,새로 씀,
+10337-A,Would you like to ______ ?,~하시겠어요?,S1,[Would you like to] borrow my textbook?,내 교과서 빌려 [갈래]?,기존,10337 · 기본
+,,,문장1-2,[Would he like to] borrow my textbook?,[걔] 내 교과서 빌려 [갈까]?,기존,10337 · 문장1-2
+,,,문장1-3,[Would you like to] borrow his textbook?,걔 교과서 빌려 [갈래]?,기존,10337 · 문장1-3
+,,,기본,[Would you like to] sit here?,여기 앉으[시겠어요]?,기존,10337 · 기본
+,,,기본,[Would you like to] come in?,들어오[시겠어요]?,새로 씀,
+,,,어려운,[Would you like to] join us for dinner?,저녁 같이 하[시겠어요]?,기존,10337 · 어려운
+,,,어려운,[Would you like to] leave a message for him?,그분께 메시지 남기[시겠어요]?,새로 씀,
+,,,어려운,[Would you like to] go to the movies with me this Friday?,이번 주 금요일에 나랑 영화 보러 가[실래요]?,새로 씀,
+10337-B,I'd like to ______ .,~하고 싶어요,S1,"[I'd like to] order, please.",주문[할게요].,기존,10337 · 기본
+,,,문장1-2,"[We'd like to] order, please.",주문[할게요].,새로 씀,
+,,,문장1-3,"[I'd like to] order now, please.",지금 주문[할게요].,새로 씀,
+,,,기본,[I'd like to] pay by card.,카드로 계산하[고 싶어요].,새로 씀,
+,,,기본,[I'd like to] try this on.,이거 입어 보[고 싶어요].,새로 씀,
+,,,어려운,[I'd like to] speak with the manager.,매니저와 이야기하[고 싶습니다].,기존,10337 · 어려운
+,,,어려운,"[I'd like to] change my seat, please.",자리를 바꾸[고 싶습니다].,기존,10337 · 어려운
+,,,어려운,[I'd like to] book a table for four at seven.,7시에 네 명 자리를 예약하[고 싶어요].,새로 씀,
+10341-A,another ______,또 하나의 ~,S1,There's [another] exhibition upstairs.,위층에 전시가 [하나 더] 있어요.,기존,10341 · 기본
+,,,문장1-2,There's [another] exhibition downstairs.,아래층에 전시가 [하나 더] 있어요.,기존,10341 · 문장1-2
+,,,문장1-3,There was [another] exhibition upstairs.,위층에 전시가 [하나 더] 있었어요.,기존,10341 · 문장1-3
+,,,기본,That's [another] good example.,그것도 [또 하나의] 좋은 예야.,기존,10341 · 기본
+,,,기본,Can I have [another] cookie?,쿠키 [하나 더] 먹어도 돼?,새로 씀,
+,,,어려운,I'll give you [another] ten minutes.,10분 [더] 줄게.,기존,10341 · 어려운
+,,,어려운,Let's try [another] restaurant this time.,이번엔 [다른] 식당 가 보자.,새로 씀,
+,,,어려운,She's looking for [another] job these days.,걔는 요즘 [다른] 일자리를 찾고 있어.,새로 씀,
+10341-B,other ______s,다른 ~들,S1,Do they have [other] colors?,[다른] 색도 있어?,기존,10341 · 기본
+,,,문장1-2,Do they have [other] sizes?,[다른] 사이즈도 있어?,새로 씀,
+,,,문장1-3,Do you have [other] colors?,[다른] 색도 있어요?,새로 씀,
+,,,기본,I like [other] songs better.,난 [다른] 노래가 더 좋아.,새로 씀,
+,,,기본,Where are the [other] kids?,[다른] 애들은 어디 있어?,새로 씀,
+,,,어려운,The [other] class finished early.,[다른] 반은 일찍 끝났어.,기존,10341 · 어려운
+,,,어려운,Any [other] questions before we start?,시작하기 전에 [다른] 질문 있나요?,기존,10341 · 어려운
+,,,어려운,"Some people agreed, but [other] people didn't.",동의한 사람도 있었지만 [다른] 사람들은 아니었어.,새로 씀,
+10349-A,"명령문 , or ______","~해, 안 그러면 ~",S1,"Leave now, [or you'll] miss your hunting trip.","지금 나가, [안 그러면] 사냥 여행 놓쳐.",기존,10349 · 기본
+,,,문장1-2,"Leave now, [or he'll] miss his hunting trip.","지금 나가, [안 그러면] 걔가 사냥 여행 놓쳐.",기존,10349 · 문장1-2
+,,,문장1-3,"Leave now, [or she'll] miss her hunting trip.","지금 나가, [안 그러면] 그 애가 사냥 여행 놓쳐.",기존,10349 · 문장1-3
+,,,기본,"Study hard, [or you'll] fail the test.","열심히 공부해, [안 그러면] 시험에 떨어져.",기존,10349 · 기본
+,,,기본,"Hurry up, [or we'll] be late.","서둘러, [안 그러면] 늦어.",새로 씀,
+,,,어려운,"Don't be late, [or they'll] leave without you.","늦지 마, [안 그러면] 너 두고 갈 거야.",기존,10349 · 어려운
+,,,어려운,"Put on your coat, [or you'll] catch a cold.","코트 입어, [안 그러면] 감기 걸려.",새로 씀,
+,,,어려운,"Save your work now, [or you'll] lose everything.","지금 저장해, [안 그러면] 다 날아가.",새로 씀,
+10349-B,"명령문 , and ______",~하면 ~할 거야,S1,"Leave now, [and you'll] make it.",지금 나가[면] 시간 맞출 수 있을 거야.,기존,10349 · 기본
+,,,문장1-2,"Leave now, [and we'll] make it.",지금 나가[면] 우리 시간 맞출 수 있을 거야.,새로 씀,
+,,,문장1-3,"Leave right now, [and you'll] make it.",지금 당장 나가[면] 시간 맞출 수 있을 거야.,새로 씀,
+,,,기본,"Try it, [and you'll] like it.",한번 먹어 보[면] 좋아하게 될 거야.,새로 씀,
+,,,기본,"Ask him, [and he'll] help you.",걔한테 물어보[면] 도와줄 거야.,새로 씀,
+,,,어려운,Take this medicine [and you'll] feel better.,이 약 먹으[면] 나아질 거야.,기존,10349 · 어려운
+,,,어려운,Turn left at the corner [and you'll] see it.,모퉁이에서 왼쪽으로 돌[면] 보일 거야.,기존,10349 · 어려운
+,,,어려운,"Practice every day, [and you'll] get better at it.",매일 연습하[면] 실력이 늘 거야.,새로 씀,
+10355-A,There is no ______ .,~가 전혀 없어,S1,[There are no] tulips in this garden.,이 정원엔 튤립이 [없어].,기존,10355 · 기본
+,,,문장1-2,[There are no] tulips in that garden.,저 정원엔 튤립이 [없어].,기존,10355 · 문장1-2
+,,,문장1-3,[There were no] tulips in this garden.,이 정원엔 튤립이 [없었어].,기존,10355 · 문장1-3
+,,,기본,[There's no] risk at all.,위험은 전혀 [없어].,기존,10355 · 기본
+,,,기본,[There's no] milk.,우유가 [없어].,새로 씀,
+,,,어려운,[Were there no] options left?,남은 선택지가 [없었어]?,기존,10355 · 어려운
+,,,어려운,[There's no] reason to worry about it.,그거 걱정할 이유는 [없어].,새로 씀,
+,,,어려운,[There was no] answer when I knocked.,노크했는데 대답이 [없었어].,새로 씀,
+10355-B,주어 + have no ______,(가진) ~가 전혀 없어,S1,[I have no] free time today.,오늘은 여유 시간이 전혀 [없어].,기존,10355 · 기본
+,,,문장1-2,[She has no] free time today.,걔는 오늘 여유 시간이 전혀 [없어].,새로 씀,
+,,,문장1-3,[I have no] free time this week.,이번 주엔 여유 시간이 전혀 [없어].,새로 씀,
+,,,기본,[I have no] money.,돈이 [없어].,새로 씀,
+,,,기본,[We have no] choice.,우린 선택의 여지가 [없어].,새로 씀,
+,,,어려운,[She has no] friends around here.,[걔는] 이 근처에 친구가 [없어].,기존,10355 · 어려운
+,,,어려운,[I have no] desire to argue with you.,너랑 다투고 싶은 마음이 전혀 [없어].,기존,10355 · 어려운
+,,,어려운,[He had no] time to eat lunch today.,걔는 오늘 점심 먹을 시간이 [없었어].,새로 씀,
+10369-A,stop ______ -ing,~하던 걸 멈추다,S1,I stopped [eating] grains.,난 곡물을 [끊었어].,기존,10369 · 기본
+,,,문장1-2,He stopped [eating] grains.,걘 곡물을 [끊었어].,기존,10369 · 문장1-2
+,,,문장1-3,She stopped [eating] grains.,그 앤 곡물을 [끊었어].,기존,10369 · 문장1-3
+,,,기본,The baby stopped [crying].,아기가 [우는 걸] 멈췄어.,새로 씀,
+,,,기본,Please stop [talking].,제발 [떠드는 거] 그만해.,새로 씀,
+,,,어려운,My dad stopped [smoking] ten years ago.,우리 아빠는 10년 전에 [담배 피우는 걸] 끊었어.,새로 씀,
+,,,어려운,It finally stopped [raining] after three days.,사흘 만에 드디어 [비가] 그쳤어.,새로 씀,
+,,,어려운,Can you stop [checking] your phone during dinner?,저녁 먹는 동안 [폰 보는 거] 좀 그만할래?,새로 씀,
+10369-B,stop to ______,~하려고 멈추다,S1,He stopped [to buy] some coffee.,걔는 커피를 [사려고] 멈췄어.,기존,10369 · 기본
+,,,문장1-2,She stopped [to buy] some coffee.,걔는 커피를 [사려고] 멈췄어.,새로 씀,
+,,,문장1-3,He stopped [to buy] some flowers.,걔는 꽃을 [사려고] 멈췄어.,새로 씀,
+,,,기본,We stopped [to rest].,우린 [쉬려고] 멈췄어.,새로 씀,
+,,,기본,I stopped [to look].,난 [보려고] 멈춰 섰어.,새로 씀,
+,,,어려운,We stopped [to take] a photo of the sunset.,우린 노을 사진을 [찍으려고] 멈췄어.,새로 씀,
+,,,어려운,She stopped [to tie] her shoes on the way.,걔는 가다가 신발 끈을 [묶으려고] 멈췄어.,새로 씀,
+,,,어려운,He stopped [to ask] for directions at a gas station.,걔는 주유소에서 길을 [물어보려고] 멈췄어.,새로 씀,
+10369-C,regret ______ -ing,~한 걸 후회하다,S1,I regret [telling] her the truth.,걔한테 사실을 [말한 게] 후회돼.,기존,10369 · 기본
+,,,문장1-2,He regrets [telling] her the truth.,걔는 그녀한테 사실을 [말한 걸] 후회해.,새로 씀,
+,,,문장1-3,I regret [telling] him the truth.,걔한테 사실을 [말한 게] 후회돼.,새로 씀,
+,,,기본,I regret [saying] that.,그 말 [한 게] 후회돼.,새로 씀,
+,,,기본,Do you regret [leaving]?,[떠난 거] 후회해?,새로 씀,
+,,,어려운,She regrets [quitting] her job last year.,걔는 작년에 일을 [그만둔 걸] 후회해.,새로 씀,
+,,,어려운,I don't regret [moving] to a new city.,새 도시로 [이사 온 건] 후회 안 해.,새로 씀,
+,,,어려운,He regrets not [studying] harder in school.,걔는 학교 다닐 때 더 열심히 [공부하지 않은 걸] 후회해.,새로 씀,
+10369-D,remember to ______,~할 걸 기억하다,S1,Remember [to call] your mother tonight.,오늘 밤 엄마한테 [전화하는 거] 잊지 마.,기존,10369 · 어려운
+,,,문장1-2,Remember [to call] your father tonight.,오늘 밤 아빠한테 [전화하는 거] 잊지 마.,새로 씀,
+,,,문장1-3,Remember [to call] your mother tomorrow.,내일 엄마한테 [전화하는 거] 잊지 마.,새로 씀,
+,,,기본,Remember [to lock] the door.,문 [잠그는 거] 잊지 마.,새로 씀,
+,,,기본,Did you remember [to eat]?,[밥 먹는 거] 잊지 않았지?,새로 씀,
+,,,어려운,Please remember [to bring] your passport tomorrow.,내일 여권 [챙겨 오는 거] 잊지 마세요.,새로 씀,
+,,,어려운,I always remember [to water] the plants on Sundays.,난 일요일마다 꼭 화분에 [물 주는 걸] 기억해.,새로 씀,
+,,,어려운,Remember [to turn off] the lights when you leave.,나갈 때 불 [끄는 거] 잊지 마.,새로 씀,
+10369-E,remember ______ -ing,~한 걸 기억하다,S1,I remember [meeting] him last time.,지난번에 걔를 [만난 게] 기억나.,기존,10369 · 어려운
+,,,문장1-2,She remembers [meeting] him last time.,걔는 지난번에 그를 [만난 걸] 기억해.,새로 씀,
+,,,문장1-3,I remember [meeting] her last time.,지난번에 걔를 [만난 게] 기억나.,새로 씀,
+,,,기본,I remember [seeing] this movie.,이 영화 [본 게] 기억나.,새로 씀,
+,,,기본,Do you remember [meeting] me?,나 [만난 거] 기억나?,새로 씀,
+,,,어려운,I remember [walking] to school with my sister.,언니랑 학교에 [걸어가던 게] 기억나.,새로 씀,
+,,,어려운,He doesn't remember [locking] the door this morning.,걔는 오늘 아침에 문을 [잠근 게] 기억 안 난대.,새로 씀,
+,,,어려운,I still remember [hearing] that song for the first time.,그 노래를 처음 [들었던 게] 아직도 기억나.,새로 씀,
+10369-F,forget ______ -ing,~한 걸 잊다,S1,I'll never forget [seeing] her for the first time.,걔를 처음 [봤던] 순간을 절대 잊지 못할 거야.,기존,10369 · 어려운
+,,,문장1-2,He'll never forget [seeing] her for the first time.,걔는 그녀를 처음 [봤던] 순간을 절대 잊지 못할 거야.,새로 씀,
+,,,문장1-3,I'll never forget [seeing] him for the first time.,걔를 처음 [봤던] 순간을 절대 잊지 못할 거야.,새로 씀,
+,,,기본,I'll never forget [meeting] you.,널 [만난 걸] 절대 잊지 못할 거야.,새로 씀,
+,,,기본,I won't forget [visiting] Paris.,파리에 [갔던 걸] 잊지 못할 거야.,새로 씀,
+,,,어려운,She'll never forget [winning] her first race.,걔는 첫 경주에서 [우승했던 걸] 절대 잊지 못할 거야.,새로 씀,
+,,,어려운,I'll never forget [hearing] the news that day.,그날 그 소식을 [들었던 걸] 절대 잊지 못할 거야.,새로 씀,
+,,,어려운,We'll never forget [traveling] around Europe together.,우리가 함께 유럽을 [여행했던 걸] 절대 잊지 못할 거야.,새로 씀,
+10376-A,"______ -ing , 주어 + 동사 .",~하면서 ~해,S1,"[Wearing] a warm scarf, she walked to school.",따뜻한 목도리를 [두르고] 학교까지 걸어갔어.,기존,10376 · 기본
+,,,문장1-2,"[Wearing] a warm scarf, he walked to school.",따뜻한 목도리를 [두르고] 걔는 학교까지 걸어갔어.,기존,10376 · 문장1-2
+,,,문장1-3,"[Wearing] a warm scarf, they walked to school.",따뜻한 목도리를 [두르고] 그들은 학교까지 걸어갔어.,기존,10376 · 문장1-3
+,,,기본,"[Smiling] to himself, he left the room.",걔는 혼자 [미소 지으며] 방을 나갔어.,기존,10376 · 기본
+,,,기본,"[Feeling] tired, he went to bed early.",[피곤해서] 걔는 일찍 잤어.,기존,10376 · 기본
+,,,어려운,"[Looking] out the window, she saw the first snow.",창밖을 [보다가] 걔는 첫눈을 봤어.,새로 씀,
+,,,어려운,"[Walking] home from work, I ran into an old friend.",퇴근하고 집에 [걸어가다가] 옛 친구를 만났어.,새로 씀,
+,,,어려운,"[Not knowing] what to say, he just smiled.",뭐라고 해야 할지 [몰라서] 걔는 그냥 웃었어.,새로 씀,
+10376-B,"______(과거분사) , 주어 + 동사 .",~돼서 ~해,S1,"[Frightened] by the noise, the cat ran away.",소리에 [놀라서] 고양이가 도망갔어.,기존,10376 · 어려운
+,,,문장1-2,"[Frightened] by the noise, the dog ran away.",소리에 [놀라서] 개가 도망갔어.,새로 씀,
+,,,문장1-3,"[Frightened] by the loud noise, the cat ran away.",큰 소리에 [놀라서] 고양이가 도망갔어.,새로 씀,
+,,,기본,"[Tired] from work, I went to bed.",일 때문에 [지쳐서] 잤어.,새로 씀,
+,,,기본,"[Surprised] by the news, she cried.",소식에 [놀라서] 걔는 울었어.,새로 씀,
+,,,어려운,"[Exhausted] from a long day, she fell asleep.",긴 하루에 [지쳐서] 걔는 잠들었어.,기존,10376 · 어려운
+,,,어려운,"[Criticized] by everyone, he decided to quit.",모두에게 [비난받고] 그는 그만두기로 했어.,기존,10376 · 어려운
+,,,어려운,"[Written] in simple English, the book is easy to read.",쉬운 영어로 [쓰여서] 그 책은 읽기 쉬워.,새로 씀,
+10378-A,with + 명사 + ______ -ing,~가 ~하는 채로,S1,He sat in the studio [with] his hands [shaking].,걔는 손을 [떨며] 스튜디오에 앉아 있었어.,기존,10378 · 기본
+,,,문장1-2,She sat in the studio [with] her hands [shaking].,걔는 손을 [떨며] 스튜디오에 앉아 있었어.,기존,10378 · 문장1-2
+,,,문장1-3,He stood in the studio [with] his hands [shaking].,걔는 손을 [떨며] 스튜디오에 서 있었어.,기존,10378 · 문장1-3
+,,,기본,I fell asleep [with] my music [playing].,음악을 [틀어놓은 채]로 잠들었어.,기존,10378 · 기본
+,,,기본,I can't sleep [with] the dog [barking].,개가 [짖어 대는 통에] 못 자겠어.,새로 씀,
+,,,어려운,We just sat there [with] the engine [running].,우린 시동을 [켜둔 채] 그냥 앉아 있었어.,기존,10378 · 어려운
+,,,어려운,I can't study [with] my brother [singing].,동생이 [노래를 부르는 통에] 공부를 못 하겠어.,기존,10378 · 어려운
+,,,어려운,She came home [with] tears [running] down her face.,걔는 눈물을 [흘리며] 집에 왔어.,새로 씀,
+10378-B,with + 명사 + ______(과거분사),~가 ~된 채로,S1,He stood there [with] his arms [crossed].,걔는 팔짱을 [낀 채] 거기 서 있었어.,기존,10378 · 기본
+,,,문장1-2,She stood there [with] her arms [crossed].,걔는 팔짱을 [낀 채] 거기 서 있었어.,새로 씀,
+,,,문장1-3,He sat there [with] his arms [crossed].,걔는 팔짱을 [낀 채] 거기 앉아 있었어.,새로 씀,
+,,,기본,She sat [with] her legs [crossed].,걔는 다리를 [꼰 채] 앉아 있었어.,새로 씀,
+,,,기본,He listened [with] his eyes [closed].,걔는 눈을 [감은 채] 들었어.,새로 씀,
+,,,어려운,I just lay there [with] my eyes [closed].,난 그냥 눈을 [감은 채] 누워 있었어.,기존,10378 · 어려운
+,,,어려운,Don't leave the house [with] the stove [turned] on.,가스레인지를 [켜 둔 채] 집을 나가지 마.,새로 씀,
+,,,어려운,She waited for hours [with] her bags [packed].,걔는 짐을 [싸 둔 채] 몇 시간을 기다렸어.,새로 씀,
+10400-A,명사 + ______(과거분사),~된 ~,S1,Kids [exposed] to music learn faster.,음악을 [접한] 아이들은 더 빨리 학습해.,기존,10400 · 기본
+,,,문장1-2,Students [exposed] to music learn faster.,음악을 [접한] 학생들은 더 빨리 학습해.,기존,10400 · 문장1-2
+,,,문장1-3,Kids [exposed] to music learn much faster.,음악을 [접한] 아이들은 훨씬 더 빨리 학습해.,기존,10400 · 문장1-3
+,,,기본,I like the photos [taken] by you.,네가 [찍은] 사진들이 좋아.,새로 씀,
+,,,기본,This is a book [written] in English.,이건 영어로 [쓰인] 책이야.,새로 씀,
+,,,어려운,The car [parked] near the gate is mine.,정문 근처에 [세워둔] 차가 내 거야.,기존,10400 · 어려운
+,,,어려운,The money [stolen] from the bank was never found.,은행에서 [도난당한] 돈은 끝내 발견되지 않았어.,새로 씀,
+,,,어려운,Most of the products [sold] here are made in Korea.,여기서 [팔리는] 제품은 대부분 한국에서 만들어.,새로 씀,
+10400-B,명사 + ______ -ing,~하는 ~,S1,The man [sitting] outside is my uncle.,밖에 [앉아 계신] 분이 우리 삼촌이야.,기존,10400 · 기본
+,,,문장1-2,The woman [sitting] outside is my aunt.,밖에 [앉아 계신] 분이 우리 이모야.,새로 씀,
+,,,문장1-3,The man [sitting] outside the café is my uncle.,카페 밖에 [앉아 계신] 분이 우리 삼촌이야.,새로 씀,
+,,,기본,The problem [facing] us is very serious.,우리가 [직면한] 문제는 아주 심각해.,기존,10400 · 기본
+,,,기본,The girl [singing] is my sister.,[노래하는] 여자애가 내 동생이야.,새로 씀,
+,,,어려운,The people [waiting] in line looked tired.,줄 [서 있던] 사람들이 지쳐 보였어.,기존,10400 · 어려운
+,,,어려운,My husband is the one [wearing] the hat.,모자 [쓴] 사람이 제 남편이에요.,기존,10400 · 어려운
+,,,어려운,Anyone [living] in this building can use the gym.,이 건물에 [사는] 사람은 누구나 헬스장을 쓸 수 있어.,새로 씀,
+10402-A,"______ , which + 동사 …","~했는데, 그게 ~해",S1,"They went bankrupt, [which] surprised everyone.","그들이 파산했[는데], 다들 놀랐어.",기존,10402 · 기본
+,,,문장1-2,"He went bankrupt, [which] surprised everyone.","걔가 파산했[는데], 다들 놀랐어.",기존,10402 · 문장1-2
+,,,문장1-3,"She went bankrupt, [which] surprised everyone.","걔가 파산했[는데], 다들 놀랐어.",기존,10402 · 문장1-3
+,,,기본,"We stayed at a hotel, [which] was clean.",우린 호텔에 묵었[는데] 깨끗했어.,기존,10402 · 기본
+,,,기본,"He works here, [which] is nice.","걔가 여기서 일하[는데], 그게 좋아.",기존,10402 · 기본
+,,,어려운,"My car broke down, [which] made me late.",차가 고장 나[서] 늦었어.,기존,10402 · 어려운
+,,,어려운,"She didn't call me back, [which] made me worried.","걔가 다시 전화를 안 했[는데], 그래서 걱정됐어.",새로 씀,
+,,,어려운,"The train was delayed again, [which] wasn't surprising.","기차가 또 연착됐[는데], 놀랄 일도 아니었어.",새로 씀,
+10402-B,"사람 , who + 동사 …","~인데, 그 사람은 ~해",S1,"I met Sarah, [who] works at a bank.","사라를 만났[는데], 은행에서 일해.",기존,10402 · 어려운
+,,,문장1-2,"I met Tom, [who] works at a bank.","톰을 만났[는데], 은행에서 일해.",새로 씀,
+,,,문장1-3,"I met Sarah, [who] works at a big bank.","사라를 만났[는데], 큰 은행에서 일해.",새로 씀,
+,,,기본,"This is Mike, [who] lives next door.","이쪽은 마이크[인데], 옆집에 살아.",새로 씀,
+,,,기본,"I called Jenny, [who] was at home.","제니한테 전화했[는데], 집에 있었어.",새로 씀,
+,,,어려운,"My uncle, [who] lives in Boston, called me.",보스턴에 사[는] 삼촌이 나한테 전화했어.,기존,10402 · 어려운
+,,,어려운,"My teacher, [who] is from Canada, speaks French too.",캐나다 출신[인] 우리 선생님은 프랑스어도 해.,새로 씀,
+,,,어려운,"We visited my grandma, [who] made us a big lunch.","할머니 댁에 갔[는데], 점심을 푸짐하게 차려 주셨어.",새로 씀,
+10406-A,전치사 + which + 주어 + 동사,~가 ~한 그 (곳·것),S1,This is [the] motel [in which] she stayed.,여기가 걔가 묵었[던] 모텔이야.,기존,10406 · 기본
+,,,문장1-2,This is [the] motel [in which] he stayed.,여기가 걔가 묵었[던] 모텔이야.,기존,10406 · 문장1-2
+,,,문장1-3,This is [the] motel [in which] they stayed.,여기가 그들이 묵었[던] 모텔이야.,기존,10406 · 문장1-3
+,,,기본,This is the town [in which] they grew up.,여기가 그들이 자[란] 마을이야.,기존,10406 · 기본
+,,,기본,That's the school [from which] he graduated.,저기가 걔가 졸업[한] 학교야.,기존,10406 · 기본
+,,,어려운,This is the park [in which] we first met.,여기가 우리가 처음 만[난] 공원이야.,기존,10406 · 어려운
+,,,어려운,This is the house [in which] I was born.,여기가 내가 태어[난] 집이야.,새로 씀,
+,,,어려운,That's the company [for which] she worked for ten years.,저기가 걔가 10년 동안 일[한] 회사야.,새로 씀,
+10406-B,전치사 + whom + 주어 + 동사,~가 ~한 그 사람,S1,She's the one [for whom] it was written.,그건 [걔를 위해] 쓰인 거야.,기존,10406 · 어려운
+,,,문장1-2,He's the one [for whom] it was written.,그건 [걔를 위해] 쓰인 거야.,새로 씀,
+,,,문장1-3,She's the one [for whom] this song was written.,이 노래는 [걔를 위해] 쓰인 거야.,새로 씀,
+,,,기본,He's the man [with whom] I work.,그분이 내가 같이 일하[는] 사람이야.,새로 씀,
+,,,기본,She's the girl [to whom] I gave the letter.,걔가 내가 편지를 [준] 여자애야.,새로 씀,
+,,,어려운,He's the person [to whom] it's addressed.,이건 바로 걔[한테] 온 거야.,기존,10406 · 어려운
+,,,어려운,The man [with whom] she was talking is my boss.,걔가 이야기하고 있[던] 남자가 우리 상사야.,새로 씀,
+,,,어려운,There are many people [to whom] I owe thanks.,내가 고마움을 [전해야 할] 사람이 많아.,새로 씀,
+10439-A,I don't know if ______ .,~인지 모르겠어,S1,[I don't know if] it's poisonous.,독이 있[는지 모르]겠어.,기존,10439 · 기본
+,,,문장1-2,[He doesn't know if] it's poisonous.,[걘] 독이 있[는지 모른]대.,기존,10439 · 문장1-2
+,,,문장1-3,[I don't know if] they're poisonous.,그것들이 독이 있[는지 모르]겠어.,기존,10439 · 문장1-3
+,,,기본,[I don't know if] they're open.,거기 문 열었[는지 모르]겠어.,기존,10439 · 기본
+,,,기본,[I don't know if] I should tell you.,너한테 말해야 할[지 모르겠]어.,기존,10439 · 기본
+,,,어려운,[I don't know if] that's a good idea.,그게 좋은 생각인[지 모르겠]어.,기존,10439 · 어려운
+,,,어려운,[I don't know if] I can finish this by Friday.,금요일까지 이걸 끝낼 수 있을[지 모르겠어].,새로 씀,
+,,,어려운,[I don't know if] she'll like the gift I bought.,내가 산 선물을 걔가 좋아할[지 모르겠어].,새로 씀,
+10439-B,I'm not sure if ______ .,~인지 잘 모르겠어,S1,[I'm not sure if] you'd like it.,네가 좋아할[지 잘 모르겠어].,기존,10439 · 어려운
+,,,문장1-2,[I'm not sure if] he'd like it.,걔가 좋아할[지 잘 모르겠어].,새로 씀,
+,,,문장1-3,[I'm not sure if] you'd like this one.,네가 이걸 좋아할[지 잘 모르겠어].,새로 씀,
+,,,기본,[I'm not sure if] it's true.,그게 사실인[지 잘 모르겠어].,새로 씀,
+,,,기본,[I'm not sure if] he's home.,걔가 집에 있는[지 잘 모르겠어].,새로 씀,
+,,,어려운,[I'm not sure if] he's coming tonight.,걔가 오늘 밤 올[지 잘 모르겠어].,기존,10439 · 어려운
+,,,어려운,[I'm not sure if] the store is still open at this hour.,이 시간에 가게가 아직 열려 있는[지 잘 모르겠어].,새로 씀,
+,,,어려운,[I'm not sure if] I locked the car when I left.,나올 때 차를 잠갔는[지 잘 모르겠어].,새로 씀,
