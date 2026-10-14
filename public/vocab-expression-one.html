@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>표현 한 흐름</title>
+<style>
+  :root { --bg:#a9ccf2; --ink:#2f3e52; --green:#2e9e57; }
+  * { box-sizing:border-box; }
+  html, body { margin:0; }
+  body { font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+    background:var(--bg); color:var(--ink); display:flex; justify-content:center; }
+  .app { width:100%; max-width:460px; min-height:100vh; padding:14px 16px 40px; background:linear-gradient(#aacdf3,#bfe0ef); }
+  h1 { font-size:17px; margin:2px 2px 10px; color:#fff; text-shadow:0 1px 2px rgba(30,60,110,.25); }
+
+  .units { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:8px; }
+  .unit { border:1px solid rgba(255,255,255,.8); background:rgba(255,255,255,.35); color:#35506f; border-radius:20px;
+    padding:6px 12px; font-size:13px; font-weight:700; cursor:pointer; }
+  .unit.on { background:#4b83d6; border-color:#4b83d6; color:#fff; }
+  .unit.rand { border-style:dashed; }
+  .find-u { display:flex; margin-bottom:10px; }
+  .find-u input { flex:1; min-width:0; border:none; border-radius:11px; padding:8px 11px; font-size:13px; background:rgba(255,255,255,.7); color:#2f3e52; }
+
+  /* 단계표 — 지금 어느 줄에 있는지가 보인다 */
+  .table { background:#fff; border-radius:16px; padding:10px 12px; margin-bottom:14px; box-shadow:0 4px 12px rgba(30,60,110,.1); }
+  .table summary { cursor:pointer; font-size:13px; font-weight:800; color:#3a6bb0; list-style:none; }
+  .table summary::-webkit-details-marker { display:none; }
+  .table summary::after { content:' ▾'; color:#9aa8bc; }
+  .table[open] summary::after { content:' ▴'; }
+  .st { width:100%; border-collapse:collapse; font-size:12px; margin-top:8px; }
+  .st th { text-align:left; color:#8a98ad; font-weight:800; padding:4px 3px; border-bottom:1px solid #eef2f8; }
+  .st td { padding:5px 3px; border-bottom:1px solid #f2f5fa; vertical-align:top; }
+  .st tr.cur td { background:#eef4fd; font-weight:800; }
+  .st tr.cur td:first-child { box-shadow:inset 3px 0 0 #4b83d6; }
+  .st .mk { font-weight:800; } .st .o { color:#2e9e57; } .st .x { color:#c46a2c; } .st .skip { color:#b9c4d3; }
+  .st .tg { display:inline-block; font-size:10.5px; font-weight:800; border-radius:6px; padding:0 5px; }
+  .tg.b { background:#e3edfb; color:#3a6bb0; } .tg.r { background:#fdeadf; color:#c4632c; }
+  .rules { font-size:11.5px; color:#6b7c93; line-height:1.55; margin:8px 0 2px; }
+  .rules b { color:#3d5778; }
+
+  /* 진행 */
+  .top { display:flex; align-items:center; gap:8px; margin:0 2px 14px; }
+  .bar { flex:1; height:8px; background:rgba(255,255,255,.55); border-radius:6px; overflow:hidden; }
+  .bar i { display:block; height:100%; background:#6f9fe6; border-radius:6px; transition:width .3s; }
+  .top .n { font-size:12px; font-weight:800; color:#fff; }
+
+  .card { position:relative; background:#fff; border-radius:22px; box-shadow:0 6px 18px rgba(30,60,110,.13); padding:22px 18px 18px; min-height:330px; }
+  .tag { position:absolute; top:-12px; left:16px; font-size:12px; font-weight:800; border-radius:11px 11px 11px 3px; padding:3px 11px; }
+  .tag.b { background:#cfe0f5; color:#3a6bb0; } .tag.r { background:#fbd9c5; color:#b5541c; }
+  .stage { font-size:12.5px; font-weight:800; color:#8a98ad; margin-bottom:10px; }
+  .kr { font-size:19px; font-weight:700; color:#33465c; line-height:1.5; margin-bottom:6px; }
+  .tgt { color:var(--green); font-weight:800; }
+  .tip { font-size:13px; color:#3a6bb0; background:#eef4fd; border-radius:10px; padding:7px 10px; margin:8px 0 4px; line-height:1.45; }
+  .spk { border:none; background:#eef4fd; color:#3a6bb0; border-radius:20px; padding:5px 11px; font-size:12.5px; font-weight:800; cursor:pointer; margin-bottom:6px; }
+
+  /* 문장 구성 */
+  .fill { display:flex; flex-wrap:wrap; align-items:center; gap:7px 5px; min-height:56px; padding:10px 0; border-bottom:2px solid #e2e9f3; margin:10px 0 14px; }
+  .bank { display:flex; flex-wrap:wrap; gap:7px; }
+  .w { font:inherit; font-size:16.5px; font-weight:700; color:#2f3e52; padding:8px 12px; border:1px solid #d3e0f2; background:#fff;
+    border-radius:11px; box-shadow:0 2px 0 #e1e9f5; cursor:pointer; }
+  .w:active { transform:translateY(2px); box-shadow:none; }
+  .w.used { background:#e3e9f2; border-color:#dbe2ee; color:transparent; box-shadow:none; pointer-events:none; }
+  .w.g { background:#dcf6e6; color:#1f7a49; border-color:#a9dec2; }
+  .w.bad { background:#fdeee6; color:#b5541c; border-color:#f0c4a8; }
+  .punct { margin-left:-3px; font-size:18px; font-weight:700; }
+
+  /* 빈칸 문장 */
+  .sent { font-size:19px; font-weight:700; line-height:2; margin:10px 0 14px; }
+  .blank { display:inline-block; min-width:70px; border-bottom:2.5px solid #7aa3dc; color:#3a6bb0; text-align:center; padding:0 6px; line-height:1.4; }
+  .blank.ok { border-color:#2e9e57; color:#1f7a49; background:#dcf6e6; border-radius:6px 6px 0 0; }
+  .blank.bad { border-color:#e0874f; color:#b5541c; background:#fdeee6; border-radius:6px 6px 0 0; }
+  .inp { font:inherit; font-size:18px; font-weight:800; color:#3a6bb0; border:none; border-bottom:2.5px solid #7aa3dc; background:#f3f8ff; border-radius:6px 6px 0 0; padding:1px 6px; outline:none; text-align:center; }
+  .opts { display:grid; gap:8px; }
+  .opt { font:inherit; font-size:16.5px; font-weight:700; padding:12px; border:1px solid #d3e0f2; background:#fff; border-radius:13px; box-shadow:0 2px 0 #e1e9f5; cursor:pointer; color:#2f3e52; text-align:left; }
+  .opt.ok { background:#dcf6e6; border-color:#a9dec2; color:#1f7a49; }
+  .opt.bad { background:#fdeee6; border-color:#f0c4a8; color:#b5541c; }
+
+  /* 결과 */
+  .res { margin-top:16px; border-radius:16px; padding:12px 14px; animation:up .25s ease both; }
+  .res.ok { background:#edf9f1; } .res.no { background:#fdf3ec; }
+  .res .h { font-size:15px; font-weight:800; margin-bottom:4px; }
+  .res.ok .h { color:#1f7a49; } .res.no .h { color:#b5541c; }
+  .res .a { font-size:15.5px; font-weight:700; color:#33465c; line-height:1.55; }
+  .res .a .g { color:#1f7a49; background:#dcf6e6; border-radius:5px; padding:0 4px; }
+  .res .nx { font-size:12px; color:#8a98ad; margin-top:6px; font-weight:700; }
+  @keyframes up { from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;} }
+  .btn { display:block; width:100%; border:none; border-radius:15px; padding:14px 8px; font-size:15.5px; font-weight:800; cursor:pointer; margin-top:16px;
+    background:linear-gradient(#8b7cf0,#6f5bf0); color:#fff; }
+  .btn:disabled { background:#d6dce6; color:#fff; cursor:default; }
+
+  /* 소개 · 완료 */
+  .intro { text-align:center; padding-top:20px; }
+  .intro .f { font-size:24px; font-weight:800; color:#1f7a49; margin:10px 0 6px; }
+  .intro .m { font-size:15px; color:#5d6f88; }
+  .intro .eg { margin-top:18px; font-size:15px; font-weight:700; color:#33465c; line-height:1.6; }
+  .intro .eg .g { color:#1f7a49; }
+  .intro .d { margin-top:14px; font-size:13.5px; color:#3a6bb0; background:#eef4fd; border-radius:12px; padding:9px 12px; text-align:left; line-height:1.5; }
+  .done-list { text-align:left; margin-top:14px; }
+  .done-list .r { display:flex; gap:8px; align-items:baseline; padding:6px 0; border-bottom:1px dashed #e7edf5; font-size:14.5px; font-weight:700; }
+  .done-list .r .s { flex:0 0 40px; font-size:12px; color:#8a98ad; }
+  .done-list .r .t { flex:1; } .done-list .r .t .g { color:#1f7a49; }
+  .done-list .r .k { flex:0 0 auto; font-size:13px; }
+  .src { margin-top:12px; text-align:right; font-size:11px; color:#a6b3c4; }
+  .slot { display:inline-block; min-width:52px; height:36px; vertical-align:middle; border:1.5px dashed #7aa3dc; border-radius:9px; background:#f3f8ff; margin:0 2px;
+    font-size:16.5px; font-weight:800; color:#2f3e52; line-height:33px; text-align:center; padding:0 9px; cursor:pointer; }
+  .slot.on { border-style:solid; border-color:#d3e0f2; background:#fff; }
+  .slot.ok { border-style:solid; border-color:#a9dec2; background:#dcf6e6; color:#1f7a49; }
+  .slot.bad { border-style:solid; border-color:#f0c4a8; background:#fdeee6; color:#b5541c; }
+  .base { font-size:14px; font-weight:700; color:#8a98ad; margin-left:2px; }
+  .lad { border:none; border-radius:20px; padding:7px 13px; font-size:12.5px; font-weight:800; cursor:pointer; background:#fff; color:#6b7c93; box-shadow:0 1px 4px rgba(30,60,110,.12); margin-top:12px; }
+  .sec { text-align:left; margin-top:18px; }
+  .sec .t { font-size:12.5px; font-weight:800; color:#8a98ad; margin-bottom:6px; }
+  .miss { padding:8px 0; border-bottom:1px dashed #e7edf5; font-size:14.5px; font-weight:700; line-height:1.55; }
+  .miss .no { color:#b5541c; text-decoration:line-through; text-decoration-color:#e0874f; }
+  .miss .yes .g { color:#1f7a49; background:#dcf6e6; border-radius:5px; padding:0 4px; }
+  .miss .st2 { font-size:11.5px; color:#a6b3c4; margin-left:4px; }
+  .tabs { display:flex; gap:6px; margin-bottom:8px; }
+  .tab { flex:1; border:none; border-radius:12px; padding:9px 0; font-size:13px; font-weight:800; cursor:pointer; background:rgba(255,255,255,.55); color:#4d6585; line-height:1.3; }
+  .tab small { display:block; font-size:11px; font-weight:700; opacity:.75; }
+  .tab.on { background:#fff; color:#2f3e52; box-shadow:0 2px 6px rgba(30,60,110,.15); }
+  .kinds { display:flex; flex-wrap:wrap; gap:5px; margin-bottom:8px; }
+  .kind { border:none; border-radius:9px; padding:5px 9px; font-size:12px; font-weight:800; cursor:pointer; background:rgba(255,255,255,.4); color:#55708f; }
+  .kind.on { background:#fdf0e1; color:#a5641a; }
+  .wk { font:inherit; font-size:17px; font-weight:700; color:#2f3e52; padding:3px 8px; border:1px solid #dbe6f5; background:#fff; border-radius:10px; box-shadow:0 2px 0 #e7eef8; cursor:pointer; margin:2px 1px; }
+  .wk.ok { background:#dcf6e6; color:#1f7a49; border-color:#a9dec2; }
+  .wk.bad { color:#aab7c8; border-color:#e6d3bd; }
+  .wline { line-height:2.1; }
+  .row { padding:8px 0; } .row + .row { border-top:1px dashed #e2e9f3; }
+  .row .kr { font-size:14.5px; color:#7d8ea6; margin-bottom:2px; }
+  .meet { text-align:center; padding:18px 0 6px; }
+  .meet .chunk { font-size:30px; font-weight:800; color:#1f7a49; }
+  .meet .m { font-size:15px; color:#5d6f88; margin-top:4px; }
+  .meet .say { font-size:13px; color:#8a98ad; margin-top:14px; }
+  .eg { padding:10px 0; border-top:1px dashed #e7edf5; font-size:16px; font-weight:700; line-height:1.55; }
+  .eg .k { font-size:13.5px; color:#7d8ea6; font-weight:600; }
+  .eg .g { color:#1f7a49; background:#dcf6e6; border-radius:5px; padding:0 4px; }
+  .eg .lab { display:inline-block; font-size:11.5px; font-weight:800; color:#a5641a; background:#fdf0e1; border-radius:7px; padding:1px 7px; margin-left:4px; vertical-align:2px; }
+  .pair { display:flex; align-items:center; justify-content:center; gap:10px; font-size:22px; font-weight:800; padding:10px 0; border-top:1px dashed #e7edf5; cursor:pointer; }
+  .pair .b { color:#7d8ea6; } .pair .ar { color:#c3ccd8; } .pair .f b { color:#1f7a49; }
+  .pair .lab { font-size:11.5px; font-weight:800; color:#a5641a; background:#fdf0e1; border-radius:7px; padding:1px 7px; }
+  .dec { display:flex; flex-wrap:wrap; align-items:center; gap:8px; font-size:20px; font-weight:800; margin:4px 0 14px; }
+  .dec .bs { color:#5d6f88; background:#eef2f7; border-radius:10px; padding:4px 11px; }
+  .gapb { display:inline-block; width:26px; height:26px; vertical-align:middle; border:1.5px dashed #7aa3dc; border-radius:7px; background:#f3f8ff; cursor:pointer; margin:0 2px; }
+  .gapb.bad { border-color:#e0a458; background:#fff4e5; }
+  .movw { display:inline-block; font-size:15px; font-weight:800; color:#3a6bb0; background:#e3edfb; border-radius:9px; padding:3px 10px; margin-bottom:10px; }
+  .opts { display:grid; gap:8px; }
+  .opt { font:inherit; font-size:16.5px; font-weight:700; padding:12px; border:1px solid #d3e0f2; background:#fff; border-radius:13px; box-shadow:0 2px 0 #e1e9f5; cursor:pointer; color:#2f3e52; text-align:left; }
+  .opt.ok { background:#dcf6e6; border-color:#a9dec2; color:#1f7a49; } .opt.bad { background:#fdeee6; border-color:#f0c4a8; color:#b5541c; }
+  .sline .g { color:#1f7a49; background:#dcf6e6; border-radius:6px; padding:1px 5px; }
+</style>
+</head>
+<body>
+<div class="app">
+  <h1>표현 한 흐름 — 모든 유닛 같은 방식</h1>
+  <div class="units" id="units"></div>
+  <div class="find-u"><input id="q" type="search" placeholder="유닛 id나 카드 초록으로 찾기 (예: 10065, stop)" enterkeyhint="search"></div>
+  <div class="top"><div class="bar"><i id="barI"></i></div><span class="n" id="barN"></span></div>
+  <div id="stage"></div>
+  <details class="table" id="tbl" open style="margin-top:16px"><summary>단계표 — 지금 어디인지</summary><div id="tblBody"></div></details>
+</div>
+
+<script>
+/* 모든 유닛이 같은 흐름을 탄다 — 패턴화 가능/불가, 형태/자리/어순 같은 갈래가 없다. 화면은 배열과 빈칸 쓰기 두 가지뿐이다.
+   한 문장으로 두 단계를 묶는다: 그 문장을 배열해 보고(핵심 초록) → 같은 문장에서 핵심을 직접 쓴다.
+   이 묶음을 S1 과 새 문장으로 두 번 한다. 단계가 바뀔 때마다 대상 낱말이 바뀌면(tallest → smallest → smartest) 연결이 끊기기 때문이다.
+   왕초보 단계표와 같은 규칙: 다 맞히면 다음 단계, 틀리면 같은 퀴즈를 다른 문장으로 한 번 더, 그다음은 결과와 상관없이 다음 단계. */
+const STAGES = {
+  '1-1':{ kind:'arrange', tag:'b', name:'듣고 문장 구성', pass:'2-1', fail:'1-2', green:true, listen:true },
+  '1-2':{ kind:'arrange', tag:'b', name:'듣고 문장 구성', pass:'2-1', fail:'2-1', green:true, listen:true },
+  '2-1':{ kind:'blank',   tag:'b', name:'핵심 쓰기',      pass:'3-1', fail:'2-2' },
+  '2-2':{ kind:'blank',   tag:'b', name:'핵심 쓰기',      pass:'3-1', fail:'3-1' },
+  '3-1':{ kind:'arrange', tag:'r', name:'문장 구성',      pass:'4-1', fail:'3-2' },
+  '3-2':{ kind:'arrange', tag:'r', name:'문장 구성',      pass:'4-1', fail:'4-1' },
+  '4-1':{ kind:'blank',   tag:'r', name:'핵심 쓰기',      pass:null,  fail:'4-2' },
+  '4-2':{ kind:'blank',   tag:'r', name:'핵심 쓰기',      pass:null,  fail:null },
+};
+const ORDER = Object.keys(STAGES);
+const NOTE = {
+  '1':'S1 을 듣고 낱말 타일로 만든다 — 핵심 타일은 초록',
+  '2':'방금 만든 <b>같은 문장</b>에서 핵심 자리가 빈칸 — 직접 쓴다(글자 수 칸 · 첫 글자 힌트 · 형태 규칙은 원형 힌트)',
+  '3':'새 문장을 한국어만 보고 만든다 — 초록 없음',
+  '4':'방금 만든 <b>같은 문장</b>에서 핵심 자리가 빈칸 — 직접 쓴다',
+};
+const FEATURED = ['10001', '10033', '10369-A', '10065', '10299', '10041', '10084', '10013'];
+
+let U = [], byId = {}, uid = '10001', run = null;
+try { const s = JSON.parse(localStorage.getItem('veone') || 'null'); if (s) uid = s.uid; } catch (e) {}
+
+const $ = s => document.querySelector(s);
+const $$ = (s, el = document) => [...el.querySelectorAll(s)];
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[c]));
+const krHtml = s => esc(s).replace(/\[([^\]]+)\]/g, '<span class="tgt">$1</span>');
+const plain = s => s.replace(/[[\]]/g, '');
+const norm = w => String(w).toLowerCase().replace(/[’‘]/g, "'").replace(/[^a-z0-9' -]/g, '').replace(/\s+/g, ' ').trim();
+const tileText = w => /^I('|$)/.test(w) ? w : w.toLowerCase();
+const shuffle = a => { const b = a.slice(); for (let n = 0; n < 30; n++) { for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [b[i], b[j]] = [b[j], b[i]]; } if (a.length < 2 || b.some((x, k) => x !== a[k])) break; } return b; };
+const unit = () => byId[uid];
+function say(text) { try { const v = new SpeechSynthesisUtterance(plain(text)); v.lang = 'en-US'; v.rate = .9; speechSynthesis.cancel(); speechSynthesis.speak(v); } catch (e) {} }
+function greenRuns(ws) {
+  const out = [];
+  ws.forEach(([w, g]) => { if (g && out.length && out.at(-1).g) out.at(-1).w.push(w); else out.push({ g, w:[w] }); });
+  return out.map(r => r.g ? `<span class="g">${esc(r.w.join(' '))}</span>` : esc(r.w.join(' '))).join(' ');
+}
+
+/* 핵심 — 매번 정답으로 쓰는 부분. 데이터의 [ ] 이고, 패턴 유닛은 그중 모든 문장에 공통인 낱말(고정어),
+   형태 규칙 유닛은 꼴이 바뀐 낱말 하나(괄호가 주어까지 묶은 [She cried] 에서 cried) */
+const formInfo = (u, i) => { const v = u.kind === 'form' && u.plan && u.plan.info && u.plan.info[i]; return v && !v.peri && norm(v.base) !== norm(v.w) ? v : null; };
+function core(u, i) {
+  const x = u.s[i];
+  if (u.kind === 'pattern') return x.t.map((t, j) => t[2] ? j : -1).filter(j => j >= 0);
+  const v = formInfo(u, i); if (v) return [v.ti];
+  if (u.kind === 'form') return [];
+  return x.t.map((t, j) => t[1] ? j : -1).filter(j => j >= 0);
+}
+const hintOf = (u, i) => { const v = formInfo(u, i); return v ? v.base : ''; };
+/* 문장 고르기 — 아직 안 나온 문장 먼저(주어 변형은 뒤로), 핵심이 있는 문장만 */
+function pick(avoid = []) {
+  const u = unit();
+  const order = u.s.map((_, i) => i).sort((a, b) => (u.s[a].tag.startsWith('문장1-') - u.s[b].tag.startsWith('문장1-')) || a - b);
+  const ok = order.filter(i => core(u, i).length && !avoid.includes(i));
+  return ok.find(i => !run.used.has(i)) ?? ok[0];
+}
+
+/* ── 머리 · 단계표 ── */
+function header() {
+  const name = u => { const f = u.form.replace(/\s+/g, ' '); return f.length > 20 ? f.slice(0, 19) + '…' : f; };
+  const chips = FEATURED.filter(id => byId[id]).map(id => `<button class="unit${id === uid ? ' on' : ''}" data-id="${id}">${esc(name(byId[id]))}</button>`);
+  if (!FEATURED.includes(uid)) chips.push(`<button class="unit on" data-id="${uid}">${esc(name(unit()))}</button>`);
+  chips.push(`<button class="unit rand" id="rand">다른 유닛 ↻</button>`);
+  $('#units').innerHTML = chips.join('');
+  $$('.unit[data-id]').forEach(b => b.onclick = () => open(b.dataset.id));
+  $('#rand').onclick = () => { const pool = U.filter(x => x.id !== uid); open(pool[Math.floor(Math.random() * pool.length)].id); };
+}
+function drawTable() {
+  const marks = {}; run && run.log.forEach(l => marks[l.stage] = l.ok ? '<span class="mk o">O</span>' : '<span class="mk x">X</span>');
+  $('#tblBody').innerHTML = `<table class="st"><tr><th>단계</th><th>퀴즈</th><th>문장</th><th>다 맞힘</th><th>틀림</th><th></th></tr>`
+    + ORDER.map(id => { const s = STAGES[id], d = id.charAt(0);
+      const which = id.endsWith('-2') ? '다른 문장' : d === '1' ? 'S1' : d === '2' ? '1단계와 같은 문장' : d === '3' ? '새 문장' : '3단계와 같은 문장';
+      return `<tr class="${run && run.phase === 'quiz' && run.stage === id ? 'cur' : ''}"><td>${id} <span class="tg ${s.tag}">${s.tag === 'b' ? '기초' : '실전'}</span></td><td>${s.name}</td><td style="color:#8a98ad">${which}</td><td>${s.pass || '완료'}</td><td>${s.fail || '완료'}</td><td>${marks[id] || ''}</td></tr>`; }).join('')
+    + `</table><div class="rules"><b>모든 유닛이 같은 흐름</b> — 화면은 배열 · 빈칸 쓰기 두 가지. <b>핵심</b> = 데이터의 [ ] (패턴은 모든 문장에 공통인 낱말, 형태 규칙은 꼴이 바뀐 낱말).<br>`
+    + `<b>규칙</b> 다 맞히면 다음 단계, 틀리면 같은 퀴즈를 다른 문장으로 한 번 더, 그다음은 결과와 상관없이 다음 단계.<br>`
+    + Object.entries(NOTE).map(([k, v]) => `<b>${k}단계</b> ${v}`).join('<br>') + `<br><b>완료</b> 틀린 것과 설명이 있을 때만</div>`;
+}
+function drawBar() {
+  const n = !run ? 0 : run.phase === 'done' ? 4 : +run.stage.charAt(0) - 1;
+  $('#barI').style.width = `${n / 4 * 100}%`;
+  $('#barN').textContent = run && run.phase === 'quiz' ? `${run.stage.charAt(0)} / 4` : run && run.phase === 'done' ? '완료' : '';
+}
+function refresh() { header(); drawTable(); drawBar(); }
+function open(id) {
+  uid = id; try { localStorage.setItem('veone', JSON.stringify({ uid })); } catch (e) {}
+  run = { stage:null, used:new Set(), log:[], miss:[], lastArrange:null, phase:'quiz' };
+  goStage('1-1');
+}
+function goStage(id) {
+  if (!id) return finish();
+  run.stage = id; refresh();
+  const s = STAGES[id], u = unit();
+  let i;
+  if (s.kind === 'arrange') i = id === '1-1' && core(u, 0).length ? 0 : pick();
+  else i = id.endsWith('-1') && run.lastArrange !== null ? run.lastArrange : pick([run.lastBlank]);
+  run.used.add(i);
+  if (s.kind === 'arrange') run.lastArrange = i; else run.lastBlank = i;
+  (s.kind === 'arrange' ? quizArrange : quizBlank)(s, i);
+}
+function shell(s, body, note = '') {
+  const u = unit();
+  $('#stage').innerHTML = `<div class="card"><div class="tag ${s.tag}">${s.tag === 'b' ? '기초' : '실전'}</div>
+    <div class="stage">${run.stage} · ${s.name}</div>${body}<div id="res"></div><div id="bb"></div>
+    <div class="src">유닛 ${esc(u.id)} · ${esc(u.form)}${note ? ' · ' + note : ''}</div></div>`;
+}
+function report(ok, i, given) {
+  const s = STAGES[run.stage], u = unit(), x = u.s[i], c = core(u, i);
+  run.log.push({ stage:run.stage, ok });
+  if (!ok) run.miss.push({ stage:run.stage, i, given });
+  const next = ok ? s.pass : s.fail;
+  $('#res').innerHTML = `<div class="res ${ok ? 'ok' : 'no'}"><div class="h">${ok ? '정답!' : '아쉬워요'}</div><div class="a">${greenRuns(x.t.map((t, j) => [t[0], c.includes(j)]))}${esc(x.p)}</div></div>`;
+  $('#bb').innerHTML = `<button class="btn" id="nx">${next ? '다음' : '완료'}</button>`;
+  $('#nx').onclick = () => goStage(next);
+  drawTable();
+}
+
+/* 배열 — 1단계는 듣기와 핵심 초록, 3단계는 한국어만 */
+function quizArrange(s, i) {
+  const u = unit(), x = u.s[i], c = core(u, i);
+  shell(s, `${s.listen ? `<button class="spk" id="spk">🔊 듣기</button>` : ''}<div class="kr">${krHtml(x.kr)}</div>
+    <div class="fill" id="fill"></div><div class="bank" id="bank"></div>`);
+  if (s.listen) { $('#spk').onclick = () => say(x.en); say(x.en); }
+  const items = x.t.map((t, j) => ({ text:t[0], g:s.green && c.includes(j) }));
+  const order = shuffle(items.map((_, k) => k)), placed = [];
+  let fin = false;
+  $('#bank').innerHTML = order.map(k => `<button class="w${items[k].g ? ' g' : ''}" data-k="${k}">${esc(tileText(items[k].text))}</button>`).join('');
+  $('#bb').innerHTML = `<button class="btn" id="ok" disabled>확인</button>`;
+  const draw = () => {
+    $('#fill').innerHTML = placed.map((k, j) => `<button class="w${items[k].g ? ' g' : ''}" data-j="${j}">${esc(tileText(items[k].text))}</button>`).join('') + (placed.length === items.length && x.p ? `<span class="punct">${esc(x.p)}</span>` : '');
+    $$('#bank .w').forEach(b => b.classList.toggle('used', placed.includes(+b.dataset.k)));
+    $$('#fill .w').forEach(b => b.onclick = () => { if (fin) return; placed.splice(+b.dataset.j, 1); draw(); });
+    $('#ok').disabled = placed.length < items.length;
+  };
+  $$('#bank .w').forEach(b => b.onclick = () => { if (fin) return; placed.push(+b.dataset.k); draw(); });
+  $('#ok').onclick = () => {
+    fin = true;
+    const ok = placed.every((k, j) => norm(items[k].text) === norm(items[j].text));
+    $$('#fill .w').forEach((b, j) => { b.classList.remove('g'); b.classList.add(norm(items[placed[j]].text) === norm(items[j].text) ? 'g' : 'bad'); });
+    $('#bank').style.display = 'none';
+    report(ok, i, placed.map(k => items[k].text).join(' ') + x.p);
+  };
+  draw();
+}
+
+/* 빈칸 쓰기 — 핵심 낱말이 빈칸. 이어진 낱말은 칸 하나. 칸에 글자 수, 막히면 첫 글자, 형태 규칙은 원형 */
+function quizBlank(s, i) {
+  const u = unit(), x = u.s[i], idx = core(u, i), hint = hintOf(u, i);
+  const groups = []; idx.forEach(j => { if (groups.length && groups.at(-1).at(-1) === j - 1) groups.at(-1).push(j); else groups.push([j]); });
+  const ans = groups.map(g => g.map(j => x.t[j][0]).join(' '));
+  const mask = w => w.split(' ').map(p => p.replace(/[A-Za-z0-9]/g, '_')).join('  ');
+  let html = '', j = 0;
+  while (j < x.t.length) { const gi = groups.findIndex(g => g[0] === j);
+    if (gi >= 0) { html += `<input class="inp" data-g="${gi}" size="${ans[gi].length + 2}" placeholder="${esc(mask(ans[gi]))}" autocomplete="off" autocapitalize="off" spellcheck="false">` + (hint && gi === groups.length - 1 ? `<span class="base">(${esc(hint)})</span>` : '') + ' '; j = groups[gi].at(-1) + 1; }
+    else { html += esc(x.t[j][0]) + ' '; j++; } }
+  shell(s, `<div class="kr">${krHtml(x.kr)}</div><div class="sent">${html.trim()}${esc(x.p)}</div><button class="lad" id="hint">첫 글자 보기</button>`, hint ? '<span style="color:#c08a3a">원형 자동 추출</span>' : '');
+  $('#bb').innerHTML = `<button class="btn" id="ok" disabled>확인</button>`;
+  const ins = $$('.sent .inp');
+  ins.forEach(e => { e.oninput = () => { $('#ok').disabled = ins.some(f => !f.value.trim()); }; e.onkeydown = ev => { if (ev.key === 'Enter' && !$('#ok').disabled) $('#ok').click(); }; });
+  $('#hint').onclick = () => { ins.forEach(e => { e.placeholder = ans[+e.dataset.g].split(' ').map(w => w[0] + w.slice(1).replace(/[A-Za-z0-9]/g, '_')).join('  '); }); $('#hint').remove(); };
+  ins[0].focus();
+  $('#ok').onclick = () => {
+    const vals = ins.map(e => e.value.trim()), ok = ins.every(e => norm(e.value) === norm(ans[+e.dataset.g]));
+    if ($('#hint')) $('#hint').remove();
+    ins.forEach(e => e.readOnly = true);
+    const given = [];
+    for (let n = 0; n < x.t.length; n++) { const gi = groups.findIndex(g => g[0] === n); if (gi >= 0) { given.push(vals[gi]); n = groups[gi].at(-1); } else given.push(x.t[n][0]); }
+    report(ok, i, given.join(' ') + x.p);
+  };
+}
+
+/* 완료 — 틀린 것과 설명이 있을 때만 */
+function finish() {
+  run.phase = 'done'; run.stage = null; refresh();
+  const u = unit();
+  const miss = run.miss.map(m => { const x = u.s[m.i], c = core(u, m.i);
+    return `<div class="miss"><div class="no">${esc(m.given)}</div><div class="yes">→ ${greenRuns(x.t.map((t, j) => [t[0], c.includes(j)]))}${esc(x.p)}<span class="st2">${m.stage} ${STAGES[m.stage].name}</span></div></div>`; }).join('');
+  const body = (miss ? `<div class="sec"><div class="t">틀렸던 곳</div>${miss}</div>` : '') + (u.desc ? `<div class="sec"><div class="t">알아 두기</div><div class="d" style="margin-top:0">${esc(u.desc)}</div></div>` : '');
+  $('#stage').innerHTML = `<div class="card"><div class="intro"><div class="stage">유닛 완료</div><div class="f">${esc(u.form)}</div><div class="m">${esc(u.mean)}</div>${body}</div>
+    <button class="btn" id="nxu">다음 유닛</button><button class="btn" id="again" style="background:#fff;color:#6b7c93;box-shadow:0 1px 4px rgba(30,60,110,.12);margin-top:8px">다시</button></div>`;
+  $('#again').onclick = () => open(uid);
+  $('#nxu').onclick = () => $('#rand').click();
+}
+
+fetch('units/flow-units.gen.json').then(r => r.json()).then(d => {
+  U = d.units.filter(u => u.s.some((_, i) => core(u, i).length)); U.forEach(u => byId[u.id] = u);
+  if (!byId[uid]) uid = FEATURED[0];
+  const q = $('#q');
+  q.onkeydown = e => {
+    if (e.key !== 'Enter') return;
+    const v = q.value.trim().toLowerCase(); if (!v) return;
+    const hit = U.find(x => x.id.toLowerCase() === v) || U.find(x => x.form.toLowerCase().includes(v) || x.mean.includes(v));
+    if (hit) { open(hit.id); q.value = ''; q.blur(); } else { q.value = ''; q.placeholder = `"${v}" 에 맞는 유닛이 없어요`; }
+  };
+  open(uid);
+}).catch(e => { $('#stage').innerHTML = `<div class="card">문장을 불러오지 못했어요. (${esc(e.message)})</div>`; });
+</script>
+</body>
+</html>
