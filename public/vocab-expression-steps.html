@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>표현 4단계 — 왕초보식</title>
+<style>
+  :root { --bg:#a9ccf2; --ink:#2f3e52; --green:#2e9e57; }
+  * { box-sizing:border-box; }
+  html, body { margin:0; }
+  body { font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+    background:var(--bg); color:var(--ink); display:flex; justify-content:center; }
+  .app { width:100%; max-width:460px; min-height:100vh; padding:14px 16px 40px; background:linear-gradient(#aacdf3,#bfe0ef); }
+  h1 { font-size:17px; margin:2px 2px 10px; color:#fff; text-shadow:0 1px 2px rgba(30,60,110,.25); }
+
+  .units { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:8px; }
+  .unit { border:1px solid rgba(255,255,255,.8); background:rgba(255,255,255,.35); color:#35506f; border-radius:20px;
+    padding:6px 12px; font-size:13px; font-weight:700; cursor:pointer; }
+  .unit.on { background:#4b83d6; border-color:#4b83d6; color:#fff; }
+  .unit.rand { border-style:dashed; }
+  .find-u { display:flex; margin-bottom:10px; }
+  .find-u input { flex:1; min-width:0; border:none; border-radius:11px; padding:8px 11px; font-size:13px; background:rgba(255,255,255,.7); color:#2f3e52; }
+
+  /* 단계표 — 지금 어느 줄에 있는지가 보인다 */
+  .table { background:#fff; border-radius:16px; padding:10px 12px; margin-bottom:14px; box-shadow:0 4px 12px rgba(30,60,110,.1); }
+  .table summary { cursor:pointer; font-size:13px; font-weight:800; color:#3a6bb0; list-style:none; }
+  .table summary::-webkit-details-marker { display:none; }
+  .table summary::after { content:' ▾'; color:#9aa8bc; }
+  .table[open] summary::after { content:' ▴'; }
+  .st { width:100%; border-collapse:collapse; font-size:12px; margin-top:8px; }
+  .st th { text-align:left; color:#8a98ad; font-weight:800; padding:4px 3px; border-bottom:1px solid #eef2f8; }
+  .st td { padding:5px 3px; border-bottom:1px solid #f2f5fa; vertical-align:top; }
+  .st tr.cur td { background:#eef4fd; font-weight:800; }
+  .st tr.cur td:first-child { box-shadow:inset 3px 0 0 #4b83d6; }
+  .st .mk { font-weight:800; } .st .o { color:#2e9e57; } .st .x { color:#c46a2c; } .st .skip { color:#b9c4d3; }
+  .st .tg { display:inline-block; font-size:10.5px; font-weight:800; border-radius:6px; padding:0 5px; }
+  .tg.b { background:#e3edfb; color:#3a6bb0; } .tg.r { background:#fdeadf; color:#c4632c; }
+  .rules { font-size:11.5px; color:#6b7c93; line-height:1.55; margin:8px 0 2px; }
+  .rules b { color:#3d5778; }
+
+  /* 진행 */
+  .top { display:flex; align-items:center; gap:8px; margin:0 2px 14px; }
+  .bar { flex:1; height:8px; background:rgba(255,255,255,.55); border-radius:6px; overflow:hidden; }
+  .bar i { display:block; height:100%; background:#6f9fe6; border-radius:6px; transition:width .3s; }
+  .top .n { font-size:12px; font-weight:800; color:#fff; }
+
+  .card { position:relative; background:#fff; border-radius:22px; box-shadow:0 6px 18px rgba(30,60,110,.13); padding:22px 18px 18px; min-height:330px; }
+  .tag { position:absolute; top:-12px; left:16px; font-size:12px; font-weight:800; border-radius:11px 11px 11px 3px; padding:3px 11px; }
+  .tag.b { background:#cfe0f5; color:#3a6bb0; } .tag.r { background:#fbd9c5; color:#b5541c; }
+  .stage { font-size:12.5px; font-weight:800; color:#8a98ad; margin-bottom:10px; }
+  .kr { font-size:19px; font-weight:700; color:#33465c; line-height:1.5; margin-bottom:6px; }
+  .tgt { color:var(--green); font-weight:800; }
+  .tip { font-size:13px; color:#3a6bb0; background:#eef4fd; border-radius:10px; padding:7px 10px; margin:8px 0 4px; line-height:1.45; }
+  .spk { border:none; background:#eef4fd; color:#3a6bb0; border-radius:20px; padding:5px 11px; font-size:12.5px; font-weight:800; cursor:pointer; margin-bottom:6px; }
+
+  /* 문장 구성 */
+  .fill { display:flex; flex-wrap:wrap; align-items:center; gap:7px 5px; min-height:56px; padding:10px 0; border-bottom:2px solid #e2e9f3; margin:10px 0 14px; }
+  .bank { display:flex; flex-wrap:wrap; gap:7px; }
+  .w { font:inherit; font-size:16.5px; font-weight:700; color:#2f3e52; padding:8px 12px; border:1px solid #d3e0f2; background:#fff;
+    border-radius:11px; box-shadow:0 2px 0 #e1e9f5; cursor:pointer; }
+  .w:active { transform:translateY(2px); box-shadow:none; }
+  .w.used { background:#e3e9f2; border-color:#dbe2ee; color:transparent; box-shadow:none; pointer-events:none; }
+  .w.g { background:#dcf6e6; color:#1f7a49; border-color:#a9dec2; }
+  .w.bad { background:#fdeee6; color:#b5541c; border-color:#f0c4a8; }
+  .punct { margin-left:-3px; font-size:18px; font-weight:700; }
+
+  /* 빈칸 문장 */
+  .sent { font-size:19px; font-weight:700; line-height:2; margin:10px 0 14px; }
+  .blank { display:inline-block; min-width:70px; border-bottom:2.5px solid #7aa3dc; color:#3a6bb0; text-align:center; padding:0 6px; line-height:1.4; }
+  .blank.ok { border-color:#2e9e57; color:#1f7a49; background:#dcf6e6; border-radius:6px 6px 0 0; }
+  .blank.bad { border-color:#e0874f; color:#b5541c; background:#fdeee6; border-radius:6px 6px 0 0; }
+  .inp { font:inherit; font-size:18px; font-weight:800; color:#3a6bb0; border:none; border-bottom:2.5px solid #7aa3dc; background:#f3f8ff; border-radius:6px 6px 0 0; padding:1px 6px; outline:none; text-align:center; }
+  .opts { display:grid; gap:8px; }
+  .opt { font:inherit; font-size:16.5px; font-weight:700; padding:12px; border:1px solid #d3e0f2; background:#fff; border-radius:13px; box-shadow:0 2px 0 #e1e9f5; cursor:pointer; color:#2f3e52; text-align:left; }
+  .opt.ok { background:#dcf6e6; border-color:#a9dec2; color:#1f7a49; }
+  .opt.bad { background:#fdeee6; border-color:#f0c4a8; color:#b5541c; }
+
+  /* 결과 */
+  .res { margin-top:16px; border-radius:16px; padding:12px 14px; animation:up .25s ease both; }
+  .res.ok { background:#edf9f1; } .res.no { background:#fdf3ec; }
+  .res .h { font-size:15px; font-weight:800; margin-bottom:4px; }
+  .res.ok .h { color:#1f7a49; } .res.no .h { color:#b5541c; }
+  .res .a { font-size:15.5px; font-weight:700; color:#33465c; line-height:1.55; }
+  .res .a .g { color:#1f7a49; background:#dcf6e6; border-radius:5px; padding:0 4px; }
+  .res .nx { font-size:12px; color:#8a98ad; margin-top:6px; font-weight:700; }
+  @keyframes up { from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;} }
+  .btn { display:block; width:100%; border:none; border-radius:15px; padding:14px 8px; font-size:15.5px; font-weight:800; cursor:pointer; margin-top:16px;
+    background:linear-gradient(#8b7cf0,#6f5bf0); color:#fff; }
+  .btn:disabled { background:#d6dce6; color:#fff; cursor:default; }
+
+  /* 소개 · 완료 */
+  .intro { text-align:center; padding-top:20px; }
+  .intro .f { font-size:24px; font-weight:800; color:#1f7a49; margin:10px 0 6px; }
+  .intro .m { font-size:15px; color:#5d6f88; }
+  .intro .eg { margin-top:18px; font-size:15px; font-weight:700; color:#33465c; line-height:1.6; }
+  .intro .eg .g { color:#1f7a49; }
+  .intro .d { margin-top:14px; font-size:13.5px; color:#3a6bb0; background:#eef4fd; border-radius:12px; padding:9px 12px; text-align:left; line-height:1.5; }
+  .done-list { text-align:left; margin-top:14px; }
+  .done-list .r { display:flex; gap:8px; align-items:baseline; padding:6px 0; border-bottom:1px dashed #e7edf5; font-size:14.5px; font-weight:700; }
+  .done-list .r .s { flex:0 0 40px; font-size:12px; color:#8a98ad; }
+  .done-list .r .t { flex:1; } .done-list .r .t .g { color:#1f7a49; }
+  .done-list .r .k { flex:0 0 auto; font-size:13px; }
+  .src { margin-top:12px; text-align:right; font-size:11px; color:#a6b3c4; }
+</style>
+</head>
+<body>
+<div class="app">
+  <h1>표현 4단계 — 왕초보식</h1>
+  <div class="units" id="units"></div>
+  <div class="find-u"><input id="q" type="search" placeholder="유닛 id나 카드 초록으로 찾기 (예: 10065, stop)" enterkeyhint="search"></div>
+  <div class="top"><div class="bar"><i id="barI"></i></div><span class="n" id="barN"></span></div>
+  <div id="stage"></div>
+  <details class="table" id="tbl" open style="margin-top:16px"><summary>단계표 — 지금 어디인지</summary><div id="tblBody"></div></details>
+</div>
+
+<script>
+/* 왕초보 단계표(BeginnerFirstLearnStageMachine.ts kBeginnerFirstLearnStages)와 같은 모양.
+   다 맞히면 다음 단계, 틀리면 같은 퀴즈를 다른 문장으로 한 번 더(X-2), 그다음은 결과와 상관없이 다음 단계.
+   패턴화 가능 / 불가를 가르지 않는다 — 무엇을 묻는지는 문장의 [ ] 가 정한다. */
+const STAGES = {
+  '1-1':{ kind:'listen', tag:'b', name:'듣고 문장 구성', pass:'2-1', fail:'1-2' },
+  '1-2':{ kind:'listen', tag:'b', name:'듣고 문장 구성', pass:'2-1', fail:'2-1' },
+  '2-1':{ kind:'choice', tag:'b', name:'표현 고르기', pass:'3-1', fail:'2-2' },
+  '2-2':{ kind:'choice', tag:'b', name:'표현 고르기', pass:'3-1', fail:'3-1' },
+  '3-1':{ kind:'build', tag:'r', name:'문장 구성', pass:'4-1', fail:'3-2' },
+  '3-2':{ kind:'build', tag:'r', name:'문장 구성', pass:'4-1', fail:'4-1' },
+  '4-1':{ kind:'write', tag:'r', name:'표현 쓰기', pass:null, fail:'4-2' },
+  '4-2':{ kind:'write', tag:'r', name:'표현 쓰기', pass:null, fail:null },
+};
+const ORDER = Object.keys(STAGES);
+const KIND_NOTE = {
+  listen:'한국어(표현 자리 초록)를 보고 들으며 낱말 타일로 문장을 만든다',
+  choice:'문장의 [ ] 자리가 빈칸 — 보기 4개 중에 고른다',
+  build:'한국어만 보고 문장을 만든다 — 헷갈리는 낱말이 섞여 있다',
+  write:'문장의 [ ] 자리가 빈칸 — 직접 쓴다',
+};
+const FEATURED = ['10001', '10065', '10041', '10369-A', '10084', '10299'];
+
+let U = [], byId = {}, uid = '10001';
+let run = null; // { stage, used:Set, last:{}, log:[], phase:'intro'|'quiz'|'done' }
+try { const s = localStorage.getItem('vesteps'); if (s) uid = s; } catch (e) {}
+
+const $ = s => document.querySelector(s);
+const $$ = (s, el = document) => [...el.querySelectorAll(s)];
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[c]));
+const krHtml = s => esc(s).replace(/\[([^\]]+)\]/g, '<span class="tgt">$1</span>');
+const enHtml = s => esc(s).replace(/\[([^\]]+)\]/g, '<span class="g">$1</span>');
+const norm = w => String(w).toLowerCase().replace(/[’‘]/g, "'").replace(/[^a-z0-9' ]/g, '').replace(/\s+/g, ' ').trim();
+const tileText = w => /^I('|$)/.test(w) ? w : w.toLowerCase();
+const parts = en => [...en.matchAll(/\[([^\]]+)\]/g)].map(m => m[1].trim());
+const shuffle = a => { const b = a.slice(); for (let n = 0; n < 30; n++) { for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [b[i], b[j]] = [b[j], b[i]]; } if (a.length < 2 || b.some((x, k) => x !== a[k])) break; } return b; };
+const hash = s => [...s].reduce((h, c) => (h * 31 + c.charCodeAt(0)) >>> 0, 7);
+const unit = () => byId[uid];
+
+/* 문장 고르기 — 왕초보 BeginnerSentencePicker 와 같은 규칙: 아직 안 나온 문장 먼저, 재도전은 직전과 다른 문장.
+   첫 단계는 S1. 고르기·쓰기 단계는 [ ] 가 하나인 문장을 먼저 쓴다(빈칸이 하나일 때 가장 단순하다) */
+function pickSentence(kind, retry) {
+  const u = unit(), n = u.s.length;
+  const order = [...Array(n).keys()].sort((a, b) => (u.s[a].tag.startsWith('문장1-') - u.s[b].tag.startsWith('문장1-')) || a - b);
+  if (run.log.length === 0) return 0;
+  const single = i => parts(u.s[i].en).length === 1;
+  const prefer = i => (kind === 'choice' || kind === 'write') && !single(i) ? 1 : 0;
+  const lastHere = run.last[kind];
+  let pool = order.filter(i => !run.used.has(i) && i !== lastHere);
+  if (!pool.length) pool = order.filter(i => i !== lastHere);
+  if (!pool.length) pool = order;
+  return pool.slice().sort((a, b) => prefer(a) - prefer(b))[0];
+}
+
+/* 오답 보기 · 함정 타일 — 한 곳에서 나온다. 순서: 나눈 유닛의 형제 갈래 → 규칙을 잘못 적용한 꼴 → 다른 유닛의 표현 */
+function distractors(u, i, need = 3) {
+  const right = parts(u.s[i].en), key = norm(right.join(' '));
+  const out = [], seen = new Set([key]);
+  const add = (ps, src) => { const k = norm(ps.join(' ')); if (!k || seen.has(k) || ps.length !== right.length) return; seen.add(k); out.push({ ps, src }); };
+  U.filter(x => x.orig === u.orig && x.id !== u.id).forEach(x => x.s.forEach(y => add(parts(y.en), '형제 갈래')));
+  const info = u.plan && u.plan.info && u.plan.info[i];
+  if (info && info.wrong) {
+    add(right.map(p => p.replace(new RegExp(`\\b${info.w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'i'), info.wrong)), '잘못 적용한 꼴');
+    if (info.base && !info.base.includes(' ')) add(right.map(p => p.replace(new RegExp(`\\b${info.w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'i'), info.base)), '원형');
+  }
+  // 자리·어순 유닛은 [ ] 안 낱말 순서를 뒤집은 꼴(always is), 일치 유닛은 짝 꼴(Is you)
+  if (u.kind === 'place' || u.kind === 'order') add(right.map(p => p.split(/\s+/).reverse().join(' ')), '순서를 바꾼 꼴');
+  if (u.kind === 'agree') {
+    const PAIR = { is:'are', are:'is', am:'is', was:'were', were:'was', do:'does', does:'do', have:'has', has:'have' };
+    add(right.map(p => p.replace(/\b(is|are|am|was|were|do|does|have|has)\b/i, w => { const r = PAIR[w.toLowerCase()]; return w[0] === w[0].toUpperCase() ? r[0].toUpperCase() + r.slice(1) : r; })), '짝 꼴');
+  }
+  // 다른 유닛 — 같은 길이(낱말 수)의 표현을 유닛마다 고정된 순서로
+  const words = right.join(' ').split(/\s+/).length, h = hash(u.id);
+  const others = U.filter(x => x.orig !== u.orig).map(x => ({ x, k:(hash(x.id) ^ h) >>> 0 })).sort((a, b) => a.k - b.k);
+  for (const { x } of others) {
+    if (out.length >= need) break;
+    const ps = parts(x.s[0].en);
+    if (ps.join(' ').split(/\s+/).length === words) add(ps, '다른 유닛');
+  }
+  for (const { x } of others) { if (out.length >= need) break; add(parts(x.s[0].en), '다른 유닛'); }
+  return out.slice(0, need);
+}
+
+/* ── 단계표 · 진행 ── */
+function drawTable() {
+  const marks = {}; run && run.log.forEach(l => marks[l.stage] = l.ok ? '<span class="mk o">O</span>' : '<span class="mk x">X</span>');
+  const visited = new Set(run ? run.log.map(l => l.stage) : []);
+  const skipped = s => run && run.phase !== 'intro' && !visited.has(s) && ORDER.indexOf(s) < ORDER.indexOf(run.stage || '4-2') && s.endsWith('-2');
+  $('#tblBody').innerHTML = `<table class="st"><tr><th>단계</th><th>퀴즈</th><th>다 맞힘</th><th>틀림</th><th></th></tr>`
+    + ORDER.map(id => { const s = STAGES[id];
+      return `<tr class="${run && run.phase === 'quiz' && run.stage === id ? 'cur' : ''}"><td>${id} <span class="tg ${s.tag}">${s.tag === 'b' ? '기초' : '실전'}</span></td><td>${s.name}${id.endsWith('-2') ? ' <span style="color:#a6b3c4">(다른 문장)</span>' : ''}</td><td>${s.pass || '완료'}</td><td>${s.fail || '완료'}</td><td>${marks[id] || (skipped(id) ? '<span class="skip">—</span>' : '')}</td></tr>`; }).join('')
+    + `</table><div class="rules"><b>규칙은 하나</b> — 다 맞히면 다음 단계, 틀리면 같은 퀴즈를 <b>다른 문장으로 한 번 더</b>, 그다음은 결과와 상관없이 다음 단계.<br>`
+    + Object.entries(KIND_NOTE).map(([k, v]) => `<b>${STAGES[ORDER.find(id => STAGES[id].kind === k)].name}</b> ${v}`).join('<br>') + `</div>`;
+}
+function drawBar() {
+  const done = run && run.phase === 'done' ? 4 : run ? Math.max(0, ['1', '2', '3', '4'].indexOf((run.stage || '1').charAt(0))) : 0;
+  $('#barI').style.width = `${done / 4 * 100}%`;
+  $('#barN').textContent = run && run.phase === 'quiz' ? `${run.stage.charAt(0)} / 4` : run && run.phase === 'done' ? '완료' : '';
+}
+function header() {
+  const name = u => { const f = u.form.replace(/\s+/g, ' '); return f.length > 20 ? f.slice(0, 19) + '…' : f; };
+  const chips = FEATURED.filter(id => byId[id]).map(id => `<button class="unit${id === uid ? ' on' : ''}" data-id="${id}">${esc(name(byId[id]))}</button>`);
+  if (!FEATURED.includes(uid)) chips.push(`<button class="unit on" data-id="${uid}">${esc(name(unit()))}</button>`);
+  chips.push(`<button class="unit rand" id="rand">다른 유닛 ↻</button>`);
+  $('#units').innerHTML = chips.join('');
+  $$('.unit[data-id]').forEach(b => b.onclick = () => open(b.dataset.id));
+  $('#rand').onclick = () => { const pool = U.filter(x => x.id !== uid); open(pool[Math.floor(Math.random() * pool.length)].id); };
+}
+function open(id) { uid = id; try { localStorage.setItem('vesteps', id); } catch (e) {} intro(); }
+function refresh() { header(); drawTable(); drawBar(); }
+
+/* ── 소개 ── */
+function intro() {
+  run = { stage:null, used:new Set(), last:{}, log:[], phase:'intro' };
+  refresh();
+  const u = unit(), s1 = u.s[0];
+  $('#stage').innerHTML = `<div class="card"><div class="intro">
+    <div class="stage">유닛 ${esc(u.id)}</div>
+    <div class="f">${esc(u.form)}</div><div class="m">${esc(u.mean)}</div>
+    <div class="eg">${enHtml(s1.en)}<br><span style="color:#7d8ea6;font-size:14px">${krHtml(s1.kr)}</span></div>
+    ${u.desc ? `<div class="d">${esc(u.desc)}</div>` : ''}
+  </div><button class="btn" id="go">▶ 학습하기</button>
+  <div class="src">문장 ${u.s.length}개 · ${u.kind === 'pattern' ? '패턴화 가능' : '패턴화 불가'} — 흐름은 같다</div></div>`;
+  $('#go').onclick = () => goStage('1-1');
+}
+
+/* ── 단계 ── */
+function goStage(id) {
+  if (!id) return finish();
+  run.stage = id; run.phase = 'quiz';
+  const st = STAGES[id], i = pickSentence(st.kind, id.endsWith('-2'));
+  run.used.add(i); run.last[st.kind] = i; run.cur = i;
+  refresh();
+  ({ listen:quizCompose, build:quizCompose, choice:quizChoice, write:quizWrite })[st.kind](st, i);
+}
+function shell(st, body) {
+  $('#stage').innerHTML = `<div class="card"><div class="tag ${st.tag}">${st.tag === 'b' ? '기초' : '실전'}</div>
+    <div class="stage">${run.stage} · ${st.name}</div>${body}<div id="res"></div><div id="bb"></div></div>`;
+}
+function report(ok, i) {
+  const st = STAGES[run.stage], u = unit(), x = u.s[i];
+  run.log.push({ stage:run.stage, ok, i });
+  const next = ok ? st.pass : st.fail;
+  const where = next ? `${next} ${STAGES[next].name}${next.endsWith('-2') ? ' (다른 문장으로 한 번 더)' : ''}` : '유닛 완료';
+  $('#res').innerHTML = `<div class="res ${ok ? 'ok' : 'no'}"><div class="h">${ok ? '정답!' : '아쉬워요'}</div>
+    <div class="a">${enHtml(x.en)}</div><div class="nx">다음 → ${esc(where)}</div></div>`;
+  $('#bb').innerHTML = `<button class="btn" id="nx">${next ? '다음' : '완료'}</button>`;
+  $('#nx').onclick = () => goStage(next);
+  drawTable();
+}
+function say(text) { try { const u = new SpeechSynthesisUtterance(text.replace(/[[\]]/g, '')); u.lang = 'en-US'; u.rate = .9; speechSynthesis.cancel(); speechSynthesis.speak(u); } catch (e) {} }
+
+/* 1단계 듣고 문장 구성 · 3단계 문장 구성 — 같은 화면. 1단계는 듣기·표현 tip, 3단계는 헷갈리는 낱말 3개가 섞인다 */
+function quizCompose(st, i) {
+  const u = unit(), x = u.s[i], listen = st.kind === 'listen';
+  const ans = x.t.map(t => t[0]);
+  const traps = listen ? [] : [...new Set(distractors(u, i).flatMap(d => d.ps.join(' ').split(/\s+/)).filter(w => !ans.map(norm).includes(norm(w))))].slice(0, 3);
+  const tiles = shuffle(ans.map((w, k) => ({ w, k })).concat(traps.map(w => ({ w, trap:true }))));
+  shell(st, `${listen ? `<button class="spk" id="spk">🔊 듣기</button>` : ''}<div class="kr">${krHtml(x.kr)}</div>
+    ${listen && u.desc ? `<div class="tip">💡 ${esc(u.desc)}</div>` : ''}
+    <div class="fill" id="fill"></div><div class="bank" id="bank">${tiles.map((t, k) => `<button class="w" data-k="${k}">${esc(tileText(t.w))}</button>`).join('')}</div>`);
+  if (listen) { $('#spk').onclick = () => say(x.en); say(x.en); }
+  const placed = [];
+  let fin = false;
+  const draw = () => {
+    $('#fill').innerHTML = placed.map((k, j) => `<button class="w" data-j="${j}">${esc(tileText(tiles[k].w))}</button>`).join('') + (placed.length && x.p ? `<span class="punct">${esc(x.p)}</span>` : '');
+    $$('#bank .w').forEach(b => b.classList.toggle('used', placed.includes(+b.dataset.k)));
+    $$('#fill .w').forEach(b => b.onclick = () => { if (fin) return; placed.splice(+b.dataset.j, 1); draw(); });
+    $('#ok').disabled = !placed.length;
+  };
+  $('#bb').innerHTML = `<button class="btn" id="ok" disabled>확인</button>`;
+  $$('#bank .w').forEach(b => b.onclick = () => { if (fin) return; placed.push(+b.dataset.k); draw(); });
+  $('#ok').onclick = () => {
+    fin = true;
+    const ok = placed.length === ans.length && placed.every((k, j) => norm(tiles[k].w) === norm(ans[j]));
+    $$('#fill .w').forEach((b, j) => { const k = placed[j]; b.classList.add(norm(tiles[k].w) === norm(ans[j] || '') ? 'g' : 'bad'); });
+    $('#bank').style.display = 'none';
+    report(ok, i);
+  };
+  draw();
+}
+
+/* 빈칸 문장 — [ ] 자리마다 빈칸 */
+function blanked(en, fillFn) {
+  let n = 0;
+  return esc(en).replace(/\[([^\]]+)\]/g, () => fillFn(n++));
+}
+
+/* 2단계 표현 고르기 — 정답 + 오답 보기 3개 */
+function quizChoice(st, i) {
+  const u = unit(), x = u.s[i], right = parts(x.en);
+  const opts = shuffle([{ ps:right, ok:true }].concat(distractors(u, i).map(d => ({ ps:d.ps, src:d.src }))));
+  shell(st, `<div class="kr">${krHtml(x.kr)}</div><div class="sent" id="sent">${blanked(x.en, n => `<span class="blank" data-n="${n}">&nbsp;</span>`)}</div>
+    <div class="opts">${opts.map((o, k) => `<button class="opt" data-k="${k}">${esc(o.ps.join(' … '))}</button>`).join('')}</div>`);
+  $$('.opt').forEach(b => b.onclick = () => {
+    const o = opts[+b.dataset.k];
+    $$('.opt').forEach(e => { e.disabled = true; if (opts[+e.dataset.k].ok) e.classList.add('ok'); });
+    if (!o.ok) b.classList.add('bad');
+    $$('#sent .blank').forEach((e, n) => { e.textContent = o.ps[n] || ''; e.classList.add(o.ok ? 'ok' : 'bad'); });
+    report(!!o.ok, i);
+  });
+}
+
+/* 4단계 표현 쓰기 — 빈칸에 직접 쓴다 */
+function quizWrite(st, i) {
+  const u = unit(), x = u.s[i], right = parts(x.en);
+  shell(st, `<div class="kr">${krHtml(x.kr)}</div><div class="sent" id="sent">${blanked(x.en, n => `<input class="inp" data-n="${n}" size="${Math.max(4, right[n].length + 1)}" autocomplete="off" autocapitalize="off" spellcheck="false">`)}</div>`);
+  $('#bb').innerHTML = `<button class="btn" id="ok" disabled>확인</button>`;
+  const ins = $$('#sent .inp');
+  ins.forEach(e => {
+    e.oninput = () => { $('#ok').disabled = ins.some(f => !f.value.trim()); };
+    e.onkeydown = ev => { if (ev.key === 'Enter' && !$('#ok').disabled) $('#ok').click(); };
+  });
+  ins[0].focus();
+  $('#ok').onclick = () => {
+    const ok = ins.every((e, n) => norm(e.value) === norm(right[n]));
+    ins.forEach((e, n) => { const good = norm(e.value) === norm(right[n]); const sp = document.createElement('span'); sp.className = 'blank ' + (good ? 'ok' : 'bad'); sp.textContent = good ? right[n] : e.value; e.replaceWith(sp); });
+    report(ok, i);
+  };
+}
+
+/* ── 완료 ── */
+function finish() {
+  run.phase = 'done'; run.stage = null;
+  refresh();
+  const u = unit();
+  const rows = run.log.map(l => `<div class="r"><span class="s">${l.stage}</span><span class="t">${enHtml(u.s[l.i].en)}</span><span class="k">${l.ok ? '<span style="color:#2e9e57">O</span>' : '<span style="color:#c46a2c">X</span>'}</span></div>`).join('');
+  $('#stage').innerHTML = `<div class="card"><div class="intro"><div class="stage">유닛 완료</div>
+    <div class="f">${esc(u.form)}</div><div class="m">${esc(u.mean)}</div>${u.desc ? `<div class="d">${esc(u.desc)}</div>` : ''}
+    <div class="done-list">${rows}</div></div>
+    <button class="btn" id="again" style="background:#fff;color:#6b7c93;box-shadow:0 1px 4px rgba(30,60,110,.12)">다시</button><button class="btn" id="nxu" style="margin-top:8px">다음 유닛 ↻</button></div>`;
+  $('#again').onclick = intro;
+  $('#nxu').onclick = () => $('#rand').click();
+}
+
+fetch('units/flow-units.gen.json').then(r => r.json()).then(d => {
+  U = d.units; U.forEach(u => byId[u.id] = u);
+  if (!byId[uid]) uid = FEATURED[0];
+  const q = $('#q');
+  q.onkeydown = e => {
+    if (e.key !== 'Enter') return;
+    const v = q.value.trim().toLowerCase(); if (!v) return;
+    const hit = U.find(x => x.id.toLowerCase() === v) || U.find(x => x.form.toLowerCase().includes(v) || x.mean.includes(v));
+    if (hit) { open(hit.id); q.value = ''; q.blur(); } else { q.value = ''; q.placeholder = `"${v}" 에 맞는 유닛이 없어요`; }
+  };
+  intro();
+}).catch(e => { $('#stage').innerHTML = `<div class="card">문장을 불러오지 못했어요. (${esc(e.message)})</div>`; });
+</script>
+</body>
+</html>
