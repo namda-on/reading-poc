@@ -182,6 +182,9 @@ function greenRuns(ws) {
 const brIdx = x => x.t.map((t, j) => t[1] ? j : -1).filter(j => j >= 0);
 const sentHtml = x => greenRuns(x.t.map(t => [t[0], t[1]])) + esc(x.p);
 
+/* 일치 규칙의 주어 — 의문문은 조동사 뒤(소유격이면 두 낱말: your kids), 평서문은 앞(I do like) */
+const DET = new Set(['your', 'my', 'his', 'her', 'our', 'their', 'the']);
+const subjectOf = (x, at) => at === 0 ? (DET.has(norm(x.t[1][0])) ? `${x.t[1][0]} ${x.t[2][0]}` : x.t[1][0]) : x.t[at - 1][0];
 /* ALT — 뱅크에 [ ] 말고 하나 더 오는 낱말과, 그걸 놓았을 때 보여 줄 한 줄 */
 function altOf(u, i) {
   const x = u.s[i], br = brIdx(x), has = w => br.some(j => norm(x.t[j][0]) === norm(w));
@@ -194,7 +197,7 @@ function altOf(u, i) {
     const opts = (u.plan.decide && u.plan.decide.opts) || [];
     const at = br.find(j => opts.some(o => norm(o) === norm(x.t[j][0])));
     if (at !== undefined) { const o = opts.find(o => norm(o) !== norm(x.t[at][0]));
-      if (o) return { w:o, why:`주어 ${x.t[at + 1] ? x.t[at + 1][0] : ''} 에는 ${o.toLowerCase()} 말고 ${x.t[at][0].toLowerCase()}` }; }
+      if (o) return { w:o, why:`주어 ${subjectOf(x, at)} 에는 ${o.toLowerCase()} 말고 ${x.t[at][0].toLowerCase()}` }; }
   }
   const list = CHOICE[u.id];
   if (list) {
