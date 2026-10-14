@@ -16,6 +16,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import classify_units as cu
+import flow_plan
 
 CONCERN = Path(os.environ.get("CONCERN_CSV", cu.DL / "패턴화 고민 목록 - 목록.csv"))
 OUT = Path(__file__).resolve().parent.parent / "public" / "units"
@@ -477,7 +478,7 @@ def main():
             pat, anc, why_not, chk = judge(u["form"], u["sents"], g["type"], keep=KEEP.get(uid, ""))
             keep = f"나누지 않음 — {KEEP[uid]}" if uid in KEEP else ""
             judged.append(dict(id=uid, parent=uid, form=u["form"], pat=pat, anc=anc, why=why_not, chk=chk))
-            recs.append(dict(orig=uid, new="", form=u["form"], mean=u["mean"], sents=[("S1" if n == 0 else t, e, k, False) for n, (t, e, k) in enumerate(u["sents"])], typ=g["type"], pat=pat, anc=anc,
+            recs.append(dict(orig=uid, new="", form=u["form"], mean=u["mean"], desc=u["desc"], sents=[("S1" if n == 0 else t, e, k, False) for n, (t, e, k) in enumerate(u["sents"])], typ=g["type"], pat=pat, anc=anc,
                              why=why_not, chk=chk, reason=keep, memo=subj, concern=concern.get(uid, {}).get("유형", "")))
             for n, (tag, en, kr) in enumerate(u["sents"]):
                 first = n == 0
@@ -502,7 +503,7 @@ def main():
                 full = [(slot, en, kr) for slot, en, kr, _, _ in full_set(p, written)]
                 pat, anc, why_not, chk = judge(p["form"], full, side=p["side"])
                 judged.append(dict(id=p["id"], parent=uid, form=p["form"], pat=pat, anc=anc, why=why_not, chk=chk))
-                recs.append(dict(orig=uid, new=p["id"], form=p["form"], mean=p["mean"], sents=[(slot, e, k, src == "새로 씀") for slot, e, k, src, _ in full_set(p, written)], typ=f"{g['type']}에서 나눔", pat=pat,
+                recs.append(dict(orig=uid, new=p["id"], form=p["form"], mean=p["mean"], desc=p["desc"], sents=[(slot, e, k, src == "새로 씀") for slot, e, k, src, _ in full_set(p, written)], typ=f"{g['type']}에서 나눔", pat=pat,
                                  anc=anc, why=why_not, chk=chk, reason=f"나눔 — {p['why']}", memo=" · ".join(memo), concern=concern.get(uid, {}).get("유형", "")))
                 add = [f"{g['type']}에서 나눔", pat, anc, why_not, chk, f"나눔 — {p['why']}", " · ".join(memo)]
             else:
@@ -569,6 +570,7 @@ def main():
                             f"{u['id']} · {orig}" if src == "기존" else ""])
     print(f"나눈 유닛 학습 문장: {sum(len(ps) for _, ps in blocks) * len(SLOTS)}칸 = 기존 {sum(len(ps) for _, ps in blocks) * len(SLOTS) - n_new} + 새로 씀 {n_new}")
     if concern: write_xlsx(units, recs, blocks, list(csv.reader(open(CONCERN, encoding="utf-8"))), judged)
+    flow_plan.write(recs, OUT / "flow-units.gen.json", keys_of, anchors, OUT.parent / "vocab-expression-traps.sample.json")
     cnt = Counter(j["pat"] for j in judged)
     print(f"원본 {len(units)}유닛 · {sum(len(u['sents']) for u in units.values())}문장 → 나눈 유닛 {len(SPLITS)}개(새 유닛 {sum(1 for j in judged if j['parent'] != j['id'])}개)"
           f" · 나눈 뒤 {len(judged)}유닛 (패턴화 가능 {cnt['가능']} · 불가 {cnt['불가']})")

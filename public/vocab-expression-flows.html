@@ -1,0 +1,773 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>두 흐름 — 패턴 · 규칙</title>
+<style>
+  :root { --bg:#a9ccf2; --ink:#2f3e52; --green:#2e9e57; }
+  * { box-sizing:border-box; }
+  html, body { margin:0; }
+  body { font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+    background:var(--bg); color:var(--ink); display:flex; justify-content:center; }
+  .app { width:100%; max-width:460px; min-height:100vh; padding:14px 16px 40px; background:linear-gradient(#aacdf3,#bfe0ef); }
+  h1 { font-size:17px; margin:2px 2px 10px; color:#fff; text-shadow:0 1px 2px rgba(30,60,110,.25); }
+
+  .guide { background:#fff; border-radius:18px; padding:4px 14px 12px; box-shadow:0 4px 12px rgba(30,60,110,.1); margin-bottom:14px; }
+  .guide summary { cursor:pointer; font-weight:800; font-size:14px; padding:10px 0 6px; color:#3a6bb0; list-style:none; }
+  .guide summary::-webkit-details-marker { display:none; }
+  .guide summary::after { content:' ▾'; color:#9aa8bc; }
+  .guide[open] summary::after { content:' ▴'; }
+  .g-p { font-size:12.5px; color:#5d6f88; line-height:1.6; margin:0 0 8px; }
+  .g-t { width:100%; border-collapse:collapse; font-size:12.5px; margin:2px 0 10px; }
+  .g-t th { text-align:left; color:#8a98ad; font-weight:800; padding:4px; border-bottom:1px solid #eef2f8; }
+  .g-t td { padding:5px 4px; border-bottom:1px solid #f2f5fa; vertical-align:top; line-height:1.45; }
+  .g-t td:first-child { font-weight:800; white-space:nowrap; }
+  .g-flow { font-size:13.5px; font-weight:800; line-height:1.55; padding:2px 0 6px; }
+  .g-flow.a { color:#22794a; } .g-flow.b { color:#a5641a; }
+
+  .tabs { display:flex; gap:6px; margin-bottom:8px; }
+  .tab { flex:1; border:none; border-radius:12px; padding:9px 0; font-size:13px; font-weight:800; cursor:pointer;
+    background:rgba(255,255,255,.55); color:#4d6585; line-height:1.3; }
+  .tab small { display:block; font-size:11px; font-weight:700; opacity:.75; }
+  .tab.on { background:#fff; color:#2f3e52; box-shadow:0 2px 6px rgba(30,60,110,.15); }
+  .kinds { display:flex; flex-wrap:wrap; gap:5px; margin-bottom:8px; }
+  .kind { border:none; border-radius:9px; padding:5px 9px; font-size:12px; font-weight:800; cursor:pointer; background:rgba(255,255,255,.4); color:#55708f; }
+  .kind.on { background:#fdf0e1; color:#a5641a; }
+  .units { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:8px; }
+  .unit { border:1px solid rgba(255,255,255,.8); background:rgba(255,255,255,.35); color:#35506f; border-radius:20px;
+    padding:6px 12px; font-size:13px; font-weight:700; cursor:pointer; }
+  .unit.on { background:#4b83d6; border-color:#4b83d6; color:#fff; }
+  .unit.rand { border-style:dashed; }
+  .find-u { display:flex; gap:6px; margin-bottom:8px; }
+  .find-u input { flex:1; min-width:0; border:none; border-radius:11px; padding:8px 11px; font-size:13px; background:rgba(255,255,255,.7); color:#2f3e52; }
+  .info { font-size:12px; color:#3d5778; background:rgba(255,255,255,.55); border-radius:11px; padding:7px 10px; margin-bottom:10px; line-height:1.5; }
+  .info b { color:#2f3e52; }
+  .info .pv { color:#22794a; font-weight:800; } .info .pr { color:#a5641a; font-weight:800; }
+  .steps { display:flex; gap:5px; margin:0 0 18px; }
+  .step { flex:1; text-align:center; font-size:11px; font-weight:800; padding:6px 0; border-radius:10px;
+    background:rgba(255,255,255,.4); color:#6f88a8; line-height:1.25; }
+  .step.on { background:#fff; color:#3a6bb0; } .step.ok { background:rgba(255,255,255,.75); color:#2e9e57; }
+
+  .chat-card { position:relative; background:linear-gradient(#e9f1fb 0,#f4f8fd 48px,#ffffff 48px,#ffffff 100%);
+    border-radius:22px; box-shadow:0 6px 18px rgba(30,60,110,.13); padding:24px 18px 18px; }
+  .chat-card.correct { background:linear-gradient(#dff3e4 0,#eaf8ee 48px,#fbfffc 48px,#fbfffc 100%); }
+  .chat-tag { position:absolute; top:-13px; left:16px; background:#cfe0f5; color:#3a6bb0; font-size:12px; font-weight:800;
+    border-radius:11px 11px 11px 3px; padding:3px 11px; }
+  .chat-card.correct .chat-tag { background:#dff3e4; color:#22794a; }
+  .ask { font-size:14px; font-weight:700; color:#5d6f88; margin-bottom:12px; line-height:1.5; }
+  .ask .pill { display:inline-block; background:#dcf6e6; color:#1f7a49; border-radius:8px; padding:0 7px; font-weight:800; }
+  .tgt { color:var(--green); font-weight:800; }
+  .kr { font-size:18px; color:#33465c; font-weight:600; line-height:1.5; margin-bottom:12px; }
+  .kr.sm { font-size:14px; color:#7d8ea6; margin-bottom:6px; }
+
+  /* 낱말 키 — 찾기·고치기에서 누르는 낱말 */
+  .row { padding:10px 0; }
+  .row + .row { border-top:1px dashed #e2e9f3; }
+  .wline { display:flex; flex-wrap:wrap; align-items:center; gap:8px 4px; font-size:17px; font-weight:700; line-height:1.5; }
+  .wk { font:inherit; color:inherit; padding:3px 7px; border:1px solid #dbe6f5; background:#fff; border-radius:10px; box-shadow:0 2px 0 #e7eef8;
+    cursor:pointer; transition:background .15s, transform .09s, box-shadow .09s; }
+  .wk:active { transform:translateY(2px); box-shadow:none; }
+  .wk.ok { background:#dcf6e6; color:#1f7a49; border-color:#a9dec2; box-shadow:0 2px 0 #c2ebd4; }
+  .wk.bad { color:#aab7c8; border-color:#e6d3bd; box-shadow:0 2px 0 #f0e4d3; }
+  .wk.hint { border:1.5px dashed #e0a458; }
+  .wk.fixme { background:#fff4e5; color:#a5641a; border-color:#f0c48c; }
+  .pn { margin-left:-4px; }
+  .wline.nudge { animation:nudge .26s ease; }
+  @keyframes nudge { 30%{transform:translateX(-4px);} 70%{transform:translateX(3px);} }
+
+  /* 문장 그대로 보이는 줄(읽기 전용) */
+  .sline { font-size:17px; font-weight:700; line-height:1.9; }
+  .sline .g, .li .g { color:#1f7a49; background:#dcf6e6; border-radius:6px; padding:1px 5px; }
+  .sline .m { color:#9aa8bc; }
+  .inp { font:inherit; font-size:17px; font-weight:800; color:#3a6bb0; border:none; border-bottom:2.5px solid #7aa3dc; background:#f3f8ff;
+    border-radius:6px 6px 0 0; padding:1px 6px; outline:none; text-align:center; }
+  .inp.ok { color:#1f7a49; border-bottom-color:#2e9e57; background:#dcf6e6; }
+  .inp.bad { animation:shake .34s ease; border-bottom-color:#e0a458; }
+  .gapb { display:inline-block; width:26px; height:26px; vertical-align:middle; border:1.5px dashed #7aa3dc; border-radius:7px; background:#f3f8ff; cursor:pointer; margin:0 2px; }
+  .gapb:hover { background:#e3eefc; }
+  .gapb.bad { border-color:#e0a458; background:#fff4e5; animation:shake .34s ease; }
+  .movw { display:inline-block; font-size:15px; font-weight:800; color:#3a6bb0; background:#e3edfb; border-radius:9px; padding:3px 10px; margin-bottom:10px; }
+
+  /* 배열 */
+  .card { font:inherit; font-size:16.5px; font-weight:700; color:#2f3e52; padding:8px 13px; border:1px solid #d3e0f2; background:#fff;
+    border-radius:11px; box-shadow:0 2px 0 #e1e9f5; cursor:pointer; }
+  .card:active { transform:translateY(2px); box-shadow:none; }
+  .card.used { background:#e3e9f2; border-color:#dbe2ee; color:transparent; box-shadow:none; pointer-events:none; }
+  .card.pre { background:#dcf6e6; color:#1f7a49; border-color:#a9dec2; }
+  .punct { margin-left:-4px; font-size:18px; font-weight:700; }
+  .fill { display:flex; flex-wrap:wrap; align-items:center; gap:8px 6px; min-height:52px; padding:6px 0 10px; border-bottom:2px solid #e2e9f3; margin-bottom:14px; }
+  .fill.ok .card { background:#f2f6fb; color:#5d6f88; border-color:#e2e9f3; box-shadow:none; }
+  .fill.ok .card.g { background:#dcf6e6; color:#1f7a49; border-color:#a9dec2; }
+  .fill.shake { animation:shake .34s ease; }
+  @keyframes shake { 22%{transform:translateX(-5px);} 55%{transform:translateX(5px);} 82%{transform:translateX(-2px);} }
+  .bank { display:flex; flex-wrap:wrap; gap:8px; }
+
+  /* 릴레이 */
+  .relay-top { display:flex; justify-content:space-between; align-items:center; font-size:12.5px; font-weight:800; color:#8a98ad; margin-bottom:8px; }
+  .streak { color:#d9822b; }
+  .done-lines { margin-top:4px; }
+  .done-lines .sline { font-size:15.5px; line-height:1.7; }
+  .done-lines .rec { font-size:11.5px; color:#8a98ad; font-weight:700; margin:-2px 0 6px; }
+
+  /* 결정 */
+  .dec { display:flex; flex-wrap:wrap; align-items:center; gap:8px; font-size:20px; font-weight:800; margin:4px 0 14px; }
+  .dec .base { color:#5d6f88; background:#eef2f7; border-radius:10px; padding:4px 11px; }
+  .dec .arrow { color:#9aa8bc; }
+  .tagchip { display:inline-block; font-size:12.5px; font-weight:800; color:#a5641a; background:#fdf0e1; border-radius:8px; padding:2px 8px; margin-left:4px; vertical-align:2px; }
+  .opts { display:flex; gap:8px; margin:6px 0 4px; }
+  .opt { font:inherit; flex:1; font-size:17px; font-weight:800; padding:11px 0; border:1px solid #d3e0f2; background:#fff; border-radius:12px; box-shadow:0 2px 0 #e1e9f5; cursor:pointer; color:#2f3e52; }
+  .opt.bad { color:#c0a989; border-color:#efd9bf; animation:shake .34s ease; }
+  .opt.ok { background:#dcf6e6; color:#1f7a49; border-color:#a9dec2; }
+
+  /* 분류 */
+  .pool { display:flex; flex-wrap:wrap; gap:7px; min-height:40px; margin-bottom:12px; }
+  .chip { font:inherit; font-size:15px; font-weight:800; padding:6px 11px; border:1px solid #d3e0f2; background:#fff; border-radius:10px; box-shadow:0 2px 0 #e1e9f5; cursor:pointer; color:#2f3e52; }
+  .chip.sel { background:#e3edfb; border-color:#7aa3dc; color:#2b5ea7; }
+  .bins { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+  .bin { border:1.5px dashed #c9d6e8; border-radius:13px; padding:8px 9px; min-height:62px; cursor:pointer; background:#fbfcfe; }
+  .bin .bt { font-size:12.5px; font-weight:800; color:#a5641a; margin-bottom:4px; }
+  .bin .it { font-size:13.5px; font-weight:700; color:#33465c; line-height:1.55; }
+  .bin .it b { color:#1f7a49; }
+  .bin.shake { animation:shake .34s ease; border-color:#e0a458; }
+  .bin.full { border-style:solid; border-color:#cdebd8; background:#f4fbf6; }
+  .bt-tbl { width:100%; border-collapse:collapse; font-size:14.5px; }
+  .bt-tbl td { padding:5px 4px; border-bottom:1px dashed #e7edf5; font-weight:700; }
+  .bt-tbl td:first-child { color:#7d8ea6; }
+
+  /* 열린 쓰기 */
+  .free { width:100%; font:inherit; font-size:17px; font-weight:700; color:#2f3e52; border:1.5px solid #d3e0f2; border-radius:13px; padding:12px; outline:none; resize:none; }
+  .free:focus { border-color:#7aa3dc; }
+  .list { margin-top:12px; }
+  .list .li { font-size:15.5px; font-weight:700; line-height:1.6; padding:7px 0; border-bottom:1px dashed #e7edf5; }
+  .list .li.mine { background:#f6f2ff; border-radius:10px; padding:7px 9px; border-bottom:none; margin-bottom:4px; }
+  .badge { display:inline-block; font-size:11px; font-weight:800; border-radius:7px; padding:1px 7px; margin-right:5px; vertical-align:2px; }
+  .badge.me { background:#ece8fd; color:#5b47c9; } .badge.nw { background:#fdf0e1; color:#a5641a; }
+
+  .msg { margin-top:12px; font-size:13.5px; color:#6b5a2e; background:#fbf6ea; border-radius:12px; padding:9px 12px; line-height:1.5; animation:fadeUp .25s ease both; }
+  .msg b { color:#8a4a1f; }
+  .msg.good { color:#22794a; background:#edf9f1; }
+  .msg.good b { color:#1f7a49; }
+  .msg.note { color:#5d6f88; background:#f2f6fb; }
+  .rule { margin-top:14px; border-radius:16px; background:#f4fbf6; border:1px solid #cdebd8; padding:13px 14px; animation:fadeUp .35s ease both; }
+  .rule .f { font-size:17px; font-weight:800; color:#22794a; }
+  .rule .m { font-size:13px; color:#6b7c93; margin-top:2px; }
+  .rule .d { font-size:13.5px; color:#3c5a48; margin-top:8px; line-height:1.55; }
+  @keyframes fadeUp { from{opacity:0; transform:translateY(-4px);} to{opacity:1; transform:none;} }
+
+  .ladder { display:flex; gap:6px; margin-top:12px; }
+  .lad { border:none; border-radius:20px; padding:7px 13px; font-size:12.5px; font-weight:800; cursor:pointer; background:#fff; color:#6b7c93; box-shadow:0 1px 4px rgba(30,60,110,.12); }
+  .btns { display:flex; gap:8px; margin-top:18px; }
+  .btn { flex:1; border:none; border-radius:15px; padding:14px 8px; font-size:15px; font-weight:800; cursor:pointer; }
+  .btn.main { background:linear-gradient(#8b7cf0,#6f5bf0); color:#fff; }
+  .btn.ghost { flex:0 0 30%; background:#fff; color:#6b7c93; box-shadow:0 1px 4px rgba(30,60,110,.12); font-size:13.5px; }
+  .src { margin-top:12px; text-align:right; font-size:11px; color:#a6b3c4; line-height:1.5; }
+  .src .auto { color:#c08a3a; font-weight:800; } .src .hand { color:#5b47c9; font-weight:800; } .src .data { color:#2e9e57; font-weight:800; }
+</style>
+</head>
+<body>
+<div class="app">
+  <h1>두 흐름 — 패턴 · 규칙</h1>
+
+  <details class="guide">
+    <summary>이 페이지는</summary>
+    <p class="g-p">유닛 정리 시트의 <b>패턴화 판정</b>에 따라 두 흐름 중 하나를 탑니다. 문장은 확정 CSV(나눈 유닛은 8칸)를 그대로 쓰고, 각 단계에서 무엇을 쓰는지는 데이터에서 정합니다.</p>
+    <div class="g-flow a">패턴 흐름 (가능 836) — ① 찾기 → ② 고정어 릴레이 → ③ 문장 완성 → ④ 내 말로</div>
+    <div class="g-flow b">규칙 흐름 (불가 97) — ① 따라 만들기 → ② 먼저 결정 → ③ 틀린 문장 고치기 → ④ 정리</div>
+    <table class="g-t">
+      <tr><th>데이터</th><th>쓰임</th></tr>
+      <tr><td>영어 [ ]</td><td>학습 영역 — 규칙 흐름에서 찾고·정하고·고치는 자리. 완성 후 초록</td></tr>
+      <tr><td>한국어 [ ]</td><td>뜻 영역 — 문제의 초록 표시</td></tr>
+      <tr><td>고정어</td><td>모든 문장에 공통인 낱말(판정 때 계산). 패턴 흐름 ①의 정답, ②의 입력칸, ④의 채점 기준</td></tr>
+      <tr><td>불가 이유</td><td>규칙 흐름 ②의 모양 — 형태(원형 → 꼴) · 자리(부사 자리) · 어순(덩어리 순서) · 일치(is / are) · 그 밖(덩어리 순서)</td></tr>
+    </table>
+    <p class="g-p"><b>원형·틀린 문장</b>은 원본에 없어서 이 페이지가 만듭니다. 형태·일치는 규칙으로 <span style="color:#c08a3a;font-weight:800">자동 생성</span>하고, 자리·어순은 규칙으로는 맞는 문장이 나오는 경우가 있어 <span style="color:#5b47c9;font-weight:800">손으로 썼습니다</span>. 그 밖 27유닛은 틀린 문장이 없어 ③을 건너뜁니다. 카드 아래에 출처를 적었습니다.</p>
+  </details>
+
+  <div class="tabs" id="tabs"></div>
+  <div class="kinds" id="kinds"></div>
+  <div class="units" id="units"></div>
+  <div class="find-u"><input id="q" type="search" placeholder="유닛 id나 카드 초록으로 찾기 (예: 10065, stop)" enterkeyhint="search"></div>
+  <div class="info" id="info"></div>
+  <div class="steps" id="steps"></div>
+  <div id="stage"></div>
+</div>
+
+<script>
+/* 데이터: units/flow-units.gen.json — scripts/organize_units.py 가 판정을 마친 뒤 scripts/flow_plan.py 로 굽는다.
+   유닛마다 문장 토큰 [낱말, 괄호 안?, 고정어 키] 과 단계별 계획(plan)이 들어 있다. 화면은 계획을 그대로 따른다. */
+const STEPS = {
+  pattern:['① 찾기', '② 고정어 릴레이', '③ 문장 완성', '④ 내 말로'],
+  rule:['① 따라 만들기', '② 먼저 결정', '③ 틀린 문장 고치기', '④ 정리'],
+};
+const KINDS = [['form', '형태'], ['place', '자리'], ['order', '어순'], ['agree', '일치'], ['other', '그 밖']];
+const FEATURED = {
+  pattern:['10001', '10000', '10033', '10369-A', '10019-A', '10444'],
+  form:['10065', '10299', '10317', '10040', '10056'],
+  place:['10041', '10043', '10132'],
+  order:['10084', '10300', '10107'],
+  agree:['10006', '10009'],
+  other:['10013', '10066', '10088'],
+};
+
+let D = null, U = [], byId = {}, LEX = null;
+let st = { tab:'pattern', kind:'form', id:'10001', step:0, log:{} };
+try { const s = JSON.parse(localStorage.getItem('veflows') || 'null'); if (s && STEPS[s.tab]) st = { ...st, tab:s.tab, kind:s.kind || 'form', id:s.id }; } catch (e) {}
+const save = () => { try { localStorage.setItem('veflows', JSON.stringify({ tab:st.tab, kind:st.kind, id:st.id })); } catch (e) {} };
+
+const $ = s => document.querySelector(s);
+const $$ = (s, el = document) => [...el.querySelectorAll(s)];
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[c]));
+const krHtml = s => esc(s).replace(/\[([^\]]+)\]/g, '<span class="tgt">$1</span>');
+const low = w => String(w).toLowerCase().replace(/[’‘]/g, "'");
+const norm = w => low(w).replace(/^[^a-z0-9']+|[^a-z0-9']+$/g, '');
+const tileText = w => /^I('|$)/.test(w) ? w : w.toLowerCase();
+const shuffle = a => { const b = a.slice(); for (let n = 0; n < 30; n++) { for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [b[i], b[j]] = [b[j], b[i]]; } if (a.length < 2 || b.some((x, k) => x !== a[k])) break; } return b; };
+const bump = (el, c) => { el.classList.remove(c); void el.offsetWidth; el.classList.add(c); };
+const unit = () => byId[st.id];
+const sent = (u, i) => u.s[i];
+const plainOf = x => x.t.map(t => t[0]).join(' ') + x.p;
+/* 오타 한 글자는 같은 낱말로 본다(4글자 이상) — 바꿔치기도 한 번으로 센다 */
+function near(a, b) {
+  if (a === b) return true;
+  if (Math.min(a.length, b.length) < 4 || Math.abs(a.length - b.length) > 1) return false;
+  const d = Array.from({ length:a.length + 1 }, (_, i) => [i, ...Array(b.length).fill(0)]);
+  for (let j = 1; j <= b.length; j++) d[0][j] = j;
+  for (let i = 1; i <= a.length; i++) for (let j = 1; j <= b.length; j++) {
+    d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+    if (i > 1 && j > 1 && a[i - 1] === b[j - 2] && a[i - 2] === b[j - 1]) d[i][j] = Math.min(d[i][j], d[i - 2][j - 2] + 1);
+  }
+  return d[a.length][b.length] <= 1;
+}
+/* 문장 줄 — 괄호(또는 고정어) 낱말은 초록 */
+function slineHtml(x, mark = (t) => t[1]) {
+  return greenRuns(x.t.map(t => [t[0], !!mark(t)])) + esc(x.p);
+}
+/* 이어진 초록 낱말은 한 덩어리로 칠한다(talk to) */
+function greenRuns(ws) {
+  const out = [];
+  ws.forEach(([w, g]) => { if (g && out.length && out.at(-1).g) out.at(-1).w.push(w); else out.push({ g, w:[w] }); });
+  return out.map(r => r.g ? `<span class="g">${esc(r.w.join(' '))}</span>` : esc(r.w.join(' '))).join(' ');
+}
+const ruleHtml = u => `<div class="rule"><div class="f">${esc(u.form)}</div><div class="m">${esc(u.mean)}</div>${u.desc ? `<div class="d">${esc(u.desc)}</div>` : ''}</div>`;
+function src(u, extra = '') {
+  const why = u.kind === 'pattern' ? `고정어 <b>${esc(u.anc)}</b>` : esc((u.why || '').split(' — ')[0]);
+  return `<div class="src">유닛 ${esc(u.id)} · ${why}${extra ? ' · ' + extra : ''}</div>`;
+}
+
+/* ── 고정어 키 — scripts/classify_units.py 의 tokens · stem 과 같은 규칙(④ 내 말로 채점용) ── */
+const SET = {};
+function lexInit(L) {
+  ['PERS', 'BE', 'DO', 'HAVE', 'MODAL', 'NEG', 'FUNC', 'IS_HOST'].forEach(k => SET[k] = new Set(L[k]));
+}
+function stem(w) {
+  w = LEX.IRR[w] || LEX.IRR_CMP[w] || w;
+  for (const suf of ['ing', 'ied', 'ies', 'ed', 'es', 's']) {
+    if (w.endsWith(suf) && w.length - suf.length >= 2) { w = w.slice(0, -suf.length) + (suf === 'ied' || suf === 'ies' ? 'i' : ''); break; }
+  }
+  if (w.length > 3 && w.at(-1) === w.at(-2) && !'ls'.includes(w.at(-1))) w = w.slice(0, -1);
+  if (w.endsWith('y')) w = w.slice(0, -1) + 'i';
+  if (w.endsWith('e') && w.length > 2) w = w.slice(0, -1);
+  return w;
+}
+const TAIL = { "n't":'not', "'s":'is', "'m":'am', "'re":'are', "'ll":'will', "'d":'would', "'ve":'have' };
+function keysOf(text) {
+  const out = [];
+  low(text).split(/\s+/).forEach((raw, wi) => {
+    const w = raw.replace(/[^a-z'\-]/g, '').replace(/^'+|'+$/g, '');
+    if (!w) return;
+    let pieces = LEX.CONTR[w];
+    if (!pieces) {
+      const m = w.match(/^(.+?)(n't|'s|'m|'re|'ll|'d|'ve)$/);
+      if (m) {
+        const head = ({ ca:'can', wo:'will', sha:'shall' })[m[1]] || m[1];
+        pieces = m[2] === "'s" && !SET.PERS.has(head) && !SET.IS_HOST.has(head) ? [head, "'s"] : [head, TAIL[m[2]]];
+      } else pieces = [w];
+    }
+    pieces.forEach(p => {
+      const c = p === "'s" ? 'POSS' : SET.PERS.has(p) ? 'PERS' : SET.BE.has(p) ? 'BE' : SET.DO.has(p) ? 'DO' : SET.HAVE.has(p) ? 'HAVE'
+        : SET.MODAL.has(p) ? 'MODAL' : SET.NEG.has(p) ? 'NEG' : SET.FUNC.has(p) ? 'FUNC' : 'OPEN';
+      out.push({ k:c === 'OPEN' ? stem(p) : p, c, wi });
+    });
+  });
+  return out;
+}
+
+/* ── 공통 배열 — 정답 순서의 조각(낱말 또는 덩어리)을 섞어 놓고 차례로 놓는다 ── */
+function arrange(box, items, punct, onDone, opt = {}) {
+  const order = shuffle(items.map((_, i) => i));
+  const placed = [];
+  let fin = false;
+  box.innerHTML = `<div class="fill" data-r="fill"></div><div class="bank" data-r="bank">${order.map(i =>
+    `<button class="card${items[i].pre ? ' pre' : ''}" data-i="${i}">${esc(opt.keepCase || items[i].pre ? items[i].text : tileText(items[i].text))}</button>`).join('')}</div><div data-r="fb"></div>`;
+  const fill = box.querySelector('[data-r=fill]'), bank = box.querySelector('[data-r=bank]'), fb = box.querySelector('[data-r=fb]');
+  const draw = () => {
+    fill.innerHTML = placed.map((i, j) => `<button class="card${fin && items[i].g ? ' g' : ''}" data-j="${j}">${esc(fin && j === 0 ? items[i].text : (opt.keepCase || items[i].pre ? items[i].text : tileText(items[i].text)))}</button>`).join('')
+      + (placed.length === items.length && punct ? `<span class="punct">${esc(punct)}</span>` : '');
+    $$('.card', bank).forEach(b => b.classList.toggle('used', placed.includes(+b.dataset.i)));
+    $$('.card', fill).forEach(b => b.onclick = () => { if (fin) return; placed.splice(+b.dataset.j, 1); fb.innerHTML = ''; draw(); });
+  };
+  const finish = shown => { fin = true; draw(); fill.classList.add('ok'); bank.style.display = 'none'; fb.innerHTML = ''; onDone(shown); };
+  $$('.card', bank).forEach(b => b.onclick = () => {
+    if (fin) return;
+    placed.push(+b.dataset.i); draw();
+    if (placed.length < items.length) return;
+    if (placed.every((i, j) => norm(items[i].text) === norm(items[j].text))) return finish(false);
+    bump(fill, 'shake');
+    fb.innerHTML = `<div class="msg">순서를 다시 볼까요? 놓은 조각을 누르면 뺄 수 있어요.</div>`;
+    if (opt.onWrong) opt.onWrong();
+  });
+  draw();
+  return { show() { placed.length = 0; items.forEach((_, i) => placed.push(i)); finish(true); } };
+}
+const wordItems = (x, green) => x.t.map(t => ({ text:t[0], g:green(t) }));
+
+/* ── 머리 ── */
+function header() {
+  const nP = U.filter(u => u.kind === 'pattern').length, nR = U.length - nP;
+  $('#tabs').innerHTML = `<button class="tab${st.tab === 'pattern' ? ' on' : ''}" data-t="pattern">패턴 흐름<small>패턴화 가능 ${nP}</small></button>`
+    + `<button class="tab${st.tab === 'rule' ? ' on' : ''}" data-t="rule">규칙 흐름<small>패턴화 불가 ${nR}</small></button>`;
+  $('#kinds').innerHTML = st.tab === 'rule' ? KINDS.map(([k, n]) => `<button class="kind${st.kind === k ? ' on' : ''}" data-k="${k}">${n} ${U.filter(u => u.kind === k).length}</button>`).join('') : '';
+  $('#kinds').style.display = st.tab === 'rule' ? '' : 'none';
+  const feat = FEATURED[st.tab === 'pattern' ? 'pattern' : st.kind].filter(id => byId[id]);
+  const name = u => { const f = u.form.replace(/\s+/g, ' '); return f.length > 20 ? f.slice(0, 19) + '…' : f; };
+  const chips = feat.map(id => `<button class="unit${id === st.id ? ' on' : ''}" data-id="${id}">${esc(name(byId[id]))}</button>`);
+  if (!feat.includes(st.id)) chips.push(`<button class="unit on" data-id="${st.id}">${esc(name(unit()))}</button>`);
+  chips.push(`<button class="unit rand" id="rand">다른 유닛 ↻</button>`);
+  $('#units').innerHTML = chips.join('');
+  const u = unit();
+  $('#info').innerHTML = `<b>${esc(u.id)}</b> · ${esc(u.form)} · ${esc(u.mean)}<br>`
+    + (u.kind === 'pattern' ? `<span class="pv">패턴화 가능</span> — 고정어 <b>${esc(u.anc)}</b>${u.chk ? ' · 기능어 하나뿐' : ''}`
+      : `<span class="pr">패턴화 불가</span> — ${esc(u.why)}`);
+  $('#steps').innerHTML = STEPS[st.tab].map((x, i) => `<div class="step${i === st.step ? ' on' : (i < st.step ? ' ok' : '')}">${x}</div>`).join('');
+  $$('.tab').forEach(b => b.onclick = () => { const t = b.dataset.t; openUnit(t, t === 'pattern' ? FEATURED.pattern[0] : FEATURED[st.kind][0]); });
+  $$('.kind').forEach(b => b.onclick = () => { st.kind = b.dataset.k; openUnit('rule', FEATURED[st.kind][0]); });
+  $$('.unit[data-id]').forEach(b => b.onclick = () => openUnit(st.tab, b.dataset.id));
+  $('#rand').onclick = () => {
+    const pool = U.filter(x => (st.tab === 'pattern' ? x.kind === 'pattern' : x.kind === st.kind) && x.id !== st.id);
+    openUnit(st.tab, pool[Math.floor(Math.random() * pool.length)].id);
+  };
+}
+function openUnit(tab, id) {
+  const u = byId[id]; if (!u) return;
+  const t = u.kind === 'pattern' ? 'pattern' : 'rule';
+  st = { tab:t, kind:t === 'rule' ? u.kind : st.kind, id, step:0, log:{} };
+  save(); render(); keepCardInView();
+}
+function render() {
+  header();
+  const u = unit();
+  if (st.tab === 'pattern') [pFind, pRelay, pBuild, pOpen, pDone][st.step](u);
+  else [rFollow, rDecide, rFix, rSum][st.step](u);
+}
+/* 단계가 바뀌어도 맨 위로 올리지 않는다 — 카드 윗변이 화면 위로 벗어났을 때만 카드까지 올린다 */
+function keepCardInView() { const r = $('#stage').getBoundingClientRect(); if (r.top < 0) window.scrollBy({ top:r.top - 12, behavior:'smooth' }); }
+function go(step) { st.step = step; render(); keepCardInView(); }
+function cardShell(tag, body, extra = '') {
+  $('#stage').innerHTML = `<div class="chat-card" id="card"><div class="chat-tag">${tag}</div>${body}<div id="fb"></div><div id="lad" class="ladder"></div><div id="after"></div>${extra}</div>`;
+}
+function ladder(btns) {
+  $('#lad').innerHTML = btns.map((b, i) => `<button class="lad" data-i="${i}">${esc(b[0])}</button>`).join('');
+  $$('.lad', $('#lad')).forEach(el => el.onclick = () => btns[+el.dataset.i][1](el));
+}
+function next(label, step) {
+  $('#lad').innerHTML = '';
+  $('#after').insertAdjacentHTML('beforeend', `<div class="btns"><button class="btn main" id="nextb">${label}</button></div>`);
+  $('#nextb').onclick = () => go(step);
+}
+const correct = () => $('#card').classList.add('correct');
+
+/* ═══ 패턴 흐름 ═══ */
+
+/* ① 찾기 — 두 문장에서 같은 말(고정어)을 짚는다. 같은 고정어는 두 줄에서 함께 켜진다 */
+function pFind(u) {
+  const P = u.plan;
+  const rows = P.find.map((i, r) => {
+    const x = sent(u, i);
+    const line = x.t.map((t, j) => `<button class="wk" data-r="${r}" data-k="${esc(t[2] || '')}" data-w="${esc(norm(t[0]))}">${esc(t[0])}</button>`).join('') + (x.p ? `<span class="pn">${esc(x.p)}</span>` : '');
+    return `<div class="row"><div class="kr sm">${krHtml(x.kr)}</div><div class="wline">${line}</div></div>`;
+  }).join('');
+  cardShell(STEPS.pattern[0], `<div class="ask">두 문장에서 <b>똑같이 반복되는 말</b>을 찾아 눌러 보세요</div><div id="rows">${rows}</div>`, src(u));
+  const keys = r => new Set($$(`#rows .wk[data-r="${r}"]`).map(b => b.dataset.k).filter(Boolean));
+  const k0 = keys(0), k1 = keys(1);
+  let need = [...k0].filter(k => k1.has(k));
+  if (!need.length) need = [...new Set([...k0, ...k1])];
+  const got = new Set();
+  let help = false;
+  const light = k => $$(`#rows .wk`).filter(b => b.dataset.k === k).forEach(b => { b.classList.add('ok'); b.classList.remove('hint'); });
+  const done = () => {
+    $$('#rows .wk').forEach(b => { b.disabled = true; b.classList.remove('bad'); });
+    correct(); st.log.find = { help };
+    $('#fb').innerHTML = `<div class="msg good">두 문장에 <b>${esc(u.anc)}</b> 가 똑같이 들어 있어요 — 이 덩어리는 그대로 쓰고, 나머지만 바뀌어요.</div>`;
+    next('고정어 써 보기 ›', 1);
+  };
+  $$('#rows .wk').forEach(b => b.onclick = () => {
+    const k = b.dataset.k;
+    if (k) { light(k); got.add(k); $('#fb').innerHTML = ''; if (need.every(x => got.has(x))) done(); return; }
+    b.classList.add('bad'); bump(b.closest('.wline'), 'nudge');
+    const both = [0, 1].every(r => $$(`#rows .wk[data-r="${r}"]`).some(e => e.dataset.w === b.dataset.w));
+    $('#fb').innerHTML = `<div class="msg">${both ? '두 문장에 다 있지만, 이 표현의 일부는 아니에요.' : '두 문장에 <b>다 있는</b> 말을 찾아 보세요.'}</div>`;
+  });
+  ladder([
+    ['첫 낱말 보기', () => { help = true; const k = need.find(x => !got.has(x)); if (k) $$(`#rows .wk`).filter(b => b.dataset.k === k).forEach(b => b.classList.add('hint')); }],
+    ['정답 보기', () => { help = true; need.forEach(k => { light(k); got.add(k); }); done(); }],
+  ]);
+}
+
+/* ② 고정어 릴레이 — 바뀌는 말은 주고, 고정어만 연달아 친다(S1 → 주어 변형 두 문장) */
+function pRelay(u) {
+  const P = u.plan, seq = P.relay.slice(0, 3);
+  let ri = 0, streak = 0;
+  const t0 = Date.now(), recs = [];
+  cardShell(STEPS.pattern[1], `<div class="ask">회색 말은 그대로 두고, <b>반복되는 말</b>만 채워 보세요</div>
+    <div class="relay-top"><span id="cnt"></span><span class="streak" id="stk"></span></div><div class="kr" id="rkr"></div><div class="sline" id="rline"></div>`, src(u));
+  let help = false;
+  const show = () => {
+    const x = sent(u, seq[ri]);
+    help = false;
+    $('#cnt').textContent = `${ri + 1} / ${seq.length}`;
+    $('#stk').textContent = streak > 1 ? `⚡ 연속 ${streak}` : '';
+    $('#rkr').innerHTML = krHtml(x.kr);
+    // 이어진 고정어는 칸 하나로 묶는다
+    const parts = [];
+    x.t.forEach(t => { if (t[2] && parts.length && parts.at(-1).a) parts.at(-1).w.push(t[0]); else parts.push({ a:!!t[2], w:[t[0]] }); });
+    $('#rline').innerHTML = parts.map((p, k) => p.a
+      ? `<input class="inp" data-k="${k}" data-ans="${esc(p.w.join(' '))}" size="${Math.max(3, p.w.join(' ').length)}" autocomplete="off" autocapitalize="off" spellcheck="false">`
+      : `<span class="m">${esc(p.w.join(' '))}</span>`).join(' ') + `<span class="m">${esc(x.p)}</span>`;
+    const ins = $$('#rline .inp');
+    ins.forEach((inp, n) => inp.oninput = () => {
+      const want = inp.dataset.ans.split(' ').map(norm), got = inp.value.trim().split(/\s+/).map(norm);
+      if (got.length === want.length && want.every((w, j) => near(got[j], w))) {
+        inp.value = inp.dataset.ans; inp.readOnly = true; inp.classList.add('ok');
+        const nx = ins.find(e => !e.readOnly); if (nx) nx.focus(); else step();
+      }
+    });
+    ins[0].focus();
+  };
+  const step = () => {
+    streak = help ? 0 : streak + 1;
+    recs.push({ i:seq[ri], help });
+    setTimeout(() => { ri++; if (ri < seq.length) show(); else finish(); }, 380);
+  };
+  const finish = () => {
+    st.log.relay = recs;
+    const sec = Math.round((Date.now() - t0) / 1000);
+    correct();
+    $('#rkr').remove(); $('#cnt').textContent = `${seq.length}문장 · ${sec}초`; $('#stk').textContent = recs.every(r => !r.help) ? '⚡ 한 번에' : '';
+    $('#rline').outerHTML = `<div class="done-lines">${seq.map(i => `<div class="sline">${slineHtml(sent(u, i), t => t[2])}</div>`).join('')}</div>`;
+    $('#fb').innerHTML = `<div class="msg good">주어가 바뀌어도 <b>${esc(u.anc)}</b> 는 그대로예요.</div>`;
+    next('문장 완성하기 ›', 2);
+  };
+  ladder([
+    ['첫 글자', () => { help = true; $$('#rline .inp').forEach(i => { if (!i.readOnly) i.placeholder = i.dataset.ans.split(' ').map(w => w[0] + '…').join(' '); }); }],
+    ['정답 보기', () => { help = true; $$('#rline .inp').forEach(i => { i.value = i.dataset.ans; i.readOnly = true; i.classList.add('ok'); }); step(); }],
+  ]);
+  show();
+}
+
+/* ③ 문장 완성 — 처음 만드는 한 문장을 낱말 타일로 배열한다 */
+function pBuild(u) {
+  const x = sent(u, u.plan.build);
+  cardShell(STEPS.pattern[2], `<div class="kr">${krHtml(x.kr)}</div><div id="arr"></div>`, src(u));
+  let tried = 0;
+  const a = arrange($('#arr'), wordItems(x, t => !!t[2]), x.p, shown => {
+    correct(); st.log.build = { shown, tried };
+    $('#fb').innerHTML = `<div class="msg good">완성! 초록이 이 표현이에요.</div>`;
+    next('내 말로 써 보기 ›', 3);
+  }, { onWrong:() => tried++ });
+  ladder([['정답 보기', () => a.show()]]);
+}
+
+/* ④ 내 말로 — 재료 없이 이 표현으로 아무 문장이나 쓴다. 채점은 고정어 + 고정어 밖 낱말 1개 이상 + 본 문장과 다름 */
+function pOpen(u) {
+  const anc = u.plan.anc;
+  cardShell(STEPS.pattern[3], `<div class="ask"><span class="pill">${esc(u.anc)}</span> 로 하고 싶은 말을 영어로 써 보세요<br><span style="font-size:12.5px;color:#8a98ad">무엇에 대해서든 괜찮아요. 이 표현만 들어가면 돼요.</span></div>
+    <textarea class="free" id="free" rows="2" placeholder="예: …" autocomplete="off" autocapitalize="sentences" spellcheck="false"></textarea>
+    <div class="btns" style="margin-top:10px"><button class="btn main" id="chk">확인</button></div>`, src(u));
+  const seen = new Set(u.s.map(x => norm(plainOf(x)).replace(/[^a-z' ]/g, '')));
+  const vocab = new Set(u.s.flatMap(x => x.t.map(t => norm(t[0]))));
+  let help = false, shownEg = [];
+  const check = (text, forced) => {
+    const ks = keysOf(text);
+    const used = new Set();
+    const miss = anc.filter(a => {
+      const j = ks.findIndex((k, n) => !used.has(n) && (a.fam ? k.c === a.c : k.k === a.k));
+      if (j < 0) return true; used.add(j); return false;
+    });
+    if (miss.length) return { ok:false, why:`<b>${esc(u.anc)}</b> 가 다 들어갔는지 볼까요?` };
+    if (ks.length <= used.size) return { ok:false, why:'이 표현에 낱말을 더해서 <b>문장</b>으로 만들어 보세요.' };
+    const key = norm(text).replace(/[^a-z' ]/g, '');
+    if (!forced && seen.has(key)) return { ok:false, why:'앞에서 본 문장이에요. <b>다른 말</b>을 넣어 볼까요?' };
+    return { ok:true, words:new Set([...used].map(n => ks[n].wi)) };
+  };
+  const finish = (text, res) => {
+    correct();
+    const raw = text.trim().split(/\s+/);
+    const mine = greenRuns(raw.map((w, n) => [w, res.words.has(n)]));
+    st.log.open = { html:mine, help };
+    // 예문에 없던 낱말 — 표현 낱말과 그 꼴 바뀜(talked)은 빼고, 기능어도 뺀다
+    const stems = new Set([...vocab].map(w => stem(w)));
+    const fresh = [...new Set(raw.map(norm).filter((w, n) => !res.words.has(n) && w.length >= 3 && !vocab.has(w) && !stems.has(stem(w)) && keysOf(w).every(k => k.c === 'OPEN')))];
+    const others = [...new Map(u.s.map(x => [plainOf(x), x])).values()];
+    $('#free').outerHTML = `<div class="list"><div class="li mine"><span class="badge me">내 문장</span>${mine}</div>`
+      + others.map(x => `<div class="li sline" style="font-size:15px">${slineHtml(x, t => t[2])}</div>`).join('') + `</div>`;
+    $('#chk').closest('.btns').remove();
+    $('#fb').innerHTML = `<div class="msg good">같은 <b>${esc(u.anc)}</b> 로 이만큼 말할 수 있어요.${fresh.length ? ` 예문에 없던 <b>${fresh.map(esc).join(' · ')}</b> 도 넣었어요.` : ''}</div>`;
+    next('정리 보기 ›', 4);
+  };
+  $('#chk').onclick = () => {
+    const text = $('#free').value.trim(); if (!text) return;
+    const r = check(text);
+    if (r.ok) finish(text, r); else { $('#fb').innerHTML = `<div class="msg">${r.why}</div>`; bump($('#free'), 'shake'); }
+  };
+  $('#free').onkeydown = e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); $('#chk').click(); } };
+  const pool = u.s.filter(x => x.t.some(t => t[2]));
+  ladder([
+    ['예문 보기', () => { help = true; const x = pool.find(y => !shownEg.includes(y) && check(plainOf(y), true).ok) || pool[0]; shownEg.push(x); $('#fb').innerHTML = `<div class="msg note">예: ${slineHtml(x, t => t[2])}<br>이 문장과 <b>다른 말</b>로 써 보세요.</div>`; }],
+    // 고정어가 다 든 예문을 고른다 — 유닛 문장 중에는 고정어 하나가 빠진 것이 섞여 있다(80% 기준으로 판정했다)
+    ['정답 보기', () => { help = true; const x = [...pool].reverse().find(y => check(plainOf(y), true).ok) || sent(u, 0); const text = plainOf(x); $('#free').value = text;
+      const r = check(text, true); finish(text, r.ok ? r : { words:new Set(x.t.map((t, n) => t[2] ? n : -1)) }); }],
+  ]);
+  $('#free').focus();
+}
+
+/* 정리 — 이 표현으로 만든 문장과 처음 낸 답 */
+function pDone(u) {
+  const L = st.log, rows = [];
+  (L.relay || []).forEach(r => rows.push([sent(u, r.i), r.help ? '② 도움 받음' : '② 한 번에 ✓']));
+  rows.push([sent(u, u.plan.build), L.build && (L.build.shown ? '③ 정답 보기' : L.build.tried ? `③ ${L.build.tried}번 고쳐서 ✓` : '③ 한 번에 ✓')]);
+  $('#stage').innerHTML = `<div class="chat-card correct"><div class="chat-tag">정리</div>
+    <div class="ask">이 표현으로 만든 문장</div><div class="done-lines">
+    ${rows.map(([x, r]) => `<div class="sline">${slineHtml(x, t => t[2])}</div><div class="rec">${r || ''}</div>`).join('')}
+    ${L.open ? `<div class="sline">${L.open.html}</div><div class="rec">④ 내 문장${L.open.help ? ' · 도움 받음' : ''}</div>` : ''}</div>
+    ${ruleHtml(u)}<div class="btns"><button class="btn ghost" id="again">다시</button><button class="btn main" id="nx">다른 유닛 ↻</button></div>${src(u)}</div>`;
+  $('#again').onclick = () => { st.log = {}; go(0); };
+  $('#nx').onclick = () => $('#rand').click();
+}
+
+/* ═══ 규칙 흐름 ═══ */
+
+/* ① 따라 만들기 — S1 배열. 완성되면 영어 [ ] 와 한국어 [ ] 가 같은 초록으로 이어진다 */
+function rFollow(u) {
+  const x = sent(u, 0);
+  cardShell(STEPS.rule[0], `<div class="kr">${krHtml(x.kr)}</div><div id="arr"></div>`, src(u));
+  let tried = 0;
+  const a = arrange($('#arr'), wordItems(x, t => !!t[1]), x.p, shown => {
+    correct(); st.log.follow = { shown, tried };
+    $('#fb').innerHTML = `<div class="msg good">영어 초록과 한국어 초록이 같은 뜻이에요. 이 자리를 다음 문장에서 직접 정해 봐요.</div>`;
+    next('먼저 정해 보기 ›', 1);
+  }, { onWrong:() => tried++ });
+  ladder([['정답 보기', () => a.show()]]);
+}
+
+/* ② 먼저 결정 — 불가 이유가 모양을 정한다 */
+function rDecide(u) {
+  const d = u.plan.decide;
+  if (!d) return skipCard(1, '이 유닛은 ② 에 쓸 문장이 없어요.', '틀린 문장 고치기 ›', 2);
+  ({ form:decForm, agree:decAgree, place:decPlace })[u.kind] ? ({ form:decForm, agree:decAgree, place:decPlace })[u.kind](u, d) : decChunks(u, d);
+}
+function skipCard(stepIdx, text, label, to) {
+  const u = unit();
+  cardShell(STEPS.rule[stepIdx], `<div class="msg note" style="margin-top:0">${text}</div>`, src(u));
+  next(label, to);
+}
+/* 형태 — 원형을 보고 꼴을 먼저 친 뒤, 그 꼴을 넣어 문장을 배열한다 */
+function decForm(u, d) {
+  const x = sent(u, d.i), word = x.t[d.ti][0];
+  const ans = norm(word);
+  cardShell(STEPS.rule[1], `<div class="kr">${krHtml(x.kr)}</div>
+    <div class="ask" id="q1">이 문장에 들어갈 꼴을 먼저 정해요</div>
+    <div class="dec" id="dec"><span class="base">${esc(d.base)}</span><span class="arrow">→</span><input class="inp" id="fi" size="${Math.max(5, word.length + 1)}" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+    <div id="arr"></div>`, src(u, '<span class="auto">원형 자동 추출</span>'));
+  let wrong = 0;
+  const decided = () => {
+    $('#fi').value = word; $('#fi').readOnly = true; $('#fi').classList.add('ok');
+    $('#dec').insertAdjacentHTML('beforeend', `<span class="tagchip">${esc(d.tag)}</span>`);
+    $('#q1').textContent = '이제 그 꼴을 넣어 문장을 만들어요';
+    $('#fb').innerHTML = '';
+    let tried = 0;
+    const a = arrange($('#arr'), x.t.map((t, j) => ({ text:t[0], g:!!t[1], pre:j === d.ti })), x.p, shown => {
+      correct(); st.log.decide = { wrong, shown, tried };
+      $('#fb').innerHTML = `<div class="msg good"><b>${esc(d.base)} → ${esc(word)}</b> · ${esc(d.tag)}</div>`;
+      next('틀린 문장 고치기 ›', 2);
+    }, { onWrong:() => tried++ });
+    ladder([['정답 보기', () => a.show()]]);
+  };
+  $('#fi').onkeydown = e => { if (e.key === 'Enter') $('#fi').dispatchEvent(new Event('change')); };
+  $('#fi').onchange = () => {
+    const v = norm($('#fi').value); if (!v) return;
+    if (v === ans) return decided();
+    wrong++; bump($('#fi'), 'bad');
+    $('#fb').innerHTML = `<div class="msg">${wrong >= 2 ? `정답은 <b>${esc(word)}</b> 예요.` : '꼴을 다시 볼까요? 철자까지 맞아야 해요.'}</div>`;
+    if (wrong >= 2) setTimeout(decided, 900);
+  };
+  $('#fi').oninput = () => { if (norm($('#fi').value) === ans) decided(); };
+  ladder([['정답 보기', () => { wrong = Math.max(wrong, 2); decided(); }]]);
+  $('#fi').focus();
+}
+/* 일치 — 주어를 보고 is / are 중 하나를 고른다 */
+function decAgree(u, d) {
+  const x = sent(u, d.i);
+  const line = x.t.map((t, j) => j === d.ti ? `<span class="gapb" style="width:54px"></span>` : `<span class="m">${esc(t[0])}</span>`).join(' ') + `<span class="m">${esc(x.p)}</span>`;
+  const opts = shuffle(d.opts);
+  cardShell(STEPS.rule[1], `<div class="kr">${krHtml(x.kr)}</div><div class="ask">주어에 맞는 쪽을 골라요</div><div class="sline" id="ln">${line}</div>
+    <div class="opts">${opts.map(o => `<button class="opt" data-o="${esc(o)}">${esc(o)}</button>`).join('')}</div>`, src(u));
+  let wrong = 0;
+  $$('.opt').forEach(b => b.onclick = () => {
+    if (b.dataset.o === d.opts[0]) {
+      b.classList.add('ok'); $$('.opt').forEach(e => e.disabled = true); correct();
+      $('#ln').innerHTML = slineHtml(x); st.log.decide = { wrong };
+      $('#fb').innerHTML = `<div class="msg good">주어가 정해 주는 꼴이에요 — <b>${esc(d.opts[0])}</b></div>`;
+      next('틀린 문장 고치기 ›', 2);
+    } else { wrong++; bump(b, 'bad'); $('#fb').innerHTML = `<div class="msg">주어를 다시 볼까요?</div>`; }
+  });
+}
+/* 자리 — 부사(대명사·형용사)를 빼 둔 문장에서 들어갈 자리를 누른다 */
+function decPlace(u, d) {
+  const x = sent(u, d.i), mv = x.t[d.mi][0];
+  const rest = x.t.filter((_, j) => j !== d.mi);
+  const line = rest.map((t, j) => `<button class="gapb" data-g="${j}"></button> <span class="m">${esc(t[0])}</span>`).join(' ')
+    + ` <button class="gapb" data-g="${rest.length}"></button><span class="m">${esc(x.p)}</span>`;
+  cardShell(STEPS.rule[1], `<div class="kr">${krHtml(x.kr)}</div><div class="ask">이 말이 들어갈 자리를 눌러 보세요</div><div class="movw">${esc(mv)}</div>
+    <div class="sline" id="ln">${line}</div>`, src(u));
+  let wrong = 0;
+  $$('#ln .gapb').forEach(b => b.onclick = () => {
+    if (+b.dataset.g === d.mi) {
+      correct(); $('#ln').innerHTML = slineHtml(x, (t) => t === x.t[d.mi] || t[1]); st.log.decide = { wrong };
+      $('.movw').remove();
+      $('#fb').innerHTML = `<div class="msg good"><b>${esc(mv)}</b> 는 ${esc(placeNote(x, d.mi))}</div>`;
+      next('틀린 문장 고치기 ›', 2);
+    } else { wrong++; bump(b, 'bad'); $('#fb').innerHTML = `<div class="msg">${wrong >= 2 ? '초록 뜻이 걸리는 말의 바로 옆을 찾아 보세요.' : '다른 자리를 볼까요?'}</div>`; }
+  });
+  ladder([['정답 보기', () => { wrong = Math.max(wrong, 2); $(`#ln .gapb[data-g="${d.mi}"]`).click(); }]]);
+}
+function placeNote(x, mi) {
+  const prev = x.t[mi - 1] && norm(x.t[mi - 1][0]), nxt = x.t[mi + 1] && norm(x.t[mi + 1][0]);
+  if (prev && /^(is|are|am|was|were|be|\w+'s|\w+'re|\w+'m)$/.test(prev)) return 'be동사 뒤에 와요.';
+  if (prev && /^(can|could|will|would|should|may|might|must|\w+'ll)$/.test(prev)) return '조동사 뒤에 와요.';
+  if (nxt) return `${nxt} 앞에 와요.`;
+  return `${prev} 뒤에 와요.`;
+}
+/* 어순 · 그 밖 — 괄호 밖은 덩어리 하나로 묶고, 괄호 안 낱말만 하나씩 놓는다 */
+function decChunks(u, d) {
+  const x = sent(u, d.i);
+  const items = d.chunks.map(([a, b]) => ({ text:x.t.slice(a, b).map(t => t[0]).join(' '), g:x.t[a][1] && b - a === 1 }));
+  cardShell(STEPS.rule[1], `<div class="kr">${krHtml(x.kr)}</div><div class="ask">초록 자리의 <b>순서</b>를 정해요 — 나머지는 덩어리로 줬어요</div><div id="arr"></div>`, src(u));
+  let tried = 0;
+  const a = arrange($('#arr'), items, x.p, shown => {
+    correct(); st.log.decide = { shown, tried };
+    $('#fb').innerHTML = `<div class="msg good">초록 말의 순서가 이 표현이에요.</div>`;
+    next(u.plan.fix ? '틀린 문장 고치기 ›' : '정리 보기 ›', u.plan.fix ? 2 : 3);
+  }, { onWrong:() => tried++ });
+  ladder([['정답 보기', () => a.show()]]);
+}
+
+/* ③ 틀린 문장 고치기 — 틀린 곳을 짚고(1박자) 고친다(2박자) */
+function rFix(u) {
+  const f = u.plan.fix;
+  if (!f) return skipCard(2, '이 유닛은 <b>틀린 문장 데이터</b>가 없어 건너뛰어요. (데이터 개선 ③ — 기획 저작 대상)', '정리 보기 ›', 3);
+  const x = sent(u, f.i);
+  const inWrong = j => f.pos ? f.pos.includes(j) : j >= f.wr[0] && j < f.wr[1];
+  const tag = { auto:'<span class="auto">틀린 문장 자동 생성</span>', hand:'<span class="hand">틀린 문장 손으로 씀</span>', trap:'<span class="data">trap 샘플</span>' }[f.src];
+  cardShell(STEPS.rule[2], `<div class="kr">${krHtml(x.kr)}</div><div class="ask">이 문장에 틀린 곳이 있어요. 눌러 보세요</div>
+    <div class="wline" id="wl">${f.wrong.map((w, j) => `<button class="wk" data-j="${j}">${esc(w)}</button>`).join('')}<span class="pn">${esc(x.p)}</span></div><div id="fx" style="margin-top:14px"></div>`, src(u, tag));
+  let miss = 0;
+  const solved = (help) => {
+    correct(); st.log.fix = { miss, help };
+    $('.ask').textContent = '고친 문장';
+    const cr = f.pos ? f.pos : Array.from({ length:f.cr[1] - f.cr[0] }, (_, k) => f.cr[0] + k);
+    $('#wl').outerHTML = `<div class="sline">${greenRuns(x.t.map((t, j) => [t[0], cr.includes(j)]))}${esc(x.p)}</div>`;
+    $('#fx').innerHTML = '';
+    const v = u.plan.info && u.plan.info[f.i];
+    const how = v ? `<b>${esc(v.base)} → ${esc(v.w)}</b> · ${esc(v.tag)}` : '';
+    $('#fb').innerHTML = `<div class="msg good">고쳤어요! ${how}${f.why ? `<br><span style="color:#5d6f88">${esc(f.wrong.filter((w, j) => inWrong(j)).join(' '))} 는 ${esc(f.why)}이에요.</span>` : ''}</div>`;
+    next('정리 보기 ›', 3);
+  };
+  const fixStage = () => {
+    $$('#wl .wk').forEach(b => { b.disabled = true; if (inWrong(+b.dataset.j)) b.classList.add('fixme'); });
+    $('.ask').textContent = '맞게 고쳐 보세요';
+    if (f.mode === 'type') {
+      const j = f.pos ? f.pos[0] : f.cr[0], want = x.t[j][0];
+      $('#fx').innerHTML = `<div class="dec"><span class="base" style="text-decoration:line-through;color:#c0a989">${esc(f.wrong[f.pos ? f.pos[0] : f.wr[0]])}</span><span class="arrow">→</span><input class="inp" id="fi" size="${want.length + 2}" autocomplete="off" autocapitalize="off" spellcheck="false"></div>`;
+      const fi = $('#fi'); fi.focus();
+      let wrong = 0;
+      const test = final => {
+        if (norm(fi.value) === norm(want)) { fi.classList.add('ok'); fi.readOnly = true; return solved(false); }
+        if (final) { wrong++; bump(fi, 'bad'); $('#fb').innerHTML = `<div class="msg">${wrong >= 2 ? `정답은 <b>${esc(want)}</b> 예요.` : '꼴을 다시 볼까요?'}</div>`; if (wrong >= 2) setTimeout(() => solved(true), 900); }
+      };
+      fi.oninput = () => test(false);
+      fi.onkeydown = e => { if (e.key === 'Enter') test(true); };
+      ladder([['정답 보기', () => solved(true)]]);
+    } else {
+      const items = x.t.slice(f.cr[0], f.cr[1]).map(t => ({ text:t[0], g:true }));
+      $('#fx').innerHTML = `<div class="ask" style="margin-bottom:6px">이 자리의 낱말 순서를 다시 놓아 보세요</div><div id="arr"></div>`;
+      const a = arrange($('#arr'), items, '', shown => solved(shown));
+      ladder([['정답 보기', () => a.show()]]);
+    }
+  };
+  $$('#wl .wk').forEach(b => b.onclick = () => {
+    if (inWrong(+b.dataset.j)) { $('#fb').innerHTML = ''; return fixStage(); }
+    miss++; b.classList.add('bad'); bump($('#wl'), 'nudge');
+    $('#fb').innerHTML = `<div class="msg">여기는 맞아요. 초록 뜻에 해당하는 곳을 보세요.</div>`;
+  });
+  ladder([['틀린 곳 보기', () => { miss = Math.max(miss, 1); $$('#wl .wk').forEach(b => { if (inWrong(+b.dataset.j)) b.classList.add('hint'); }); }]]);
+}
+
+/* ④ 정리 — 형태는 만든 낱말을 규칙별로 나누고, 나머지는 이 유닛의 문장을 모아 본다 */
+function rSum(u) {
+  const P = u.plan;
+  const end = () => {
+    correct();
+    $('#after').innerHTML = ruleHtml(u) + `<div class="btns"><button class="btn ghost" id="again">다시</button><button class="btn main" id="nx">다른 유닛 ↻</button></div>`;
+    $('#lad').innerHTML = '';
+    $('#again').onclick = () => { st.log = {}; go(0); };
+    $('#nx').onclick = () => $('#rand').click();
+  };
+  if (u.kind === 'form' && P.sort && P.sort.bins.length >= 2) {
+    const items = P.sort.items, bins = P.sort.bins;
+    cardShell(STEPS.rule[3], `<div class="ask">이 유닛의 낱말을 <b>바뀐 방식</b>대로 나눠 보세요<br><span style="font-size:12.5px;color:#8a98ad">낱말을 누르고, 들어갈 칸을 누르세요</span></div>
+      <div class="pool" id="pool">${shuffle(items.map((_, i) => i)).map(i => `<button class="chip" data-i="${i}">${esc(items[i].w)}</button>`).join('')}</div>
+      <div class="bins">${bins.map((b, k) => `<div class="bin" data-b="${k}"><div class="bt">${esc(b)}</div><div class="it"></div></div>`).join('')}</div>`, src(u, '<span class="auto">규칙 태그 자동 추출</span>'));
+    let sel = null, left = items.length, miss = 0;
+    $$('#pool .chip').forEach(c => c.onclick = () => { $$('#pool .chip').forEach(e => e.classList.remove('sel')); sel = +c.dataset.i; c.classList.add('sel'); });
+    const put = (i, k) => {
+      const it = items[i], box = $(`.bin[data-b="${k}"] .it`);
+      box.insertAdjacentHTML('beforeend', `<div>${esc(it.base)} → <b>${esc(it.w)}</b></div>`);
+      $(`.bin[data-b="${k}"]`).classList.add('full');
+      $(`#pool .chip[data-i="${i}"]`).remove(); sel = null;
+      if (!$$('#pool .chip').length) $('#pool').style.display = 'none';
+      if (--left === 0) { $('#fb').innerHTML = `<div class="msg good">${miss ? '' : '한 번에 다 나눴어요! '}낱말은 달라도 바뀌는 방식은 몇 가지뿐이에요.</div>`; st.log.sum = { miss }; end(); }
+    };
+    $$('.bin').forEach(b => b.onclick = () => {
+      if (sel === null) return;
+      const k = +b.dataset.b, want = bins.indexOf(items[sel].tag);
+      if (k === want) { $('#fb').innerHTML = ''; return put(sel, k); }
+      miss++; bump(b, 'shake');
+      $('#fb').innerHTML = `<div class="msg"><b>${esc(items[sel].base)} → ${esc(items[sel].w)}</b> — 어떻게 바뀌었는지 다시 볼까요?</div>`;
+    });
+    ladder([['정답 보기', () => { miss = Math.max(miss, 1); [...$$('#pool .chip')].forEach(c => put(+c.dataset.i, bins.indexOf(items[+c.dataset.i].tag))); }]]);
+    return;
+  }
+  const lines = u.kind === 'form' && P.sort
+    ? `<table class="bt-tbl">${P.sort.items.map(it => `<tr><td>${esc(it.base)}</td><td>→ <b style="color:#1f7a49">${esc(it.w)}</b></td></tr>`).join('')}</table>`
+    : `<div class="done-lines">${[...new Map(u.s.map(x => [plainOf(x), x])).values()].map(x => `<div class="sline">${slineHtml(x)}</div>`).join('')}</div>`;
+  cardShell(STEPS.rule[3], `<div class="ask">이 유닛의 문장 — 초록 자리가 같은 규칙을 따라요</div>${lines}`, src(u));
+  end();
+}
+
+fetch('units/flow-units.gen.json').then(r => r.json()).then(d => {
+  D = d; LEX = d.lex; lexInit(LEX); U = d.units; U.forEach(u => byId[u.id] = u);
+  if (!byId[st.id]) st.id = FEATURED.pattern[0];
+  const u = unit(); st.tab = u.kind === 'pattern' ? 'pattern' : 'rule'; if (st.tab === 'rule') st.kind = u.kind;
+  const q = $('#q');
+  q.onkeydown = e => {
+    if (e.key !== 'Enter') return;
+    const v = q.value.trim().toLowerCase(); if (!v) return;
+    const hit = byId[v] || byId[v.toUpperCase()] || U.find(x => x.id.toLowerCase() === v) || U.find(x => x.form.toLowerCase().includes(v) || x.mean.includes(v));
+    if (hit) { openUnit(null, hit.id); q.value = ''; q.blur(); } else { q.value = ''; q.placeholder = `"${v}" 에 맞는 유닛이 없어요`; }
+  };
+  render();
+}).catch(e => { $('#stage').innerHTML = `<div class="msg">문장을 불러오지 못했어요. (${esc(e.message)})</div>`; });
+</script>
+</body>
+</html>
