@@ -3,7 +3,7 @@
 산출: public/units/ 아래 CSV 세 장 — 배포 사이트에서 서빙되므로 Google 시트가 IMPORTDATA 로 바로 불러온다(BOM 을 붙이면 첫 칸에 섞여 들어간다)
   열 이름 앞에 출처를 붙인다 — `원본 ·` 확정 CSV 그대로 · `변경 ·` 원본을 바꾸자는 제안(나눈 유닛뿐) · `추가 ·` 원본에 없던 판정 · `채움 ·` 원본에 빈 열로 있던 것
   units-after-split.gen.csv      확정 CSV 의 문장 행 전부(순서·내용 그대로) + 오른쪽에 변경·추가 열
-  unit-splits.gen.csv            나눈 26유닛만 — 원본 문장을 새 유닛별로 묶어 원본 태그와 새 태그를 나란히
+  unit-splits.gen.csv            나눈 유닛만 — 원본 문장을 새 유닛별로 묶어 원본 태그와 새 태그를 나란히
   pattern-concern-list.judged.gen.csv  고민 목록 133유닛 그대로 + 빈 열이던 '패턴 학습 포인트'·'판단'을 채움
 
 나누는 기준: 갈래마다 뜻이나 쓰는 자리가 달라 따로 골라야 하는 것(stop -ing / stop to, some / any, at / on / in …)과
@@ -81,19 +81,28 @@ SPLITS = {
     "base": ("There is no ______ .", "~가 전혀 없어"), "have": ("주어 + have no ______", "(가진) ~가 전혀 없어")}),
   "10439": ("frame", "문장에 틀이 둘이다(don't know if / not sure if)", {
     "base": ("I don't know if ______ .", "~인지 모르겠어"), "sure": ("I'm not sure if ______ .", "~인지 잘 모르겠어")}),
+  "10078": ("frame", "could be(~일 수도 있어)와 can't be(~일 리 없어)는 뜻이 반대다", {
+    "base": ("주어 + could + be + ______ .", "~일 수도 있어"), "cant": ("주어 + can't + be + ______ .", "~일 리가 없어")}),
+  "10017": ("frame", "가까운 것 this·these / 먼 것 that·those", {
+    "base": ("This / These + be동사 + ______ .", "이건 / 이것들은 ~야"), "that": ("That / Those + be동사 + ______ .", "저건 / 그건 ~야")}),
+  "10020": ("frame", "가까운 것 this·these / 먼 것 that·those", {
+    "base": ("this / these + ______", "이 ~"), "that": ("that / those + ______", "저 ~ / 그 ~")}),
 }
 FRAME_RX = {"10026": [("go", r"\bgo\b")], "10335": [("st", r"\b(i|we)'d\b")], "10337": [("st", r"\b(i|we)'d\b")],
-            "10355": [("have", r"\b(have|has)\b")], "10439": [("sure", r"\bsure\b")]}
+            "10355": [("have", r"\b(have|has)\b")], "10439": [("sure", r"\bsure\b")],
+            "10078": [("cant", r"\bcan't\b")], "10017": [("that", r"\b(that|those)\b")], "10020": [("that", r"\b(that|those)\b")]}
 
 # 나누지 않는 대비형 — 갈래가 있어도 한 유닛으로 두는 이유
 KEEP = {
   **{k: "열린 목록 — 같은 자리에 의문사가 갈아 끼워진다" for k in ("10013", "10014", "10080")},
   **{k: "열린 목록 — 같은 자리에 같은 부류 낱말(부사·동사·대명사)이 갈아 끼워진다" for k in ("10031", "10037", "10054", "10114", "10195", "10196", "10206")},
   **{k: "열린 목록 — 같은 자리에 접속사·관계사가 갈아 끼워진다" for k in ("10383", "10391", "10396", "10397", "10403")},
-  **{k: "열린 목록 — 지시어(this / that / these / those). 단수·복수와 거리로 고르는 대비로 보면 나눌 수 있다(확인 필요)" for k in ("10017", "10020")},
   **{k: "주어에 맞춰 정해진다 — 고르는 결정이 아니다" for k in ("10060", "10088", "10353", "10212")},
-  **{k: "뉘앙스 차이 — 갈래의 뜻이 거의 같아 설명(회색 2행)으로 다룬다" for k in ("10066", "10078", "10130", "10189", "10414")},
+  **{k: "뉘앙스 차이 — 갈래의 뜻이 거의 같아 설명(회색 2행)으로 다룬다" for k in ("10066", "10130", "10189", "10414")},
 }
+
+# 나눈 뒤에도 고르는 것이 남는 유닛 — this / these 는 뒤 명사가 정하므로 고정어가 아니라 일치 규칙이다
+NUMBER_AGREE = {k: "일치 규칙 — this·these / that·those 는 뒤 명사가 하나인지 여럿인지로 정해진다" for k in ("10017", "10020")}
 
 RULE = {"변화형": "형태 규칙 — 같은 규칙으로 낱말마다 끝 모양을 바꾼다(공통된 말이 없다)",
         "자리형": "자리 규칙 — 부사·대명사가 들어가는 위치만 같다(들어가는 낱말은 매번 다르다)",
@@ -174,8 +183,8 @@ def split_unit(u, gen):
         form, mean = spec[key]
         ss = groups[key]
         has_s1 = u["sents"][0] in ss
-        if not has_s1:  # 원래 S1 이 없는 갈래는 첫 기본 문장을 S1 으로 세운다
-            first = next((s for s in ss if s[0] in BASIC), ss[0])
+        if not has_s1:  # 원래 S1 이 없는 갈래는 S1 의 주어 변형(S1 과 같은 꼴)을, 없으면 첫 기본 문장을 S1 으로 세운다
+            first = next((s for s in ss if s[0] in VARIANT), None) or next((s for s in ss if s[0] in BASIC), ss[0])
             ss = [first] + [s for s in ss if s is not first]
         out.append(dict(id=f"{u['id']}-{'ABCDEFG'[n]}", parent=u["id"], side=key, why=why, form=form, mean=mean, desc=u["desc"],
                         sents=ss, new_s1=not has_s1))
@@ -208,7 +217,7 @@ def subj_in_bracket(sents):
 
 XLSX = "unit-organize.gen.xlsx"
 NEW_SENTS = Path(__file__).resolve().parent / "unit_split_sentences.json"
-SLOTS = ["S1", "문장1-2", "문장1-3", "기본", "기본", "어려운", "어려운", "어려운"]  # 나눈 26유닛의 원래 구성과 같다
+SLOTS = ["S1", "문장1-2", "문장1-3", "기본", "기본", "어려운", "어려운", "어려운"]  # 나눈 원래 유닛의 구성과 같다
 
 def full_set(p, written):
     """새 유닛의 8칸 — 원래 유닛의 문장을 먼저 원래 칸에 넣고, 빈칸만 새로 쓴 문장으로 채운다"""
@@ -407,7 +416,7 @@ def write_xlsx(units, recs, blocks, concern_rows, judged):
     put("유닛 정리 — 원본과 바꾼 것", style="title")
     put()
     put("원래 데이터", style="h")
-    put("확정 CSV", None, "유기적 통합모드 문장 (공유용) - 문장1 변형후보 추가 (검토중)-문장만 확정.csv")
+    put("확정 CSV", None, cu.SRC.name)
     r = put("  원본 유닛 수", len(units), "확정 CSV 의 id 행 수 (원본에서 센 값)")
     put("  원본 문장 수", n_src_rows, "확정 CSV 의 sentence 행 수 (원본에서 센 값)")
     put("고민 목록", None, "패턴화 고민 목록 - 목록.csv — 133유닛, '패턴 학습 포인트'·'판단' 열이 비어 있던 것")
@@ -502,6 +511,7 @@ def main():
                 # 판정은 채운 8칸 전체로 낸다 — 원래 문장 한두 개로는 고정어가 우연히 맞는다
                 full = [(slot, en, kr) for slot, en, kr, _, _ in full_set(p, written)]
                 pat, anc, why_not, chk = judge(p["form"], full, side=p["side"])
+                if uid in NUMBER_AGREE: pat, anc, why_not, chk = "불가", "", NUMBER_AGREE[uid], ""
                 judged.append(dict(id=p["id"], parent=uid, form=p["form"], pat=pat, anc=anc, why=why_not, chk=chk))
                 recs.append(dict(orig=uid, new=p["id"], form=p["form"], mean=p["mean"], desc=p["desc"], sents=[(slot, e, k, src == "새로 씀") for slot, e, k, src, _ in full_set(p, written)], typ=f"{g['type']}에서 나눔", pat=pat,
                                  anc=anc, why=why_not, chk=chk, reason=f"나눔 — {p['why']}", memo=" · ".join(memo), concern=concern.get(uid, {}).get("유형", "")))

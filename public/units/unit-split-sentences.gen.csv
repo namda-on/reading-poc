@@ -1,4 +1,20 @@
 새 유닛,카드 초록 (제안),뜻 (제안),칸,sentence,translation,출처,원래 유닛 · 원래 칸
+10017-A,This / These + be동사 + ______ .,이건 / 이것들은 ~야,S1,[This is] my bike.,[이건] 내 자전거[야].,기존,10017 · 기본
+,,,문장1-2,[This is] my car.,[이건] 내 차[야].,새로 씀,
+,,,문장1-3,[This is] my new bike.,[이건] 내 새 자전거[야].,새로 씀,
+,,,기본,[These are] my books.,[이것들은] 내 책[이야].,새로 씀,
+,,,기본,[This is] my sister.,[이쪽은] 우리 언니[야].,새로 씀,
+,,,어려운,[These are] nice.,[이것들] 괜찮[다].,기존,10017 · 어려운
+,,,어려운,[This was] a great idea.,[이거] 정말 좋은 생각[이었어].,기존,10017 · 어려운
+,,,어려운,[These are] the best seats in the theater.,[여기가] 극장에서 제일 좋은 자리[야].,새로 씀,
+10017-B,That / Those + be동사 + ______ .,저건 / 그건 ~야,S1,[That's] my bike.,[저건] 내 자전거[야].,기존,10017 · 문장1-2
+,,,문장1-2,[That's] my bag.,[저건] 내 가방[이야].,새로 씀,
+,,,문장1-3,[That's] a nice bike.,[저건] 괜찮은 자전거[야].,기존,10017 · 문장1-3
+,,,기본,[That was] interesting.,[그거] 흥미로[웠어].,기존,10017 · 기본
+,,,기본,[Those are] mine.,[그것들은] 내 거[야].,기존,10017 · 기본
+,,,어려운,[That was] a funny story.,[그거] 웃긴 이야기[였어].,기존,10017 · 어려운
+,,,어려운,[Those are] the shoes I wanted.,[저게] 내가 갖고 싶던 신발[이야].,새로 씀,
+,,,어려운,[That was] the best day of my life.,[그날이] 내 인생 최고의 날[이었어].,새로 씀,
 10019-A,주어 + be동사 + in + ______ .,~ 안에 있어,S1,[I'm in] the library.,[나는] 도서관[에 있어].,기존,10019 · 기본
 ,,,문장1-2,[They're in] the library.,[걔네는] 도서관[에 있어].,기존,10019 · 문장1-2
 ,,,문장1-3,[We're in] the library.,[우리는] 도서관[에 있어].,기존,10019 · 문장1-3
@@ -23,6 +39,22 @@
 ,,,어려운,[He was at] the office until midnight.,[걔는] 자정까지 사무실[에 있었어].,새로 씀,
 ,,,어려운,[They were at] the party last night.,[걔네] 어젯밤 파티[에 있었어].,새로 씀,
 ,,,어려운,[I'll be at] the front desk if you need me.,필요하면 [나] 프런트[에 있을게].,새로 씀,
+10020-A,this / these + ______,이 ~,S1,I like [this burger].,난 [이 버거]를 좋아해.,기존,10020 · 기본
+,,,문장1-2,We like [this burger].,우린 [이 버거]를 좋아해.,기존,10020 · 문장1-2
+,,,문장1-3,I like [this pizza].,난 [이 피자]를 좋아해.,새로 씀,
+,,,기본,[This bag] is mine.,[이 가방]은 내 거야.,새로 씀,
+,,,기본,Look at [these shoes].,[이 신발] 좀 봐.,새로 씀,
+,,,어려운,[These books] are old.,[이 책들] 오래됐어.,기존,10020 · 어려운
+,,,어려운,[This coffee] tastes really good.,[이 커피] 정말 맛있어.,새로 씀,
+,,,어려운,I bought [these flowers] for my mom.,엄마 드리려고 [이 꽃들]을 샀어.,새로 씀,
+10020-B,that / those + ______,저 ~ / 그 ~,S1,I like [that burger].,난 [저 버거]를 좋아해.,기존,10020 · 문장1-3
+,,,문장1-2,We like [that burger].,우린 [저 버거]를 좋아해.,새로 씀,
+,,,문장1-3,I like [that cake].,난 [저 케이크]를 좋아해.,새로 씀,
+,,,기본,Look at [that car].,[저 차] 좀 봐.,기존,10020 · 기본
+,,,기본,[That book] is mine.,[저 책]은 내 거야.,기존,10020 · 기본
+,,,어려운,I want [those tickets].,나 [그 표] 갖고 싶어.,기존,10020 · 어려운
+,,,어려운,[Those pictures] were great.,[그 사진들] 멋졌어.,기존,10020 · 어려운
+,,,어려운,[That restaurant] was too expensive.,[그 식당] 너무 비쌌어.,새로 씀,
 10026-A,Let's ______ .,~하자,S1,[Let's] cook!,[우리] 요리하[자]!,기존,10026 · 기본
 ,,,문장1-2,[Let's] cook together!,같이 요리하[자]!,기존,10026 · 문장1-2
 ,,,문장1-3,[Let's] cook tonight!,오늘 저녁에 요리하[자]!,기존,10026 · 문장1-3
@@ -63,6 +95,22 @@
 ,,,어려운,We usually go to the beach [in August].,우린 보통 [8월에] 바다에 가.,새로 씀,
 ,,,어려운,I like to read [in the evening] after dinner.,난 [저녁에] 밥 먹고 책 읽는 걸 좋아해.,새로 씀,
 ,,,어려운,The flowers bloom [in spring] every year.,꽃은 해마다 [봄에] 펴.,새로 씀,
+10078-A,주어 + could + be + ______ .,~일 수도 있어,S1,It [could be] similar.,비슷할 [수도 있어].,기존,10078 · 기본
+,,,문장1-2,They [could be] similar.,그것들은 비슷할 [수도 있어].,기존,10078 · 문장1-2
+,,,문장1-3,It [could be] similar to mine.,내 거랑 비슷할 [수도 있어].,기존,10078 · 문장1-3
+,,,기본,That [could be] true.,그게 사실일 [수도 있어].,기존,10078 · 기본
+,,,기본,It [could be] fun.,재밌을 [수도 있어].,새로 씀,
+,,,어려운,That doctor [can be] scary.,그 의사 선생님은 무서울 [때가 있어].,기존,10078 · 어려운
+,,,어려운,There [could be] another answer.,다른 답이 있을 [수도 있어].,기존,10078 · 어려운
+,,,어려운,Your present [could come] tomorrow.,네 선물이 내일 [올 수도 있어].,기존,10078 · 어려운
+10078-B,주어 + can't + be + ______ .,~일 리가 없어,S1,That [can't be] real.,그게 진짜[일 리가 없어].,기존,10078 · 기본
+,,,문장1-2,That [can't be] true.,그게 사실[일 리가 없어].,새로 씀,
+,,,문장1-3,It [can't be] real.,그거 진짜[일 리가 없어].,새로 씀,
+,,,기본,He [can't be] busy.,걔가 바쁠 [리가 없어].,새로 씀,
+,,,기본,She [can't be] serious.,걔가 진심[일 리가 없어].,새로 씀,
+,,,어려운,This [can't be] the right answer.,이게 정답[일 리가 없어].,새로 씀,
+,,,어려운,You [can't be] tired already.,네가 벌써 피곤할 [리가 없어].,새로 씀,
+,,,어려운,That [can't be] the same person.,그게 같은 사람[일 리가 없어].,새로 씀,
 10083-A,some ______,좀 ~,S1,I bought [some gifts].,나 [선물 좀] 샀어.,기존,10083 · 기본
 ,,,문장1-2,We bought [some gifts].,우린 [선물 좀] 샀어.,기존,10083 · 문장1-2
 ,,,문장1-3,They bought [some gifts].,걔네는 [선물 좀] 샀어.,기존,10083 · 문장1-3

@@ -58,7 +58,8 @@ PRON_OBJ = {"me", "you", "him", "her", "it", "us", "them"}
 ORD = {"first": "one", "second": "two", "third": "three", "fourth": "four", "fifth": "five", "sixth": "six", "seventh": "seven",
        "eighth": "eight", "ninth": "nine", "tenth": "ten", "eleventh": "eleven", "twelfth": "twelve", "thirteenth": "thirteen",
        "fourteenth": "fourteen", "fifteenth": "fifteen", "twentieth": "twenty", "thirtieth": "thirty"}
-AGREE = {"is": "are", "are": "is", "am": "is", "was": "were", "were": "was", "do": "does", "does": "do", "have": "has", "has": "have"}
+AGREE = {"is": "are", "are": "is", "am": "is", "was": "were", "were": "was", "do": "does", "does": "do", "have": "has", "has": "have",
+         "this": "these", "these": "this", "that": "those", "those": "that"}
 IRR_MORE = {"more": "much", "most": "much", "less": "little", "least": "little"}
 NOT_ING = {"morning", "evening", "during", "building", "ceiling", "nothing", "something", "anything", "everything"}
 TAG_ORDER = ["+ed", "+d", "y → ied", "자음 겹치고 +ed", "+ing", "e 빼고 +ing", "자음 겹치고 +ing", "ie → ying",

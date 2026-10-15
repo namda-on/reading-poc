@@ -371,5 +371,41 @@
   ["기본", "[I'm not sure if] he's home.", "걔가 집에 있는[지 잘 모르겠어]."],
   ["어려운", "[I'm not sure if] the store is still open at this hour.", "이 시간에 가게가 아직 열려 있는[지 잘 모르겠어]."],
   ["어려운", "[I'm not sure if] I locked the car when I left.", "나올 때 차를 잠갔는[지 잘 모르겠어]."]
+ ],
+ "10078-A": [
+  ["기본", "It [could be] fun.", "재밌을 [수도 있어]."]
+ ],
+ "10078-B": [
+  ["문장1-2", "That [can't be] true.", "그게 사실[일 리가 없어]."],
+  ["문장1-3", "It [can't be] real.", "그거 진짜[일 리가 없어]."],
+  ["기본", "He [can't be] busy.", "걔가 바쁠 [리가 없어]."],
+  ["기본", "She [can't be] serious.", "걔가 진심[일 리가 없어]."],
+  ["어려운", "This [can't be] the right answer.", "이게 정답[일 리가 없어]."],
+  ["어려운", "You [can't be] tired already.", "네가 벌써 피곤할 [리가 없어]."],
+  ["어려운", "That [can't be] the same person.", "그게 같은 사람[일 리가 없어]."]
+ ],
+ "10017-A": [
+  ["문장1-2", "[This is] my car.", "[이건] 내 차[야]."],
+  ["문장1-3", "[This is] my new bike.", "[이건] 내 새 자전거[야]."],
+  ["기본", "[These are] my books.", "[이것들은] 내 책[이야]."],
+  ["기본", "[This is] my sister.", "[이쪽은] 우리 언니[야]."],
+  ["어려운", "[These are] the best seats in the theater.", "[여기가] 극장에서 제일 좋은 자리[야]."]
+ ],
+ "10017-B": [
+  ["문장1-2", "[That's] my bag.", "[저건] 내 가방[이야]."],
+  ["어려운", "[Those are] the shoes I wanted.", "[저게] 내가 갖고 싶던 신발[이야]."],
+  ["어려운", "[That was] the best day of my life.", "[그날이] 내 인생 최고의 날[이었어]."]
+ ],
+ "10020-A": [
+  ["문장1-3", "I like [this pizza].", "난 [이 피자]를 좋아해."],
+  ["기본", "[This bag] is mine.", "[이 가방]은 내 거야."],
+  ["기본", "Look at [these shoes].", "[이 신발] 좀 봐."],
+  ["어려운", "[This coffee] tastes really good.", "[이 커피] 정말 맛있어."],
+  ["어려운", "I bought [these flowers] for my mom.", "엄마 드리려고 [이 꽃들]을 샀어."]
+ ],
+ "10020-B": [
+  ["문장1-2", "We like [that burger].", "우린 [저 버거]를 좋아해."],
+  ["문장1-3", "I like [that cake].", "난 [저 케이크]를 좋아해."],
+  ["어려운", "[That restaurant] was too expensive.", "[그 식당] 너무 비쌌어."]
  ]
 }

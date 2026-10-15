@@ -208,7 +208,8 @@ const FREQ = new Set('always usually often sometimes never rarely seldom ever'.s
 const MANNER = new Set('well fast early late hard carefully quickly slowly easily loudly quietly'.split(' '));
 const PRON_OBJ = new Set('me you him her it us them'.split(' '));
 const THING = new Set('something nothing anything everything someone anyone everyone somewhere anywhere nowhere somebody nobody'.split(' '));
-const AGREE = { is:'are', are:'is', am:'is', was:'were', were:'was', do:'does', does:'do', have:'has', has:'have' };
+const AGREE = { is:'are', are:'is', am:'is', was:'were', were:'was', do:'does', does:'do', have:'has', has:'have',
+  this:'these', these:'this', that:'those', those:'that' };
 
 let U = [], byId = {}, uid = '10001', tab = 'pattern', kindF = 'form';
 let run = null;
@@ -454,7 +455,7 @@ function quizApply(s) {
   }
   if (u.kind === 'agree') {
     const j = auxIdx(x), w = x.t[j][0], alt = AGREE[norm(w)], opts = shuffle([w, w[0] === w[0].toUpperCase() ? alt[0].toUpperCase() + alt.slice(1) : alt]);
-    shell(s, `${kr}<div class="ask">주어에 맞는 쪽을 골라요</div><div class="sline" style="margin-bottom:12px">${x.t.map((t, k) => k === j ? '<span class="blank">&nbsp;?&nbsp;</span>' : esc(t[0])).join(' ')}${esc(x.p)}</div>
+    shell(s, `${kr}<div class="ask">${/^th(is|ese|at|ose)$/.test(norm(w)) ? '뒤에 오는 말에 맞는 쪽을 골라요' : '주어에 맞는 쪽을 골라요'}</div><div class="sline" style="margin-bottom:12px">${x.t.map((t, k) => k === j ? '<span class="blank">&nbsp;?&nbsp;</span>' : esc(t[0])).join(' ')}${esc(x.p)}</div>
       <div class="opts">${opts.map(o => `<button class="opt" data-o="${esc(o)}">${esc(o)}</button>`).join('')}</div>`);
     $$('.opt').forEach(b => b.onclick = () => { const ok = b.dataset.o === w; $$('.opt').forEach(e => { e.disabled = true; if (e.dataset.o === w) e.classList.add('ok'); }); if (!ok) b.classList.add('bad');
       report(ok, i, x.t.map((t, k) => k === j ? b.dataset.o : t[0]).join(' ') + x.p, [j]); });
