@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """표현 유닛을 학습 유형(패턴형·변화형·대비형·자리형)으로 분류한다.
 
-소스(레포 밖): UNITS_CSV, 기본 ~/Downloads/유기적 통합모드 문장 (공유용) - 문장1 변형후보 추가 (검토중)-문장만 확정.csv
+소스(레포 밖): UNITS_CSV, 기본 ~/Downloads/유기적 통합모드 문장 (공유용) - 문장1 변형후보 추가 (검토중)-문장만 확정 (2).csv
 산출: public/vocab-expression-units.gen.json
 
 유닛은 '학습자가 문장을 만들 때 내려야 하는 결정 하나'다. 그 결정이 무엇인지는
@@ -18,7 +18,7 @@ from collections import Counter, OrderedDict
 from pathlib import Path
 
 DL = Path.home() / "Downloads"
-SRC = Path(os.environ.get("UNITS_CSV", DL / "유기적 통합모드 문장 (공유용) - 문장1 변형후보 추가 (검토중)-문장만 확정.csv"))
+SRC = Path(os.environ.get("UNITS_CSV", DL / "유기적 통합모드 문장 (공유용) - 문장1 변형후보 추가 (검토중)-문장만 확정 (2).csv"))
 OUT = Path(__file__).resolve().parent.parent / "public" / "vocab-expression-units.gen.json"
 
 # 규칙이 데이터와 어긋나는 유닛 — 사람이 정한 값과 그 이유. 규칙을 고치기 전까지 여기서 덮는다.

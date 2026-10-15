@@ -1,9 +1,9 @@
 원본 · id,원본 · 카드 초록 (형태),원본 · 카드 회색 1행 (뜻),원본 · 태그,원본 · sentence,원본 · translation,변경 · 새 유닛,변경 · 새 카드 초록 (제안),변경 · 새 뜻 (제안),변경 · 새 태그,추가 · 나누는 이유,추가 · 메모
-10019,주어 + be동사 + in / on / at + ______ .,~ 안에 / 위에 / 에 있어,기본,[She's in] the library.,[걔는] 도서관[에 있어].,10019-A,주어 + be동사 + in + ______ .,~ 안에 있어,S1,장소 전치사가 갈래마다 뜻이 다르다,원래 문장 5개 + 새로 쓴 문장 3개 = 8칸
-,,,문장1-2,[He's in] the library.,[걔는] 도서관[에 있어].,,,,,,
+10019,주어 + be동사 + in / on / at + ______ .,~ 안에 / 위에 / 에 있어,기본,[I'm in] the library.,[나는] 도서관[에 있어].,10019-A,주어 + be동사 + in + ______ .,~ 안에 있어,S1,장소 전치사가 갈래마다 뜻이 다르다,원래 문장 5개 + 새로 쓴 문장 3개 = 8칸
+,,,문장1-2,[They're in] the library.,[걔네는] 도서관[에 있어].,,,,,,
 ,,,문장1-3,[We're in] the library.,[우리는] 도서관[에 있어].,,,,,,
 ,,,기본,[It was in] the car.,[그거] 차 안[에 있었어].,,,,,,
-,,,어려운,[He was in] the bathroom.,[걔] 화장실[에 있었어].,,,,,,
+,,,어려운,[I was in] the bathroom.,[나] 화장실[에 있었어].,,,,,,
 ,,,기본,[They're on] the table.,[그것들은] 탁자 위[에 있어].,10019-B,주어 + be동사 + on + ______ .,~ 위에 있어,S1 (원래 기본),장소 전치사가 갈래마다 뜻이 다르다,S1 새로 지정 — 주어 변형 문장 없음 · 원래 문장 2개 + 새로 쓴 문장 6개 = 8칸
 ,,,어려운,[They were on] the desk.,[그것들은] 책상 위[에 있었어].,,,,,,
 ,,,어려운,[I'm] not [at] home.,[나] 집[에] 없[어].,10019-C,주어 + be동사 + at + ______ .,~에 있어,S1 (원래 어려운),장소 전치사가 갈래마다 뜻이 다르다,S1 새로 지정 — 주어 변형 문장 없음 · 원래 문장 1개 + 새로 쓴 문장 7개 = 8칸
@@ -23,14 +23,14 @@
 ,,,기본,Let's go [at three o'clock].,[3시에] 가자.,10059-B,at + 시각,~시에,S1 (원래 기본),때를 나타내는 전치사가 갈래마다 붙는 말이 다르다,S1 새로 지정 — 주어 변형 문장 없음 · 원래 문장 2개 + 새로 쓴 문장 6개 = 8칸
 ,,,어려운,Are you busy [at twelve o'clock]?,[12시에] 바빠?,,,,,,
 ,,,기본,I'm busy [in the morning].,난 [아침에] 바빠.,10059-C,in + 아침·달·계절,~에 (아침·달·계절),S1 (원래 기본),때를 나타내는 전치사가 갈래마다 붙는 말이 다르다,S1 새로 지정 — 주어 변형 문장 없음 · 원래 문장 1개 + 새로 쓴 문장 7개 = 8칸
-10083,some ______ / not any ______,좀 ~ / ~가 하나도 없는,기본,You have [some gifts].,너한테 온 [선물이 몇 개] 있어.,10083-A,some ______,좀 ~,S1,긍정문 some / 부정·의문문 any,원래 문장 6개 + 새로 쓴 문장 2개 = 8칸
-,,,문장1-2,She has [some gifts].,걔한테 [선물이 몇 개] 있어.,,,,,,
-,,,문장1-3,He has [some gifts].,걔한테 [선물이 몇 개] 있어.,,,,,,
+10083,some ______ / not any ______,좀 ~ / ~가 하나도 없는,기본,I bought [some gifts].,나 [선물 좀] 샀어.,10083-A,some ______,좀 ~,S1,긍정문 some / 부정·의문문 any,원래 문장 6개 + 새로 쓴 문장 2개 = 8칸
+,,,문장1-2,We bought [some gifts].,우린 [선물 좀] 샀어.,,,,,,
+,,,문장1-3,They bought [some gifts].,걔네는 [선물 좀] 샀어.,,,,,,
 ,,,기본,Let's make [some pasta].,[파스타 좀] 만들자.,,,,,,
 ,,,어려운,Could we have [some more time]?,[시간을 좀 더] 주실 수 있을까요?,,,,,,
-,,,어려운,She gave me [some good advice].,걔가 [좋은 조언을 좀] 해줬어.,,,,,,
+,,,어려운,You gave me [some good advice].,네가 [좋은 조언을 좀] 해줬어.,,,,,,
 ,,,기본,I [don't] have [any milk].,우유가 [하나도 없어].,10083-B,not any ______ / any ______ ?,~가 하나도 없는 / ~ 있어?,S1 (원래 기본),긍정문 some / 부정·의문문 any,S1 새로 지정 — 주어 변형 문장 없음 · 원래 문장 2개 + 새로 쓴 문장 6개 = 8칸
-,,,어려운,Do you have [any other ideas]?,[다른 생각 좀] 있어?,,,,,,
+,,,어려운,Do you have [any other ideas]?,[다른 생각] 있어?,,,,,,
 10097,How many / much ______ ?,~가 몇 개야? / 얼마나 돼?,기본,[How many] channels [do you] get?,채널이 [몇 개]나 나와?,10097-A,How many ______ ?,~가 몇 개야?,S1,셀 수 있는 many / 셀 수 없는 much,원래 문장 5개 + 새로 쓴 문장 3개 = 8칸
 ,,,문장1-2,[How many] channels [do you] watch?,채널을 [몇 개]나 봐?,,,,,,
 ,,,문장1-3,[How many] channels [do you] get now?,지금은 채널이 [몇 개]나 나와?,,,,,,
@@ -45,60 +45,60 @@
 ,,,기본,We [don't] have [much] time.,시간이 [별로 없어].,,,,,,
 ,,,어려운,We [didn't] have [much] money.,우린 돈이 [별로 없었어].,,,,,,
 ,,,기본,We [don't] have [many] options.,선택지가 [많지 않아].,10098-B,not many ______,~가 많지 않아 (셀 수 있는 것),S1 (원래 기본),셀 수 있는 many / 셀 수 없는 much,S1 새로 지정 — 주어 변형 문장 없음 · 원래 문장 3개 + 새로 쓴 문장 5개 = 8칸
-,,,어려운,He [didn't] have [many] friends in school.,걔는 학교에서 친구가 [많지 않았어].,,,,,,
+,,,어려운,I [didn't] have [many] friends.,난 친구가 [많지 않았어].,,,,,,
 ,,,어려운,There [aren't many] schools in this area.,이 동네엔 학교가 [많지 않아].,,,,,,
 10102,"______ , too. / ______ , either.",나도 ~해 / 나도 안 해,기본,"[I] prefer this ring, [too].",[나도] 이 반지가 더 좋아.,10102-A,"______ , too.",나도 ~해,S1,긍정 too / 부정 either,원래 문장 4개 + 새로 쓴 문장 4개 = 8칸
-,,,문장1-2,"[She] prefers this ring, [too].",[걔도] 이 반지가 더 좋대.,,,,,,
+,,,문장1-2,"[We] prefer this ring, [too].",[우리도] 이 반지가 더 좋아.,,,,,,
 ,,,문장1-3,"[I] prefer this gold ring, [too].",[나도] 이 금반지가 더 좋아.,,,,,,
-,,,어려운,"Did [he] go out, [too]?",[걔도] 나갔어?,,,,,,
+,,,어려운,"Did [they] go out, [too]?",[걔네도] 나갔어?,,,,,,
 ,,,기본,"[I don't] like math, [either].",[나도] 수학 [안] 좋아해.,10102-B,"______ not ~ , either.",나도 안 해,S1 (원래 기본),긍정 too / 부정 either,S1 새로 지정 — 주어 변형 문장 없음 · 원래 문장 4개 + 새로 쓴 문장 4개 = 8칸
 ,,,기본,"Did you not like it, [either]?",너[도] 그거 별로였어?,,,,,,
 ,,,어려운,"[I didn't] go to the concert, [either].",[나도] 콘서트에 [안] 갔어.,,,,,,
 ,,,어려운,I'm not happy about it [either].,나[도] 그게 마음에 안 들어.,,,,,,
-10117,some / any (of) + ______,몇몇의 ~ / 어떤 ~,기본,[Some of them] are adults.,[그중] [몇몇]은 어른이야.,10117-A,some of ______,~ 중 몇몇,S1,긍정문 some / 부정·의문문 any,원래 문장 5개 + 새로 쓴 문장 3개 = 8칸
-,,,문장1-2,[Some of them] are young adults.,[그중] [몇몇]은 젊은 어른이야.,,,,,,
-,,,문장1-3,[Some of them] are adults now.,[그중] [몇몇]은 이제 어른이야.,,,,,,
+10117,some / any (of) + ______,몇몇의 ~ / 어떤 ~,기본,[Some of them] are adults.,[그중 몇몇]은 어른이야.,10117-A,some of ______,~ 중 몇몇,S1,긍정문 some / 부정·의문문 any,원래 문장 5개 + 새로 쓴 문장 3개 = 8칸
+,,,문장1-2,[Some of them] are young adults.,[그중 몇몇]은 청년이야.,,,,,,
+,,,문장1-3,[Some of them] are adults now.,[그중 몇몇]은 이제 어른이야.,,,,,,
 ,,,어려운,[Some of their songs] are pretty weird.,[그들 노래 중 몇 개]는 꽤 이상해.,,,,,,
 ,,,어려운,Would you like [some of my pasta]?,[내 파스타 좀] 먹을래?,,,,,,
 ,,,기본,Take [any of them].,[그중에 아무거나] 가져가.,10117-B,any (of) ______,~ 중 아무거나 / 하나도,S1 (원래 기본),긍정문 some / 부정·의문문 any,S1 새로 지정 — 주어 변형 문장 없음 · 원래 문장 3개 + 새로 쓴 문장 5개 = 8칸
 ,,,기본,I don't have [any].,난 [하나도] 없어.,,,,,,
 ,,,어려운,Did [any of them] call?,[그중에] 전화한 [사람 있어]?,,,,,,
 10127,주어 + 동사 + 목적어 + for / to + ______ .,~에게 ~를 해주다,기본,I [got] this drink [for you].,이 음료 [너 주려고 사왔어].,10127-A,주어 + 동사 + 목적어 + for + 사람 .,~에게 ~를 해주다 (got·made·bought),S1,동사마다 for / to 가 갈린다,원래 문장 6개 + 새로 쓴 문장 2개 = 8칸
-,,,문장1-2,I [got] this drink [for her].,이 음료 [걔 주려고 사왔어].,,,,,,
-,,,문장1-3,I [got] this drink [for him].,이 음료 [걔 주려고 사왔어].,,,,,,
-,,,기본,She [made] cookies [for us].,걔가 [우리 주려고] 쿠키를 [만들었어].,,,,,,
+,,,문장1-2,I [got] this drink [for Lily].,이 음료 [릴리 주려고 사왔어].,,,,,,
+,,,문장1-3,I [got] this drink [for them].,이 음료 [걔네 주려고 사왔어].,,,,,,
+,,,기본,Mia [made] cookies [for us].,미아가 [우리 주려고] 쿠키를 [만들었어].,,,,,,
 ,,,어려운,My boss [bought] dinner [for everyone].,상사가 [모두에게] 저녁을 [사줬어].,,,,,,
-,,,어려운,I [saved] the last one [for you].,마지막 하나는 [너 주려고] [남겨뒀어].,,,,,,
-,,,기본,I [passed] the ball [to her].,내가 [걔한테] 공을 [패스했어].,10127-B,주어 + 동사 + 목적어 + to + 사람 .,~에게 ~를 건네다 (passed·sent),S1 (원래 기본),동사마다 for / to 가 갈린다,S1 새로 지정 — 주어 변형 문장 없음 · 원래 문장 2개 + 새로 쓴 문장 6개 = 8칸
-,,,어려운,She [sent] the money [to me].,걔가 [나한테] 돈을 [보냈어].,,,,,,
+,,,어려운,I [saved] the last one [for you].,마지막 하나는 [너 주려고 남겨뒀어].,,,,,,
+,,,기본,I [passed] the ball [to Jake].,내가 [제이크한테] 공을 [패스했어].,10127-B,주어 + 동사 + 목적어 + to + 사람 .,~에게 ~를 건네다 (passed·sent),S1 (원래 기본),동사마다 for / to 가 갈린다,S1 새로 지정 — 주어 변형 문장 없음 · 원래 문장 2개 + 새로 쓴 문장 6개 = 8칸
+,,,어려운,They [sent] the money [to me].,걔네가 [나한테] 돈을 [보냈어].,,,,,,
 10137,must not ______ / don't have to ______,~하면 안 돼 / ~ 안 해도 돼,기본,Visitors [must not] feed the animals.,방문객은 동물에게 먹이를 주[면 안 됩니다].,10137-A,must not ______,~하면 안 돼,S1,금지 must not / 불필요 don't have to — 뜻이 정반대다,원래 문장 5개 + 새로 쓴 문장 3개 = 8칸
 ,,,문장1-2,Visitors [must not] feed the birds.,방문객은 새에게 먹이를 주[면 안 됩니다].,,,,,,
 ,,,문장1-3,You [must not] feed the fish.,물고기에게 먹이를 주[면 안 됩니다].,,,,,,
 ,,,기본,We [must not] give up.,우린 포기하[면 안 돼].,,,,,,
 ,,,어려운,Students [must not] run in the hallways.,학생들은 복도에서 뛰[면 안 됩니다].,,,,,,
 ,,,기본,You [don't have to] come.,너 [안] 와[도 돼].,10137-B,don't have to ______,~ 안 해도 돼,S1 (원래 기본),금지 must not / 불필요 don't have to — 뜻이 정반대다,S1 새로 지정 — 주어 변형 문장 없음 · 원래 문장 3개 + 새로 쓴 문장 5개 = 8칸
-,,,어려운,She [doesn't have to] work today.,걔는 오늘 일 [안] 해[도 돼].,,,,,,
+,,,어려운,I [don't have to] work today.,난 오늘 일 [안] 해[도 돼].,,,,,,
 ,,,어려운,We [don't have to] attend this meeting.,우린 이 회의에 참석 [안] 해[도 돼].,,,,,,
 10180,a few / a little ______,몇 개의 ~ / 조금의 ~,기본,[A few] users had the same problem.,[몇몇] 사용자가 같은 문제를 겪었어요.,10180-A,a few ______,몇 개의 ~,S1,셀 수 있는 a few / 셀 수 없는 a little,원래 문장 5개 + 새로 쓴 문장 3개 = 8칸
 ,,,문장1-2,[A few] users had the same opinion.,[몇몇] 사용자들이 같은 의견을 가지고 있었어요.,,,,,,
 ,,,문장1-3,[A few] users had the same thought.,[몇몇] 사용자들이 같은 생각을 가지고 있었어요.,,,,,,
 ,,,어려운,I had [a few] pancakes for breakfast.,아침으로 팬케이크를 [몇 장] 먹었어.,,,,,,
-,,,어려운,Can we have [a few] more minutes?,[몇 분]만 더 주실 수 있을까요?,,,,,,
+,,,어려운,Can we have [a few] more minutes?,[몇] 분만 더 주실 수 있을까요?,,,,,,
 ,,,기본,Add [a little] pepper.,후추를 [조금] 넣어.,10180-B,a little ______,조금의 ~,S1 (원래 기본),셀 수 있는 a few / 셀 수 없는 a little,S1 새로 지정 — 주어 변형 문장 없음 · 원래 문장 3개 + 새로 쓴 문장 5개 = 8칸
 ,,,기본,I need [a little] more time.,시간이 [조금] 더 필요해.,,,,,,
 ,,,어려운,I added [a little] sugar.,설탕을 [조금] 넣었어.,,,,,,
-10186,few / little ______,~가 거의 없어,기본,There are [few bad authors].,[나쁜 작가는 거의 없]어.,10186-A,few ______,~가 거의 없어 (셀 수 있는 것),S1,셀 수 있는 few / 셀 수 없는 little,원래 문장 4개 + 새로 쓴 문장 4개 = 8칸
-,,,문장1-2,There are [few famous authors].,[유명한 작가는 거의 없]어.,,,,,,
-,,,문장1-3,There are [few young authors].,[젊은 작가는 거의 없]어.,,,,,,
-,,,어려운,He has very [few friends].,걔는 [친구가] 정말 [적]어.,,,,,,
+10186,few / little ______,~가 거의 없어,기본,[Few people] came.,[온 사람이 거의 없]었어.,10186-A,few ______,~가 거의 없어 (셀 수 있는 것),S1,셀 수 있는 few / 셀 수 없는 little,원래 문장 4개 + 새로 쓴 문장 4개 = 8칸
+,,,문장1-2,[Few people] stayed.,[남은 사람이 거의 없]었어.,,,,,,
+,,,문장1-3,[Few people] laughed.,[웃은 사람이 거의 없]었어.,,,,,,
+,,,어려운,I have very [few friends].,난 [친구가] 정말 [적]어.,,,,,,
 ,,,기본,There is [little hope].,[희망이 거의 없]어.,10186-B,little ______,~가 거의 없어 (셀 수 없는 것),S1 (원래 기본),셀 수 있는 few / 셀 수 없는 little,S1 새로 지정 — 주어 변형 문장 없음 · 원래 문장 4개 + 새로 쓴 문장 4개 = 8칸
 ,,,기본,We have very [little time].,[시간이] 정말 [얼마 없]어.,,,,,,
 ,,,어려운,I have [little interest] in music.,난 음악에 [별 관심이 없]어.,,,,,,
 ,,,어려운,I have [little doubt] about that.,그건 [거의 의심하지 않]아.,,,,,,
-10312,______(과거분사 / 현재분사) + 명사,~된 ~ / ~하는 ~,기본,He's a [retired pilot].,걔는 [은퇴한 조종사]야.,10312-A,______(과거분사) + 명사,~된 ~,S1,능동 -ing / 수동 과거분사,원래 문장 5개 + 새로 쓴 문장 3개 = 8칸
-,,,문장1-2,She's a [retired pilot].,걔는 [은퇴한 조종사]야.,,,,,,
-,,,문장1-3,They're [retired pilots].,그들은 [은퇴한 조종사]야.,,,,,,
-,,,기본,He fixed my [broken glasses].,걔가 내 [부러진 안경]을 고쳐줬어.,,,,,,
+10312,______(과거분사 / 현재분사) + 명사,~된 ~ / ~하는 ~,기본,I'm a [retired pilot].,난 [은퇴한 조종사]야.,10312-A,______(과거분사) + 명사,~된 ~,S1,능동 -ing / 수동 과거분사,원래 문장 5개 + 새로 쓴 문장 3개 = 8칸
+,,,문장1-2,She's a [retired pilot].,그분은 [은퇴한 조종사]셔.,,,,,,
+,,,문장1-3,They're [retired pilots].,그분들은 [은퇴한 조종사]셔.,,,,,,
+,,,기본,You fixed my [broken glasses].,네가 내 [부러진 안경]을 고쳐줬어.,,,,,,
 ,,,어려운,Any [food made] by her is excellent.,걔가 [만든 음식]은 뭐든 훌륭해.,,,,,,
 ,,,기본,She picked up the [crying baby].,걔가 [우는 아기]를 안아 올렸어.,10312-B,______(현재분사) + 명사,~하는 ~,S1 (원래 기본),능동 -ing / 수동 과거분사,S1 새로 지정 — 주어 변형 문장 없음 · 원래 문장 3개 + 새로 쓴 문장 5개 = 8칸
 ,,,어려운,The [barking dog] scared my sister.,[짖는 개]가 내 동생을 놀라게 했어.,,,,,,
@@ -159,9 +159,9 @@
 ,,,어려운,Remember [to call] your mother tonight.,오늘 밤 엄마한테 [전화하는 거] 잊지 마.,10369-D,remember to ______,~할 걸 기억하다,S1 (원래 어려운),"동사가 다르고, 같은 동사도 -ing / to 에 따라 뜻이 정반대다",S1 새로 지정 — 주어 변형 문장 없음 · 원래 문장 1개 + 새로 쓴 문장 7개 = 8칸
 ,,,어려운,I remember [meeting] him last time.,지난번에 걔를 [만난 게] 기억나.,10369-E,remember ______ -ing,~한 걸 기억하다,S1 (원래 어려운),"동사가 다르고, 같은 동사도 -ing / to 에 따라 뜻이 정반대다",S1 새로 지정 — 주어 변형 문장 없음 · 원래 문장 1개 + 새로 쓴 문장 7개 = 8칸
 ,,,어려운,I'll never forget [seeing] her for the first time.,걔를 처음 [봤던] 순간을 절대 잊지 못할 거야.,10369-F,forget ______ -ing,~한 걸 잊다,S1 (원래 어려운),"동사가 다르고, 같은 동사도 -ing / to 에 따라 뜻이 정반대다",S1 새로 지정 — 주어 변형 문장 없음 · 원래 문장 1개 + 새로 쓴 문장 7개 = 8칸
-10376,"______ -ing / ______(과거분사) , 주어 + 동사 .",~하면서 / ~해서 ~해,기본,"[Wearing] a warm scarf, she walked to school.",따뜻한 목도리를 [두르고] 학교까지 걸어갔어.,10376-A,"______ -ing , 주어 + 동사 .",~하면서 ~해,S1,능동 -ing / 수동 과거분사,원래 문장 5개 + 새로 쓴 문장 3개 = 8칸
-,,,문장1-2,"[Wearing] a warm scarf, he walked to school.",따뜻한 목도리를 [두르고] 걔는 학교까지 걸어갔어.,,,,,,
-,,,문장1-3,"[Wearing] a warm scarf, they walked to school.",따뜻한 목도리를 [두르고] 그들은 학교까지 걸어갔어.,,,,,,
+10376,"______ -ing / ______(과거분사) , 주어 + 동사 .",~하면서 / ~해서 ~해,기본,"[Wearing] a warm scarf, I walked to school.",따뜻한 스카프를 [두르고] 학교까지 걸어갔어.,10376-A,"______ -ing , 주어 + 동사 .",~하면서 ~해,S1,능동 -ing / 수동 과거분사,원래 문장 5개 + 새로 쓴 문장 3개 = 8칸
+,,,문장1-2,"[Wearing] a warm scarf, we walked to school.",따뜻한 스카프를 [두르고] 우린 학교까지 걸어갔어.,,,,,,
+,,,문장1-3,"[Wearing] a warm scarf, they walked to school.",따뜻한 스카프를 [두르고] 걔네는 학교까지 걸어갔어.,,,,,,
 ,,,기본,"[Smiling] to himself, he left the room.",걔는 혼자 [미소 지으며] 방을 나갔어.,,,,,,
 ,,,기본,"[Feeling] tired, he went to bed early.",[피곤해서] 걔는 일찍 잤어.,,,,,,
 ,,,어려운,"[Frightened] by the noise, the cat ran away.",소리에 [놀라서] 고양이가 도망갔어.,10376-B,"______(과거분사) , 주어 + 동사 .",~돼서 ~해,S1 (원래 어려운),능동 -ing / 수동 과거분사,S1 새로 지정 — 주어 변형 문장 없음 · 원래 문장 3개 + 새로 쓴 문장 5개 = 8칸
@@ -199,9 +199,9 @@
 ,,,어려운,This is the park [in which] we first met.,여기가 우리가 처음 만[난] 공원이야.,,,,,,
 ,,,어려운,She's the one [for whom] it was written.,그건 [걔를 위해] 쓰인 거야.,10406-B,전치사 + whom + 주어 + 동사,~가 ~한 그 사람,S1 (원래 어려운),사물 which / 사람 whom,S1 새로 지정 — 주어 변형 문장 없음 · 원래 문장 2개 + 새로 쓴 문장 6개 = 8칸
 ,,,어려운,He's the person [to whom] it's addressed.,이건 바로 걔[한테] 온 거야.,,,,,,
-10439,I don't know if ______ .,~인지 모르겠어,기본,[I don't know if] it's poisonous.,독이 있[는지 모르]겠어.,10439-A,I don't know if ______ .,~인지 모르겠어,S1,문장에 틀이 둘이다(don't know if / not sure if),원래 문장 6개 + 새로 쓴 문장 2개 = 8칸
+10439,I don't know if ______ .,~인지 모르겠어,기본,[I don't know if] it's poisonous.,독이 있[는지 모르겠]어.,10439-A,I don't know if ______ .,~인지 모르겠어,S1,문장에 틀이 둘이다(don't know if / not sure if),원래 문장 6개 + 새로 쓴 문장 2개 = 8칸
 ,,,문장1-2,[He doesn't know if] it's poisonous.,[걘] 독이 있[는지 모른]대.,,,,,,
-,,,문장1-3,[I don't know if] they're poisonous.,그것들이 독이 있[는지 모르]겠어.,,,,,,
+,,,문장1-3,[I don't know if] they're poisonous.,그것들이 독이 있[는지 모르겠]어.,,,,,,
 ,,,기본,[I don't know if] they're open.,거기 문 열었[는지 모르]겠어.,,,,,,
 ,,,기본,[I don't know if] I should tell you.,너한테 말해야 할[지 모르겠]어.,,,,,,
 ,,,어려운,[I don't know if] that's a good idea.,그게 좋은 생각인[지 모르겠]어.,,,,,,
