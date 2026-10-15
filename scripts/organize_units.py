@@ -234,6 +234,17 @@ def full_set(p, written):
     if left: cu.die(f"{p['id']} 에 칸보다 문장이 많다: {left}")
     return rows
 
+def review_marks(rows):
+    """새로 쓴 문장의 검수 순서 — 학습 흐름은 S1 + 서로 다른 문장 2개(3문장)면 돌아가므로, 기존 독립 문장으로 3문장이 안 되는 만큼만 1차로 먼저 검수한다.
+    주어 변형 칸(문장1-2 · 1-3)은 S1 과 같은 문장이라 3문장에 세지 않는다. → (칸마다 표시, 1차 수)"""
+    need = max(0, 3 - sum(1 for slot, _, _, src, _ in rows if src == "기존" and slot not in VARIANT))
+    marks, first = [], 0
+    for slot, _, _, src, _ in rows:
+        if src != "새로 씀": marks.append(""); continue
+        if slot not in VARIANT and first < need: marks.append("1차 — 3문장 맞추기"); first += 1
+        else: marks.append("2차")
+    return marks, first
+
 def patch_rich_text_writer():
     """openpyxl 3.1.2 는 lxml 이 없을 때 쓰는 etree 경로에서 서식 있는 글자(CellRichText)를 저장하다 죽는다(TextBlock.name).
     서식 있는 칸만 고친 경로로 쓰고 나머지는 원래 함수에 맡긴다."""
@@ -263,8 +274,8 @@ def write_xlsx(units, recs, blocks, concern_rows, judged):
     from openpyxl.styles import Alignment, Border, Font, PatternFill, Side
     from openpyxl.utils import get_column_letter
 
-    GRAY, ORANGE, BLUE, GREEN, PURPLE = "EEF1F5", "FDEBD6", "E1EDFB", "E2F4E7", "EEE6FB"
-    DARK = {GRAY: "5D6B7D", ORANGE: "A85A12", BLUE: "2F5E9E", GREEN: "2C7A47", PURPLE: "6A3FB5"}
+    GRAY, ORANGE, BLUE, GREEN, PURPLE, YELLOW = "EEF1F5", "FDEBD6", "E1EDFB", "E2F4E7", "EEE6FB", "FFF2B8"
+    DARK = {GRAY: "5D6B7D", ORANGE: "A85A12", BLUE: "2F5E9E", GREEN: "2C7A47", PURPLE: "6A3FB5", YELLOW: "8A6500"}
     F = lambda **k: Font(name="Arial", size=k.pop("size", 10), **k)
     fill = lambda c: PatternFill("solid", fgColor=c)
     thin, thick = Side(style="thin", color="D5DBE3"), Side(style="medium", color="8A97A8")
@@ -302,6 +313,8 @@ def write_xlsx(units, recs, blocks, concern_rows, judged):
             memo = []
             if p["new_s1"]: memo.append("S1 새로 지정(주어 변형 없음)")
             memo.append(f"원래 문장 {len(p['sents'])}개 + 새로 쓴 문장 {len(written.get(p['id'], []))}개 = 8칸")
+            first = review_marks(full_set(p, written))[1]
+            if first: memo.append(f"3문장까지 {first}문장 부족 → 1차 검수 {first}문장")
             for k, (tag, en, kr) in enumerate(p["sents"]):
                 orig_s1 = p["sents"][k] is u["sents"][0]
                 new_tag = ("S1" if orig_s1 else "S1 ← " + tag) if k == 0 else ""
@@ -329,20 +342,27 @@ def write_xlsx(units, recs, blocks, concern_rows, judged):
     rows, starts = [], []
     for u, parts in blocks:
         for p in parts:
-            for k, (slot, en, kr, src, orig) in enumerate(full_set(p, written)):
+            fs = full_set(p, written)
+            rv = review_marks(fs)[0]
+            for k, (slot, en, kr, src, orig) in enumerate(fs):
                 starts.append(k == 0)
                 rows.append([p["id"] if k == 0 else "", p["form"] if k == 0 else "", p["mean"] if k == 0 else "", slot, en, kr, src,
-                             f"{u['id']} · {orig}" if src == "기존" else ""])
+                             f"{u['id']} · {orig}" if src == "기존" else "", rv[k]])
     def sent_style(ws, r, row):
         if starts[r - 3]:
-            for c in range(1, 9): ws.cell(r, c).border = Border(top=thick)
+            for c in range(1, 10): ws.cell(r, c).border = Border(top=thick)
             for c in (1, 2, 3): ws.cell(r, c).fill = fill(ORANGE); ws.cell(r, c).font = F(bold=True, color=DARK[ORANGE])
         new = row[6] == "새로 씀"
         for c in (4, 5, 6, 7): ws.cell(r, c).fill = fill(PURPLE if new else GRAY)
         ws.cell(r, 7).font = F(bold=True, color=DARK[PURPLE] if new else DARK[GRAY])
+        if row[8].startswith("1차"):
+            for c in (5, 6, 9): ws.cell(r, c).fill = fill(YELLOW)
+            ws.cell(r, 9).font = F(bold=True, color=DARK[YELLOW])
+        elif row[8]: ws.cell(r, 9).font = F(color=DARK[GRAY])
     table(ws, [("새 유닛 (변경 제안)", ORANGE, ["새 유닛", "카드 초록", "뜻"]),
-               ("학습 문장 — 기존(회색) / 새로 씀(보라)", PURPLE, ["칸", "sentence", "translation", "출처", "원래 유닛 · 원래 칸"])],
-          [9, 22, 18, 9, 44, 36, 9, 16], rows, sent_style)
+               ("학습 문장 — 기존(회색) / 새로 씀(보라)", PURPLE, ["칸", "sentence", "translation", "출처", "원래 유닛 · 원래 칸"]),
+               ("검수 (추가) — 1차 노랑", YELLOW, ["검수 순서"])],
+          [9, 22, 18, 9, 44, 36, 9, 16, 18], rows, sent_style)
 
     # ── 유닛별 판정: 나눈 뒤 유닛 한 줄씩 ──
     ws = wb.create_sheet("유닛별 판정")
@@ -409,7 +429,7 @@ def write_xlsx(units, recs, blocks, concern_rows, judged):
         for k in (1, 2, 3): R.cell(r, k).font = F(); R.cell(r, k).alignment = Alignment(wrap_text=True, vertical="top")
         if style == "title": R.cell(r, 1).font = F(bold=True, size=14)
         if style == "h": R.cell(r, 1).font = F(bold=True, size=11, color="2F5E9E")
-        if style in (GRAY, ORANGE, BLUE, GREEN, PURPLE):
+        if style in (GRAY, ORANGE, BLUE, GREEN, PURPLE, YELLOW):
             R.cell(r, 1).fill = fill(style); R.cell(r, 1).font = F(bold=True, color=DARK[style])
         return r
     n_src_rows = sum(len(u["sents"]) for u in units.values())
@@ -434,6 +454,8 @@ def write_xlsx(units, recs, blocks, concern_rows, judged):
     put("  새 유닛의 학습 문장", "=COUNTA('나눈 유닛 문장'!E3:E2000)", "새 유닛마다 원래 구성과 같은 8칸(S1 · 문장1-2 · 문장1-3 · 기본 2 · 어려운 3)")
     put("    그중 기존 문장", "=COUNTIF('나눈 유닛 문장'!G3:G2000,\"기존\")", "원래 유닛의 문장을 문구 그대로 원래 칸에 넣은 것")
     put("    그중 새로 쓴 문장", "=COUNTIF('나눈 유닛 문장'!G3:G2000,\"새로 씀\")", "빈 칸만 새로 썼다 — 원본 5,371문장과 겹치지 않는다")
+    put("      1차 검수", "=COUNTIF('나눈 유닛 문장'!I3:I2000,\"1차*\")", "S1 + 다른 문장 2개(3문장)를 맞추는 데 필요한 것 — 먼저 검수. '나눈 유닛 문장' 탭의 노랑, '검수 순서' 열로 거를 수 있다", style=YELLOW)
+    put("      2차 검수", "=COUNTIF('나눈 유닛 문장'!I3:I2000,\"2차\")", "나머지 빈 칸 — 복습 문장을 다양하게 하는 용도라 나중에 검수해도 된다")
     put()
     put("판정 (추가)", style="h")
     put("  나눈 뒤 유닛", "=COUNTA('유닛별 판정'!A3:A2000)", "원본 유닛 - 나눈 원본 유닛 + 새 유닛")
@@ -448,7 +470,7 @@ def write_xlsx(units, recs, blocks, concern_rows, judged):
     put()
     put("탭", style="h")
     put("나눈 유닛", None, "나눈 원본 유닛마다 원본(왼쪽 회색) → 새 유닛(가운데 주황)을 옆으로 나란히. 굵은 선 = 원본 유닛 경계, 가는 선 = 새 유닛 경계. 새 태그 'S1 ← 기본'은 원래 기본 문장을 새 유닛의 S1 으로 세웠다는 뜻")
-    put("나눈 유닛 문장", None, "새 유닛마다 8칸. 회색 = 원래 유닛의 기존 문장(원래 유닛 · 원래 칸을 함께 적음), 보라 = 빈 칸을 채우려고 새로 쓴 문장")
+    put("나눈 유닛 문장", None, "새 유닛마다 8칸. 회색 = 원래 유닛의 기존 문장(원래 유닛 · 원래 칸을 함께 적음), 보라 = 빈 칸을 채우려고 새로 쓴 문장. '검수 순서' 열의 1차(노랑)가 먼저 검수할 문장")
     put("유닛별 판정", None, "나눈 뒤 유닛 한 줄씩. 학습 문장 칸에 그 유닛의 문장이 전부 있다(영어 + 해석, 괄호 부분 초록) — 더 나눌 유닛이 있는지 여기서 본다. 나눈 유닛은 '나눈 유닛 문장' 탭의 8칸이고 ✎ 는 새로 쓴 문장. 새 유닛·카드 초록·뜻 칸이 주황(제안). 패턴화 열로 거르면 가능/불가만 볼 수 있다")
     put("고민 목록 판단", None, "원본 열 그대로에 채운 두 열(초록)을 앞으로 당겨 둠 — 열 순서만 옮겼고 값은 그대로")
     for row in R.iter_rows(min_row=1, max_row=line[0], min_col=2, max_col=2):
@@ -507,6 +529,8 @@ def main():
             memo = []
             if p["new_s1"]: memo.append("S1 새로 지정 — 주어 변형 문장 없음")
             memo.append(f"원래 문장 {len(p['sents'])}개 + 새로 쓴 문장 {len(written.get(p['id'], []))}개 = 8칸")
+            first = review_marks(full_set(p, written))[1]
+            if first: memo.append(f"3문장까지 {first}문장 부족 → 1차 검수 {first}문장")
             if is_s1:
                 # 판정은 채운 8칸 전체로 낸다 — 원래 문장 한두 개로는 고정어가 우연히 맞는다
                 full = [(slot, en, kr) for slot, en, kr, _, _ in full_set(p, written)]
@@ -526,6 +550,8 @@ def main():
             memo = []
             if p["new_s1"]: memo.append("S1 새로 지정 — 주어 변형 문장 없음")
             memo.append(f"원래 문장 {len(p['sents'])}개 + 새로 쓴 문장 {len(written.get(p['id'], []))}개 = 8칸")
+            first = review_marks(full_set(p, written))[1]
+            if first: memo.append(f"3문장까지 {first}문장 부족 → 1차 검수 {first}문장")
             for k, (tag, en, kr) in enumerate(p["sents"]):
                 first_of_unit = p is parts[0] and k == 0
                 orig_s1 = p["sents"][k] is u["sents"][0]
@@ -570,15 +596,18 @@ def main():
             t.writerow(r)
 
     t = w("unit-split-sentences.gen.csv")
-    t.writerow(["새 유닛", "카드 초록 (제안)", "뜻 (제안)", "칸", "sentence", "translation", "출처", "원래 유닛 · 원래 칸"])
-    n_new = 0
+    t.writerow(["새 유닛", "카드 초록 (제안)", "뜻 (제안)", "칸", "sentence", "translation", "출처", "원래 유닛 · 원래 칸", "검수 순서"])
+    n_new = n_first = 0
     for u, parts in blocks:
         for p in parts:
-            for k, (slot, en, kr, src, orig) in enumerate(full_set(p, written)):
+            fs = full_set(p, written)
+            rv, first = review_marks(fs)
+            n_first += first
+            for k, (slot, en, kr, src, orig) in enumerate(fs):
                 n_new += src == "새로 씀"
                 t.writerow([p["id"] if k == 0 else "", p["form"] if k == 0 else "", p["mean"] if k == 0 else "", slot, en, kr, src,
-                            f"{u['id']} · {orig}" if src == "기존" else ""])
-    print(f"나눈 유닛 학습 문장: {sum(len(ps) for _, ps in blocks) * len(SLOTS)}칸 = 기존 {sum(len(ps) for _, ps in blocks) * len(SLOTS) - n_new} + 새로 씀 {n_new}")
+                            f"{u['id']} · {orig}" if src == "기존" else "", rv[k]])
+    print(f"나눈 유닛 학습 문장: {sum(len(ps) for _, ps in blocks) * len(SLOTS)}칸 = 기존 {sum(len(ps) for _, ps in blocks) * len(SLOTS) - n_new} + 새로 씀 {n_new}(1차 검수 {n_first})")
     if concern: write_xlsx(units, recs, blocks, list(csv.reader(open(CONCERN, encoding="utf-8"))), judged)
     flow_plan.write(recs, OUT / "flow-units.gen.json", keys_of, anchors, OUT.parent / "vocab-expression-traps.sample.json")
     cnt = Counter(j["pat"] for j in judged)
