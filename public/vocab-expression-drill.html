@@ -117,21 +117,11 @@
   .miss .no { color:#b5541c; text-decoration:line-through; text-decoration-color:#e0874f; }
   .miss .st2 { font-size:11.5px; color:#a6b3c4; margin-left:4px; }
 
-  /* 단서 칩 — 주어진 말. 핵심은 학습자가 떠올린다 */
-  .cues { display:flex; flex-wrap:wrap; align-items:center; gap:6px; margin:4px 0 12px; }
-  .cues .l { font-size:12px; font-weight:800; color:#8a98ad; margin-right:2px; }
-  .cue { font-size:15px; font-weight:700; color:#5d6f88; background:#f4f6fa; border:1.5px dashed #c9d3e2; border-radius:10px; padding:4px 10px; }
-  .cue.base { color:#8a5a2e; background:#fdf6ee; border-color:#edd3b8; }
-  .w.cue-t { background:#f4f6fa; border-style:dashed; color:#5d6f88; box-shadow:none; }
-  .typ { width:100%; font:inherit; font-size:18px; font-weight:700; color:#2f3e52; border:none; border-bottom:2.5px solid #7aa3dc; background:#f3f8ff;
-    border-radius:8px 8px 0 0; padding:9px 10px; outline:none; margin:6px 0 2px; }
-  .typ::placeholder { color:#b3c2d6; letter-spacing:.5px; }
-  .fixnote { font-size:13px; color:#3a6bb0; margin-top:6px; font-weight:700; }
 </style>
 </head>
 <body>
 <div class="app">
-  <h1>바꿔 말하기 — 단서를 받고, 핵심은 내가 떠올린다</h1>
+  <h1>바꿔 말하기 — 보고 만들기 → 문장 배열 → 긴 문장</h1>
   <div class="units" id="units"></div>
   <div class="find-u"><input id="q" type="search" placeholder="유닛 id나 카드 초록으로 찾기 (예: 10065, stop)" enterkeyhint="search"></div>
   <div class="top"><div class="bar"><i id="barI"></i></div><span class="n" id="barN"></span></div>
@@ -140,27 +130,22 @@
 </div>
 
 <script>
-/* 패턴화 가능 · 불가 두 갈래가 같은 네 단계를 탄다. 갈래마다 다른 것은 화면이 아니라 '단서'다 — 데이터의 [ ] 밖 말은 단서 덩어리로 주고,
-   [ ] 안(핵심)은 학습자가 떠올린다. 패턴형이면 핵심이 덩어리(Why don't you), 형태 규칙이면 꼴(talked — 단서는 원형 talk),
-   일치 규칙이면 is/are 같은 꼴, 자리 규칙이면 부사가 들어갈 자리다. 단서는 문장 데이터에서 바로 나와 새로 쓸 콘텐츠가 없다.
-   단계마다 지원이 줄어든다 — 1 예시를 보고 핵심 자리만 · 2 단서 덩어리 + 핵심 낱말 뱅크 · 3 단서만 보고 직접 쓰기 · 4 긴 문장 통째로.
+/* 세 단계 — 1 예시(S1)를 보고 새 문장의 핵심([ ]) 자리만 채우고 · 2 새 문장을 한국어만 보고 통째로 배열 · 3 남은 가장 긴 문장을 통째로 배열.
+   직접 쓰기(타이핑)는 이 시점에 너무 어려워 두지 않는다. 뱅크에 핵심 말고 하나 더 오는 낱말(ALT)은 유닛 유형이 정한다.
    왕초보 단계표와 같은 규칙: 다 맞히면 다음 단계, 틀리면 같은 퀴즈를 다른 문장으로 한 번 더, 그다음은 결과와 상관없이 다음 단계. */
 const STAGES = {
   '1-1':{ kind:'same',    tag:'b', name:'보고 만들기',        ask:'같은 패턴으로 완성하세요', pass:'2-1', fail:'1-2' },
   '1-2':{ kind:'same',    tag:'b', name:'보고 만들기',        ask:'같은 패턴으로 완성하세요', pass:'2-1', fail:'2-1' },
-  '2-1':{ kind:'swapA',   tag:'b', name:'바꿔 말하기',        ask:'',                         pass:'3-1', fail:'2-2' },
-  '2-2':{ kind:'swapA',   tag:'b', name:'바꿔 말하기',        ask:'',                         pass:'3-1', fail:'3-1' },
-  '3-1':{ kind:'swapB',   tag:'r', name:'바꿔 말하기 — 쓰기', ask:'',                         pass:'4-1', fail:'3-2' },
-  '3-2':{ kind:'swapB',   tag:'r', name:'바꿔 말하기 — 쓰기', ask:'',                         pass:'4-1', fail:'4-1' },
-  '4-1':{ kind:'arrange', tag:'r', name:'긴 문장',            ask:'',                         pass:null,  fail:'4-2' },
-  '4-2':{ kind:'arrange', tag:'r', name:'긴 문장',            ask:'',                         pass:null,  fail:null },
+  '2-1':{ kind:'arrange', tag:'b', name:'문장 배열',          ask:'',                         pass:'3-1', fail:'2-2' },
+  '2-2':{ kind:'arrange', tag:'b', name:'문장 배열',          ask:'',                         pass:'3-1', fail:'3-1' },
+  '3-1':{ kind:'arrange', tag:'r', name:'긴 문장',            ask:'',                         pass:null,  fail:'3-2' },
+  '3-2':{ kind:'arrange', tag:'r', name:'긴 문장',            ask:'',                         pass:null,  fail:null },
 };
 const ORDER = Object.keys(STAGES);
 const NOTE = {
   '1':'위에 S1(예시, 핵심 초록) · 아래 새 문장은 핵심 자리만 빈칸 — 뱅크의 낱말을 놓는다',
-  '2':'한국어를 보고 문장을 만든다 — 핵심 밖은 <b>단서 덩어리</b>(점선) 하나로, 핵심은 낱말로 뱅크에 있다',
-  '3':'한국어 + 단서만 보고 문장 전체를 <b>직접 쓴다</b> — 형태 규칙은 원형이 단서(talk → talked). 막히면 핵심 첫 글자',
-  '4':'남은 가장 긴 문장을 초록 없이 통째로 배열',
+  '2':'새 문장을 한국어만 보고 <b>통째로 배열</b> — 초록 없음, 짧은 문장부터',
+  '3':'남은 <b>가장 긴 문장</b>을 초록 없이 통째로 배열',
 };
 const CHOICE = {
   '10031':['Maybe','Actually','Unfortunately'], '10054':['once','twice'], '10088':['myself','yourself','himself','herself'],
@@ -224,24 +209,7 @@ function altOf(u, i) {
   return null;
 }
 
-/* 문장을 덩어리로 — 핵심([ ]) 낱말은 하나씩, 핵심 밖은 이어진 말 하나로(단서) */
-function pieces(x) {
-  const out = [];
-  x.t.forEach(t => { if (t[1]) out.push({ w:t[0], core:true }); else if (out.length && !out.at(-1).core) out.at(-1).w += ' ' + t[0]; else out.push({ w:t[0], core:false }); });
-  return out;
-}
-/* 단서 — 핵심 밖 덩어리(낱말이 든 것만) + 형태 규칙이면 꼴이 바뀐 낱말의 원형 */
-function cueOf(u, i) {
-  const x = u.s[i], chunks = pieces(x).filter(p => !p.core && /[A-Za-z0-9]/.test(p.w)).map(p => p.w);
-  let base = null;
-  if (u.kind === 'form' && !NO_BASE.has(u.id)) {
-    const v = u.plan && u.plan.info && u.plan.info[i];
-    if (v && !v.peri && x.t[v.ti] && x.t[v.ti][1] && norm(v.base) !== norm(v.w)) base = v.base;
-  }
-  return { chunks, base };
-}
-
-/* 문장 고르기 — S1 은 1단계 예시. 가장 긴 독립 문장은 4단계 몫으로 남기고, 2·3단계는 짧은 것부터.
+/* 문장 고르기 — S1 은 1단계 예시. 가장 긴 독립 문장은 3단계 몫으로 남기고, 2단계는 짧은 것부터.
    다시 풀기는 남은 독립 문장 → 없으면 주어 변형(같은 결정을 한 번 더) */
 function pick(stage) {
   const u = unit(), all = u.s.map((_, i) => i).filter(i => i > 0 && brIdx(u.s[i]).length);
@@ -255,7 +223,7 @@ function pick(stage) {
     const pool = [...diff, ...c, ...free(vari)];
     return pool.find(i => altOf(u, i)) ?? pool[0] ?? rest();
   }
-  if (d === '2' || d === '3') return free(ind).filter(i => i !== reserve).sort((a, b) => len(a) - len(b))[0] ?? free(vari)[0] ?? rest();
+  if (d === '2') return free(ind).filter(i => i !== reserve).sort((a, b) => len(a) - len(b))[0] ?? free(vari)[0] ?? rest();
   if (reserve !== null && !run.used.has(reserve)) return reserve;
   return free(ind).sort((a, b) => len(b) - len(a))[0] ?? free(vari)[0] ?? rest();
 }
@@ -269,24 +237,23 @@ function header() {
   $$('.unit[data-id]').forEach(b => b.onclick = () => open(b.dataset.id));
   $('#rand').onclick = () => { const pool = U.filter(x => x.id !== uid); open(pool[Math.floor(Math.random() * pool.length)].id); };
 }
-const KIND = { pattern:'패턴화 가능 — 단서를 받고 덩어리를 떠올린다', form:'형태 규칙 — 원형이 단서, 꼴을 떠올린다', agree:'일치 규칙 — 주어에 맞는 꼴을 떠올린다',
-  place:'자리 규칙 — 부사가 들어갈 자리를 떠올린다', order:'어순 규칙 — 덩어리 순서를 떠올린다', other:'그 밖 — 뜻에 맞는 말을 떠올린다' };
+const KIND = { pattern:'패턴화 가능 — 뱅크 = 핵심 낱말', form:'형태 규칙 — 뱅크에 원형이 하나 더', agree:'일치 규칙 — 뱅크에 다른 꼴이 하나 더',
+  place:'자리 규칙', order:'어순 규칙', other:'그 밖 — 뜻으로 고르는 목록이면 뱅크에 다른 쪽이 하나 더' };
 function drawTable() {
   const marks = {}; run && run.log.forEach(l => marks[l.stage] = l.ok ? '<span class="mk o">O</span>' : '<span class="mk x">X</span>');
   const u = unit();
   $('#tblBody').innerHTML = `<table class="st"><tr><th>단계</th><th>퀴즈</th><th>문장</th><th>다 맞힘</th><th>틀림</th><th></th></tr>`
     + ORDER.map(id => { const s = STAGES[id], d = id.charAt(0);
-      const which = id.endsWith('-2') ? '다른 문장' : d === '1' ? '새 문장 (예시 S1)' : d === '4' ? '가장 긴 문장' : '새 문장 (짧은 것부터)';
+      const which = id.endsWith('-2') ? '다른 문장' : d === '1' ? '새 문장 (예시 S1)' : d === '3' ? '가장 긴 문장' : '새 문장 (짧은 것부터)';
       return `<tr class="${run && run.phase === 'quiz' && run.stage === id ? 'cur' : ''}"><td>${id} <span class="tg ${s.tag}">${s.tag === 'b' ? '기초' : '실전'}</span></td><td>${s.name}</td><td style="color:#8a98ad">${which}</td><td>${s.pass || '완료'}</td><td>${s.fail || '완료'}</td><td>${marks[id] || ''}</td></tr>`; }).join('')
     + `</table><div class="rules"><b>이 유닛</b> ${u ? esc(KIND[u.kind] || '') : ''}<br>`
-    + `<b>두 갈래가 같은 화면</b> — 갈래마다 다른 것은 단서뿐이다. 핵심([ ]) 밖은 단서로 주고 핵심은 학습자가 떠올린다.<br>`
     + `<b>규칙</b> 다 맞히면 다음 단계, 틀리면 같은 퀴즈를 다른 문장으로 한 번 더, 그다음은 결과와 상관없이 다음 단계.<br>`
     + Object.entries(NOTE).map(([k, v]) => `<b>${k}단계</b> ${v}`).join('<br>') + `<br><b>완료</b> 틀린 것과 설명이 있을 때만</div>`;
 }
 function drawBar() {
-  const n = !run ? 0 : run.phase === 'done' ? 4 : +run.stage.charAt(0) - 1;
-  $('#barI').style.width = `${n / 4 * 100}%`;
-  $('#barN').textContent = run && run.phase === 'quiz' ? `${run.stage.charAt(0)} / 4` : run && run.phase === 'done' ? '완료' : '';
+  const n = !run ? 0 : run.phase === 'done' ? 3 : +run.stage.charAt(0) - 1;
+  $('#barI').style.width = `${n / 3 * 100}%`;
+  $('#barN').textContent = run && run.phase === 'quiz' ? `${run.stage.charAt(0)} / 3` : run && run.phase === 'done' ? '완료' : '';
 }
 function refresh() { header(); drawTable(); drawBar(); }
 function open(id) {
@@ -299,7 +266,7 @@ function goStage(id) {
   run.stage = id; refresh();
   const s = STAGES[id], i = pick(id);
   run.used.add(i); run.last = i;
-  ({ same:quizSame, swapA:quizSwapA, swapB:quizSwapB, arrange:quizArrange })[s.kind](s, i);
+  ({ same:quizSame, arrange:quizArrange })[s.kind](s, i);
 }
 function shell(s, body) {
   const u = unit();
@@ -312,15 +279,12 @@ function report(ok, i, given, why = '') {
   run.log.push({ stage:run.stage, ok });
   if (!ok && given !== null) run.miss.push({ stage:run.stage, i, given, why });
   const next = ok ? s.pass : s.fail;
-  $('#res').innerHTML = `<div class="res ${ok ? 'ok' : 'no'}"><div class="h">${ok ? '정답!' : '아쉬워요'}</div><div class="a">${sentHtml(x)}</div>${why ? `<div class="${ok ? 'fixnote' : 'why'}">${esc(why)}</div>` : ''}</div>`;
+  $('#res').innerHTML = `<div class="res ${ok ? 'ok' : 'no'}"><div class="h">${ok ? '정답!' : '아쉬워요'}</div><div class="a">${sentHtml(x)}</div>${!ok && why ? `<div class="why">${esc(why)}</div>` : ''}</div>`;
   $('#bb').innerHTML = `<button class="btn" id="nx">${next ? '다음' : '완료'}</button>`;
   $('#nx').onclick = () => goStage(next);
   say(x.en);
   drawTable();
 }
-const cuesHtml = (c, label = '단서') => (c.chunks.length || c.base)
-  ? `<div class="cues"><span class="l">${label}</span>${c.base ? `<span class="cue base">(${esc(c.base)})</span>` : ''}${c.chunks.map(w => `<span class="cue">${esc(w)}</span>`).join('')}</div>` : '';
-
 /* 1 보고 만들기 — 위 예시(S1, 핵심 초록) · 아래 새 문장의 핵심 자리가 빈칸. 뱅크 = 핵심 낱말 + ALT */
 function quizSame(s, i) {
   const u = unit(), m = u.s[0], x = u.s[i], br = brIdx(x), alt = altOf(u, i);
@@ -350,14 +314,14 @@ function quizSame(s, i) {
   draw();
 }
 
-/* 배열 공용 — items 를 정답 순서(seq)대로 놓는다. 단서 덩어리는 점선 타일 */
-function arrangeIn(s, i, head, seq, extra, mode) {
+/* 배열 — items 를 정답 순서(seq)대로 놓는다 */
+function arrangeIn(s, i, head, seq, extra) {
   const u = unit(), x = u.s[i];
   shell(s, `${head}<div class="fill" id="fill"></div><div class="bank" id="bank"></div>`);
-  const items = [...seq, ...extra.map(w => ({ w, core:true, alt:true }))];
+  const items = [...seq, ...extra.map(w => ({ w, alt:true }))];
   const order = shuffle(items.map((_, k) => k)), placed = [];
   let fin = false;
-  const tile = (it, attr) => `<button class="w${mode === 'swap' && !it.core ? ' cue-t' : ''}" ${attr}>${esc(tileText(it.w))}</button>`;
+  const tile = (it, attr) => `<button class="w" ${attr}>${esc(tileText(it.w))}</button>`;
   $('#bank').innerHTML = order.map(k => tile(items[k], `data-k="${k}"`)).join('');
   $('#bb').innerHTML = `<button class="btn" id="ok" disabled>확인</button>`;
   const draw = () => {
@@ -378,52 +342,10 @@ function arrangeIn(s, i, head, seq, extra, mode) {
   draw();
 }
 
-/* 2 바꿔 말하기 — 한국어를 보고 만든다. 핵심 밖은 단서 덩어리 하나(점선), 핵심은 낱말로. 형태 규칙은 원형을 함께 둔다(ALT) */
-function quizSwapA(s, i) {
-  const u = unit(), x = u.s[i], alt = altOf(u, i);
-  arrangeIn(s, i, `<div class="kr">${krHtml(x.kr)}</div>`, pieces(x), alt ? [alt.w] : [], 'swap');
-}
-
-/* 3 바꿔 말하기 — 쓰기. 한국어 + 단서만 주고 문장 전체를 직접 쓴다. 채점은 낱말 단위(대소문자·부호 무시, 축약형 풀어 비교, 4글자 이상은 한 글자 오타 허용) */
-const EXP = [[/\bcan't\b/g, 'can not'], [/\bcannot\b/g, 'can not'], [/\bwon't\b/g, 'will not'], [/n't\b/g, ' not'], [/'re\b/g, ' are'], [/'m\b/g, ' am'], [/'ll\b/g, ' will'], [/'ve\b/g, ' have']];
-const words = s => { let t = norm(s); EXP.forEach(([r, v]) => t = t.replace(r, v)); return t.split(' ').filter(Boolean); };
-function dist(a, b) {
-  const d = Array.from({ length:a.length + 1 }, (_, i) => [i, ...Array(b.length).fill(0)]);
-  for (let j = 1; j <= b.length; j++) d[0][j] = j;
-  for (let i = 1; i <= a.length; i++) for (let j = 1; j <= b.length; j++) {
-    d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
-    if (i > 1 && j > 1 && a[i - 1] === b[j - 2] && a[i - 2] === b[j - 1]) d[i][j] = Math.min(d[i][j], d[i - 2][j - 2] + 1);
-  }
-  return d[a.length][b.length];
-}
-function quizSwapB(s, i) {
-  const u = unit(), x = u.s[i], c = cueOf(u, i), ans = x.t.map(t => t[0]).join(' ') + x.p;
-  const masked = pieces(x).map(p => p.core ? p.w.split(' ').map(w => w[0] + w.slice(1).replace(/[A-Za-z0-9]/g, '_')).join(' ') : p.w).join(' ') + x.p;
-  shell(s, `<div class="kr">${krHtml(x.kr)}</div>${cuesHtml(c)}
-    <input class="typ" id="typ" placeholder="영어로 써 보세요" autocomplete="off" autocapitalize="sentences" spellcheck="false" enterkeyhint="done">
-    <button class="lad" id="hint">핵심 첫 글자 보기</button> <button class="lad" id="show">정답 보기</button>`);
-  $('#bb').innerHTML = `<button class="btn" id="ok" disabled>확인</button>`;
-  const inp = $('#typ'); let fin = false, shown = false;
-  inp.oninput = () => { $('#ok').disabled = !inp.value.trim(); };
-  inp.onkeydown = e => { if (e.key === 'Enter' && !$('#ok').disabled) $('#ok').click(); };
-  $('#hint').onclick = () => { inp.placeholder = masked; $('#hint').remove(); inp.focus(); };
-  $('#show').onclick = () => { shown = true; inp.value = ''; inp.placeholder = ans; $('#show').remove(); if ($('#hint')) $('#hint').remove(); inp.focus(); };
-  inp.focus();
-  $('#ok').onclick = () => {
-    if (fin) return; fin = true;
-    const a = words(inp.value), b = words(ans);
-    const typo = [];
-    const same = a.length === b.length && a.every((w, k) => w === b[k] || (b[k].length >= 4 && dist(w, b[k]) <= 1 && typo.push(`${w} → ${b[k]}`)));
-    const ok = same && !shown;
-    inp.readOnly = true; ['#hint', '#show'].forEach(q => $(q) && $(q).remove());
-    report(ok, i, inp.value.trim(), ok && typo.length ? `철자 ${typo.join(', ')}` : '');
-  };
-}
-
-/* 4 긴 문장 — 한국어만 보고 통째로. 초록 없음, 뱅크에 ALT */
+/* 2 문장 배열 · 3 긴 문장 — 한국어만 보고 통째로. 초록 없음, 뱅크에 ALT */
 function quizArrange(s, i) {
   const u = unit(), x = u.s[i], alt = altOf(u, i);
-  arrangeIn(s, i, `<div class="kr">${krHtml(x.kr)}</div>`, x.t.map(t => ({ w:t[0], core:true })), alt ? [alt.w] : [], 'plain');
+  arrangeIn(s, i, `<div class="kr">${krHtml(x.kr)}</div>`, x.t.map(t => ({ w:t[0] })), alt ? [alt.w] : []);
 }
 
 function finish() {
