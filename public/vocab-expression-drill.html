@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>바꿔 말하기</title>
+<title>표현 학습 — 두 섹션</title>
 <style>
   :root { --bg:#a9ccf2; --ink:#2f3e52; --green:#2e9e57; }
   * { box-sizing:border-box; }
@@ -117,11 +117,27 @@
   .miss .no { color:#b5541c; text-decoration:line-through; text-decoration-color:#e0874f; }
   .miss .st2 { font-size:11.5px; color:#a6b3c4; margin-left:4px; }
 
+  /* 섹션 탭 — 패턴화 가능 / 불가는 학습 방식이 다르다 */
+  .tabs { display:flex; gap:6px; margin:0 0 10px; }
+  .tabs button { flex:1; border:none; border-radius:13px; padding:10px 8px; font-size:14px; font-weight:800; cursor:pointer; background:rgba(255,255,255,.45); color:#35506f; }
+  .tabs button.on { background:#fff; color:#2f3e52; box-shadow:0 3px 10px rgba(30,60,110,.12); }
+  .tabs .c { display:block; font-size:11.5px; font-weight:700; color:#8a98ad; margin-top:2px; }
+  /* 찾기 두 줄 */
+  .fl { padding:10px 0; border-bottom:1px dashed #e7edf5; }
+  .fl:last-of-type { border-bottom:none; }
+  /* 찾은 뒤 펼쳐지는 규칙 */
+  .rule { margin-top:12px; background:#f6f9fd; border-radius:12px; padding:10px 12px; }
+  .rule .f { font-size:16px; font-weight:800; color:#1f7a49; }
+  .rule .p { font-size:15px; font-weight:700; color:#33465c; margin-top:4px; }
+  .rule .p b { color:#1f7a49; }
+  .rule .d { font-size:13px; color:#5d6f88; margin-top:4px; line-height:1.45; }
+  .w.trapx { background:#fdeee6; color:#b5541c; border-color:#f0c4a8; }
 </style>
 </head>
 <body>
 <div class="app">
-  <h1>바꿔 말하기 — 보고 만들기 → 문장 배열 → 긴 문장</h1>
+  <h1>표현 학습 — 패턴화 가능 / 불가 두 섹션</h1>
+  <div class="tabs" id="tabs"></div>
   <div class="units" id="units"></div>
   <div class="find-u"><input id="q" type="search" placeholder="유닛 id나 카드 초록으로 찾기 (예: 10065, stop)" enterkeyhint="search"></div>
   <div class="top"><div class="bar"><i id="barI"></i></div><span class="n" id="barN"></span></div>
@@ -130,22 +146,38 @@
 </div>
 
 <script>
-/* 세 단계 — 1 예시(S1)를 보고 새 문장의 핵심([ ]) 자리만 채우고 · 2 새 문장을 한국어만 보고 통째로 배열 · 3 남은 가장 긴 문장을 통째로 배열.
-   직접 쓰기(타이핑)는 이 시점에 너무 어려워 두지 않는다. 뱅크에 핵심 말고 하나 더 오는 낱말(ALT)은 유닛 유형이 정한다.
-   왕초보 단계표와 같은 규칙: 다 맞히면 다음 단계, 틀리면 같은 퀴즈를 다른 문장으로 한 번 더, 그다음은 결과와 상관없이 다음 단계. */
-const STAGES = {
-  '1-1':{ kind:'same',    tag:'b', name:'보고 만들기',        ask:'같은 패턴으로 완성하세요', pass:'2-1', fail:'1-2' },
-  '1-2':{ kind:'same',    tag:'b', name:'보고 만들기',        ask:'같은 패턴으로 완성하세요', pass:'2-1', fail:'2-1' },
-  '2-1':{ kind:'arrange', tag:'b', name:'문장 배열',          ask:'',                         pass:'3-1', fail:'2-2' },
-  '2-2':{ kind:'arrange', tag:'b', name:'문장 배열',          ask:'',                         pass:'3-1', fail:'3-1' },
-  '3-1':{ kind:'arrange', tag:'r', name:'긴 문장',            ask:'',                         pass:null,  fail:'3-2' },
-  '3-2':{ kind:'arrange', tag:'r', name:'긴 문장',            ask:'',                         pass:null,  fail:null },
-};
-const ORDER = Object.keys(STAGES);
-const NOTE = {
-  '1':'위에 S1(예시, 핵심 초록) · 아래 새 문장은 핵심 자리만 빈칸 — 뱅크의 낱말을 놓는다',
-  '2':'새 문장을 한국어만 보고 <b>통째로 배열</b> — 초록 없음, 짧은 문장부터',
-  '3':'남은 <b>가장 긴 문장</b>을 초록 없이 통째로 배열',
+/* 패턴화 가능과 불가는 학습 방식이 다르다 — 섹션을 나눈다.
+   가능: 1 보고 만들기(예시 S1 · 새 문장의 핵심([ ]) 자리) → 2 문장 배열 → 3 긴 문장(트랩과 함께).
+   불가: 1 찾기(두 문장에서 초록 뜻에 해당하는 영어를 누르면 바뀌는 방식이 펼쳐진다) → 2 규칙 적용(새 문장의 핵심 자리, 뱅크에 원형·다른 꼴)
+         → 3 문장 배열 → 4 긴 문장(트랩과 함께). 같은 덩어리가 반복되지 않으니 '보고 따라' 대신 바뀌는 방식을 먼저 짚게 한다.
+   왕초보 단계표와 같은 규칙: 다 맞히면 다음 단계, 틀리면 같은 퀴즈를 다른 문장으로 한 번 더, 그다음은 결과와 상관없이 다음 단계. 찾기는 다시 하지 않는다. */
+const FLOWS = {
+  pattern:{ label:'패턴화 가능', stages:{
+    '1-1':{ kind:'same',    tag:'b', name:'보고 만들기',   ask:'같은 패턴으로 완성하세요', pass:'2-1', fail:'1-2' },
+    '1-2':{ kind:'same',    tag:'b', name:'보고 만들기',   ask:'같은 패턴으로 완성하세요', pass:'2-1', fail:'2-1' },
+    '2-1':{ kind:'arrange', tag:'b', name:'문장 배열',     ask:'', pass:'3-1', fail:'2-2' },
+    '2-2':{ kind:'arrange', tag:'b', name:'문장 배열',     ask:'', pass:'3-1', fail:'3-1' },
+    '3-1':{ kind:'long',    tag:'r', name:'긴 문장 + 트랩', ask:'', pass:null,  fail:'3-2' },
+    '3-2':{ kind:'long',    tag:'r', name:'긴 문장 + 트랩', ask:'', pass:null,  fail:null },
+  }, note:{
+    '1':'위에 S1(예시, 핵심 초록) · 아래 새 문장은 핵심 자리만 빈칸 — 뱅크의 낱말을 놓는다',
+    '2':'새 문장을 한국어만 보고 <b>통째로 배열</b> — 초록 없음, 짧은 문장부터',
+    '3':'남은 <b>가장 긴 문장</b>을 통째로 배열 — 뱅크에 <b>트랩 3개</b>가 섞인다',
+  }},
+  rule:{ label:'패턴화 불가', stages:{
+    '1-1':{ kind:'find',    tag:'b', name:'찾기',           ask:'초록 뜻에 해당하는 영어를 두 문장에서 눌러 보세요', pass:'2-1', fail:'2-1' },
+    '2-1':{ kind:'same',    tag:'b', name:'규칙 적용',      ask:'같은 규칙으로 완성하세요', pass:'3-1', fail:'2-2' },
+    '2-2':{ kind:'same',    tag:'b', name:'규칙 적용',      ask:'같은 규칙으로 완성하세요', pass:'3-1', fail:'3-1' },
+    '3-1':{ kind:'arrange', tag:'r', name:'문장 배열',      ask:'', pass:'4-1', fail:'3-2' },
+    '3-2':{ kind:'arrange', tag:'r', name:'문장 배열',      ask:'', pass:'4-1', fail:'4-1' },
+    '4-1':{ kind:'long',    tag:'r', name:'긴 문장 + 트랩', ask:'', pass:null,  fail:'4-2' },
+    '4-2':{ kind:'long',    tag:'r', name:'긴 문장 + 트랩', ask:'', pass:null,  fail:null },
+  }, note:{
+    '1':'S1 과 다른 문장 하나 — 한국어 초록에 해당하는 영어를 누른다. 다 누르면 <b>바뀌는 방식</b>(open → open<b>ed</b> · cry → cr<b>ied</b>)과 카드 설명이 펼쳐진다. 틀려도 다시 하지 않는다',
+    '2':'위에 찾은 두 문장 · 아래 새 문장은 핵심 자리만 빈칸 — 뱅크에 원형 · 다른 꼴 · 다른 쪽이 하나 더',
+    '3':'새 문장을 한국어만 보고 <b>통째로 배열</b> — 초록 없음',
+    '4':'남은 <b>가장 긴 문장</b>을 통째로 배열 — 뱅크에 <b>트랩 3개</b>가 섞인다',
+  }},
 };
 const CHOICE = {
   '10031':['Maybe','Actually','Unfortunately'], '10054':['once','twice'], '10088':['myself','yourself','himself','herself'],
@@ -154,10 +186,23 @@ const CHOICE = {
   '10403':['However','Wherever','Whenever'],
 };
 const NO_BASE = new Set(['10374', '10344']);
-const FEATURED = ['10033', '10001', '10369-A', '10065', '10299', '10041', '10006', '10017-A', '10084'];
+const FEATURED = { pattern:['10033', '10001', '10000', '10369-A', '10078-B'], rule:['10065', '10299', '10041', '10006', '10017-A', '10084', '10383'] };
+/* 트랩 — 같은 자리에 올 수 있는 같은 부류 낱말(그 한국어 뜻으로는 틀린 말). 한 부류에서 몰아 뽑지 않게 라운드로빈.
+   부류로 못 채우면 다른 유닛의 핵심 낱말(길이가 비슷한 것)로 메운다. 3개 고정 — 1~2개는 과잉으로 보이지 않는다 */
+const TRAP_BUCKETS = [
+  ['on','off','up','down','out','over','back','away','through','along'],
+  ['to','for','with','about','from','at','of','by','into','in'],
+  ["don't","doesn't","didn't","isn't","aren't","wasn't","weren't","won't","can't","couldn't","shouldn't","haven't","hasn't"],
+  ['do','does','did','is','are','was','were','am','will','would','can','could','should','have','has','had'],
+  ['i','you','he','she','it','we','they'],
+  ['me','him','her','us','them'],
+  ['my','your','his','its','our','their'],
+  ['some','any','much','many','few','little','every','each'],
+];
+let CONTENT_POOL = [];
 
-let U = [], byId = {}, uid = '10033', run = null;
-try { const s = JSON.parse(localStorage.getItem('vedrill') || 'null'); if (s) uid = s.uid; } catch (e) {}
+let U = [], byId = {}, sec = 'pattern', uid = '10033', run = null;
+try { const s = JSON.parse(localStorage.getItem('vedrill') || 'null'); if (s) { uid = s.uid; sec = s.sec || sec; } } catch (e) {}
 
 const $ = s => document.querySelector(s);
 const $$ = (s, el = document) => [...el.querySelectorAll(s)];
@@ -168,6 +213,8 @@ const norm = w => String(w).toLowerCase().replace(/[’‘]/g, "'").replace(/[^a
 const tileText = w => /^I('|$)/.test(w) ? w : w.toLowerCase();
 const shuffle = a => { const b = a.slice(); for (let n = 0; n < 30; n++) { for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [b[i], b[j]] = [b[j], b[i]]; } if (a.length < 2 || b.some((x, k) => x !== a[k])) break; } return b; };
 const unit = () => byId[uid];
+const secOf = u => u.pat === '가능' ? 'pattern' : 'rule';
+const STAGES = () => FLOWS[secOf(unit())].stages;
 function say(text) { try { const v = new SpeechSynthesisUtterance(plain(text)); v.lang = 'en-US'; v.rate = .9; speechSynthesis.cancel(); speechSynthesis.speak(v); } catch (e) {} }
 function greenRuns(ws) {
   const out = [];
@@ -208,65 +255,84 @@ function altOf(u, i) {
   }
   return null;
 }
+/* 트랩 3개 — ALT 먼저, 그다음 문장 속 기능어와 같은 부류, 모자라면 다른 유닛의 핵심 낱말 */
+function trapsOf(u, i) {
+  const x = u.s[i], used = new Set(x.t.map(t => norm(t[0]))), out = [];
+  const push = w => { const b = norm(w); if (b && !used.has(b) && !out.some(y => norm(y) === b)) out.push(w); };
+  const alt = altOf(u, i); if (alt) push(alt.w);
+  const seed = [...x.en].reduce((a, c) => a + c.charCodeAt(0), 0);
+  const hits = x.t.map(t => TRAP_BUCKETS.find(b => b.includes(norm(t[0])))).filter(Boolean);
+  for (let round = 0; round < 3 && out.length < 3 && hits.length; round++)
+    hits.forEach(pool => { if (out.length >= 3) return; const c = pool.filter(w => !used.has(w) && !out.some(y => norm(y) === w)); if (c.length) push(c[(seed + out.length + round) % c.length]); });
+  const avg = Math.round(x.t.reduce((a, t) => a + norm(t[0]).length, 0) / x.t.length);
+  const near = CONTENT_POOL.filter(w => !used.has(w) && Math.abs(w.length - avg) <= 2);
+  for (let k = 0; out.length < 3 && k < near.length; k++) push(near[(seed + k * 7) % near.length]);
+  return out.slice(0, 3);
+}
 
-/* 문장 고르기 — S1 은 1단계 예시. 가장 긴 독립 문장은 3단계 몫으로 남기고, 2단계는 짧은 것부터.
+/* 문장 고르기 — S1 은 예시(가능) · 찾기 첫 줄(불가). 가장 긴 독립 문장은 '긴 문장' 몫으로 남기고, 나머지는 짧은 것부터.
    다시 풀기는 남은 독립 문장 → 없으면 주어 변형(같은 결정을 한 번 더) */
 function pick(stage) {
-  const u = unit(), all = u.s.map((_, i) => i).filter(i => i > 0 && brIdx(u.s[i]).length);
+  const u = unit(), kind = STAGES()[stage].kind, all = u.s.map((_, i) => i).filter(i => i > 0 && brIdx(u.s[i]).length);
   const ind = all.filter(i => !u.s[i].tag.startsWith('문장1-')), vari = all.filter(i => u.s[i].tag.startsWith('문장1-'));
   const free = a => a.filter(i => !run.used.has(i)), len = i => u.s[i].t.length;
   const reserve = ind.length > 2 ? [...ind].sort((a, b) => len(b) - len(a))[0] : null;
   const rest = () => free(ind)[0] ?? free(vari)[0] ?? all.find(i => i !== run.last) ?? all[0];
-  const d = stage.charAt(0);
-  if (d === '1') {
+  if (kind === 'find') {
+    const c = free(ind).filter(i => i !== reserve), diff = c.filter(i => brKey(u.s[i]) !== brKey(u.s[0]));
+    return diff[0] ?? c[0] ?? rest();
+  }
+  if (kind === 'same') {
     const c = free(ind).filter(i => i !== reserve), diff = c.filter(i => brKey(u.s[i]) !== brKey(u.s[0]));
     const pool = [...diff, ...c, ...free(vari)];
     return pool.find(i => altOf(u, i)) ?? pool[0] ?? rest();
   }
-  if (d === '2') return free(ind).filter(i => i !== reserve).sort((a, b) => len(a) - len(b))[0] ?? free(vari)[0] ?? rest();
+  if (kind === 'arrange') return free(ind).filter(i => i !== reserve).sort((a, b) => len(a) - len(b))[0] ?? free(vari)[0] ?? rest();
   if (reserve !== null && !run.used.has(reserve)) return reserve;
   return free(ind).sort((a, b) => len(b) - len(a))[0] ?? free(vari)[0] ?? rest();
 }
 
+const short = u => { const f = u.form.replace(/\s+/g, ' '); return f.length > 20 ? f.slice(0, 19) + '…' : f; };
 function header() {
-  const name = u => { const f = u.form.replace(/\s+/g, ' '); return f.length > 20 ? f.slice(0, 19) + '…' : f; };
-  const chips = FEATURED.filter(id => byId[id]).map(id => `<button class="unit${id === uid ? ' on' : ''}" data-id="${id}">${esc(name(byId[id]))}</button>`);
-  if (!FEATURED.includes(uid)) chips.push(`<button class="unit on" data-id="${uid}">${esc(name(unit()))}</button>`);
+  const n = k => U.filter(u => secOf(u) === k).length;
+  $('#tabs').innerHTML = Object.entries(FLOWS).map(([k, f]) => `<button data-s="${k}" class="${k === sec ? 'on' : ''}">${f.label}<span class="c">${n(k)}유닛 · ${Object.keys(f.note).length}단계</span></button>`).join('');
+  $$('#tabs button').forEach(b => b.onclick = () => { if (b.dataset.s === sec) return; sec = b.dataset.s; open(FEATURED[sec].find(id => byId[id]) || U.find(u => secOf(u) === sec).id); });
+  const chips = FEATURED[sec].filter(id => byId[id]).map(id => `<button class="unit${id === uid ? ' on' : ''}" data-id="${id}">${esc(short(byId[id]))}</button>`);
+  if (!FEATURED[sec].includes(uid)) chips.push(`<button class="unit on" data-id="${uid}">${esc(short(unit()))}</button>`);
   chips.push(`<button class="unit rand" id="rand">다른 유닛 ↻</button>`);
   $('#units').innerHTML = chips.join('');
   $$('.unit[data-id]').forEach(b => b.onclick = () => open(b.dataset.id));
-  $('#rand').onclick = () => { const pool = U.filter(x => x.id !== uid); open(pool[Math.floor(Math.random() * pool.length)].id); };
+  $('#rand').onclick = () => { const pool = U.filter(x => x.id !== uid && secOf(x) === sec); open(pool[Math.floor(Math.random() * pool.length)].id); };
 }
-const KIND = { pattern:'패턴화 가능 — 뱅크 = 핵심 낱말', form:'형태 규칙 — 뱅크에 원형이 하나 더', agree:'일치 규칙 — 뱅크에 다른 꼴이 하나 더',
-  place:'자리 규칙', order:'어순 규칙', other:'그 밖 — 뜻으로 고르는 목록이면 뱅크에 다른 쪽이 하나 더' };
 function drawTable() {
   const marks = {}; run && run.log.forEach(l => marks[l.stage] = l.ok ? '<span class="mk o">O</span>' : '<span class="mk x">X</span>');
-  const u = unit();
+  const f = FLOWS[sec], st = f.stages, last = Object.keys(f.note).at(-1);
   $('#tblBody').innerHTML = `<table class="st"><tr><th>단계</th><th>퀴즈</th><th>문장</th><th>다 맞힘</th><th>틀림</th><th></th></tr>`
-    + ORDER.map(id => { const s = STAGES[id], d = id.charAt(0);
-      const which = id.endsWith('-2') ? '다른 문장' : d === '1' ? '새 문장 (예시 S1)' : d === '3' ? '가장 긴 문장' : '새 문장 (짧은 것부터)';
+    + Object.keys(st).map(id => { const s = st[id], d = id.charAt(0);
+      const which = id.endsWith('-2') ? '다른 문장' : s.kind === 'find' ? 'S1 + 새 문장' : s.kind === 'same' ? '새 문장' : s.kind === 'long' ? '가장 긴 문장' : '새 문장 (짧은 것부터)';
       return `<tr class="${run && run.phase === 'quiz' && run.stage === id ? 'cur' : ''}"><td>${id} <span class="tg ${s.tag}">${s.tag === 'b' ? '기초' : '실전'}</span></td><td>${s.name}</td><td style="color:#8a98ad">${which}</td><td>${s.pass || '완료'}</td><td>${s.fail || '완료'}</td><td>${marks[id] || ''}</td></tr>`; }).join('')
-    + `</table><div class="rules"><b>이 유닛</b> ${u ? esc(KIND[u.kind] || '') : ''}<br>`
-    + `<b>규칙</b> 다 맞히면 다음 단계, 틀리면 같은 퀴즈를 다른 문장으로 한 번 더, 그다음은 결과와 상관없이 다음 단계.<br>`
-    + Object.entries(NOTE).map(([k, v]) => `<b>${k}단계</b> ${v}`).join('<br>') + `<br><b>완료</b> 틀린 것과 설명이 있을 때만</div>`;
+    + `</table><div class="rules"><b>규칙</b> 다 맞히면 다음 단계, 틀리면 같은 퀴즈를 다른 문장으로 한 번 더, 그다음은 결과와 상관없이 다음 단계.<br>`
+    + Object.entries(f.note).map(([k, v]) => `<b>${k}단계</b> ${v}`).join('<br>') + `<br><b>완료</b> 틀린 것과 설명이 있을 때만</div>`;
 }
 function drawBar() {
-  const n = !run ? 0 : run.phase === 'done' ? 3 : +run.stage.charAt(0) - 1;
-  $('#barI').style.width = `${n / 3 * 100}%`;
-  $('#barN').textContent = run && run.phase === 'quiz' ? `${run.stage.charAt(0)} / 3` : run && run.phase === 'done' ? '완료' : '';
+  const total = Object.keys(FLOWS[sec].note).length;
+  const n = !run ? 0 : run.phase === 'done' ? total : +run.stage.charAt(0) - 1;
+  $('#barI').style.width = `${n / total * 100}%`;
+  $('#barN').textContent = run && run.phase === 'quiz' ? `${run.stage.charAt(0)} / ${total}` : run && run.phase === 'done' ? '완료' : '';
 }
 function refresh() { header(); drawTable(); drawBar(); }
 function open(id) {
-  uid = id; try { localStorage.setItem('vedrill', JSON.stringify({ uid })); } catch (e) {}
-  run = { stage:null, used:new Set([0]), log:[], miss:[], last:null, phase:'quiz' };
+  uid = id; sec = secOf(unit());
+  try { localStorage.setItem('vedrill', JSON.stringify({ uid, sec })); } catch (e) {}
+  run = { stage:null, used:new Set([0]), log:[], miss:[], last:null, found:null, phase:'quiz' };
   goStage('1-1');
 }
 function goStage(id) {
   if (!id) return finish();
   run.stage = id; refresh();
-  const s = STAGES[id], i = pick(id);
+  const s = STAGES()[id], i = pick(id);
   run.used.add(i); run.last = i;
-  ({ same:quizSame, arrange:quizArrange })[s.kind](s, i);
+  ({ find:quizFind, same:quizSame, arrange:quizArrange, long:quizLong })[s.kind](s, i);
 }
 function shell(s, body) {
   const u = unit();
@@ -274,26 +340,60 @@ function shell(s, body) {
     <div class="stage">${run.stage} · ${s.name}</div>${s.ask ? `<div class="ask">${s.ask}</div>` : ''}${body}<div id="res"></div><div id="bb"></div>
     <div class="src">유닛 ${esc(u.id)} · ${esc(u.form)}</div></div>`;
 }
-function report(ok, i, given, why = '') {
-  const s = STAGES[run.stage], u = unit(), x = u.s[i];
+function report(ok, i, given, why = '', extra = '') {
+  const s = STAGES()[run.stage], u = unit(), x = u.s[i];
   run.log.push({ stage:run.stage, ok });
   if (!ok && given !== null) run.miss.push({ stage:run.stage, i, given, why });
   const next = ok ? s.pass : s.fail;
-  $('#res').innerHTML = `<div class="res ${ok ? 'ok' : 'no'}"><div class="h">${ok ? '정답!' : '아쉬워요'}</div><div class="a">${sentHtml(x)}</div>${!ok && why ? `<div class="why">${esc(why)}</div>` : ''}</div>`;
+  $('#res').innerHTML = `<div class="res ${ok ? 'ok' : 'no'}"><div class="h">${ok ? '정답!' : '아쉬워요'}</div>${given === null ? '' : `<div class="a">${sentHtml(x)}</div>`}${!ok && why ? `<div class="why">${esc(why)}</div>` : ''}</div>${extra}`;
   $('#bb').innerHTML = `<button class="btn" id="nx">${next ? '다음' : '완료'}</button>`;
   $('#nx').onclick = () => goStage(next);
-  say(x.en);
+  if (given !== null) say(x.en);
   drawTable();
 }
-/* 1 보고 만들기 — 위 예시(S1, 핵심 초록) · 아래 새 문장의 핵심 자리가 빈칸. 뱅크 = 핵심 낱말 + ALT */
+
+/* 불가 1 찾기 — S1 과 다른 문장 하나에서 한국어 초록에 해당하는 영어를 누른다. 같은 낱말이 [ ] 밖에도 있으면 [ ] 쪽으로 친다.
+   다 누르면 바뀌는 방식이 펼쳐진다 — 형태는 원형 → 꼴(바뀐 끝 초록), 그 밖은 카드 초록과 설명 */
+function ruleHtml(u, rows) {
+  const info = u.plan && u.plan.info;
+  const pairs = u.kind === 'form' && info ? rows.map(i => info[i]).filter(v => v && !v.peri && norm(v.base) !== norm(v.w)).map(v => {
+    let k = 0; while (k < v.base.length && k < v.w.length && v.base[k].toLowerCase() === v.w[k].toLowerCase()) k++;
+    return `${esc(v.base)} → ${esc(v.w.slice(0, k))}<b>${esc(v.w.slice(k))}</b>`; }) : [];
+  return `<div class="rule"><div class="f">${esc(u.form)}</div>${pairs.length ? `<div class="p">${pairs.join(' &nbsp;·&nbsp; ')}</div>` : ''}${u.desc ? `<div class="d">${esc(u.desc)}</div>` : ''}</div>`;
+}
+function quizFind(s, i) {
+  const u = unit(), rows = [0, i];
+  run.found = rows;
+  shell(s, rows.map((r, n) => { const x = u.s[r];
+    return `<div class="fl"><div class="kr">${krHtml(x.kr)}</div><div class="wline">${x.t.map((t, j) => /[A-Za-z0-9]/.test(t[0]) ? `<button class="wk" data-r="${n}" data-j="${j}">${esc(t[0])}</button>` : `<span class="wk plain">${esc(t[0])}</span>`).join(' ')}<span class="punct">${esc(x.p)}</span></div></div>`; }).join('')
+    + `<div id="nt"></div><button class="lad" id="lad">정답 보기</button>`);
+  const br = rows.map(r => brIdx(u.s[r])), got = rows.map(() => new Set());
+  let wrong = 0, fin = false;
+  const left = () => br.reduce((a, b, n) => a + b.length - got[n].size, 0);
+  const done = shown => { fin = true; $('#lad').remove();
+    $$('.wk[data-j]').forEach(b => { b.classList.toggle('ok', br[+b.dataset.r].includes(+b.dataset.j)); b.classList.remove('miss'); });
+    $('#nt').innerHTML = ''; report(!wrong && !shown, i, null, '', ruleHtml(u, rows)); };
+  $$('.wk[data-j]').forEach(b => b.onclick = () => {
+    if (fin) return; const n = +b.dataset.r, j = +b.dataset.j, x = u.s[rows[n]];
+    const hit = br[n].includes(j) ? j : br[n].find(k => !got[n].has(k) && norm(x.t[k][0]) === norm(x.t[j][0]));
+    if (hit === undefined) { wrong++; b.classList.add('miss'); $('#nt').innerHTML = `<div class="note">초록 뜻과 다른 말이에요</div>`; return; }
+    got[n].add(hit); $(`.wk[data-r="${n}"][data-j="${hit}"]`).classList.add('ok');
+    $('#nt').innerHTML = left() ? `<div class="note">${left()}낱말 더 있어요</div>` : '';
+    if (!left()) done(false);
+  });
+  $('#lad').onclick = () => { wrong++; done(true); };
+}
+
+/* 가능 1 보고 만들기 · 불가 2 규칙 적용 — 위 예시(가능: S1 · 불가: 찾기에서 본 두 문장) · 아래 새 문장의 핵심 자리가 빈칸. 뱅크 = 핵심 + ALT */
 function quizSame(s, i) {
-  const u = unit(), m = u.s[0], x = u.s[i], br = brIdx(x), alt = altOf(u, i);
+  const u = unit(), models = run.found || [0], x = u.s[i], br = brIdx(x), alt = altOf(u, i);
   const tiles = shuffle([...br.map(j => x.t[j][0]), ...(alt ? [alt.w] : [])]);
-  shell(s, `<div class="model"><div class="av">A</div><div class="bub"><div class="en"><button class="sp" id="sp">🔊</button>${sentHtml(m)}</div><div class="k">${esc(plain(m.kr))}</div></div></div>
-    <div class="kr sm">${krHtml(x.kr)}</div>
+  shell(s, models.map((r, n) => { const m = u.s[r];
+    return `<div class="model"><div class="av">${'AB'[n]}</div><div class="bub"><div class="en"><button class="sp" data-m="${r}">🔊</button>${sentHtml(m)}</div><div class="k">${esc(plain(m.kr))}</div></div></div>`; }).join('')
+    + `<div class="kr sm">${krHtml(x.kr)}</div>
     <div class="sline">${x.t.map((t, j) => br.includes(j) ? `<span class="slot" data-j="${j}"></span>` : esc(t[0])).join(' ')}${esc(x.p)}</div>
     <div class="bank" id="bank">${tiles.map((w, k) => `<button class="w" data-k="${k}">${esc(tileText(w))}</button>`).join('')}</div>`);
-  $('#sp').onclick = () => say(m.en); say(m.en);
+  $$('.sp').forEach(b => b.onclick = () => say(u.s[+b.dataset.m].en)); say(u.s[models[0]].en);
   const put = {}; let fin = false;
   $('#bb').innerHTML = `<button class="btn" id="ok" disabled>확인</button>`;
   const draw = () => {
@@ -309,16 +409,16 @@ function quizSame(s, i) {
     $$('.sline .slot').forEach(e => e.classList.add(norm(tiles[put[e.dataset.j]]) === norm(x.t[e.dataset.j][0]) ? 'ok' : 'bad'));
     $('#bank').style.display = 'none';
     const usedAlt = alt && br.some(j => norm(tiles[put[j]]) === norm(alt.w) && norm(x.t[j][0]) !== norm(alt.w));
-    report(ok, i, x.t.map((t, j) => br.includes(j) ? tiles[put[j]] : t[0]).join(' ') + x.p, !ok && usedAlt ? alt.why : '');
+    report(ok, i, x.t.map((t, j) => br.includes(j) ? tiles[put[j]] : t[0]).join(' ') + x.p, usedAlt ? alt.why : '');
   };
   draw();
 }
 
-/* 배열 — items 를 정답 순서(seq)대로 놓는다 */
-function arrangeIn(s, i, head, seq, extra) {
-  const u = unit(), x = u.s[i];
-  shell(s, `${head}<div class="fill" id="fill"></div><div class="bank" id="bank"></div>`);
-  const items = [...seq, ...extra.map(w => ({ w, alt:true }))];
+/* 배열 — 한국어만 보고 통째로. 초록 없음. extra 는 뱅크에 섞이는 낱말(ALT · 트랩) */
+function arrangeIn(s, i, extra) {
+  const u = unit(), x = u.s[i], seq = x.t.map(t => t[0]);
+  shell(s, `<div class="kr">${krHtml(x.kr)}</div><div class="fill" id="fill"></div><div class="bank" id="bank"></div>`);
+  const items = [...seq.map(w => ({ w })), ...extra.map(w => ({ w, trap:true }))];
   const order = shuffle(items.map((_, k) => k)), placed = [];
   let fin = false;
   const tile = (it, attr) => `<button class="w" ${attr}>${esc(tileText(it.w))}</button>`;
@@ -333,25 +433,22 @@ function arrangeIn(s, i, head, seq, extra) {
   $$('#bank .w').forEach(b => b.onclick = () => { if (fin || placed.length >= seq.length) return; placed.push(+b.dataset.k); draw(); });
   $('#ok').onclick = () => {
     fin = true;
-    const ok = placed.every((k, j) => norm(items[k].w) === norm(seq[j].w));
-    $$('#fill .w').forEach((b, j) => b.classList.add(norm(items[placed[j]].w) === norm(seq[j].w) ? 'g' : 'bad'));
+    const ok = placed.every((k, j) => norm(items[k].w) === norm(seq[j]));
+    $$('#fill .w').forEach((b, j) => b.classList.add(norm(items[placed[j]].w) === norm(seq[j]) ? 'g' : items[placed[j]].trap ? 'trapx' : 'bad'));
     $('#bank').style.display = 'none';
-    const alt = altOf(u, i), usedAlt = alt && placed.some(k => items[k].alt);
-    report(ok, i, placed.map(k => items[k].w).join(' ') + x.p, !ok && usedAlt ? alt.why : '');
+    const alt = altOf(u, i), trapUsed = placed.filter(k => items[k].trap).map(k => items[k].w);
+    const why = alt && trapUsed.some(w => norm(w) === norm(alt.w)) ? alt.why : trapUsed.length ? `${trapUsed.map(w => tileText(w)).join(', ')} 는 이 문장에 쓰지 않아요` : '';
+    report(ok, i, placed.map(k => items[k].w).join(' ') + x.p, why);
   };
   draw();
 }
-
-/* 2 문장 배열 · 3 긴 문장 — 한국어만 보고 통째로. 초록 없음, 뱅크에 ALT */
-function quizArrange(s, i) {
-  const u = unit(), x = u.s[i], alt = altOf(u, i);
-  arrangeIn(s, i, `<div class="kr">${krHtml(x.kr)}</div>`, x.t.map(t => ({ w:t[0] })), alt ? [alt.w] : []);
-}
+function quizArrange(s, i) { const alt = altOf(unit(), i); arrangeIn(s, i, alt ? [alt.w] : []); }
+function quizLong(s, i) { arrangeIn(s, i, trapsOf(unit(), i)); }
 
 function finish() {
   run.phase = 'done'; run.stage = null; refresh();
-  const u = unit();
-  const miss = run.miss.map(m => `<div class="miss"><div class="no">${esc(m.given)}</div><div class="yes">→ ${sentHtml(u.s[m.i])}<span class="st2">${m.stage} ${STAGES[m.stage].name}</span></div>${m.why ? `<div style="font-size:13px;color:#8a5a2e">${esc(m.why)}</div>` : ''}</div>`).join('');
+  const u = unit(), st = STAGES();
+  const miss = run.miss.map(m => `<div class="miss"><div class="no">${esc(m.given)}</div><div class="yes">→ ${sentHtml(u.s[m.i])}<span class="st2">${m.stage} ${st[m.stage].name}</span></div>${m.why ? `<div style="font-size:13px;color:#8a5a2e">${esc(m.why)}</div>` : ''}</div>`).join('');
   const body = (miss ? `<div class="sec"><div class="t">틀렸던 곳</div>${miss}</div>` : '') + (u.desc ? `<div class="sec"><div class="t">알아 두기</div><div class="d">${esc(u.desc)}</div></div>` : '');
   $('#stage').innerHTML = `<div class="card"><div class="intro"><div class="stage">유닛 완료</div><div class="f">${esc(u.form)}</div><div class="m">${esc(u.mean)}</div>${body}</div>
     <button class="btn" id="nxu">다음 유닛</button><button class="btn" id="again" style="background:#fff;color:#6b7c93;box-shadow:0 1px 4px rgba(30,60,110,.12);margin-top:8px">다시</button></div>`;
@@ -361,7 +458,10 @@ function finish() {
 
 fetch('units/flow-units.gen.json').then(r => r.json()).then(d => {
   U = d.units.filter(u => brIdx(u.s[0]).length && u.s.some((x, i) => i > 0 && brIdx(x).length)); U.forEach(u => byId[u.id] = u);
-  if (!byId[uid]) uid = FEATURED[0];
+  const fn = new Set(TRAP_BUCKETS.flat()), seen = new Set();
+  U.forEach(u => u.s.forEach(x => brIdx(x).forEach(j => { const w = norm(x.t[j][0]); if (w.length >= 3 && /^[a-z]+$/.test(w) && !fn.has(w) && !seen.has(w)) { seen.add(w); CONTENT_POOL.push(w); } })));
+  CONTENT_POOL.sort();
+  if (!byId[uid]) uid = FEATURED[sec][0];
   const q = $('#q');
   q.onkeydown = e => {
     if (e.key !== 'Enter') return;
