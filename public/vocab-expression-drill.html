@@ -153,7 +153,7 @@
    단계는 정오답과 상관없이 차례로 간다. 한 번이라도 틀리면(헤매면) 마지막에 그 단계를 다른 문장으로 '한 번 더' — 한 유닛에 한 번뿐이다. */
 const FLOWS = {
   pattern:{ label:'패턴화 가능', stages:{
-    '1':{ kind:'same',    src:'new',  tag:'b', name:'보고 만들기',    ask:'같은 패턴으로 완성하세요' },
+    '1':{ kind:'same',    src:'new',  tag:'b', name:'보고 만들기',    ask:'같은 패턴으로 완성하세요', noAgain:true },
     '2':{ kind:'arrange', src:'s1',   tag:'b', name:'문장 배열',      ask:'' },
     '3':{ kind:'long',    src:'hard', tag:'r', name:'긴 문장 + 트랩', ask:'' },
   }, note:{
@@ -304,7 +304,7 @@ function drawTable() {
     + Object.keys(st).map(id => { const s = st[id];
       return row(id, s.tag, s.name, s.kind === 'find' ? 'S1 + 기본' : { new:sec === 'rule' ? '다른 기본' : '문장2 / 기본', s1:'S1', hard:'어려운 / 문장3' }[s.src]); }).join('')
     + row('again', 'r', run && run.again ? `한 번 더 — ${run.again.base}` : '한 번 더', '헤맸을 때만 · 문장1-2 / 1-3')
-    + `</table><div class="rules"><b>규칙</b> 단계는 정오답과 상관없이 차례로 간다. 한 번이라도 틀리면 마지막에 <b>처음 틀린 단계를 다른 문장으로 한 번 더</b> — 유닛에 한 번뿐.<br>`
+    + `</table><div class="rules"><b>규칙</b> 단계는 정오답과 상관없이 차례로 간다. 한 번이라도 틀리면 마지막에 <b>처음 틀린 단계를 다른 문장으로 한 번 더</b> — 유닛에 한 번뿐${sec === 'pattern' ? ', 보고 만들기를 틀린 것은 세지 않는다' : ''}.<br>`
     + Object.entries(f.note).map(([k, v]) => `<b>${k}단계</b> ${v}`).join('<br>') + `<br><b>완료</b> 틀린 것과 설명이 있을 때만</div>`;
 }
 function drawBar() {
@@ -333,9 +333,10 @@ function shell(s, body) {
     <div class="stage">${run.stage === 'again' ? '한 번 더' : run.stage} · ${s.name}</div>${s.ask ? `<div class="ask">${s.ask}</div>` : ''}${body}<div id="res"></div><div id="bb"></div>
     <div class="src">유닛 ${esc(u.id)} · ${esc(u.form)}</div></div>`;
 }
-/* 다음 단계 — 차례대로. 끝나면 처음 틀린 단계를 다른 문장으로 한 번 더(유닛에 한 번). 찾기를 헤맸으면 규칙 적용을 한 번 더 */
+/* 다음 단계 — 차례대로. 끝나면 처음 틀린 단계를 다른 문장으로 한 번 더(유닛에 한 번). 찾기를 헤맸으면 규칙 적용을 한 번 더.
+   보고 만들기(가능 1단계)는 틀려도 한 번 더 대상이 아니다 — 다시 풀 문장이 예시 S1 과 거의 같은 1-2 라 베끼기가 된다 */
 function nextStage(ok) {
-  if (!ok && !run.firstMiss && run.stage !== 'again') run.firstMiss = run.stage;
+  if (!ok && !run.firstMiss && run.stage !== 'again' && !stageOf(run.stage).noAgain) run.firstMiss = run.stage;
   if (run.stage === 'again') return null;
   const keys = Object.keys(STAGES()), k = keys.indexOf(run.stage);
   if (k < keys.length - 1) return keys[k + 1];
