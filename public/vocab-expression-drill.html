@@ -187,11 +187,12 @@
    제안안(new) — 예시 말풍선 · 찾기(두 문장에서 낱말 누르기) · 규칙 패널을 새로 만든다.
    대체안(now) — 앱에 이미 있는 것만 쓴다: 드래그 카드 「표현만」(정답 줄의 표현 자리만 탭해 채움, 상단 뜻 줄 + 정답 줄 아래 번역)
                 · 「문장 전체」 배열 · 결과 설명 카드. 예시는 상단 뜻 줄에, 규칙 공개는 결과 설명 카드가 맡는다.
-   단계는 정오답과 상관없이 차례로 간다. 한 번이라도 틀리면(헤매면) 마지막에 처음 틀린 단계를 문장1-2로 '한 번 더' — 유닛에 한 번.
+   문장은 S1 과 기본 문장(5문장 유닛은 문장2·문장3)만 쓴다 — 유닛마다 셋이다(문장1-2·1-3 · 어려운은 쓰지 않는다).
+   단계는 정오답과 상관없이 차례로 간다. 한 번이라도 틀리면(헤매면) 마지막에 처음 틀린 단계를 '한 번 더' — 유닛에 한 번.
    head : 카드 상단 — trans(풀 문장의 번역, [ ] 초록) · mean(카드 뜻, 전체 초록) · example(S1 영어 예시) · ask(지시문)
    alt  : 뱅크에 헷갈리는 낱말 1개(정답 대신 놓기 쉬운 원형·다른 꼴·다른 쪽 — 코드 이름 ALT) · green : 뱅크의 [ ] 낱말을 초록으로(앱 첫 학습 색 — 헷갈리는 낱말이 있으면 답이 새서 끈다)
    reveal : 끝나면 결과 설명 카드(형태 · 뜻 · 원형 → 꼴 · 설명 · 예문 2) */
-const LONG = { kind:'long', src:'hard', head:'trans', tag:'r', name:'긴 문장 + 트랩', ui:'문장 전체 카드 + 트랩 3개' };
+const LONG = { kind:'long', src:'rest', head:'trans', tag:'r', name:'문장 배열 + 트랩', ui:'문장 전체 카드 + 트랩 3개' };
 const FLOWS = {
   new:{
     pattern:{
@@ -220,7 +221,6 @@ const UI_DESC = {
   new:'예시 말풍선 · 찾기(두 문장에서 낱말 누르기) · 규칙 패널을 <b>새로 만든다</b>.',
   now:'앱에 있는 드래그 카드(<b>표현만 · 문장 전체</b>)와 <b>결과 설명 카드</b>만 쓴다 — 예시는 상단 뜻 줄에, 규칙 공개는 결과 설명 카드에. 불가는 S1에서 먼저 익히고 새 문장에 적용한다.',
 };
-const SRC_LABEL = { s1:'S1', new:'첫 기본 / 문장2', hard:'어려운 중 가장 긴 것 / 문장3', variant:'문장1-2' };
 const CHOICE = {
   '10031':['Maybe','Actually','Unfortunately'], '10054':['once','twice'], '10088':['myself','yourself','himself','herself'],
   '10328':['on','off'], '10379':['Frankly','Generally','Strictly'], '10383':['when','while','before','until','since'],
@@ -316,29 +316,27 @@ function trapsOf(u, i) {
   return out.slice(0, 3);
 }
 
-/* 문장 고르기 — 단계마다 쓸 문장 칸이 정해져 있다(src). 한 유닛 안에서 이미 쓴 문장은 다시 쓰지 않는다(S1 만 예외).
-   s1      = S1(트리거 단어가 든 대표 문장)
-   new     = 첫 기본 / 문장2 — 그 문장의 [ ] 낱말이 S1 과 똑같으면 다음 기본
-   hard    = 어려운 중 낱말 수가 가장 많은 것 / 문장3(5문장 유닛)
-   variant = 문장1-2 → 1-3(헤맸을 때 '한 번 더' — S1 과 주어·낱말 하나만 달라 같은 판단만 한 번 더) */
-function pickIn(u, src, used) {
-  const all = u.s.map((_, i) => i).filter(i => i > 0 && brIdx(u.s[i]).length);
-  const free = a => a.filter(i => !used.has(i)), tag = i => u.s[i].tag, len = i => u.s[i].t.length;
-  const vari = all.filter(i => tag(i).startsWith('문장1-'));
-  const basic = all.filter(i => tag(i) === '기본' || tag(i) === '문장2');
-  const hard = all.filter(i => tag(i) === '어려운' || tag(i) === '문장3');
-  const rest = () => free(all.filter(i => !vari.includes(i)))[0] ?? free(vari)[0] ?? all[0];
-  if (src === 's1') return 0;
-  if (src === 'variant') return free(vari)[0] ?? rest();
-  if (src === 'hard') return free(hard).sort((a, b) => len(b) - len(a))[0] ?? rest();
-  const c = free(basic);
-  return c.find(i => brKey(u.s[i]) !== brKey(u.s[0])) ?? c[0] ?? free(hard).sort((a, b) => len(a) - len(b))[0] ?? rest();
-}
-/* 유닛을 열 때 단계마다 쓸 문장을 미리 정한다 — 단계표가 그대로 보여 준다 */
+/* 문장 고르기 — NEW 학습은 S1 과 기본 문장(5문장 유닛은 문장2·문장3)만 쓴다. 유닛마다 S1 + 기본 둘, 셋뿐이다.
+   s1   = S1(트리거 단어가 든 대표 문장)
+   new  = 아직 안 쓴 기본. 가능은 고정어 꼴이 S1 과 같은 것 먼저 — 예시 do you 를 보고 did you 를 놓게 되면 핵심이 바뀐 것으로 읽힌다.
+          불가는 [ ] 낱말이 S1 과 다른 것 먼저 — 같으면 찾을 결정이 없다
+   rest = 남은 기본. 셋을 다 썼으면 같은 종류 과제(빈칸 · 배열)로 아직 안 다룬 기본을 다시 쓴다
+   한 번 더 = 처음 틀린 단계와 같은 종류 과제로 아직 안 다룬 기본(찾기를 헤맸으면 규칙 적용) */
+const NEW_TAGS = new Set(['기본', '문장2', '문장3']);
+const fam = s => s.kind === 'long' ? 'arrange' : s.kind;
+const ancKey = x => norm(x.t.filter(t => t[1] && t[2]).map(t => t[0]).join(' '));
 function planFor(u) {
-  const st = FLOWS[ui][secOf(u)], used = new Set([0]), plan = {};
-  for (const k of Object.keys(st)) { const i = pickIn(u, st[k].src, used); used.add(i); plan[k] = i; }
-  plan.again = pickIn(u, 'variant', used);
+  const st = FLOWS[ui][secOf(u)], keys = Object.keys(st), plan = {}, did = {};
+  const same = i => secOf(u) === 'pattern' ? ancKey(u.s[i]) === ancKey(u.s[0]) : brKey(u.s[i]) !== brKey(u.s[0]);
+  const order = u.s.map((_, i) => i).filter(i => NEW_TAGS.has(u.s[i].tag) && brIdx(u.s[i]).length).sort((a, b) => same(b) - same(a));
+  const mark = (i, f) => (did[i] = did[i] || new Set()).add(f);
+  const pick = f => order.find(i => !did[i]) ?? order.find(i => !did[i].has(f)) ?? order[0] ?? 0;
+  for (const k of keys) {
+    const s = st[k], i = s.src === 's1' ? 0 : pick(fam(s));
+    plan[k] = i; mark(i, fam(s)); if (s.kind === 'find') mark(0, 'find');
+  }
+  plan.againOf = {};
+  for (const k of keys) { const f = fam(st[k].kind === 'find' ? st[keys[1]] : st[k]); plan.againOf[k] = order.find(i => !(did[i] && did[i].has(f))) ?? order.find(i => i !== plan[k]) ?? 0; }
   return plan;
 }
 
@@ -366,10 +364,11 @@ function drawTable() {
     const which = s.kind === 'find' ? `${sent(0)}<br>${sent(run.plan[id])}` : s.models === 's1' ? `예시 ${sent(0)}<br>풀기 ${sent(run.plan[id])}` : s.head === 'example' ? `예시(상단) ${sent(0)}<br>풀기 ${sent(run.plan[id])}` : sent(run.plan[id]);
     return row(id, s, which); });
   const again = run.again || { tag:'r', name:'한 번 더', ui:'헤맸을 때만 — 처음 틀린 단계의 화면을 다시' };
-  rows.push(row('again', again, sent(run.plan.again)));
+  const missable = Object.keys(st).filter(id => !st[id].noAgain);
+  rows.push(row('again', again, run.again ? sent(run.plan.again) : missable.map(id => `${id} 틀리면 ${sent(run.plan.againOf[id])}`).join('<br>')));
   $('#tblBody').innerHTML = `<table class="st"><tr><th>단계</th><th>퀴즈 · 화면</th><th>문장</th><th></th></tr>${rows.join('')}</table>
-    <div class="rules"><b>규칙</b> 단계는 정오답과 상관없이 차례로 간다. 맞히면 결과창 없이 바로 다음 단계, 틀리면 그 자리에서 고쳐 준다 — <b>결과창은 유닛 끝에 한 번</b>. 한 번이라도 틀리면 마지막에 <b>처음 틀린 단계를 문장1-2로 한 번 더</b> — 유닛에 한 번${sec === 'pattern' ? ', 보고 만들기를 틀린 것은 세지 않는다' : ''}. 주황 글씨 화면은 앱에 아직 없는 새 UI.<br>
-    <b>문장</b> S1 = 트리거 어휘가 든 대표 문장 · 첫 기본/문장2 = S1 다음의 독립 문장(그 [ ] 낱말이 S1 과 똑같으면 다음 기본) · 긴 문장 = 어려운 중 낱말이 가장 많은 것(5문장 유닛은 문장3) · 한 번 더 = 문장1-2</div>`;
+    <div class="rules"><b>규칙</b> 단계는 정오답과 상관없이 차례로 간다. 맞히면 결과창 없이 바로 다음 단계, 틀리면 그 자리에서 고쳐 준다 — <b>결과창은 유닛 끝에 한 번</b>. 한 번이라도 틀리면 마지막에 <b>처음 틀린 단계를 한 번 더</b> — 유닛에 한 번${sec === 'pattern' ? ', 보고 만들기를 틀린 것은 세지 않는다' : ''}. 주황 글씨 화면은 앱에 아직 없는 새 UI.<br>
+    <b>문장</b> NEW 학습은 S1 과 기본 문장(5문장 유닛은 문장2·문장3)만 쓴다 — 유닛마다 셋. S1 = 트리거 어휘가 든 대표 문장 · 기본은 ${sec === 'pattern' ? '고정어 꼴이 S1 과 같은 것을 먼저(보고 만들기)' : '[ ] 낱말이 S1 과 다른 것을 먼저(찾기)'} · 셋을 다 쓰면 같은 과제(빈칸 · 배열)로 아직 안 다룬 문장을 다시 쓴다 · 한 번 더도 같다</div>`;
 }
 function drawBar() {
   const total = Object.keys(STAGES()).length;
@@ -412,7 +411,7 @@ function shell(s, x, body) {
   $$('.sp[data-m]').forEach(b => b.onclick = () => say(u.s[+b.dataset.m].en));
 }
 /* 다음 단계 — 차례대로. 끝나면 처음 틀린 단계를 다른 문장으로 한 번 더(유닛에 한 번). 찾기를 헤맸으면 규칙 적용을 한 번 더.
-   보고 만들기(가능 1단계)는 틀려도 한 번 더 대상이 아니다 — 다시 풀 문장1-2가 예시 S1 과 거의 같아 베끼기가 된다 */
+   보고 만들기(가능 1단계)는 틀려도 한 번 더 대상이 아니다(noAgain) */
 function nextStage(ok) {
   if (!ok && !run.firstMiss && run.stage !== 'again' && !stageOf(run.stage).noAgain) run.firstMiss = run.stage;
   if (run.stage === 'again') return null;
@@ -420,7 +419,8 @@ function nextStage(ok) {
   if (k < keys.length - 1) return keys[k + 1];
   if (!run.firstMiss) return null;
   const base = STAGES()[run.firstMiss], s = base.kind === 'find' ? STAGES()[keys[1]] : base;
-  run.again = { ...s, src:'variant', tag:'r', base:s.name, name:`한 번 더 — ${s.name}` };
+  run.again = { ...s, tag:'r', base:s.name, name:`한 번 더 — ${s.name}` };
+  run.plan.again = run.plan.againOf[run.firstMiss];
   return 'again';
 }
 /* correct = 맞혔는가, ok = 한 번 더 판정(표현 보기 · 정답 보기를 썼으면 헤맨 것).
@@ -462,8 +462,8 @@ function ruleHtml(u, rows) {
 }
 /* 결과 설명 카드(앱의 SummaryResult) — 형태 · 뜻 · (형태 유닛) 원형 → 꼴 · 설명 · 예문 최대 2(이 유닛 단계에서 안 쓰는 문장) */
 function xcardHtml(u, title = '💡 새로운 표현을 배웠어요') {
-  const usedIdx = new Set([0, 1, 2, ...Object.values(run.plan)]);
-  const ex = u.s.map((x, i) => i).filter(i => !usedIdx.has(i) && brIdx(u.s[i]).length).slice(0, 2);
+  const usedIdx = new Set([0, ...Object.values(run.plan).filter(v => typeof v === 'number')]);
+  const ex = u.s.map((x, i) => i).filter(i => NEW_TAGS.has(u.s[i].tag) && !usedIdx.has(i) && brIdx(u.s[i]).length).slice(0, 2);
   const p = pairsOf(u, [0, run.plan['1'], ...ex]);
   return `<div class="xcard"><div class="xtab">학습 정보</div><div class="xt">${title}</div>
     <div class="xf">${esc(u.form)}</div><div class="xm">${esc(u.mean)}</div>${p.length ? `<div class="xp">${p.join(' &nbsp;·&nbsp; ')}</div>` : ''}
