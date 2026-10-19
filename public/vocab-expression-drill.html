@@ -5,13 +5,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>표현 학습 — 두 섹션</title>
 <style>
-  :root { --bg:#a9ccf2; --ink:#2f3e52; --green:#2e9e57; }
+  :root { --bg:#aed7fc; --ink:#394042; --green:#0f9a69; }
   * { box-sizing:border-box; }
   html, body { margin:0; }
   body { font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
-    background:var(--bg); color:var(--ink); display:flex; justify-content:center; }
-  .app { width:100%; max-width:460px; min-height:100vh; padding:14px 16px 40px; background:linear-gradient(#aacdf3,#bfe0ef); }
+    background:#eef3f9; color:var(--ink); display:flex; justify-content:center; }
+  .app { width:100%; max-width:460px; min-height:100vh; padding:14px 16px 40px; background:var(--bg); }
   h1 { font-size:17px; margin:2px 2px 10px; color:#fff; text-shadow:0 1px 2px rgba(30,60,110,.25); }
+
+  /* 섹션 탭 — 패턴화 가능 / 불가는 학습 방식이 다르다 */
+  .tabs { display:flex; gap:6px; margin:0 0 8px; }
+  .tabs button { flex:1; border:none; border-radius:13px; padding:9px 8px; font-size:14px; font-weight:800; cursor:pointer; background:rgba(255,255,255,.45); color:#35506f; }
+  .tabs button.on { background:#fff; color:#2f3e52; box-shadow:0 3px 10px rgba(30,60,110,.12); }
+  .tabs .c { display:block; font-size:11.5px; font-weight:700; color:#8a98ad; margin-top:2px; }
+  /* UI안 — 새 UI(제안안) / 지금 앱 UI만(대체안) */
+  .seg { display:flex; background:rgba(255,255,255,.4); border-radius:12px; padding:3px; gap:3px; }
+  .seg button { flex:1; border:none; border-radius:9px; padding:7px 6px; font-size:12.5px; font-weight:800; cursor:pointer; background:none; color:#35506f; }
+  .seg button.on { background:#4b83d6; color:#fff; }
+  .segd { font-size:11.5px; color:#35506f; margin:5px 4px 10px; line-height:1.45; }
 
   .units { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:8px; }
   .unit { border:1px solid rgba(255,255,255,.8); background:rgba(255,255,255,.35); color:#35506f; border-radius:20px;
@@ -21,158 +32,195 @@
   .find-u { display:flex; margin-bottom:10px; }
   .find-u input { flex:1; min-width:0; border:none; border-radius:11px; padding:8px 11px; font-size:13px; background:rgba(255,255,255,.7); color:#2f3e52; }
 
-  .table { background:#fff; border-radius:16px; padding:10px 12px; margin-bottom:14px; box-shadow:0 4px 12px rgba(30,60,110,.1); }
+  .top { display:flex; align-items:center; gap:8px; margin:4px 2px 30px; }
+  .bar { flex:1; height:10px; background:rgba(255,255,255,.55); border-radius:6px; overflow:hidden; }
+  .bar i { display:block; height:100%; background:#3f8ef0; border-radius:6px; transition:width .3s; }
+  .top .n { font-size:12px; font-weight:800; color:#fff; }
+
+  /* 앱 문제 카드 — 레벨 탭 · 상단(분홍) · 문제 영역(흰색) */
+  .cardwrap { position:relative; }
+  .ctab { position:absolute; top:-19px; left:8px; background:#8ac4f2; color:#fff; font-size:11px; font-weight:800; border-radius:10px 10px 0 0; padding:4px 12px 8px; }
+  .cnew { position:absolute; top:-16px; right:10px; background:#fa5555; color:#fff; font-size:10.5px; font-weight:800; border-radius:8px; padding:3px 9px 7px; }
+  .acard { position:relative; background:#fff; border-radius:24px; overflow:hidden; box-shadow:0 6px 16px rgba(30,60,110,.14); }
+  .ahead { background:#fdf0f0; padding:24px 20px 20px; min-height:104px; }
+  .hk { font-size:19px; font-weight:600; color:#222; line-height:1.5; }
+  .hx { display:flex; align-items:center; gap:6px; margin-bottom:4px; }
+  .chip { font-size:11px; font-weight:800; color:#6b55d9; background:#efeafd; border-radius:8px; padding:2px 8px; }
+  .he { font-size:18px; font-weight:600; color:#222; line-height:1.45; }
+  .he .g, .ahead .g { color:var(--green); font-weight:800; }
+  .hs { font-size:13px; color:#8a98ad; margin-top:2px; }
+  .tgt { color:var(--green); font-weight:800; }
+  .abody { background:#fcfcfc; padding:18px 18px 20px; min-height:160px; }
+  .sp { border:none; background:none; padding:0 2px; cursor:pointer; font-size:15px; }
+
+  /* 정답 줄 — 고정 낱말 + 빈칸(밑줄). 정답 줄 아래 번역 */
+  .aline { display:flex; flex-wrap:wrap; align-items:center; gap:10px 7px; min-height:48px; font-size:20px; }
+  .sw { color:#5a6268; font-weight:500; }
+  .sw.p { margin-left:-5px; }
+  .ul { display:inline-flex; align-items:center; justify-content:center; min-width:58px; height:38px; border-bottom:2px solid #c3cbd6; cursor:pointer; }
+  .ul .w { margin:0; }
+  .ul.ok .w { background:#f4fdf8; border-color:#8ed9ac; color:#237a4a; }
+  .ul.bad .w { background:#fdeee6; border-color:#f0c4a8; color:#b5541c; }
+  .atrans { font-size:14.5px; color:#8a98ad; margin-top:12px; }
+  .aline.arr { border-bottom:2px solid #e2e9f3; padding-bottom:10px; }
+
+  /* 단어 카드 — 앱 GrammarDraggableWord */
+  .bank { display:flex; flex-wrap:wrap; gap:6px; }
+  .w { font:inherit; font-size:19px; font-weight:400; color:#394042; padding:5px 9px; border:1px solid #d5d9e8; background:#fff; border-radius:8px; cursor:pointer; line-height:1.3; }
+  .w:active { transform:translateY(1px); }
+  .w.g { background:#f4fdf8; border-color:#8ed9ac; color:#237a4a; }
+  .w.used { background:#f0f0f5; border-color:#f0f0f5; color:transparent; pointer-events:none; }
+  .w.up { background:#eef2fb; border-color:#eef2fb; }
+  .w.ok { background:#f4fdf8; border-color:#8ed9ac; color:#237a4a; }
+  .w.bad { background:#fdeee6; border-color:#f0c4a8; color:#b5541c; }
+  .w.trapx { background:#fdeee6; border-color:#f0c4a8; color:#b5541c; text-decoration:line-through; }
+
+  /* 하단 — 단어 카드 영역 + 버튼 */
+  .abot { background:#fff; margin:18px -16px 0; padding:16px 18px 18px; min-height:230px; display:flex; flex-direction:column; gap:14px; }
+  .abtns { display:flex; gap:8px; margin-top:auto; }
+  .abtns button { border:none; color:#fff; font-size:15px; font-weight:700; border-radius:12px; padding:15px 8px; cursor:pointer; }
+  .abtns .lb { width:86px; background:#af85f2; font-size:12.5px; }
+  .abtns .ok { flex:1; background:#8571ef; }
+  .abtns .ok:disabled { background:#cfd4e3; cursor:default; }
+
+  /* 표현 보기 → 오답노트 팁 (앱에 있는 것) */
+  .tipbox { margin-top:14px; background:#fff8db; border-radius:12px; padding:10px 12px; font-size:14.5px; line-height:1.5; color:#5b4a14; }
+  .tipbox b { color:var(--green); }
+
+  /* 예시 말풍선 (제안안 — 새 UI) */
+  .model { display:flex; gap:8px; align-items:flex-start; margin:0 0 12px; }
+  .model .av { flex:0 0 26px; height:26px; border-radius:50%; background:#8ac4f2; color:#fff; font-weight:800; display:flex; align-items:center; justify-content:center; font-size:12px; margin-top:4px; }
+  .model .bub { flex:1; background:#fff; border:1px solid #d5d9e8; border-radius:12px; padding:8px 12px; }
+  .model .en { font-size:16px; font-weight:600; line-height:1.45; }
+  .model .en .g { color:var(--green); font-weight:800; }
+  .model .k { font-size:12.5px; color:#8a98ad; margin-top:2px; }
+  .newui { display:inline-block; font-size:10.5px; font-weight:800; color:#c4632c; background:#fdeadf; border-radius:6px; padding:1px 6px; margin-bottom:8px; }
+
+  /* 찾기 두 줄 (제안안 — 새 UI) */
+  .fl { padding:6px 0 10px; }
+  .fl .kr { font-size:15.5px; font-weight:600; margin-bottom:6px; }
+  .wline { display:flex; flex-wrap:wrap; gap:6px; align-items:center; }
+  .wk.miss { color:#aab7c8; border-color:#e6eaf0; text-decoration:underline; text-decoration-color:#e3c9b0; }
+  .wk.plain { border-color:transparent; background:none; padding:5px 1px; cursor:default; }
+  .note { font-size:13.5px; color:#3a6bb0; background:#eef4fd; border-radius:10px; padding:7px 10px; line-height:1.45; }
+
+  /* 결과 */
+  .res { border-radius:14px; padding:12px 14px; animation:up .25s ease both; }
+  .res.ok { background:#edf9f1; } .res.no { background:#fdf3ec; }
+  .res .h { font-size:15px; font-weight:800; margin-bottom:4px; }
+  .res.ok .h { color:#1f7a49; } .res.no .h { color:#b5541c; }
+  .res .a { font-size:16px; font-weight:600; color:#33465c; line-height:1.55; }
+  .res .a .g, .miss .yes .g { color:#1f7a49; font-weight:800; }
+  .res .why { font-size:13.5px; color:#8a5a2e; margin-top:5px; font-weight:700; }
+  @keyframes up { from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;} }
+
+  /* 규칙 패널(제안안 찾기) · 결과 설명 카드(앱에 있는 것) */
+  .rule { background:#f4fdf8; border:1px solid #8ed9ac; border-radius:12px; padding:10px 12px; }
+  .rule .f { font-size:16px; font-weight:800; color:#1f7a49; }
+  .rule .p { font-size:15px; font-weight:600; color:#33465c; margin-top:4px; }
+  .rule .p b { color:#1f7a49; }
+  .rule .d { font-size:13px; color:#5d6f88; margin-top:4px; line-height:1.45; }
+  .xcard { position:relative; background:#fff; border-radius:22px; margin:34px 0 0; padding:20px 18px 16px; box-shadow:0 6px 16px rgba(30,60,110,.12); }
+  .xcard .xtab { position:absolute; top:-18px; left:10px; background:#8ac4f2; color:#fff; font-size:11px; font-weight:800; border-radius:10px 10px 0 0; padding:4px 12px 8px; }
+  .xt { font-size:14px; font-weight:800; color:#33465c; }
+  .xf { font-size:22px; font-weight:800; color:var(--green); text-align:center; margin:12px 0 2px; }
+  .xm { font-size:13.5px; color:#8a98ad; text-align:center; }
+  .xp { font-size:15px; font-weight:600; text-align:center; margin-top:8px; }
+  .xp b { color:var(--green); }
+  .xd { margin-top:12px; background:#f4f6fa; border-radius:10px; padding:8px 11px; font-size:13px; color:#5d6f88; line-height:1.45; }
+  .xe { font-size:12.5px; color:#8a98ad; margin:14px 0 6px; border-top:1px dashed #e3e8f0; padding-top:12px; }
+  .xs { font-size:15.5px; font-weight:600; line-height:1.45; margin-bottom:8px; }
+  .xs .g { color:var(--green); font-weight:800; }
+  .xs .k { font-size:12.5px; color:#8a98ad; font-weight:400; }
+
+  .uiwho { font-size:11.5px; color:#35506f; margin:10px 2px 0; line-height:1.45; }
+  .uiwho b { color:#2f3e52; }
+
+  /* 완료 */
+  .intro { text-align:center; padding:4px 0; }
+  .intro .f { font-size:22px; font-weight:800; color:var(--green); margin:6px 0 4px; }
+  .intro .m { font-size:14.5px; color:#5d6f88; }
+  .sec { text-align:left; margin-top:16px; }
+  .sec .t { font-size:12.5px; font-weight:800; color:#8a98ad; margin-bottom:6px; }
+  .sec .d { font-size:13.5px; color:#5d6f88; background:#f4f6fa; border-radius:10px; padding:8px 11px; line-height:1.45; }
+  .miss { padding:8px 10px; border-radius:10px; background:#fff8f3; font-size:14.5px; font-weight:600; line-height:1.55; margin-bottom:6px; }
+  .miss .no { color:#b5541c; text-decoration:line-through; text-decoration-color:#e0874f; }
+  .miss .st2 { font-size:11.5px; color:#a6b3c4; margin-left:4px; }
+
+  /* 단계표 — 이 유닛이 단계마다 실제로 쓰는 문장 */
+  .table { background:#fff; border-radius:16px; padding:10px 12px; margin-top:16px; box-shadow:0 4px 12px rgba(30,60,110,.1); }
   .table summary { cursor:pointer; font-size:13px; font-weight:800; color:#3a6bb0; list-style:none; }
   .table summary::-webkit-details-marker { display:none; }
   .table summary::after { content:' ▾'; color:#9aa8bc; }
   .table[open] summary::after { content:' ▴'; }
   .st { width:100%; border-collapse:collapse; font-size:12px; margin-top:8px; }
   .st th { text-align:left; color:#8a98ad; font-weight:800; padding:4px 3px; border-bottom:1px solid #eef2f8; }
-  .st td { padding:5px 3px; border-bottom:1px solid #f2f5fa; vertical-align:top; }
-  .st tr.cur td { background:#eef4fd; font-weight:800; }
+  .st td { padding:6px 3px; border-bottom:1px solid #f2f5fa; vertical-align:top; line-height:1.45; }
+  .st td .g { color:#1f7a49; font-weight:800; }
+  .st td .ui { display:block; color:#8a98ad; font-size:11px; }
+  .st td .ui.n { color:#c4632c; }
+  .st tr.cur td { background:#eef4fd; }
   .st tr.cur td:first-child { box-shadow:inset 3px 0 0 #4b83d6; }
   .st .mk { font-weight:800; } .st .o { color:#2e9e57; } .st .x { color:#c46a2c; }
   .st .tg { display:inline-block; font-size:10.5px; font-weight:800; border-radius:6px; padding:0 5px; }
   .tg.b { background:#e3edfb; color:#3a6bb0; } .tg.r { background:#fdeadf; color:#c4632c; }
   .rules { font-size:11.5px; color:#6b7c93; line-height:1.55; margin:8px 0 2px; }
   .rules b { color:#3d5778; }
-
-  .top { display:flex; align-items:center; gap:8px; margin:0 2px 14px; }
-  .bar { flex:1; height:8px; background:rgba(255,255,255,.55); border-radius:6px; overflow:hidden; }
-  .bar i { display:block; height:100%; background:#6f9fe6; border-radius:6px; transition:width .3s; }
-  .top .n { font-size:12px; font-weight:800; color:#fff; }
-
-  .card { position:relative; background:#fff; border-radius:22px; box-shadow:0 6px 18px rgba(30,60,110,.13); padding:22px 18px 18px; min-height:330px; }
-  .tag { position:absolute; top:-12px; left:16px; font-size:12px; font-weight:800; border-radius:11px 11px 11px 3px; padding:3px 11px; }
-  .tag.b { background:#cfe0f5; color:#3a6bb0; } .tag.r { background:#fbd9c5; color:#b5541c; }
-  .stage { font-size:12.5px; font-weight:800; color:#8a98ad; margin-bottom:4px; }
-  .ask { font-size:18px; font-weight:800; color:#2f3e52; margin-bottom:12px; }
-  .kr { font-size:19px; font-weight:700; color:#33465c; line-height:1.5; margin-bottom:6px; }
-  .kr.sm { font-size:15px; color:#5d6f88; }
-  .tgt { color:var(--green); font-weight:800; }
-  .spk { border:none; background:#eef4fd; color:#3a6bb0; border-radius:20px; padding:5px 11px; font-size:12.5px; font-weight:800; cursor:pointer; margin-bottom:6px; }
-
-  /* 예시 말풍선 — 듀오링고 '같은 패턴으로 완성하세요'의 위쪽 문장 */
-  .model { display:flex; gap:9px; align-items:flex-start; margin:2px 0 16px; }
-  .model .av { flex:0 0 38px; height:38px; border-radius:50%; background:#e3edfb; color:#3a6bb0; font-weight:800; display:flex; align-items:center; justify-content:center; font-size:14px; }
-  .model .bub { flex:1; border:1.5px solid #dbe6f5; border-radius:4px 16px 16px 16px; padding:9px 12px; }
-  .model .en { font-size:17px; font-weight:700; line-height:1.5; }
-  .model .en .g { color:#1f7a49; border-bottom:2px dotted #2e9e57; }
-  .model .k { font-size:13px; color:#8a98ad; margin-top:2px; }
-  .model .sp { border:none; background:none; padding:0 4px 0 0; cursor:pointer; font-size:15px; }
-
-  /* 문장 위 빈칸 */
-  .sline { font-size:18.5px; font-weight:700; line-height:2.3; margin:6px 0 16px; }
-  .slot { display:inline-block; min-width:54px; height:36px; vertical-align:middle; border:1.5px dashed #7aa3dc; border-radius:9px; background:#f3f8ff; margin:0 2px;
-    font-size:16.5px; font-weight:800; color:#2f3e52; line-height:33px; text-align:center; padding:0 9px; cursor:pointer; }
-  .slot.on { border-style:solid; border-color:#d3e0f2; background:#fff; }
-  .slot.ok { border-style:solid; border-color:#a9dec2; background:#dcf6e6; color:#1f7a49; }
-  .slot.bad { border-style:solid; border-color:#f0c4a8; background:#fdeee6; color:#b5541c; }
-
-  /* 짚기 */
-  .wline { line-height:2.3; font-size:18px; }
-  .wk { font:inherit; font-size:17.5px; font-weight:700; color:#2f3e52; padding:3px 9px; border:1px solid #dbe6f5; background:#fff; border-radius:10px; box-shadow:0 2px 0 #e7eef8; cursor:pointer; margin:2px 1px; }
-  .wk:active { transform:translateY(2px); box-shadow:none; }
-  .wk.ok { background:#dcf6e6; color:#1f7a49; border-color:#a9dec2; }
-  .wk.miss { color:#aab7c8; border-color:#e6eaf0; box-shadow:none; text-decoration:underline; text-decoration-color:#e3c9b0; }
-  .wk.plain { border-color:transparent; box-shadow:none; background:none; padding:3px 1px; cursor:default; }
-  .note { font-size:13.5px; color:#3a6bb0; background:#eef4fd; border-radius:10px; padding:7px 10px; margin:10px 0 0; line-height:1.45; }
-
-  /* 문장 구성 */
-  .fill { display:flex; flex-wrap:wrap; align-items:center; gap:7px 5px; min-height:56px; padding:10px 0; border-bottom:2px solid #e2e9f3; margin:10px 0 14px; }
-  .bank { display:flex; flex-wrap:wrap; gap:7px; }
-  .w { font:inherit; font-size:16.5px; font-weight:700; color:#2f3e52; padding:8px 12px; border:1px solid #d3e0f2; background:#fff;
-    border-radius:11px; box-shadow:0 2px 0 #e1e9f5; cursor:pointer; }
-  .w:active { transform:translateY(2px); box-shadow:none; }
-  .w.used { background:#e3e9f2; border-color:#dbe2ee; color:transparent; box-shadow:none; pointer-events:none; }
-  .w.g { background:#dcf6e6; color:#1f7a49; border-color:#a9dec2; }
-  .w.bad { background:#fdeee6; color:#b5541c; border-color:#f0c4a8; }
-  .punct { margin-left:-3px; font-size:18px; font-weight:700; }
-
-  .sent { font-size:19px; font-weight:700; line-height:2; margin:10px 0 14px; }
-  .inp { font:inherit; font-size:18px; font-weight:800; color:#3a6bb0; border:none; border-bottom:2.5px solid #7aa3dc; background:#f3f8ff; border-radius:6px 6px 0 0; padding:1px 6px; outline:none; text-align:center; }
-  .base { font-size:14px; font-weight:700; color:#8a98ad; margin-left:2px; }
-  .lad { border:none; border-radius:20px; padding:7px 13px; font-size:12.5px; font-weight:800; cursor:pointer; background:#fff; color:#6b7c93; box-shadow:0 1px 4px rgba(30,60,110,.12); margin-top:12px; }
-
-  .res { margin-top:16px; border-radius:16px; padding:12px 14px; animation:up .25s ease both; }
-  .res.ok { background:#edf9f1; } .res.no { background:#fdf3ec; }
-  .res .h { font-size:15px; font-weight:800; margin-bottom:4px; }
-  .res.ok .h { color:#1f7a49; } .res.no .h { color:#b5541c; }
-  .res .a { font-size:15.5px; font-weight:700; color:#33465c; line-height:1.55; }
-  .res .a .g, .miss .yes .g { color:#1f7a49; background:#dcf6e6; border-radius:5px; padding:0 4px; }
-  .res .why { font-size:13.5px; color:#8a5a2e; margin-top:5px; font-weight:700; }
-  @keyframes up { from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;} }
-  .btn { display:block; width:100%; border:none; border-radius:15px; padding:14px 8px; font-size:15.5px; font-weight:800; cursor:pointer; margin-top:16px;
-    background:linear-gradient(#8b7cf0,#6f5bf0); color:#fff; }
-  .btn:disabled { background:#d6dce6; color:#fff; cursor:default; }
-
-  .intro { text-align:center; padding-top:20px; }
-  .intro .f { font-size:24px; font-weight:800; color:#1f7a49; margin:10px 0 6px; }
-  .intro .m { font-size:15px; color:#5d6f88; }
-  .intro .d { margin-top:0; font-size:13.5px; color:#3a6bb0; background:#eef4fd; border-radius:12px; padding:9px 12px; text-align:left; line-height:1.5; }
-  .src { margin-top:12px; text-align:right; font-size:11px; color:#a6b3c4; }
-  .sec { text-align:left; margin-top:18px; }
-  .sec .t { font-size:12.5px; font-weight:800; color:#8a98ad; margin-bottom:6px; }
-  .miss { padding:8px 0; border-bottom:1px dashed #e7edf5; font-size:14.5px; font-weight:700; line-height:1.55; }
-  .miss .no { color:#b5541c; text-decoration:line-through; text-decoration-color:#e0874f; }
-  .miss .st2 { font-size:11.5px; color:#a6b3c4; margin-left:4px; }
-
-  /* 섹션 탭 — 패턴화 가능 / 불가는 학습 방식이 다르다 */
-  .tabs { display:flex; gap:6px; margin:0 0 10px; }
-  .tabs button { flex:1; border:none; border-radius:13px; padding:10px 8px; font-size:14px; font-weight:800; cursor:pointer; background:rgba(255,255,255,.45); color:#35506f; }
-  .tabs button.on { background:#fff; color:#2f3e52; box-shadow:0 3px 10px rgba(30,60,110,.12); }
-  .tabs .c { display:block; font-size:11.5px; font-weight:700; color:#8a98ad; margin-top:2px; }
-  /* 찾기 두 줄 */
-  .fl { padding:10px 0; border-bottom:1px dashed #e7edf5; }
-  .fl:last-of-type { border-bottom:none; }
-  /* 찾은 뒤 펼쳐지는 규칙 */
-  .rule { margin-top:12px; background:#f6f9fd; border-radius:12px; padding:10px 12px; }
-  .rule .f { font-size:16px; font-weight:800; color:#1f7a49; }
-  .rule .p { font-size:15px; font-weight:700; color:#33465c; margin-top:4px; }
-  .rule .p b { color:#1f7a49; }
-  .rule .d { font-size:13px; color:#5d6f88; margin-top:4px; line-height:1.45; }
-  .w.trapx { background:#fdeee6; color:#b5541c; border-color:#f0c4a8; }
 </style>
 </head>
 <body>
 <div class="app">
   <h1>표현 학습 — 패턴화 가능 / 불가 두 섹션</h1>
   <div class="tabs" id="tabs"></div>
+  <div class="seg" id="uiSeg"><button data-u="new">제안안 · 새 UI</button><button data-u="now">대체안 · 지금 앱 UI만</button></div>
+  <div class="segd" id="uiDesc"></div>
   <div class="units" id="units"></div>
   <div class="find-u"><input id="q" type="search" placeholder="유닛 id나 카드 초록으로 찾기 (예: 10065, stop)" enterkeyhint="search"></div>
-  <div class="top"><div class="bar"><i id="barI"></i></div><span class="n" id="barN"></span></div>
+  <div class="top"><span class="n">‹</span><div class="bar"><i id="barI"></i></div><span class="n" id="barN"></span></div>
   <div id="stage"></div>
-  <details class="table" id="tbl" open style="margin-top:16px"><summary>단계표 — 지금 어디인지</summary><div id="tblBody"></div></details>
+  <details class="table" id="tbl" open><summary>단계표 — 이 유닛이 단계마다 쓰는 문장</summary><div id="tblBody"></div></details>
 </div>
 
 <script>
-/* 패턴화 가능과 불가는 학습 방식이 다르다 — 섹션을 나눈다.
-   가능: 1 보고 만들기(예시 S1 · 새 문장의 핵심([ ]) 자리) → 2 문장 배열 → 3 긴 문장(트랩과 함께).
-   불가: 1 찾기(두 문장에서 초록 뜻에 해당하는 영어를 누르면 바뀌는 방식이 펼쳐진다) → 2 규칙 적용(새 문장의 핵심 자리, 뱅크에 원형·다른 꼴)
-         → 3 문장 배열 → 4 긴 문장(트랩과 함께). 같은 덩어리가 반복되지 않으니 '보고 따라' 대신 바뀌는 방식을 먼저 짚게 한다.
-   단계는 정오답과 상관없이 차례로 간다. 한 번이라도 틀리면(헤매면) 마지막에 그 단계를 다른 문장으로 '한 번 더' — 한 유닛에 한 번뿐이다. */
+/* 패턴화 가능과 불가는 학습 방식이 다르다 — 섹션을 나눈다. 화면은 앱(통합모드 표현 첫 학습)의 카드 모양을 따른다.
+   UI안 둘을 나란히 둔다.
+   제안안(new) — 예시 말풍선 · 찾기(두 문장에서 낱말 누르기) · 규칙 패널을 새로 만든다.
+   대체안(now) — 앱에 이미 있는 것만 쓴다: 드래그 카드 「표현만」(정답 줄의 표현 자리만 탭해 채움, 상단 뜻 줄 + 정답 줄 아래 번역)
+                · 「문장 전체」 배열 · 결과 설명 카드. 예시는 상단 뜻 줄에, 규칙 공개는 결과 설명 카드가 맡는다.
+   단계는 정오답과 상관없이 차례로 간다. 한 번이라도 틀리면(헤매면) 마지막에 처음 틀린 단계를 문장1-2로 '한 번 더' — 유닛에 한 번.
+   head : 카드 상단 — trans(풀 문장의 번역, [ ] 초록) · mean(카드 뜻, 전체 초록) · example(S1 영어 예시) · ask(지시문)
+   alt  : 뱅크에 ALT 1개 · green : 뱅크의 [ ] 낱말을 초록으로(앱 첫 학습 색 — ALT가 있으면 답이 새서 끈다)
+   reveal : 끝나면 결과 설명 카드(형태 · 뜻 · 원형 → 꼴 · 설명 · 예문 2) */
+const LONG = { kind:'long', src:'hard', head:'trans', tag:'r', name:'긴 문장 + 트랩', ui:'문장 전체 카드 + 트랩 3개' };
 const FLOWS = {
-  pattern:{ label:'패턴화 가능', stages:{
-    '1':{ kind:'same',    src:'new',  tag:'b', name:'보고 만들기',    ask:'같은 패턴으로 완성하세요', noAgain:true },
-    '2':{ kind:'arrange', src:'s1',   tag:'b', name:'문장 배열',      ask:'' },
-    '3':{ kind:'long',    src:'hard', tag:'r', name:'긴 문장 + 트랩', ask:'' },
-  }, note:{
-    '1':'위에 S1(트리거 단어가 든 문장, 핵심 초록) · 아래 <b>문장2 / 기본</b>(같은 덩어리, 다른 내용)의 핵심 자리만 빈칸 — 뱅크의 낱말을 놓는다',
-    '2':'1단계에서 예시로 본 <b>S1</b>을 이번엔 예시 없이 한국어만 보고 통째로 배열 — 트리거 단어와 표현을 한 문장으로 굳힌다',
-    '3':'처음 보는 <b>어려운 / 문장3</b>을 통째로 배열 — 뱅크에 <b>트랩 3개</b>가 섞인다',
-  }},
-  rule:{ label:'패턴화 불가', stages:{
-    '1':{ kind:'find',    src:'new',  tag:'b', name:'찾기',           ask:'초록 뜻에 해당하는 영어를 두 문장에서 눌러 보세요' },
-    '2':{ kind:'same',    src:'new',  tag:'b', name:'규칙 적용',      ask:'같은 규칙으로 완성하세요' },
-    '3':{ kind:'arrange', src:'s1',   tag:'r', name:'문장 배열',      ask:'' },
-    '4':{ kind:'long',    src:'hard', tag:'r', name:'긴 문장 + 트랩', ask:'' },
-  }, note:{
-    '1':'<b>S1 + 기본</b>(핵심 낱말이 다른 것) — 한국어 초록에 해당하는 영어를 누른다. 다 누르면 <b>바뀌는 방식</b>(open → open<b>ed</b> · cry → cr<b>ied</b>)과 카드 설명이 펼쳐진다',
-    '2':'위에 찾은 두 문장 · 아래 <b>다른 기본 문장</b>의 핵심 자리만 빈칸 — 뱅크에 원형 · 다른 꼴 · 다른 쪽이 하나 더',
-    '3':'<b>S1</b>을 한국어만 보고 통째로 배열 — 초록 없음',
-    '4':'처음 보는 <b>어려운</b> 문장을 통째로 배열 — 뱅크에 <b>트랩 3개</b>가 섞인다',
-  }},
+  new:{
+    pattern:{
+      '1':{ kind:'fill', src:'new', head:'trans', models:'s1', tag:'b', name:'보고 만들기', noAgain:true, ui:'새 UI — 예시 말풍선(S1) + 빈칸', newUi:true },
+      '2':{ kind:'arrange', src:'s1', head:'trans', tag:'b', name:'문장 배열', ui:'문장 전체 카드' },
+      '3':LONG },
+    rule:{
+      '1':{ kind:'find', src:'new', head:'ask', tag:'b', name:'찾기', ask:'초록 뜻에 해당하는 영어를 두 문장에서 눌러 보세요', ui:'새 UI — 두 문장에서 낱말 누르기 + 규칙 패널', newUi:true },
+      '2':{ kind:'fill', src:'new', head:'trans', models:'found', alt:true, tag:'b', name:'규칙 적용', ui:'새 UI — 예시 말풍선 2개 + 빈칸 + ALT', newUi:true },
+      '3':{ kind:'arrange', src:'s1', head:'trans', alt:true, tag:'r', name:'문장 배열', ui:'문장 전체 카드 + ALT' },
+      '4':LONG },
+  },
+  now:{
+    pattern:{
+      '1':{ kind:'fill', src:'new', head:'example', green:true, tag:'b', name:'보고 만들기', noAgain:true, ui:'표현만 카드 — 상단 뜻 줄에 S1 예시' },
+      '2':{ kind:'arrange', src:'s1', head:'trans', green:true, reveal:true, tag:'b', name:'문장 배열', ui:'문장 전체 카드 → 결과 설명 카드' },
+      '3':LONG },
+    rule:{
+      '1':{ kind:'fill', src:'s1', head:'mean', alt:true, tag:'b', name:'표현 넣기', ui:'표현만 카드 + ALT' },
+      '2':{ kind:'arrange', src:'s1', head:'trans', alt:true, reveal:true, tag:'b', name:'문장 배열', ui:'문장 전체 카드 + ALT → 결과 설명 카드(규칙 공개)' },
+      '3':{ kind:'fill', src:'new', head:'example', alt:true, tag:'r', name:'규칙 적용', ui:'표현만 카드 + ALT — 상단 뜻 줄에 S1 예시' },
+      '4':LONG },
+  },
 };
+const UI_DESC = {
+  new:'예시 말풍선 · 찾기(두 문장에서 낱말 누르기) · 규칙 패널을 <b>새로 만든다</b>.',
+  now:'앱에 있는 드래그 카드(<b>표현만 · 문장 전체</b>)와 <b>결과 설명 카드</b>만 쓴다 — 예시는 상단 뜻 줄에, 규칙 공개는 결과 설명 카드에. 불가는 S1에서 먼저 익히고 새 문장에 적용한다.',
+};
+const SRC_LABEL = { s1:'S1', new:'첫 기본 / 문장2', hard:'어려운 중 가장 긴 것 / 문장3', variant:'문장1-2' };
 const CHOICE = {
   '10031':['Maybe','Actually','Unfortunately'], '10054':['once','twice'], '10088':['myself','yourself','himself','herself'],
   '10328':['on','off'], '10379':['Frankly','Generally','Strictly'], '10383':['when','while','before','until','since'],
@@ -197,8 +245,8 @@ const TRAP_BUCKETS = [
 const NEAR = [['can', 'could'], ['will', 'would'], ['may', 'might'], ["can't", "couldn't"], ["won't", "wouldn't"]];
 let CONTENT_POOL = [];
 
-let U = [], byId = {}, sec = 'pattern', uid = '10033', run = null;
-try { const s = JSON.parse(localStorage.getItem('vedrill') || 'null'); if (s) { uid = s.uid; sec = s.sec || sec; } } catch (e) {}
+let U = [], byId = {}, sec = 'pattern', uid = '10033', ui = 'new', run = null;
+try { const s = JSON.parse(localStorage.getItem('vedrill') || 'null'); if (s) { uid = s.uid; sec = s.sec || sec; ui = s.ui || ui; } } catch (e) {}
 
 const $ = s => document.querySelector(s);
 const $$ = (s, el = document) => [...el.querySelectorAll(s)];
@@ -210,7 +258,7 @@ const tileText = w => /^I('|$)/.test(w) ? w : w.toLowerCase();
 const shuffle = a => { const b = a.slice(); for (let n = 0; n < 30; n++) { for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [b[i], b[j]] = [b[j], b[i]]; } if (a.length < 2 || b.some((x, k) => x !== a[k])) break; } return b; };
 const unit = () => byId[uid];
 const secOf = u => u.pat === '가능' ? 'pattern' : 'rule';
-const STAGES = () => FLOWS[secOf(unit())].stages;
+const STAGES = () => FLOWS[ui][secOf(unit())];
 const stageOf = id => id === 'again' ? run.again : STAGES()[id];
 function say(text) { try { const v = new SpeechSynthesisUtterance(plain(text)); v.lang = 'en-US'; v.rate = .9; speechSynthesis.cancel(); speechSynthesis.speak(v); } catch (e) {} }
 function greenRuns(ws) {
@@ -268,30 +316,40 @@ function trapsOf(u, i) {
   return out.slice(0, 3);
 }
 
-/* 문장 고르기 — 단계마다 쓸 문장이 정해져 있다(src).
-   new  = 문장2 / 기본(S1 과 내용이 다른 문장 — 핵심이 S1 과 다른 것, 규칙 적용은 ALT 가 있는 것 먼저)
-   s1   = S1(트리거 단어가 든 문장 — 앞 단계에서 본 것을 예시 없이 다시 만든다)
-   hard = 어려운 중 가장 긴 것 / 문장3(5문장 유닛)
-   variant = 문장1-2 · 1-3(헤맸을 때 '한 번 더' — S1 과 주어·낱말 하나만 달라 같은 판단만 한 번 더) */
-function pick(src) {
-  const u = unit(), all = u.s.map((_, i) => i).filter(i => i > 0 && brIdx(u.s[i]).length);
-  const free = a => a.filter(i => !run.used.has(i)), tag = i => u.s[i].tag, len = i => u.s[i].t.length;
+/* 문장 고르기 — 단계마다 쓸 문장 칸이 정해져 있다(src). 한 유닛 안에서 이미 쓴 문장은 다시 쓰지 않는다(S1 만 예외).
+   s1      = S1(트리거 단어가 든 대표 문장)
+   new     = 첫 기본 / 문장2 — 그 문장의 [ ] 낱말이 S1 과 똑같으면 다음 기본
+   hard    = 어려운 중 낱말 수가 가장 많은 것 / 문장3(5문장 유닛)
+   variant = 문장1-2 → 1-3(헤맸을 때 '한 번 더' — S1 과 주어·낱말 하나만 달라 같은 판단만 한 번 더) */
+function pickIn(u, src, used) {
+  const all = u.s.map((_, i) => i).filter(i => i > 0 && brIdx(u.s[i]).length);
+  const free = a => a.filter(i => !used.has(i)), tag = i => u.s[i].tag, len = i => u.s[i].t.length;
   const vari = all.filter(i => tag(i).startsWith('문장1-'));
   const basic = all.filter(i => tag(i) === '기본' || tag(i) === '문장2');
   const hard = all.filter(i => tag(i) === '어려운' || tag(i) === '문장3');
-  const rest = () => free(all.filter(i => !vari.includes(i)))[0] ?? free(vari)[0] ?? all.find(i => i !== run.last) ?? all[0];
+  const rest = () => free(all.filter(i => !vari.includes(i)))[0] ?? free(vari)[0] ?? all[0];
   if (src === 's1') return 0;
   if (src === 'variant') return free(vari)[0] ?? rest();
   if (src === 'hard') return free(hard).sort((a, b) => len(b) - len(a))[0] ?? rest();
-  const c = free(basic), diff = c.filter(i => brKey(u.s[i]) !== brKey(u.s[0])), pool = [...diff, ...c];
-  return pool.find(i => altOf(u, i)) ?? pool[0] ?? free(hard).sort((a, b) => len(a) - len(b))[0] ?? rest();
+  const c = free(basic);
+  return c.find(i => brKey(u.s[i]) !== brKey(u.s[0])) ?? c[0] ?? free(hard).sort((a, b) => len(a) - len(b))[0] ?? rest();
+}
+/* 유닛을 열 때 단계마다 쓸 문장을 미리 정한다 — 단계표가 그대로 보여 준다 */
+function planFor(u) {
+  const st = FLOWS[ui][secOf(u)], used = new Set([0]), plan = {};
+  for (const k of Object.keys(st)) { const i = pickIn(u, st[k].src, used); used.add(i); plan[k] = i; }
+  plan.again = pickIn(u, 'variant', used);
+  return plan;
 }
 
 const short = u => { const f = u.form.replace(/\s+/g, ' '); return f.length > 20 ? f.slice(0, 19) + '…' : f; };
+function save() { try { localStorage.setItem('vedrill', JSON.stringify({ uid, sec, ui })); } catch (e) {} }
 function header() {
-  const n = k => U.filter(u => secOf(u) === k).length;
-  $('#tabs').innerHTML = Object.entries(FLOWS).map(([k, f]) => `<button data-s="${k}" class="${k === sec ? 'on' : ''}">${f.label}<span class="c">${n(k)}유닛 · ${Object.keys(f.note).length}단계</span></button>`).join('');
+  const n = k => U.filter(u => secOf(u) === k).length, L = { pattern:'패턴화 가능', rule:'패턴화 불가' };
+  $('#tabs').innerHTML = ['pattern', 'rule'].map(k => `<button data-s="${k}" class="${k === sec ? 'on' : ''}">${L[k]}<span class="c">${n(k)}유닛 · ${Object.keys(FLOWS[ui][k]).length}단계</span></button>`).join('');
   $$('#tabs button').forEach(b => b.onclick = () => { if (b.dataset.s === sec) return; sec = b.dataset.s; open(FEATURED[sec].find(id => byId[id]) || U.find(u => secOf(u) === sec).id); });
+  $$('#uiSeg button').forEach(b => { b.classList.toggle('on', b.dataset.u === ui); b.onclick = () => { if (b.dataset.u === ui) return; ui = b.dataset.u; open(uid); }; });
+  $('#uiDesc').innerHTML = UI_DESC[ui];
   const chips = FEATURED[sec].filter(id => byId[id]).map(id => `<button class="unit${id === uid ? ' on' : ''}" data-id="${id}">${esc(short(byId[id]))}</button>`);
   if (!FEATURED[sec].includes(uid)) chips.push(`<button class="unit on" data-id="${uid}">${esc(short(unit()))}</button>`);
   chips.push(`<button class="unit rand" id="rand">다른 유닛 ↻</button>`);
@@ -300,44 +358,59 @@ function header() {
   $('#rand').onclick = () => { const pool = U.filter(x => x.id !== uid && secOf(x) === sec); open(pool[Math.floor(Math.random() * pool.length)].id); };
 }
 function drawTable() {
-  const marks = {}; run && run.log.forEach(l => marks[l.stage] = l.ok ? '<span class="mk o">O</span>' : '<span class="mk x">X</span>');
-  const f = FLOWS[sec], st = f.stages;
-  const row = (id, tag, name, which) => `<tr class="${run && run.phase === 'quiz' && run.stage === id ? 'cur' : ''}"><td>${id === 'again' ? '+' : id} <span class="tg ${tag}">${tag === 'b' ? '기초' : '실전'}</span></td><td>${name}</td><td style="color:#8a98ad">${which}</td><td>${marks[id] || ''}</td></tr>`;
-  $('#tblBody').innerHTML = `<table class="st"><tr><th>단계</th><th>퀴즈</th><th>문장</th><th></th></tr>`
-    + Object.keys(st).map(id => { const s = st[id];
-      return row(id, s.tag, s.name, s.kind === 'find' ? 'S1 + 기본' : { new:sec === 'rule' ? '다른 기본' : '문장2 / 기본', s1:'S1', hard:'어려운 / 문장3' }[s.src]); }).join('')
-    + row('again', 'r', run && run.again ? `한 번 더 — ${run.again.base}` : '한 번 더', '헤맸을 때만 · 문장1-2 / 1-3')
-    + `</table><div class="rules"><b>규칙</b> 단계는 정오답과 상관없이 차례로 간다. 한 번이라도 틀리면 마지막에 <b>처음 틀린 단계를 다른 문장으로 한 번 더</b> — 유닛에 한 번뿐${sec === 'pattern' ? ', 보고 만들기를 틀린 것은 세지 않는다' : ''}.<br>`
-    + Object.entries(f.note).map(([k, v]) => `<b>${k}단계</b> ${v}`).join('<br>') + `<br><b>완료</b> 틀린 것과 설명이 있을 때만</div>`;
+  const u = unit(), st = STAGES(), marks = {};
+  run.log.forEach(l => marks[l.stage] = l.ok ? '<span class="mk o">O</span>' : '<span class="mk x">X</span>');
+  const sent = i => `${esc(u.s[i].tag)} · ${sentHtml(u.s[i])}`;
+  const row = (id, s, which) => `<tr class="${run.phase === 'quiz' && run.stage === id ? 'cur' : ''}"><td>${id === 'again' ? '+' : id} <span class="tg ${s.tag}">${s.tag === 'b' ? '기초' : '실전'}</span></td><td><b>${esc(s.name)}</b><span class="ui${s.newUi ? ' n' : ''}">${esc(s.ui)}</span></td><td>${which}</td><td>${marks[id] || ''}</td></tr>`;
+  const rows = Object.keys(st).map(id => { const s = st[id];
+    const which = s.kind === 'find' ? `${sent(0)}<br>${sent(run.plan[id])}` : s.models === 's1' ? `예시 ${sent(0)}<br>풀기 ${sent(run.plan[id])}` : s.head === 'example' ? `예시(상단) ${sent(0)}<br>풀기 ${sent(run.plan[id])}` : sent(run.plan[id]);
+    return row(id, s, which); });
+  const again = run.again || { tag:'r', name:'한 번 더', ui:'헤맸을 때만 — 처음 틀린 단계의 화면을 다시' };
+  rows.push(row('again', again, sent(run.plan.again)));
+  $('#tblBody').innerHTML = `<table class="st"><tr><th>단계</th><th>퀴즈 · 화면</th><th>문장</th><th></th></tr>${rows.join('')}</table>
+    <div class="rules"><b>규칙</b> 단계는 정오답과 상관없이 차례로 간다. 한 번이라도 틀리면 마지막에 <b>처음 틀린 단계를 문장1-2로 한 번 더</b> — 유닛에 한 번${sec === 'pattern' ? ', 보고 만들기를 틀린 것은 세지 않는다' : ''}. 주황 글씨 화면은 앱에 아직 없는 새 UI.<br>
+    <b>문장</b> S1 = 트리거 어휘가 든 대표 문장 · 첫 기본/문장2 = S1 다음의 독립 문장(그 [ ] 낱말이 S1 과 똑같으면 다음 기본) · 긴 문장 = 어려운 중 낱말이 가장 많은 것(5문장 유닛은 문장3) · 한 번 더 = 문장1-2</div>`;
 }
 function drawBar() {
-  const total = Object.keys(FLOWS[sec].note).length;
+  const total = Object.keys(STAGES()).length;
   const n = !run ? 0 : run.phase === 'done' || run.stage === 'again' ? total : +run.stage - 1;
   $('#barI').style.width = `${n / total * 100}%`;
   $('#barN').textContent = !run ? '' : run.phase === 'done' ? '완료' : run.stage === 'again' ? '한 번 더' : `${run.stage} / ${total}`;
 }
 function refresh() { header(); drawTable(); drawBar(); }
 function open(id) {
-  uid = id; sec = secOf(unit());
-  try { localStorage.setItem('vedrill', JSON.stringify({ uid, sec })); } catch (e) {}
-  run = { stage:null, used:new Set([0]), log:[], miss:[], last:null, found:null, again:null, phase:'quiz' };
+  uid = id; sec = secOf(unit()); save();
+  run = { stage:null, plan:planFor(unit()), log:[], miss:[], found:null, again:null, phase:'quiz' };
   goStage('1');
 }
 function goStage(id) {
   if (!id) return finish();
   run.stage = id; refresh();
-  const s = stageOf(id), i = pick(s.src);
-  run.used.add(i); run.last = i;
-  ({ find:quizFind, same:quizSame, arrange:quizArrange, long:quizLong })[s.kind](s, i);
+  const s = stageOf(id), i = id === 'again' ? run.plan.again : run.plan[id];
+  ({ find:quizFind, fill:quizFill, arrange:quizArrange, long:quizLong })[s.kind](s, i);
+  window.scrollTo({ top:0 });
 }
-function shell(s, body) {
+
+/* 카드 상단 */
+function headHtml(s, x) {
   const u = unit();
-  $('#stage').innerHTML = `<div class="card"><div class="tag ${s.tag}">${s.tag === 'b' ? '기초' : '실전'}</div>
-    <div class="stage">${run.stage === 'again' ? '한 번 더' : run.stage} · ${s.name}</div>${s.ask ? `<div class="ask">${s.ask}</div>` : ''}${body}<div id="res"></div><div id="bb"></div>
-    <div class="src">유닛 ${esc(u.id)} · ${esc(u.form)}</div></div>`;
+  if (s.head === 'mean') return `<div class="hk"><span class="tgt">${esc(u.mean)}</span></div>`;
+  if (s.head === 'ask') return `<div class="hk">${esc(s.ask)}</div>`;
+  if (s.head === 'example') { const m = u.s[0];
+    return `<div class="hx"><span class="chip">예시</span><button class="sp" data-m="0">🔊</button></div><div class="he">${sentHtml(m)}</div><div class="hs">${esc(plain(m.kr))}</div>`; }
+  return `<div class="hk">${krHtml(x.kr)}</div>`;
+}
+function shell(s, x, body) {
+  const u = unit();
+  $('#stage').innerHTML = `<div class="cardwrap"><div class="ctab">표현 · ${run.stage === 'again' ? '한 번 더' : run.stage} ${esc(s.name)}</div><div class="cnew">NEW</div>
+    <div class="acard"><div class="ahead">${headHtml(s, x)}</div><div class="abody">${s.newUi ? '<div class="newui">새 UI</div>' : ''}${body}<div id="tip"></div></div></div></div>
+    <div class="abot"><div class="bank" id="bank"></div><div id="res"></div><div class="abtns" id="btns"></div></div>
+    <div id="xcard"></div>
+    <div class="uiwho"><b>${esc(s.ui)}</b> · 유닛 ${esc(u.id)} · ${esc(u.form)}</div>`;
+  $$('.sp[data-m]').forEach(b => b.onclick = () => say(u.s[+b.dataset.m].en));
 }
 /* 다음 단계 — 차례대로. 끝나면 처음 틀린 단계를 다른 문장으로 한 번 더(유닛에 한 번). 찾기를 헤맸으면 규칙 적용을 한 번 더.
-   보고 만들기(가능 1단계)는 틀려도 한 번 더 대상이 아니다 — 다시 풀 문장이 예시 S1 과 거의 같은 1-2 라 베끼기가 된다 */
+   보고 만들기(가능 1단계)는 틀려도 한 번 더 대상이 아니다 — 다시 풀 문장1-2가 예시 S1 과 거의 같아 베끼기가 된다 */
 function nextStage(ok) {
   if (!ok && !run.firstMiss && run.stage !== 'again' && !stageOf(run.stage).noAgain) run.firstMiss = run.stage;
   if (run.stage === 'again') return null;
@@ -348,39 +421,60 @@ function nextStage(ok) {
   run.again = { ...s, src:'variant', tag:'r', base:s.name, name:`한 번 더 — ${s.name}` };
   return 'again';
 }
-function report(ok, i, given, why = '', extra = '') {
+/* correct = 맞혔는가, ok = 한 번 더 판정(표현 보기 · 정답 보기를 썼으면 헤맨 것) */
+function report(correct, ok, i, given, why = '', extra = '') {
   const s = stageOf(run.stage), u = unit(), x = u.s[i];
   run.log.push({ stage:run.stage, ok });
-  if (!ok && given !== null) run.miss.push({ stage:run.stage, name:s.name, i, given, why });
+  if (!correct && given !== null) run.miss.push({ stage:run.stage, name:s.name, i, given, why });
   const next = nextStage(ok);
-  $('#res').innerHTML = `<div class="res ${ok ? 'ok' : 'no'}"><div class="h">${ok ? '정답!' : '아쉬워요'}</div>${given === null ? '' : `<div class="a">${sentHtml(x)}</div>`}${!ok && why ? `<div class="why">${esc(why)}</div>` : ''}</div>${extra}`;
-  $('#bb').innerHTML = `<button class="btn" id="nx">${next ? '다음' : '완료'}</button>`;
+  $('#bank').style.display = 'none';
+  $('#res').innerHTML = `<div class="res ${correct ? 'ok' : 'no'}"><div class="h">${correct ? '정답!' : '아쉬워요'}</div>${s.kind === 'find' ? '' : `<div class="a">${sentHtml(x)}</div>`}${!correct && why ? `<div class="why">${esc(why)}</div>` : ''}</div>${extra}`;
+  $('#btns').innerHTML = `<button class="ok" id="nx">${next ? '다음' : '완료'}</button>`;
   $('#nx').onclick = () => goStage(next);
-  if (given !== null) say(x.en);
+  if (s.reveal) $('#xcard').innerHTML = xcardHtml(u);
+  if (s.kind !== 'find') say(x.en);
   drawTable();
 }
-
-/* 불가 1 찾기 — S1 과 다른 문장 하나에서 한국어 초록에 해당하는 영어를 누른다. 같은 낱말이 [ ] 밖에도 있으면 [ ] 쪽으로 친다.
-   다 누르면 바뀌는 방식이 펼쳐진다 — 형태는 원형 → 꼴(바뀐 끝 초록), 그 밖은 카드 초록과 설명 */
-function ruleHtml(u, rows) {
+/* 형태 유닛의 원형 → 꼴(바뀐 끝 굵게) */
+function pairsOf(u, rows) {
   const info = u.plan && u.plan.info;
-  const pairs = u.kind === 'form' && info ? rows.map(i => info[i]).filter(v => v && !v.peri && norm(v.base) !== norm(v.w)).map(v => {
+  if (u.kind !== 'form' || !info) return [];
+  const seen = new Set();
+  return rows.map(i => info[i]).filter(v => v && !v.peri && norm(v.base) !== norm(v.w) && !seen.has(norm(v.w)) && seen.add(norm(v.w))).map(v => {
     let k = 0; while (k < v.base.length && k < v.w.length && v.base[k].toLowerCase() === v.w[k].toLowerCase()) k++;
-    return `${esc(v.base)} → ${esc(v.w.slice(0, k))}<b>${esc(v.w.slice(k))}</b>`; }) : [];
-  return `<div class="rule"><div class="f">${esc(u.form)}</div>${pairs.length ? `<div class="p">${pairs.join(' &nbsp;·&nbsp; ')}</div>` : ''}${u.desc ? `<div class="d">${esc(u.desc)}</div>` : ''}</div>`;
+    return `${esc(v.base)} → ${esc(v.w.slice(0, k))}<b>${esc(v.w.slice(k))}</b>`; });
 }
+function ruleHtml(u, rows) {
+  const p = pairsOf(u, rows);
+  return `<div class="rule"><div class="f">${esc(u.form)}</div>${p.length ? `<div class="p">${p.join(' &nbsp;·&nbsp; ')}</div>` : ''}${u.desc ? `<div class="d">${esc(u.desc)}</div>` : ''}</div>`;
+}
+/* 결과 설명 카드(앱의 SummaryResult) — 형태 · 뜻 · (형태 유닛) 원형 → 꼴 · 설명 · 예문 최대 2(이 유닛 단계에서 안 쓰는 문장) */
+function xcardHtml(u) {
+  const usedIdx = new Set([0, 1, 2, ...Object.values(run.plan)]);
+  const ex = u.s.map((x, i) => i).filter(i => !usedIdx.has(i) && brIdx(u.s[i]).length).slice(0, 2);
+  const p = pairsOf(u, [0, run.plan['1'], ...ex]);
+  return `<div class="xcard"><div class="xtab">학습 정보</div><div class="xt">💡 새로운 표현을 배웠어요</div>
+    <div class="xf">${esc(u.form)}</div><div class="xm">${esc(u.mean)}</div>${p.length ? `<div class="xp">${p.join(' &nbsp;·&nbsp; ')}</div>` : ''}
+    ${u.desc ? `<div class="xd">${esc(u.desc)}</div>` : ''}
+    ${ex.length ? `<div class="xe">ⓘ 단어만 바꿔서 이렇게도 말할 수 있어요</div>${ex.map(i => `<div class="xs">${sentHtml(u.s[i])}<div class="k">${esc(plain(u.s[i].kr))}</div></div>`).join('')}` : ''}</div>`;
+}
+const bubbleHtml = (m, n) => `<div class="model"><div class="av">${'AB'[n]}</div><div class="bub"><div class="en"><button class="sp" data-m="${unit().s.indexOf(m)}">🔊</button>${sentHtml(m)}</div><div class="k">${esc(plain(m.kr))}</div></div></div>`;
+
+/* 찾기(제안안 — 새 UI) — S1 과 기본 한 줄에서 한국어 초록에 해당하는 영어를 누른다. 같은 낱말이 [ ] 밖에도 있으면 [ ] 쪽으로 친다.
+   다 누르면 확인 없이 끝나고 바뀌는 방식(원형 → 꼴)과 카드 설명이 펼쳐진다 */
 function quizFind(s, i) {
   const u = unit(), rows = [0, i];
   run.found = rows;
-  shell(s, rows.map((r, n) => { const x = u.s[r];
-    return `<div class="fl"><div class="kr">${krHtml(x.kr)}</div><div class="wline">${x.t.map((t, j) => /[A-Za-z0-9]/.test(t[0]) ? `<button class="wk" data-r="${n}" data-j="${j}">${esc(t[0])}</button>` : `<span class="wk plain">${esc(t[0])}</span>`).join(' ')}<span class="punct">${esc(x.p)}</span></div></div>`; }).join('')
-    + `<div id="nt"></div><button class="lad" id="lad">정답 보기</button>`);
+  shell(s, u.s[i], rows.map((r, n) => { const x = u.s[r];
+    return `<div class="fl"><div class="kr">${krHtml(x.kr)}</div><div class="wline">${x.t.map((t, j) => /[A-Za-z0-9]/.test(t[0]) ? `<button class="w wk" data-r="${n}" data-j="${j}">${esc(t[0])}</button>` : `<span class="w wk plain">${esc(t[0])}</span>`).join('')}<span class="sw p">${esc(x.p)}</span></div></div>`; }).join('') + `<div id="nt"></div>`);
+  $('#bank').style.display = 'none';
+  $('#btns').innerHTML = `<button class="lb" id="lb">정답 보기</button>`;
   const br = rows.map(r => brIdx(u.s[r])), got = rows.map(() => new Set());
   let wrong = 0, fin = false;
   const left = () => br.reduce((a, b, n) => a + b.length - got[n].size, 0);
-  const done = shown => { fin = true; $('#lad').remove();
+  const done = shown => { fin = true;
     $$('.wk[data-j]').forEach(b => { b.classList.toggle('ok', br[+b.dataset.r].includes(+b.dataset.j)); b.classList.remove('miss'); });
-    $('#nt').innerHTML = ''; report(!wrong && !shown, i, null, '', ruleHtml(u, rows)); };
+    $('#nt').innerHTML = ''; report(!wrong && !shown, !wrong && !shown, i, null, '', ruleHtml(u, rows)); };
   $$('.wk[data-j]').forEach(b => b.onclick = () => {
     if (fin) return; const n = +b.dataset.r, j = +b.dataset.j, x = u.s[rows[n]];
     const hit = br[n].includes(j) ? j : br[n].find(k => !got[n].has(k) && norm(x.t[k][0]) === norm(x.t[j][0]));
@@ -389,77 +483,78 @@ function quizFind(s, i) {
     $('#nt').innerHTML = left() ? `<div class="note">${left()}낱말 더 있어요</div>` : '';
     if (!left()) done(false);
   });
-  $('#lad').onclick = () => { wrong++; done(true); };
+  $('#lb').onclick = () => { wrong++; done(true); };
 }
 
-/* 가능 1 보고 만들기 · 불가 2 규칙 적용 — 위 예시(가능: S1 · 불가: 찾기에서 본 두 문장) · 아래 새 문장의 핵심 자리가 빈칸. 뱅크 = 핵심 + ALT */
-function quizSame(s, i) {
-  const u = unit(), models = run.found || [0], x = u.s[i], br = brIdx(x), alt = altOf(u, i);
-  const tiles = shuffle([...br.map(j => x.t[j][0]), ...(alt ? [alt.w] : [])]);
-  shell(s, models.map((r, n) => { const m = u.s[r];
-    return `<div class="model"><div class="av">${'AB'[n]}</div><div class="bub"><div class="en"><button class="sp" data-m="${r}">🔊</button>${sentHtml(m)}</div><div class="k">${esc(plain(m.kr))}</div></div></div>`; }).join('')
-    + `<div class="kr sm">${krHtml(x.kr)}</div>
-    <div class="sline">${x.t.map((t, j) => br.includes(j) ? `<span class="slot" data-j="${j}"></span>` : esc(t[0])).join(' ')}${esc(x.p)}</div>
-    <div class="bank" id="bank">${tiles.map((w, k) => `<button class="w" data-k="${k}">${esc(tileText(w))}</button>`).join('')}</div>`);
-  $$('.sp').forEach(b => b.onclick = () => say(u.s[+b.dataset.m].en)); say(u.s[models[0]].en);
-  const put = {}; let fin = false;
-  $('#bb').innerHTML = `<button class="btn" id="ok" disabled>확인</button>`;
+/* 표현만 카드 — 정답 줄의 [ ] 자리만 빈칸(밑줄), 나머지 낱말은 그대로. 뱅크 = [ ] 낱말 (+ ALT).
+   예시: 제안안은 카드 안 말풍선(새 UI), 대체안은 상단 뜻 줄(S1 영어). 표현 보기 = 앱의 오답노트 팁 */
+function quizFill(s, i) {
+  const u = unit(), x = u.s[i], br = brIdx(x), alt = s.alt ? altOf(u, i) : null;
+  const models = s.models === 'found' ? (run.found || [0]) : s.models === 's1' ? [0] : [];
+  const line = `<div class="aline">${x.t.map((t, j) => br.includes(j) ? `<span class="ul" data-j="${j}"></span>` : `<span class="sw">${esc(t[0])}</span>`).join('')}<span class="sw p">${esc(x.p)}</span></div>`;
+  shell(s, x, models.map((r, n) => bubbleHtml(u.s[r], n)).join('') + line + (s.head !== 'trans' ? `<div class="atrans">${esc(plain(x.kr))}</div>` : ''));
+  const tiles = shuffle([...br.map(j => x.t[j][0]), ...(alt ? [alt.w] : [])]), green = s.green && !alt;
+  $('#bank').innerHTML = tiles.map((w, k) => `<button class="w${green ? ' g' : ''}" data-k="${k}">${esc(tileText(w))}</button>`).join('');
+  $('#btns').innerHTML = `<button class="lb" id="lb">표현 보기</button><button class="ok" id="ok" disabled>확인</button>`;
+  const put = {}; let fin = false, hinted = false;
   const draw = () => {
-    $$('.sline .slot').forEach(e => { const k = put[e.dataset.j]; e.textContent = k === undefined ? '' : tileText(tiles[k]); e.classList.toggle('on', k !== undefined); });
+    $$('.aline .ul').forEach(e => { const k = put[e.dataset.j]; e.innerHTML = k === undefined ? '' : `<span class="w up${green ? ' g' : ''}">${esc(tileText(tiles[k]))}</span>`; });
     $$('#bank .w').forEach(b => b.classList.toggle('used', Object.values(put).includes(+b.dataset.k)));
     $('#ok').disabled = br.some(j => put[j] === undefined);
   };
   $$('#bank .w').forEach(b => b.onclick = () => { if (fin) return; const j = br.find(j => put[j] === undefined); if (j === undefined) return; put[j] = +b.dataset.k; draw(); });
-  $$('.sline .slot').forEach(e => e.onclick = () => { if (fin) return; delete put[e.dataset.j]; draw(); });
+  $$('.aline .ul').forEach(e => e.onclick = () => { if (fin) return; delete put[e.dataset.j]; draw(); });
+  $('#lb').onclick = () => { hinted = true; const p = pairsOf(u, [0, i]);
+    $('#tip').innerHTML = `<div class="tipbox">💡 <b>${esc(u.form)}</b> · ${esc(u.mean)}${p.length ? `<br>${p.join(' · ')}` : ''}</div>`; };
   $('#ok').onclick = () => {
     fin = true;
-    const ok = br.every(j => norm(tiles[put[j]]) === norm(x.t[j][0]));
-    $$('.sline .slot').forEach(e => e.classList.add(norm(tiles[put[e.dataset.j]]) === norm(x.t[e.dataset.j][0]) ? 'ok' : 'bad'));
-    $('#bank').style.display = 'none';
+    const correct = br.every(j => norm(tiles[put[j]]) === norm(x.t[j][0]));
+    $$('.aline .ul').forEach(e => e.classList.add(norm(tiles[put[e.dataset.j]]) === norm(x.t[e.dataset.j][0]) ? 'ok' : 'bad'));
     const usedAlt = alt && br.some(j => norm(tiles[put[j]]) === norm(alt.w) && norm(x.t[j][0]) !== norm(alt.w));
-    report(ok, i, x.t.map((t, j) => br.includes(j) ? tiles[put[j]] : t[0]).join(' ') + x.p, usedAlt ? alt.why : '');
+    report(correct, correct && !hinted, i, x.t.map((t, j) => br.includes(j) ? tiles[put[j]] : t[0]).join(' ') + x.p, usedAlt ? alt.why : '');
   };
   draw();
 }
 
-/* 배열 — 한국어만 보고 통째로. 초록 없음. extra 는 뱅크에 섞이는 낱말(ALT · 트랩) */
+/* 문장 전체 카드 — 한국어(상단)만 보고 통째로. extra 는 뱅크에 섞이는 낱말(ALT · 트랩). 정답 보기 = 정답 공개(헤맨 것으로 친다) */
 function arrangeIn(s, i, extra) {
   const u = unit(), x = u.s[i], seq = x.t.map(t => t[0]);
-  shell(s, `<div class="kr">${krHtml(x.kr)}</div><div class="fill" id="fill"></div><div class="bank" id="bank"></div>`);
-  const items = [...seq.map(w => ({ w })), ...extra.map(w => ({ w, trap:true }))];
+  shell(s, x, `<div class="aline arr" id="fill"></div>`);
+  const green = s.green && !extra.length;
+  const items = [...x.t.map(t => ({ w:t[0], g:green && t[1] })), ...extra.map(w => ({ w, trap:true }))];
   const order = shuffle(items.map((_, k) => k)), placed = [];
   let fin = false;
-  const tile = (it, attr) => `<button class="w" ${attr}>${esc(tileText(it.w))}</button>`;
+  const tile = (it, attr, cls = '') => `<button class="w${it.g ? ' g' : ''}${cls}" ${attr}>${esc(tileText(it.w))}</button>`;
   $('#bank').innerHTML = order.map(k => tile(items[k], `data-k="${k}"`)).join('');
-  $('#bb').innerHTML = `<button class="btn" id="ok" disabled>확인</button>`;
+  $('#btns').innerHTML = `<button class="lb" id="lb">정답 보기</button><button class="ok" id="ok" disabled>확인</button>`;
   const draw = () => {
-    $('#fill').innerHTML = placed.map((k, j) => tile(items[k], `data-j="${j}"`)).join('') + (placed.length === seq.length && x.p ? `<span class="punct">${esc(x.p)}</span>` : '');
+    $('#fill').innerHTML = placed.map((k, j) => tile(items[k], `data-j="${j}"`, ' up')).join('') + '<span class="ul"></span>'.repeat(seq.length - placed.length) + (placed.length === seq.length && x.p ? `<span class="sw p">${esc(x.p)}</span>` : '');
     $$('#bank .w').forEach(b => b.classList.toggle('used', placed.includes(+b.dataset.k)));
     $$('#fill .w').forEach(b => b.onclick = () => { if (fin) return; placed.splice(+b.dataset.j, 1); draw(); });
     $('#ok').disabled = placed.length !== seq.length;
   };
   $$('#bank .w').forEach(b => b.onclick = () => { if (fin || placed.length >= seq.length) return; placed.push(+b.dataset.k); draw(); });
+  $('#lb').onclick = () => { fin = true; placed.splice(0, placed.length, ...seq.map((_, j) => j)); draw(); $$('#fill .w').forEach(b => b.classList.add('ok')); report(false, false, i, null); };
   $('#ok').onclick = () => {
     fin = true;
-    const ok = placed.every((k, j) => norm(items[k].w) === norm(seq[j]));
-    $$('#fill .w').forEach((b, j) => b.classList.add(norm(items[placed[j]].w) === norm(seq[j]) ? 'g' : items[placed[j]].trap ? 'trapx' : 'bad'));
-    $('#bank').style.display = 'none';
+    const correct = placed.every((k, j) => norm(items[k].w) === norm(seq[j]));
+    $$('#fill .w').forEach((b, j) => b.classList.add(norm(items[placed[j]].w) === norm(seq[j]) ? 'ok' : items[placed[j]].trap ? 'trapx' : 'bad'));
     const alt = altOf(u, i), trapUsed = placed.filter(k => items[k].trap).map(k => items[k].w);
     const why = alt && trapUsed.some(w => norm(w) === norm(alt.w)) ? alt.why : trapUsed.length ? `${trapUsed.map(w => tileText(w)).join(', ')} 는 이 문장에 쓰지 않아요` : '';
-    report(ok, i, placed.map(k => items[k].w).join(' ') + x.p, why);
+    report(correct, correct, i, placed.map(k => items[k].w).join(' ') + x.p, why);
   };
   draw();
 }
-function quizArrange(s, i) { const alt = altOf(unit(), i); arrangeIn(s, i, alt ? [alt.w] : []); }
+function quizArrange(s, i) { const alt = s.alt ? altOf(unit(), i) : null; arrangeIn(s, i, alt ? [alt.w] : []); }
 function quizLong(s, i) { arrangeIn(s, i, trapsOf(unit(), i)); }
 
 function finish() {
   run.phase = 'done'; run.stage = null; refresh();
   const u = unit();
-  const miss = run.miss.map(m => `<div class="miss"><div class="no">${esc(m.given)}</div><div class="yes">→ ${sentHtml(u.s[m.i])}<span class="st2">${m.name}</span></div>${m.why ? `<div style="font-size:13px;color:#8a5a2e">${esc(m.why)}</div>` : ''}</div>`).join('');
+  const miss = run.miss.map(m => `<div class="miss"><div class="no">${esc(m.given)}</div><div class="yes">→ ${sentHtml(u.s[m.i])}<span class="st2">${esc(m.name)}</span></div>${m.why ? `<div style="font-size:13px;color:#8a5a2e">${esc(m.why)}</div>` : ''}</div>`).join('');
   const body = (miss ? `<div class="sec"><div class="t">틀렸던 곳</div>${miss}</div>` : '') + (u.desc ? `<div class="sec"><div class="t">알아 두기</div><div class="d">${esc(u.desc)}</div></div>` : '');
-  $('#stage').innerHTML = `<div class="card"><div class="intro"><div class="stage">유닛 완료</div><div class="f">${esc(u.form)}</div><div class="m">${esc(u.mean)}</div>${body}</div>
-    <button class="btn" id="nxu">다음 유닛</button><button class="btn" id="again" style="background:#fff;color:#6b7c93;box-shadow:0 1px 4px rgba(30,60,110,.12);margin-top:8px">다시</button></div>`;
+  $('#stage').innerHTML = `<div class="cardwrap"><div class="ctab">표현 · 완료</div><div class="acard"><div class="abody"><div class="intro"><div class="f">${esc(u.form)}</div><div class="m">${esc(u.mean)}</div></div>${body}</div></div></div>
+    <div class="abot"><div class="abtns"><button class="lb" id="again">다시</button><button class="ok" id="nxu">다음 유닛</button></div></div>`;
   $('#again').onclick = () => open(uid);
   $('#nxu').onclick = () => $('#rand').click();
 }
@@ -470,6 +565,7 @@ fetch('units/flow-units.gen.json').then(r => r.json()).then(d => {
   U.forEach(u => u.s.forEach(x => brIdx(x).forEach(j => { const w = norm(x.t[j][0]); if (w.length >= 3 && /^[a-z]+$/.test(w) && !fn.has(w) && !seen.has(w)) { seen.add(w); CONTENT_POOL.push(w); } })));
   CONTENT_POOL.sort();
   if (!byId[uid]) uid = FEATURED[sec][0];
+  if (!FLOWS[ui]) ui = 'new';
   const q = $('#q');
   q.onkeydown = e => {
     if (e.key !== 'Enter') return;
@@ -478,7 +574,7 @@ fetch('units/flow-units.gen.json').then(r => r.json()).then(d => {
     if (hit) { open(hit.id); q.value = ''; q.blur(); } else { q.value = ''; q.placeholder = `"${v}" 에 맞는 유닛이 없어요`; }
   };
   open(uid);
-}).catch(e => { $('#stage').innerHTML = `<div class="card">문장을 불러오지 못했어요. (${esc(e.message)})</div>`; });
+}).catch(e => { $('#stage').innerHTML = `<div class="acard"><div class="abody">문장을 불러오지 못했어요. (${esc(e.message)})</div></div>`; });
 </script>
 </body>
 </html>
