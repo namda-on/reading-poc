@@ -150,30 +150,24 @@
    가능: 1 보고 만들기(예시 S1 · 새 문장의 핵심([ ]) 자리) → 2 문장 배열 → 3 긴 문장(트랩과 함께).
    불가: 1 찾기(두 문장에서 초록 뜻에 해당하는 영어를 누르면 바뀌는 방식이 펼쳐진다) → 2 규칙 적용(새 문장의 핵심 자리, 뱅크에 원형·다른 꼴)
          → 3 문장 배열 → 4 긴 문장(트랩과 함께). 같은 덩어리가 반복되지 않으니 '보고 따라' 대신 바뀌는 방식을 먼저 짚게 한다.
-   왕초보 단계표와 같은 규칙: 다 맞히면 다음 단계, 틀리면 같은 퀴즈를 다른 문장으로 한 번 더, 그다음은 결과와 상관없이 다음 단계. 찾기는 다시 하지 않는다. */
+   단계는 정오답과 상관없이 차례로 간다. 한 번이라도 틀리면(헤매면) 마지막에 그 단계를 다른 문장으로 '한 번 더' — 한 유닛에 한 번뿐이다. */
 const FLOWS = {
   pattern:{ label:'패턴화 가능', stages:{
-    '1-1':{ kind:'same',    tag:'b', name:'보고 만들기',   ask:'같은 패턴으로 완성하세요', pass:'2-1', fail:'1-2' },
-    '1-2':{ kind:'same',    tag:'b', name:'보고 만들기',   ask:'같은 패턴으로 완성하세요', pass:'2-1', fail:'2-1' },
-    '2-1':{ kind:'arrange', tag:'b', name:'문장 배열',     ask:'', pass:'3-1', fail:'2-2' },
-    '2-2':{ kind:'arrange', tag:'b', name:'문장 배열',     ask:'', pass:'3-1', fail:'3-1' },
-    '3-1':{ kind:'long',    tag:'r', name:'긴 문장 + 트랩', ask:'', pass:null,  fail:'3-2' },
-    '3-2':{ kind:'long',    tag:'r', name:'긴 문장 + 트랩', ask:'', pass:null,  fail:null },
+    '1':{ kind:'same',    tag:'b', name:'보고 만들기',    ask:'같은 패턴으로 완성하세요' },
+    '2':{ kind:'arrange', tag:'b', name:'문장 배열',      ask:'' },
+    '3':{ kind:'long',    tag:'r', name:'긴 문장 + 트랩', ask:'' },
   }, note:{
     '1':'위에 S1(예시, 핵심 초록) · 아래 새 문장은 핵심 자리만 빈칸 — 뱅크의 낱말을 놓는다',
     '2':'새 문장을 한국어만 보고 <b>통째로 배열</b> — 초록 없음, 짧은 문장부터',
     '3':'남은 <b>가장 긴 문장</b>을 통째로 배열 — 뱅크에 <b>트랩 3개</b>가 섞인다',
   }},
   rule:{ label:'패턴화 불가', stages:{
-    '1-1':{ kind:'find',    tag:'b', name:'찾기',           ask:'초록 뜻에 해당하는 영어를 두 문장에서 눌러 보세요', pass:'2-1', fail:'2-1' },
-    '2-1':{ kind:'same',    tag:'b', name:'규칙 적용',      ask:'같은 규칙으로 완성하세요', pass:'3-1', fail:'2-2' },
-    '2-2':{ kind:'same',    tag:'b', name:'규칙 적용',      ask:'같은 규칙으로 완성하세요', pass:'3-1', fail:'3-1' },
-    '3-1':{ kind:'arrange', tag:'r', name:'문장 배열',      ask:'', pass:'4-1', fail:'3-2' },
-    '3-2':{ kind:'arrange', tag:'r', name:'문장 배열',      ask:'', pass:'4-1', fail:'4-1' },
-    '4-1':{ kind:'long',    tag:'r', name:'긴 문장 + 트랩', ask:'', pass:null,  fail:'4-2' },
-    '4-2':{ kind:'long',    tag:'r', name:'긴 문장 + 트랩', ask:'', pass:null,  fail:null },
+    '1':{ kind:'find',    tag:'b', name:'찾기',           ask:'초록 뜻에 해당하는 영어를 두 문장에서 눌러 보세요' },
+    '2':{ kind:'same',    tag:'b', name:'규칙 적용',      ask:'같은 규칙으로 완성하세요' },
+    '3':{ kind:'arrange', tag:'r', name:'문장 배열',      ask:'' },
+    '4':{ kind:'long',    tag:'r', name:'긴 문장 + 트랩', ask:'' },
   }, note:{
-    '1':'S1 과 다른 문장 하나 — 한국어 초록에 해당하는 영어를 누른다. 다 누르면 <b>바뀌는 방식</b>(open → open<b>ed</b> · cry → cr<b>ied</b>)과 카드 설명이 펼쳐진다. 틀려도 다시 하지 않는다',
+    '1':'S1 과 다른 문장 하나 — 한국어 초록에 해당하는 영어를 누른다. 다 누르면 <b>바뀌는 방식</b>(open → open<b>ed</b> · cry → cr<b>ied</b>)과 카드 설명이 펼쳐진다',
     '2':'위에 찾은 두 문장 · 아래 새 문장은 핵심 자리만 빈칸 — 뱅크에 원형 · 다른 꼴 · 다른 쪽이 하나 더',
     '3':'새 문장을 한국어만 보고 <b>통째로 배열</b> — 초록 없음',
     '4':'남은 <b>가장 긴 문장</b>을 통째로 배열 — 뱅크에 <b>트랩 3개</b>가 섞인다',
@@ -215,6 +209,7 @@ const shuffle = a => { const b = a.slice(); for (let n = 0; n < 30; n++) { for (
 const unit = () => byId[uid];
 const secOf = u => u.pat === '가능' ? 'pattern' : 'rule';
 const STAGES = () => FLOWS[secOf(unit())].stages;
+const stageOf = id => id === 'again' ? run.again : STAGES()[id];
 function say(text) { try { const v = new SpeechSynthesisUtterance(plain(text)); v.lang = 'en-US'; v.rate = .9; speechSynthesis.cancel(); speechSynthesis.speak(v); } catch (e) {} }
 function greenRuns(ws) {
   const out = [];
@@ -272,8 +267,8 @@ function trapsOf(u, i) {
 
 /* 문장 고르기 — S1 은 예시(가능) · 찾기 첫 줄(불가). 가장 긴 독립 문장은 '긴 문장' 몫으로 남기고, 나머지는 짧은 것부터.
    다시 풀기는 남은 독립 문장 → 없으면 주어 변형(같은 결정을 한 번 더) */
-function pick(stage) {
-  const u = unit(), kind = STAGES()[stage].kind, all = u.s.map((_, i) => i).filter(i => i > 0 && brIdx(u.s[i]).length);
+function pick(kind) {
+  const u = unit(), all = u.s.map((_, i) => i).filter(i => i > 0 && brIdx(u.s[i]).length);
   const ind = all.filter(i => !u.s[i].tag.startsWith('문장1-')), vari = all.filter(i => u.s[i].tag.startsWith('문장1-'));
   const free = a => a.filter(i => !run.used.has(i)), len = i => u.s[i].t.length;
   const reserve = ind.length > 2 ? [...ind].sort((a, b) => len(b) - len(a))[0] : null;
@@ -306,45 +301,57 @@ function header() {
 }
 function drawTable() {
   const marks = {}; run && run.log.forEach(l => marks[l.stage] = l.ok ? '<span class="mk o">O</span>' : '<span class="mk x">X</span>');
-  const f = FLOWS[sec], st = f.stages, last = Object.keys(f.note).at(-1);
-  $('#tblBody').innerHTML = `<table class="st"><tr><th>단계</th><th>퀴즈</th><th>문장</th><th>다 맞힘</th><th>틀림</th><th></th></tr>`
-    + Object.keys(st).map(id => { const s = st[id], d = id.charAt(0);
-      const which = id.endsWith('-2') ? '다른 문장' : s.kind === 'find' ? 'S1 + 새 문장' : s.kind === 'same' ? '새 문장' : s.kind === 'long' ? '가장 긴 문장' : '새 문장 (짧은 것부터)';
-      return `<tr class="${run && run.phase === 'quiz' && run.stage === id ? 'cur' : ''}"><td>${id} <span class="tg ${s.tag}">${s.tag === 'b' ? '기초' : '실전'}</span></td><td>${s.name}</td><td style="color:#8a98ad">${which}</td><td>${s.pass || '완료'}</td><td>${s.fail || '완료'}</td><td>${marks[id] || ''}</td></tr>`; }).join('')
-    + `</table><div class="rules"><b>규칙</b> 다 맞히면 다음 단계, 틀리면 같은 퀴즈를 다른 문장으로 한 번 더, 그다음은 결과와 상관없이 다음 단계.<br>`
+  const f = FLOWS[sec], st = f.stages;
+  const row = (id, tag, name, which) => `<tr class="${run && run.phase === 'quiz' && run.stage === id ? 'cur' : ''}"><td>${id === 'again' ? '+' : id} <span class="tg ${tag}">${tag === 'b' ? '기초' : '실전'}</span></td><td>${name}</td><td style="color:#8a98ad">${which}</td><td>${marks[id] || ''}</td></tr>`;
+  $('#tblBody').innerHTML = `<table class="st"><tr><th>단계</th><th>퀴즈</th><th>문장</th><th></th></tr>`
+    + Object.keys(st).map(id => { const s = st[id];
+      return row(id, s.tag, s.name, s.kind === 'find' ? 'S1 + 새 문장' : s.kind === 'same' ? '새 문장' : s.kind === 'long' ? '가장 긴 문장' : '새 문장 (짧은 것부터)'); }).join('')
+    + row('again', 'r', run && run.again ? `한 번 더 — ${run.again.base}` : '한 번 더', '헤맸을 때만 · 다른 문장')
+    + `</table><div class="rules"><b>규칙</b> 단계는 정오답과 상관없이 차례로 간다. 한 번이라도 틀리면 마지막에 <b>처음 틀린 단계를 다른 문장으로 한 번 더</b> — 유닛에 한 번뿐.<br>`
     + Object.entries(f.note).map(([k, v]) => `<b>${k}단계</b> ${v}`).join('<br>') + `<br><b>완료</b> 틀린 것과 설명이 있을 때만</div>`;
 }
 function drawBar() {
   const total = Object.keys(FLOWS[sec].note).length;
-  const n = !run ? 0 : run.phase === 'done' ? total : +run.stage.charAt(0) - 1;
+  const n = !run ? 0 : run.phase === 'done' || run.stage === 'again' ? total : +run.stage - 1;
   $('#barI').style.width = `${n / total * 100}%`;
-  $('#barN').textContent = run && run.phase === 'quiz' ? `${run.stage.charAt(0)} / ${total}` : run && run.phase === 'done' ? '완료' : '';
+  $('#barN').textContent = !run ? '' : run.phase === 'done' ? '완료' : run.stage === 'again' ? '한 번 더' : `${run.stage} / ${total}`;
 }
 function refresh() { header(); drawTable(); drawBar(); }
 function open(id) {
   uid = id; sec = secOf(unit());
   try { localStorage.setItem('vedrill', JSON.stringify({ uid, sec })); } catch (e) {}
-  run = { stage:null, used:new Set([0]), log:[], miss:[], last:null, found:null, phase:'quiz' };
-  goStage('1-1');
+  run = { stage:null, used:new Set([0]), log:[], miss:[], last:null, found:null, again:null, phase:'quiz' };
+  goStage('1');
 }
 function goStage(id) {
   if (!id) return finish();
   run.stage = id; refresh();
-  const s = STAGES()[id], i = pick(id);
+  const s = stageOf(id), i = pick(s.kind);
   run.used.add(i); run.last = i;
   ({ find:quizFind, same:quizSame, arrange:quizArrange, long:quizLong })[s.kind](s, i);
 }
 function shell(s, body) {
   const u = unit();
   $('#stage').innerHTML = `<div class="card"><div class="tag ${s.tag}">${s.tag === 'b' ? '기초' : '실전'}</div>
-    <div class="stage">${run.stage} · ${s.name}</div>${s.ask ? `<div class="ask">${s.ask}</div>` : ''}${body}<div id="res"></div><div id="bb"></div>
+    <div class="stage">${run.stage === 'again' ? '한 번 더' : run.stage} · ${s.name}</div>${s.ask ? `<div class="ask">${s.ask}</div>` : ''}${body}<div id="res"></div><div id="bb"></div>
     <div class="src">유닛 ${esc(u.id)} · ${esc(u.form)}</div></div>`;
 }
+/* 다음 단계 — 차례대로. 끝나면 처음 틀린 단계를 다른 문장으로 한 번 더(유닛에 한 번). 찾기를 헤맸으면 규칙 적용을 한 번 더 */
+function nextStage(ok) {
+  if (!ok && !run.firstMiss && run.stage !== 'again') run.firstMiss = run.stage;
+  if (run.stage === 'again') return null;
+  const keys = Object.keys(STAGES()), k = keys.indexOf(run.stage);
+  if (k < keys.length - 1) return keys[k + 1];
+  if (!run.firstMiss) return null;
+  const base = STAGES()[run.firstMiss], s = base.kind === 'find' ? STAGES()[keys[1]] : base;
+  run.again = { ...s, tag:'r', base:s.name, name:`한 번 더 — ${s.name}` };
+  return 'again';
+}
 function report(ok, i, given, why = '', extra = '') {
-  const s = STAGES()[run.stage], u = unit(), x = u.s[i];
+  const s = stageOf(run.stage), u = unit(), x = u.s[i];
   run.log.push({ stage:run.stage, ok });
-  if (!ok && given !== null) run.miss.push({ stage:run.stage, i, given, why });
-  const next = ok ? s.pass : s.fail;
+  if (!ok && given !== null) run.miss.push({ stage:run.stage, name:s.name, i, given, why });
+  const next = nextStage(ok);
   $('#res').innerHTML = `<div class="res ${ok ? 'ok' : 'no'}"><div class="h">${ok ? '정답!' : '아쉬워요'}</div>${given === null ? '' : `<div class="a">${sentHtml(x)}</div>`}${!ok && why ? `<div class="why">${esc(why)}</div>` : ''}</div>${extra}`;
   $('#bb').innerHTML = `<button class="btn" id="nx">${next ? '다음' : '완료'}</button>`;
   $('#nx').onclick = () => goStage(next);
@@ -447,8 +454,8 @@ function quizLong(s, i) { arrangeIn(s, i, trapsOf(unit(), i)); }
 
 function finish() {
   run.phase = 'done'; run.stage = null; refresh();
-  const u = unit(), st = STAGES();
-  const miss = run.miss.map(m => `<div class="miss"><div class="no">${esc(m.given)}</div><div class="yes">→ ${sentHtml(u.s[m.i])}<span class="st2">${m.stage} ${st[m.stage].name}</span></div>${m.why ? `<div style="font-size:13px;color:#8a5a2e">${esc(m.why)}</div>` : ''}</div>`).join('');
+  const u = unit();
+  const miss = run.miss.map(m => `<div class="miss"><div class="no">${esc(m.given)}</div><div class="yes">→ ${sentHtml(u.s[m.i])}<span class="st2">${m.name}</span></div>${m.why ? `<div style="font-size:13px;color:#8a5a2e">${esc(m.why)}</div>` : ''}</div>`).join('');
   const body = (miss ? `<div class="sec"><div class="t">틀렸던 곳</div>${miss}</div>` : '') + (u.desc ? `<div class="sec"><div class="t">알아 두기</div><div class="d">${esc(u.desc)}</div></div>` : '');
   $('#stage').innerHTML = `<div class="card"><div class="intro"><div class="stage">유닛 완료</div><div class="f">${esc(u.form)}</div><div class="m">${esc(u.mean)}</div>${body}</div>
     <button class="btn" id="nxu">다음 유닛</button><button class="btn" id="again" style="background:#fff;color:#6b7c93;box-shadow:0 1px 4px rgba(30,60,110,.12);margin-top:8px">다시</button></div>`;
