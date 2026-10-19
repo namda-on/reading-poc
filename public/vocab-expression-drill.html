@@ -189,7 +189,7 @@
                 · 「문장 전체」 배열 · 결과 설명 카드. 예시는 상단 뜻 줄에, 규칙 공개는 결과 설명 카드가 맡는다.
    단계는 정오답과 상관없이 차례로 간다. 한 번이라도 틀리면(헤매면) 마지막에 처음 틀린 단계를 문장1-2로 '한 번 더' — 유닛에 한 번.
    head : 카드 상단 — trans(풀 문장의 번역, [ ] 초록) · mean(카드 뜻, 전체 초록) · example(S1 영어 예시) · ask(지시문)
-   alt  : 뱅크에 ALT 1개 · green : 뱅크의 [ ] 낱말을 초록으로(앱 첫 학습 색 — ALT가 있으면 답이 새서 끈다)
+   alt  : 뱅크에 헷갈리는 낱말 1개(정답 대신 놓기 쉬운 원형·다른 꼴·다른 쪽 — 코드 이름 ALT) · green : 뱅크의 [ ] 낱말을 초록으로(앱 첫 학습 색 — 헷갈리는 낱말이 있으면 답이 새서 끈다)
    reveal : 끝나면 결과 설명 카드(형태 · 뜻 · 원형 → 꼴 · 설명 · 예문 2) */
 const LONG = { kind:'long', src:'hard', head:'trans', tag:'r', name:'긴 문장 + 트랩', ui:'문장 전체 카드 + 트랩 3개' };
 const FLOWS = {
@@ -200,19 +200,19 @@ const FLOWS = {
       '3':LONG },
     rule:{
       '1':{ kind:'find', src:'new', head:'ask', tag:'b', name:'찾기', ask:'초록 뜻에 해당하는 영어를 두 문장에서 눌러 보세요', ui:'새 UI — 두 문장에서 낱말 누르기 + 규칙 패널', newUi:true },
-      '2':{ kind:'fill', src:'new', head:'trans', models:'found', alt:true, tag:'b', name:'규칙 적용', ui:'새 UI — 예시 말풍선 2개 + 빈칸 + ALT', newUi:true },
-      '3':{ kind:'arrange', src:'s1', head:'trans', alt:true, tag:'r', name:'문장 배열', ui:'문장 전체 카드 + ALT' },
+      '2':{ kind:'fill', src:'new', head:'trans', models:'found', alt:true, tag:'b', name:'규칙 적용', ui:'새 UI — 예시 말풍선 2개 + 빈칸 + 헷갈리는 낱말', newUi:true },
+      '3':{ kind:'arrange', src:'s1', head:'trans', alt:true, tag:'r', name:'문장 배열', ui:'문장 전체 카드 + 헷갈리는 낱말' },
       '4':LONG },
   },
   now:{
     pattern:{
       '1':{ kind:'fill', src:'new', head:'example', green:true, tag:'b', name:'보고 만들기', noAgain:true, ui:'표현만 카드 — 상단 뜻 줄에 S1 예시' },
-      '2':{ kind:'arrange', src:'s1', head:'trans', green:true, reveal:true, tag:'b', name:'문장 배열', ui:'문장 전체 카드 → 결과 설명 카드' },
+      '2':{ kind:'arrange', src:'s1', head:'trans', green:true, tag:'b', name:'문장 배열', ui:'문장 전체 카드' },
       '3':LONG },
     rule:{
-      '1':{ kind:'fill', src:'s1', head:'mean', alt:true, tag:'b', name:'표현 넣기', ui:'표현만 카드 + ALT' },
-      '2':{ kind:'arrange', src:'s1', head:'trans', alt:true, reveal:true, tag:'b', name:'문장 배열', ui:'문장 전체 카드 + ALT → 결과 설명 카드(규칙 공개)' },
-      '3':{ kind:'fill', src:'new', head:'example', alt:true, tag:'r', name:'규칙 적용', ui:'표현만 카드 + ALT — 상단 뜻 줄에 S1 예시' },
+      '1':{ kind:'fill', src:'s1', head:'mean', alt:true, tag:'b', name:'표현 넣기', ui:'표현만 카드 + 헷갈리는 낱말' },
+      '2':{ kind:'arrange', src:'s1', head:'trans', alt:true, reveal:true, tag:'b', name:'문장 배열', ui:'문장 전체 카드 + 헷갈리는 낱말 → 결과 설명 카드(규칙 공개)' },
+      '3':{ kind:'fill', src:'new', head:'example', alt:true, tag:'r', name:'규칙 적용', ui:'표현만 카드 + 헷갈리는 낱말 — 상단 뜻 줄에 S1 예시' },
       '4':LONG },
   },
 };
@@ -368,22 +368,24 @@ function drawTable() {
   const again = run.again || { tag:'r', name:'한 번 더', ui:'헤맸을 때만 — 처음 틀린 단계의 화면을 다시' };
   rows.push(row('again', again, sent(run.plan.again)));
   $('#tblBody').innerHTML = `<table class="st"><tr><th>단계</th><th>퀴즈 · 화면</th><th>문장</th><th></th></tr>${rows.join('')}</table>
-    <div class="rules"><b>규칙</b> 단계는 정오답과 상관없이 차례로 간다. 한 번이라도 틀리면 마지막에 <b>처음 틀린 단계를 문장1-2로 한 번 더</b> — 유닛에 한 번${sec === 'pattern' ? ', 보고 만들기를 틀린 것은 세지 않는다' : ''}. 주황 글씨 화면은 앱에 아직 없는 새 UI.<br>
+    <div class="rules"><b>규칙</b> 단계는 정오답과 상관없이 차례로 간다. 맞히면 결과창 없이 바로 다음 단계, 틀리면 그 자리에서 고쳐 준다 — <b>결과창은 유닛 끝에 한 번</b>. 한 번이라도 틀리면 마지막에 <b>처음 틀린 단계를 문장1-2로 한 번 더</b> — 유닛에 한 번${sec === 'pattern' ? ', 보고 만들기를 틀린 것은 세지 않는다' : ''}. 주황 글씨 화면은 앱에 아직 없는 새 UI.<br>
     <b>문장</b> S1 = 트리거 어휘가 든 대표 문장 · 첫 기본/문장2 = S1 다음의 독립 문장(그 [ ] 낱말이 S1 과 똑같으면 다음 기본) · 긴 문장 = 어려운 중 낱말이 가장 많은 것(5문장 유닛은 문장3) · 한 번 더 = 문장1-2</div>`;
 }
 function drawBar() {
   const total = Object.keys(STAGES()).length;
   const n = !run ? 0 : run.phase === 'done' || run.stage === 'again' ? total : +run.stage - 1;
   $('#barI').style.width = `${n / total * 100}%`;
-  $('#barN').textContent = !run ? '' : run.phase === 'done' ? '완료' : run.stage === 'again' ? '한 번 더' : `${run.stage} / ${total}`;
+  $('#barN').textContent = !run ? '' : run.phase === 'done' ? '결과' : run.stage === 'again' ? '한 번 더' : `${run.stage} / ${total}`;
 }
 function refresh() { header(); drawTable(); drawBar(); }
 function open(id) {
+  if (run) clearTimeout(run.timer);
   uid = id; sec = secOf(unit()); save();
   run = { stage:null, plan:planFor(unit()), log:[], miss:[], found:null, again:null, phase:'quiz' };
   goStage('1');
 }
 function goStage(id) {
+  clearTimeout(run.timer); run.autoNext = null;
   if (!id) return finish();
   run.stage = id; refresh();
   const s = stageOf(id), i = id === 'again' ? run.plan.again : run.plan[id];
@@ -421,18 +423,28 @@ function nextStage(ok) {
   run.again = { ...s, src:'variant', tag:'r', base:s.name, name:`한 번 더 — ${s.name}` };
   return 'again';
 }
-/* correct = 맞혔는가, ok = 한 번 더 판정(표현 보기 · 정답 보기를 썼으면 헤맨 것) */
+/* correct = 맞혔는가, ok = 한 번 더 판정(표현 보기 · 정답 보기를 썼으면 헤맨 것).
+   결과창은 유닛 끝에 한 번(finish) — 정답이면 0.9초 머문 뒤 결과 없이 다음 단계로 간다(앱 첫 학습의 sub 1 → 2 전환과 같다).
+   틀렸거나 표현 보기 · 정답 보기를 썼으면 그 자리에서 고쳐 주고(정답 문장 + 이유 1줄) 읽을 수 있게 다음 버튼을 둔다.
+   찾기(규칙 패널)와 reveal(결과 설명 카드 — 불가 대체안의 규칙 공개)은 읽을 것이 있어 맞혀도 다음 버튼 */
 function report(correct, ok, i, given, why = '', extra = '') {
   const s = stageOf(run.stage), u = unit(), x = u.s[i];
   run.log.push({ stage:run.stage, ok });
   if (!correct && given !== null) run.miss.push({ stage:run.stage, name:s.name, i, given, why });
   const next = nextStage(ok);
   $('#bank').style.display = 'none';
-  $('#res').innerHTML = `<div class="res ${correct ? 'ok' : 'no'}"><div class="h">${correct ? '정답!' : '아쉬워요'}</div>${s.kind === 'find' ? '' : `<div class="a">${sentHtml(x)}</div>`}${!correct && why ? `<div class="why">${esc(why)}</div>` : ''}</div>${extra}`;
-  $('#btns').innerHTML = `<button class="ok" id="nx">${next ? '다음' : '완료'}</button>`;
-  $('#nx').onclick = () => goStage(next);
-  if (s.reveal) $('#xcard').innerHTML = xcardHtml(u);
   if (s.kind !== 'find') say(x.en);
+  if (correct && ok && s.kind !== 'find' && !s.reveal) {
+    $('#res').innerHTML = `<div class="res ok"><div class="h">정답!</div></div>`;
+    $('#btns').innerHTML = '';
+    run.autoNext = () => { clearTimeout(run.timer); run.autoNext = null; goStage(next); };
+    run.timer = setTimeout(run.autoNext, 900);
+    drawTable(); return;
+  }
+  $('#res').innerHTML = `<div class="res ${correct ? 'ok' : 'no'}"><div class="h">${correct ? '정답!' : '아쉬워요'}</div>${s.kind === 'find' ? '' : `<div class="a">${sentHtml(x)}</div>`}${!correct && why ? `<div class="why">${esc(why)}</div>` : ''}</div>${extra}`;
+  $('#btns').innerHTML = `<button class="ok" id="nx">${next ? '다음' : '결과 보기'}</button>`;
+  $('#nx').onclick = () => goStage(next);
+  if (s.reveal) { run.revealed = true; $('#xcard').innerHTML = xcardHtml(u); }
   drawTable();
 }
 /* 형태 유닛의 원형 → 꼴(바뀐 끝 굵게) */
@@ -449,11 +461,11 @@ function ruleHtml(u, rows) {
   return `<div class="rule"><div class="f">${esc(u.form)}</div>${p.length ? `<div class="p">${p.join(' &nbsp;·&nbsp; ')}</div>` : ''}${u.desc ? `<div class="d">${esc(u.desc)}</div>` : ''}</div>`;
 }
 /* 결과 설명 카드(앱의 SummaryResult) — 형태 · 뜻 · (형태 유닛) 원형 → 꼴 · 설명 · 예문 최대 2(이 유닛 단계에서 안 쓰는 문장) */
-function xcardHtml(u) {
+function xcardHtml(u, title = '💡 새로운 표현을 배웠어요') {
   const usedIdx = new Set([0, 1, 2, ...Object.values(run.plan)]);
   const ex = u.s.map((x, i) => i).filter(i => !usedIdx.has(i) && brIdx(u.s[i]).length).slice(0, 2);
   const p = pairsOf(u, [0, run.plan['1'], ...ex]);
-  return `<div class="xcard"><div class="xtab">학습 정보</div><div class="xt">💡 새로운 표현을 배웠어요</div>
+  return `<div class="xcard"><div class="xtab">학습 정보</div><div class="xt">${title}</div>
     <div class="xf">${esc(u.form)}</div><div class="xm">${esc(u.mean)}</div>${p.length ? `<div class="xp">${p.join(' &nbsp;·&nbsp; ')}</div>` : ''}
     ${u.desc ? `<div class="xd">${esc(u.desc)}</div>` : ''}
     ${ex.length ? `<div class="xe">ⓘ 단어만 바꿔서 이렇게도 말할 수 있어요</div>${ex.map(i => `<div class="xs">${sentHtml(u.s[i])}<div class="k">${esc(plain(u.s[i].kr))}</div></div>`).join('')}` : ''}</div>`;
@@ -548,13 +560,18 @@ function arrangeIn(s, i, extra) {
 function quizArrange(s, i) { const alt = s.alt ? altOf(unit(), i) : null; arrangeIn(s, i, alt ? [alt.w] : []); }
 function quizLong(s, i) { arrangeIn(s, i, trapsOf(unit(), i)); }
 
+/* 결과창 — 유닛 끝에 한 번. 틀렸던 곳(있을 때) + 복습 주기 + 결과 설명 카드(앞에서 이미 봤으면 '한 번 더 확인!').
+   첫 학습의 정오답은 판정에 쓰지 않는다 — 1~3일 뒤 헷갈리는 낱말 · 트랩과 함께 다시 나올 때 판별한다 */
 function finish() {
   run.phase = 'done'; run.stage = null; refresh();
   const u = unit();
   const miss = run.miss.map(m => `<div class="miss"><div class="no">${esc(m.given)}</div><div class="yes">→ ${sentHtml(u.s[m.i])}<span class="st2">${esc(m.name)}</span></div>${m.why ? `<div style="font-size:13px;color:#8a5a2e">${esc(m.why)}</div>` : ''}</div>`).join('');
-  const body = (miss ? `<div class="sec"><div class="t">틀렸던 곳</div>${miss}</div>` : '') + (u.desc ? `<div class="sec"><div class="t">알아 두기</div><div class="d">${esc(u.desc)}</div></div>` : '');
-  $('#stage').innerHTML = `<div class="cardwrap"><div class="ctab">표현 · 완료</div><div class="acard"><div class="abody"><div class="intro"><div class="f">${esc(u.form)}</div><div class="m">${esc(u.mean)}</div></div>${body}</div></div></div>
-    <div class="abot"><div class="abtns"><button class="lb" id="again">다시</button><button class="ok" id="nxu">다음 유닛</button></div></div>`;
+  const clean = run.log.every(l => l.ok);
+  $('#stage').innerHTML = `<div class="cardwrap"><div class="ctab">표현 · 결과</div><div class="cnew">NEW</div><div class="acard"><div class="abody">
+      <div class="intro"><div class="f">${clean ? '모든 단계를 한 번에 맞혔어요' : '수고했어요'}</div><div class="m">📅 1~3일 뒤 복습 — 그때 헷갈리는 낱말 · 트랩과 함께 다시 나와요</div></div>
+      ${miss ? `<div class="sec"><div class="t">틀렸던 곳</div>${miss}</div>` : ''}</div></div></div>
+    ${xcardHtml(u, run.revealed ? '💡 한 번 더 확인!' : '💡 새로운 표현을 배웠어요')}
+    <div class="abot" style="min-height:0"><div class="abtns"><button class="lb" id="again">다시</button><button class="ok" id="nxu">다음 유닛</button></div></div>`;
   $('#again').onclick = () => open(uid);
   $('#nxu').onclick = () => $('#rand').click();
 }
