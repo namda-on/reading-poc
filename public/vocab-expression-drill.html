@@ -193,6 +193,8 @@ const TRAP_BUCKETS = [
   ['my','your','his','its','our','their'],
   ['some','any','much','many','few','little','every','each'],
 ];
+/* 바꿔 넣어도 맞는 말이 되는 조동사 짝 — 문장에 한쪽이 있으면 다른 쪽은 트랩으로 쓰지 않는다(Can I get → Could I get) */
+const NEAR = [['can', 'could'], ['will', 'would'], ['may', 'might'], ["can't", "couldn't"], ["won't", "wouldn't"]];
 let CONTENT_POOL = [];
 
 let U = [], byId = {}, sec = 'pattern', uid = '10033', run = null;
@@ -253,6 +255,7 @@ function altOf(u, i) {
 /* 트랩 3개 — ALT 먼저, 그다음 문장 속 기능어와 같은 부류, 모자라면 다른 유닛의 핵심 낱말 */
 function trapsOf(u, i) {
   const x = u.s[i], used = new Set(x.t.map(t => norm(t[0]))), out = [];
+  NEAR.forEach(([a, b]) => { if (used.has(a)) used.add(b); if (used.has(b)) used.add(a); });
   const push = w => { const b = norm(w); if (b && !used.has(b) && !out.some(y => norm(y) === b)) out.push(w); };
   const alt = altOf(u, i); if (alt) push(alt.w);
   const seed = [...x.en].reduce((a, c) => a + c.charCodeAt(0), 0);
