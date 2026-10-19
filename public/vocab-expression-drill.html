@@ -153,24 +153,24 @@
    단계는 정오답과 상관없이 차례로 간다. 한 번이라도 틀리면(헤매면) 마지막에 그 단계를 다른 문장으로 '한 번 더' — 한 유닛에 한 번뿐이다. */
 const FLOWS = {
   pattern:{ label:'패턴화 가능', stages:{
-    '1':{ kind:'same',    tag:'b', name:'보고 만들기',    ask:'같은 패턴으로 완성하세요' },
-    '2':{ kind:'arrange', tag:'b', name:'문장 배열',      ask:'' },
-    '3':{ kind:'long',    tag:'r', name:'긴 문장 + 트랩', ask:'' },
+    '1':{ kind:'same',    src:'new',  tag:'b', name:'보고 만들기',    ask:'같은 패턴으로 완성하세요' },
+    '2':{ kind:'arrange', src:'s1',   tag:'b', name:'문장 배열',      ask:'' },
+    '3':{ kind:'long',    src:'hard', tag:'r', name:'긴 문장 + 트랩', ask:'' },
   }, note:{
-    '1':'위에 S1(예시, 핵심 초록) · 아래 새 문장은 핵심 자리만 빈칸 — 뱅크의 낱말을 놓는다',
-    '2':'새 문장을 한국어만 보고 <b>통째로 배열</b> — 초록 없음, 짧은 문장부터',
-    '3':'남은 <b>가장 긴 문장</b>을 통째로 배열 — 뱅크에 <b>트랩 3개</b>가 섞인다',
+    '1':'위에 S1(트리거 단어가 든 문장, 핵심 초록) · 아래 <b>문장2 / 기본</b>(같은 덩어리, 다른 내용)의 핵심 자리만 빈칸 — 뱅크의 낱말을 놓는다',
+    '2':'1단계에서 예시로 본 <b>S1</b>을 이번엔 예시 없이 한국어만 보고 통째로 배열 — 트리거 단어와 표현을 한 문장으로 굳힌다',
+    '3':'처음 보는 <b>어려운 / 문장3</b>을 통째로 배열 — 뱅크에 <b>트랩 3개</b>가 섞인다',
   }},
   rule:{ label:'패턴화 불가', stages:{
-    '1':{ kind:'find',    tag:'b', name:'찾기',           ask:'초록 뜻에 해당하는 영어를 두 문장에서 눌러 보세요' },
-    '2':{ kind:'same',    tag:'b', name:'규칙 적용',      ask:'같은 규칙으로 완성하세요' },
-    '3':{ kind:'arrange', tag:'r', name:'문장 배열',      ask:'' },
-    '4':{ kind:'long',    tag:'r', name:'긴 문장 + 트랩', ask:'' },
+    '1':{ kind:'find',    src:'new',  tag:'b', name:'찾기',           ask:'초록 뜻에 해당하는 영어를 두 문장에서 눌러 보세요' },
+    '2':{ kind:'same',    src:'new',  tag:'b', name:'규칙 적용',      ask:'같은 규칙으로 완성하세요' },
+    '3':{ kind:'arrange', src:'s1',   tag:'r', name:'문장 배열',      ask:'' },
+    '4':{ kind:'long',    src:'hard', tag:'r', name:'긴 문장 + 트랩', ask:'' },
   }, note:{
-    '1':'S1 과 다른 문장 하나 — 한국어 초록에 해당하는 영어를 누른다. 다 누르면 <b>바뀌는 방식</b>(open → open<b>ed</b> · cry → cr<b>ied</b>)과 카드 설명이 펼쳐진다',
-    '2':'위에 찾은 두 문장 · 아래 새 문장은 핵심 자리만 빈칸 — 뱅크에 원형 · 다른 꼴 · 다른 쪽이 하나 더',
-    '3':'새 문장을 한국어만 보고 <b>통째로 배열</b> — 초록 없음',
-    '4':'남은 <b>가장 긴 문장</b>을 통째로 배열 — 뱅크에 <b>트랩 3개</b>가 섞인다',
+    '1':'<b>S1 + 기본</b>(핵심 낱말이 다른 것) — 한국어 초록에 해당하는 영어를 누른다. 다 누르면 <b>바뀌는 방식</b>(open → open<b>ed</b> · cry → cr<b>ied</b>)과 카드 설명이 펼쳐진다',
+    '2':'위에 찾은 두 문장 · 아래 <b>다른 기본 문장</b>의 핵심 자리만 빈칸 — 뱅크에 원형 · 다른 꼴 · 다른 쪽이 하나 더',
+    '3':'<b>S1</b>을 한국어만 보고 통째로 배열 — 초록 없음',
+    '4':'처음 보는 <b>어려운</b> 문장을 통째로 배열 — 뱅크에 <b>트랩 3개</b>가 섞인다',
   }},
 };
 const CHOICE = {
@@ -265,26 +265,23 @@ function trapsOf(u, i) {
   return out.slice(0, 3);
 }
 
-/* 문장 고르기 — S1 은 예시(가능) · 찾기 첫 줄(불가). 가장 긴 독립 문장은 '긴 문장' 몫으로 남기고, 나머지는 짧은 것부터.
-   다시 풀기는 남은 독립 문장 → 없으면 주어 변형(같은 결정을 한 번 더) */
-function pick(kind) {
+/* 문장 고르기 — 단계마다 쓸 문장이 정해져 있다(src).
+   new  = 문장2 / 기본(S1 과 내용이 다른 문장 — 핵심이 S1 과 다른 것, 규칙 적용은 ALT 가 있는 것 먼저)
+   s1   = S1(트리거 단어가 든 문장 — 앞 단계에서 본 것을 예시 없이 다시 만든다)
+   hard = 어려운 중 가장 긴 것 / 문장3(5문장 유닛)
+   variant = 문장1-2 · 1-3(헤맸을 때 '한 번 더' — S1 과 주어·낱말 하나만 달라 같은 판단만 한 번 더) */
+function pick(src) {
   const u = unit(), all = u.s.map((_, i) => i).filter(i => i > 0 && brIdx(u.s[i]).length);
-  const ind = all.filter(i => !u.s[i].tag.startsWith('문장1-')), vari = all.filter(i => u.s[i].tag.startsWith('문장1-'));
-  const free = a => a.filter(i => !run.used.has(i)), len = i => u.s[i].t.length;
-  const reserve = ind.length > 2 ? [...ind].sort((a, b) => len(b) - len(a))[0] : null;
-  const rest = () => free(ind)[0] ?? free(vari)[0] ?? all.find(i => i !== run.last) ?? all[0];
-  if (kind === 'find') {
-    const c = free(ind).filter(i => i !== reserve), diff = c.filter(i => brKey(u.s[i]) !== brKey(u.s[0]));
-    return diff[0] ?? c[0] ?? rest();
-  }
-  if (kind === 'same') {
-    const c = free(ind).filter(i => i !== reserve), diff = c.filter(i => brKey(u.s[i]) !== brKey(u.s[0]));
-    const pool = [...diff, ...c, ...free(vari)];
-    return pool.find(i => altOf(u, i)) ?? pool[0] ?? rest();
-  }
-  if (kind === 'arrange') return free(ind).filter(i => i !== reserve).sort((a, b) => len(a) - len(b))[0] ?? free(vari)[0] ?? rest();
-  if (reserve !== null && !run.used.has(reserve)) return reserve;
-  return free(ind).sort((a, b) => len(b) - len(a))[0] ?? free(vari)[0] ?? rest();
+  const free = a => a.filter(i => !run.used.has(i)), tag = i => u.s[i].tag, len = i => u.s[i].t.length;
+  const vari = all.filter(i => tag(i).startsWith('문장1-'));
+  const basic = all.filter(i => tag(i) === '기본' || tag(i) === '문장2');
+  const hard = all.filter(i => tag(i) === '어려운' || tag(i) === '문장3');
+  const rest = () => free(all.filter(i => !vari.includes(i)))[0] ?? free(vari)[0] ?? all.find(i => i !== run.last) ?? all[0];
+  if (src === 's1') return 0;
+  if (src === 'variant') return free(vari)[0] ?? rest();
+  if (src === 'hard') return free(hard).sort((a, b) => len(b) - len(a))[0] ?? rest();
+  const c = free(basic), diff = c.filter(i => brKey(u.s[i]) !== brKey(u.s[0])), pool = [...diff, ...c];
+  return pool.find(i => altOf(u, i)) ?? pool[0] ?? free(hard).sort((a, b) => len(a) - len(b))[0] ?? rest();
 }
 
 const short = u => { const f = u.form.replace(/\s+/g, ' '); return f.length > 20 ? f.slice(0, 19) + '…' : f; };
@@ -305,8 +302,8 @@ function drawTable() {
   const row = (id, tag, name, which) => `<tr class="${run && run.phase === 'quiz' && run.stage === id ? 'cur' : ''}"><td>${id === 'again' ? '+' : id} <span class="tg ${tag}">${tag === 'b' ? '기초' : '실전'}</span></td><td>${name}</td><td style="color:#8a98ad">${which}</td><td>${marks[id] || ''}</td></tr>`;
   $('#tblBody').innerHTML = `<table class="st"><tr><th>단계</th><th>퀴즈</th><th>문장</th><th></th></tr>`
     + Object.keys(st).map(id => { const s = st[id];
-      return row(id, s.tag, s.name, s.kind === 'find' ? 'S1 + 새 문장' : s.kind === 'same' ? '새 문장' : s.kind === 'long' ? '가장 긴 문장' : '새 문장 (짧은 것부터)'); }).join('')
-    + row('again', 'r', run && run.again ? `한 번 더 — ${run.again.base}` : '한 번 더', '헤맸을 때만 · 다른 문장')
+      return row(id, s.tag, s.name, s.kind === 'find' ? 'S1 + 기본' : { new:sec === 'rule' ? '다른 기본' : '문장2 / 기본', s1:'S1', hard:'어려운 / 문장3' }[s.src]); }).join('')
+    + row('again', 'r', run && run.again ? `한 번 더 — ${run.again.base}` : '한 번 더', '헤맸을 때만 · 문장1-2 / 1-3')
     + `</table><div class="rules"><b>규칙</b> 단계는 정오답과 상관없이 차례로 간다. 한 번이라도 틀리면 마지막에 <b>처음 틀린 단계를 다른 문장으로 한 번 더</b> — 유닛에 한 번뿐.<br>`
     + Object.entries(f.note).map(([k, v]) => `<b>${k}단계</b> ${v}`).join('<br>') + `<br><b>완료</b> 틀린 것과 설명이 있을 때만</div>`;
 }
@@ -326,7 +323,7 @@ function open(id) {
 function goStage(id) {
   if (!id) return finish();
   run.stage = id; refresh();
-  const s = stageOf(id), i = pick(s.kind);
+  const s = stageOf(id), i = pick(s.src);
   run.used.add(i); run.last = i;
   ({ find:quizFind, same:quizSame, arrange:quizArrange, long:quizLong })[s.kind](s, i);
 }
@@ -344,7 +341,7 @@ function nextStage(ok) {
   if (k < keys.length - 1) return keys[k + 1];
   if (!run.firstMiss) return null;
   const base = STAGES()[run.firstMiss], s = base.kind === 'find' ? STAGES()[keys[1]] : base;
-  run.again = { ...s, tag:'r', base:s.name, name:`한 번 더 — ${s.name}` };
+  run.again = { ...s, src:'variant', tag:'r', base:s.name, name:`한 번 더 — ${s.name}` };
   return 'again';
 }
 function report(ok, i, given, why = '', extra = '') {
