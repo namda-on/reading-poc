@@ -645,12 +645,12 @@ function arrangeIn(s, i, extra) {
 function quizArrange(s, i) { const alt = s.alt ? altOf(unit(), i) : null; arrangeIn(s, i, alt ? [alt.w] : []); }
 function quizLong(s, i) { arrangeIn(s, i, trapsOf(unit(), i)); }
 
-/* 결과창 — 유닛 끝에 한 번, 앱 결과 화면 구성. 맨 위 카드 = 마지막에 푼 문장(표현 초록) · 태그 '1~3일 뒤 실력 확인',
+/* 결과창 — 유닛 끝에 한 번, 앱 결과 화면 구성. 맨 위 카드 = 마지막에 푼 문장(표현 초록) · 태그 'n일 뒤 실력 확인'(일수는 앱이 복습 주기로 채운다),
    아래 학습 정보(앞에서 시트를 봤으면 '한 번 더 확인!'). 틀렸던 곳 목록은 두지 않는다 — 정오답은 1~3일 뒤 헷갈리는 낱말 · 트랩과 함께 다시 나올 때 판별한다 */
 function finish() {
   run.phase = 'done'; run.stage = null; refresh();
   const u = unit(), x = u.s[run.lastI];
-  $('#stage').innerHTML = `<div class="cardwrap"><div class="ctab">표현 · 결과</div><div class="cnew">1~3일 뒤 실력 확인</div><div class="acard">
+  $('#stage').innerHTML = `<div class="cardwrap"><div class="ctab">표현 · 결과</div><div class="cnew">n일 뒤 실력 확인</div><div class="acard">
       <div class="ahead"><div class="hk">${krHtml(x.kr)}</div></div>
       <div class="abody"><div class="aline">${x.t.map(t => `<span class="w${t[1] ? ' ok' : ' up'}">${esc(t[0])}</span>`).join('')}<span class="sw p">${esc(x.p)}</span></div>
         <div class="acts"><span>다시 듣기</span><span>듣기 평가 속도</span><span>다시 말하기</span><span>발음 진단</span></div></div></div></div>
