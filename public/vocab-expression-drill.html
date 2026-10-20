@@ -56,6 +56,7 @@
 
   /* 앱 문제 카드 — 레벨 탭 · 상단(분홍) · 문제 영역(흰색) */
   .cardwrap { position:relative; }
+  .ctab .cq { display:inline-flex; align-items:center; justify-content:center; width:13px; height:13px; margin-left:4px; border-radius:50%; background:#fff; color:#8ac4f2; font-size:9px; vertical-align:1px; }
   .ctab { position:absolute; top:-19px; left:8px; background:#8ac4f2; color:#fff; font-size:11px; font-weight:800; border-radius:10px 10px 0 0; padding:4px 12px 8px; }
   .cnew { position:absolute; top:-16px; right:10px; background:#fa5555; color:#fff; font-size:10.5px; font-weight:800; border-radius:8px; padding:3px 9px 7px; }
   .acard { position:relative; background:#fff; border-radius:24px; overflow:hidden; box-shadow:0 6px 16px rgba(30,60,110,.14); }
@@ -307,7 +308,11 @@ const tileText = w => /^I('|$)/.test(w) ? w : w.toLowerCase();
 const shuffle = a => { const b = a.slice(); for (let n = 0; n < 30; n++) { for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [b[i], b[j]] = [b[j], b[i]]; } if (a.length < 2 || b.some((x, k) => x !== a[k])) break; } return b; };
 const unit = () => byId[uid];
 const secOf = u => u.pat === '가능' ? 'pattern' : 'rule';
-const STAGES = () => FLOWS[ui][secOf(unit())];
+const flowOf = u => FLOWS[ui][secOf(u)];
+const STAGES = () => flowOf(unit());
+/* 카드 탭의 레벨 — 표현 유닛에는 레벨이 없어 이어 붙은 트리거 어휘의 레벨을 쓴다 */
+function levelOf(u) { const it = mode === 'learn' ? LS.items[LS.idx] : LS.items.find(x => x.u === u.id); return it ? it.v.level : '—'; }
+const levelTab = u => `<div class="ctab">레벨 ${esc(levelOf(u))}<span class="cq">?</span></div>`;
 const stageOf = id => id === 'again' ? run.again : STAGES()[id];
 function say(text) { try { const v = new SpeechSynthesisUtterance(plain(text)); v.lang = 'en-US'; v.rate = .9; speechSynthesis.cancel(); speechSynthesis.speak(v); } catch (e) {} }
 function greenRuns(ws) {
@@ -371,7 +376,7 @@ function trapsOf(u, i) {
 const TAG_SRC = { v12:['문장1-2'], v13:['문장1-3'], v2:['문장2', '기본'] };
 const srcIdx = (u, src) => src === 's1' ? 0 : Math.max(0, u.s.findIndex(x => TAG_SRC[src].includes(x.tag)));
 function planFor(u) {
-  const st = FLOWS[ui][secOf(u)], plan = { againOf:{}, ex:{} };
+  const st = flowOf(u), plan = { againOf:{}, ex:{} };
   for (const k of Object.keys(st)) {
     plan[k] = srcIdx(u, st[k].src); plan.againOf[k] = plan[k];
     plan.ex[k] = st[k].ex ? srcIdx(u, st[k].ex) : 0;
@@ -449,10 +454,10 @@ function headHtml(s, x) {
 }
 function shell(s, x, body) {
   const u = unit();
-  $('#stage').innerHTML = `<div class="cardwrap"><div class="ctab">표현 · ${run.stage === 'again' ? '한 번 더' : run.stage} ${esc(s.name)}</div><div class="cnew">${run.stage === 'again' ? '한 번 더' : esc(s.badge || 'NEW')}</div>
+  $('#stage').innerHTML = `<div class="cardwrap">${levelTab(u)}<div class="cnew">${run.stage === 'again' ? '한 번 더' : esc(s.badge || 'NEW')}</div>
     <div class="acard"><div class="ahead">${headHtml(s, x)}</div><div class="abody">${s.newUi ? '<div class="newui">새 UI</div>' : ''}${body}<div id="tip"></div></div></div></div>
     <div class="abot"><div class="bank" id="bank"></div><div id="res"></div><div class="abtns" id="btns"></div></div>
-    <div class="uiwho"><b>${esc(s.ui)}</b> · 유닛 ${esc(u.id)} · ${esc(u.form)}</div>`;
+    <div class="uiwho"><b>${run.stage === 'again' ? '한 번 더' : run.stage} ${esc(s.name)}</b> · ${esc(s.ui)} · 유닛 ${esc(u.id)} · ${esc(u.form)}</div>`;
   $$('.sp[data-m]').forEach(b => b.onclick = () => say(u.s[+b.dataset.m].en));
 }
 /* 다음 단계 — 차례대로. 끝나면 처음 틀린 단계를 다른 문장으로 한 번 더(유닛에 한 번). 찾기를 헤맸으면 규칙 적용을 한 번 더.
@@ -650,7 +655,7 @@ function quizLong(s, i) { arrangeIn(s, i, trapsOf(unit(), i)); }
 function finish() {
   run.phase = 'done'; run.stage = null; refresh();
   const u = unit(), x = u.s[run.lastI];
-  $('#stage').innerHTML = `<div class="cardwrap"><div class="ctab">표현 · 결과</div><div class="cnew">n일 뒤 실력 확인</div><div class="acard">
+  $('#stage').innerHTML = `<div class="cardwrap">${levelTab(u)}<div class="cnew">n일 뒤 실력 확인</div><div class="acard">
       <div class="ahead"><div class="hk">${krHtml(x.kr)}</div></div>
       <div class="abody"><div class="aline">${x.t.map(t => `<span class="w${t[1] ? ' ok' : ' up'}">${esc(t[0])}</span>`).join('')}<span class="sw p">${esc(x.p)}</span></div>
         <div class="acts"><span>다시 듣기</span><span>듣기 평가 속도</span><span>다시 말하기</span><span>발음 진단</span></div></div></div></div>
@@ -702,7 +707,7 @@ function renderVocab() {
   let hint = 0, done = false;
   const ko = v.koLines.map(l => `<div class="vko${/^\s*\(/.test(l) ? ' note' : ''}">${krHtml(l)}</div>`).join('') + (v.hint ? `<div class="vko note">빈칸 뜻 <span class="tgt">${esc(v.hint)}</span></div>` : '');
   const en = v.enLines.map(l => `<div class="ven">${esc(l).replace(/\[[^\]]+\]/, '<input class="vin" id="vin" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done">')}</div>`).join('');
-  $('#stage').innerHTML = `<div class="cardwrap"><div class="ctab">레벨 ${esc(it.v.level)}</div><div class="cnew">NEW</div>
+  $('#stage').innerHTML = `<div class="cardwrap"><div class="ctab">레벨 ${esc(it.v.level)}<span class="cq">?</span></div><div class="cnew">NEW</div>
     <div class="acard"><div class="ahead">${ko}</div><div class="abody">${en}<div id="vwrong"></div><div id="vnote"></div></div></div></div>
     <div class="abot"><div class="abtns" id="btns"><button class="lb" id="vhint">힌트 보기</button></div></div>
     <div class="uiwho"><b>어휘 빈칸</b> · ${esc(it.v.word)} → 표현 유닛 ${esc(it.u)} · ${esc(byId[it.u].form)}</div>`;
@@ -741,7 +746,9 @@ fetch('units/flow-units.gen.json').then(r => r.json()).then(d => {
   $('#back').onclick = () => { if (mode === 'learn') renderHome(); };
   return fetch('vocab-expression.data.json').then(r => r.json()).catch(() => null).then(vd => {
     LS.items = (vd ? vd.items : []).map(v => { const id = String(v.unit), base = id.split('-')[0];
-      const u = byId[id] ? id : byId[base] ? base : null; return u && v.vocabA ? { v, u } : null; }).filter(Boolean);
+      const u = byId[id] ? id : byId[base] ? base : null; return u && v.vocabA ? { v, u } : null; })
+      /* 학습하기는 기획서(대체안 · 가능) 흐름만 — 불가 문항은 흐름이 확정될 때까지 뺀다(유닛 살펴보기에는 남는다) */
+      .filter(x => x && byId[x.u].pat === '가능');
     setMode(LS.items.length ? mode : 'explore');
   });
 }).catch(e => { $('#stage').innerHTML = `<div class="acard"><div class="abody">문장을 불러오지 못했어요. (${esc(e.message)})</div></div>`; });
