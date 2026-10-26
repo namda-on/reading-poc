@@ -277,7 +277,9 @@ const KNOW = {
    (상단 = 하려던 말의 뜻, 문제 영역 = 친구가 한 말 한 줄, 하단 = 단어 카드).
    틀린 말은 여러 언어 학습자에게 공통인 것만 쓴다 — 두 갈래:
    form    표현 그 자체를 틀린 것(look forward to meet · pick up you · more better) — 뜻은 통해도 영어로 틀렸다
-   meaning 기본 낱말로 옮겨 뜻이 바뀐 것(must not · met · slept)
+   meaning 기본 낱말로 옮겨 뜻이 정반대가 된 것(must not ↔ don't have to) — 덜 정확할 뿐인 말(slept ↔ fell asleep · met ↔ ran into)은
+           번역에 따라 맞는 답이 되므로(잠들었어 = I slept) 쓰지 않는다. 화면의 뜻이 어느 언어로 옮겨져도 그 말을 틀리게 만들어야 한다
+   패턴화 고민 목록(units/pattern-concern-list.judged.gen.csv)에 있는 유닛은 패턴에서 뺄지 검토 중이라 쓰지 않는다.
    bad 의 [ ] = 틀린 곳(누를 자리), fix = 그 자리에 들어갈 말 — bad 의 [ ] 를 fix 로 바꾸면 그 유닛의 3단계 문장(문장2)과 같아야 한다. 대표 10유닛 손저작 */
 const FIX = {
   '10171':{ type:'form', bad:'I look forward to [meet] you!', fix:'meeting' },
@@ -286,10 +288,10 @@ const FIX = {
   '10271':{ type:'form', bad:'Which is [more better]?', fix:'better' },
   '10416':{ type:'form', bad:'Would you mind [to carry] this?', fix:'carrying' },
   '10231':{ type:'form', bad:"It's [enough simple] to understand.", fix:'simple enough' },
-  '10437':{ type:'form', bad:'Text me when [you will be] done.', fix:"you're" },
+  '10655':{ type:'form', bad:"You'll [get use to] it.", fix:'get used to' },
   '10520':{ type:'meaning', bad:'You [must not] explain.', fix:"don't have to" },
-  '10219':{ type:'meaning', bad:'I [met] Sam at the store.', fix:'ran into' },
-  '10236':{ type:'meaning', bad:'I [slept].', fix:'fell asleep' },
+  '10491':{ type:'form', bad:'How do you [deal] stress?', fix:'deal with' },
+  '10048':{ type:'form', bad:'[Turn off it].', fix:'Turn it off' },
 };
 const FIX_STAGE = { kind:'fix', src:'v2', head:'fix', tag:'r', badge:'실전', name:'친구 말 고쳐 주기', ui:'새 UI — 친구가 한 말에서 틀린 곳을 눌러 빈칸으로 바꾸고, 배운 표현으로 채운다' };
 /* 3단계 방식(학습하기) — trap: 문장 배열 + 트랩(기획서) · fix: 친구 말 고쳐 주기(FIX 가 있는 유닛만 풀게 된다) */
