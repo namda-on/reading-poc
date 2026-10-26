@@ -150,14 +150,18 @@
   .xs .g { color:var(--green); font-weight:800; }
   .xs .k { font-size:12.5px; color:#8a98ad; font-weight:400; }
 
-  /* 친구 말 고쳐 주기 — 친구가 틀리게 한 말과 그 말을 오해한 상대의 반응 */
+  /* 친구 메시지 고쳐 주기 — 보내기 전 메시지 · 답장 */
   .scene { font-size:13px; color:#8a98ad; margin-bottom:10px; }
   .chat .model .av { font-size:10px; flex-basis:30px; height:30px; }
   .chat .av.f { background:#f2a65a; } .chat .av.l { background:#8ac4f2; }
   .chat .bub .wline { gap:5px; } .chat .bub .w { font-size:16px; padding:3px 7px; }
   .chat .bub .sw { font-size:16px; color:#394042; } .chat .bub .ul { min-width:46px; height:32px; }
-  .chat .bub.huh { background:#fbfbfd; } .chat .bub.yes { border-color:#8ed9ac; background:#f4fdf8; animation:up .35s ease both; }
+  .chat .bub.draft { border-style:dashed; }
+  .chat .ds { font-size:11.5px; color:#a3afc0; } .chat .ds.sent { color:var(--green); font-weight:700; }
+  .chat .bub.yes { border-color:#8ed9ac; background:#f4fdf8; animation:up .35s ease both; }
   .chat .bub.fixed .en .g { color:var(--green); font-weight:800; }
+  .huh { margin:2px 0 0 38px; font-size:12.5px; color:#8a98ad; line-height:1.45; animation:up .35s ease both; }
+  .huh b { color:#5d6f88; font-weight:600; } .huh span { display:block; font-size:12px; }
   .uiwho { font-size:11.5px; color:#35506f; margin:10px 2px 0; line-height:1.45; }
   .uiwho b { color:#2f3e52; }
 
@@ -281,24 +285,26 @@ const KNOW = {
   '10460':"'~해야 한다'가 아니라 '혹시 ~하면'이에요 — Should you ~ = If you ~.",
   '10462':"의문문이 아니라 If를 뺀 가정이에요 — Had ~ = If ~ had.",
 };
-/* 친구 말 고쳐 주기(3단계 실험) — 친구가 배운 표현 대신 떠올리기 쉬운 말로 틀리게 말하고, 상대가 그 말을 글자 그대로 받아들여 오해한다.
-   학습자는 틀린 곳을 짚고 배운 표현으로 고친다. 고치면 상대 반응이 바뀐다 — 내 말이 대화를 바로잡는 것이 이 단계의 결과물이다.
-   bad 의 [ ] = 틀린 곳(누를 자리), fix = 그 자리에 들어갈 말 — bad 의 [ ] 를 fix 로 바꾸면 그 유닛의 3단계 문장(문장2)과 같아야 한다.
-   틀린 말은 '그 뜻으로는 확실히 틀린' 것만 쓴다 — 대부분 뜻이 바뀌는 말(stop ≠ stop by)이고, 둘은 영어가 아닌 말(thought it · became to)이다. 대표 10유닛 손저작 */
+/* 친구 메시지 고쳐 주기(3단계 실험) — 친구가 영어 메시지를 보내기 전에 봐 달라고 한다. 학습자는 틀린 곳을 짚고 배운 표현으로 고친다.
+   고치면 메시지가 보내지고 받는 사람의 답장이 온다 — 내가 고친 말이 대화를 이어 가게 한 것이 이 단계의 결과물이다.
+   틀린 말은 여러 언어 학습자에게 공통인 것만 쓴다 — 두 갈래:
+   form    표현 그 자체를 틀린 것(look forward to meet · pick up you · more better) — 뜻은 통해도 영어로 틀렸다
+   meaning 기본 낱말로 옮겨 뜻이 바뀐 것(must not · met · slept) — 그대로 보내면 다르게 읽힌다(huh, 고친 뒤에만 보인다)
+   bad 의 [ ] = 틀린 곳(누를 자리), fix = 그 자리에 들어갈 말 — bad 의 [ ] 를 fix 로 바꾸면 그 유닛의 3단계 문장(문장2)과 같아야 한다. 대표 10유닛 손저작 */
 const FIX = {
-  '10508':{ scene:'퇴근길에 들르겠다는 친구와 친구네 룸메이트', bad:"I'll [stop] after work.", fix:'stop by', huh:['Stop what? Your job?', '뭘 그만둬? 회사를?'], yes:['Great, see you tonight!', '좋아, 이따 봐!'] },
-  '10530':{ scene:'모임에서 누가 친구의 아픈 얘기를 꺼냈어요', bad:'Why would you [bring that]?', fix:'bring that up', huh:["Bring what? I'm not carrying anything.", '뭘 가져와? 나 아무것도 안 들고 있는데.'], yes:["Sorry, I shouldn't have said that.", '미안, 그 얘기는 하지 말걸.'] },
-  '10658':{ scene:'회의에서 이 아이디어가 누구 거냐고 물었어요', bad:'Jenna [thought] it.', fix:'came up with', huh:['Jenna thought... what?', '제나가 뭘 생각했다고?'], yes:["Wow, that's a great idea, Jenna!", '와, 제나 아이디어 좋다!'] },
-  '10476':{ scene:'식당 예약을 했냐고 묻는 동료에게', bad:'I already [took] it.', fix:'took care of', huh:['You took it? Where did you put it?', '그걸 가져갔다고? 어디 뒀어?'], yes:["Oh, thanks! That's one less thing to do.", '오, 고마워! 일 하나 줄었네.'] },
-  '10611':{ scene:'옆방에서 아기가 깨서 울어요', bad:"I'll go [check] her.", fix:'check on', huh:['Check her? Like a doctor?', '검사한다고? 의사처럼?'], yes:["Thanks. Tell me if she's okay.", '고마워. 괜찮은지 알려 줘.'] },
-  '10249':{ scene:'처음엔 싫다던 요가를 석 달째 다니는 친구', bad:'I [became to] enjoy it.', fix:'came to', huh:['You became... what?', '뭐가 됐다고?'], yes:["See? I knew you'd like it!", '거봐, 좋아할 줄 알았어!'] },
-  '10529':{ scene:'농담이 지나쳐서 마크가 말없이 나갔어요', bad:'You hurt [him].', fix:'his feelings', huh:["I hurt him? I didn't even touch him!", '내가 다치게 했다고? 손도 안 댔는데!'], yes:["Oh no. I'll go say sorry.", '아 이런, 가서 사과할게.'] },
-  '10514':{ scene:'토론 수업에서 무엇을 중요하게 여기는지 말해요', bad:'I [believe] freedom.', fix:'believe in', huh:['You believe freedom? What did freedom say?', '자유의 말을 믿는다고? 자유가 뭐라고 했는데?'], yes:['Me too. Everyone should be free.', '나도. 누구나 자유로워야지.'] },
-  '10557':{ scene:'어젯밤 파티에 못 온 친구에게', bad:'You [missed].', fix:'missed out', huh:['Missed what? The bus?', '뭘 놓쳤는데? 버스?'], yes:['Ugh, I knew it. Next time for sure!', '아, 그럴 줄 알았어. 다음엔 꼭 갈게!'] },
-  '10561':{ scene:'새 휴대폰을 지금 살지 고민하는 친구에게', bad:'Wait until the price [falls down].', fix:'goes down', huh:['Falls down? Off the shelf?', '떨어진다고? 선반에서?'], yes:["Good idea. It's too expensive now.", '좋은 생각이야. 지금은 너무 비싸.'] },
+  '10171':{ type:'form', scene:'처음 만날 홈스테이 가족에게', bad:'I look forward to [meet] you!', fix:'meeting', yes:["We can't wait to see you, too!", '우리도 빨리 보고 싶어요!'] },
+  '10113':{ type:'form', scene:'공항에 내리는 친구에게', bad:'I can [pick up you].', fix:'pick you up', yes:['Really? Thank you so much!', '정말? 진짜 고마워!'] },
+  '10141':{ type:'form', scene:'요즘은 매운 걸 못 먹는다며 새 친구에게', bad:"[I'm used to] love spicy food.", fix:'I used to', yes:['Not anymore? What happened?', '이젠 아니야? 무슨 일 있었어?'] },
+  '10271':{ type:'form', scene:'셔츠 두 벌 사진을 보내면서 언니에게', bad:'Which is [more better]?', fix:'better', yes:['The blue one, for sure.', '무조건 파란 거.'] },
+  '10416':{ type:'form', scene:'이삿짐을 같이 옮겨 달라고 이웃에게', bad:'Would you mind [to carry] this?', fix:'carrying', yes:["Not at all. I'll be right there.", '그럼요. 바로 갈게요.'] },
+  '10231':{ type:'form', scene:'새 앱 쓰는 법을 물어보신 엄마에게', bad:"It's [enough simple] to understand.", fix:'simple enough', yes:["Okay, I'll give it a try!", '그래, 한번 해 볼게!'] },
+  '10437':{ type:'form', scene:'회의 중인 동료에게', bad:'Text me when [you will be] done.', fix:"you're", yes:['Will do. Almost finished.', '그럴게. 거의 끝났어.'] },
+  '10520':{ type:'meaning', scene:'늦어서 미안하다며 이유를 늘어놓는 동료에게 답장으로', bad:'You [must not] explain.', fix:"don't have to", huh:["Oh... okay. I won't say a word.", '아… 알겠어. 한마디도 안 할게.'], yes:['Thanks for understanding!', '이해해 줘서 고마워!'] },
+  '10219':{ type:'meaning', scene:'마트에서 있었던 일을 가족에게', bad:'I [met] Sam at the store.', fix:'ran into', huh:['Oh, did you two have plans?', '둘이 약속했었어?'], yes:['No way! How is he doing?', '진짜? 걔 잘 지낸대?'] },
+  '10236':{ type:'meaning', scene:'영화 어땠냐고 묻는 룸메이트에게 답장으로', bad:'I [slept].', fix:'fell asleep', huh:['Good! You needed some rest.', '잘됐네! 너 좀 쉬어야 했잖아.'], yes:['Ha! Was it that boring?', '하하! 그렇게 지루했어?'] },
 };
-const FIX_STAGE = { kind:'fix', src:'v2', head:'fix', tag:'r', badge:'실전', name:'친구 말 고쳐 주기', hold:true, newUi:true, ui:'새 UI — 친구가 틀리게 한 말을 짚고 배운 표현으로 고친다 · 고치면 상대 반응이 바뀐다' };
-/* 3단계 방식(학습하기) — trap: 문장 배열 + 트랩(기획서) · fix: 친구 말 고쳐 주기(FIX 가 있는 유닛만 풀게 된다) */
+const FIX_STAGE = { kind:'fix', src:'v2', head:'fix', tag:'r', badge:'실전', name:'친구 메시지 고쳐 주기', hold:true, newUi:true, ui:'새 UI — 친구가 보내려는 메시지에서 틀린 곳을 짚고 배운 표현으로 고친다 · 고치면 보내지고 답장이 온다' };
+/* 3단계 방식(학습하기) — trap: 문장 배열 + 트랩(기획서) · fix: 친구 메시지 고쳐 주기(FIX 가 있는 유닛만 풀게 된다) */
 let step3 = 'trap';
 try { step3 = localStorage.getItem('vedrill:step3') || 'trap'; } catch (e) {}
 /* 트랩 — 같은 자리에 올 수 있는 같은 부류 낱말(그 한국어 뜻으로는 틀린 말). 한 부류에서 몰아 뽑지 않게 라운드로빈.
@@ -681,7 +687,7 @@ function arrangeIn(s, i, extra) {
 function quizArrange(s, i) { const alt = s.alt ? altOf(unit(), i) : null; arrangeIn(s, i, alt ? [alt.w] : []); }
 function quizLong(s, i) { arrangeIn(s, i, trapsOf(unit(), i)); }
 
-/* 친구 말 고쳐 주기 — bad 를 낱말로 나눠 [ ] 자리(틀린 곳)를 기억한다. 고친 문장 = 앞 + fix + 뒤 */
+/* 친구 메시지 고쳐 주기 — bad 를 낱말로 나눠 [ ] 자리(틀린 곳)를 기억한다. 고친 문장 = 앞 + fix + 뒤 */
 function fixParts(f) {
   const m = f.bad.match(/^(.*?)([.!?]*)$/), body = m[1], p = m[2];
   const toks = [], span = [];
@@ -690,16 +696,14 @@ function fixParts(f) {
   return { toks, span, p, fix, pre:toks.slice(0, a), post:toks.slice(z), good:[...toks.slice(0, a), ...fix, ...toks.slice(z)] };
 }
 /* 틀린 곳 짚기 — 틀린 자리의 낱말 하나만 눌러도 그 자리 전체를 짚은 것으로 친다(헤맨 것으로 세지 않는다).
-   고치기 — 틀린 자리가 빈칸이 되고 뱅크에 fix 낱말 + 친구가 쓴 틀린 낱말 + 같은 부류 낱말이 온다. 채점 · 오답노트는 quizFill 과 같다 */
+   고치기 — 틀린 자리가 빈칸이 되고 뱅크에 fix 낱말 + 친구가 쓴 틀린 낱말 + 같은 부류 낱말이 온다. 채점 · 오답노트는 quizFill 과 같다.
+   고치면 메시지가 보내지고 답장이 온다. 뜻이 바뀌는 실수(meaning)는 '그대로 보냈다면' 어떻게 읽혔을지를 함께 보인다 */
 function quizFix(s, i) {
   const u = unit(), x = u.s[i], f = FIX[u.id], P = fixParts(f);
-  const bubble = (who, cls, inner, kr) => `<div class="model"><div class="av ${who === '친구' ? 'f' : 'l'}">${who}</div><div class="bub ${cls}"><div class="en">${inner}</div>${kr ? `<div class="k">${esc(kr)}</div>` : ''}</div></div>`;
-  const reply = r => bubble('상대', r === f.yes ? 'yes' : 'huh', `<button class="sp" data-say="${esc(r[0])}">🔊</button>${esc(r[0])}`, r[1]);
-  shell(s, x, `<div class="scene">${esc(f.scene)}</div><div class="chat">
-    <div id="fbub">${bubble('친구', '', `<div class="wline">${P.toks.map((t, j) => `<button class="w wk" data-j="${j}">${esc(t)}</button>`).join('')}<span class="sw p">${esc(P.p)}</span></div>`)}</div>
-    <div id="lbub">${reply(f.huh)}</div></div><div id="nt"><div class="note">상대가 오해했어요. 친구 말에서 이상한 곳을 눌러 보세요</div></div>`);
-  const sayBtns = () => $$('[data-say]').forEach(b => b.onclick = () => say(b.dataset.say));
-  sayBtns(); say(plain(f.bad));
+  const bubble = (who, cls, inner, kr) => `<div class="model"><div class="av ${who === '친구' ? 'f' : 'l'}">${who}</div><div class="bub ${cls}"><div class="en">${inner}</div>${kr ? `<div class="k">${kr}</div>` : ''}</div></div>`;
+  shell(s, x, `<div class="scene">${esc(f.scene)} 보내려는 메시지</div><div class="chat">
+    <div id="fbub">${bubble('친구', 'draft', `<div class="wline">${P.toks.map((t, j) => `<button class="w wk" data-j="${j}">${esc(t)}</button>`).join('')}<span class="sw p">${esc(P.p)}</span></div>`, '<span class="ds">보내기 전 · 이렇게 보내도 돼?</span>')}</div>
+    <div id="lbub"></div></div><div id="nt"><div class="note">이상한 곳을 눌러 보세요</div></div>`);
   $('#bank').innerHTML = '';
   $('#btns').innerHTML = `<button class="lb" id="lb">정답 보기</button><button class="ok" id="ok" disabled>확인</button>`;
   const used = new Set(P.good.map(norm)), extra = [];
@@ -724,14 +728,21 @@ function quizFix(s, i) {
     $('#bank').innerHTML = tiles.map((w, k) => `<button class="w" data-k="${k}">${esc(tileText(w))}</button>`).join('');
     $$('#bank .w').forEach(b => b.onclick = () => { if (fin || put.length >= P.fix.length) return; put.push(+b.dataset.k); draw(); });
     draw(); };
-  /* 고쳐지면 친구 말이 고친 문장(표현 초록)으로 굳고 상대 반응이 바뀐다 */
+  /* 고쳐지면 메시지가 고친 문장(표현 초록)으로 보내지고 답장이 온다 */
   const settle = revealed => { fin = true; $('#tip').innerHTML = ''; $('#nt').innerHTML = '';
-    $('#fbub .bub').classList.add('fixed'); $('#fbub .en').innerHTML = `<button class="sp" data-say="${esc(plain(x.en))}">🔊</button>${fixedLine()}`;
-    $('#lbub').innerHTML = reply(f.yes); sayBtns(); $$('#bank .w').forEach(b => { b.classList.add('used'); b.classList.remove('need'); });
-    complete(i, revealed); setTimeout(() => say(f.yes[0]), 1300); };
+    const b = $('#fbub .bub'); b.classList.remove('draft'); b.classList.add('fixed');
+    $('#fbub .en').innerHTML = `<button class="sp" data-say="${esc(plain(x.en))}">🔊</button>${fixedLine()}`;
+    $('#fbub .k').innerHTML = '<span class="ds sent">보냄 ✓</span>';
+    $$('#bank .w').forEach(b => { b.classList.add('used'); b.classList.remove('need'); });
+    complete(i, revealed);
+    setTimeout(() => {
+      $('#lbub').innerHTML = bubble('상대', 'yes', `<button class="sp" data-say="${esc(f.yes[0])}">🔊</button>${esc(f.yes[0])}`, esc(f.yes[1]))
+        + (f.huh ? `<div class="huh">그대로 보냈다면 <b>“${esc(f.huh[0])}”</b><span>${esc(f.huh[1])}</span></div>` : '');
+      $$('[data-say]').forEach(b => b.onclick = () => say(b.dataset.say)); say(f.yes[0]);
+    }, 900); };
   $$('#fbub .wk').forEach(b => b.onclick = () => { if (fin || spotted) return;
     if (P.span.includes(+b.dataset.j)) { P.span.forEach(j => $(`#fbub .wk[data-j="${j}"]`).classList.add('ok')); setTimeout(openFix, 350); return; }
-    b.classList.add('miss'); $('#nt').innerHTML = `<div class="note">${esc(b.textContent)} 는 괜찮아요. 상대가 무엇을 오해했는지 보세요</div>`; });
+    b.classList.add('miss'); $('#nt').innerHTML = `<div class="note">${esc(b.textContent)} 는 괜찮아요</div>`; });
   $('#lb').onclick = () => { if (!fin) settle(true); };
   $('#ok').onclick = () => { if (fin || !spotted) return;
     const jd = judge(P.fix, P.fix.map((_, n) => put[n] === undefined ? null : tiles[put[n]]));
@@ -769,9 +780,9 @@ function renderHome() {
   if (run) clearTimeout(run.timer);
   $('#top').style.display = 'none'; $('#stage').innerHTML = '';
   const N = LS.items.length, pos = Math.min(getPos(), N), rest = N - pos;
-  $('#home').innerHTML = `<div class="seg" id="s3seg" style="margin-bottom:6px"><button data-v="trap">3단계 · 문장 배열 + 트랩</button><button data-v="fix">3단계 · 친구 말 고쳐 주기</button></div>
-    <div class="segd">${step3 === 'fix' ? `친구가 배운 표현 대신 쉬운 말로 틀리게 말하고 상대가 오해해요. 틀린 곳을 짚고 배운 표현으로 고쳐요 — 대표 ${N}유닛만 문장을 써 뒀어요` : '기획서 흐름 — 마지막 문장을 트랩 3개가 섞인 뱅크로 통째 배열해요'}</div>
-    <div class="start"><div class="sf">어휘 빈칸 <span>→</span> 보고 만들기 <span>→</span> 표현 바텀시트 <span>→</span> 문장 배열 <span>→</span> ${step3 === 'fix' ? '친구 말 고쳐 주기' : '문장 배열 + 트랩'} <span>→</span> 결과</div>
+  $('#home').innerHTML = `<div class="seg" id="s3seg" style="margin-bottom:6px"><button data-v="trap">3단계 · 문장 배열 + 트랩</button><button data-v="fix">3단계 · 친구 메시지 고쳐 주기</button></div>
+    <div class="segd">${step3 === 'fix' ? `친구가 보내기 전에 봐 달라는 영어 메시지에서 틀린 곳을 짚고 배운 표현으로 고쳐요. 표현 자체를 틀린 것과 뜻이 바뀐 것 두 갈래 — 대표 ${N}유닛만 문장을 써 뒀어요` : '기획서 흐름 — 마지막 문장을 트랩 3개가 섞인 뱅크로 통째 배열해요'}</div>
+    <div class="start"><div class="sf">어휘 빈칸 <span>→</span> 보고 만들기 <span>→</span> 표현 바텀시트 <span>→</span> 문장 배열 <span>→</span> ${step3 === 'fix' ? '친구 메시지 고쳐 주기' : '문장 배열 + 트랩'} <span>→</span> 결과</div>
     <div class="sc">${rest ? `남은 <b>${rest}</b>문항 · 총 ${N}문항` : `${N}문항을 모두 풀었어요`}</div>
     <div class="sn">문항마다 어휘를 익히고, 그 어휘로 쓰는 표현을 배워요 — 대체안(지금 앱 UI)</div>
     <button class="sbtn" id="startBtn">${!rest ? '다시 처음부터 ▶' : pos ? '이어서 풀기 ▶' : '학습 시작 ▶'}</button>
