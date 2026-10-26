@@ -275,23 +275,25 @@ const KNOW = {
 };
 /* 친구 말 고쳐 주기(3단계 실험) — 친구가 한 말에서 틀린 곳을 누르고 배운 표현으로 고친다. 화면은 다른 단계와 같은 카드 한 장이다
    (상단 = 하려던 말의 뜻, 문제 영역 = 친구가 한 말 한 줄, 하단 = 단어 카드).
-   틀린 말은 여러 언어 학습자에게 공통인 것만 쓴다 — 두 갈래:
-   form    표현 그 자체를 틀린 것(look forward to meet · pick up you · more better) — 뜻은 통해도 영어로 틀렸다
+   틀린 곳은 저작하지 않고 계산한다(fixParts) — 친구가 한 말(bad)과 그 유닛의 3단계 문장(문장2)을 앞 · 뒤에서 낱말 단위로 맞춰 보고
+   남는 가운데가 틀린 곳이다. 그래서 틀린 곳에는 바꿔야 하는 낱말만 들어간다(Turn off it → off it, Turn 은 맞는 낱말).
+   실수는 두 모양만 쓴다 — 바뀐 낱말(meet → meeting)과 바뀐 순서(off it → it off). 빠진 낱말(deal stress)은 누를 낱말이 없고
+   남는 낱말(more better)은 채울 칸이 없어 쓰지 않는다. 틀린 말은 여러 언어 학습자에게 공통인 것만 쓴다:
+   form    표현 그 자체를 틀린 것 — 뜻은 통해도 영어로 틀렸다
    meaning 기본 낱말로 옮겨 뜻이 정반대가 된 것(must not ↔ don't have to) — 덜 정확할 뿐인 말(slept ↔ fell asleep · met ↔ ran into)은
            번역에 따라 맞는 답이 되므로(잠들었어 = I slept) 쓰지 않는다. 화면의 뜻이 어느 언어로 옮겨져도 그 말을 틀리게 만들어야 한다
-   패턴화 고민 목록(units/pattern-concern-list.judged.gen.csv)에 있는 유닛은 패턴에서 뺄지 검토 중이라 쓰지 않는다.
-   bad 의 [ ] = 틀린 곳(누를 자리), fix = 그 자리에 들어갈 말 — bad 의 [ ] 를 fix 로 바꾸면 그 유닛의 3단계 문장(문장2)과 같아야 한다. 대표 10유닛 손저작 */
+   패턴화 고민 목록(units/pattern-concern-list.judged.gen.csv)에 있는 유닛은 패턴에서 뺄지 검토 중이라 쓰지 않는다. 대표 10유닛 손저작 */
 const FIX = {
-  '10171':{ type:'form', bad:'I look forward to [meet] you!', fix:'meeting' },
-  '10113':{ type:'form', bad:'I can [pick up you].', fix:'pick you up' },
-  '10141':{ type:'form', bad:"[I'm used to] love spicy food.", fix:'I used to' },
-  '10271':{ type:'form', bad:'Which is [more better]?', fix:'better' },
-  '10416':{ type:'form', bad:'Would you mind [to carry] this?', fix:'carrying' },
-  '10231':{ type:'form', bad:"It's [enough simple] to understand.", fix:'simple enough' },
-  '10655':{ type:'form', bad:"You'll [get use to] it.", fix:'get used to' },
-  '10520':{ type:'meaning', bad:'You [must not] explain.', fix:"don't have to" },
-  '10491':{ type:'form', bad:'How do you [deal] stress?', fix:'deal with' },
-  '10048':{ type:'form', bad:'[Turn off it].', fix:'Turn it off' },
+  '10171':{ type:'form', bad:'I look forward to meet you!' },
+  '10113':{ type:'form', bad:'I can pick up you.' },
+  '10141':{ type:'form', bad:"I'm used to love spicy food." },
+  '10577':{ type:'form', bad:"Let's make it happened." },
+  '10416':{ type:'form', bad:'Would you mind to carry this?' },
+  '10231':{ type:'form', bad:"It's enough simple to understand." },
+  '10655':{ type:'form', bad:"You'll get use to it." },
+  '10236':{ type:'form', bad:'I felt asleep.' },
+  '10048':{ type:'form', bad:'Turn off it.' },
+  '10520':{ type:'meaning', bad:'You must not explain.' },
 };
 const FIX_STAGE = { kind:'fix', src:'v2', head:'fix', tag:'r', badge:'실전', name:'친구 말 고쳐 주기', ui:'새 UI — 친구가 한 말에서 틀린 곳을 눌러 빈칸으로 바꾸고, 배운 표현으로 채운다' };
 /* 3단계 방식(학습하기) — trap: 문장 배열 + 트랩(기획서) · fix: 친구 말 고쳐 주기(FIX 가 있는 유닛만 풀게 된다) */
@@ -333,7 +335,8 @@ const tileText = w => /^I('|$)/.test(w) ? w : w.toLowerCase();
 const shuffle = a => { const b = a.slice(); for (let n = 0; n < 30; n++) { for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [b[i], b[j]] = [b[j], b[i]]; } if (a.length < 2 || b.some((x, k) => x !== a[k])) break; } return b; };
 const unit = () => byId[uid];
 const secOf = u => u.pat === '가능' ? 'pattern' : 'rule';
-const flowOf = u => mode === 'learn' && step3 === 'fix' && FIX[u.id] ? { ...FLOWS.now.pattern, '3':FIX_STAGE } : FLOWS[ui][secOf(u)];
+const fixOk = id => !!FIX[id] && !!byId[id] && fixParts(FIX[id], byId[id].s[srcIdx(byId[id], 'v2')]).ok;
+const flowOf = u => mode === 'learn' && step3 === 'fix' && fixOk(u.id) ? { ...FLOWS.now.pattern, '3':FIX_STAGE } : FLOWS[ui][secOf(u)];
 const STAGES = () => flowOf(unit());
 /* 카드 탭의 레벨 — 표현 유닛에는 레벨이 없어 이어 붙은 트리거 어휘의 레벨을 쓴다 */
 function levelOf(u) { const it = mode === 'learn' ? LS.items[LS.idx] : LS.items.find(x => x.u === u.id); return it ? it.v.level : '—'; }
@@ -676,18 +679,20 @@ function arrangeIn(s, i, extra) {
 function quizArrange(s, i) { const alt = s.alt ? altOf(unit(), i) : null; arrangeIn(s, i, alt ? [alt.w] : []); }
 function quizLong(s, i) { arrangeIn(s, i, trapsOf(unit(), i)); }
 
-/* 친구 말 고쳐 주기 — bad 를 낱말로 나눠 [ ] 자리(틀린 곳)를 기억한다. 고친 문장 = 앞 + fix + 뒤 */
-function fixParts(f) {
-  const m = f.bad.match(/^(.*?)([.!?]*)$/), body = m[1], p = m[2];
-  const toks = [], span = [];
-  body.replace(/\[([^\]]+)\]|(\S+)/g, (_, b, w) => { (b || w).split(' ').forEach(t => { if (b) span.push(toks.length); toks.push(t); }); });
-  const fix = f.fix.split(' '), a = span[0], z = span.at(-1) + 1;
-  return { toks, span, p, fix, pre:toks.slice(0, a), post:toks.slice(z), good:[...toks.slice(0, a), ...fix, ...toks.slice(z)] };
+/* 친구 말 고쳐 주기 — 틀린 곳 계산. bad 와 고칠 문장 x 를 낱말로 나눠 앞 · 뒤에서 같은 낱말을 걷어 내고 남는 가운데:
+   span = bad 에서 틀린 낱말의 자리, fix = x 에서 그 자리에 들어갈 낱말. 둘 중 하나라도 비면 쓸 수 없는 실수다(ok:false) */
+function fixParts(f, x) {
+  const m = f.bad.match(/^(.*?)([.!?]*)$/), toks = m[1].split(' '), p = m[2], good = x.t.map(t => t[0]);
+  let a = 0; while (a < toks.length && a < good.length && norm(toks[a]) === norm(good[a])) a++;
+  let z = 0; while (z < toks.length - a && z < good.length - a && norm(toks[toks.length - 1 - z]) === norm(good[good.length - 1 - z])) z++;
+  const span = toks.map((_, j) => j).slice(a, toks.length - z), fix = good.slice(a, good.length - z);
+  return { toks, span, p, fix, pre:toks.slice(0, a), post:toks.slice(toks.length - z), good, ok:span.length > 0 && fix.length > 0 && p === x.p };
 }
-/* 친구가 한 말 한 줄 — 낱말을 눌러 틀린 곳을 짚는다(틀린 자리의 낱말 하나만 눌러도 그 자리 전체 · 헤맨 것으로 세지 않는다).
+/* 친구가 한 말 한 줄 — 낱말을 눌러 틀린 곳을 짚는다. 틀린 곳의 낱말 중 아무거나 하나를 누르면 맞힌 것이고 틀린 곳 전체가 표시된다
+   (Turn off it 에서 off · it 어느 쪽이든). 틀린 곳 밖을 누르면 '그 부분은 맞아요' — 헤맨 것으로 세지 않는다.
    짚으면 그 자리가 빈칸이 되고 단어 카드가 나온다 — 그다음은 표현만 카드(quizFill)와 같다: 뱅크 = fix 낱말 + 친구가 쓴 틀린 낱말 + 같은 부류 낱말 */
 function quizFix(s, i) {
-  const u = unit(), x = u.s[i], P = fixParts(FIX[u.id]);
+  const u = unit(), x = u.s[i], P = fixParts(FIX[u.id], x);
   shell(s, x, `<div class="aline" id="fline">${P.toks.map((t, j) => `<button class="w wk" data-j="${j}">${esc(t)}</button>`).join('')}<span class="sw p">${esc(P.p)}</span></div>`);
   $('#bank').innerHTML = '';
   $('#btns').innerHTML = `<button class="lb" id="lb">정답 보기</button><button class="ok" id="ok" disabled>확인</button>`;
@@ -769,7 +774,7 @@ function renderHome() {
   $('#startBtn').onclick = () => startLearn(rest ? pos : 0);
   if ($('#restartBtn')) $('#restartBtn').onclick = () => startLearn(0);
 }
-function pickItems() { LS.items = step3 === 'fix' ? LS.all.filter(x => FIX[x.u]) : LS.all; }
+function pickItems() { LS.items = step3 === 'fix' ? LS.all.filter(x => fixOk(x.u)) : LS.all; }
 function startLearn(i) { LS.idx = i; setPos(i); $('#home').innerHTML = ''; $('#top').style.display = ''; renderVocab(); }
 function nextItem() { LS.idx++; setPos(LS.idx); if (LS.idx >= LS.items.length) return renderHome(); renderVocab(); }
 function diffSpell(typed, answer) {
